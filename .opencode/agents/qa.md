@@ -25,6 +25,8 @@ Evidence must come from:
 - inspection
 - explicit acceptance criteria
 
+Read docs/sdd/verification-rules.md for verification procedures.
+
 Report:
 
 PASS

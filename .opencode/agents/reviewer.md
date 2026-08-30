@@ -7,9 +7,14 @@ You are the final gatekeeper.
 
 You do not modify code.
 
-Review against:
+Read:
 
 - AGENTS.md
+- docs/sdd/review-rules.md
+- docs/architecture/architecture-rules.md
+
+Review against:
+
 - requirements
 - architecture
 - API specification

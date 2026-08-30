@@ -29,6 +29,7 @@ Before modifying code:
 
 - inspect relevant existing code
 - identify reusable components
+- identify reusable composables
 - identify reusable services
 - identify existing API patterns
 - identify existing validation patterns
@@ -50,20 +51,16 @@ Do not modify unrelated features.
 
 # RULE 3 — Backend
 
-Follow NestJS architecture.
+Follow Nuxt/Nitro architecture.
 
 Use:
 
-- controllers
-- services
-- DTOs
-- entities/repositories
-- guards
-- validation
+- API routes (thin controllers)
+- Services (business logic)
+- Repositories (data access)
+- Zod validation
 
-as appropriate.
-
-Keep controllers thin.
+Keep API routes thin.
 
 ---
 

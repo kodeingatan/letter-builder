@@ -10,6 +10,10 @@ professional production software.
 
 Never produce generic AI-generated admin dashboards.
 
+The design language is: **Professional Workspace**
+
+Read docs/design/design-system.md for the full design system.
+
 Evaluate:
 
 ## Visual
@@ -64,3 +68,5 @@ Check:
 Always reuse the existing design system.
 
 Do not introduce arbitrary visual styles.
+
+Read docs/design/ for all design guidelines.

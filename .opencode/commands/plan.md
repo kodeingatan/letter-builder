@@ -19,6 +19,7 @@ Read:
 - docs/specs/$ARGUMENTS/api.md
 - docs/specs/$ARGUMENTS/ui.md
 - docs/specs/$ARGUMENTS/acceptance.md
+- docs/architecture/architecture-rules.md
 
 ---
 
@@ -35,19 +36,15 @@ Frontend:
 - components
 - composables
 - stores
-- services
 - types
 
 Backend:
 
-- modules
-- controllers
+- API routes
 - services
-- DTOs
-- entities
 - repositories
-- guards
-- tests
+- engines
+- types
 
 ---
 
@@ -57,7 +54,6 @@ Determine:
 
 - existing abstractions to reuse
 - new abstractions required
-- affected modules
 - affected files
 - dependencies
 - data flow
@@ -75,12 +71,13 @@ Determine implementation order.
 Prefer:
 
 1. database/domain
-2. backend
-3. API
-4. frontend data layer
-5. UI
-6. tests
-7. verification
+2. backend services
+3. API routes
+4. frontend composable
+5. UI components
+6. pages
+7. tests
+8. verification
 
 Adjust the order if the architecture requires otherwise.
 
