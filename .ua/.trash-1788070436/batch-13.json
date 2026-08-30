@@ -1,0 +1,3655 @@
+{
+  "batch": 13,
+  "files": [
+    {
+      "path": "docs/specs/_template/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 69,
+      "fileCategory": "docs",
+      "nodes": [
+        {
+          "id": "file::docs/specs/_template/acceptance.md",
+          "kind": "file",
+          "label": "acceptance.md",
+          "file": "docs/specs/_template/acceptance.md",
+          "startLine": 1,
+          "endLine": 69,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "category": "docs",
+            "language": "markdown",
+            "description": "Template for acceptance criteria using Given/When/Then format"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/acceptance.md::ac-001",
+          "kind": "section",
+          "label": "AC-001: [Criterion Title]",
+          "file": "docs/specs/_template/acceptance.md",
+          "startLine": 7,
+          "endLine": 14,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "acceptance-criterion",
+            "format": "Given/When/Then",
+            "mappedTo": "REQ-001"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/acceptance.md::ac-004-validation",
+          "kind": "section",
+          "label": "AC-004: Validation Error",
+          "file": "docs/specs/_template/acceptance.md",
+          "startLine": 31,
+          "endLine": 37,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "acceptance-criterion",
+            "scenario": "validation-error",
+            "mappedTo": "REQ-004"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/acceptance.md::ac-005-empty-state",
+          "kind": "section",
+          "label": "AC-005: Empty State",
+          "file": "docs/specs/_template/acceptance.md",
+          "startLine": 39,
+          "endLine": 45,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "acceptance-criterion",
+            "scenario": "empty-state",
+            "mappedTo": "REQ-005"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/acceptance.md::ac-006-loading",
+          "kind": "section",
+          "label": "AC-006: Loading State",
+          "file": "docs/specs/_template/acceptance.md",
+          "startLine": 47,
+          "endLine": 53,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "acceptance-criterion",
+            "scenario": "loading-state",
+            "mappedTo": "REQ-006"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/acceptance.md::ac-007-error",
+          "kind": "section",
+          "label": "AC-007: Error State",
+          "file": "docs/specs/_template/acceptance.md",
+          "startLine": 55,
+          "endLine": 61,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "acceptance-criterion",
+            "scenario": "error-state",
+            "mappedTo": "REQ-007"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/acceptance.md::summary",
+          "kind": "section",
+          "label": "Summary",
+          "file": "docs/specs/_template/acceptance.md",
+          "startLine": 63,
+          "endLine": 69,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "summary-table",
+            "columns": [
+              "ID",
+              "Criterion",
+              "Mapped To",
+              "Status"
+            ]
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "file::docs/specs/_template/acceptance.md",
+          "target": "file::docs/specs/_template/requirements.md",
+          "kind": "references",
+          "label": "maps criteria to requirements",
+          "meta": {
+            "strength": "high",
+            "reason": "Acceptance criteria map to REQ-XXX requirements defined in requirements.md"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/acceptance.md::ac-004-validation",
+          "target": "file::docs/specs/_template/business-rules.md",
+          "kind": "references",
+          "label": "validation rules",
+          "meta": {
+            "strength": "medium",
+            "reason": "Validation error criteria relate to validation rules in business-rules.md"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/acceptance.md::ac-005-empty-state",
+          "target": "file::docs/specs/_template/ux.md",
+          "kind": "references",
+          "label": "empty state UX",
+          "meta": {
+            "strength": "medium",
+            "reason": "Empty state criteria relate to UX empty states defined in ux.md"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/acceptance.md::ac-006-loading",
+          "target": "file::docs/specs/_template/ux.md",
+          "kind": "references",
+          "label": "loading state UX",
+          "meta": {
+            "strength": "medium",
+            "reason": "Loading state criteria relate to UX loading states defined in ux.md"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/acceptance.md::ac-007-error",
+          "target": "file::docs/specs/_template/ux.md",
+          "kind": "references",
+          "label": "error handling UX",
+          "meta": {
+            "strength": "medium",
+            "reason": "Error state criteria relate to UX error handling defined in ux.md"
+          }
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/_template/api.md",
+      "language": "markdown",
+      "sizeLines": 97,
+      "fileCategory": "docs",
+      "nodes": [
+        {
+          "id": "file::docs/specs/_template/api.md",
+          "kind": "file",
+          "label": "api.md",
+          "file": "docs/specs/_template/api.md",
+          "startLine": 1,
+          "endLine": 97,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "category": "docs",
+            "language": "markdown",
+            "description": "Template for API endpoint specifications"
+          }
+        },
+        {
+          "id": "endpoint::docs/specs/_template/api.md::get-list",
+          "kind": "endpoint",
+          "label": "GET /api/[resource]",
+          "file": "docs/specs/_template/api.md",
+          "startLine": 5,
+          "endLine": 24,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "method": "GET",
+            "path": "/api/[resource]",
+            "description": "List resources with pagination, sort, search",
+            "parameters": [
+              "page",
+              "per_page",
+              "sort",
+              "order",
+              "search"
+            ]
+          }
+        },
+        {
+          "id": "endpoint::docs/specs/_template/api.md::get-single",
+          "kind": "endpoint",
+          "label": "GET /api/[resource]/:id",
+          "file": "docs/specs/_template/api.md",
+          "startLine": 26,
+          "endLine": 35,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "method": "GET",
+            "path": "/api/[resource]/:id",
+            "description": "Get single resource"
+          }
+        },
+        {
+          "id": "endpoint::docs/specs/_template/api.md::post-create",
+          "kind": "endpoint",
+          "label": "POST /api/[resource]",
+          "file": "docs/specs/_template/api.md",
+          "startLine": 37,
+          "endLine": 56,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "method": "POST",
+            "path": "/api/[resource]",
+            "description": "Create resource",
+            "validation": "Zod schema"
+          }
+        },
+        {
+          "id": "endpoint::docs/specs/_template/api.md::put-update",
+          "kind": "endpoint",
+          "label": "PUT /api/[resource]/:id",
+          "file": "docs/specs/_template/api.md",
+          "startLine": 58,
+          "endLine": 75,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "method": "PUT",
+            "path": "/api/[resource]/:id",
+            "description": "Update resource"
+          }
+        },
+        {
+          "id": "endpoint::docs/specs/_template/api.md::delete-resource",
+          "kind": "endpoint",
+          "label": "DELETE /api/[resource]/:id",
+          "file": "docs/specs/_template/api.md",
+          "startLine": 77,
+          "endLine": 86,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "method": "DELETE",
+            "path": "/api/[resource]/:id",
+            "description": "Delete resource"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/api.md::error-responses",
+          "kind": "section",
+          "label": "Error Responses",
+          "file": "docs/specs/_template/api.md",
+          "startLine": 88,
+          "endLine": 97,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "error-codes",
+            "codes": [
+              "VALIDATION_ERROR",
+              "UNAUTHORIZED",
+              "FORBIDDEN",
+              "NOT_FOUND",
+              "CONFLICT",
+              "INTERNAL_ERROR"
+            ]
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "file::docs/specs/_template/api.md",
+          "target": "file::docs/specs/_template/business-rules.md",
+          "kind": "references",
+          "label": "validation rules",
+          "meta": {
+            "strength": "high",
+            "reason": "API validation references Zod schemas and validation rules from business-rules.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/api.md",
+          "target": "file::docs/specs/_template/domain.md",
+          "kind": "references",
+          "label": "entity definitions",
+          "meta": {
+            "strength": "medium",
+            "reason": "API endpoints operate on entities defined in domain.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/api.md",
+          "target": "file::docs/specs/_template/requirements.md",
+          "kind": "references",
+          "label": "functional requirements",
+          "meta": {
+            "strength": "medium",
+            "reason": "API endpoints implement functional requirements from requirements.md"
+          }
+        },
+        {
+          "source": "endpoint::docs/specs/_template/api.md::post-create",
+          "target": "section::docs/specs/_template/business-rules.md::validation-rules",
+          "kind": "enforces",
+          "label": "validates input",
+          "meta": {
+            "strength": "high",
+            "reason": "POST endpoint enforces validation rules defined in business-rules.md"
+          }
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/_template/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 38,
+      "fileCategory": "docs",
+      "nodes": [
+        {
+          "id": "file::docs/specs/_template/business-rules.md",
+          "kind": "file",
+          "label": "business-rules.md",
+          "file": "docs/specs/_template/business-rules.md",
+          "startLine": 1,
+          "endLine": 38,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "category": "docs",
+            "language": "markdown",
+            "description": "Template for business rules including validation, permissions, state transitions, and constraints"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/business-rules.md::validation-rules",
+          "kind": "section",
+          "label": "Validation Rules",
+          "file": "docs/specs/_template/business-rules.md",
+          "startLine": 3,
+          "endLine": 8,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "validation-rules",
+            "ruleIds": [
+              "VR-001",
+              "VR-002"
+            ],
+            "fields": [
+              "name"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/business-rules.md::permission-rules",
+          "kind": "section",
+          "label": "Permission Rules",
+          "file": "docs/specs/_template/business-rules.md",
+          "startLine": 10,
+          "endLine": 17,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "permission-rules",
+            "ruleIds": [
+              "PR-001",
+              "PR-002",
+              "PR-003",
+              "PR-004"
+            ],
+            "roles": [
+              "Administrator",
+              "Staff"
+            ],
+            "actions": [
+              "create",
+              "read",
+              "update",
+              "delete"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/business-rules.md::state-transitions",
+          "kind": "section",
+          "label": "State Transition Rules",
+          "file": "docs/specs/_template/business-rules.md",
+          "startLine": 19,
+          "endLine": 24,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "state-machine",
+            "ruleIds": [
+              "ST-001",
+              "ST-002"
+            ],
+            "states": [
+              "Draft",
+              "Published",
+              "Archived"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/business-rules.md::business-constraints",
+          "kind": "section",
+          "label": "Business Constraints",
+          "file": "docs/specs/_template/business-rules.md",
+          "startLine": 26,
+          "endLine": 31,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "constraints",
+            "ruleIds": [
+              "BC-001",
+              "BC-002"
+            ],
+            "severities": [
+              "CRITICAL",
+              "HIGH"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/business-rules.md::side-effects",
+          "kind": "section",
+          "label": "Side Effects",
+          "file": "docs/specs/_template/business-rules.md",
+          "startLine": 33,
+          "endLine": 38,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "side-effects",
+            "ruleIds": [
+              "SE-001",
+              "SE-002"
+            ],
+            "actions": [
+              "Publish template",
+              "Delete table"
+            ]
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "file::docs/specs/_template/business-rules.md",
+          "target": "file::docs/specs/_template/domain.md",
+          "kind": "references",
+          "label": "entity constraints",
+          "meta": {
+            "strength": "high",
+            "reason": "Business rules define constraints on entities from domain.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/business-rules.md",
+          "target": "file::docs/specs/_template/api.md",
+          "kind": "enforces",
+          "label": "API validation",
+          "meta": {
+            "strength": "high",
+            "reason": "Validation rules enforce input validation at API layer"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/business-rules.md::state-transitions",
+          "target": "section::docs/specs/_template/domain.md::state-machine",
+          "kind": "references",
+          "label": "state machine definition",
+          "meta": {
+            "strength": "high",
+            "reason": "State transition rules define valid transitions for entity state machines"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/business-rules.md::permission-rules",
+          "target": "file::docs/specs/_template/ux.md",
+          "kind": "references",
+          "label": "UI permissions",
+          "meta": {
+            "strength": "medium",
+            "reason": "Permission rules affect UI element visibility and interaction"
+          }
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/_template/domain.md",
+      "language": "markdown",
+      "sizeLines": 43,
+      "fileCategory": "docs",
+      "nodes": [
+        {
+          "id": "file::docs/specs/_template/domain.md",
+          "kind": "file",
+          "label": "domain.md",
+          "file": "docs/specs/_template/domain.md",
+          "startLine": 1,
+          "endLine": 43,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "category": "docs",
+            "language": "markdown",
+            "description": "Template for domain model definitions including entities, relationships, and state machines"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/domain.md::entities",
+          "kind": "section",
+          "label": "Entities",
+          "file": "docs/specs/_template/domain.md",
+          "startLine": 3,
+          "endLine": 25,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "entity-definitions",
+            "attributes": [
+              "id",
+              "name",
+              "status",
+              "created_at",
+              "updated_at"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/domain.md::relationships",
+          "kind": "section",
+          "label": "Relationships",
+          "file": "docs/specs/_template/domain.md",
+          "startLine": 27,
+          "endLine": 32,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "entity-relationships",
+            "cardinalities": [
+              "1:N",
+              "N:1"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/domain.md::invariants",
+          "kind": "section",
+          "label": "Invariants",
+          "file": "docs/specs/_template/domain.md",
+          "startLine": 34,
+          "endLine": 37,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "invariants",
+            "description": "Entity-level constraints that must always hold"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/domain.md::lifecycle",
+          "kind": "section",
+          "label": "Lifecycle",
+          "file": "docs/specs/_template/domain.md",
+          "startLine": 39,
+          "endLine": 43,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "entity-lifecycle",
+            "states": [
+              "State 1",
+              "State 2",
+              "State 3"
+            ]
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "file::docs/specs/_template/domain.md",
+          "target": "file::docs/specs/_template/business-rules.md",
+          "kind": "references",
+          "label": "entity constraints",
+          "meta": {
+            "strength": "high",
+            "reason": "Domain entities have invariants enforced by business rules"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/domain.md",
+          "target": "file::docs/specs/_template/api.md",
+          "kind": "references",
+          "label": "API operations",
+          "meta": {
+            "strength": "medium",
+            "reason": "Domain entities are operated on by API endpoints"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/domain.md",
+          "target": "file::docs/specs/_template/tasks.md",
+          "kind": "references",
+          "label": "database schema",
+          "meta": {
+            "strength": "high",
+            "reason": "Domain entities are implemented as database tables per tasks.md"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/domain.md::lifecycle",
+          "target": "section::docs/specs/_template/business-rules.md::state-transitions",
+          "kind": "references",
+          "label": "state transitions",
+          "meta": {
+            "strength": "high",
+            "reason": "Entity lifecycle states have transitions defined in business rules"
+          }
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/_template/requirements.md",
+      "language": "markdown",
+      "sizeLines": 57,
+      "fileCategory": "docs",
+      "nodes": [
+        {
+          "id": "file::docs/specs/_template/requirements.md",
+          "kind": "file",
+          "label": "requirements.md",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 1,
+          "endLine": 57,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "category": "docs",
+            "language": "markdown",
+            "description": "Template for feature requirements including problem, objectives, user stories, and functional/non-functional requirements"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/requirements.md::problem",
+          "kind": "section",
+          "label": "Problem",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 3,
+          "endLine": 5,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "problem-statement"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/requirements.md::objective",
+          "kind": "section",
+          "label": "Objective",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 7,
+          "endLine": 9,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "objective"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/requirements.md::actors",
+          "kind": "section",
+          "label": "Actors",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 11,
+          "endLine": 14,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "actors",
+            "description": "System actors and their roles"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/requirements.md::user-stories",
+          "kind": "section",
+          "label": "User Stories",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 16,
+          "endLine": 27,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "user-stories",
+            "storyIds": [
+              "US-001"
+            ],
+            "format": "As a [actor] / I want to [action] / So that [benefit]"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/requirements.md::functional-requirements",
+          "kind": "section",
+          "label": "Functional Requirements",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 29,
+          "endLine": 35,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "functional-requirements",
+            "requirementIds": [
+              "REQ-001",
+              "REQ-002",
+              "REQ-003"
+            ],
+            "priorities": [
+              "Must",
+              "Should"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/requirements.md::non-functional-requirements",
+          "kind": "section",
+          "label": "Non-Functional Requirements",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 37,
+          "endLine": 42,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "non-functional-requirements",
+            "requirementIds": [
+              "NFR-001",
+              "NFR-002"
+            ],
+            "categories": [
+              "Performance",
+              "Security"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/requirements.md::constraints",
+          "kind": "section",
+          "label": "Constraints",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 44,
+          "endLine": 47,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "constraints"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/requirements.md::edge-cases",
+          "kind": "section",
+          "label": "Edge Cases",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 49,
+          "endLine": 52,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "edge-cases"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/requirements.md::dependencies",
+          "kind": "section",
+          "label": "Dependencies",
+          "file": "docs/specs/_template/requirements.md",
+          "startLine": 54,
+          "endLine": 57,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "dependencies"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "file::docs/specs/_template/requirements.md",
+          "target": "file::docs/specs/_template/acceptance.md",
+          "kind": "references",
+          "label": "acceptance criteria",
+          "meta": {
+            "strength": "high",
+            "reason": "Requirements are validated by acceptance criteria"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/requirements.md",
+          "target": "file::docs/specs/_template/domain.md",
+          "kind": "references",
+          "label": "domain model",
+          "meta": {
+            "strength": "medium",
+            "reason": "Requirements define entities modeled in domain.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/requirements.md",
+          "target": "file::docs/specs/_template/tasks.md",
+          "kind": "references",
+          "label": "implementation tasks",
+          "meta": {
+            "strength": "medium",
+            "reason": "Requirements are implemented through tasks defined in tasks.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/requirements.md",
+          "target": "file::docs/specs/_template/test-cases.md",
+          "kind": "references",
+          "label": "test coverage",
+          "meta": {
+            "strength": "high",
+            "reason": "Requirements are verified by test cases in test-cases.md"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/requirements.md::user-stories",
+          "target": "file::docs/specs/_template/ux.md",
+          "kind": "references",
+          "label": "UX flows",
+          "meta": {
+            "strength": "medium",
+            "reason": "User stories drive UX flows defined in ux.md"
+          }
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/_template/tasks.md",
+      "language": "markdown",
+      "sizeLines": 143,
+      "fileCategory": "docs",
+      "nodes": [
+        {
+          "id": "file::docs/specs/_template/tasks.md",
+          "kind": "file",
+          "label": "tasks.md",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 1,
+          "endLine": 143,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "category": "docs",
+            "language": "markdown",
+            "description": "Template for implementation tasks with dependencies and verification steps"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-001",
+          "kind": "task",
+          "label": "TASK-001: Database Schema",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 5,
+          "endLine": 16,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-001",
+            "description": "Create database tables and migrations",
+            "affectedFiles": [
+              "app/server/database/schema.ts",
+              "app/server/database/migrations/"
+            ],
+            "dependencies": [],
+            "verification": "Migration runs successfully"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-002",
+          "kind": "task",
+          "label": "TASK-002: Shared Types",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 19,
+          "endLine": 29,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-002",
+            "description": "Create TypeScript types and Zod schemas",
+            "affectedFiles": [
+              "app/shared/types/[feature].ts",
+              "app/shared/schemas/[feature].ts"
+            ],
+            "dependencies": [
+              "TASK-001"
+            ],
+            "verification": "Types compile without errors"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-003",
+          "kind": "task",
+          "label": "TASK-003: Repository",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 32,
+          "endLine": 42,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-003",
+            "description": "Create data access layer",
+            "affectedFiles": [
+              "app/server/repositories/[feature].repository.ts"
+            ],
+            "dependencies": [
+              "TASK-001",
+              "TASK-002"
+            ],
+            "verification": "Repository methods return correct types"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-004",
+          "kind": "task",
+          "label": "TASK-004: Service",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 45,
+          "endLine": 55,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-004",
+            "description": "Create business logic layer",
+            "affectedFiles": [
+              "app/server/services/[feature].service.ts"
+            ],
+            "dependencies": [
+              "TASK-003"
+            ],
+            "verification": "Service enforces business rules"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-005",
+          "kind": "task",
+          "label": "TASK-005: API Routes",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 58,
+          "endLine": 72,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-005",
+            "description": "Create server API endpoints",
+            "affectedFiles": [
+              "app/server/api/[feature]/index.get.ts",
+              "app/server/api/[feature]/index.post.ts",
+              "app/server/api/[feature]/[id].get.ts",
+              "app/server/api/[feature]/[id].put.ts",
+              "app/server/api/[feature]/[id].delete.ts"
+            ],
+            "dependencies": [
+              "TASK-004"
+            ],
+            "verification": "API endpoints respond correctly"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-006",
+          "kind": "task",
+          "label": "TASK-006: Composable",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 75,
+          "endLine": 85,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-006",
+            "description": "Create frontend data composable",
+            "affectedFiles": [
+              "app/app/composables/use[Feature].ts"
+            ],
+            "dependencies": [
+              "TASK-005"
+            ],
+            "verification": "Composable calls API correctly"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-007",
+          "kind": "task",
+          "label": "TASK-007: UI Components",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 88,
+          "endLine": 98,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-007",
+            "description": "Create UI components",
+            "affectedFiles": [
+              "app/app/components/[feature]/[Component].vue"
+            ],
+            "dependencies": [
+              "TASK-006"
+            ],
+            "verification": "Components render correctly"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-008",
+          "kind": "task",
+          "label": "TASK-008: Pages",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 101,
+          "endLine": 112,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-008",
+            "description": "Create page routes",
+            "affectedFiles": [
+              "app/app/pages/[feature]/index.vue",
+              "app/app/pages/[feature]/[id].vue"
+            ],
+            "dependencies": [
+              "TASK-007"
+            ],
+            "verification": "Pages navigate correctly"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-009",
+          "kind": "task",
+          "label": "TASK-009: Tests",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 115,
+          "endLine": 126,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-009",
+            "description": "Write unit and integration tests",
+            "affectedFiles": [
+              "app/tests/unit/[feature]/[test].test.ts",
+              "app/tests/integration/[feature]/[test].test.ts"
+            ],
+            "dependencies": [
+              "TASK-008"
+            ],
+            "verification": "All tests pass"
+          }
+        },
+        {
+          "id": "task::docs/specs/_template/tasks.md::task-010",
+          "kind": "task",
+          "label": "TASK-010: Verification",
+          "file": "docs/specs/_template/tasks.md",
+          "startLine": 129,
+          "endLine": 143,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "taskId": "TASK-010",
+            "description": "Run full verification",
+            "checks": [
+              "Typecheck passes",
+              "Lint passes",
+              "Tests pass",
+              "Build passes",
+              "Acceptance criteria met"
+            ],
+            "dependencies": [
+              "TASK-009"
+            ],
+            "verification": "All checks pass"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "file::docs/specs/_template/tasks.md",
+          "target": "file::docs/specs/_template/requirements.md",
+          "kind": "references",
+          "label": "implements requirements",
+          "meta": {
+            "strength": "high",
+            "reason": "Tasks implement functional requirements from requirements.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/tasks.md",
+          "target": "file::docs/specs/_template/domain.md",
+          "kind": "references",
+          "label": "implements domain model",
+          "meta": {
+            "strength": "high",
+            "reason": "TASK-001 creates database schema from domain.md entities"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/tasks.md",
+          "target": "file::docs/specs/_template/api.md",
+          "kind": "references",
+          "label": "implements API",
+          "meta": {
+            "strength": "high",
+            "reason": "TASK-005 creates API endpoints defined in api.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/tasks.md",
+          "target": "file::docs/specs/_template/ui.md",
+          "kind": "references",
+          "label": "implements UI",
+          "meta": {
+            "strength": "high",
+            "reason": "TASK-007 and TASK-008 create UI components and pages from ui.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/tasks.md",
+          "target": "file::docs/specs/_template/test-cases.md",
+          "kind": "references",
+          "label": "implements tests",
+          "meta": {
+            "strength": "high",
+            "reason": "TASK-009 writes tests based on test-cases.md"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-002",
+          "target": "task::docs/specs/_template/tasks.md::task-001",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "Shared types depend on database schema"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-003",
+          "target": "task::docs/specs/_template/tasks.md::task-001",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "Repository depends on database schema"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-003",
+          "target": "task::docs/specs/_template/tasks.md::task-002",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "Repository depends on shared types"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-004",
+          "target": "task::docs/specs/_template/tasks.md::task-003",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "Service depends on repository"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-005",
+          "target": "task::docs/specs/_template/tasks.md::task-004",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "API routes depend on service"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-006",
+          "target": "task::docs/specs/_template/tasks.md::task-005",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "Composable depends on API routes"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-007",
+          "target": "task::docs/specs/_template/tasks.md::task-006",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "UI components depend on composable"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-008",
+          "target": "task::docs/specs/_template/tasks.md::task-007",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "Pages depend on UI components"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-009",
+          "target": "task::docs/specs/_template/tasks.md::task-008",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "Tests depend on pages"
+          }
+        },
+        {
+          "source": "task::docs/specs/_template/tasks.md::task-010",
+          "target": "task::docs/specs/_template/tasks.md::task-009",
+          "kind": "depends-on",
+          "label": "depends on",
+          "meta": {
+            "strength": "high",
+            "reason": "Verification depends on tests"
+          }
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/_template/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 45,
+      "fileCategory": "docs",
+      "nodes": [
+        {
+          "id": "file::docs/specs/_template/test-cases.md",
+          "kind": "file",
+          "label": "test-cases.md",
+          "file": "docs/specs/_template/test-cases.md",
+          "startLine": 1,
+          "endLine": 45,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "category": "docs",
+            "language": "markdown",
+            "description": "Template for test case specifications including unit, integration, API, and E2E tests"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/test-cases.md::unit-tests",
+          "kind": "section",
+          "label": "Unit Tests",
+          "file": "docs/specs/_template/test-cases.md",
+          "startLine": 3,
+          "endLine": 10,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "test-section",
+            "testType": "unit",
+            "testIds": [
+              "UT-001",
+              "UT-002"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/test-cases.md::integration-tests",
+          "kind": "section",
+          "label": "Integration Tests",
+          "file": "docs/specs/_template/test-cases.md",
+          "startLine": 12,
+          "endLine": 19,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "test-section",
+            "testType": "integration",
+            "testIds": [
+              "IT-001",
+              "IT-002"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/test-cases.md::api-tests",
+          "kind": "section",
+          "label": "API Tests",
+          "file": "docs/specs/_template/test-cases.md",
+          "startLine": 21,
+          "endLine": 29,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "test-section",
+            "testType": "api",
+            "testIds": [
+              "AT-001",
+              "AT-002",
+              "AT-003"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/test-cases.md::e2e-tests",
+          "kind": "section",
+          "label": "E2E Tests",
+          "file": "docs/specs/_template/test-cases.md",
+          "startLine": 31,
+          "endLine": 38,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "test-section",
+            "testType": "e2e",
+            "testIds": [
+              "ET-001",
+              "ET-002"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/test-cases.md::edge-cases",
+          "kind": "section",
+          "label": "Edge Cases",
+          "file": "docs/specs/_template/test-cases.md",
+          "startLine": 40,
+          "endLine": 45,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "test-section",
+            "testType": "edge-case",
+            "testIds": [
+              "EC-001",
+              "EC-002"
+            ]
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "file::docs/specs/_template/test-cases.md",
+          "target": "file::docs/specs/_template/requirements.md",
+          "kind": "references",
+          "label": "tests requirements",
+          "meta": {
+            "strength": "high",
+            "reason": "Test cases map to REQ-XXX requirements defined in requirements.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/test-cases.md",
+          "target": "file::docs/specs/_template/acceptance.md",
+          "kind": "references",
+          "label": "validates acceptance criteria",
+          "meta": {
+            "strength": "high",
+            "reason": "Test cases validate acceptance criteria scenarios"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/test-cases.md",
+          "target": "file::docs/specs/_template/api.md",
+          "kind": "references",
+          "label": "tests API endpoints",
+          "meta": {
+            "strength": "high",
+            "reason": "API tests verify endpoints defined in api.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/test-cases.md",
+          "target": "file::docs/specs/_template/tasks.md",
+          "kind": "references",
+          "label": "implements tests",
+          "meta": {
+            "strength": "medium",
+            "reason": "Test cases are implemented in TASK-009 of tasks.md"
+          }
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/_template/ui.md",
+      "language": "markdown",
+      "sizeLines": 78,
+      "fileCategory": "docs",
+      "nodes": [
+        {
+          "id": "file::docs/specs/_template/ui.md",
+          "kind": "file",
+          "label": "ui.md",
+          "file": "docs/specs/_template/ui.md",
+          "startLine": 1,
+          "endLine": 78,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "category": "docs",
+            "language": "markdown",
+            "description": "Template for UI specifications including pages, forms, tables, navigation, and responsive behavior"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ui.md::pages",
+          "kind": "section",
+          "label": "Pages",
+          "file": "docs/specs/_template/ui.md",
+          "startLine": 3,
+          "endLine": 19,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "page-definitions",
+            "states": [
+              "Loading",
+              "Empty",
+              "Error",
+              "Success"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ui.md::information-hierarchy",
+          "kind": "section",
+          "label": "Information Hierarchy",
+          "file": "docs/specs/_template/ui.md",
+          "startLine": 21,
+          "endLine": 29,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "layout-hierarchy",
+            "levels": [
+              "Page Title",
+              "Context/Breadcrumb",
+              "Primary Action",
+              "Main Content",
+              "Secondary Actions"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ui.md::forms",
+          "kind": "section",
+          "label": "Forms",
+          "file": "docs/specs/_template/ui.md",
+          "startLine": 31,
+          "endLine": 38,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "form-definitions",
+            "fields": [
+              "name",
+              "type"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ui.md::tables",
+          "kind": "section",
+          "label": "Tables",
+          "file": "docs/specs/_template/ui.md",
+          "startLine": 40,
+          "endLine": 47,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "table-definitions",
+            "columns": [
+              "name",
+              "status"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ui.md::navigation",
+          "kind": "section",
+          "label": "Navigation",
+          "file": "docs/specs/_template/ui.md",
+          "startLine": 49,
+          "endLine": 52,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "navigation"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ui.md::responsive",
+          "kind": "section",
+          "label": "Responsive Behavior",
+          "file": "docs/specs/_template/ui.md",
+          "startLine": 54,
+          "endLine": 60,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "responsive-design",
+            "breakpoints": [
+              "Desktop",
+              "Tablet",
+              "Mobile"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ui.md::states",
+          "kind": "section",
+          "label": "Loading/Empty/Error States",
+          "file": "docs/specs/_template/ui.md",
+          "startLine": 62,
+          "endLine": 72,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "ui-states",
+            "states": [
+              "Loading",
+              "Empty",
+              "Error"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ui.md::accessibility",
+          "kind": "section",
+          "label": "Accessibility",
+          "file": "docs/specs/_template/ui.md",
+          "startLine": 74,
+          "endLine": 78,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "accessibility",
+            "requirements": [
+              "Keyboard",
+              "Screen reader",
+              "Focus"
+            ]
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "file::docs/specs/_template/ui.md",
+          "target": "file::docs/specs/_template/ux.md",
+          "kind": "references",
+          "label": "UX interactions",
+          "meta": {
+            "strength": "high",
+            "reason": "UI specifications implement UX interactions and flows from ux.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/ui.md",
+          "target": "file::docs/specs/_template/requirements.md",
+          "kind": "references",
+          "label": "implements requirements",
+          "meta": {
+            "strength": "medium",
+            "reason": "UI implements user stories and functional requirements from requirements.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/ui.md",
+          "target": "file::docs/specs/_template/api.md",
+          "kind": "references",
+          "label": "calls API",
+          "meta": {
+            "strength": "medium",
+            "reason": "UI forms and tables call API endpoints defined in api.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/ui.md",
+          "target": "file::docs/specs/_template/tasks.md",
+          "kind": "references",
+          "label": "implements UI",
+          "meta": {
+            "strength": "medium",
+            "reason": "UI specifications are implemented in TASK-007 and TASK-008 of tasks.md"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/ui.md::states",
+          "target": "file::docs/specs/_template/ux.md",
+          "kind": "references",
+          "label": "UX state definitions",
+          "meta": {
+            "strength": "high",
+            "reason": "UI states (loading, empty, error) are defined in UX specifications"
+          }
+        }
+      ]
+    },
+    {
+      "path": "docs/specs/_template/ux.md",
+      "language": "markdown",
+      "sizeLines": 92,
+      "fileCategory": "docs",
+      "nodes": [
+        {
+          "id": "file::docs/specs/_template/ux.md",
+          "kind": "file",
+          "label": "ux.md",
+          "file": "docs/specs/_template/ux.md",
+          "startLine": 1,
+          "endLine": 92,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "category": "docs",
+            "language": "markdown",
+            "description": "Template for UX specifications including user flows, interactions, feedback, states, and keyboard shortcuts"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ux.md::user-flow",
+          "kind": "section",
+          "label": "User Flow",
+          "file": "docs/specs/_template/ux.md",
+          "startLine": 3,
+          "endLine": 17,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "user-flow",
+            "description": "Visual representation of user journey with branching paths"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ux.md::interactions",
+          "kind": "section",
+          "label": "Interactions",
+          "file": "docs/specs/_template/ux.md",
+          "startLine": 19,
+          "endLine": 31,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "interaction-definitions",
+            "description": "Trigger/Action/Feedback patterns"
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ux.md::feedback",
+          "kind": "section",
+          "label": "Feedback",
+          "file": "docs/specs/_template/ux.md",
+          "startLine": 33,
+          "endLine": 39,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "feedback-patterns",
+            "actions": [
+              "Create",
+              "Update",
+              "Delete",
+              "Error"
+            ],
+            "types": [
+              "Toast",
+              "Dialog",
+              "Inline"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ux.md::empty-states",
+          "kind": "section",
+          "label": "Empty States",
+          "file": "docs/specs/_template/ux.md",
+          "startLine": 41,
+          "endLine": 52,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "empty-state-definitions",
+            "scenarios": [
+              "No resources",
+              "Search no results"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ux.md::loading-states",
+          "kind": "section",
+          "label": "Loading States",
+          "file": "docs/specs/_template/ux.md",
+          "startLine": 54,
+          "endLine": 58,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "loading-state-definitions",
+            "scenarios": [
+              "Initial load",
+              "Submitting",
+              "Background"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ux.md::error-handling",
+          "kind": "section",
+          "label": "Error Handling",
+          "file": "docs/specs/_template/ux.md",
+          "startLine": 60,
+          "endLine": 67,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "error-handling",
+            "errorTypes": [
+              "Network",
+              "Validation",
+              "Permission",
+              "Not found"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ux.md::confirmation",
+          "kind": "section",
+          "label": "Confirmation Dialogs",
+          "file": "docs/specs/_template/ux.md",
+          "startLine": 69,
+          "endLine": 82,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "confirmation-patterns",
+            "scenarios": [
+              "Destructive actions",
+              "With dependencies"
+            ]
+          }
+        },
+        {
+          "id": "section::docs/specs/_template/ux.md::keyboard-shortcuts",
+          "kind": "section",
+          "label": "Keyboard Shortcuts",
+          "file": "docs/specs/_template/ux.md",
+          "startLine": 84,
+          "endLine": 92,
+          "exports": [],
+          "imports": [],
+          "meta": {
+            "type": "keyboard-shortcuts",
+            "shortcuts": [
+              "Cmd+K",
+              "Cmd+S",
+              "Esc",
+              "Delete"
+            ]
+          }
+        }
+      ],
+      "edges": [
+        {
+          "source": "file::docs/specs/_template/ux.md",
+          "target": "file::docs/specs/_template/ui.md",
+          "kind": "references",
+          "label": "UI implementation",
+          "meta": {
+            "strength": "high",
+            "reason": "UX interactions are implemented in UI components from ui.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/ux.md",
+          "target": "file::docs/specs/_template/requirements.md",
+          "kind": "references",
+          "label": "implements user stories",
+          "meta": {
+            "strength": "high",
+            "reason": "UX flows implement user stories from requirements.md"
+          }
+        },
+        {
+          "source": "file::docs/specs/_template/ux.md",
+          "target": "file::docs/specs/_template/acceptance.md",
+          "kind": "references",
+          "label": "UX acceptance criteria",
+          "meta": {
+            "strength": "medium",
+            "reason": "Empty and loading states match acceptance criteria scenarios"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/ux.md::empty-states",
+          "target": "section::docs/specs/_template/acceptance.md::ac-005-empty-state",
+          "kind": "references",
+          "label": "empty state UX",
+          "meta": {
+            "strength": "high",
+            "reason": "Empty state UX matches AC-005 acceptance criterion"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/ux.md::loading-states",
+          "target": "section::docs/specs/_template/acceptance.md::ac-006-loading",
+          "kind": "references",
+          "label": "loading state UX",
+          "meta": {
+            "strength": "high",
+            "reason": "Loading state UX matches AC-006 acceptance criterion"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/ux.md::error-handling",
+          "target": "section::docs/specs/_template/acceptance.md::ac-007-error",
+          "kind": "references",
+          "label": "error handling UX",
+          "meta": {
+            "strength": "high",
+            "reason": "Error handling UX matches AC-007 acceptance criterion"
+          }
+        },
+        {
+          "source": "section::docs/specs/_template/ux.md::feedback",
+          "target": "section::docs/specs/_template/business-rules.md::side-effects",
+          "kind": "references",
+          "label": "feedback for side effects",
+          "meta": {
+            "strength": "medium",
+            "reason": "Feedback patterns handle side effects from business rules"
+          }
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "file::docs/specs/_template/acceptance.md",
+      "kind": "file",
+      "label": "acceptance.md",
+      "file": "docs/specs/_template/acceptance.md",
+      "startLine": 1,
+      "endLine": 69,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "category": "docs",
+        "language": "markdown",
+        "description": "Template for acceptance criteria using Given/When/Then format"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/acceptance.md::ac-001",
+      "kind": "section",
+      "label": "AC-001: [Criterion Title]",
+      "file": "docs/specs/_template/acceptance.md",
+      "startLine": 7,
+      "endLine": 14,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "acceptance-criterion",
+        "format": "Given/When/Then",
+        "mappedTo": "REQ-001"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/acceptance.md::ac-004-validation",
+      "kind": "section",
+      "label": "AC-004: Validation Error",
+      "file": "docs/specs/_template/acceptance.md",
+      "startLine": 31,
+      "endLine": 37,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "acceptance-criterion",
+        "scenario": "validation-error",
+        "mappedTo": "REQ-004"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/acceptance.md::ac-005-empty-state",
+      "kind": "section",
+      "label": "AC-005: Empty State",
+      "file": "docs/specs/_template/acceptance.md",
+      "startLine": 39,
+      "endLine": 45,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "acceptance-criterion",
+        "scenario": "empty-state",
+        "mappedTo": "REQ-005"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/acceptance.md::ac-006-loading",
+      "kind": "section",
+      "label": "AC-006: Loading State",
+      "file": "docs/specs/_template/acceptance.md",
+      "startLine": 47,
+      "endLine": 53,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "acceptance-criterion",
+        "scenario": "loading-state",
+        "mappedTo": "REQ-006"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/acceptance.md::ac-007-error",
+      "kind": "section",
+      "label": "AC-007: Error State",
+      "file": "docs/specs/_template/acceptance.md",
+      "startLine": 55,
+      "endLine": 61,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "acceptance-criterion",
+        "scenario": "error-state",
+        "mappedTo": "REQ-007"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/acceptance.md::summary",
+      "kind": "section",
+      "label": "Summary",
+      "file": "docs/specs/_template/acceptance.md",
+      "startLine": 63,
+      "endLine": 69,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "summary-table",
+        "columns": [
+          "ID",
+          "Criterion",
+          "Mapped To",
+          "Status"
+        ]
+      }
+    },
+    {
+      "id": "file::docs/specs/_template/api.md",
+      "kind": "file",
+      "label": "api.md",
+      "file": "docs/specs/_template/api.md",
+      "startLine": 1,
+      "endLine": 97,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "category": "docs",
+        "language": "markdown",
+        "description": "Template for API endpoint specifications"
+      }
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::get-list",
+      "kind": "endpoint",
+      "label": "GET /api/[resource]",
+      "file": "docs/specs/_template/api.md",
+      "startLine": 5,
+      "endLine": 24,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "method": "GET",
+        "path": "/api/[resource]",
+        "description": "List resources with pagination, sort, search",
+        "parameters": [
+          "page",
+          "per_page",
+          "sort",
+          "order",
+          "search"
+        ]
+      }
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::get-single",
+      "kind": "endpoint",
+      "label": "GET /api/[resource]/:id",
+      "file": "docs/specs/_template/api.md",
+      "startLine": 26,
+      "endLine": 35,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "method": "GET",
+        "path": "/api/[resource]/:id",
+        "description": "Get single resource"
+      }
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::post-create",
+      "kind": "endpoint",
+      "label": "POST /api/[resource]",
+      "file": "docs/specs/_template/api.md",
+      "startLine": 37,
+      "endLine": 56,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "method": "POST",
+        "path": "/api/[resource]",
+        "description": "Create resource",
+        "validation": "Zod schema"
+      }
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::put-update",
+      "kind": "endpoint",
+      "label": "PUT /api/[resource]/:id",
+      "file": "docs/specs/_template/api.md",
+      "startLine": 58,
+      "endLine": 75,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "method": "PUT",
+        "path": "/api/[resource]/:id",
+        "description": "Update resource"
+      }
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::delete-resource",
+      "kind": "endpoint",
+      "label": "DELETE /api/[resource]/:id",
+      "file": "docs/specs/_template/api.md",
+      "startLine": 77,
+      "endLine": 86,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "method": "DELETE",
+        "path": "/api/[resource]/:id",
+        "description": "Delete resource"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/api.md::error-responses",
+      "kind": "section",
+      "label": "Error Responses",
+      "file": "docs/specs/_template/api.md",
+      "startLine": 88,
+      "endLine": 97,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "error-codes",
+        "codes": [
+          "VALIDATION_ERROR",
+          "UNAUTHORIZED",
+          "FORBIDDEN",
+          "NOT_FOUND",
+          "CONFLICT",
+          "INTERNAL_ERROR"
+        ]
+      }
+    },
+    {
+      "id": "file::docs/specs/_template/business-rules.md",
+      "kind": "file",
+      "label": "business-rules.md",
+      "file": "docs/specs/_template/business-rules.md",
+      "startLine": 1,
+      "endLine": 38,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "category": "docs",
+        "language": "markdown",
+        "description": "Template for business rules including validation, permissions, state transitions, and constraints"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/business-rules.md::validation-rules",
+      "kind": "section",
+      "label": "Validation Rules",
+      "file": "docs/specs/_template/business-rules.md",
+      "startLine": 3,
+      "endLine": 8,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "validation-rules",
+        "ruleIds": [
+          "VR-001",
+          "VR-002"
+        ],
+        "fields": [
+          "name"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/business-rules.md::permission-rules",
+      "kind": "section",
+      "label": "Permission Rules",
+      "file": "docs/specs/_template/business-rules.md",
+      "startLine": 10,
+      "endLine": 17,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "permission-rules",
+        "ruleIds": [
+          "PR-001",
+          "PR-002",
+          "PR-003",
+          "PR-004"
+        ],
+        "roles": [
+          "Administrator",
+          "Staff"
+        ],
+        "actions": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/business-rules.md::state-transitions",
+      "kind": "section",
+      "label": "State Transition Rules",
+      "file": "docs/specs/_template/business-rules.md",
+      "startLine": 19,
+      "endLine": 24,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "state-machine",
+        "ruleIds": [
+          "ST-001",
+          "ST-002"
+        ],
+        "states": [
+          "Draft",
+          "Published",
+          "Archived"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/business-rules.md::business-constraints",
+      "kind": "section",
+      "label": "Business Constraints",
+      "file": "docs/specs/_template/business-rules.md",
+      "startLine": 26,
+      "endLine": 31,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "constraints",
+        "ruleIds": [
+          "BC-001",
+          "BC-002"
+        ],
+        "severities": [
+          "CRITICAL",
+          "HIGH"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/business-rules.md::side-effects",
+      "kind": "section",
+      "label": "Side Effects",
+      "file": "docs/specs/_template/business-rules.md",
+      "startLine": 33,
+      "endLine": 38,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "side-effects",
+        "ruleIds": [
+          "SE-001",
+          "SE-002"
+        ],
+        "actions": [
+          "Publish template",
+          "Delete table"
+        ]
+      }
+    },
+    {
+      "id": "file::docs/specs/_template/domain.md",
+      "kind": "file",
+      "label": "domain.md",
+      "file": "docs/specs/_template/domain.md",
+      "startLine": 1,
+      "endLine": 43,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "category": "docs",
+        "language": "markdown",
+        "description": "Template for domain model definitions including entities, relationships, and state machines"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/domain.md::entities",
+      "kind": "section",
+      "label": "Entities",
+      "file": "docs/specs/_template/domain.md",
+      "startLine": 3,
+      "endLine": 25,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "entity-definitions",
+        "attributes": [
+          "id",
+          "name",
+          "status",
+          "created_at",
+          "updated_at"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/domain.md::relationships",
+      "kind": "section",
+      "label": "Relationships",
+      "file": "docs/specs/_template/domain.md",
+      "startLine": 27,
+      "endLine": 32,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "entity-relationships",
+        "cardinalities": [
+          "1:N",
+          "N:1"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/domain.md::invariants",
+      "kind": "section",
+      "label": "Invariants",
+      "file": "docs/specs/_template/domain.md",
+      "startLine": 34,
+      "endLine": 37,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "invariants",
+        "description": "Entity-level constraints that must always hold"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/domain.md::lifecycle",
+      "kind": "section",
+      "label": "Lifecycle",
+      "file": "docs/specs/_template/domain.md",
+      "startLine": 39,
+      "endLine": 43,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "entity-lifecycle",
+        "states": [
+          "State 1",
+          "State 2",
+          "State 3"
+        ]
+      }
+    },
+    {
+      "id": "file::docs/specs/_template/requirements.md",
+      "kind": "file",
+      "label": "requirements.md",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 1,
+      "endLine": 57,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "category": "docs",
+        "language": "markdown",
+        "description": "Template for feature requirements including problem, objectives, user stories, and functional/non-functional requirements"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/requirements.md::problem",
+      "kind": "section",
+      "label": "Problem",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 3,
+      "endLine": 5,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "problem-statement"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/requirements.md::objective",
+      "kind": "section",
+      "label": "Objective",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 7,
+      "endLine": 9,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "objective"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/requirements.md::actors",
+      "kind": "section",
+      "label": "Actors",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 11,
+      "endLine": 14,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "actors",
+        "description": "System actors and their roles"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/requirements.md::user-stories",
+      "kind": "section",
+      "label": "User Stories",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 16,
+      "endLine": 27,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "user-stories",
+        "storyIds": [
+          "US-001"
+        ],
+        "format": "As a [actor] / I want to [action] / So that [benefit]"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/requirements.md::functional-requirements",
+      "kind": "section",
+      "label": "Functional Requirements",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 29,
+      "endLine": 35,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "functional-requirements",
+        "requirementIds": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003"
+        ],
+        "priorities": [
+          "Must",
+          "Should"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/requirements.md::non-functional-requirements",
+      "kind": "section",
+      "label": "Non-Functional Requirements",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 37,
+      "endLine": 42,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "non-functional-requirements",
+        "requirementIds": [
+          "NFR-001",
+          "NFR-002"
+        ],
+        "categories": [
+          "Performance",
+          "Security"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/requirements.md::constraints",
+      "kind": "section",
+      "label": "Constraints",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 44,
+      "endLine": 47,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "constraints"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/requirements.md::edge-cases",
+      "kind": "section",
+      "label": "Edge Cases",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 49,
+      "endLine": 52,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "edge-cases"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/requirements.md::dependencies",
+      "kind": "section",
+      "label": "Dependencies",
+      "file": "docs/specs/_template/requirements.md",
+      "startLine": 54,
+      "endLine": 57,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "dependencies"
+      }
+    },
+    {
+      "id": "file::docs/specs/_template/tasks.md",
+      "kind": "file",
+      "label": "tasks.md",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 1,
+      "endLine": 143,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "category": "docs",
+        "language": "markdown",
+        "description": "Template for implementation tasks with dependencies and verification steps"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-001",
+      "kind": "task",
+      "label": "TASK-001: Database Schema",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 5,
+      "endLine": 16,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-001",
+        "description": "Create database tables and migrations",
+        "affectedFiles": [
+          "app/server/database/schema.ts",
+          "app/server/database/migrations/"
+        ],
+        "dependencies": [],
+        "verification": "Migration runs successfully"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-002",
+      "kind": "task",
+      "label": "TASK-002: Shared Types",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 19,
+      "endLine": 29,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-002",
+        "description": "Create TypeScript types and Zod schemas",
+        "affectedFiles": [
+          "app/shared/types/[feature].ts",
+          "app/shared/schemas/[feature].ts"
+        ],
+        "dependencies": [
+          "TASK-001"
+        ],
+        "verification": "Types compile without errors"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-003",
+      "kind": "task",
+      "label": "TASK-003: Repository",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 32,
+      "endLine": 42,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-003",
+        "description": "Create data access layer",
+        "affectedFiles": [
+          "app/server/repositories/[feature].repository.ts"
+        ],
+        "dependencies": [
+          "TASK-001",
+          "TASK-002"
+        ],
+        "verification": "Repository methods return correct types"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-004",
+      "kind": "task",
+      "label": "TASK-004: Service",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 45,
+      "endLine": 55,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-004",
+        "description": "Create business logic layer",
+        "affectedFiles": [
+          "app/server/services/[feature].service.ts"
+        ],
+        "dependencies": [
+          "TASK-003"
+        ],
+        "verification": "Service enforces business rules"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-005",
+      "kind": "task",
+      "label": "TASK-005: API Routes",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 58,
+      "endLine": 72,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-005",
+        "description": "Create server API endpoints",
+        "affectedFiles": [
+          "app/server/api/[feature]/index.get.ts",
+          "app/server/api/[feature]/index.post.ts",
+          "app/server/api/[feature]/[id].get.ts",
+          "app/server/api/[feature]/[id].put.ts",
+          "app/server/api/[feature]/[id].delete.ts"
+        ],
+        "dependencies": [
+          "TASK-004"
+        ],
+        "verification": "API endpoints respond correctly"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-006",
+      "kind": "task",
+      "label": "TASK-006: Composable",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 75,
+      "endLine": 85,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-006",
+        "description": "Create frontend data composable",
+        "affectedFiles": [
+          "app/app/composables/use[Feature].ts"
+        ],
+        "dependencies": [
+          "TASK-005"
+        ],
+        "verification": "Composable calls API correctly"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-007",
+      "kind": "task",
+      "label": "TASK-007: UI Components",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 88,
+      "endLine": 98,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-007",
+        "description": "Create UI components",
+        "affectedFiles": [
+          "app/app/components/[feature]/[Component].vue"
+        ],
+        "dependencies": [
+          "TASK-006"
+        ],
+        "verification": "Components render correctly"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-008",
+      "kind": "task",
+      "label": "TASK-008: Pages",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 101,
+      "endLine": 112,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-008",
+        "description": "Create page routes",
+        "affectedFiles": [
+          "app/app/pages/[feature]/index.vue",
+          "app/app/pages/[feature]/[id].vue"
+        ],
+        "dependencies": [
+          "TASK-007"
+        ],
+        "verification": "Pages navigate correctly"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-009",
+      "kind": "task",
+      "label": "TASK-009: Tests",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 115,
+      "endLine": 126,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-009",
+        "description": "Write unit and integration tests",
+        "affectedFiles": [
+          "app/tests/unit/[feature]/[test].test.ts",
+          "app/tests/integration/[feature]/[test].test.ts"
+        ],
+        "dependencies": [
+          "TASK-008"
+        ],
+        "verification": "All tests pass"
+      }
+    },
+    {
+      "id": "task::docs/specs/_template/tasks.md::task-010",
+      "kind": "task",
+      "label": "TASK-010: Verification",
+      "file": "docs/specs/_template/tasks.md",
+      "startLine": 129,
+      "endLine": 143,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "taskId": "TASK-010",
+        "description": "Run full verification",
+        "checks": [
+          "Typecheck passes",
+          "Lint passes",
+          "Tests pass",
+          "Build passes",
+          "Acceptance criteria met"
+        ],
+        "dependencies": [
+          "TASK-009"
+        ],
+        "verification": "All checks pass"
+      }
+    },
+    {
+      "id": "file::docs/specs/_template/test-cases.md",
+      "kind": "file",
+      "label": "test-cases.md",
+      "file": "docs/specs/_template/test-cases.md",
+      "startLine": 1,
+      "endLine": 45,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "category": "docs",
+        "language": "markdown",
+        "description": "Template for test case specifications including unit, integration, API, and E2E tests"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/test-cases.md::unit-tests",
+      "kind": "section",
+      "label": "Unit Tests",
+      "file": "docs/specs/_template/test-cases.md",
+      "startLine": 3,
+      "endLine": 10,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "test-section",
+        "testType": "unit",
+        "testIds": [
+          "UT-001",
+          "UT-002"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/test-cases.md::integration-tests",
+      "kind": "section",
+      "label": "Integration Tests",
+      "file": "docs/specs/_template/test-cases.md",
+      "startLine": 12,
+      "endLine": 19,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "test-section",
+        "testType": "integration",
+        "testIds": [
+          "IT-001",
+          "IT-002"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/test-cases.md::api-tests",
+      "kind": "section",
+      "label": "API Tests",
+      "file": "docs/specs/_template/test-cases.md",
+      "startLine": 21,
+      "endLine": 29,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "test-section",
+        "testType": "api",
+        "testIds": [
+          "AT-001",
+          "AT-002",
+          "AT-003"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/test-cases.md::e2e-tests",
+      "kind": "section",
+      "label": "E2E Tests",
+      "file": "docs/specs/_template/test-cases.md",
+      "startLine": 31,
+      "endLine": 38,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "test-section",
+        "testType": "e2e",
+        "testIds": [
+          "ET-001",
+          "ET-002"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/test-cases.md::edge-cases",
+      "kind": "section",
+      "label": "Edge Cases",
+      "file": "docs/specs/_template/test-cases.md",
+      "startLine": 40,
+      "endLine": 45,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "test-section",
+        "testType": "edge-case",
+        "testIds": [
+          "EC-001",
+          "EC-002"
+        ]
+      }
+    },
+    {
+      "id": "file::docs/specs/_template/ui.md",
+      "kind": "file",
+      "label": "ui.md",
+      "file": "docs/specs/_template/ui.md",
+      "startLine": 1,
+      "endLine": 78,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "category": "docs",
+        "language": "markdown",
+        "description": "Template for UI specifications including pages, forms, tables, navigation, and responsive behavior"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ui.md::pages",
+      "kind": "section",
+      "label": "Pages",
+      "file": "docs/specs/_template/ui.md",
+      "startLine": 3,
+      "endLine": 19,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "page-definitions",
+        "states": [
+          "Loading",
+          "Empty",
+          "Error",
+          "Success"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ui.md::information-hierarchy",
+      "kind": "section",
+      "label": "Information Hierarchy",
+      "file": "docs/specs/_template/ui.md",
+      "startLine": 21,
+      "endLine": 29,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "layout-hierarchy",
+        "levels": [
+          "Page Title",
+          "Context/Breadcrumb",
+          "Primary Action",
+          "Main Content",
+          "Secondary Actions"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ui.md::forms",
+      "kind": "section",
+      "label": "Forms",
+      "file": "docs/specs/_template/ui.md",
+      "startLine": 31,
+      "endLine": 38,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "form-definitions",
+        "fields": [
+          "name",
+          "type"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ui.md::tables",
+      "kind": "section",
+      "label": "Tables",
+      "file": "docs/specs/_template/ui.md",
+      "startLine": 40,
+      "endLine": 47,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "table-definitions",
+        "columns": [
+          "name",
+          "status"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ui.md::navigation",
+      "kind": "section",
+      "label": "Navigation",
+      "file": "docs/specs/_template/ui.md",
+      "startLine": 49,
+      "endLine": 52,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "navigation"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ui.md::responsive",
+      "kind": "section",
+      "label": "Responsive Behavior",
+      "file": "docs/specs/_template/ui.md",
+      "startLine": 54,
+      "endLine": 60,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "responsive-design",
+        "breakpoints": [
+          "Desktop",
+          "Tablet",
+          "Mobile"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ui.md::states",
+      "kind": "section",
+      "label": "Loading/Empty/Error States",
+      "file": "docs/specs/_template/ui.md",
+      "startLine": 62,
+      "endLine": 72,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "ui-states",
+        "states": [
+          "Loading",
+          "Empty",
+          "Error"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ui.md::accessibility",
+      "kind": "section",
+      "label": "Accessibility",
+      "file": "docs/specs/_template/ui.md",
+      "startLine": 74,
+      "endLine": 78,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "accessibility",
+        "requirements": [
+          "Keyboard",
+          "Screen reader",
+          "Focus"
+        ]
+      }
+    },
+    {
+      "id": "file::docs/specs/_template/ux.md",
+      "kind": "file",
+      "label": "ux.md",
+      "file": "docs/specs/_template/ux.md",
+      "startLine": 1,
+      "endLine": 92,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "category": "docs",
+        "language": "markdown",
+        "description": "Template for UX specifications including user flows, interactions, feedback, states, and keyboard shortcuts"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ux.md::user-flow",
+      "kind": "section",
+      "label": "User Flow",
+      "file": "docs/specs/_template/ux.md",
+      "startLine": 3,
+      "endLine": 17,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "user-flow",
+        "description": "Visual representation of user journey with branching paths"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ux.md::interactions",
+      "kind": "section",
+      "label": "Interactions",
+      "file": "docs/specs/_template/ux.md",
+      "startLine": 19,
+      "endLine": 31,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "interaction-definitions",
+        "description": "Trigger/Action/Feedback patterns"
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ux.md::feedback",
+      "kind": "section",
+      "label": "Feedback",
+      "file": "docs/specs/_template/ux.md",
+      "startLine": 33,
+      "endLine": 39,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "feedback-patterns",
+        "actions": [
+          "Create",
+          "Update",
+          "Delete",
+          "Error"
+        ],
+        "types": [
+          "Toast",
+          "Dialog",
+          "Inline"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ux.md::empty-states",
+      "kind": "section",
+      "label": "Empty States",
+      "file": "docs/specs/_template/ux.md",
+      "startLine": 41,
+      "endLine": 52,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "empty-state-definitions",
+        "scenarios": [
+          "No resources",
+          "Search no results"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ux.md::loading-states",
+      "kind": "section",
+      "label": "Loading States",
+      "file": "docs/specs/_template/ux.md",
+      "startLine": 54,
+      "endLine": 58,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "loading-state-definitions",
+        "scenarios": [
+          "Initial load",
+          "Submitting",
+          "Background"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ux.md::error-handling",
+      "kind": "section",
+      "label": "Error Handling",
+      "file": "docs/specs/_template/ux.md",
+      "startLine": 60,
+      "endLine": 67,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "error-handling",
+        "errorTypes": [
+          "Network",
+          "Validation",
+          "Permission",
+          "Not found"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ux.md::confirmation",
+      "kind": "section",
+      "label": "Confirmation Dialogs",
+      "file": "docs/specs/_template/ux.md",
+      "startLine": 69,
+      "endLine": 82,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "confirmation-patterns",
+        "scenarios": [
+          "Destructive actions",
+          "With dependencies"
+        ]
+      }
+    },
+    {
+      "id": "section::docs/specs/_template/ux.md::keyboard-shortcuts",
+      "kind": "section",
+      "label": "Keyboard Shortcuts",
+      "file": "docs/specs/_template/ux.md",
+      "startLine": 84,
+      "endLine": 92,
+      "exports": [],
+      "imports": [],
+      "meta": {
+        "type": "keyboard-shortcuts",
+        "shortcuts": [
+          "Cmd+K",
+          "Cmd+S",
+          "Esc",
+          "Delete"
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "file::docs/specs/_template/acceptance.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "maps criteria to requirements",
+      "meta": {
+        "strength": "high",
+        "reason": "Acceptance criteria map to REQ-XXX requirements defined in requirements.md"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/acceptance.md::ac-004-validation",
+      "target": "file::docs/specs/_template/business-rules.md",
+      "kind": "references",
+      "label": "validation rules",
+      "meta": {
+        "strength": "medium",
+        "reason": "Validation error criteria relate to validation rules in business-rules.md"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/acceptance.md::ac-005-empty-state",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "empty state UX",
+      "meta": {
+        "strength": "medium",
+        "reason": "Empty state criteria relate to UX empty states defined in ux.md"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/acceptance.md::ac-006-loading",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "loading state UX",
+      "meta": {
+        "strength": "medium",
+        "reason": "Loading state criteria relate to UX loading states defined in ux.md"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/acceptance.md::ac-007-error",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "error handling UX",
+      "meta": {
+        "strength": "medium",
+        "reason": "Error state criteria relate to UX error handling defined in ux.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/api.md",
+      "target": "file::docs/specs/_template/business-rules.md",
+      "kind": "references",
+      "label": "validation rules",
+      "meta": {
+        "strength": "high",
+        "reason": "API validation references Zod schemas and validation rules from business-rules.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/api.md",
+      "target": "file::docs/specs/_template/domain.md",
+      "kind": "references",
+      "label": "entity definitions",
+      "meta": {
+        "strength": "medium",
+        "reason": "API endpoints operate on entities defined in domain.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/api.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "functional requirements",
+      "meta": {
+        "strength": "medium",
+        "reason": "API endpoints implement functional requirements from requirements.md"
+      }
+    },
+    {
+      "source": "endpoint::docs/specs/_template/api.md::post-create",
+      "target": "section::docs/specs/_template/business-rules.md::validation-rules",
+      "kind": "enforces",
+      "label": "validates input",
+      "meta": {
+        "strength": "high",
+        "reason": "POST endpoint enforces validation rules defined in business-rules.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/business-rules.md",
+      "target": "file::docs/specs/_template/domain.md",
+      "kind": "references",
+      "label": "entity constraints",
+      "meta": {
+        "strength": "high",
+        "reason": "Business rules define constraints on entities from domain.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/business-rules.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "enforces",
+      "label": "API validation",
+      "meta": {
+        "strength": "high",
+        "reason": "Validation rules enforce input validation at API layer"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/business-rules.md::state-transitions",
+      "target": "section::docs/specs/_template/domain.md::state-machine",
+      "kind": "references",
+      "label": "state machine definition",
+      "meta": {
+        "strength": "high",
+        "reason": "State transition rules define valid transitions for entity state machines"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/business-rules.md::permission-rules",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "UI permissions",
+      "meta": {
+        "strength": "medium",
+        "reason": "Permission rules affect UI element visibility and interaction"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/domain.md",
+      "target": "file::docs/specs/_template/business-rules.md",
+      "kind": "references",
+      "label": "entity constraints",
+      "meta": {
+        "strength": "high",
+        "reason": "Domain entities have invariants enforced by business rules"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/domain.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "references",
+      "label": "API operations",
+      "meta": {
+        "strength": "medium",
+        "reason": "Domain entities are operated on by API endpoints"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/domain.md",
+      "target": "file::docs/specs/_template/tasks.md",
+      "kind": "references",
+      "label": "database schema",
+      "meta": {
+        "strength": "high",
+        "reason": "Domain entities are implemented as database tables per tasks.md"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/domain.md::lifecycle",
+      "target": "section::docs/specs/_template/business-rules.md::state-transitions",
+      "kind": "references",
+      "label": "state transitions",
+      "meta": {
+        "strength": "high",
+        "reason": "Entity lifecycle states have transitions defined in business rules"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/requirements.md",
+      "target": "file::docs/specs/_template/acceptance.md",
+      "kind": "references",
+      "label": "acceptance criteria",
+      "meta": {
+        "strength": "high",
+        "reason": "Requirements are validated by acceptance criteria"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/requirements.md",
+      "target": "file::docs/specs/_template/domain.md",
+      "kind": "references",
+      "label": "domain model",
+      "meta": {
+        "strength": "medium",
+        "reason": "Requirements define entities modeled in domain.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/requirements.md",
+      "target": "file::docs/specs/_template/tasks.md",
+      "kind": "references",
+      "label": "implementation tasks",
+      "meta": {
+        "strength": "medium",
+        "reason": "Requirements are implemented through tasks defined in tasks.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/requirements.md",
+      "target": "file::docs/specs/_template/test-cases.md",
+      "kind": "references",
+      "label": "test coverage",
+      "meta": {
+        "strength": "high",
+        "reason": "Requirements are verified by test cases in test-cases.md"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/requirements.md::user-stories",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "UX flows",
+      "meta": {
+        "strength": "medium",
+        "reason": "User stories drive UX flows defined in ux.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "implements requirements",
+      "meta": {
+        "strength": "high",
+        "reason": "Tasks implement functional requirements from requirements.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/domain.md",
+      "kind": "references",
+      "label": "implements domain model",
+      "meta": {
+        "strength": "high",
+        "reason": "TASK-001 creates database schema from domain.md entities"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "references",
+      "label": "implements API",
+      "meta": {
+        "strength": "high",
+        "reason": "TASK-005 creates API endpoints defined in api.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/ui.md",
+      "kind": "references",
+      "label": "implements UI",
+      "meta": {
+        "strength": "high",
+        "reason": "TASK-007 and TASK-008 create UI components and pages from ui.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/test-cases.md",
+      "kind": "references",
+      "label": "implements tests",
+      "meta": {
+        "strength": "high",
+        "reason": "TASK-009 writes tests based on test-cases.md"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-002",
+      "target": "task::docs/specs/_template/tasks.md::task-001",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Shared types depend on database schema"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-003",
+      "target": "task::docs/specs/_template/tasks.md::task-001",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Repository depends on database schema"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-003",
+      "target": "task::docs/specs/_template/tasks.md::task-002",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Repository depends on shared types"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-004",
+      "target": "task::docs/specs/_template/tasks.md::task-003",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Service depends on repository"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-005",
+      "target": "task::docs/specs/_template/tasks.md::task-004",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "API routes depend on service"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-006",
+      "target": "task::docs/specs/_template/tasks.md::task-005",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Composable depends on API routes"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-007",
+      "target": "task::docs/specs/_template/tasks.md::task-006",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "UI components depend on composable"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-008",
+      "target": "task::docs/specs/_template/tasks.md::task-007",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Pages depend on UI components"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-009",
+      "target": "task::docs/specs/_template/tasks.md::task-008",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Tests depend on pages"
+      }
+    },
+    {
+      "source": "task::docs/specs/_template/tasks.md::task-010",
+      "target": "task::docs/specs/_template/tasks.md::task-009",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Verification depends on tests"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/test-cases.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "tests requirements",
+      "meta": {
+        "strength": "high",
+        "reason": "Test cases map to REQ-XXX requirements defined in requirements.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/test-cases.md",
+      "target": "file::docs/specs/_template/acceptance.md",
+      "kind": "references",
+      "label": "validates acceptance criteria",
+      "meta": {
+        "strength": "high",
+        "reason": "Test cases validate acceptance criteria scenarios"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/test-cases.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "references",
+      "label": "tests API endpoints",
+      "meta": {
+        "strength": "high",
+        "reason": "API tests verify endpoints defined in api.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/test-cases.md",
+      "target": "file::docs/specs/_template/tasks.md",
+      "kind": "references",
+      "label": "implements tests",
+      "meta": {
+        "strength": "medium",
+        "reason": "Test cases are implemented in TASK-009 of tasks.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/ui.md",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "UX interactions",
+      "meta": {
+        "strength": "high",
+        "reason": "UI specifications implement UX interactions and flows from ux.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/ui.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "implements requirements",
+      "meta": {
+        "strength": "medium",
+        "reason": "UI implements user stories and functional requirements from requirements.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/ui.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "references",
+      "label": "calls API",
+      "meta": {
+        "strength": "medium",
+        "reason": "UI forms and tables call API endpoints defined in api.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/ui.md",
+      "target": "file::docs/specs/_template/tasks.md",
+      "kind": "references",
+      "label": "implements UI",
+      "meta": {
+        "strength": "medium",
+        "reason": "UI specifications are implemented in TASK-007 and TASK-008 of tasks.md"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/ui.md::states",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "UX state definitions",
+      "meta": {
+        "strength": "high",
+        "reason": "UI states (loading, empty, error) are defined in UX specifications"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/ux.md",
+      "target": "file::docs/specs/_template/ui.md",
+      "kind": "references",
+      "label": "UI implementation",
+      "meta": {
+        "strength": "high",
+        "reason": "UX interactions are implemented in UI components from ui.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/ux.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "implements user stories",
+      "meta": {
+        "strength": "high",
+        "reason": "UX flows implement user stories from requirements.md"
+      }
+    },
+    {
+      "source": "file::docs/specs/_template/ux.md",
+      "target": "file::docs/specs/_template/acceptance.md",
+      "kind": "references",
+      "label": "UX acceptance criteria",
+      "meta": {
+        "strength": "medium",
+        "reason": "Empty and loading states match acceptance criteria scenarios"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/ux.md::empty-states",
+      "target": "section::docs/specs/_template/acceptance.md::ac-005-empty-state",
+      "kind": "references",
+      "label": "empty state UX",
+      "meta": {
+        "strength": "high",
+        "reason": "Empty state UX matches AC-005 acceptance criterion"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/ux.md::loading-states",
+      "target": "section::docs/specs/_template/acceptance.md::ac-006-loading",
+      "kind": "references",
+      "label": "loading state UX",
+      "meta": {
+        "strength": "high",
+        "reason": "Loading state UX matches AC-006 acceptance criterion"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/ux.md::error-handling",
+      "target": "section::docs/specs/_template/acceptance.md::ac-007-error",
+      "kind": "references",
+      "label": "error handling UX",
+      "meta": {
+        "strength": "high",
+        "reason": "Error handling UX matches AC-007 acceptance criterion"
+      }
+    },
+    {
+      "source": "section::docs/specs/_template/ux.md::feedback",
+      "target": "section::docs/specs/_template/business-rules.md::side-effects",
+      "kind": "references",
+      "label": "feedback for side effects",
+      "meta": {
+        "strength": "medium",
+        "reason": "Feedback patterns handle side effects from business rules"
+      }
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "batchIndex": 11,
+  "nodes": [
+    {
+      "id": "document:docs/specs/06-document/acceptance.md",
+      "type": "document",
+      "name": "acceptance.md",
+      "filePath": "docs/specs/06-document/acceptance.md",
+      "summary": "Acceptance criteria for Document feature: 7 ACs covering auto-generation on workflow completion, HTML storage, PDF generation, viewing, searching, downloading, and document settings. Each AC maps to REQ and US identifiers.",
+      "tags": ["spec", "acceptance-criteria", "document", "06-document"],
+      "complexity": "simple",
+      "languageNotes": "Markdown specification file with Given/When/Then BDD-style acceptance criteria."
+    },
+    {
+      "id": "document:docs/specs/06-document/api.md",
+      "type": "document",
+      "name": "api.md",
+      "filePath": "docs/specs/06-document/api.md",
+      "summary": "API specification for Document feature: GET /api/documents (list with pagination/search/filter), GET /api/documents/:id (detail), GET /api/documents/:id/pdf (download), GET/PUT /api/documents/settings. Includes error response codes.",
+      "tags": ["spec", "api", "endpoints", "document", "06-document"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification file defining REST API endpoints with JSON request/response schemas."
+    },
+    {
+      "id": "document:docs/specs/06-document/business-rules.md",
+      "type": "document",
+      "name": "business-rules.md",
+      "filePath": "docs/specs/06-document/business-rules.md",
+      "summary": "Business rules for Document: 3 validation rules (required fields), 4 permission rules (role-based access), 2 state transition rules (Generating→Generated/Failed), 3 business constraints (immutability, linkage, PDF fidelity), and 2 side effects.",
+      "tags": ["spec", "business-rules", "validation", "permissions", "document", "06-document"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification file with tabular business rule definitions."
+    },
+    {
+      "id": "document:docs/specs/06-document/domain.md",
+      "type": "document",
+      "name": "domain.md",
+      "filePath": "docs/specs/06-document/domain.md",
+      "summary": "Domain model for Document feature: Document entity (10 attributes, state machine Generating→Generated/Failed), DocumentVersion entity (6 attributes), DocumentSettings entity (8 attributes). Defines N:1 relationships to Instance, Administration, Template and 1:N to DocumentVersion.",
+      "tags": ["spec", "domain", "entities", "relationships", "state-machine", "document", "06-document"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification file defining domain entities, attributes, relationships, and invariants."
+    },
+    {
+      "id": "document:docs/specs/06-document/requirements.md",
+      "type": "document",
+      "name": "requirements.md",
+      "filePath": "docs/specs/06-document/requirements.md",
+      "summary": "Requirements specification for Document: 5 user stories (generate, view, search, download, settings), 8 functional requirements (REQ-DC-001..008), 4 non-functional requirements (NFR-DC-001..004), constraints, edge cases, and dependencies on Administration/Template/Render Engine.",
+      "tags": ["spec", "requirements", "user-stories", "functional", "non-functional", "document", "06-document"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification file with structured requirements, user stories, and priority classifications."
+    },
+    {
+      "id": "document:docs/specs/06-document/tasks.md",
+      "type": "document",
+      "name": "tasks.md",
+      "filePath": "docs/specs/06-document/tasks.md",
+      "summary": "Implementation plan for Document feature: 12 sequential tasks from database schema (TASK-001) through shared types, repository, service, PDF generation, API routes, composable, UI (list/viewer/settings), tests, to final verification. Each task lists affected files, dependencies, and verification criteria.",
+      "tags": ["spec", "tasks", "implementation-plan", "document", "06-document"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification file defining ordered implementation tasks with dependencies and file targets."
+    },
+    {
+      "id": "document:docs/specs/06-document/test-cases.md",
+      "type": "document",
+      "name": "test-cases.md",
+      "filePath": "docs/specs/06-document/test-cases.md",
+      "summary": "Test cases for Document: 3 unit tests (DocumentService generation/storage/PDF), 1 integration test (full lifecycle), 5 API tests (all endpoints), 2 E2E tests (view/download), and 3 edge cases (complex layout, 100+ pages, PDF failure).",
+      "tags": ["spec", "test-cases", "unit-tests", "integration", "api-tests", "e2e", "document", "06-document"],
+      "complexity": "simple",
+      "languageNotes": "Markdown specification file with tabular test case definitions across multiple test levels."
+    },
+    {
+      "id": "document:docs/specs/06-document/ui.md",
+      "type": "document",
+      "name": "ui.md",
+      "filePath": "docs/specs/06-document/ui.md",
+      "summary": "UI specification for Document: 3 pages (/documents, /documents/:id, /documents/settings) with wireframe layouts. Documents list with search/filters, Document viewer with HTML rendering and metadata, Settings page for page size/margins/headers/footers. Includes responsive breakpoints and loading/empty/error states.",
+      "tags": ["spec", "ui", "wireframes", "pages", "responsive", "document", "06-document"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification file with ASCII wireframe layouts and responsive behavior tables."
+    },
+    {
+      "id": "document:docs/specs/06-document/ux.md",
+      "type": "document",
+      "name": "ux.md",
+      "filePath": "docs/specs/06-document/ux.md",
+      "summary": "UX specification for Document: 3 user flows (view document, download PDF, generate document) with step-by-step diagrams. Feedback table (loading/toast/error), keyboard shortcuts (Cmd+P print, Cmd+S download, Escape close).",
+      "tags": ["spec", "ux", "user-flows", "feedback", "keyboard-shortcuts", "document", "06-document"],
+      "complexity": "simple",
+      "languageNotes": "Markdown specification file defining user interaction flows and feedback mechanisms."
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/acceptance.md",
+      "type": "defines",
+      "label": "acceptance criteria derived from requirements",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/domain.md",
+      "type": "defines",
+      "label": "domain entities derived from requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/business-rules.md",
+      "type": "defines",
+      "label": "business rules derived from requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/api.md",
+      "type": "defines",
+      "label": "API endpoints derived from functional requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/ui.md",
+      "type": "defines",
+      "label": "UI pages derived from user stories",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/ux.md",
+      "type": "defines",
+      "label": "UX flows derived from user stories",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/test-cases.md",
+      "type": "defines",
+      "label": "test cases derived from requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/tasks.md",
+      "type": "defines",
+      "label": "implementation tasks derived from requirements",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/domain.md",
+      "target": "document:docs/specs/06-document/business-rules.md",
+      "type": "constrains",
+      "label": "business rules constrain domain state transitions",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/domain.md",
+      "target": "document:docs/specs/06-document/api.md",
+      "type": "shapes",
+      "label": "domain model shapes API response schemas",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/api.md",
+      "target": "document:docs/specs/06-document/test-cases.md",
+      "type": "tested_by",
+      "label": "API tests validate endpoint behavior",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/ui.md",
+      "target": "document:docs/specs/06-document/ux.md",
+      "type": "implements",
+      "label": "UI pages implement UX user flows",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/acceptance.md",
+      "target": "document:docs/specs/06-document/test-cases.md",
+      "type": "verified_by",
+      "label": "test cases verify acceptance criteria",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/tasks.md",
+      "target": "document:docs/specs/06-document/test-cases.md",
+      "type": "verified_by",
+      "label": "tests verify task implementation",
+      "weight": 0.7,
+      "direction": "forward"
+    }
+  ]
+}

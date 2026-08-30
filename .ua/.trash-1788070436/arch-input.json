@@ -1,0 +1,4467 @@
+{
+  "file_nodes": [
+    {
+      "id": "document:app/README.md",
+      "type": "document",
+      "name": "README",
+      "filePath": "app/README.md",
+      "summary": "Nuxt Minimal Starter documentation covering setup, development server, production build, and deployment instructions.",
+      "tags": [
+        "documentation",
+        "nuxt",
+        "setup",
+        "readme"
+      ]
+    },
+    {
+      "id": "config:app/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "app/package.json",
+      "summary": "Nuxt application package manifest defining project name, scripts (build, dev, generate, preview, postinstall), and dependencies including Nuxt 4, Vue 3, Naive UI, Tailwind CSS v4, and anime.js.",
+      "tags": [
+        "config",
+        "package",
+        "nuxt",
+        "dependencies",
+        "scripts"
+      ]
+    },
+    {
+      "id": "config:app/package-lock.json",
+      "type": "config",
+      "name": "package-lock.json",
+      "filePath": "app/package-lock.json",
+      "summary": "npm lockfile pinning exact dependency versions and their dependency trees for reproducible installs.",
+      "tags": [
+        "config",
+        "lockfile",
+        "npm",
+        "dependencies"
+      ]
+    },
+    {
+      "id": "config:app/pnpm-lock.yaml",
+      "type": "config",
+      "name": "pnpm-lock.yaml",
+      "filePath": "app/pnpm-lock.yaml",
+      "summary": "pnpm lockfile pinning exact dependency versions and integrity hashes for reproducible installs.",
+      "tags": [
+        "config",
+        "lockfile",
+        "pnpm",
+        "dependencies"
+      ]
+    },
+    {
+      "id": "config:app/pnpm-workspace.yaml",
+      "type": "config",
+      "name": "pnpm-workspace.yaml",
+      "filePath": "app/pnpm-workspace.yaml",
+      "summary": "pnpm workspace configuration with esbuild build policy setting.",
+      "tags": [
+        "config",
+        "workspace",
+        "pnpm"
+      ]
+    },
+    {
+      "id": "config:app/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "app/tsconfig.json",
+      "summary": "TypeScript configuration referencing Nuxt-generated tsconfig files for app, server, shared, and node contexts.",
+      "tags": [
+        "config",
+        "typescript",
+        "nuxt",
+        "references"
+      ]
+    },
+    {
+      "id": "document:docs/architecture/api.md",
+      "type": "document",
+      "name": "API Architecture",
+      "filePath": "docs/architecture/api.md",
+      "summary": "Defines RESTful API conventions for the Persuratan platform including JSON response formats (success/error), HTTP method usage (GET/POST/PUT/PATCH/DELETE), Zod-based input validation, session-based authentication, role-based authorization (RBAC), pagination with query parameters, and filtering.",
+      "tags": [
+        "api",
+        "rest",
+        "http",
+        "validation",
+        "authentication",
+        "authorization",
+        "pagination"
+      ]
+    },
+    {
+      "id": "document:docs/architecture/architecture-rules.md",
+      "type": "document",
+      "name": "Architecture Rules",
+      "filePath": "docs/architecture/architecture-rules.md",
+      "summary": "Mandatory architectural rules for all AI agents: strict layer separation (Page\u2192Component\u2192Composable\u2192API Route\u2192Service\u2192Repository\u2192Database), reuse-before-create principle, no modification of unrelated code, consistent naming conventions, TypeScript strictness with no any types, structured error handling, metadata-driven design for user-defined structures, and framework-independent domain engines.",
+      "tags": [
+        "architecture",
+        "rules",
+        "layer-separation",
+        "design-principles",
+        "typescript",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "document:docs/architecture/backend.md",
+      "type": "document",
+      "name": "Backend Architecture",
+      "filePath": "docs/architecture/backend.md",
+      "summary": "Describes the Nitro-based backend architecture with detailed server structure under app/server/: API route handlers (collections, components, templates, workflows, documents, files), service layer for business logic, repository layer for data access via Drizzle ORM, and five domain engines (Expression, Binding, Component, Template, Document). Includes complete HTTP request flow from route to database.",
+      "tags": [
+        "backend",
+        "nitro",
+        "server",
+        "services",
+        "repositories",
+        "engines",
+        "request-flow"
+      ]
+    },
+    {
+      "id": "document:docs/architecture/database.md",
+      "type": "document",
+      "name": "Database Architecture",
+      "filePath": "docs/architecture/database.md",
+      "summary": "Documents the SQLite + Drizzle ORM database architecture using a hybrid approach: fixed metadata tables for Global Tables, Components, Templates, Administrations, and Documents definitions, combined with JSONB-based dynamic data storage for user-defined records. Covers naming conventions (nanoid/UUID IDs, timestamps, soft delete, JSONB columns), migration strategy via Drizzle Kit, and schema file locations.",
+      "tags": [
+        "database",
+        "sqlite",
+        "drizzle",
+        "orm",
+        "migrations",
+        "jsonb",
+        "schema"
+      ]
+    },
+    {
+      "id": "document:docs/architecture/frontend.md",
+      "type": "document",
+      "name": "Frontend Architecture",
+      "filePath": "docs/architecture/frontend.md",
+      "summary": "Details the Nuxt 4 + Vue 3 Composition API frontend with TypeScript, Nuxt UI component library, and Tailwind CSS styling. Describes client app structure (pages, components, composables, layouts, middleware, plugins), component architecture hierarchy (Primitive\u2192Pattern\u2192Feature\u2192Page), state management via Pinia and composables, and Tiptap editor integration with custom ProseMirror nodes (DynamicText, Component, Loop, Condition, PageBreak).",
+      "tags": [
+        "frontend",
+        "nuxt",
+        "vue",
+        "components",
+        "state-management",
+        "tiptap",
+        "tailwind"
+      ]
+    },
+    {
+      "id": "document:docs/architecture/overview.md",
+      "type": "document",
+      "name": "Architecture Overview",
+      "filePath": "docs/architecture/overview.md",
+      "summary": "High-level architecture overview describing the unified full-stack Nuxt 4 + Nitro application with three major layers (Client/Server/Data). Defines six major modules (Collections, Components, Templates, Workflows, Documents, Expression Engine) and their responsibilities. Documents the complete data flow from user action through Nuxt Page/Component \u2192 Composable \u2192 Nitro API Route \u2192 Service \u2192 Domain Engine \u2192 Repository \u2192 Drizzle ORM \u2192 SQLite.",
+      "tags": [
+        "architecture",
+        "overview",
+        "design-decisions",
+        "data-flow",
+        "modules"
+      ]
+    },
+    {
+      "id": "document:docs/architecture/security.md",
+      "type": "document",
+      "name": "Security",
+      "filePath": "docs/architecture/security.md",
+      "summary": "Covers security implementation: session-based authentication using Nitro session handling with HTTP-only cookies (no JWT), role-based authorization (Administrator/Staff/Manager) with permission checks at service layer, Zod-based server-side validation as authoritative, data protection via Drizzle parameterized queries (SQL injection prevention) and Vue template escaping (XSS prevention), and environment variable-based secrets management.",
+      "tags": [
+        "security",
+        "authentication",
+        "authorization",
+        "rbac",
+        "validation",
+        "data-protection"
+      ]
+    },
+    {
+      "id": "document:docs/architecture/system-context.md",
+      "type": "document",
+      "name": "System Context",
+      "filePath": "docs/architecture/system-context.md",
+      "summary": "Defines the system boundary with three actors (User/Browser, Persuratan Nuxt App, SQLite Database) and one external dependency (File System for storage). In-scope features: dynamic data structures, reusable document components, template composition, administration workflows, document rendering (HTML+PDF), file management, authentication/authorization. Out-of-scope: external databases, third-party document services, external auth providers, mobile native apps, real-time collaboration.",
+      "tags": [
+        "system-context",
+        "actors",
+        "integrations",
+        "boundaries",
+        "scope"
+      ]
+    },
+    {
+      "id": "document:docs/architecture/technology-stack.md",
+      "type": "document",
+      "name": "Technology Stack",
+      "filePath": "docs/architecture/technology-stack.md",
+      "summary": "Comprehensive technology inventory across Core (Nuxt 4, Nitro, Vue 3, TypeScript 5, Node.js 20+), Frontend (Nuxt UI, Tailwind CSS v4, Tiptap, Pinia, VueUse, TanStack Table, vee-validate, Zod, date-fns, Lucide), Backend (Drizzle ORM, SQLite, Zod, Sharp, Pino), Document Engine (Tiptap/ProseMirror, Playwright), and Testing (Vitest, Playwright E2E). Notes that naive-ui is currently installed but Nuxt UI is the design target. Package manager is pnpm.",
+      "tags": [
+        "technology-stack",
+        "dependencies",
+        "tools",
+        "frameworks",
+        "libraries"
+      ]
+    },
+    {
+      "id": "document:docs/design/accessibility.md",
+      "type": "document",
+      "name": "accessibility.md",
+      "filePath": "docs/design/accessibility.md",
+      "summary": "Accessibility guidelines covering keyboard navigation, focus management, labels, semantic structure, contrast ratios, screen reader support, and validation feedback for the Persuratan application.",
+      "tags": [
+        "design",
+        "accessibility",
+        "a11y",
+        "documentation",
+        "keyboard",
+        "screen-reader",
+        "contrast"
+      ]
+    },
+    {
+      "id": "document:docs/design/component-guidelines.md",
+      "type": "document",
+      "name": "component-guidelines.md",
+      "filePath": "docs/design/component-guidelines.md",
+      "summary": "Component development guidelines defining reuse-first philosophy, naming conventions (Primitive/Pattern/Feature/Page), single-responsibility principle, composition over inheritance, variant patterns via props, required interactive states, and file organization structure.",
+      "tags": [
+        "design",
+        "component",
+        "guidelines",
+        "vue",
+        "composition",
+        "naming",
+        "documentation"
+      ]
+    },
+    {
+      "id": "document:docs/design/design-system.md",
+      "type": "document",
+      "name": "design-system.md",
+      "filePath": "docs/design/design-system.md",
+      "summary": "Core design system defining the 'Professional Workspace' design language with foundations: color tokens (primary, semantic), surface system, typography scale, 4px spacing grid, border radius tokens, elevation levels, component library layering (Nuxt UI \u2192 Tokens \u2192 App \u2192 Feature), and Lucide icon system.",
+      "tags": [
+        "design",
+        "design-system",
+        "tokens",
+        "color",
+        "typography",
+        "spacing",
+        "documentation"
+      ]
+    },
+    {
+      "id": "document:docs/design/interaction-patterns.md",
+      "type": "document",
+      "name": "interaction-patterns.md",
+      "filePath": "docs/design/interaction-patterns.md",
+      "summary": "Eight UI interaction patterns: workspace navigation (sidebar/resource/canvas), builder canvas (left/center/right panels), command palette (Cmd+K), form submission with validation, destructive action confirmation, drag and drop, split view (editor + preview), and step wizard with progress indicator.",
+      "tags": [
+        "design",
+        "interaction",
+        "patterns",
+        "ux",
+        "drag-drop",
+        "command-palette",
+        "documentation"
+      ]
+    },
+    {
+      "id": "document:docs/design/responsive.md",
+      "type": "document",
+      "name": "responsive.md",
+      "filePath": "docs/design/responsive.md",
+      "summary": "Responsive design strategy defining breakpoints (sm/md/lg/xl/2xl), desktop workspace layout (sidebar+canvas+properties), tablet collapsible sidebar, mobile single-column with bottom navigation, plus responsive tables, forms, and navigation behavior across breakpoints.",
+      "tags": [
+        "design",
+        "responsive",
+        "breakpoints",
+        "mobile",
+        "layout",
+        "documentation"
+      ]
+    },
+    {
+      "id": "document:docs/design/ui-principles.md",
+      "type": "document",
+      "name": "ui-principles.md",
+      "filePath": "docs/design/ui-principles.md",
+      "summary": "UI design principles covering visual hierarchy (title\u2192context\u2192action\u2192content\u2192secondary), consistency via design tokens, density for power users, clarity with one primary action per section, information architecture with tabs/breadcrumbs/sidebar, and the workspace concept (sidebar+canvas+properties).",
+      "tags": [
+        "design",
+        "ui",
+        "principles",
+        "hierarchy",
+        "workspace",
+        "documentation"
+      ]
+    },
+    {
+      "id": "document:docs/design/ux-principles.md",
+      "type": "document",
+      "name": "ux-principles.md",
+      "filePath": "docs/design/ux-principles.md",
+      "summary": "UX principles covering discoverability (visible actions, command palette, empty states), feedback for every action (toasts, dialogs, spinners), error prevention (validate before save, destructive warnings), progressive disclosure, predictable interaction (click/hover/drag conventions), and user efficiency (shortcuts, inline editing, bulk ops).",
+      "tags": [
+        "design",
+        "ux",
+        "principles",
+        "feedback",
+        "discoverability",
+        "documentation"
+      ]
+    },
+    {
+      "id": "file:docs/sdd/bootstrap-notes.md",
+      "type": "file",
+      "name": "Bootstrap Notes",
+      "filePath": "",
+      "summary": "",
+      "tags": [
+        "sdd",
+        "bootstrap",
+        "project-setup",
+        "metadata"
+      ]
+    },
+    {
+      "id": "file:docs/sdd/definition-of-done.md",
+      "type": "file",
+      "name": "Definition of Done",
+      "filePath": "",
+      "summary": "",
+      "tags": [
+        "sdd",
+        "definition-of-done",
+        "checklist",
+        "quality"
+      ]
+    },
+    {
+      "id": "file:docs/sdd/implementation-rules.md",
+      "type": "file",
+      "name": "Implementation Rules",
+      "filePath": "",
+      "summary": "",
+      "tags": [
+        "sdd",
+        "implementation",
+        "rules",
+        "coding-guidelines"
+      ]
+    },
+    {
+      "id": "file:docs/sdd/review-rules.md",
+      "type": "file",
+      "name": "Review Rules",
+      "filePath": "",
+      "summary": "",
+      "tags": [
+        "sdd",
+        "review",
+        "severity-levels",
+        "quality-gate"
+      ]
+    },
+    {
+      "id": "file:docs/sdd/specification-rules.md",
+      "type": "file",
+      "name": "Specification Rules",
+      "filePath": "",
+      "summary": "",
+      "tags": [
+        "sdd",
+        "specification",
+        "rules",
+        "requirements"
+      ]
+    },
+    {
+      "id": "file:docs/sdd/verification-rules.md",
+      "type": "file",
+      "name": "Verification Rules",
+      "filePath": "",
+      "summary": "",
+      "tags": [
+        "sdd",
+        "verification",
+        "pipeline",
+        "quality-assurance"
+      ]
+    },
+    {
+      "id": "file:docs/sdd/workflow.md",
+      "type": "file",
+      "name": "SDD Workflow",
+      "filePath": "",
+      "summary": "",
+      "tags": [
+        "sdd",
+        "workflow",
+        "phases",
+        "pipeline",
+        "process"
+      ]
+    },
+    {
+      "id": "document:docs/specs/01-global-table/acceptance.md",
+      "type": "document",
+      "name": "acceptance.md",
+      "filePath": "docs/specs/01-global-table/acceptance.md",
+      "summary": "Acceptance criteria for Global Table feature \u2014 20 testable criteria (AC-001 to AC-020) mapping user actions to expected outcomes, covering CRUD operations, validation, state transitions, and UI states.",
+      "tags": [
+        "spec",
+        "acceptance-criteria",
+        "global-table",
+        "testing"
+      ]
+    },
+    {
+      "id": "document:docs/specs/01-global-table/api.md",
+      "type": "document",
+      "name": "api.md",
+      "filePath": "docs/specs/01-global-table/api.md",
+      "summary": "API specification for Global Table \u2014 REST endpoints for collection CRUD, column management, record operations with search/sort/pagination, and error response codes.",
+      "tags": [
+        "spec",
+        "api",
+        "rest",
+        "global-table",
+        "endpoints"
+      ]
+    },
+    {
+      "id": "document:docs/specs/01-global-table/business-rules.md",
+      "type": "document",
+      "name": "business-rules.md",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "Business rules for Global Table \u2014 validation rules (VR-GT-001 to VR-GT-013), permission rules (PR-GT-001 to PR-GT-008), state transitions (ST-GT-001 to ST-GT-004), constraints (BC-GT-001 to BC-GT-008), and side effects (SE-GT-001 to SE-GT-005).",
+      "tags": [
+        "spec",
+        "business-rules",
+        "validation",
+        "permissions",
+        "global-table"
+      ]
+    },
+    {
+      "id": "document:docs/specs/01-global-table/domain.md",
+      "type": "document",
+      "name": "domain.md",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Domain model for Global Table \u2014 defines entities (GlobalTable, Column, Record), their attributes, relationships (1:N, N:M), invariants, lifecycle states, and state machine transitions.",
+      "tags": [
+        "spec",
+        "domain",
+        "entities",
+        "relationships",
+        "global-table"
+      ]
+    },
+    {
+      "id": "document:docs/specs/01-global-table/requirements.md",
+      "type": "document",
+      "name": "requirements.md",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "Requirements for Global Table \u2014 problem statement, user stories (US-001 to US-006), functional requirements (REQ-GT-001 to REQ-GT-012), non-functional requirements, constraints, edge cases, and dependencies.",
+      "tags": [
+        "spec",
+        "requirements",
+        "user-stories",
+        "functional",
+        "global-table"
+      ]
+    },
+    {
+      "id": "document:docs/specs/01-global-table/tasks.md",
+      "type": "document",
+      "name": "tasks.md",
+      "filePath": "docs/specs/01-global-table/tasks.md",
+      "summary": "Implementation plan for Global Table \u2014 14 tasks (TASK-001 to TASK-014) covering database schema, types, repository, service, API routes, composable, UI components, tests, and verification.",
+      "tags": [
+        "spec",
+        "tasks",
+        "implementation",
+        "global-table"
+      ]
+    },
+    {
+      "id": "document:docs/specs/01-global-table/test-cases.md",
+      "type": "document",
+      "name": "test-cases.md",
+      "filePath": "docs/specs/01-global-table/test-cases.md",
+      "summary": "Test cases for Global Table \u2014 unit tests (service, column, record), integration tests (collection lifecycle, record management), API tests (collection and record endpoints), E2E tests (admin flows), and edge cases.",
+      "tags": [
+        "spec",
+        "test-cases",
+        "unit-tests",
+        "integration-tests",
+        "global-table"
+      ]
+    },
+    {
+      "id": "document:docs/specs/01-global-table/ui.md",
+      "type": "document",
+      "name": "ui.md",
+      "filePath": "docs/specs/01-global-table/ui.md",
+      "summary": "UI specification for Global Table \u2014 pages (Collections List, Workspace, Create), component hierarchy, tables (Records, Columns), forms (Create Collection, Add Column), navigation, responsive behavior, loading/empty/error states, and accessibility.",
+      "tags": [
+        "spec",
+        "ui",
+        "components",
+        "pages",
+        "global-table"
+      ]
+    },
+    {
+      "id": "document:docs/specs/01-global-table/ux.md",
+      "type": "document",
+      "name": "ux.md",
+      "filePath": "docs/specs/01-global-table/ux.md",
+      "summary": "UX specification for Global Table \u2014 user flows (create collection, add column, add/edit/delete record, publish), interactions (type selection, column reorder, inline edit), feedback patterns, empty/loading/error states, confirmation dialogs, and keyboard shortcuts.",
+      "tags": [
+        "spec",
+        "ux",
+        "user-flows",
+        "interactions",
+        "global-table"
+      ]
+    },
+    {
+      "id": "concept:GlobalTable",
+      "type": "concept",
+      "name": "GlobalTable",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Core entity \u2014 a metadata-driven data structure defining how data is stored, input, displayed, validated, searched, and ordered. Has status lifecycle (Draft \u2192 Published \u2192 Archived).",
+      "tags": [
+        "entity",
+        "domain",
+        "core",
+        "metadata-driven"
+      ]
+    },
+    {
+      "id": "concept:Column",
+      "type": "concept",
+      "name": "Column",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Field definition within a Global Table specifying data type, behavior, and UI rendering. Supports 10 types: text, number, date, time, datetime, image, select, richtext, relation, computed.",
+      "tags": [
+        "entity",
+        "domain",
+        "field-definition",
+        "column-types"
+      ]
+    },
+    {
+      "id": "concept:Record",
+      "type": "concept",
+      "name": "Record",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "A single data entry in a Global Table, stored as a JSON document with column values as key-value pairs.",
+      "tags": [
+        "entity",
+        "domain",
+        "data-entry",
+        "json-document"
+      ]
+    },
+    {
+      "id": "concept:GlobalTableLifecycle",
+      "type": "concept",
+      "name": "GlobalTable Lifecycle",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "State machine for GlobalTable: Draft (freely modifiable) \u2192 Published (available for Components, restricted changes) \u2192 Archived (no new references, data preserved). Supports unpublish back to Draft.",
+      "tags": [
+        "state-machine",
+        "lifecycle",
+        "status-transitions"
+      ]
+    },
+    {
+      "id": "concept:ColumnTypeSystem",
+      "type": "concept",
+      "name": "Column Type System",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Column type configuration system defining input components, storage formats, and type-specific configs. Includes progressive disclosure for type-specific options.",
+      "tags": [
+        "type-system",
+        "configuration",
+        "progressive-disclosure"
+      ]
+    },
+    {
+      "id": "concept:CRUDOperations",
+      "type": "concept",
+      "name": "Auto-Generated CRUD",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "System auto-generates full CRUD operations for each Global Table \u2014 browse, create, read, update, delete \u2014 without manual coding.",
+      "tags": [
+        "crud",
+        "auto-generation",
+        "requirement"
+      ]
+    },
+    {
+      "id": "concept:FormGeneration",
+      "type": "concept",
+      "name": "Dynamic Form Generation",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "Forms are dynamically generated from column definitions \u2014 field types (text input, date picker, select, etc.) determined by column type, with computed fields displaying calculated values and relation fields showing selectable options.",
+      "tags": [
+        "form-generation",
+        "dynamic-forms",
+        "column-driven"
+      ]
+    },
+    {
+      "id": "concept:ExpressionEngine",
+      "type": "concept",
+      "name": "Expression Engine",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "External dependency for computed columns \u2014 evaluates expressions like 'harga * jumlah' to calculate values. Must prevent circular references.",
+      "tags": [
+        "dependency",
+        "expression-parser",
+        "computed-columns"
+      ]
+    },
+    {
+      "id": "endpoint:collections-api",
+      "type": "endpoint",
+      "name": "Collections API",
+      "filePath": "docs/specs/01-global-table/api.md",
+      "summary": "REST API for Global Table collection management \u2014 CRUD operations, status transitions (publish/unpublish/archive), with pagination, search, and filtering.",
+      "tags": [
+        "api",
+        "rest",
+        "collections",
+        "crud"
+      ]
+    },
+    {
+      "id": "endpoint:columns-api",
+      "type": "endpoint",
+      "name": "Columns API",
+      "filePath": "docs/specs/01-global-table/api.md",
+      "summary": "REST API for column management within a Global Table \u2014 add, update, delete (blocked if data exists), and reorder columns.",
+      "tags": [
+        "api",
+        "rest",
+        "columns",
+        "management"
+      ]
+    },
+    {
+      "id": "endpoint:records-api",
+      "type": "endpoint",
+      "name": "Records API",
+      "filePath": "docs/specs/01-global-table/api.md",
+      "summary": "REST API for record management \u2014 CRUD with search across searchable columns, sorting by orderable columns, and pagination.",
+      "tags": [
+        "api",
+        "rest",
+        "records",
+        "search",
+        "pagination"
+      ]
+    },
+    {
+      "id": "concept:ValidationRules",
+      "type": "concept",
+      "name": "Validation Rules",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "13 validation rules (VR-GT-001 to VR-GT-013) covering table name uniqueness, snake_case format, required fields, column name uniqueness, type-specific validation (select options, computed expressions, relation targets).",
+      "tags": [
+        "validation",
+        "rules",
+        "business-logic"
+      ]
+    },
+    {
+      "id": "concept:PermissionRules",
+      "type": "concept",
+      "name": "Permission Rules",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "8 permission rules (PR-GT-001 to PR-GT-008) defining role-based access \u2014 Administrator has full control, Staff can read published tables only.",
+      "tags": [
+        "permissions",
+        "rbac",
+        "access-control"
+      ]
+    },
+    {
+      "id": "concept:StateTransitions",
+      "type": "concept",
+      "name": "State Transitions",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "4 state transition rules (ST-GT-001 to ST-GT-004) governing GlobalTable lifecycle: Draft\u2194Published, Published\u2192Archived, with conditions for each transition.",
+      "tags": [
+        "state-transitions",
+        "lifecycle",
+        "business-rules"
+      ]
+    },
+    {
+      "id": "concept:BusinessConstraints",
+      "type": "concept",
+      "name": "Business Constraints",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "8 business constraints (BC-GT-001 to BC-GT-008) with severity levels \u2014 CRITICAL (uniqueness, min columns), HIGH (data protection, expression validity, relation targets), MEDIUM (required values, select options).",
+      "tags": [
+        "constraints",
+        "business-rules",
+        "severity"
+      ]
+    },
+    {
+      "id": "concept:SideEffects",
+      "type": "concept",
+      "name": "Side Effects",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "5 side effects (SE-GT-001 to SE-GT-005) \u2014 publish makes table available for Components, archive removes from relation selectors, column deletion causes data loss, type change may break data, adding required column needs defaults for existing records.",
+      "tags": [
+        "side-effects",
+        "consequences",
+        "business-rules"
+      ]
+    },
+    {
+      "id": "concept:AcceptanceCriteria",
+      "type": "concept",
+      "name": "Acceptance Criteria (AC-001 to AC-020)",
+      "filePath": "docs/specs/01-global-table/acceptance.md",
+      "summary": "20 acceptance criteria organized by feature area \u2014 CRUD operations, validation, search/sort/pagination, column management, state transitions, empty/loading states, computed/relation/select columns.",
+      "tags": [
+        "acceptance-criteria",
+        "testing",
+        "verification"
+      ]
+    },
+    {
+      "id": "concept:UserStories",
+      "type": "concept",
+      "name": "User Stories (US-001 to US-006)",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "6 user stories \u2014 US-001 Create Global Table, US-002 Manage Columns, US-003 Browse Records, US-004 Create/Edit Records, US-005 Delete Records, US-006 Publish Collection.",
+      "tags": [
+        "user-stories",
+        "requirements",
+        "features"
+      ]
+    },
+    {
+      "id": "concept:ImplementationTasks",
+      "type": "concept",
+      "name": "Implementation Tasks (TASK-001 to TASK-014)",
+      "filePath": "docs/specs/01-global-table/tasks.md",
+      "summary": "14 implementation tasks covering the full stack: database schema, shared types/schemas, repository, service, API routes (collection/column/record), composable, UI components (list, workspace, column builder, record form), tests, and verification.",
+      "tags": [
+        "implementation",
+        "tasks",
+        "plan"
+      ]
+    },
+    {
+      "id": "concept:TestCases",
+      "type": "concept",
+      "name": "Test Cases",
+      "filePath": "docs/specs/01-global-table/test-cases.md",
+      "summary": "Comprehensive test suite \u2014 unit tests (service, column, record), integration tests (collection lifecycle, record management), API tests (collection and record endpoints), E2E tests (admin flows), and edge case tests.",
+      "tags": [
+        "test-cases",
+        "testing",
+        "quality-assurance"
+      ]
+    },
+    {
+      "id": "concept:UISpecification",
+      "type": "concept",
+      "name": "UI Specification",
+      "filePath": "docs/specs/01-global-table/ui.md",
+      "summary": "UI specification covering pages (Collections List, Workspace, Create), component hierarchy, tables (Records, Columns), forms, column builder layout, navigation, responsive behavior (desktop/tablet/mobile), and state handling (loading, empty, error).",
+      "tags": [
+        "ui",
+        "components",
+        "pages",
+        "responsive",
+        "accessibility"
+      ]
+    },
+    {
+      "id": "concept:UXSpecification",
+      "type": "concept",
+      "name": "UX Specification",
+      "filePath": "docs/specs/01-global-table/ux.md",
+      "summary": "UX specification covering user flows (create, add column, add/edit/delete record, publish), interactions (type selection, column reorder, inline edit, row selection), feedback patterns, empty/loading/error states, confirmation dialogs, and keyboard shortcuts.",
+      "tags": [
+        "ux",
+        "user-flows",
+        "interactions",
+        "feedback",
+        "keyboard"
+      ]
+    },
+    {
+      "id": "concept:GlobalTableInvariants",
+      "type": "concept",
+      "name": "GlobalTable Invariants",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Domain invariants ensuring data integrity \u2014 unique names, unique column names within table, minimum columns, protected published data, valid expressions, valid relation targets, matching record data keys, required column values.",
+      "tags": [
+        "invariants",
+        "data-integrity",
+        "domain-rules"
+      ]
+    },
+    {
+      "id": "concept:GlobalTableRelationships",
+      "type": "concept",
+      "name": "GlobalTable Relationships",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Entity relationships \u2014 GlobalTable 1:N Column, GlobalTable 1:N Record, Column N:M Column (via relation table_id), Record referenced by Relation columns in other tables.",
+      "tags": [
+        "relationships",
+        "entity-relationships",
+        "domain-model"
+      ]
+    },
+    {
+      "id": "concept:NonFunctionalRequirements",
+      "type": "concept",
+      "name": "Non-Functional Requirements",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "Performance targets \u2014 NFR-GT-001: record browse <500ms for 1000 records, NFR-GT-002: form generation <100ms, NFR-GT-003: search across columns <300ms.",
+      "tags": [
+        "nfr",
+        "performance",
+        "requirements"
+      ]
+    },
+    {
+      "id": "concept:EdgeCases",
+      "type": "concept",
+      "name": "Edge Cases",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "Edge cases \u2014 50+ columns (UI usability), 10,000+ records (pagination required), archived relation targets, invalid computed expressions, column type change on existing data.",
+      "tags": [
+        "edge-cases",
+        "robustness",
+        "requirements"
+      ]
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/acceptance.md",
+      "type": "document",
+      "name": "Expression Engine Acceptance Criteria",
+      "filePath": "docs/specs/02-expression-engine/acceptance.md",
+      "summary": "Defines 6 acceptance criteria (AC-001 through AC-006) for the Expression Engine, covering mathematical evaluation, string concatenation, conditional logic, nested variable resolution, undefined variable handling, and number formatting. Each AC maps to functional requirements and user stories.",
+      "tags": [
+        "spec",
+        "acceptance-criteria",
+        "expression-engine",
+        "testing"
+      ]
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/api.md",
+      "type": "document",
+      "name": "Expression Engine API Specification",
+      "filePath": "docs/specs/02-expression-engine/api.md",
+      "summary": "Defines 3 REST API endpoints for the Expression Engine: POST /api/expressions/validate (syntax validation), POST /api/expressions/evaluate (expression evaluation with context), and POST /api/expressions/resolve (dynamic token resolution). Includes request/response schemas and error codes.",
+      "tags": [
+        "spec",
+        "api",
+        "expression-engine",
+        "rest",
+        "endpoints"
+      ]
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/business-rules.md",
+      "type": "document",
+      "name": "Expression Engine Business Rules",
+      "filePath": "docs/specs/02-expression-engine/business-rules.md",
+      "summary": "Specifies validation rules (VR-EX-001 to VR-EX-003), permission rules (PR-EX-001 to PR-EX-002), state transition rules (Raw\u2192Parsed\u2192Evaluated), business constraints (parseability, division-by-zero, undefined variables, depth limit), and side effects for the Expression Engine.",
+      "tags": [
+        "spec",
+        "business-rules",
+        "expression-engine",
+        "validation",
+        "constraints"
+      ]
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/domain.md",
+      "type": "document",
+      "name": "Expression Engine Domain Model",
+      "filePath": "docs/specs/02-expression-engine/domain.md",
+      "summary": "Defines core domain entities for the Expression Engine: Expression (mathematical, string, conditional, mixed types), Token (8 token types including Number, String, Variable, Operator, Comparison, Logical, Parenthesis, Function), AST (6 node types: Literal, Variable, BinaryOp, UnaryOp, FunctionCall, Conditional), and ExpressionContext (variable map with parent nesting). Describes the parse\u2192build\u2192evaluate pipeline and invariants.",
+      "tags": [
+        "spec",
+        "domain-model",
+        "expression-engine",
+        "ast",
+        "tokenizer",
+        "parser"
+      ]
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "document",
+      "name": "Expression Engine Requirements",
+      "filePath": "docs/specs/02-expression-engine/requirements.md",
+      "summary": "Comprehensive requirements document for the Expression Engine covering the problem statement, objective, actors (System, Administrator), 5 user stories (math evaluation, string expressions, conditional expressions, variable resolution, output formatting), 7 functional requirements (REQ-EX-001 to REQ-EX-007), 3 non-functional requirements (performance targets), constraints, edge cases, and dependencies on Template, Component, and Administration modules.",
+      "tags": [
+        "spec",
+        "requirements",
+        "expression-engine",
+        "user-stories",
+        "functional"
+      ]
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/tasks.md",
+      "type": "document",
+      "name": "Expression Engine Implementation Tasks",
+      "filePath": "docs/specs/02-expression-engine/tasks.md",
+      "summary": "Defines 8 implementation tasks (TASK-001 through TASK-008) in dependency order: Tokenizer \u2192 Parser \u2192 Evaluator \u2192 Variable Resolver / Formatter \u2192 API Routes \u2192 Tests \u2192 Verification. Specifies affected source files for each task and verification criteria.",
+      "tags": [
+        "spec",
+        "tasks",
+        "expression-engine",
+        "implementation",
+        "plan"
+      ]
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/test-cases.md",
+      "type": "document",
+      "name": "Expression Engine Test Cases",
+      "filePath": "docs/specs/02-expression-engine/test-cases.md",
+      "summary": "Defines comprehensive test coverage for the Expression Engine: 14 unit tests for ExpressionParser (UT-EX-001 to UT-EX-006) and ExpressionEvaluator (UT-EX-007 to UT-EX-014), 3 unit tests for VariableResolver (UT-VR-001 to UT-VR-003), 1 integration test (IT-EX-001), 4 API tests (AT-EX-001 to AT-EX-004), and 4 edge case tests (EC-EX-001 to EC-EX-004).",
+      "tags": [
+        "spec",
+        "test-cases",
+        "expression-engine",
+        "unit-tests",
+        "integration-tests"
+      ]
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/ui.md",
+      "type": "document",
+      "name": "Expression Engine UI Specification",
+      "filePath": "docs/specs/02-expression-engine/ui.md",
+      "summary": "Defines the Expression Engine UI components: Expression Editor (used in Template Builder, Component Builder, Administration Builder), Variable Reference Picker (triggered by @ or {{ with search), Validation Indicator (green check, red X, yellow warning states), and keyboard shortcuts ({{, @, Tab, Escape).",
+      "tags": [
+        "spec",
+        "ui",
+        "expression-engine",
+        "components",
+        "editor"
+      ]
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/ux.md",
+      "type": "document",
+      "name": "Expression Engine UX Specification",
+      "filePath": "docs/specs/02-expression-engine/ux.md",
+      "summary": "Defines user experience flows for the Expression Engine: Write Expression flow (click \u2192 type \u2192 variable picker \u2192 validate \u2192 save), Variable Picker flow (trigger on {{ \u2192 search \u2192 select \u2192 insert), Real-time Validation flow (type \u2192 validate syntax \u2192 resolve variables \u2192 determine type \u2192 show feedback). Includes feedback types and keyboard shortcuts.",
+      "tags": [
+        "spec",
+        "ux",
+        "expression-engine",
+        "user-flows",
+        "interaction"
+      ]
+    },
+    {
+      "id": "document:docs/specs/03-component/requirements.md",
+      "type": "document",
+      "name": "Component Requirements",
+      "filePath": "docs/specs/03-component/requirements.md",
+      "summary": "Defines the problem statement, objectives, user stories (US-001 to US-005), functional requirements (REQ-CO-001 to REQ-CO-008), non-functional requirements, constraints, and edge cases for the Component feature. Covers creating reusable document blocks with dynamic tokens, data requirements, single/collection modes, preview, and publish lifecycle.",
+      "tags": [
+        "specification",
+        "requirements",
+        "component",
+        "user-stories",
+        "functional-requirements"
+      ]
+    },
+    {
+      "id": "document:docs/specs/03-component/domain.md",
+      "type": "document",
+      "name": "Component Domain Model",
+      "filePath": "docs/specs/03-component/domain.md",
+      "summary": "Defines domain entities (Component, DataRequirement, DynamicToken, LoopConfig), their attributes, relationships, state machine (Draft\u2192Published\u2192Archived), invariants, lifecycle phases, and the Tiptap content model with nested Document/Paragraph/Text/DynamicToken/Loop/Condition structure.",
+      "tags": [
+        "specification",
+        "domain-model",
+        "entity",
+        "state-machine",
+        "tiptap",
+        "component"
+      ]
+    },
+    {
+      "id": "document:docs/specs/03-component/acceptance.md",
+      "type": "document",
+      "name": "Component Acceptance Criteria",
+      "filePath": "docs/specs/03-component/acceptance.md",
+      "summary": "Defines 11 acceptance criteria (AC-001 to AC-011) for the Component feature in Given/When/Then format, covering creation, unique names, rich text, dynamic tokens, data requirement matching, collection mode, preview, publish, versioning, empty state, and requirement protection.",
+      "tags": [
+        "specification",
+        "acceptance-criteria",
+        "component",
+        "testing"
+      ]
+    },
+    {
+      "id": "document:docs/specs/03-component/business-rules.md",
+      "type": "document",
+      "name": "Component Business Rules",
+      "filePath": "docs/specs/03-component/business-rules.md",
+      "summary": "Defines validation rules (VR-CO-001 to VR-CO-010), permission rules (PR-CO-001 to PR-CO-005), state transition rules (ST-CO-001 to ST-CO-003), business constraints (BC-CO-001 to BC-CO-006), and side effects (SE-CO-001 to SE-CO-004) governing Component behavior.",
+      "tags": [
+        "specification",
+        "business-rules",
+        "validation",
+        "permissions",
+        "state-transitions",
+        "component"
+      ]
+    },
+    {
+      "id": "document:docs/specs/03-component/api.md",
+      "type": "document",
+      "name": "Component API Specification",
+      "filePath": "docs/specs/03-component/api.md",
+      "summary": "Defines REST API endpoints for Components: GET /api/components (list), GET /api/components/:id (detail), POST /api/components (create), PUT /api/components/:id (update/version), DELETE /api/components/:id, POST /api/components/:id/publish, POST /api/components/:id/preview, with request/response schemas and error codes.",
+      "tags": [
+        "specification",
+        "api",
+        "rest",
+        "endpoints",
+        "component",
+        "http"
+      ]
+    },
+    {
+      "id": "document:docs/specs/03-component/test-cases.md",
+      "type": "document",
+      "name": "Component Test Cases",
+      "filePath": "docs/specs/03-component/test-cases.md",
+      "summary": "Defines unit tests for ComponentService and DataRequirementValidator, integration tests for Component lifecycle and version chains, API tests for all endpoints, E2E tests for create/token/publish flows, and edge case tests for static components, 20+ requirements, 10+ template references, and special character tokens.",
+      "tags": [
+        "specification",
+        "test-cases",
+        "unit-tests",
+        "integration-tests",
+        "api-tests",
+        "e2e-tests",
+        "component"
+      ]
+    },
+    {
+      "id": "document:docs/specs/03-component/tasks.md",
+      "type": "document",
+      "name": "Component Implementation Tasks",
+      "filePath": "docs/specs/03-component/tasks.md",
+      "summary": "Defines 12 implementation tasks (TASK-001 to TASK-012) for the Component feature: database schema, shared types, repository, service, API routes, composable, UI list page, UI builder, dynamic token system, requirements panel, tests, and verification. Each task lists affected files, dependencies, and verification criteria.",
+      "tags": [
+        "specification",
+        "implementation-plan",
+        "tasks",
+        "component",
+        "development"
+      ]
+    },
+    {
+      "id": "document:docs/specs/03-component/ui.md",
+      "type": "document",
+      "name": "Component UI Specification",
+      "filePath": "docs/specs/03-component/ui.md",
+      "summary": "Defines UI specifications for the Component feature: Components List page (/components), Component Builder with three-panel layout (Insert|Canvas|Properties), Component Create page, information hierarchy, responsive behavior (desktop/tablet/mobile), loading states, empty states, error states, and accessibility requirements.",
+      "tags": [
+        "specification",
+        "ui",
+        "layout",
+        "three-panel-builder",
+        "responsive",
+        "accessibility",
+        "component"
+      ]
+    },
+    {
+      "id": "document:docs/specs/03-component/ux.md",
+      "type": "document",
+      "name": "Component UX Specification",
+      "filePath": "docs/specs/03-component/ux.md",
+      "summary": "Defines UX flows for Component: create flow, dynamic token insertion (click or {{ trigger), collection mode configuration, preview, publish. Includes interaction details (token insert/select, canvas edit, drag reorder), feedback patterns (toasts, inline warnings), empty/loading states, error handling, confirmation dialogs, and keyboard shortcuts (Cmd+S, Cmd+K, Cmd+Z, Escape, Delete).",
+      "tags": [
+        "specification",
+        "ux",
+        "user-flows",
+        "interactions",
+        "keyboard-shortcuts",
+        "component"
+      ]
+    },
+    {
+      "id": "document:docs/specs/04-template/acceptance.md",
+      "type": "document",
+      "name": "Acceptance Criteria \u2014 Template",
+      "filePath": "docs/specs/04-template/acceptance.md",
+      "summary": "Defines 11 acceptance criteria (AC-001 to AC-011) for the Template feature, covering creation, unique naming, component insertion, data binding, loop/condition configuration, live preview, publishing, versioning, and empty state. Each criterion maps to requirements and user stories.",
+      "tags": [
+        "template",
+        "acceptance-criteria",
+        "verification",
+        "specification"
+      ]
+    },
+    {
+      "id": "document:docs/specs/04-template/api.md",
+      "type": "document",
+      "name": "API \u2014 Template",
+      "filePath": "docs/specs/04-template/api.md",
+      "summary": "Defines REST API endpoints for Template CRUD operations: GET /api/templates (list), GET /api/templates/:id (detail with bindings/conditions), POST /api/templates (create), PUT /api/templates/:id (update with versioning), DELETE /api/templates/:id, POST /api/templates/:id/publish, POST /api/templates/:id/preview, POST /api/templates/:id/bindings. Includes error response codes (400, 404, 409, 422, 500).",
+      "tags": [
+        "template",
+        "api",
+        "rest",
+        "endpoints",
+        "specification"
+      ]
+    },
+    {
+      "id": "document:docs/specs/04-template/business-rules.md",
+      "type": "document",
+      "name": "Business Rules \u2014 Template",
+      "filePath": "docs/specs/04-template/business-rules.md",
+      "summary": "Defines validation rules (VR-TE-001 to VR-TE-006), permission rules (PR-TE-001 to PR-TE-005), state transition rules (Draft\u2192Published\u2192Archived), business constraints (BC-TE-001 to BC-TE-005), and side effects (SE-TE-001 to SE-TE-004) for the Template feature.",
+      "tags": [
+        "template",
+        "business-rules",
+        "validation",
+        "permissions",
+        "specification"
+      ]
+    },
+    {
+      "id": "document:docs/specs/04-template/domain.md",
+      "type": "document",
+      "name": "Domain \u2014 Template",
+      "filePath": "docs/specs/04-template/domain.md",
+      "summary": "Defines domain entities: Template (with status state machine: Draft\u2192Published\u2192Archived), DataBinding (with source types: administration/global-table/manual/expression/system), ComponentBlock (single/collection modes), and Condition. Describes relationships (Template 1:N DataBinding, N:M Component, 1:N Condition, N:1 Administration, 1:N Document), invariants, and Tiptap content model structure.",
+      "tags": [
+        "template",
+        "domain-model",
+        "entities",
+        "relationships",
+        "specification"
+      ]
+    },
+    {
+      "id": "document:docs/specs/04-template/requirements.md",
+      "type": "document",
+      "name": "Requirements \u2014 Template",
+      "filePath": "docs/specs/04-template/requirements.md",
+      "summary": "Core specification for the Template feature. Defines problem statement (hardcoded document structures), objective (composable document blueprints), actors (Administrator, Staff), 7 user stories (US-001 to US-007), 9 functional requirements (REQ-TE-001 to REQ-TE-009), 3 non-functional requirements (NFR-TE-001 to NFR-TE-003), constraints, edge cases, and dependencies (Component, Global Table, Expression Engine, Tiptap).",
+      "tags": [
+        "template",
+        "requirements",
+        "user-stories",
+        "specification",
+        "core-spec"
+      ]
+    },
+    {
+      "id": "document:docs/specs/04-template/tasks.md",
+      "type": "document",
+      "name": "Tasks \u2014 Template",
+      "filePath": "docs/specs/04-template/tasks.md",
+      "summary": "Implementation plan with 13 tasks (TASK-001 to TASK-013): Database Schema (Drizzle), Shared Types & Schemas (Zod), Repository Layer (TemplateRepository), Service Layer (TemplateService), API Routes, Composable (useTemplate), UI pages (Template List, Builder, Component Picker, Data Binding UI, Preview Panel), Tests, and Verification. Defines dependencies and affected files for each task.",
+      "tags": [
+        "template",
+        "implementation-tasks",
+        "plan",
+        "specification"
+      ]
+    },
+    {
+      "id": "document:docs/specs/04-template/test-cases.md",
+      "type": "document",
+      "name": "Test Cases \u2014 Template",
+      "filePath": "docs/specs/04-template/test-cases.md",
+      "summary": "Defines test cases for Template feature: 4 unit tests for TemplateService (UT-TE-001 to UT-TE-004), 4 unit tests for DataBindingResolver (UT-DB-001 to UT-DB-004), 2 integration tests (IT-TE-001, IT-TE-002), 7 API tests (AT-TE-001 to AT-TE-007), 3 E2E tests (ET-TE-001 to ET-TE-003), and 4 edge cases (EC-TE-001 to EC-TE-004).",
+      "tags": [
+        "template",
+        "test-cases",
+        "testing",
+        "specification"
+      ]
+    },
+    {
+      "id": "document:docs/specs/04-template/ui.md",
+      "type": "document",
+      "name": "UI \u2014 Template",
+      "filePath": "docs/specs/04-template/ui.md",
+      "summary": "UI specification for Template feature: Templates List page (/templates), Template Builder with three-panel layout (Blocks panel, Document Canvas with Tiptap, Data Panel), Template Create page, Component Picker (command palette style), Data Binding UI, Preview Panel (split-screen). Includes responsive behavior (desktop/tablet/mobile), loading/empty/error states, and accessibility requirements.",
+      "tags": [
+        "template",
+        "ui",
+        "interface",
+        "design",
+        "specification"
+      ]
+    },
+    {
+      "id": "document:docs/specs/04-template/ux.md",
+      "type": "document",
+      "name": "UX \u2014 Template",
+      "filePath": "docs/specs/04-template/ux.md",
+      "summary": "UX specification for Template feature: User flows for Create Template, Insert Component, Bind Data, Configure Loop, Configure Condition, and Preview. Includes feedback mechanisms (toasts, badges, checks), keyboard shortcuts (Cmd+S save, Cmd+P preview, Cmd+K palette), and interaction patterns.",
+      "tags": [
+        "template",
+        "ux",
+        "user-flow",
+        "interaction",
+        "specification"
+      ]
+    },
+    {
+      "id": "file::docs/specs/05-administration/acceptance.md",
+      "type": "file",
+      "name": "acceptance.md",
+      "filePath": "docs/specs/05-administration/acceptance.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/05-administration/api.md",
+      "type": "file",
+      "name": "api.md",
+      "filePath": "docs/specs/05-administration/api.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/05-administration/business-rules.md",
+      "type": "file",
+      "name": "business-rules.md",
+      "filePath": "docs/specs/05-administration/business-rules.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/05-administration/domain.md",
+      "type": "file",
+      "name": "domain.md",
+      "filePath": "docs/specs/05-administration/domain.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/05-administration/requirements.md",
+      "type": "file",
+      "name": "requirements.md",
+      "filePath": "docs/specs/05-administration/requirements.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/05-administration/tasks.md",
+      "type": "file",
+      "name": "tasks.md",
+      "filePath": "docs/specs/05-administration/tasks.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/05-administration/test-cases.md",
+      "type": "file",
+      "name": "test-cases.md",
+      "filePath": "docs/specs/05-administration/test-cases.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/05-administration/ui.md",
+      "type": "file",
+      "name": "ui.md",
+      "filePath": "docs/specs/05-administration/ui.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/05-administration/ux.md",
+      "type": "file",
+      "name": "ux.md",
+      "filePath": "docs/specs/05-administration/ux.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "document:docs/specs/06-document/acceptance.md",
+      "type": "document",
+      "name": "acceptance.md",
+      "filePath": "docs/specs/06-document/acceptance.md",
+      "summary": "Acceptance criteria for Document feature: 7 ACs covering auto-generation on workflow completion, HTML storage, PDF generation, viewing, searching, downloading, and document settings. Each AC maps to REQ and US identifiers.",
+      "tags": [
+        "spec",
+        "acceptance-criteria",
+        "document",
+        "06-document"
+      ]
+    },
+    {
+      "id": "document:docs/specs/06-document/api.md",
+      "type": "document",
+      "name": "api.md",
+      "filePath": "docs/specs/06-document/api.md",
+      "summary": "API specification for Document feature: GET /api/documents (list with pagination/search/filter), GET /api/documents/:id (detail), GET /api/documents/:id/pdf (download), GET/PUT /api/documents/settings. Includes error response codes.",
+      "tags": [
+        "spec",
+        "api",
+        "endpoints",
+        "document",
+        "06-document"
+      ]
+    },
+    {
+      "id": "document:docs/specs/06-document/business-rules.md",
+      "type": "document",
+      "name": "business-rules.md",
+      "filePath": "docs/specs/06-document/business-rules.md",
+      "summary": "Business rules for Document: 3 validation rules (required fields), 4 permission rules (role-based access), 2 state transition rules (Generating\u2192Generated/Failed), 3 business constraints (immutability, linkage, PDF fidelity), and 2 side effects.",
+      "tags": [
+        "spec",
+        "business-rules",
+        "validation",
+        "permissions",
+        "document",
+        "06-document"
+      ]
+    },
+    {
+      "id": "document:docs/specs/06-document/domain.md",
+      "type": "document",
+      "name": "domain.md",
+      "filePath": "docs/specs/06-document/domain.md",
+      "summary": "Domain model for Document feature: Document entity (10 attributes, state machine Generating\u2192Generated/Failed), DocumentVersion entity (6 attributes), DocumentSettings entity (8 attributes). Defines N:1 relationships to Instance, Administration, Template and 1:N to DocumentVersion.",
+      "tags": [
+        "spec",
+        "domain",
+        "entities",
+        "relationships",
+        "state-machine",
+        "document",
+        "06-document"
+      ]
+    },
+    {
+      "id": "document:docs/specs/06-document/requirements.md",
+      "type": "document",
+      "name": "requirements.md",
+      "filePath": "docs/specs/06-document/requirements.md",
+      "summary": "Requirements specification for Document: 5 user stories (generate, view, search, download, settings), 8 functional requirements (REQ-DC-001..008), 4 non-functional requirements (NFR-DC-001..004), constraints, edge cases, and dependencies on Administration/Template/Render Engine.",
+      "tags": [
+        "spec",
+        "requirements",
+        "user-stories",
+        "functional",
+        "non-functional",
+        "document",
+        "06-document"
+      ]
+    },
+    {
+      "id": "document:docs/specs/06-document/tasks.md",
+      "type": "document",
+      "name": "tasks.md",
+      "filePath": "docs/specs/06-document/tasks.md",
+      "summary": "Implementation plan for Document feature: 12 sequential tasks from database schema (TASK-001) through shared types, repository, service, PDF generation, API routes, composable, UI (list/viewer/settings), tests, to final verification. Each task lists affected files, dependencies, and verification criteria.",
+      "tags": [
+        "spec",
+        "tasks",
+        "implementation-plan",
+        "document",
+        "06-document"
+      ]
+    },
+    {
+      "id": "document:docs/specs/06-document/test-cases.md",
+      "type": "document",
+      "name": "test-cases.md",
+      "filePath": "docs/specs/06-document/test-cases.md",
+      "summary": "Test cases for Document: 3 unit tests (DocumentService generation/storage/PDF), 1 integration test (full lifecycle), 5 API tests (all endpoints), 2 E2E tests (view/download), and 3 edge cases (complex layout, 100+ pages, PDF failure).",
+      "tags": [
+        "spec",
+        "test-cases",
+        "unit-tests",
+        "integration",
+        "api-tests",
+        "e2e",
+        "document",
+        "06-document"
+      ]
+    },
+    {
+      "id": "document:docs/specs/06-document/ui.md",
+      "type": "document",
+      "name": "ui.md",
+      "filePath": "docs/specs/06-document/ui.md",
+      "summary": "UI specification for Document: 3 pages (/documents, /documents/:id, /documents/settings) with wireframe layouts. Documents list with search/filters, Document viewer with HTML rendering and metadata, Settings page for page size/margins/headers/footers. Includes responsive breakpoints and loading/empty/error states.",
+      "tags": [
+        "spec",
+        "ui",
+        "wireframes",
+        "pages",
+        "responsive",
+        "document",
+        "06-document"
+      ]
+    },
+    {
+      "id": "document:docs/specs/06-document/ux.md",
+      "type": "document",
+      "name": "ux.md",
+      "filePath": "docs/specs/06-document/ux.md",
+      "summary": "UX specification for Document: 3 user flows (view document, download PDF, generate document) with step-by-step diagrams. Feedback table (loading/toast/error), keyboard shortcuts (Cmd+P print, Cmd+S download, Escape close).",
+      "tags": [
+        "spec",
+        "ux",
+        "user-flows",
+        "feedback",
+        "keyboard-shortcuts",
+        "document",
+        "06-document"
+      ]
+    },
+    {
+      "id": "file:node::docs/specs/07-render-engine/acceptance.md",
+      "type": "file",
+      "name": "acceptance.md",
+      "filePath": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:node::docs/specs/07-render-engine/api.md",
+      "type": "file",
+      "name": "api.md",
+      "filePath": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:node::docs/specs/07-render-engine/business-rules.md",
+      "type": "file",
+      "name": "business-rules.md",
+      "filePath": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:node::docs/specs/07-render-engine/domain.md",
+      "type": "file",
+      "name": "domain.md",
+      "filePath": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:node::docs/specs/07-render-engine/requirements.md",
+      "type": "file",
+      "name": "requirements.md",
+      "filePath": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:node::docs/specs/07-render-engine/tasks.md",
+      "type": "file",
+      "name": "tasks.md",
+      "filePath": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:node::docs/specs/07-render-engine/test-cases.md",
+      "type": "file",
+      "name": "test-cases.md",
+      "filePath": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:node::docs/specs/07-render-engine/ui.md",
+      "type": "file",
+      "name": "ui.md",
+      "filePath": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:node::docs/specs/07-render-engine/ux.md",
+      "type": "file",
+      "name": "ux.md",
+      "filePath": "",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/_template/acceptance.md",
+      "type": "file",
+      "name": "acceptance.md",
+      "filePath": "docs/specs/_template/acceptance.md",
+      "summary": "Template for acceptance criteria using Given/When/Then format",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/acceptance.md::ac-001",
+      "type": "section",
+      "name": "AC-001: [Criterion Title]",
+      "filePath": "docs/specs/_template/acceptance.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/acceptance.md::ac-004-validation",
+      "type": "section",
+      "name": "AC-004: Validation Error",
+      "filePath": "docs/specs/_template/acceptance.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/acceptance.md::ac-005-empty-state",
+      "type": "section",
+      "name": "AC-005: Empty State",
+      "filePath": "docs/specs/_template/acceptance.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/acceptance.md::ac-006-loading",
+      "type": "section",
+      "name": "AC-006: Loading State",
+      "filePath": "docs/specs/_template/acceptance.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/acceptance.md::ac-007-error",
+      "type": "section",
+      "name": "AC-007: Error State",
+      "filePath": "docs/specs/_template/acceptance.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/acceptance.md::summary",
+      "type": "section",
+      "name": "Summary",
+      "filePath": "docs/specs/_template/acceptance.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/_template/api.md",
+      "type": "file",
+      "name": "api.md",
+      "filePath": "docs/specs/_template/api.md",
+      "summary": "Template for API endpoint specifications",
+      "tags": []
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::get-list",
+      "type": "endpoint",
+      "name": "GET /api/[resource]",
+      "filePath": "docs/specs/_template/api.md",
+      "summary": "List resources with pagination, sort, search",
+      "tags": []
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::get-single",
+      "type": "endpoint",
+      "name": "GET /api/[resource]/:id",
+      "filePath": "docs/specs/_template/api.md",
+      "summary": "Get single resource",
+      "tags": []
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::post-create",
+      "type": "endpoint",
+      "name": "POST /api/[resource]",
+      "filePath": "docs/specs/_template/api.md",
+      "summary": "Create resource",
+      "tags": []
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::put-update",
+      "type": "endpoint",
+      "name": "PUT /api/[resource]/:id",
+      "filePath": "docs/specs/_template/api.md",
+      "summary": "Update resource",
+      "tags": []
+    },
+    {
+      "id": "endpoint::docs/specs/_template/api.md::delete-resource",
+      "type": "endpoint",
+      "name": "DELETE /api/[resource]/:id",
+      "filePath": "docs/specs/_template/api.md",
+      "summary": "Delete resource",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/api.md::error-responses",
+      "type": "section",
+      "name": "Error Responses",
+      "filePath": "docs/specs/_template/api.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/_template/business-rules.md",
+      "type": "file",
+      "name": "business-rules.md",
+      "filePath": "docs/specs/_template/business-rules.md",
+      "summary": "Template for business rules including validation, permissions, state transitions, and constraints",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/business-rules.md::validation-rules",
+      "type": "section",
+      "name": "Validation Rules",
+      "filePath": "docs/specs/_template/business-rules.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/business-rules.md::permission-rules",
+      "type": "section",
+      "name": "Permission Rules",
+      "filePath": "docs/specs/_template/business-rules.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/business-rules.md::state-transitions",
+      "type": "section",
+      "name": "State Transition Rules",
+      "filePath": "docs/specs/_template/business-rules.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/business-rules.md::business-constraints",
+      "type": "section",
+      "name": "Business Constraints",
+      "filePath": "docs/specs/_template/business-rules.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/business-rules.md::side-effects",
+      "type": "section",
+      "name": "Side Effects",
+      "filePath": "docs/specs/_template/business-rules.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/_template/domain.md",
+      "type": "file",
+      "name": "domain.md",
+      "filePath": "docs/specs/_template/domain.md",
+      "summary": "Template for domain model definitions including entities, relationships, and state machines",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/domain.md::entities",
+      "type": "section",
+      "name": "Entities",
+      "filePath": "docs/specs/_template/domain.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/domain.md::relationships",
+      "type": "section",
+      "name": "Relationships",
+      "filePath": "docs/specs/_template/domain.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/domain.md::invariants",
+      "type": "section",
+      "name": "Invariants",
+      "filePath": "docs/specs/_template/domain.md",
+      "summary": "Entity-level constraints that must always hold",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/domain.md::lifecycle",
+      "type": "section",
+      "name": "Lifecycle",
+      "filePath": "docs/specs/_template/domain.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/_template/requirements.md",
+      "type": "file",
+      "name": "requirements.md",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "Template for feature requirements including problem, objectives, user stories, and functional/non-functional requirements",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/requirements.md::problem",
+      "type": "section",
+      "name": "Problem",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/requirements.md::objective",
+      "type": "section",
+      "name": "Objective",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/requirements.md::actors",
+      "type": "section",
+      "name": "Actors",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "System actors and their roles",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/requirements.md::user-stories",
+      "type": "section",
+      "name": "User Stories",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/requirements.md::functional-requirements",
+      "type": "section",
+      "name": "Functional Requirements",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/requirements.md::non-functional-requirements",
+      "type": "section",
+      "name": "Non-Functional Requirements",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/requirements.md::constraints",
+      "type": "section",
+      "name": "Constraints",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/requirements.md::edge-cases",
+      "type": "section",
+      "name": "Edge Cases",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/requirements.md::dependencies",
+      "type": "section",
+      "name": "Dependencies",
+      "filePath": "docs/specs/_template/requirements.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/_template/tasks.md",
+      "type": "file",
+      "name": "tasks.md",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Template for implementation tasks with dependencies and verification steps",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-001",
+      "type": "task",
+      "name": "TASK-001: Database Schema",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Create database tables and migrations",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-002",
+      "type": "task",
+      "name": "TASK-002: Shared Types",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Create TypeScript types and Zod schemas",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-003",
+      "type": "task",
+      "name": "TASK-003: Repository",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Create data access layer",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-004",
+      "type": "task",
+      "name": "TASK-004: Service",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Create business logic layer",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-005",
+      "type": "task",
+      "name": "TASK-005: API Routes",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Create server API endpoints",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-006",
+      "type": "task",
+      "name": "TASK-006: Composable",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Create frontend data composable",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-007",
+      "type": "task",
+      "name": "TASK-007: UI Components",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Create UI components",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-008",
+      "type": "task",
+      "name": "TASK-008: Pages",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Create page routes",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-009",
+      "type": "task",
+      "name": "TASK-009: Tests",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Write unit and integration tests",
+      "tags": []
+    },
+    {
+      "id": "file:task::docs/specs/_template/tasks.md::task-010",
+      "type": "task",
+      "name": "TASK-010: Verification",
+      "filePath": "docs/specs/_template/tasks.md",
+      "summary": "Run full verification",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/_template/test-cases.md",
+      "type": "file",
+      "name": "test-cases.md",
+      "filePath": "docs/specs/_template/test-cases.md",
+      "summary": "Template for test case specifications including unit, integration, API, and E2E tests",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/test-cases.md::unit-tests",
+      "type": "section",
+      "name": "Unit Tests",
+      "filePath": "docs/specs/_template/test-cases.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/test-cases.md::integration-tests",
+      "type": "section",
+      "name": "Integration Tests",
+      "filePath": "docs/specs/_template/test-cases.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/test-cases.md::api-tests",
+      "type": "section",
+      "name": "API Tests",
+      "filePath": "docs/specs/_template/test-cases.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/test-cases.md::e2e-tests",
+      "type": "section",
+      "name": "E2E Tests",
+      "filePath": "docs/specs/_template/test-cases.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/test-cases.md::edge-cases",
+      "type": "section",
+      "name": "Edge Cases",
+      "filePath": "docs/specs/_template/test-cases.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/_template/ui.md",
+      "type": "file",
+      "name": "ui.md",
+      "filePath": "docs/specs/_template/ui.md",
+      "summary": "Template for UI specifications including pages, forms, tables, navigation, and responsive behavior",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ui.md::pages",
+      "type": "section",
+      "name": "Pages",
+      "filePath": "docs/specs/_template/ui.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ui.md::information-hierarchy",
+      "type": "section",
+      "name": "Information Hierarchy",
+      "filePath": "docs/specs/_template/ui.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ui.md::forms",
+      "type": "section",
+      "name": "Forms",
+      "filePath": "docs/specs/_template/ui.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ui.md::tables",
+      "type": "section",
+      "name": "Tables",
+      "filePath": "docs/specs/_template/ui.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ui.md::navigation",
+      "type": "section",
+      "name": "Navigation",
+      "filePath": "docs/specs/_template/ui.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ui.md::responsive",
+      "type": "section",
+      "name": "Responsive Behavior",
+      "filePath": "docs/specs/_template/ui.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ui.md::states",
+      "type": "section",
+      "name": "Loading/Empty/Error States",
+      "filePath": "docs/specs/_template/ui.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ui.md::accessibility",
+      "type": "section",
+      "name": "Accessibility",
+      "filePath": "docs/specs/_template/ui.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file::docs/specs/_template/ux.md",
+      "type": "file",
+      "name": "ux.md",
+      "filePath": "docs/specs/_template/ux.md",
+      "summary": "Template for UX specifications including user flows, interactions, feedback, states, and keyboard shortcuts",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ux.md::user-flow",
+      "type": "section",
+      "name": "User Flow",
+      "filePath": "docs/specs/_template/ux.md",
+      "summary": "Visual representation of user journey with branching paths",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ux.md::interactions",
+      "type": "section",
+      "name": "Interactions",
+      "filePath": "docs/specs/_template/ux.md",
+      "summary": "Trigger/Action/Feedback patterns",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ux.md::feedback",
+      "type": "section",
+      "name": "Feedback",
+      "filePath": "docs/specs/_template/ux.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ux.md::empty-states",
+      "type": "section",
+      "name": "Empty States",
+      "filePath": "docs/specs/_template/ux.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ux.md::loading-states",
+      "type": "section",
+      "name": "Loading States",
+      "filePath": "docs/specs/_template/ux.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ux.md::error-handling",
+      "type": "section",
+      "name": "Error Handling",
+      "filePath": "docs/specs/_template/ux.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ux.md::confirmation",
+      "type": "section",
+      "name": "Confirmation Dialogs",
+      "filePath": "docs/specs/_template/ux.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:section::docs/specs/_template/ux.md::keyboard-shortcuts",
+      "type": "section",
+      "name": "Keyboard Shortcuts",
+      "filePath": "docs/specs/_template/ux.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:.opencode/.gitignore",
+      "type": "file",
+      "name": ".opencode/.gitignore",
+      "filePath": ".opencode/.gitignore",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:.ua/.understandignore",
+      "type": "file",
+      "name": ".ua/.understandignore",
+      "filePath": ".ua/.understandignore",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:AGENTS.md",
+      "type": "file",
+      "name": "AGENTS.md",
+      "filePath": "AGENTS.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:README.md",
+      "type": "file",
+      "name": "README.md",
+      "filePath": "README.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:app/.gitignore",
+      "type": "file",
+      "name": "app/.gitignore",
+      "filePath": "app/.gitignore",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:app/app/app.vue",
+      "type": "file",
+      "name": "app.vue",
+      "filePath": "app/app/app.vue",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:app/nuxt.config.ts",
+      "type": "file",
+      "name": "nuxt.config.ts",
+      "filePath": "app/nuxt.config.ts",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:app/public/favicon.ico",
+      "type": "file",
+      "name": "favicon.ico",
+      "filePath": "app/public/favicon.ico",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:app/public/robots.txt",
+      "type": "file",
+      "name": "robots.txt",
+      "filePath": "app/public/robots.txt",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:docs/specs/README.md",
+      "type": "file",
+      "name": "specs/README.md",
+      "filePath": "docs/specs/README.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:prompts/generate-animejs-skill.md",
+      "type": "file",
+      "name": "generate-animejs-skill.md",
+      "filePath": "prompts/generate-animejs-skill.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:prompts/generate-naiveui-skill.md",
+      "type": "file",
+      "name": "generate-naiveui-skill.md",
+      "filePath": "prompts/generate-naiveui-skill.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:prompts/generate-nuxtjs-skill.md",
+      "type": "file",
+      "name": "generate-nuxtjs-skill.md",
+      "filePath": "prompts/generate-nuxtjs-skill.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:prompts/generate-tailwindcss-skill.md",
+      "type": "file",
+      "name": "generate-tailwindcss-skill.md",
+      "filePath": "prompts/generate-tailwindcss-skill.md",
+      "summary": "",
+      "tags": []
+    },
+    {
+      "id": "file:prompts/generate-test-skill.md",
+      "type": "file",
+      "name": "generate-test-skill.md",
+      "filePath": "prompts/generate-test-skill.md",
+      "summary": "",
+      "tags": []
+    }
+  ],
+  "import_edges": [],
+  "all_edges": [
+    {
+      "source": "config:app/package.json",
+      "target": "config:app/package-lock.json",
+      "type": "configures",
+      "label": "lockfile generated from",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "config:app/package.json",
+      "target": "config:app/pnpm-lock.yaml",
+      "type": "configures",
+      "label": "lockfile generated from",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "config:app/package.json",
+      "target": "config:app/pnpm-workspace.yaml",
+      "type": "related",
+      "label": "workspace config",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:app/README.md",
+      "target": "config:app/package.json",
+      "type": "documents",
+      "label": "documents setup",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/api.md",
+      "target": "document:docs/architecture/security.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "API authentication and authorization patterns",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/api.md",
+      "target": "document:docs/architecture/technology-stack.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "References Zod for validation",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/architecture-rules.md",
+      "target": "document:docs/architecture/frontend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Layer separation rules for Page/Component/Composable",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/architecture-rules.md",
+      "target": "document:docs/architecture/backend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Layer separation rules for API Route/Service/Repository",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/backend.md",
+      "target": "document:docs/architecture/database.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Repository layer uses Drizzle ORM for data access",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/backend.md",
+      "target": "document:docs/architecture/api.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "API route handlers follow API conventions",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/backend.md",
+      "target": "document:docs/architecture/security.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Request flow includes auth check before service delegation",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/database.md",
+      "target": "document:docs/architecture/technology-stack.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "SQLite and Drizzle ORM from technology stack",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/frontend.md",
+      "target": "document:docs/architecture/technology-stack.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Nuxt 4, Vue 3, Nuxt UI, Tailwind CSS, Tiptap from stack",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/frontend.md",
+      "target": "document:docs/architecture/backend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Composables call API routes on server",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/overview.md",
+      "target": "document:docs/architecture/frontend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Client layer: Nuxt UI workspace UI",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/overview.md",
+      "target": "document:docs/architecture/backend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Server layer: Nitro handles domain logic",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/overview.md",
+      "target": "document:docs/architecture/database.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Data layer: Drizzle ORM \u2192 SQLite",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/overview.md",
+      "target": "document:docs/architecture/architecture-rules.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Key architecture decisions and design principles",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/security.md",
+      "target": "document:docs/architecture/technology-stack.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "References Zod for input validation",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/system-context.md",
+      "target": "document:docs/architecture/overview.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "System actors and boundaries context",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/system-context.md",
+      "target": "document:docs/architecture/database.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "SQLite as external data store actor",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/technology-stack.md",
+      "target": "document:docs/architecture/overview.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Technology choices inform architectural decisions",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/architecture/technology-stack.md",
+      "target": "document:docs/architecture/system-context.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "External integrations: Playwright for PDF, Browser Print API",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/design-system.md",
+      "target": "document:docs/design/component-guidelines.md",
+      "type": "documents",
+      "label": "defines component library structure referenced by",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/design-system.md",
+      "target": "document:docs/design/accessibility.md",
+      "type": "documents",
+      "label": "color tokens and contrast requirements defined by",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/design-system.md",
+      "target": "document:docs/design/responsive.md",
+      "type": "documents",
+      "label": "desktop-first and responsive design language defined by",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/ui-principles.md",
+      "target": "document:docs/design/design-system.md",
+      "type": "documents",
+      "label": "consistency via design tokens references",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/ui-principles.md",
+      "target": "document:docs/design/component-guidelines.md",
+      "type": "related",
+      "label": "workspace concept and component API alignment",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/ux-principles.md",
+      "target": "document:docs/design/interaction-patterns.md",
+      "type": "documents",
+      "label": "interaction conventions (click/hover/drag/esc) detailed in patterns",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/ux-principles.md",
+      "target": "document:docs/design/accessibility.md",
+      "type": "related",
+      "label": "feedback and error prevention overlap with validation feedback",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/component-guidelines.md",
+      "target": "document:docs/design/accessibility.md",
+      "type": "related",
+      "label": "interactive component states must meet a11y requirements",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/component-guidelines.md",
+      "target": "document:docs/design/responsive.md",
+      "type": "related",
+      "label": "component behavior varies by responsive breakpoint",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/interaction-patterns.md",
+      "target": "document:docs/design/responsive.md",
+      "type": "related",
+      "label": "interaction patterns adapt to responsive breakpoints",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/design/interaction-patterns.md",
+      "target": "document:docs/design/ui-principles.md",
+      "type": "related",
+      "label": "workspace navigation and builder canvas implement UI principles",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/workflow.md",
+      "target": "file:docs/sdd/specification-rules.md",
+      "type": "references",
+      "label": "SPEC phase follows specification rules",
+      "confidence": 0.9,
+      "evidence": "workflow.md defines SPEC phase (line 60-77) which must follow specification-rules.md rules",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/workflow.md",
+      "target": "file:docs/sdd/verification-rules.md",
+      "type": "references",
+      "label": "VERIFY phase follows verification rules",
+      "confidence": 0.9,
+      "evidence": "workflow.md defines VERIFY phase (line 133-150) which must follow verification-rules.md pipeline",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/workflow.md",
+      "target": "file:docs/sdd/review-rules.md",
+      "type": "references",
+      "label": "REVIEW phase follows review rules",
+      "confidence": 0.9,
+      "evidence": "workflow.md defines REVIEW phase (line 154-166) which must follow review-rules.md severity levels",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/workflow.md",
+      "target": "file:docs/sdd/implementation-rules.md",
+      "type": "references",
+      "label": "IMPLEMENT phase follows implementation rules",
+      "confidence": 0.9,
+      "evidence": "workflow.md defines IMPLEMENT phase (line 114-129) which must follow implementation-rules.md",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/workflow.md",
+      "target": "file:docs/sdd/definition-of-done.md",
+      "type": "references",
+      "label": "DONE phase uses definition of done",
+      "confidence": 0.9,
+      "evidence": "workflow.md DONE criteria (line 182-189) align with definition-of-done.md checklist",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/definition-of-done.md",
+      "target": "file:docs/sdd/verification-rules.md",
+      "type": "references",
+      "label": "Verification section maps to verification pipeline",
+      "confidence": 0.85,
+      "evidence": "definition-of-done.md Verification section (lines 31-40) lists checks matching verification-rules.md 10-step pipeline",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/definition-of-done.md",
+      "target": "file:docs/sdd/review-rules.md",
+      "type": "references",
+      "label": "Review section maps to review rules",
+      "confidence": 0.85,
+      "evidence": "definition-of-done.md Review section (lines 58-67) references CRITICAL/HIGH findings from review-rules.md",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/implementation-rules.md",
+      "target": "file:docs/sdd/specification-rules.md",
+      "type": "depends-on",
+      "label": "Implementation reads spec first",
+      "confidence": 0.8,
+      "evidence": "implementation-rules.md Rule 1 (lines 5-11) requires reading full specification before coding",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/review-rules.md",
+      "target": "file:docs/sdd/definition-of-done.md",
+      "type": "enforces",
+      "label": "Review blocking rules enforce DoD",
+      "confidence": 0.8,
+      "evidence": "review-rules.md blocking rules (lines 118-122) enforce that CRITICAL/HIGH findings block completion per definition-of-done.md",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/verification-rules.md",
+      "target": "file:docs/sdd/definition-of-done.md",
+      "type": "enforces",
+      "label": "Verification pipeline implements DoD verification",
+      "confidence": 0.85,
+      "evidence": "verification-rules.md pipeline steps directly implement definition-of-done.md Verification checklist items",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/sdd/bootstrap-notes.md",
+      "target": "file:docs/sdd/workflow.md",
+      "type": "references",
+      "label": "Bootstrap references SDD workflow",
+      "confidence": 0.6,
+      "evidence": "bootstrap-notes.md recommended follow-ups (lines 62-67) align with workflow.md phases (spec, plan, implement, verify)",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/acceptance.md",
+      "target": "document:docs/specs/01-global-table/requirements.md",
+      "type": "documents",
+      "label": "maps acceptance criteria to requirements",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/acceptance.md",
+      "target": "document:docs/specs/01-global-table/business-rules.md",
+      "type": "documents",
+      "label": "references business rules (BC-GT-*, REQ-GT-*)",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/api.md",
+      "target": "document:docs/specs/01-global-table/domain.md",
+      "type": "documents",
+      "label": "API endpoints implement domain entities",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/api.md",
+      "target": "document:docs/specs/01-global-table/business-rules.md",
+      "type": "documents",
+      "label": "API validation enforces business rules",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/business-rules.md",
+      "target": "document:docs/specs/01-global-table/domain.md",
+      "type": "documents",
+      "label": "business rules govern domain entity lifecycle",
+      "metadata": {
+        "weight": 0.9
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/domain.md",
+      "target": "document:docs/specs/01-global-table/requirements.md",
+      "type": "documents",
+      "label": "domain model implements requirements",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/tasks.md",
+      "target": "document:docs/specs/01-global-table/domain.md",
+      "type": "documents",
+      "label": "tasks implement domain model",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/tasks.md",
+      "target": "document:docs/specs/01-global-table/api.md",
+      "type": "documents",
+      "label": "tasks implement API endpoints",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/ui.md",
+      "target": "document:docs/specs/01-global-table/domain.md",
+      "type": "documents",
+      "label": "UI renders domain entities",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/ui.md",
+      "target": "document:docs/specs/01-global-table/api.md",
+      "type": "documents",
+      "label": "UI consumes API endpoints",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/ux.md",
+      "target": "document:docs/specs/01-global-table/ui.md",
+      "type": "documents",
+      "label": "UX flows implemented by UI components",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/01-global-table/tasks.md",
+      "target": "document:docs/specs/01-global-table/requirements.md",
+      "type": "documents",
+      "label": "tasks implement requirements",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:Column",
+      "type": "contains",
+      "label": "GlobalTable has many Columns (ordered)",
+      "metadata": {
+        "weight": 1.0
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:Record",
+      "type": "contains",
+      "label": "GlobalTable has many Records",
+      "metadata": {
+        "weight": 1.0
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:GlobalTableLifecycle",
+      "type": "related",
+      "label": "GlobalTable has lifecycle state machine",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:Column",
+      "target": "concept:ColumnTypeSystem",
+      "type": "related",
+      "label": "Column types defined by type system",
+      "metadata": {
+        "weight": 0.9
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:GlobalTableInvariants",
+      "type": "related",
+      "label": "GlobalTable governed by invariants",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:GlobalTableRelationships",
+      "type": "related",
+      "label": "GlobalTable entity relationships",
+      "metadata": {
+        "weight": 0.9
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:GlobalTableLifecycle",
+      "target": "concept:StateTransitions",
+      "type": "implements",
+      "label": "lifecycle implements state transition rules",
+      "metadata": {
+        "weight": 0.9
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:GlobalTableLifecycle",
+      "target": "concept:BusinessConstraints",
+      "type": "validates",
+      "label": "state transitions validated by constraints",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:ColumnTypeSystem",
+      "target": "concept:FormGeneration",
+      "type": "defines_schema",
+      "label": "column types define form field types",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:ColumnTypeSystem",
+      "target": "concept:CRUDOperations",
+      "type": "related",
+      "label": "column types determine CRUD behavior",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:ValidationRules",
+      "target": "concept:BusinessConstraints",
+      "type": "implements",
+      "label": "validation rules enforce business constraints",
+      "metadata": {
+        "weight": 0.9
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:PermissionRules",
+      "target": "concept:GlobalTableLifecycle",
+      "type": "validates",
+      "label": "permissions control state transitions",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:SideEffects",
+      "target": "concept:GlobalTableLifecycle",
+      "type": "triggers",
+      "label": "state transitions trigger side effects",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:UserStories",
+      "target": "concept:AcceptanceCriteria",
+      "type": "related",
+      "label": "user stories mapped to acceptance criteria",
+      "metadata": {
+        "weight": 0.9
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:UserStories",
+      "target": "concept:ImplementationTasks",
+      "type": "depends_on",
+      "label": "user stories implemented by tasks",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:UISpecification",
+      "target": "concept:UXSpecification",
+      "type": "implements",
+      "label": "UI implements UX flows",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:UISpecification",
+      "target": "concept:FormGeneration",
+      "type": "implements",
+      "label": "UI components render generated forms",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:UISpecification",
+      "target": "concept:CRUDOperations",
+      "type": "implements",
+      "label": "UI provides CRUD interface",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:NonFunctionalRequirements",
+      "target": "concept:CRUDOperations",
+      "type": "validates",
+      "label": "NFR targets for CRUD operations",
+      "metadata": {
+        "weight": 0.6
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:EdgeCases",
+      "target": "concept:BusinessConstraints",
+      "type": "related",
+      "label": "edge cases test constraint boundaries",
+      "metadata": {
+        "weight": 0.6
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "endpoint:collections-api",
+      "target": "concept:GlobalTable",
+      "type": "routes",
+      "label": "collection endpoints serve GlobalTable entity",
+      "metadata": {
+        "weight": 0.9
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "endpoint:columns-api",
+      "target": "concept:Column",
+      "type": "routes",
+      "label": "column endpoints serve Column entity",
+      "metadata": {
+        "weight": 0.9
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "endpoint:records-api",
+      "target": "concept:Record",
+      "type": "routes",
+      "label": "record endpoints serve Record entity",
+      "metadata": {
+        "weight": 0.9
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "endpoint:collections-api",
+      "target": "concept:ValidationRules",
+      "type": "validates",
+      "label": "API validation enforces rules",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "endpoint:columns-api",
+      "target": "concept:ValidationRules",
+      "type": "validates",
+      "label": "column validation enforces rules",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "endpoint:records-api",
+      "target": "concept:ValidationRules",
+      "type": "validates",
+      "label": "record validation enforces rules",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "endpoint:collections-api",
+      "target": "concept:PermissionRules",
+      "type": "validates",
+      "label": "API enforces permission rules",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "endpoint:collections-api",
+      "target": "concept:StateTransitions",
+      "type": "triggers",
+      "label": "publish/unpublish/archive endpoints trigger state changes",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:ExpressionEngine",
+      "target": "concept:ColumnTypeSystem",
+      "type": "depends_on",
+      "label": "computed columns depend on expression engine",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:GlobalTableRelationships",
+      "target": "concept:Column",
+      "type": "related",
+      "label": "relation columns create inter-table links",
+      "metadata": {
+        "weight": 0.8
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "concept:GlobalTableRelationships",
+      "target": "concept:Record",
+      "type": "related",
+      "label": "records referenced by relation columns",
+      "metadata": {
+        "weight": 0.7
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/acceptance.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Acceptance criteria map to functional requirements (REQ-EX-001 through REQ-EX-006) and user stories defined in requirements",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/api.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "API endpoints implement the functional requirements defined in requirements",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/business-rules.md",
+      "target": "document:docs/specs/02-expression-engine/domain.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Business rules constrain domain entity behavior and state transitions",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/domain.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Domain model entities realize the requirements",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/tasks.md",
+      "target": "document:docs/specs/02-expression-engine/domain.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Implementation tasks are structured around domain entities (tokenizer, parser, evaluator, resolver, formatter)",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/tasks.md",
+      "target": "document:docs/specs/02-expression-engine/api.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "TASK-006 implements the API routes defined in the API specification",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/test-cases.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Test cases map to functional requirements and business constraints",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/test-cases.md",
+      "target": "document:docs/specs/02-expression-engine/acceptance.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Test cases verify acceptance criteria",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/test-cases.md",
+      "target": "document:docs/specs/02-expression-engine/api.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "API tests (AT-EX-001 to AT-EX-004) validate the API endpoints",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/ui.md",
+      "target": "document:docs/specs/02-expression-engine/ux.md",
+      "type": "related",
+      "weight": 0.5,
+      "description": "UI component specification and UX user flow specification are closely related views of the same interface",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/ux.md",
+      "target": "document:docs/specs/02-expression-engine/api.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "UX validation flow relies on the /api/expressions/validate endpoint",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/business-rules.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Business rules implement constraints and requirements from the requirements document",
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/domain.md",
+      "target": "document:docs/specs/03-component/requirements.md",
+      "type": "related",
+      "label": "domain model realizes requirements",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/business-rules.md",
+      "target": "document:docs/specs/03-component/domain.md",
+      "type": "related",
+      "label": "business rules constrain domain model",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/acceptance.md",
+      "target": "document:docs/specs/03-component/requirements.md",
+      "type": "documents",
+      "label": "acceptance criteria validate requirements",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/acceptance.md",
+      "target": "document:docs/specs/03-component/business-rules.md",
+      "type": "documents",
+      "label": "acceptance criteria reference business rules",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/api.md",
+      "target": "document:docs/specs/03-component/domain.md",
+      "type": "documents",
+      "label": "API endpoints implement domain entities",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/api.md",
+      "target": "document:docs/specs/03-component/business-rules.md",
+      "type": "documents",
+      "label": "API enforces business rules via error codes",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/test-cases.md",
+      "target": "document:docs/specs/03-component/acceptance.md",
+      "type": "documents",
+      "label": "test cases validate acceptance criteria",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/test-cases.md",
+      "target": "document:docs/specs/03-component/business-rules.md",
+      "type": "documents",
+      "label": "test cases verify business rules",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/tasks.md",
+      "target": "document:docs/specs/03-component/requirements.md",
+      "type": "depends_on",
+      "label": "implementation tasks depend on requirements",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/tasks.md",
+      "target": "document:docs/specs/03-component/api.md",
+      "type": "depends_on",
+      "label": "API route tasks depend on API spec",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/ui.md",
+      "target": "document:docs/specs/03-component/ux.md",
+      "type": "related",
+      "label": "UI layout supports UX flows",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/ui.md",
+      "target": "document:docs/specs/03-component/domain.md",
+      "type": "documents",
+      "label": "UI renders domain entities",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/03-component/ux.md",
+      "target": "document:docs/specs/03-component/requirements.md",
+      "type": "documents",
+      "label": "UX flows implement user stories",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/acceptance.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "maps acceptance criteria to requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/acceptance.md",
+      "target": "document:docs/specs/04-template/test-cases.md",
+      "type": "related",
+      "label": "acceptance criteria inform test cases",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/api.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "API endpoints implement functional requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/api.md",
+      "target": "document:docs/specs/04-template/domain.md",
+      "type": "related",
+      "label": "API endpoints use domain entities",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/api.md",
+      "target": "document:docs/specs/04-template/business-rules.md",
+      "type": "validates",
+      "label": "API error responses enforce business rules",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/business-rules.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "business rules derive from requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/business-rules.md",
+      "target": "document:docs/specs/04-template/domain.md",
+      "type": "defines_schema",
+      "label": "business rules constrain domain entities",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/domain.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "domain model implements requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "implementation tasks fulfill requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/api.md",
+      "type": "related",
+      "label": "TASK-005 implements API endpoints",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/domain.md",
+      "type": "related",
+      "label": "TASK-001 creates database schema for domain entities",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/ui.md",
+      "type": "related",
+      "label": "TASK-007 through TASK-011 implement UI components",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/test-cases.md",
+      "type": "related",
+      "label": "TASK-012 implements test cases",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/test-cases.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "test cases verify requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/test-cases.md",
+      "target": "document:docs/specs/04-template/business-rules.md",
+      "type": "validates",
+      "label": "unit tests validate business rules",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/ui.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "UI implements REQ-TE-002 (Document Composition Canvas)",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/ui.md",
+      "target": "document:docs/specs/04-template/ux.md",
+      "type": "related",
+      "label": "UI specification aligns with UX flows",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/ux.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "UX flows implement user stories",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/04-template/ux.md",
+      "target": "document:docs/specs/04-template/ui.md",
+      "type": "related",
+      "label": "UX flows drive UI component design",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/acceptance.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "maps AC-001..AC-011 to REQ-WF-*, US-*, BC-WF-*",
+      "confidence": 0.95,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/acceptance.md",
+      "target": "file::docs/specs/05-administration/business-rules.md",
+      "type": "references",
+      "label": "references BC-WF-002, BC-WF-003 constraints",
+      "confidence": 0.85,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/api.md",
+      "target": "file::docs/specs/05-administration/domain.md",
+      "type": "references",
+      "label": "API endpoints implement domain entities Administration, Step, Instance",
+      "confidence": 0.92,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/api.md",
+      "target": "file::docs/specs/05-administration/business-rules.md",
+      "type": "references",
+      "label": "API validation enforces VR-WF-*, PR-WF-* rules",
+      "confidence": 0.88,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/business-rules.md",
+      "target": "file::docs/specs/05-administration/domain.md",
+      "type": "references",
+      "label": "rules govern domain entity state machines and invariants",
+      "confidence": 0.93,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/domain.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "domain model realizes REQ-WF-* requirements",
+      "confidence": 0.87,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/requirements.md",
+      "target": "file::docs/specs/05-administration/business-rules.md",
+      "type": "references",
+      "label": "requirements define constraints that become business rules",
+      "confidence": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/tasks.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "tasks implement REQ-WF-* functional requirements",
+      "confidence": 0.88,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/tasks.md",
+      "target": "file::docs/specs/05-administration/api.md",
+      "type": "references",
+      "label": "TASK-005 implements API endpoints from api.md",
+      "confidence": 0.94,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/tasks.md",
+      "target": "file::docs/specs/05-administration/domain.md",
+      "type": "references",
+      "label": "TASK-001 creates database schema for domain entities",
+      "confidence": 0.91,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/test-cases.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "test cases verify REQ-WF-*, US-* requirements",
+      "confidence": 0.92,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/test-cases.md",
+      "target": "file::docs/specs/05-administration/acceptance.md",
+      "type": "references",
+      "label": "test cases validate acceptance criteria",
+      "confidence": 0.89,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/test-cases.md",
+      "target": "file::docs/specs/05-administration/api.md",
+      "type": "references",
+      "label": "AT-WF-* API tests verify endpoints from api.md",
+      "confidence": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/test-cases.md",
+      "target": "file::docs/specs/05-administration/business-rules.md",
+      "type": "references",
+      "label": "UT-WF-* unit tests verify business rules enforcement",
+      "confidence": 0.87,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/ui.md",
+      "target": "file::docs/specs/05-administration/domain.md",
+      "type": "references",
+      "label": "UI pages display domain entities Administration, Instance, InstanceStep",
+      "confidence": 0.85,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/ui.md",
+      "target": "file::docs/specs/05-administration/api.md",
+      "type": "references",
+      "label": "UI consumes API endpoints for data display and actions",
+      "confidence": 0.86,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/ux.md",
+      "target": "file::docs/specs/05-administration/ui.md",
+      "type": "references",
+      "label": "UX flows map to UI page layouts and components",
+      "confidence": 0.93,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/ux.md",
+      "target": "file::docs/specs/05-administration/acceptance.md",
+      "type": "references",
+      "label": "UX flows implement acceptance criteria workflows",
+      "confidence": 0.88,
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/05-administration/ux.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "UX flows realize US-001 through US-008 user stories",
+      "confidence": 0.87,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/acceptance.md",
+      "type": "defines",
+      "label": "acceptance criteria derived from requirements",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/domain.md",
+      "type": "defines",
+      "label": "domain entities derived from requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/business-rules.md",
+      "type": "defines",
+      "label": "business rules derived from requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/api.md",
+      "type": "defines",
+      "label": "API endpoints derived from functional requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/ui.md",
+      "type": "defines",
+      "label": "UI pages derived from user stories",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/ux.md",
+      "type": "defines",
+      "label": "UX flows derived from user stories",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/test-cases.md",
+      "type": "defines",
+      "label": "test cases derived from requirements",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/requirements.md",
+      "target": "document:docs/specs/06-document/tasks.md",
+      "type": "defines",
+      "label": "implementation tasks derived from requirements",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/domain.md",
+      "target": "document:docs/specs/06-document/business-rules.md",
+      "type": "constrains",
+      "label": "business rules constrain domain state transitions",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/domain.md",
+      "target": "document:docs/specs/06-document/api.md",
+      "type": "shapes",
+      "label": "domain model shapes API response schemas",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/ui.md",
+      "target": "document:docs/specs/06-document/ux.md",
+      "type": "implements",
+      "label": "UI pages implement UX user flows",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/acceptance.md",
+      "target": "document:docs/specs/06-document/test-cases.md",
+      "type": "verified_by",
+      "label": "test cases verify acceptance criteria",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "document:docs/specs/06-document/tasks.md",
+      "target": "document:docs/specs/06-document/test-cases.md",
+      "type": "verified_by",
+      "label": "tests verify task implementation",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "id": "edge::acceptance-requirements",
+      "source": "file:node::docs/specs/07-render-engine/acceptance.md",
+      "target": "file:node::docs/specs/07-render-engine/requirements.md",
+      "type": "specification-reference",
+      "label": "maps to requirements",
+      "metadata": {
+        "confidence": 0.95,
+        "evidence": "AC-001 maps to REQ-RE-001, AC-002 maps to REQ-RE-003, etc.",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::acceptance-test-cases",
+      "source": "file:node::docs/specs/07-render-engine/acceptance.md",
+      "target": "file:node::docs/specs/07-render-engine/test-cases.md",
+      "type": "specification-reference",
+      "label": "defines test cases",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "AC-001 to AC-006 define acceptance criteria that must be tested",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::api-business-rules",
+      "source": "file:node::docs/specs/07-render-engine/api.md",
+      "target": "file:node::docs/specs/07-render-engine/business-rules.md",
+      "type": "specification-reference",
+      "label": "enforces business rules",
+      "metadata": {
+        "confidence": 0.85,
+        "evidence": "API error responses map to business rules (RENDER_ERROR, TEMPLATE_NOT_FOUND, etc.)",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::api-tasks",
+      "source": "file:node::docs/specs/07-render-engine/api.md",
+      "target": "file:node::docs/specs/07-render-engine/tasks.md",
+      "type": "implementation-dependency",
+      "label": "implemented by tasks",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "TASK-009 creates API routes (preview.post.ts, generate.post.ts)",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::domain-requirements",
+      "source": "file:node::docs/specs/07-render-engine/domain.md",
+      "target": "file:node::docs/specs/07-render-engine/requirements.md",
+      "type": "specification-reference",
+      "label": "models requirements",
+      "metadata": {
+        "confidence": 0.85,
+        "evidence": "Domain entities (RenderContext, RenderResult) model the requirements",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::domain-tasks",
+      "source": "file:node::docs/specs/07-render-engine/domain.md",
+      "target": "file:node::docs/specs/07-render-engine/tasks.md",
+      "type": "implementation-dependency",
+      "label": "implemented by tasks",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "Domain entities implemented in parser, resolver, renderer tasks",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::requirements-acceptance",
+      "source": "file:node::docs/specs/07-render-engine/requirements.md",
+      "target": "file:node::docs/specs/07-render-engine/acceptance.md",
+      "type": "specification-reference",
+      "label": "validated by acceptance criteria",
+      "metadata": {
+        "confidence": 0.95,
+        "evidence": "Requirements REQ-RE-001 to REQ-RE-008 are validated by AC-001 to AC-006",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::requirements-tasks",
+      "source": "file:node::docs/specs/07-render-engine/requirements.md",
+      "target": "file:node::docs/specs/07-render-engine/tasks.md",
+      "type": "implementation-dependency",
+      "label": "implemented by tasks",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "Requirements implemented by TASK-001 to TASK-011",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::tasks-test-cases",
+      "source": "file:node::docs/specs/07-render-engine/tasks.md",
+      "target": "file:node::docs/specs/07-render-engine/test-cases.md",
+      "type": "implementation-dependency",
+      "label": "verified by test cases",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "TASK-010 writes tests, TASK-011 verifies all tests pass",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::test-cases-acceptance",
+      "source": "file:node::docs/specs/07-render-engine/test-cases.md",
+      "target": "file:node::docs/specs/07-render-engine/acceptance.md",
+      "type": "specification-reference",
+      "label": "validates acceptance criteria",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "Test cases map to acceptance criteria (UT-RE-001 to UT-RE-008 validate AC-001 to AC-006)",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::ui-ux",
+      "source": "file:node::docs/specs/07-render-engine/ui.md",
+      "target": "file:node::docs/specs/07-render-engine/ux.md",
+      "type": "specification-reference",
+      "label": "implements UX flows",
+      "metadata": {
+        "confidence": 0.85,
+        "evidence": "UI integration points implement UX user flows",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::ux-requirements",
+      "source": "file:node::docs/specs/07-render-engine/ux.md",
+      "target": "file:node::docs/specs/07-render-engine/requirements.md",
+      "type": "specification-reference",
+      "label": "defines user experience",
+      "metadata": {
+        "confidence": 0.8,
+        "evidence": "UX flows define user experience for requirements US-001 to US-005",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "id": "edge::business-rules-requirements",
+      "source": "file:node::docs/specs/07-render-engine/business-rules.md",
+      "target": "file:node::docs/specs/07-render-engine/requirements.md",
+      "type": "specification-reference",
+      "label": "constrains requirements",
+      "metadata": {
+        "confidence": 0.85,
+        "evidence": "Business rules (BC-RE-001 to BC-RE-004) constrain requirements",
+        "direction": "source-to-target"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/acceptance.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "maps criteria to requirements",
+      "meta": {
+        "strength": "high",
+        "reason": "Acceptance criteria map to REQ-XXX requirements defined in requirements.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/acceptance.md::ac-004-validation",
+      "target": "file::docs/specs/_template/business-rules.md",
+      "kind": "references",
+      "label": "validation rules",
+      "meta": {
+        "strength": "medium",
+        "reason": "Validation error criteria relate to validation rules in business-rules.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/acceptance.md::ac-005-empty-state",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "empty state UX",
+      "meta": {
+        "strength": "medium",
+        "reason": "Empty state criteria relate to UX empty states defined in ux.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/acceptance.md::ac-006-loading",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "loading state UX",
+      "meta": {
+        "strength": "medium",
+        "reason": "Loading state criteria relate to UX loading states defined in ux.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/acceptance.md::ac-007-error",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "error handling UX",
+      "meta": {
+        "strength": "medium",
+        "reason": "Error state criteria relate to UX error handling defined in ux.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/api.md",
+      "target": "file::docs/specs/_template/business-rules.md",
+      "kind": "references",
+      "label": "validation rules",
+      "meta": {
+        "strength": "high",
+        "reason": "API validation references Zod schemas and validation rules from business-rules.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/api.md",
+      "target": "file::docs/specs/_template/domain.md",
+      "kind": "references",
+      "label": "entity definitions",
+      "meta": {
+        "strength": "medium",
+        "reason": "API endpoints operate on entities defined in domain.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/api.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "functional requirements",
+      "meta": {
+        "strength": "medium",
+        "reason": "API endpoints implement functional requirements from requirements.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "endpoint::docs/specs/_template/api.md::post-create",
+      "target": "file:section::docs/specs/_template/business-rules.md::validation-rules",
+      "kind": "enforces",
+      "label": "validates input",
+      "meta": {
+        "strength": "high",
+        "reason": "POST endpoint enforces validation rules defined in business-rules.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/business-rules.md",
+      "target": "file::docs/specs/_template/domain.md",
+      "kind": "references",
+      "label": "entity constraints",
+      "meta": {
+        "strength": "high",
+        "reason": "Business rules define constraints on entities from domain.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/business-rules.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "enforces",
+      "label": "API validation",
+      "meta": {
+        "strength": "high",
+        "reason": "Validation rules enforce input validation at API layer"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/business-rules.md::permission-rules",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "UI permissions",
+      "meta": {
+        "strength": "medium",
+        "reason": "Permission rules affect UI element visibility and interaction"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/domain.md",
+      "target": "file::docs/specs/_template/business-rules.md",
+      "kind": "references",
+      "label": "entity constraints",
+      "meta": {
+        "strength": "high",
+        "reason": "Domain entities have invariants enforced by business rules"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/domain.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "references",
+      "label": "API operations",
+      "meta": {
+        "strength": "medium",
+        "reason": "Domain entities are operated on by API endpoints"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/domain.md",
+      "target": "file::docs/specs/_template/tasks.md",
+      "kind": "references",
+      "label": "database schema",
+      "meta": {
+        "strength": "high",
+        "reason": "Domain entities are implemented as database tables per tasks.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/domain.md::lifecycle",
+      "target": "file:section::docs/specs/_template/business-rules.md::state-transitions",
+      "kind": "references",
+      "label": "state transitions",
+      "meta": {
+        "strength": "high",
+        "reason": "Entity lifecycle states have transitions defined in business rules"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/requirements.md",
+      "target": "file::docs/specs/_template/acceptance.md",
+      "kind": "references",
+      "label": "acceptance criteria",
+      "meta": {
+        "strength": "high",
+        "reason": "Requirements are validated by acceptance criteria"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/requirements.md",
+      "target": "file::docs/specs/_template/domain.md",
+      "kind": "references",
+      "label": "domain model",
+      "meta": {
+        "strength": "medium",
+        "reason": "Requirements define entities modeled in domain.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/requirements.md",
+      "target": "file::docs/specs/_template/tasks.md",
+      "kind": "references",
+      "label": "implementation tasks",
+      "meta": {
+        "strength": "medium",
+        "reason": "Requirements are implemented through tasks defined in tasks.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/requirements.md",
+      "target": "file::docs/specs/_template/test-cases.md",
+      "kind": "references",
+      "label": "test coverage",
+      "meta": {
+        "strength": "high",
+        "reason": "Requirements are verified by test cases in test-cases.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/requirements.md::user-stories",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "UX flows",
+      "meta": {
+        "strength": "medium",
+        "reason": "User stories drive UX flows defined in ux.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "implements requirements",
+      "meta": {
+        "strength": "high",
+        "reason": "Tasks implement functional requirements from requirements.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/domain.md",
+      "kind": "references",
+      "label": "implements domain model",
+      "meta": {
+        "strength": "high",
+        "reason": "TASK-001 creates database schema from domain.md entities"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "references",
+      "label": "implements API",
+      "meta": {
+        "strength": "high",
+        "reason": "TASK-005 creates API endpoints defined in api.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/ui.md",
+      "kind": "references",
+      "label": "implements UI",
+      "meta": {
+        "strength": "high",
+        "reason": "TASK-007 and TASK-008 create UI components and pages from ui.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/tasks.md",
+      "target": "file::docs/specs/_template/test-cases.md",
+      "kind": "references",
+      "label": "implements tests",
+      "meta": {
+        "strength": "high",
+        "reason": "TASK-009 writes tests based on test-cases.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-002",
+      "target": "file:task::docs/specs/_template/tasks.md::task-001",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Shared types depend on database schema"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-003",
+      "target": "file:task::docs/specs/_template/tasks.md::task-001",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Repository depends on database schema"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-003",
+      "target": "file:task::docs/specs/_template/tasks.md::task-002",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Repository depends on shared types"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-004",
+      "target": "file:task::docs/specs/_template/tasks.md::task-003",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Service depends on repository"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-005",
+      "target": "file:task::docs/specs/_template/tasks.md::task-004",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "API routes depend on service"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-006",
+      "target": "file:task::docs/specs/_template/tasks.md::task-005",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Composable depends on API routes"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-007",
+      "target": "file:task::docs/specs/_template/tasks.md::task-006",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "UI components depend on composable"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-008",
+      "target": "file:task::docs/specs/_template/tasks.md::task-007",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Pages depend on UI components"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-009",
+      "target": "file:task::docs/specs/_template/tasks.md::task-008",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Tests depend on pages"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:task::docs/specs/_template/tasks.md::task-010",
+      "target": "file:task::docs/specs/_template/tasks.md::task-009",
+      "kind": "depends-on",
+      "label": "depends on",
+      "meta": {
+        "strength": "high",
+        "reason": "Verification depends on tests"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/test-cases.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "tests requirements",
+      "meta": {
+        "strength": "high",
+        "reason": "Test cases map to REQ-XXX requirements defined in requirements.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/test-cases.md",
+      "target": "file::docs/specs/_template/acceptance.md",
+      "kind": "references",
+      "label": "validates acceptance criteria",
+      "meta": {
+        "strength": "high",
+        "reason": "Test cases validate acceptance criteria scenarios"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/test-cases.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "references",
+      "label": "tests API endpoints",
+      "meta": {
+        "strength": "high",
+        "reason": "API tests verify endpoints defined in api.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/test-cases.md",
+      "target": "file::docs/specs/_template/tasks.md",
+      "kind": "references",
+      "label": "implements tests",
+      "meta": {
+        "strength": "medium",
+        "reason": "Test cases are implemented in TASK-009 of tasks.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/ui.md",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "UX interactions",
+      "meta": {
+        "strength": "high",
+        "reason": "UI specifications implement UX interactions and flows from ux.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/ui.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "implements requirements",
+      "meta": {
+        "strength": "medium",
+        "reason": "UI implements user stories and functional requirements from requirements.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/ui.md",
+      "target": "file::docs/specs/_template/api.md",
+      "kind": "references",
+      "label": "calls API",
+      "meta": {
+        "strength": "medium",
+        "reason": "UI forms and tables call API endpoints defined in api.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/ui.md",
+      "target": "file::docs/specs/_template/tasks.md",
+      "kind": "references",
+      "label": "implements UI",
+      "meta": {
+        "strength": "medium",
+        "reason": "UI specifications are implemented in TASK-007 and TASK-008 of tasks.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/ui.md::states",
+      "target": "file::docs/specs/_template/ux.md",
+      "kind": "references",
+      "label": "UX state definitions",
+      "meta": {
+        "strength": "high",
+        "reason": "UI states (loading, empty, error) are defined in UX specifications"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/ux.md",
+      "target": "file::docs/specs/_template/ui.md",
+      "kind": "references",
+      "label": "UI implementation",
+      "meta": {
+        "strength": "high",
+        "reason": "UX interactions are implemented in UI components from ui.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/ux.md",
+      "target": "file::docs/specs/_template/requirements.md",
+      "kind": "references",
+      "label": "implements user stories",
+      "meta": {
+        "strength": "high",
+        "reason": "UX flows implement user stories from requirements.md"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file::docs/specs/_template/ux.md",
+      "target": "file::docs/specs/_template/acceptance.md",
+      "kind": "references",
+      "label": "UX acceptance criteria",
+      "meta": {
+        "strength": "medium",
+        "reason": "Empty and loading states match acceptance criteria scenarios"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/ux.md::empty-states",
+      "target": "file:section::docs/specs/_template/acceptance.md::ac-005-empty-state",
+      "kind": "references",
+      "label": "empty state UX",
+      "meta": {
+        "strength": "high",
+        "reason": "Empty state UX matches AC-005 acceptance criterion"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/ux.md::loading-states",
+      "target": "file:section::docs/specs/_template/acceptance.md::ac-006-loading",
+      "kind": "references",
+      "label": "loading state UX",
+      "meta": {
+        "strength": "high",
+        "reason": "Loading state UX matches AC-006 acceptance criterion"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/ux.md::error-handling",
+      "target": "file:section::docs/specs/_template/acceptance.md::ac-007-error",
+      "kind": "references",
+      "label": "error handling UX",
+      "meta": {
+        "strength": "high",
+        "reason": "Error handling UX matches AC-007 acceptance criterion"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:section::docs/specs/_template/ux.md::feedback",
+      "target": "file:section::docs/specs/_template/business-rules.md::side-effects",
+      "kind": "references",
+      "label": "feedback for side effects",
+      "meta": {
+        "strength": "medium",
+        "reason": "Feedback patterns handle side effects from business rules"
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:app/app/app.vue",
+      "target": "file:app/nuxt.config.ts",
+      "relation": "configured_by",
+      "label": "configured by",
+      "direction": "forward"
+    },
+    {
+      "source": "file:README.md",
+      "target": "file:AGENTS.md",
+      "relation": "references",
+      "label": "references AGENTS.md",
+      "direction": "forward"
+    },
+    {
+      "source": "file:docs/specs/README.md",
+      "target": "file:AGENTS.md",
+      "relation": "references",
+      "label": "references AGENTS.md for SDD workflow",
+      "direction": "forward"
+    },
+    {
+      "source": "file:AGENTS.md",
+      "target": "file:docs/specs/README.md",
+      "relation": "references",
+      "label": "references specs directory",
+      "direction": "forward"
+    },
+    {
+      "source": "file:README.md",
+      "target": "file:docs/specs/README.md",
+      "relation": "references",
+      "label": "references specs documentation",
+      "direction": "forward"
+    },
+    {
+      "source": "file:prompts/generate-animejs-skill.md",
+      "target": "file:prompts/generate-naiveui-skill.md",
+      "relation": "similar_to",
+      "label": "same prompt template pattern",
+      "direction": "forward"
+    },
+    {
+      "source": "file:prompts/generate-animejs-skill.md",
+      "target": "file:prompts/generate-nuxtjs-skill.md",
+      "relation": "similar_to",
+      "label": "same prompt template pattern",
+      "direction": "forward"
+    },
+    {
+      "source": "file:prompts/generate-animejs-skill.md",
+      "target": "file:prompts/generate-tailwindcss-skill.md",
+      "relation": "similar_to",
+      "label": "same prompt template pattern",
+      "direction": "forward"
+    },
+    {
+      "source": "file:prompts/generate-animejs-skill.md",
+      "target": "file:prompts/generate-test-skill.md",
+      "relation": "similar_to",
+      "label": "same prompt template pattern",
+      "direction": "forward"
+    },
+    {
+      "source": "file:prompts/generate-nuxtjs-skill.md",
+      "target": "file:app/nuxt.config.ts",
+      "relation": "generates_skill_for",
+      "label": "generates skill for Nuxt framework used by this config",
+      "direction": "forward"
+    },
+    {
+      "source": "file:prompts/generate-tailwindcss-skill.md",
+      "target": "file:AGENTS.md",
+      "relation": "generates_skill_for",
+      "label": "generates skill for Tailwind CSS referenced in tech stack",
+      "direction": "forward"
+    },
+    {
+      "source": "file:prompts/generate-test-skill.md",
+      "target": "file:AGENTS.md",
+      "relation": "generates_skill_for",
+      "label": "generates skill for testing referenced in verification rules",
+      "direction": "forward"
+    },
+    {
+      "source": "file:app/.gitignore",
+      "target": "file:app/nuxt.config.ts",
+      "relation": "ignores_outputs_of",
+      "label": "ignores build outputs of Nuxt config",
+      "direction": "forward"
+    },
+    {
+      "source": "file:.opencode/.gitignore",
+      "target": "file:AGENTS.md",
+      "relation": "part_of",
+      "label": "part of .opencode config referenced in AGENTS.md",
+      "direction": "forward"
+    },
+    {
+      "source": "file:.ua/.understandignore",
+      "target": "file:README.md",
+      "relation": "excludes_from_analysis",
+      "label": "excludes files from knowledge graph analysis",
+      "direction": "forward"
+    }
+  ]
+}

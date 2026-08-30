@@ -1,0 +1,188 @@
+{
+  "batchIndex": 8,
+  "nodes": [
+    {
+      "id": "document:docs/specs/03-component/requirements.md",
+      "type": "document",
+      "name": "Component Requirements",
+      "filePath": "docs/specs/03-component/requirements.md",
+      "summary": "Defines the problem statement, objectives, user stories (US-001 to US-005), functional requirements (REQ-CO-001 to REQ-CO-008), non-functional requirements, constraints, and edge cases for the Component feature. Covers creating reusable document blocks with dynamic tokens, data requirements, single/collection modes, preview, and publish lifecycle.",
+      "tags": ["specification", "requirements", "component", "user-stories", "functional-requirements"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification document with structured tables for requirements and user stories."
+    },
+    {
+      "id": "document:docs/specs/03-component/domain.md",
+      "type": "document",
+      "name": "Component Domain Model",
+      "filePath": "docs/specs/03-component/domain.md",
+      "summary": "Defines domain entities (Component, DataRequirement, DynamicToken, LoopConfig), their attributes, relationships, state machine (Draft→Published→Archived), invariants, lifecycle phases, and the Tiptap content model with nested Document/Paragraph/Text/DynamicToken/Loop/Condition structure.",
+      "tags": ["specification", "domain-model", "entity", "state-machine", "tiptap", "component"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification with ASCII diagrams for state machines and entity relationships."
+    },
+    {
+      "id": "document:docs/specs/03-component/acceptance.md",
+      "type": "document",
+      "name": "Component Acceptance Criteria",
+      "filePath": "docs/specs/03-component/acceptance.md",
+      "summary": "Defines 11 acceptance criteria (AC-001 to AC-011) for the Component feature in Given/When/Then format, covering creation, unique names, rich text, dynamic tokens, data requirement matching, collection mode, preview, publish, versioning, empty state, and requirement protection.",
+      "tags": ["specification", "acceptance-criteria", "component", "testing"],
+      "complexity": "simple",
+      "languageNotes": "Markdown specification using BDD-style Given/When/Then acceptance criteria format."
+    },
+    {
+      "id": "document:docs/specs/03-component/business-rules.md",
+      "type": "document",
+      "name": "Component Business Rules",
+      "filePath": "docs/specs/03-component/business-rules.md",
+      "summary": "Defines validation rules (VR-CO-001 to VR-CO-010), permission rules (PR-CO-001 to PR-CO-005), state transition rules (ST-CO-001 to ST-CO-003), business constraints (BC-CO-001 to BC-CO-006), and side effects (SE-CO-001 to SE-CO-004) governing Component behavior.",
+      "tags": ["specification", "business-rules", "validation", "permissions", "state-transitions", "component"],
+      "complexity": "simple",
+      "languageNotes": "Markdown specification with structured tables defining rules and constraints."
+    },
+    {
+      "id": "document:docs/specs/03-component/api.md",
+      "type": "document",
+      "name": "Component API Specification",
+      "filePath": "docs/specs/03-component/api.md",
+      "summary": "Defines REST API endpoints for Components: GET /api/components (list), GET /api/components/:id (detail), POST /api/components (create), PUT /api/components/:id (update/version), DELETE /api/components/:id, POST /api/components/:id/publish, POST /api/components/:id/preview, with request/response schemas and error codes.",
+      "tags": ["specification", "api", "rest", "endpoints", "component", "http"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification with JSON request/response examples and HTTP status code tables."
+    },
+    {
+      "id": "document:docs/specs/03-component/test-cases.md",
+      "type": "document",
+      "name": "Component Test Cases",
+      "filePath": "docs/specs/03-component/test-cases.md",
+      "summary": "Defines unit tests for ComponentService and DataRequirementValidator, integration tests for Component lifecycle and version chains, API tests for all endpoints, E2E tests for create/token/publish flows, and edge case tests for static components, 20+ requirements, 10+ template references, and special character tokens.",
+      "tags": ["specification", "test-cases", "unit-tests", "integration-tests", "api-tests", "e2e-tests", "component"],
+      "complexity": "simple",
+      "languageNotes": "Markdown specification with structured test case tables covering multiple testing levels."
+    },
+    {
+      "id": "document:docs/specs/03-component/tasks.md",
+      "type": "document",
+      "name": "Component Implementation Tasks",
+      "filePath": "docs/specs/03-component/tasks.md",
+      "summary": "Defines 12 implementation tasks (TASK-001 to TASK-012) for the Component feature: database schema, shared types, repository, service, API routes, composable, UI list page, UI builder, dynamic token system, requirements panel, tests, and verification. Each task lists affected files, dependencies, and verification criteria.",
+      "tags": ["specification", "implementation-plan", "tasks", "component", "development"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification with ordered task list showing dependency chains and affected file paths."
+    },
+    {
+      "id": "document:docs/specs/03-component/ui.md",
+      "type": "document",
+      "name": "Component UI Specification",
+      "filePath": "docs/specs/03-component/ui.md",
+      "summary": "Defines UI specifications for the Component feature: Components List page (/components), Component Builder with three-panel layout (Insert|Canvas|Properties), Component Create page, information hierarchy, responsive behavior (desktop/tablet/mobile), loading states, empty states, error states, and accessibility requirements.",
+      "tags": ["specification", "ui", "layout", "three-panel-builder", "responsive", "accessibility", "component"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification with ASCII layout diagrams, responsive breakpoint tables, and state descriptions."
+    },
+    {
+      "id": "document:docs/specs/03-component/ux.md",
+      "type": "document",
+      "name": "Component UX Specification",
+      "filePath": "docs/specs/03-component/ux.md",
+      "summary": "Defines UX flows for Component: create flow, dynamic token insertion (click or {{ trigger), collection mode configuration, preview, publish. Includes interaction details (token insert/select, canvas edit, drag reorder), feedback patterns (toasts, inline warnings), empty/loading states, error handling, confirmation dialogs, and keyboard shortcuts (Cmd+S, Cmd+K, Cmd+Z, Escape, Delete).",
+      "tags": ["specification", "ux", "user-flows", "interactions", "keyboard-shortcuts", "component"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown specification with ASCII flow diagrams and interaction/feedback tables."
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:docs/specs/03-component/domain.md",
+      "target": "document:docs/specs/03-component/requirements.md",
+      "type": "related",
+      "label": "domain model realizes requirements",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/03-component/business-rules.md",
+      "target": "document:docs/specs/03-component/domain.md",
+      "type": "related",
+      "label": "business rules constrain domain model",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/03-component/acceptance.md",
+      "target": "document:docs/specs/03-component/requirements.md",
+      "type": "documents",
+      "label": "acceptance criteria validate requirements",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/specs/03-component/acceptance.md",
+      "target": "document:docs/specs/03-component/business-rules.md",
+      "type": "documents",
+      "label": "acceptance criteria reference business rules",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/specs/03-component/api.md",
+      "target": "document:docs/specs/03-component/domain.md",
+      "type": "documents",
+      "label": "API endpoints implement domain entities",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/specs/03-component/api.md",
+      "target": "document:docs/specs/03-component/business-rules.md",
+      "type": "documents",
+      "label": "API enforces business rules via error codes",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/specs/03-component/test-cases.md",
+      "target": "document:docs/specs/03-component/acceptance.md",
+      "type": "documents",
+      "label": "test cases validate acceptance criteria",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/specs/03-component/test-cases.md",
+      "target": "document:docs/specs/03-component/business-rules.md",
+      "type": "documents",
+      "label": "test cases verify business rules",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/specs/03-component/tasks.md",
+      "target": "document:docs/specs/03-component/requirements.md",
+      "type": "depends_on",
+      "label": "implementation tasks depend on requirements",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/03-component/tasks.md",
+      "target": "document:docs/specs/03-component/api.md",
+      "type": "depends_on",
+      "label": "API route tasks depend on API spec",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/03-component/ui.md",
+      "target": "document:docs/specs/03-component/ux.md",
+      "type": "related",
+      "label": "UI layout supports UX flows",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/03-component/ui.md",
+      "target": "document:docs/specs/03-component/domain.md",
+      "type": "documents",
+      "label": "UI renders domain entities",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/specs/03-component/ux.md",
+      "target": "document:docs/specs/03-component/requirements.md",
+      "type": "documents",
+      "label": "UX flows implement user stories",
+      "weight": 0.5
+    }
+  ]
+}

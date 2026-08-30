@@ -1,0 +1,95 @@
+{
+  "batchIndex": 1,
+  "nodes": [
+    {
+      "id": "document:app/README.md",
+      "type": "document",
+      "name": "README",
+      "filePath": "app/README.md",
+      "summary": "Nuxt Minimal Starter documentation covering setup, development server, production build, and deployment instructions.",
+      "tags": ["documentation", "nuxt", "setup", "readme"],
+      "complexity": "simple",
+      "languageNotes": "Markdown documentation file describing Nuxt project setup and usage."
+    },
+    {
+      "id": "config:app/package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "app/package.json",
+      "summary": "Nuxt application package manifest defining project name, scripts (build, dev, generate, preview, postinstall), and dependencies including Nuxt 4, Vue 3, Naive UI, Tailwind CSS v4, and anime.js.",
+      "tags": ["config", "package", "nuxt", "dependencies", "scripts"],
+      "complexity": "simple",
+      "languageNotes": "JSON configuration file for Node.js package management."
+    },
+    {
+      "id": "config:app/package-lock.json",
+      "type": "config",
+      "name": "package-lock.json",
+      "filePath": "app/package-lock.json",
+      "summary": "npm lockfile pinning exact dependency versions and their dependency trees for reproducible installs.",
+      "tags": ["config", "lockfile", "npm", "dependencies"],
+      "complexity": "simple",
+      "languageNotes": "Auto-generated JSON lockfile for npm dependency resolution."
+    },
+    {
+      "id": "config:app/pnpm-lock.yaml",
+      "type": "config",
+      "name": "pnpm-lock.yaml",
+      "filePath": "app/pnpm-lock.yaml",
+      "summary": "pnpm lockfile pinning exact dependency versions and integrity hashes for reproducible installs.",
+      "tags": ["config", "lockfile", "pnpm", "dependencies"],
+      "complexity": "simple",
+      "languageNotes": "Auto-generated YAML lockfile for pnpm dependency resolution."
+    },
+    {
+      "id": "config:app/pnpm-workspace.yaml",
+      "type": "config",
+      "name": "pnpm-workspace.yaml",
+      "filePath": "app/pnpm-workspace.yaml",
+      "summary": "pnpm workspace configuration with esbuild build policy setting.",
+      "tags": ["config", "workspace", "pnpm"],
+      "complexity": "simple",
+      "languageNotes": "YAML configuration for pnpm workspace settings."
+    },
+    {
+      "id": "config:app/tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "app/tsconfig.json",
+      "summary": "TypeScript configuration referencing Nuxt-generated tsconfig files for app, server, shared, and node contexts.",
+      "tags": ["config", "typescript", "nuxt", "references"],
+      "complexity": "simple",
+      "languageNotes": "JSON TypeScript configuration with project references to .nuxt generated configs."
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:app/package.json",
+      "target": "config:app/package-lock.json",
+      "type": "configures",
+      "label": "lockfile generated from",
+      "weight": 0.6
+    },
+    {
+      "source": "config:app/package.json",
+      "target": "config:app/pnpm-lock.yaml",
+      "type": "configures",
+      "label": "lockfile generated from",
+      "weight": 0.6
+    },
+    {
+      "source": "config:app/package.json",
+      "target": "config:app/pnpm-workspace.yaml",
+      "type": "related",
+      "label": "workspace config",
+      "weight": 0.5
+    },
+    {
+      "source": "document:app/README.md",
+      "target": "config:app/package.json",
+      "type": "documents",
+      "label": "documents setup",
+      "weight": 0.5
+    }
+  ]
+}

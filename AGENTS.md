@@ -78,6 +78,10 @@ persuratan/
 │   ├── agents/                 # Agent definitions
 │   ├── commands/               # Command definitions
 │   └── skills/                 # Skill definitions
+├── .ua/                        # Knowledge graph (auto-generated)
+│   ├── knowledge-graph.json    # Interactive architecture graph
+│   ├── meta.json               # Analysis metadata
+│   └── intermediate/           # Temporary analysis artifacts
 ├── prompts/                    # Prompt templates
 ├── AGENTS.md                   # Operational constitution
 └── README.md                   # Project documentation
@@ -101,6 +105,21 @@ Page → Component → Composable → API Route → Service → Repository → D
 | Repository | Database queries | Business logic |
 
 **Reference:** [docs/architecture/architecture-rules.md](docs/architecture/architecture-rules.md)
+
+## Knowledge Graph
+
+Project architecture is mapped as an interactive knowledge graph at `.ua/knowledge-graph.json`.
+
+**Contents:**
+- 203 nodes (files, concepts, endpoints, documents, configs)
+- 244 edges (imports, references, documents, dependencies)
+- 7 architectural layers (Presentation, API, Domain, Data, Documentation, Configuration, Specification)
+- 24-step guided tour
+
+**Usage:**
+- Run `/understand` to regenerate the graph
+- Run `/understand-dashboard` to explore interactively
+- Graph is auto-updated on significant changes
 
 ### Reuse Before Create
 

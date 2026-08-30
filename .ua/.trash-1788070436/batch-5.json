@@ -1,0 +1,286 @@
+{
+  "batch": 5,
+  "files": [
+    {
+      "path": "docs/sdd/bootstrap-notes.md",
+      "language": "markdown",
+      "sizeLines": 67,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/definition-of-done.md",
+      "language": "markdown",
+      "sizeLines": 73,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/implementation-rules.md",
+      "language": "markdown",
+      "sizeLines": 83,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/review-rules.md",
+      "language": "markdown",
+      "sizeLines": 122,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/specification-rules.md",
+      "language": "markdown",
+      "sizeLines": 52,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/verification-rules.md",
+      "language": "markdown",
+      "sizeLines": 146,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/workflow.md",
+      "language": "markdown",
+      "sizeLines": 189,
+      "fileCategory": "docs"
+    }
+  ],
+  "metadata": {
+    "generatedAt": "2026-08-30T00:00:00Z",
+    "batchSize": 7,
+    "totalNodes": 7,
+    "totalEdges": 11,
+    "crossBatchEdges": 0,
+    "categories": {
+      "docs": 7
+    }
+  },
+  "nodes": [
+    {
+      "id": "docs/sdd/bootstrap-notes.md",
+      "type": "file",
+      "label": "Bootstrap Notes",
+      "fileCategory": "docs",
+      "language": "markdown",
+      "sizeLines": 67,
+      "contentSummary": "Project bootstrap documentation recording initial setup state: supplied project info, discovered project info (Nuxt 4.5.0, naive-ui, pnpm), assumptions (Nuxt UI as primary lib, SQLite, desktop-first), conflicts (naive-ui vs Nuxt UI, missing dependencies), unresolved questions (auth, file storage, deployment), and recommended follow-ups.",
+      "keyExports": [],
+      "definedSymbols": [],
+      "imports": [],
+      "references": [],
+      "tags": [
+        "sdd",
+        "bootstrap",
+        "project-setup",
+        "metadata"
+      ]
+    },
+    {
+      "id": "docs/sdd/definition-of-done.md",
+      "type": "file",
+      "label": "Definition of Done",
+      "fileCategory": "docs",
+      "language": "markdown",
+      "sizeLines": 73,
+      "contentSummary": "Comprehensive Definition of Done checklist for features. Covers 7 categories: Specification (10 items including requirements, domain, API, UI, acceptance), Implementation (10 items: tasks, schema, services, routes, composables, components, pages, validation, error handling, states), Verification (8 items: typecheck, lint, tests, build, API, UI, accessibility), Acceptance Criteria (all pass with evidence), UI/UX (8 states and patterns), Review (8 items: architecture, backend, frontend, UI/UX, security, performance, no CRITICAL/HIGH), and Final Check. ALL checkboxes must be checked for DONE.",
+      "keyExports": [],
+      "definedSymbols": [],
+      "imports": [],
+      "references": [],
+      "tags": [
+        "sdd",
+        "definition-of-done",
+        "checklist",
+        "quality"
+      ]
+    },
+    {
+      "id": "docs/sdd/implementation-rules.md",
+      "type": "file",
+      "label": "Implementation Rules",
+      "fileCategory": "docs",
+      "language": "markdown",
+      "sizeLines": 83,
+      "contentSummary": "10 rules governing code implementation: Rule 1 (Read Spec First), Rule 2 (Inspect Existing Code), Rule 3 (Reuse Abstractions - search components/composables/services/repositories/schemas), Rule 4 (Don't Modify Unrelated Code), Rule 5 (Implement Incrementally), Rule 6 (Follow Architecture Rules - layer separation), Rule 7 (Follow Design System - tokens, guidelines, patterns), Rule 8 (Validate All Input - Zod server, form client), Rule 9 (Handle All States - loading/empty/error/success/disabled), Rule 10 (Write Testable Code - small functions, injectable deps).",
+      "keyExports": [],
+      "definedSymbols": [],
+      "imports": [],
+      "references": [
+        "docs/architecture/architecture-rules.md",
+        "docs/design/"
+      ],
+      "tags": [
+        "sdd",
+        "implementation",
+        "rules",
+        "coding-guidelines"
+      ]
+    },
+    {
+      "id": "docs/sdd/review-rules.md",
+      "type": "file",
+      "label": "Review Rules",
+      "fileCategory": "docs",
+      "language": "markdown",
+      "sizeLines": 122,
+      "contentSummary": "Rules governing implementation review. Defines 4 severity levels: CRITICAL (blocks - security, data loss, architecture violation), HIGH (blocks - missing error handling, poor UX, performance), MEDIUM (should fix - code style, edge cases), LOW (nice to have - polish, docs). Includes 6 review checklists: Requirements, Architecture, Backend, Frontend, UI/UX, Security, Performance. Defines review output format (CRITICAL/HIGH/MEDIUM/LOW/Positive/Verdict) and blocking rules (CRITICAL/HIGH \u2192 CHANGES REQUIRED, MEDIUM/LOW only \u2192 APPROVED).",
+      "keyExports": [],
+      "definedSymbols": [],
+      "imports": [],
+      "references": [],
+      "tags": [
+        "sdd",
+        "review",
+        "severity-levels",
+        "quality-gate"
+      ]
+    },
+    {
+      "id": "docs/sdd/specification-rules.md",
+      "type": "file",
+      "label": "Specification Rules",
+      "fileCategory": "docs",
+      "language": "markdown",
+      "sizeLines": 52,
+      "contentSummary": "10 rules governing specification writing: Rule 1 (Spec is Source of Truth), Rule 2 (Surface Ambiguity - stop and request clarification), Rule 3 (AI Must Not Invent Business Behavior), Rule 4 (Requirements Must Be Testable), Rule 5 (UI/UX Must Be Specified - pages, components, states, responsive, a11y), Rule 6 (Business Rules Explicit - ID, description, severity, validation), Rule 7 (Document Architecture Impact), Rule 8 (Identify Edge Cases), Rule 9 (Identify Dependencies), Rule 10 (Specs Must Be Reviewable).",
+      "keyExports": [],
+      "definedSymbols": [],
+      "imports": [],
+      "references": [],
+      "tags": [
+        "sdd",
+        "specification",
+        "rules",
+        "requirements"
+      ]
+    },
+    {
+      "id": "docs/sdd/verification-rules.md",
+      "type": "file",
+      "label": "Verification Rules",
+      "fileCategory": "docs",
+      "language": "markdown",
+      "sizeLines": 146,
+      "contentSummary": "Rules governing implementation verification. Defines a 10-step verification pipeline: 1. Typecheck (npx nuxi typecheck - zero TS errors, no any), 2. Lint (eslint - zero errors), 3. Unit Tests (vitest - all new functions tested), 4. Integration Tests (vitest - flows tested), 5. Build (nuxi build - succeeds), 6. API Verification (endpoints, validation, auth, format), 7. UI Verification (renders, states, validation, responsive), 8. Acceptance Criteria (acceptance.md - PASS with evidence), 9. Accessibility (keyboard, focus, labels, contrast, screen reader), 10. Architecture (layer separation, boundaries, data flow). Includes verification report format template.",
+      "keyExports": [],
+      "definedSymbols": [],
+      "imports": [],
+      "references": [],
+      "tags": [
+        "sdd",
+        "verification",
+        "pipeline",
+        "quality-assurance"
+      ]
+    },
+    {
+      "id": "docs/sdd/workflow.md",
+      "type": "file",
+      "label": "SDD Workflow",
+      "fileCategory": "docs",
+      "language": "markdown",
+      "sizeLines": 189,
+      "contentSummary": "Spec-Driven Development workflow definition. Defines 11-phase pipeline: IDEA \u2192 UNDERSTAND \u2192 SPEC \u2192 REVIEW SPEC \u2192 PLAN \u2192 IMPLEMENT \u2192 VERIFY \u2192 REVIEW \u2192 FIX \u2192 VERIFY AGAIN \u2192 DONE. Each phase has defined Input, Activity, Rules, Output, and assigned Agent: IDEA (user request), UNDERSTAND (read docs/code), SPEC (product agent - create spec files, focus on WHAT), REVIEW SPEC (reviewer agent - completeness/ambiguity), PLAN (architect agent - task breakdown, focus on HOW), IMPLEMENT (build agent - follow tasks, incremental), VERIFY (qa agent - run checks with evidence), REVIEW (reviewer agent - compliance/quality/security), FIX (build agent - fix CRITICAL/HIGH), VERIFY AGAIN (qa re-run), DONE (all checks pass, no blocking findings).",
+      "keyExports": [],
+      "definedSymbols": [],
+      "imports": [],
+      "references": [],
+      "tags": [
+        "sdd",
+        "workflow",
+        "phases",
+        "pipeline",
+        "process"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs/sdd/workflow.md",
+      "target": "docs/sdd/specification-rules.md",
+      "type": "references",
+      "label": "SPEC phase follows specification rules",
+      "confidence": 0.9,
+      "evidence": "workflow.md defines SPEC phase (line 60-77) which must follow specification-rules.md rules"
+    },
+    {
+      "source": "docs/sdd/workflow.md",
+      "target": "docs/sdd/verification-rules.md",
+      "type": "references",
+      "label": "VERIFY phase follows verification rules",
+      "confidence": 0.9,
+      "evidence": "workflow.md defines VERIFY phase (line 133-150) which must follow verification-rules.md pipeline"
+    },
+    {
+      "source": "docs/sdd/workflow.md",
+      "target": "docs/sdd/review-rules.md",
+      "type": "references",
+      "label": "REVIEW phase follows review rules",
+      "confidence": 0.9,
+      "evidence": "workflow.md defines REVIEW phase (line 154-166) which must follow review-rules.md severity levels"
+    },
+    {
+      "source": "docs/sdd/workflow.md",
+      "target": "docs/sdd/implementation-rules.md",
+      "type": "references",
+      "label": "IMPLEMENT phase follows implementation rules",
+      "confidence": 0.9,
+      "evidence": "workflow.md defines IMPLEMENT phase (line 114-129) which must follow implementation-rules.md"
+    },
+    {
+      "source": "docs/sdd/workflow.md",
+      "target": "docs/sdd/definition-of-done.md",
+      "type": "references",
+      "label": "DONE phase uses definition of done",
+      "confidence": 0.9,
+      "evidence": "workflow.md DONE criteria (line 182-189) align with definition-of-done.md checklist"
+    },
+    {
+      "source": "docs/sdd/definition-of-done.md",
+      "target": "docs/sdd/verification-rules.md",
+      "type": "references",
+      "label": "Verification section maps to verification pipeline",
+      "confidence": 0.85,
+      "evidence": "definition-of-done.md Verification section (lines 31-40) lists checks matching verification-rules.md 10-step pipeline"
+    },
+    {
+      "source": "docs/sdd/definition-of-done.md",
+      "target": "docs/sdd/review-rules.md",
+      "type": "references",
+      "label": "Review section maps to review rules",
+      "confidence": 0.85,
+      "evidence": "definition-of-done.md Review section (lines 58-67) references CRITICAL/HIGH findings from review-rules.md"
+    },
+    {
+      "source": "docs/sdd/implementation-rules.md",
+      "target": "docs/sdd/specification-rules.md",
+      "type": "depends-on",
+      "label": "Implementation reads spec first",
+      "confidence": 0.8,
+      "evidence": "implementation-rules.md Rule 1 (lines 5-11) requires reading full specification before coding"
+    },
+    {
+      "source": "docs/sdd/review-rules.md",
+      "target": "docs/sdd/definition-of-done.md",
+      "type": "enforces",
+      "label": "Review blocking rules enforce DoD",
+      "confidence": 0.8,
+      "evidence": "review-rules.md blocking rules (lines 118-122) enforce that CRITICAL/HIGH findings block completion per definition-of-done.md"
+    },
+    {
+      "source": "docs/sdd/verification-rules.md",
+      "target": "docs/sdd/definition-of-done.md",
+      "type": "enforces",
+      "label": "Verification pipeline implements DoD verification",
+      "confidence": 0.85,
+      "evidence": "verification-rules.md pipeline steps directly implement definition-of-done.md Verification checklist items"
+    },
+    {
+      "source": "docs/sdd/bootstrap-notes.md",
+      "target": "docs/sdd/workflow.md",
+      "type": "references",
+      "label": "Bootstrap references SDD workflow",
+      "confidence": 0.6,
+      "evidence": "bootstrap-notes.md recommended follow-ups (lines 62-67) align with workflow.md phases (spec, plan, implement, verify)"
+    }
+  ]
+}

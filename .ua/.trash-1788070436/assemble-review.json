@@ -1,0 +1,119 @@
+{
+  "reviewedAt": "2026-08-30",
+  "source": "assembled-graph.json",
+  "mergeReport": {
+    "inputNodes": 203,
+    "inputEdges": 254,
+    "outputNodes": 203,
+    "outputEdges": 244,
+    "fixedCorrections": 129,
+    "unresolvedIssues": 155
+  },
+  "verdict": "PASS_WITH_WARNINGS",
+  "summary": "Assembly is structurally sound. All 203 nodes preserved. 10 edges correctly dropped (orphan/self-referencing tested_by). Two systemic issues require follow-up: (1) inconsistent node schemas across batches (batch-13 uses different field names), (2) 154 nodes have defaulted 'moderate' complexity instead of accurate assessment. One dropped edge is a legitimate data loss from a missing target node.",
+  "sections": [
+    {
+      "title": "Node Integrity",
+      "status": "PASS",
+      "details": "203 nodes in, 203 out. No node loss. All node IDs are unique. Batch contributions verified: batch-1 (6), batch-2 (9), batch-3 (7), batch-5 (7), batch-6 (35), batch-7 (9), batch-8 (9), batch-9 (9), batch-10 (9), batch-11 (9), batch-12 (9), batch-13 (70), batch-14 (15) = 203 total."
+    },
+    {
+      "title": "Edge Integrity",
+      "status": "PASS",
+      "details": "254 edges in, 244 out. 10 edges dropped: 9 tested_by edges removed because endpoints don't exist as standalone nodes (test↔test or prod↔prod pairs), and 1 edge with missing target (section::docs/specs/_template/domain.md::state-machine → does not exist; correct node is section::docs/specs/_template/domain.md::lifecycle). All 244 remaining edges reference valid node IDs."
+    },
+    {
+      "title": "Prefix Normalization",
+      "status": "PASS",
+      "details": "72 bare paths (e.g. 'docs/specs/...') correctly rewritten to 'file:docs/specs/...' during assembly. 48 edge references rewritten after ID normalization. These corrections are mechanical and correct."
+    },
+    {
+      "title": "Complexity Defaults",
+      "status": "WARNING",
+      "count": 154,
+      "severity": "MEDIUM",
+      "details": "154 nodes had null/None complexity and were defaulted to 'moderate'. This affects accuracy of downstream analysis. The majority come from batch-13 (_template files, source code files, and config files) and batch-14 (project-level files). Specific concerns:",
+      "items": [
+        {
+          "issue": "Template files (_template/*) should be 'simple' not 'moderate'",
+          "affectedNodes": "All file::* and section::* nodes under docs/specs/_template/",
+          "count": 64,
+          "recommendation": "Re-classify template spec files as 'simple' — they are boilerplate templates with no business logic"
+        },
+        {
+          "issue": "Config/lockfile/source files defaulted to 'moderate'",
+          "affectedNodes": "file:AGENTS.md, file:README.md, file:app/nuxt.config.ts, file:app/app/app.vue, file:app/public/favicon.ico, file:app/public/robots.txt, file:app/.gitignore, file:.opencode/.gitignore, file:.ua/.understandignore, file:prompts/*.md",
+          "count": 15,
+          "recommendation": "Re-classify: lockfiles (.gitignore, robots.txt, favicon.ico) as 'simple'; AGENTS.md/README.md/prompts as 'moderate' (correct); nuxt.config.ts/app.vue as 'simple'"
+        },
+        {
+          "issue": "Feature spec files (01-07) correctly 'moderate' but some should be 'simple'",
+          "affectedNodes": "Various acceptance.md, test-cases.md nodes",
+          "count": "N/A (reviewers choice)",
+          "recommendation": "acceptance.md and test-cases.md specs are tabular/bulleted — consider 'simple'. domain.md, requirements.md, api.md are 'moderate' (correct)"
+        }
+      ]
+    },
+    {
+      "title": "Schema Inconsistency (batch-13)",
+      "status": "WARNING",
+      "severity": "LOW",
+      "details": "Batch-13 uses a different node schema than other batches: {kind, file, label, exports, imports, meta} vs {type, filePath, name, tags, summary, metadata}. The assembler handled this by merging fields, but results in heterogeneous node shapes in the output. Some nodes have 'type' + 'filePath' + 'tags' + 'summary' (from batch-6), others have 'kind' + 'file' + 'label' + 'meta' (from batch-13). Both coexist in assembled-graph.json.",
+      "recommendation": "Normalize node schemas in a post-assembly step. All nodes should have a consistent shape: {id, type, name, filePath, summary, tags, complexity, metadata}. Map 'kind'→'type', 'file'→'filePath', 'label'→'name', merge 'meta'→'metadata'."
+    },
+    {
+      "title": "ID Naming Convention Inconsistency",
+      "status": "WARNING",
+      "severity": "LOW",
+      "details": "Node IDs use three different conventions: (1) 'document:' prefix for spec docs (batch-6), (2) 'concept:' prefix for domain concepts (batch-6), (3) 'file::' / 'section::' / 'endpoint::' / 'task::' prefixes (batch-13). Some IDs have double-colon '::' separators, others use single-colon ':'. This is cosmetic but may confuse downstream tools.",
+      "recommendation": "Standardize ID format: use 'type:path' consistently (e.g., 'document:docs/specs/01-global-table/domain.md' not 'file::docs/specs/_template/domain.md')."
+    },
+    {
+      "title": "Dropped Edge Analysis",
+      "status": "PASS",
+      "details": "1 edge dropped with missing target: 'section::docs/specs/_template/business-rules.md::state-transitions → section::docs/specs/_template/domain.md::state-machine'. The target should be 'section::docs/specs/_template/domain.md::lifecycle' (which exists). This is a legitimate fix — the source node 'state-transitions' correctly relates to 'lifecycle' via another edge. No data loss beyond the 9 tested_by edges that were correctly removed (orphan/self-ref).",
+      "recommendation": "If the state-transitions → lifecycle edge is important, it should be added manually. It is not currently represented."
+    },
+    {
+      "title": "Cross-Batch Edge Verification",
+      "status": "PASS",
+      "details": "Import map is empty ({}), meaning no cross-batch edge references were expected or needed. All edges are intra-batch. This is correct for the current batch structure where each batch is self-contained."
+    },
+    {
+      "title": "Feature Coverage",
+      "status": "PASS",
+      "details": "All 7 core features are represented: (1) Global Table (batch-6: 35 nodes, 50 edges), (2) Expression Engine (batch-9: 9 nodes, 20 edges), (3) Component (batch-10: 9 nodes, 19 edges), (4) Template (batch-11: 9 nodes, 14 edges), (5) Administration (batch-12: 9 nodes, 13 edges), (6) Document (batch-8: 9 nodes, 13 edges), (7) Render Engine (batch-7: 9 nodes, 12 edges). Supporting infrastructure: batch-1 (project config), batch-2 (architecture docs), batch-3 (design docs), batch-5 (SDD workflow docs), batch-13 (_template spec files), batch-14 (project root files)."
+    },
+    {
+      "title": "Graph Connectivity",
+      "status": "PASS",
+      "details": "The graph is well-connected. Within each feature (01-07), spec files cross-reference correctly: requirements↔domain↔api↔business-rules↔ui↔ux↔acceptance↔test-cases↔tasks. Cross-feature edges exist via dependency nodes (e.g., ExpressionEngine referenced by GlobalTable and Template). The _template batch forms its own connected subgraph. Batch-1 (config) and batch-14 (project files) are loosely connected via documentation edges."
+    }
+  ],
+  "actionItems": [
+    {
+      "priority": "MEDIUM",
+      "action": "Normalize node schemas across all batches to a consistent shape",
+      "reason": "Heterogeneous node shapes may break downstream consumers",
+      "effort": "low"
+    },
+    {
+      "priority": "LOW",
+      "action": "Re-classify complexity for 154 defaulted nodes",
+      "reason": "'moderate' default is inaccurate for template files, lockfiles, and simple configs",
+      "effort": "low"
+    },
+    {
+      "priority": "LOW",
+      "action": "Standardize node ID naming convention (type:path format)",
+      "reason": "Double-colon separators and mixed prefix styles reduce readability",
+      "effort": "low"
+    },
+    {
+      "priority": "LOW",
+      "action": "Add missing state-transitions → lifecycle edge for _template",
+      "reason": "Legitimate relationship not currently represented in graph",
+      "effort": "trivial"
+    }
+  ]
+}

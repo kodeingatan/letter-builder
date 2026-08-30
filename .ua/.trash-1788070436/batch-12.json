@@ -1,0 +1,317 @@
+{
+  "batchId": 12,
+  "nodes": [
+    {
+      "id": "node::docs/specs/07-render-engine/acceptance.md",
+      "type": "file",
+      "path": "docs/specs/07-render-engine/acceptance.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 60,
+      "label": "acceptance.md",
+      "metadata": {
+        "title": "Acceptance Criteria — Render Engine",
+        "type": "specification",
+        "feature": "render-engine",
+        "acceptanceCriteriaCount": 6
+      }
+    },
+    {
+      "id": "node::docs/specs/07-render-engine/api.md",
+      "type": "file",
+      "path": "docs/specs/07-render-engine/api.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 63,
+      "label": "api.md",
+      "metadata": {
+        "title": "API — Render Engine",
+        "type": "specification",
+        "feature": "render-engine",
+        "endpoints": ["POST /api/render/preview", "POST /api/render/generate"]
+      }
+    },
+    {
+      "id": "node::docs/specs/07-render-engine/business-rules.md",
+      "type": "file",
+      "path": "docs/specs/07-render-engine/business-rules.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 40,
+      "label": "business-rules.md",
+      "metadata": {
+        "title": "Business Rules — Render Engine",
+        "type": "specification",
+        "feature": "render-engine",
+        "validationRules": 3,
+        "permissionRules": 2,
+        "stateTransitions": 2,
+        "constraints": 4
+      }
+    },
+    {
+      "id": "node::docs/specs/07-render-engine/domain.md",
+      "type": "file",
+      "path": "docs/specs/07-render-engine/domain.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 86,
+      "label": "domain.md",
+      "metadata": {
+        "title": "Domain — Render Engine",
+        "type": "specification",
+        "feature": "render-engine",
+        "entities": ["RenderContext", "RenderResult", "RenderError"],
+        "pipelineStages": 7
+      }
+    },
+    {
+      "id": "node::docs/specs/07-render-engine/requirements.md",
+      "type": "file",
+      "path": "docs/specs/07-render-engine/requirements.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 123,
+      "label": "requirements.md",
+      "metadata": {
+        "title": "Requirements — Render Engine",
+        "type": "specification",
+        "feature": "render-engine",
+        "functionalRequirements": 8,
+        "nonFunctionalRequirements": 3,
+        "userStories": 5
+      }
+    },
+    {
+      "id": "node::docs/specs/07-render-engine/tasks.md",
+      "type": "file",
+      "path": "docs/specs/07-render-engine/tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 150,
+      "label": "tasks.md",
+      "metadata": {
+        "title": "Tasks — Render Engine",
+        "type": "implementation-plan",
+        "feature": "render-engine",
+        "taskCount": 11
+      }
+    },
+    {
+      "id": "node::docs/specs/07-render-engine/test-cases.md",
+      "type": "file",
+      "path": "docs/specs/07-render-engine/test-cases.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 54,
+      "label": "test-cases.md",
+      "metadata": {
+        "title": "Test Cases — Render Engine",
+        "type": "specification",
+        "feature": "render-engine",
+        "unitTests": 11,
+        "integrationTests": 2,
+        "apiTests": 2,
+        "e2eTests": 2,
+        "edgeCases": 4
+      }
+    },
+    {
+      "id": "node::docs/specs/07-render-engine/ui.md",
+      "type": "file",
+      "path": "docs/specs/07-render-engine/ui.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 75,
+      "label": "ui.md",
+      "metadata": {
+        "title": "UI — Render Engine",
+        "type": "specification",
+        "feature": "render-engine",
+        "integrationPoints": ["Template Builder", "Administration Builder", "Document Viewer"]
+      }
+    },
+    {
+      "id": "node::docs/specs/07-render-engine/ux.md",
+      "type": "file",
+      "path": "docs/specs/07-render-engine/ux.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 70,
+      "label": "ux.md",
+      "metadata": {
+        "title": "UX — Render Engine",
+        "type": "specification",
+        "feature": "render-engine",
+        "userFlows": ["Preview in Template Builder", "Generate on Workflow Completion", "Handle Render Errors"]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge::acceptance-requirements",
+      "source": "node::docs/specs/07-render-engine/acceptance.md",
+      "target": "node::docs/specs/07-render-engine/requirements.md",
+      "type": "specification-reference",
+      "label": "maps to requirements",
+      "metadata": {
+        "confidence": 0.95,
+        "evidence": "AC-001 maps to REQ-RE-001, AC-002 maps to REQ-RE-003, etc.",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::acceptance-test-cases",
+      "source": "node::docs/specs/07-render-engine/acceptance.md",
+      "target": "node::docs/specs/07-render-engine/test-cases.md",
+      "type": "specification-reference",
+      "label": "defines test cases",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "AC-001 to AC-006 define acceptance criteria that must be tested",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::api-business-rules",
+      "source": "node::docs/specs/07-render-engine/api.md",
+      "target": "node::docs/specs/07-render-engine/business-rules.md",
+      "type": "specification-reference",
+      "label": "enforces business rules",
+      "metadata": {
+        "confidence": 0.85,
+        "evidence": "API error responses map to business rules (RENDER_ERROR, TEMPLATE_NOT_FOUND, etc.)",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::api-tasks",
+      "source": "node::docs/specs/07-render-engine/api.md",
+      "target": "node::docs/specs/07-render-engine/tasks.md",
+      "type": "implementation-dependency",
+      "label": "implemented by tasks",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "TASK-009 creates API routes (preview.post.ts, generate.post.ts)",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::domain-requirements",
+      "source": "node::docs/specs/07-render-engine/domain.md",
+      "target": "node::docs/specs/07-render-engine/requirements.md",
+      "type": "specification-reference",
+      "label": "models requirements",
+      "metadata": {
+        "confidence": 0.85,
+        "evidence": "Domain entities (RenderContext, RenderResult) model the requirements",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::domain-tasks",
+      "source": "node::docs/specs/07-render-engine/domain.md",
+      "target": "node::docs/specs/07-render-engine/tasks.md",
+      "type": "implementation-dependency",
+      "label": "implemented by tasks",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "Domain entities implemented in parser, resolver, renderer tasks",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::requirements-acceptance",
+      "source": "node::docs/specs/07-render-engine/requirements.md",
+      "target": "node::docs/specs/07-render-engine/acceptance.md",
+      "type": "specification-reference",
+      "label": "validated by acceptance criteria",
+      "metadata": {
+        "confidence": 0.95,
+        "evidence": "Requirements REQ-RE-001 to REQ-RE-008 are validated by AC-001 to AC-006",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::requirements-tasks",
+      "source": "node::docs/specs/07-render-engine/requirements.md",
+      "target": "node::docs/specs/07-render-engine/tasks.md",
+      "type": "implementation-dependency",
+      "label": "implemented by tasks",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "Requirements implemented by TASK-001 to TASK-011",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::tasks-test-cases",
+      "source": "node::docs/specs/07-render-engine/tasks.md",
+      "target": "node::docs/specs/07-render-engine/test-cases.md",
+      "type": "implementation-dependency",
+      "label": "verified by test cases",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "TASK-010 writes tests, TASK-011 verifies all tests pass",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::test-cases-acceptance",
+      "source": "node::docs/specs/07-render-engine/test-cases.md",
+      "target": "node::docs/specs/07-render-engine/acceptance.md",
+      "type": "specification-reference",
+      "label": "validates acceptance criteria",
+      "metadata": {
+        "confidence": 0.9,
+        "evidence": "Test cases map to acceptance criteria (UT-RE-001 to UT-RE-008 validate AC-001 to AC-006)",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::ui-ux",
+      "source": "node::docs/specs/07-render-engine/ui.md",
+      "target": "node::docs/specs/07-render-engine/ux.md",
+      "type": "specification-reference",
+      "label": "implements UX flows",
+      "metadata": {
+        "confidence": 0.85,
+        "evidence": "UI integration points implement UX user flows",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::ux-requirements",
+      "source": "node::docs/specs/07-render-engine/ux.md",
+      "target": "node::docs/specs/07-render-engine/requirements.md",
+      "type": "specification-reference",
+      "label": "defines user experience",
+      "metadata": {
+        "confidence": 0.8,
+        "evidence": "UX flows define user experience for requirements US-001 to US-005",
+        "direction": "source-to-target"
+      }
+    },
+    {
+      "id": "edge::business-rules-requirements",
+      "source": "node::docs/specs/07-render-engine/business-rules.md",
+      "target": "node::docs/specs/07-render-engine/requirements.md",
+      "type": "specification-reference",
+      "label": "constrains requirements",
+      "metadata": {
+        "confidence": 0.85,
+        "evidence": "Business rules (BC-RE-001 to BC-RE-004) constrain requirements",
+        "direction": "source-to-target"
+      }
+    }
+  ],
+  "metadata": {
+    "feature": "render-engine",
+    "batchType": "specification",
+    "totalNodes": 9,
+    "totalEdges": 13,
+    "confidenceScore": 0.88,
+    "crossBatchEdges": 0,
+    "intraBatchEdges": 13
+  }
+}

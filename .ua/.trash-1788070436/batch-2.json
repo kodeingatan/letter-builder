@@ -1,0 +1,277 @@
+{
+  "batchIndex": 2,
+  "batchFiles": [
+    {
+      "path": "docs/architecture/api.md",
+      "language": "markdown",
+      "sizeLines": 84,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/architecture-rules.md",
+      "language": "markdown",
+      "sizeLines": 89,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/backend.md",
+      "language": "markdown",
+      "sizeLines": 108,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/database.md",
+      "language": "markdown",
+      "sizeLines": 67,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/frontend.md",
+      "language": "markdown",
+      "sizeLines": 76,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/overview.md",
+      "language": "markdown",
+      "sizeLines": 75,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/security.md",
+      "language": "markdown",
+      "sizeLines": 40,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/system-context.md",
+      "language": "markdown",
+      "sizeLines": 44,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/technology-stack.md",
+      "language": "markdown",
+      "sizeLines": 68,
+      "fileCategory": "docs"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "document:docs/architecture/api.md",
+      "type": "document",
+      "name": "API Architecture",
+      "filePath": "docs/architecture/api.md",
+      "summary": "Defines RESTful API conventions for the Persuratan platform including JSON response formats (success/error), HTTP method usage (GET/POST/PUT/PATCH/DELETE), Zod-based input validation, session-based authentication, role-based authorization (RBAC), pagination with query parameters, and filtering.",
+      "tags": ["api", "rest", "http", "validation", "authentication", "authorization", "pagination"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/architecture/architecture-rules.md",
+      "type": "document",
+      "name": "Architecture Rules",
+      "filePath": "docs/architecture/architecture-rules.md",
+      "summary": "Mandatory architectural rules for all AI agents: strict layer separation (Page→Component→Composable→API Route→Service→Repository→Database), reuse-before-create principle, no modification of unrelated code, consistent naming conventions, TypeScript strictness with no any types, structured error handling, metadata-driven design for user-defined structures, and framework-independent domain engines.",
+      "tags": ["architecture", "rules", "layer-separation", "design-principles", "typescript", "error-handling"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/architecture/backend.md",
+      "type": "document",
+      "name": "Backend Architecture",
+      "filePath": "docs/architecture/backend.md",
+      "summary": "Describes the Nitro-based backend architecture with detailed server structure under app/server/: API route handlers (collections, components, templates, workflows, documents, files), service layer for business logic, repository layer for data access via Drizzle ORM, and five domain engines (Expression, Binding, Component, Template, Document). Includes complete HTTP request flow from route to database.",
+      "tags": ["backend", "nitro", "server", "services", "repositories", "engines", "request-flow"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/architecture/database.md",
+      "type": "document",
+      "name": "Database Architecture",
+      "filePath": "docs/architecture/database.md",
+      "summary": "Documents the SQLite + Drizzle ORM database architecture using a hybrid approach: fixed metadata tables for Global Tables, Components, Templates, Administrations, and Documents definitions, combined with JSONB-based dynamic data storage for user-defined records. Covers naming conventions (nanoid/UUID IDs, timestamps, soft delete, JSONB columns), migration strategy via Drizzle Kit, and schema file locations.",
+      "tags": ["database", "sqlite", "drizzle", "orm", "migrations", "jsonb", "schema"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/architecture/frontend.md",
+      "type": "document",
+      "name": "Frontend Architecture",
+      "filePath": "docs/architecture/frontend.md",
+      "summary": "Details the Nuxt 4 + Vue 3 Composition API frontend with TypeScript, Nuxt UI component library, and Tailwind CSS styling. Describes client app structure (pages, components, composables, layouts, middleware, plugins), component architecture hierarchy (Primitive→Pattern→Feature→Page), state management via Pinia and composables, and Tiptap editor integration with custom ProseMirror nodes (DynamicText, Component, Loop, Condition, PageBreak).",
+      "tags": ["frontend", "nuxt", "vue", "components", "state-management", "tiptap", "tailwind"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/architecture/overview.md",
+      "type": "document",
+      "name": "Architecture Overview",
+      "filePath": "docs/architecture/overview.md",
+      "summary": "High-level architecture overview describing the unified full-stack Nuxt 4 + Nitro application with three major layers (Client/Server/Data). Defines six major modules (Collections, Components, Templates, Workflows, Documents, Expression Engine) and their responsibilities. Documents the complete data flow from user action through Nuxt Page/Component → Composable → Nitro API Route → Service → Domain Engine → Repository → Drizzle ORM → SQLite.",
+      "tags": ["architecture", "overview", "design-decisions", "data-flow", "modules"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/architecture/security.md",
+      "type": "document",
+      "name": "Security",
+      "filePath": "docs/architecture/security.md",
+      "summary": "Covers security implementation: session-based authentication using Nitro session handling with HTTP-only cookies (no JWT), role-based authorization (Administrator/Staff/Manager) with permission checks at service layer, Zod-based server-side validation as authoritative, data protection via Drizzle parameterized queries (SQL injection prevention) and Vue template escaping (XSS prevention), and environment variable-based secrets management.",
+      "tags": ["security", "authentication", "authorization", "rbac", "validation", "data-protection"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/architecture/system-context.md",
+      "type": "document",
+      "name": "System Context",
+      "filePath": "docs/architecture/system-context.md",
+      "summary": "Defines the system boundary with three actors (User/Browser, Persuratan Nuxt App, SQLite Database) and one external dependency (File System for storage). In-scope features: dynamic data structures, reusable document components, template composition, administration workflows, document rendering (HTML+PDF), file management, authentication/authorization. Out-of-scope: external databases, third-party document services, external auth providers, mobile native apps, real-time collaboration.",
+      "tags": ["system-context", "actors", "integrations", "boundaries", "scope"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/architecture/technology-stack.md",
+      "type": "document",
+      "name": "Technology Stack",
+      "filePath": "docs/architecture/technology-stack.md",
+      "summary": "Comprehensive technology inventory across Core (Nuxt 4, Nitro, Vue 3, TypeScript 5, Node.js 20+), Frontend (Nuxt UI, Tailwind CSS v4, Tiptap, Pinia, VueUse, TanStack Table, vee-validate, Zod, date-fns, Lucide), Backend (Drizzle ORM, SQLite, Zod, Sharp, Pino), Document Engine (Tiptap/ProseMirror, Playwright), and Testing (Vitest, Playwright E2E). Notes that naive-ui is currently installed but Nuxt UI is the design target. Package manager is pnpm.",
+      "tags": ["technology-stack", "dependencies", "tools", "frameworks", "libraries"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:docs/architecture/api.md",
+      "target": "document:docs/architecture/security.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "API authentication and authorization patterns"
+    },
+    {
+      "source": "document:docs/architecture/api.md",
+      "target": "document:docs/architecture/technology-stack.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "References Zod for validation"
+    },
+    {
+      "source": "document:docs/architecture/architecture-rules.md",
+      "target": "document:docs/architecture/frontend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Layer separation rules for Page/Component/Composable"
+    },
+    {
+      "source": "document:docs/architecture/architecture-rules.md",
+      "target": "document:docs/architecture/backend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Layer separation rules for API Route/Service/Repository"
+    },
+    {
+      "source": "document:docs/architecture/backend.md",
+      "target": "document:docs/architecture/database.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Repository layer uses Drizzle ORM for data access"
+    },
+    {
+      "source": "document:docs/architecture/backend.md",
+      "target": "document:docs/architecture/api.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "API route handlers follow API conventions"
+    },
+    {
+      "source": "document:docs/architecture/backend.md",
+      "target": "document:docs/architecture/security.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Request flow includes auth check before service delegation"
+    },
+    {
+      "source": "document:docs/architecture/database.md",
+      "target": "document:docs/architecture/technology-stack.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "SQLite and Drizzle ORM from technology stack"
+    },
+    {
+      "source": "document:docs/architecture/frontend.md",
+      "target": "document:docs/architecture/technology-stack.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Nuxt 4, Vue 3, Nuxt UI, Tailwind CSS, Tiptap from stack"
+    },
+    {
+      "source": "document:docs/architecture/frontend.md",
+      "target": "document:docs/architecture/backend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Composables call API routes on server"
+    },
+    {
+      "source": "document:docs/architecture/overview.md",
+      "target": "document:docs/architecture/frontend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Client layer: Nuxt UI workspace UI"
+    },
+    {
+      "source": "document:docs/architecture/overview.md",
+      "target": "document:docs/architecture/backend.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Server layer: Nitro handles domain logic"
+    },
+    {
+      "source": "document:docs/architecture/overview.md",
+      "target": "document:docs/architecture/database.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Data layer: Drizzle ORM → SQLite"
+    },
+    {
+      "source": "document:docs/architecture/overview.md",
+      "target": "document:docs/architecture/architecture-rules.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Key architecture decisions and design principles"
+    },
+    {
+      "source": "document:docs/architecture/security.md",
+      "target": "document:docs/architecture/technology-stack.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "References Zod for input validation"
+    },
+    {
+      "source": "document:docs/architecture/system-context.md",
+      "target": "document:docs/architecture/overview.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "System actors and boundaries context"
+    },
+    {
+      "source": "document:docs/architecture/system-context.md",
+      "target": "document:docs/architecture/database.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "SQLite as external data store actor"
+    },
+    {
+      "source": "document:docs/architecture/technology-stack.md",
+      "target": "document:docs/architecture/overview.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "Technology choices inform architectural decisions"
+    },
+    {
+      "source": "document:docs/architecture/technology-stack.md",
+      "target": "document:docs/architecture/system-context.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "External integrations: Playwright for PDF, Browser Print API"
+    }
+  ]
+}

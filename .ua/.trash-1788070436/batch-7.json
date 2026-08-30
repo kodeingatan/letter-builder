@@ -1,0 +1,190 @@
+{
+  "batchIndex": 7,
+  "nodes": [
+    {
+      "id": "document:docs/specs/02-expression-engine/acceptance.md",
+      "type": "document",
+      "name": "Expression Engine Acceptance Criteria",
+      "filePath": "docs/specs/02-expression-engine/acceptance.md",
+      "summary": "Defines 6 acceptance criteria (AC-001 through AC-006) for the Expression Engine, covering mathematical evaluation, string concatenation, conditional logic, nested variable resolution, undefined variable handling, and number formatting. Each AC maps to functional requirements and user stories.",
+      "tags": ["spec", "acceptance-criteria", "expression-engine", "testing"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 60
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/api.md",
+      "type": "document",
+      "name": "Expression Engine API Specification",
+      "filePath": "docs/specs/02-expression-engine/api.md",
+      "summary": "Defines 3 REST API endpoints for the Expression Engine: POST /api/expressions/validate (syntax validation), POST /api/expressions/evaluate (expression evaluation with context), and POST /api/expressions/resolve (dynamic token resolution). Includes request/response schemas and error codes.",
+      "tags": ["spec", "api", "expression-engine", "rest", "endpoints"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 83
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/business-rules.md",
+      "type": "document",
+      "name": "Expression Engine Business Rules",
+      "filePath": "docs/specs/02-expression-engine/business-rules.md",
+      "summary": "Specifies validation rules (VR-EX-001 to VR-EX-003), permission rules (PR-EX-001 to PR-EX-002), state transition rules (Raw→Parsed→Evaluated), business constraints (parseability, division-by-zero, undefined variables, depth limit), and side effects for the Expression Engine.",
+      "tags": ["spec", "business-rules", "expression-engine", "validation", "constraints"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 39
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/domain.md",
+      "type": "document",
+      "name": "Expression Engine Domain Model",
+      "filePath": "docs/specs/02-expression-engine/domain.md",
+      "summary": "Defines core domain entities for the Expression Engine: Expression (mathematical, string, conditional, mixed types), Token (8 token types including Number, String, Variable, Operator, Comparison, Logical, Parenthesis, Function), AST (6 node types: Literal, Variable, BinaryOp, UnaryOp, FunctionCall, Conditional), and ExpressionContext (variable map with parent nesting). Describes the parse→build→evaluate pipeline and invariants.",
+      "tags": ["spec", "domain-model", "expression-engine", "ast", "tokenizer", "parser"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 70
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "document",
+      "name": "Expression Engine Requirements",
+      "filePath": "docs/specs/02-expression-engine/requirements.md",
+      "summary": "Comprehensive requirements document for the Expression Engine covering the problem statement, objective, actors (System, Administrator), 5 user stories (math evaluation, string expressions, conditional expressions, variable resolution, output formatting), 7 functional requirements (REQ-EX-001 to REQ-EX-007), 3 non-functional requirements (performance targets), constraints, edge cases, and dependencies on Template, Component, and Administration modules.",
+      "tags": ["spec", "requirements", "expression-engine", "user-stories", "functional"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 117
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/tasks.md",
+      "type": "document",
+      "name": "Expression Engine Implementation Tasks",
+      "filePath": "docs/specs/02-expression-engine/tasks.md",
+      "summary": "Defines 8 implementation tasks (TASK-001 through TASK-008) in dependency order: Tokenizer → Parser → Evaluator → Variable Resolver / Formatter → API Routes → Tests → Verification. Specifies affected source files for each task and verification criteria.",
+      "tags": ["spec", "tasks", "expression-engine", "implementation", "plan"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 111
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/test-cases.md",
+      "type": "document",
+      "name": "Expression Engine Test Cases",
+      "filePath": "docs/specs/02-expression-engine/test-cases.md",
+      "summary": "Defines comprehensive test coverage for the Expression Engine: 14 unit tests for ExpressionParser (UT-EX-001 to UT-EX-006) and ExpressionEvaluator (UT-EX-007 to UT-EX-014), 3 unit tests for VariableResolver (UT-VR-001 to UT-VR-003), 1 integration test (IT-EX-001), 4 API tests (AT-EX-001 to AT-EX-004), and 4 edge case tests (EC-EX-001 to EC-EX-004).",
+      "tags": ["spec", "test-cases", "expression-engine", "unit-tests", "integration-tests"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 59
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/ui.md",
+      "type": "document",
+      "name": "Expression Engine UI Specification",
+      "filePath": "docs/specs/02-expression-engine/ui.md",
+      "summary": "Defines the Expression Engine UI components: Expression Editor (used in Template Builder, Component Builder, Administration Builder), Variable Reference Picker (triggered by @ or {{ with search), Validation Indicator (green check, red X, yellow warning states), and keyboard shortcuts ({{, @, Tab, Escape).",
+      "tags": ["spec", "ui", "expression-engine", "components", "editor"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 56
+    },
+    {
+      "id": "document:docs/specs/02-expression-engine/ux.md",
+      "type": "document",
+      "name": "Expression Engine UX Specification",
+      "filePath": "docs/specs/02-expression-engine/ux.md",
+      "summary": "Defines user experience flows for the Expression Engine: Write Expression flow (click → type → variable picker → validate → save), Variable Picker flow (trigger on {{ → search → select → insert), Real-time Validation flow (type → validate syntax → resolve variables → determine type → show feedback). Includes feedback types and keyboard shortcuts.",
+      "tags": ["spec", "ux", "expression-engine", "user-flows", "interaction"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 72
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:docs/specs/02-expression-engine/acceptance.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Acceptance criteria map to functional requirements (REQ-EX-001 through REQ-EX-006) and user stories defined in requirements"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/api.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "API endpoints implement the functional requirements defined in requirements"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/business-rules.md",
+      "target": "document:docs/specs/02-expression-engine/domain.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Business rules constrain domain entity behavior and state transitions"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/domain.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Domain model entities realize the requirements"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/tasks.md",
+      "target": "document:docs/specs/02-expression-engine/domain.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Implementation tasks are structured around domain entities (tokenizer, parser, evaluator, resolver, formatter)"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/tasks.md",
+      "target": "document:docs/specs/02-expression-engine/api.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "TASK-006 implements the API routes defined in the API specification"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/test-cases.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Test cases map to functional requirements and business constraints"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/test-cases.md",
+      "target": "document:docs/specs/02-expression-engine/acceptance.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Test cases verify acceptance criteria"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/test-cases.md",
+      "target": "document:docs/specs/02-expression-engine/api.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "API tests (AT-EX-001 to AT-EX-004) validate the API endpoints"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/ui.md",
+      "target": "document:docs/specs/02-expression-engine/ux.md",
+      "type": "related",
+      "weight": 0.5,
+      "description": "UI component specification and UX user flow specification are closely related views of the same interface"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/ux.md",
+      "target": "document:docs/specs/02-expression-engine/api.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "UX validation flow relies on the /api/expressions/validate endpoint"
+    },
+    {
+      "source": "document:docs/specs/02-expression-engine/business-rules.md",
+      "target": "document:docs/specs/02-expression-engine/requirements.md",
+      "type": "documents",
+      "weight": 0.5,
+      "description": "Business rules implement constraints and requirements from the requirements document"
+    }
+  ]
+}

@@ -1,0 +1,1308 @@
+{
+  "nodes": [
+    {
+      "id": "document:docs/specs/01-global-table/acceptance.md",
+      "type": "document",
+      "name": "acceptance.md",
+      "filePath": "docs/specs/01-global-table/acceptance.md",
+      "summary": "Acceptance criteria for Global Table feature \u2014 20 testable criteria (AC-001 to AC-020) mapping user actions to expected outcomes, covering CRUD operations, validation, state transitions, and UI states.",
+      "tags": [
+        "spec",
+        "acceptance-criteria",
+        "global-table",
+        "testing"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs",
+        "sizeLines": 186,
+        "specFeature": "01-global-table"
+      }
+    },
+    {
+      "id": "document:docs/specs/01-global-table/api.md",
+      "type": "document",
+      "name": "api.md",
+      "filePath": "docs/specs/01-global-table/api.md",
+      "summary": "API specification for Global Table \u2014 REST endpoints for collection CRUD, column management, record operations with search/sort/pagination, and error response codes.",
+      "tags": [
+        "spec",
+        "api",
+        "rest",
+        "global-table",
+        "endpoints"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs",
+        "sizeLines": 278,
+        "specFeature": "01-global-table"
+      }
+    },
+    {
+      "id": "document:docs/specs/01-global-table/business-rules.md",
+      "type": "document",
+      "name": "business-rules.md",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "Business rules for Global Table \u2014 validation rules (VR-GT-001 to VR-GT-013), permission rules (PR-GT-001 to PR-GT-008), state transitions (ST-GT-001 to ST-GT-004), constraints (BC-GT-001 to BC-GT-008), and side effects (SE-GT-001 to SE-GT-005).",
+      "tags": [
+        "spec",
+        "business-rules",
+        "validation",
+        "permissions",
+        "global-table"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs",
+        "sizeLines": 64,
+        "specFeature": "01-global-table"
+      }
+    },
+    {
+      "id": "document:docs/specs/01-global-table/domain.md",
+      "type": "document",
+      "name": "domain.md",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Domain model for Global Table \u2014 defines entities (GlobalTable, Column, Record), their attributes, relationships (1:N, N:M), invariants, lifecycle states, and state machine transitions.",
+      "tags": [
+        "spec",
+        "domain",
+        "entities",
+        "relationships",
+        "global-table"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs",
+        "sizeLines": 144,
+        "specFeature": "01-global-table"
+      }
+    },
+    {
+      "id": "document:docs/specs/01-global-table/requirements.md",
+      "type": "document",
+      "name": "requirements.md",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "Requirements for Global Table \u2014 problem statement, user stories (US-001 to US-006), functional requirements (REQ-GT-001 to REQ-GT-012), non-functional requirements, constraints, edge cases, and dependencies.",
+      "tags": [
+        "spec",
+        "requirements",
+        "user-stories",
+        "functional",
+        "global-table"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs",
+        "sizeLines": 134,
+        "specFeature": "01-global-table"
+      }
+    },
+    {
+      "id": "document:docs/specs/01-global-table/tasks.md",
+      "type": "document",
+      "name": "tasks.md",
+      "filePath": "docs/specs/01-global-table/tasks.md",
+      "summary": "Implementation plan for Global Table \u2014 14 tasks (TASK-001 to TASK-014) covering database schema, types, repository, service, API routes, composable, UI components, tests, and verification.",
+      "tags": [
+        "spec",
+        "tasks",
+        "implementation",
+        "global-table"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs",
+        "sizeLines": 212,
+        "specFeature": "01-global-table"
+      }
+    },
+    {
+      "id": "document:docs/specs/01-global-table/test-cases.md",
+      "type": "document",
+      "name": "test-cases.md",
+      "filePath": "docs/specs/01-global-table/test-cases.md",
+      "summary": "Test cases for Global Table \u2014 unit tests (service, column, record), integration tests (collection lifecycle, record management), API tests (collection and record endpoints), E2E tests (admin flows), and edge cases.",
+      "tags": [
+        "spec",
+        "test-cases",
+        "unit-tests",
+        "integration-tests",
+        "global-table"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs",
+        "sizeLines": 91,
+        "specFeature": "01-global-table"
+      }
+    },
+    {
+      "id": "document:docs/specs/01-global-table/ui.md",
+      "type": "document",
+      "name": "ui.md",
+      "filePath": "docs/specs/01-global-table/ui.md",
+      "summary": "UI specification for Global Table \u2014 pages (Collections List, Workspace, Create), component hierarchy, tables (Records, Columns), forms (Create Collection, Add Column), navigation, responsive behavior, loading/empty/error states, and accessibility.",
+      "tags": [
+        "spec",
+        "ui",
+        "components",
+        "pages",
+        "global-table"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs",
+        "sizeLines": 190,
+        "specFeature": "01-global-table"
+      }
+    },
+    {
+      "id": "document:docs/specs/01-global-table/ux.md",
+      "type": "document",
+      "name": "ux.md",
+      "filePath": "docs/specs/01-global-table/ux.md",
+      "summary": "UX specification for Global Table \u2014 user flows (create collection, add column, add/edit/delete record, publish), interactions (type selection, column reorder, inline edit), feedback patterns, empty/loading/error states, confirmation dialogs, and keyboard shortcuts.",
+      "tags": [
+        "spec",
+        "ux",
+        "user-flows",
+        "interactions",
+        "global-table"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs",
+        "sizeLines": 215,
+        "specFeature": "01-global-table"
+      }
+    },
+    {
+      "id": "concept:GlobalTable",
+      "type": "concept",
+      "name": "GlobalTable",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Core entity \u2014 a metadata-driven data structure defining how data is stored, input, displayed, validated, searched, and ordered. Has status lifecycle (Draft \u2192 Published \u2192 Archived).",
+      "tags": [
+        "entity",
+        "domain",
+        "core",
+        "metadata-driven"
+      ],
+      "metadata": {
+        "attributes": [
+          "id",
+          "name",
+          "display_name",
+          "description",
+          "status",
+          "created_at",
+          "updated_at"
+        ],
+        "states": [
+          "draft",
+          "published",
+          "archived"
+        ],
+        "relationships": [
+          "has_many:Column",
+          "has_many:Record",
+          "referenced_by:Component",
+          "referenced_by:Administration"
+        ]
+      }
+    },
+    {
+      "id": "concept:Column",
+      "type": "concept",
+      "name": "Column",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Field definition within a Global Table specifying data type, behavior, and UI rendering. Supports 10 types: text, number, date, time, datetime, image, select, richtext, relation, computed.",
+      "tags": [
+        "entity",
+        "domain",
+        "field-definition",
+        "column-types"
+      ],
+      "metadata": {
+        "attributes": [
+          "id",
+          "table_id",
+          "name",
+          "display_name",
+          "type",
+          "required",
+          "searchable",
+          "orderable",
+          "default_value",
+          "format",
+          "options",
+          "config",
+          "order"
+        ],
+        "types": [
+          "text",
+          "number",
+          "date",
+          "time",
+          "datetime",
+          "image",
+          "select",
+          "richtext",
+          "relation",
+          "computed"
+        ],
+        "computedSubtypes": [
+          "hidden",
+          "readonly"
+        ]
+      }
+    },
+    {
+      "id": "concept:Record",
+      "type": "concept",
+      "name": "Record",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "A single data entry in a Global Table, stored as a JSON document with column values as key-value pairs.",
+      "tags": [
+        "entity",
+        "domain",
+        "data-entry",
+        "json-document"
+      ],
+      "metadata": {
+        "attributes": [
+          "id",
+          "table_id",
+          "data",
+          "created_at",
+          "updated_at"
+        ],
+        "dataFormat": "key-value JSON matching Column names"
+      }
+    },
+    {
+      "id": "concept:GlobalTableLifecycle",
+      "type": "concept",
+      "name": "GlobalTable Lifecycle",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "State machine for GlobalTable: Draft (freely modifiable) \u2192 Published (available for Components, restricted changes) \u2192 Archived (no new references, data preserved). Supports unpublish back to Draft.",
+      "tags": [
+        "state-machine",
+        "lifecycle",
+        "status-transitions"
+      ],
+      "metadata": {
+        "transitions": [
+          "Draft \u2192 Published (at least 1 column, valid names)",
+          "Published \u2192 Draft (unpublish allowed)",
+          "Published \u2192 Archived (no active workflow references)",
+          "Archived \u2192 Published (structure valid)"
+        ]
+      }
+    },
+    {
+      "id": "concept:ColumnTypeSystem",
+      "type": "concept",
+      "name": "Column Type System",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Column type configuration system defining input components, storage formats, and type-specific configs. Includes progressive disclosure for type-specific options.",
+      "tags": [
+        "type-system",
+        "configuration",
+        "progressive-disclosure"
+      ],
+      "metadata": {
+        "types": {
+          "text": "Text input, String, maxlength",
+          "number": "Number input, Number, min/max/precision",
+          "date": "Date picker, ISO date, format",
+          "select": "Dropdown, String, options[]",
+          "relation": "Relation selector, Foreign key, table_id/display_fields",
+          "computed": "Readonly display, Calculated, expression"
+        }
+      }
+    },
+    {
+      "id": "concept:CRUDOperations",
+      "type": "concept",
+      "name": "Auto-Generated CRUD",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "System auto-generates full CRUD operations for each Global Table \u2014 browse, create, read, update, delete \u2014 without manual coding.",
+      "tags": [
+        "crud",
+        "auto-generation",
+        "requirement"
+      ],
+      "metadata": {
+        "operations": [
+          "browse",
+          "create",
+          "read",
+          "update",
+          "delete"
+        ],
+        "generatedFrom": "Global Table schema"
+      }
+    },
+    {
+      "id": "concept:FormGeneration",
+      "type": "concept",
+      "name": "Dynamic Form Generation",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "Forms are dynamically generated from column definitions \u2014 field types (text input, date picker, select, etc.) determined by column type, with computed fields displaying calculated values and relation fields showing selectable options.",
+      "tags": [
+        "form-generation",
+        "dynamic-forms",
+        "column-driven"
+      ],
+      "metadata": {
+        "generatedFrom": "Column definitions",
+        "features": [
+          "type-specific inputs",
+          "required validation",
+          "computed display",
+          "relation selectors"
+        ]
+      }
+    },
+    {
+      "id": "concept:ExpressionEngine",
+      "type": "concept",
+      "name": "Expression Engine",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "External dependency for computed columns \u2014 evaluates expressions like 'harga * jumlah' to calculate values. Must prevent circular references.",
+      "tags": [
+        "dependency",
+        "expression-parser",
+        "computed-columns"
+      ],
+      "metadata": {
+        "purpose": "Evaluate computed column expressions",
+        "constraint": "No circular references allowed"
+      }
+    },
+    {
+      "id": "endpoint:collections-api",
+      "type": "endpoint",
+      "name": "Collections API",
+      "filePath": "docs/specs/01-global-table/api.md",
+      "summary": "REST API for Global Table collection management \u2014 CRUD operations, status transitions (publish/unpublish/archive), with pagination, search, and filtering.",
+      "tags": [
+        "api",
+        "rest",
+        "collections",
+        "crud"
+      ],
+      "metadata": {
+        "endpoints": [
+          "GET /api/collections",
+          "POST /api/collections",
+          "GET /api/collections/:id",
+          "PUT /api/collections/:id",
+          "DELETE /api/collections/:id",
+          "POST /api/collections/:id/publish",
+          "POST /api/collections/:id/unpublish",
+          "POST /api/collections/:id/archive"
+        ],
+        "errorCodes": [
+          "400 VALIDATION_ERROR",
+          "401 UNAUTHORIZED",
+          "403 FORBIDDEN",
+          "404 NOT_FOUND",
+          "409 CONFLICT",
+          "422 DEPENDENCY_ERROR",
+          "500 INTERNAL_ERROR"
+        ]
+      }
+    },
+    {
+      "id": "endpoint:columns-api",
+      "type": "endpoint",
+      "name": "Columns API",
+      "filePath": "docs/specs/01-global-table/api.md",
+      "summary": "REST API for column management within a Global Table \u2014 add, update, delete (blocked if data exists), and reorder columns.",
+      "tags": [
+        "api",
+        "rest",
+        "columns",
+        "management"
+      ],
+      "metadata": {
+        "endpoints": [
+          "POST /api/collections/:id/columns",
+          "PUT /api/collections/:id/columns/:columnId",
+          "DELETE /api/collections/:id/columns/:columnId",
+          "PUT /api/collections/:id/columns/reorder"
+        ]
+      }
+    },
+    {
+      "id": "endpoint:records-api",
+      "type": "endpoint",
+      "name": "Records API",
+      "filePath": "docs/specs/01-global-table/api.md",
+      "summary": "REST API for record management \u2014 CRUD with search across searchable columns, sorting by orderable columns, and pagination.",
+      "tags": [
+        "api",
+        "rest",
+        "records",
+        "search",
+        "pagination"
+      ],
+      "metadata": {
+        "endpoints": [
+          "GET /api/collections/:id/records",
+          "POST /api/collections/:id/records",
+          "PUT /api/collections/:id/records/:recordId",
+          "DELETE /api/collections/:id/records/:recordId"
+        ],
+        "queryParameters": [
+          "page",
+          "per_page",
+          "sort",
+          "order",
+          "search",
+          "filter"
+        ]
+      }
+    },
+    {
+      "id": "concept:ValidationRules",
+      "type": "concept",
+      "name": "Validation Rules",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "13 validation rules (VR-GT-001 to VR-GT-013) covering table name uniqueness, snake_case format, required fields, column name uniqueness, type-specific validation (select options, computed expressions, relation targets).",
+      "tags": [
+        "validation",
+        "rules",
+        "business-logic"
+      ],
+      "metadata": {
+        "rules": [
+          "VR-GT-001: name required",
+          "VR-GT-002: name unique",
+          "VR-GT-003: name snake_case",
+          "VR-GT-005: columns min 1",
+          "VR-GT-007: column.name unique in table",
+          "VR-GT-011: select options required if type=select",
+          "VR-GT-012: expression required if type=computed",
+          "VR-GT-013: table_id required if type=relation"
+        ]
+      }
+    },
+    {
+      "id": "concept:PermissionRules",
+      "type": "concept",
+      "name": "Permission Rules",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "8 permission rules (PR-GT-001 to PR-GT-008) defining role-based access \u2014 Administrator has full control, Staff can read published tables only.",
+      "tags": [
+        "permissions",
+        "rbac",
+        "access-control"
+      ],
+      "metadata": {
+        "roles": [
+          "Administrator",
+          "Staff"
+        ],
+        "actions": [
+          "create",
+          "read",
+          "update",
+          "delete",
+          "publish",
+          "create_record",
+          "update_record",
+          "delete_record"
+        ]
+      }
+    },
+    {
+      "id": "concept:StateTransitions",
+      "type": "concept",
+      "name": "State Transitions",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "4 state transition rules (ST-GT-001 to ST-GT-004) governing GlobalTable lifecycle: Draft\u2194Published, Published\u2192Archived, with conditions for each transition.",
+      "tags": [
+        "state-transitions",
+        "lifecycle",
+        "business-rules"
+      ],
+      "metadata": {
+        "transitions": [
+          "ST-GT-001: Draft\u2192Published (at least 1 column, valid names)",
+          "ST-GT-002: Published\u2192Draft (unpublish allowed)",
+          "ST-GT-003: Published\u2192Archived (no active workflow refs)",
+          "ST-GT-004: Archived\u2192Published (structure valid)"
+        ]
+      }
+    },
+    {
+      "id": "concept:BusinessConstraints",
+      "type": "concept",
+      "name": "Business Constraints",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "8 business constraints (BC-GT-001 to BC-GT-008) with severity levels \u2014 CRITICAL (uniqueness, min columns), HIGH (data protection, expression validity, relation targets), MEDIUM (required values, select options).",
+      "tags": [
+        "constraints",
+        "business-rules",
+        "severity"
+      ],
+      "metadata": {
+        "critical": [
+          "BC-GT-001: table name unique",
+          "BC-GT-002: column name unique",
+          "BC-GT-003: at least 1 column"
+        ],
+        "high": [
+          "BC-GT-004: published columns protected",
+          "BC-GT-005: computed expressions valid",
+          "BC-GT-006: relations reference published tables"
+        ],
+        "medium": [
+          "BC-GT-007: required column values",
+          "BC-GT-008: select options min 1"
+        ]
+      }
+    },
+    {
+      "id": "concept:SideEffects",
+      "type": "concept",
+      "name": "Side Effects",
+      "filePath": "docs/specs/01-global-table/business-rules.md",
+      "summary": "5 side effects (SE-GT-001 to SE-GT-005) \u2014 publish makes table available for Components, archive removes from relation selectors, column deletion causes data loss, type change may break data, adding required column needs defaults for existing records.",
+      "tags": [
+        "side-effects",
+        "consequences",
+        "business-rules"
+      ],
+      "metadata": {
+        "effects": [
+          "SE-GT-001: Publish \u2192 available for Components",
+          "SE-GT-002: Archive \u2192 removed from relation selectors",
+          "SE-GT-003: Delete column with data \u2192 data loss (blocked)",
+          "SE-GT-004: Change column type \u2192 data incompatibility",
+          "SE-GT-005: Add required column \u2192 existing records need defaults"
+        ]
+      }
+    },
+    {
+      "id": "concept:AcceptanceCriteria",
+      "type": "concept",
+      "name": "Acceptance Criteria (AC-001 to AC-020)",
+      "filePath": "docs/specs/01-global-table/acceptance.md",
+      "summary": "20 acceptance criteria organized by feature area \u2014 CRUD operations, validation, search/sort/pagination, column management, state transitions, empty/loading states, computed/relation/select columns.",
+      "tags": [
+        "acceptance-criteria",
+        "testing",
+        "verification"
+      ],
+      "metadata": {
+        "criteria": 20,
+        "coverage": [
+          "create",
+          "read",
+          "update",
+          "delete",
+          "search",
+          "sort",
+          "paginate",
+          "validate",
+          "publish",
+          "archive",
+          "computed",
+          "relation",
+          "select"
+        ]
+      }
+    },
+    {
+      "id": "concept:UserStories",
+      "type": "concept",
+      "name": "User Stories (US-001 to US-006)",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "6 user stories \u2014 US-001 Create Global Table, US-002 Manage Columns, US-003 Browse Records, US-004 Create/Edit Records, US-005 Delete Records, US-006 Publish Collection.",
+      "tags": [
+        "user-stories",
+        "requirements",
+        "features"
+      ],
+      "metadata": {
+        "stories": [
+          "US-001: Create a Global Table",
+          "US-002: Manage Columns",
+          "US-003: Browse Records",
+          "US-004: Create and Edit Records",
+          "US-005: Delete Records",
+          "US-006: Publish a Global Table"
+        ]
+      }
+    },
+    {
+      "id": "concept:ImplementationTasks",
+      "type": "concept",
+      "name": "Implementation Tasks (TASK-001 to TASK-014)",
+      "filePath": "docs/specs/01-global-table/tasks.md",
+      "summary": "14 implementation tasks covering the full stack: database schema, shared types/schemas, repository, service, API routes (collection/column/record), composable, UI components (list, workspace, column builder, record form), tests, and verification.",
+      "tags": [
+        "implementation",
+        "tasks",
+        "plan"
+      ],
+      "metadata": {
+        "tasks": 14,
+        "layers": [
+          "database",
+          "types",
+          "repository",
+          "service",
+          "api",
+          "composable",
+          "ui",
+          "tests",
+          "verification"
+        ],
+        "taskFlow": "TASK-001\u2192002\u2192003\u2192004\u2192005\u2192006/007\u2192008\u2192009\u2192010\u2192011/012\u2192013\u2192014"
+      }
+    },
+    {
+      "id": "concept:TestCases",
+      "type": "concept",
+      "name": "Test Cases",
+      "filePath": "docs/specs/01-global-table/test-cases.md",
+      "summary": "Comprehensive test suite \u2014 unit tests (service, column, record), integration tests (collection lifecycle, record management), API tests (collection and record endpoints), E2E tests (admin flows), and edge case tests.",
+      "tags": [
+        "test-cases",
+        "testing",
+        "quality-assurance"
+      ],
+      "metadata": {
+        "categories": [
+          "unit",
+          "integration",
+          "api",
+          "e2e",
+          "edge-cases"
+        ],
+        "totalTests": "45+ test cases"
+      }
+    },
+    {
+      "id": "concept:UISpecification",
+      "type": "concept",
+      "name": "UI Specification",
+      "filePath": "docs/specs/01-global-table/ui.md",
+      "summary": "UI specification covering pages (Collections List, Workspace, Create), component hierarchy, tables (Records, Columns), forms, column builder layout, navigation, responsive behavior (desktop/tablet/mobile), and state handling (loading, empty, error).",
+      "tags": [
+        "ui",
+        "components",
+        "pages",
+        "responsive",
+        "accessibility"
+      ],
+      "metadata": {
+        "pages": [
+          "Collections List (/collections)",
+          "Collection Workspace (/collections/:id)",
+          "Collection Create (/collections/create)"
+        ],
+        "components": [
+          "CollectionList",
+          "CollectionWorkspace",
+          "CollectionForm",
+          "ColumnBuilder",
+          "ColumnForm",
+          "RecordForm",
+          "RecordDrawer",
+          "RecordsTab",
+          "ColumnsTab",
+          "SettingsTab"
+        ],
+        "responsiveBreakpoints": [
+          "Desktop (lg+)",
+          "Tablet (md-lg)",
+          "Mobile (<md)"
+        ]
+      }
+    },
+    {
+      "id": "concept:UXSpecification",
+      "type": "concept",
+      "name": "UX Specification",
+      "filePath": "docs/specs/01-global-table/ux.md",
+      "summary": "UX specification covering user flows (create, add column, add/edit/delete record, publish), interactions (type selection, column reorder, inline edit, row selection), feedback patterns, empty/loading/error states, confirmation dialogs, and keyboard shortcuts.",
+      "tags": [
+        "ux",
+        "user-flows",
+        "interactions",
+        "feedback",
+        "keyboard"
+      ],
+      "metadata": {
+        "flows": [
+          "Create Collection",
+          "Add Column",
+          "Add Record",
+          "Edit Record",
+          "Delete Record",
+          "Publish Collection"
+        ],
+        "interactions": [
+          "Column Type Selection",
+          "Column Reorder",
+          "Inline Edit",
+          "Row Selection"
+        ],
+        "shortcuts": [
+          "Cmd+K",
+          "Cmd+S",
+          "Escape",
+          "Delete",
+          "\u2191\u2193",
+          "Enter",
+          "Space"
+        ]
+      }
+    },
+    {
+      "id": "concept:GlobalTableInvariants",
+      "type": "concept",
+      "name": "GlobalTable Invariants",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Domain invariants ensuring data integrity \u2014 unique names, unique column names within table, minimum columns, protected published data, valid expressions, valid relation targets, matching record data keys, required column values.",
+      "tags": [
+        "invariants",
+        "data-integrity",
+        "domain-rules"
+      ],
+      "metadata": {
+        "invariants": [
+          "GlobalTable.name unique across all tables",
+          "Column.name unique within parent table",
+          "At least one Column per GlobalTable",
+          "Published tables with records cannot have Columns deleted",
+          "Computed columns must have valid expression",
+          "Relation columns must reference published GlobalTable",
+          "Record data keys must match Column names",
+          "Required columns must have non-null values"
+        ]
+      }
+    },
+    {
+      "id": "concept:GlobalTableRelationships",
+      "type": "concept",
+      "name": "GlobalTable Relationships",
+      "filePath": "docs/specs/01-global-table/domain.md",
+      "summary": "Entity relationships \u2014 GlobalTable 1:N Column, GlobalTable 1:N Record, Column N:M Column (via relation table_id), Record referenced by Relation columns in other tables.",
+      "tags": [
+        "relationships",
+        "entity-relationships",
+        "domain-model"
+      ],
+      "metadata": {
+        "relationships": [
+          "GlobalTable \u2192 Column (1:N, ordered)",
+          "GlobalTable \u2192 Record (1:N)",
+          "Column \u2192 GlobalTable (N:1, via table_id)",
+          "Record \u2192 GlobalTable (N:1)",
+          "Column \u2192 Column (N:M, via relation)"
+        ]
+      }
+    },
+    {
+      "id": "concept:NonFunctionalRequirements",
+      "type": "concept",
+      "name": "Non-Functional Requirements",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "Performance targets \u2014 NFR-GT-001: record browse <500ms for 1000 records, NFR-GT-002: form generation <100ms, NFR-GT-003: search across columns <300ms.",
+      "tags": [
+        "nfr",
+        "performance",
+        "requirements"
+      ],
+      "metadata": {
+        "targets": [
+          "NFR-GT-001: Record browse < 500ms (1000 records)",
+          "NFR-GT-002: Form generation < 100ms",
+          "NFR-GT-003: Search across columns < 300ms"
+        ]
+      }
+    },
+    {
+      "id": "concept:EdgeCases",
+      "type": "concept",
+      "name": "Edge Cases",
+      "filePath": "docs/specs/01-global-table/requirements.md",
+      "summary": "Edge cases \u2014 50+ columns (UI usability), 10,000+ records (pagination required), archived relation targets, invalid computed expressions, column type change on existing data.",
+      "tags": [
+        "edge-cases",
+        "robustness",
+        "requirements"
+      ],
+      "metadata": {
+        "cases": [
+          "50+ columns \u2014 UI must remain usable",
+          "10,000+ records \u2014 pagination required",
+          "Relation target archived \u2014 relation shows indicator",
+          "Invalid computed expression \u2014 validation error",
+          "Column type change with existing data"
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:docs/specs/01-global-table/acceptance.md",
+      "target": "document:docs/specs/01-global-table/requirements.md",
+      "type": "documents",
+      "label": "maps acceptance criteria to requirements",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/acceptance.md",
+      "target": "document:docs/specs/01-global-table/business-rules.md",
+      "type": "documents",
+      "label": "references business rules (BC-GT-*, REQ-GT-*)",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/api.md",
+      "target": "document:docs/specs/01-global-table/domain.md",
+      "type": "documents",
+      "label": "API endpoints implement domain entities",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/api.md",
+      "target": "document:docs/specs/01-global-table/business-rules.md",
+      "type": "documents",
+      "label": "API validation enforces business rules",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/business-rules.md",
+      "target": "document:docs/specs/01-global-table/domain.md",
+      "type": "documents",
+      "label": "business rules govern domain entity lifecycle",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/domain.md",
+      "target": "document:docs/specs/01-global-table/requirements.md",
+      "type": "documents",
+      "label": "domain model implements requirements",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/tasks.md",
+      "target": "document:docs/specs/01-global-table/domain.md",
+      "type": "documents",
+      "label": "tasks implement domain model",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/tasks.md",
+      "target": "document:docs/specs/01-global-table/api.md",
+      "type": "documents",
+      "label": "tasks implement API endpoints",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/test-cases.md",
+      "target": "document:docs/specs/01-global-table/acceptance.md",
+      "type": "tested_by",
+      "label": "test cases verify acceptance criteria",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/test-cases.md",
+      "target": "document:docs/specs/01-global-table/api.md",
+      "type": "tested_by",
+      "label": "API tests verify endpoints",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/test-cases.md",
+      "target": "document:docs/specs/01-global-table/business-rules.md",
+      "type": "tested_by",
+      "label": "unit tests verify business rules",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/ui.md",
+      "target": "document:docs/specs/01-global-table/domain.md",
+      "type": "documents",
+      "label": "UI renders domain entities",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/ui.md",
+      "target": "document:docs/specs/01-global-table/api.md",
+      "type": "documents",
+      "label": "UI consumes API endpoints",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/ux.md",
+      "target": "document:docs/specs/01-global-table/ui.md",
+      "type": "documents",
+      "label": "UX flows implemented by UI components",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "document:docs/specs/01-global-table/tasks.md",
+      "target": "document:docs/specs/01-global-table/requirements.md",
+      "type": "documents",
+      "label": "tasks implement requirements",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:Column",
+      "type": "contains",
+      "label": "GlobalTable has many Columns (ordered)",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:Record",
+      "type": "contains",
+      "label": "GlobalTable has many Records",
+      "metadata": {
+        "weight": 1.0
+      }
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:GlobalTableLifecycle",
+      "type": "related",
+      "label": "GlobalTable has lifecycle state machine",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:Column",
+      "target": "concept:ColumnTypeSystem",
+      "type": "related",
+      "label": "Column types defined by type system",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:GlobalTableInvariants",
+      "type": "related",
+      "label": "GlobalTable governed by invariants",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:GlobalTable",
+      "target": "concept:GlobalTableRelationships",
+      "type": "related",
+      "label": "GlobalTable entity relationships",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "concept:GlobalTableLifecycle",
+      "target": "concept:StateTransitions",
+      "type": "implements",
+      "label": "lifecycle implements state transition rules",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "concept:GlobalTableLifecycle",
+      "target": "concept:BusinessConstraints",
+      "type": "validates",
+      "label": "state transitions validated by constraints",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "concept:ColumnTypeSystem",
+      "target": "concept:FormGeneration",
+      "type": "defines_schema",
+      "label": "column types define form field types",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:ColumnTypeSystem",
+      "target": "concept:CRUDOperations",
+      "type": "related",
+      "label": "column types determine CRUD behavior",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "concept:ValidationRules",
+      "target": "concept:BusinessConstraints",
+      "type": "implements",
+      "label": "validation rules enforce business constraints",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "concept:PermissionRules",
+      "target": "concept:GlobalTableLifecycle",
+      "type": "validates",
+      "label": "permissions control state transitions",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "concept:SideEffects",
+      "target": "concept:GlobalTableLifecycle",
+      "type": "triggers",
+      "label": "state transitions trigger side effects",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:UserStories",
+      "target": "concept:AcceptanceCriteria",
+      "type": "related",
+      "label": "user stories mapped to acceptance criteria",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "concept:UserStories",
+      "target": "concept:ImplementationTasks",
+      "type": "depends_on",
+      "label": "user stories implemented by tasks",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "concept:ImplementationTasks",
+      "target": "concept:TestCases",
+      "type": "tested_by",
+      "label": "tasks verified by test cases",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:UISpecification",
+      "target": "concept:UXSpecification",
+      "type": "implements",
+      "label": "UI implements UX flows",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:UISpecification",
+      "target": "concept:FormGeneration",
+      "type": "implements",
+      "label": "UI components render generated forms",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:UISpecification",
+      "target": "concept:CRUDOperations",
+      "type": "implements",
+      "label": "UI provides CRUD interface",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "concept:TestCases",
+      "target": "concept:AcceptanceCriteria",
+      "type": "tested_by",
+      "label": "test cases verify acceptance criteria",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "concept:TestCases",
+      "target": "concept:ValidationRules",
+      "type": "tested_by",
+      "label": "unit tests verify validation rules",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:TestCases",
+      "target": "concept:PermissionRules",
+      "type": "tested_by",
+      "label": "integration tests verify permissions",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "concept:NonFunctionalRequirements",
+      "target": "concept:CRUDOperations",
+      "type": "validates",
+      "label": "NFR targets for CRUD operations",
+      "metadata": {
+        "weight": 0.6
+      }
+    },
+    {
+      "source": "concept:EdgeCases",
+      "target": "concept:BusinessConstraints",
+      "type": "related",
+      "label": "edge cases test constraint boundaries",
+      "metadata": {
+        "weight": 0.6
+      }
+    },
+    {
+      "source": "endpoint:collections-api",
+      "target": "concept:GlobalTable",
+      "type": "routes",
+      "label": "collection endpoints serve GlobalTable entity",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "endpoint:columns-api",
+      "target": "concept:Column",
+      "type": "routes",
+      "label": "column endpoints serve Column entity",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "endpoint:records-api",
+      "target": "concept:Record",
+      "type": "routes",
+      "label": "record endpoints serve Record entity",
+      "metadata": {
+        "weight": 0.9
+      }
+    },
+    {
+      "source": "endpoint:collections-api",
+      "target": "concept:ValidationRules",
+      "type": "validates",
+      "label": "API validation enforces rules",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "endpoint:columns-api",
+      "target": "concept:ValidationRules",
+      "type": "validates",
+      "label": "column validation enforces rules",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "endpoint:records-api",
+      "target": "concept:ValidationRules",
+      "type": "validates",
+      "label": "record validation enforces rules",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "endpoint:collections-api",
+      "target": "concept:PermissionRules",
+      "type": "validates",
+      "label": "API enforces permission rules",
+      "metadata": {
+        "weight": 0.7
+      }
+    },
+    {
+      "source": "endpoint:collections-api",
+      "target": "concept:StateTransitions",
+      "type": "triggers",
+      "label": "publish/unpublish/archive endpoints trigger state changes",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:ExpressionEngine",
+      "target": "concept:ColumnTypeSystem",
+      "type": "depends_on",
+      "label": "computed columns depend on expression engine",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:GlobalTableRelationships",
+      "target": "concept:Column",
+      "type": "related",
+      "label": "relation columns create inter-table links",
+      "metadata": {
+        "weight": 0.8
+      }
+    },
+    {
+      "source": "concept:GlobalTableRelationships",
+      "target": "concept:Record",
+      "type": "related",
+      "label": "records referenced by relation columns",
+      "metadata": {
+        "weight": 0.7
+      }
+    }
+  ]
+}

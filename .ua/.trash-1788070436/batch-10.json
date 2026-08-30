@@ -1,0 +1,802 @@
+{
+  "batch": 10,
+  "files": [
+    {
+      "path": "docs/specs/05-administration/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 105,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/api.md",
+      "language": "markdown",
+      "sizeLines": 153,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 59,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/domain.md",
+      "language": "markdown",
+      "sizeLines": 115,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/requirements.md",
+      "language": "markdown",
+      "sizeLines": 158,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/tasks.md",
+      "language": "markdown",
+      "sizeLines": 175,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 61,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/ui.md",
+      "language": "markdown",
+      "sizeLines": 161,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/ux.md",
+      "language": "markdown",
+      "sizeLines": 102,
+      "fileCategory": "docs"
+    }
+  ],
+  "crossBatchEdges": [],
+  "nodes": [
+    {
+      "id": "file::docs/specs/05-administration/acceptance.md",
+      "type": "file",
+      "label": "acceptance.md",
+      "filePath": "docs/specs/05-administration/acceptance.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 105,
+      "description": "Acceptance criteria for Administration feature with 11 testable conditions (AC-001 to AC-011) covering workflow creation, publishing, execution, approval, rejection, progress tracking, and completion.",
+      "symbols": [
+        {
+          "name": "AC-001",
+          "kind": "heading",
+          "line": 3
+        },
+        {
+          "name": "AC-002",
+          "kind": "heading",
+          "line": 11
+        },
+        {
+          "name": "AC-003",
+          "kind": "heading",
+          "line": 19
+        },
+        {
+          "name": "AC-004",
+          "kind": "heading",
+          "line": 27
+        },
+        {
+          "name": "AC-005",
+          "kind": "heading",
+          "line": 35
+        },
+        {
+          "name": "AC-006",
+          "kind": "heading",
+          "line": 43
+        },
+        {
+          "name": "AC-007",
+          "kind": "heading",
+          "line": 51
+        },
+        {
+          "name": "AC-008",
+          "kind": "heading",
+          "line": 59
+        },
+        {
+          "name": "AC-009",
+          "kind": "heading",
+          "line": 67
+        },
+        {
+          "name": "AC-010",
+          "kind": "heading",
+          "line": 75
+        },
+        {
+          "name": "AC-011",
+          "kind": "heading",
+          "line": 83
+        }
+      ],
+      "exports": [
+        "AC-001",
+        "AC-002",
+        "AC-003",
+        "AC-004",
+        "AC-005",
+        "AC-006",
+        "AC-007",
+        "AC-008",
+        "AC-009",
+        "AC-010",
+        "AC-011"
+      ]
+    },
+    {
+      "id": "file::docs/specs/05-administration/api.md",
+      "type": "file",
+      "label": "api.md",
+      "filePath": "docs/specs/05-administration/api.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 153,
+      "description": "API specification for Administration endpoints including CRUD operations for workflows, steps, instances, execution, approval, and rejection with request/response schemas and error codes.",
+      "symbols": [
+        {
+          "name": "GET /api/administrations",
+          "kind": "endpoint",
+          "line": 5
+        },
+        {
+          "name": "GET /api/administrations/:id",
+          "kind": "endpoint",
+          "line": 36
+        },
+        {
+          "name": "POST /api/administrations",
+          "kind": "endpoint",
+          "line": 62
+        },
+        {
+          "name": "PUT /api/administrations/:id",
+          "kind": "endpoint",
+          "line": 66
+        },
+        {
+          "name": "DELETE /api/administrations/:id",
+          "kind": "endpoint",
+          "line": 70
+        },
+        {
+          "name": "POST /api/administrations/:id/publish",
+          "kind": "endpoint",
+          "line": 74
+        },
+        {
+          "name": "POST /api/administrations/:id/steps",
+          "kind": "endpoint",
+          "line": 80
+        },
+        {
+          "name": "PUT /api/administrations/:id/steps/:stepId",
+          "kind": "endpoint",
+          "line": 84
+        },
+        {
+          "name": "DELETE /api/administrations/:id/steps/:stepId",
+          "kind": "endpoint",
+          "line": 88
+        },
+        {
+          "name": "POST /api/administrations/:id/execute",
+          "kind": "endpoint",
+          "line": 92
+        },
+        {
+          "name": "POST /api/instances/:instanceId/approve",
+          "kind": "endpoint",
+          "line": 109
+        },
+        {
+          "name": "POST /api/instances/:instanceId/reject",
+          "kind": "endpoint",
+          "line": 124
+        },
+        {
+          "name": "GET /api/instances/:instanceId",
+          "kind": "endpoint",
+          "line": 136
+        },
+        {
+          "name": "GET /api/instances",
+          "kind": "endpoint",
+          "line": 140
+        }
+      ],
+      "exports": [
+        "GET /api/administrations",
+        "GET /api/administrations/:id",
+        "POST /api/administrations",
+        "PUT /api/administrations/:id",
+        "DELETE /api/administrations/:id",
+        "POST /api/administrations/:id/publish",
+        "POST /api/administrations/:id/steps",
+        "PUT /api/administrations/:id/steps/:stepId",
+        "DELETE /api/administrations/:id/steps/:stepId",
+        "POST /api/administrations/:id/execute",
+        "POST /api/instances/:instanceId/approve",
+        "POST /api/instances/:instanceId/reject",
+        "GET /api/instances/:instanceId",
+        "GET /api/instances"
+      ]
+    },
+    {
+      "id": "file::docs/specs/05-administration/business-rules.md",
+      "type": "file",
+      "label": "business-rules.md",
+      "filePath": "docs/specs/05-administration/business-rules.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 59,
+      "description": "Business rules for Administration including validation rules (VR-WF-001 to VR-WF-007), permission rules (PR-WF-001 to PR-WF-008), state transitions (ST-WF-001 to ST-WF-007), business constraints, and side effects.",
+      "symbols": [
+        {
+          "name": "VR-WF-001",
+          "kind": "heading",
+          "line": 5
+        },
+        {
+          "name": "PR-WF-001",
+          "kind": "heading",
+          "line": 17
+        },
+        {
+          "name": "ST-WF-001",
+          "kind": "heading",
+          "line": 29
+        },
+        {
+          "name": "BC-WF-001",
+          "kind": "heading",
+          "line": 42
+        },
+        {
+          "name": "SE-WF-001",
+          "kind": "heading",
+          "line": 52
+        }
+      ],
+      "exports": [
+        "VR-WF-001",
+        "VR-WF-002",
+        "VR-WF-003",
+        "VR-WF-004",
+        "VR-WF-005",
+        "VR-WF-006",
+        "VR-WF-007",
+        "PR-WF-001",
+        "PR-WF-002",
+        "PR-WF-003",
+        "PR-WF-004",
+        "PR-WF-005",
+        "PR-WF-006",
+        "PR-WF-007",
+        "PR-WF-008",
+        "ST-WF-001",
+        "ST-WF-002",
+        "ST-WF-003",
+        "ST-WF-004",
+        "ST-WF-005",
+        "ST-WF-006",
+        "ST-WF-007",
+        "BC-WF-001",
+        "BC-WF-002",
+        "BC-WF-003",
+        "BC-WF-004",
+        "BC-WF-005",
+        "BC-WF-006",
+        "SE-WF-001",
+        "SE-WF-002",
+        "SE-WF-003",
+        "SE-WF-004",
+        "SE-WF-005"
+      ]
+    },
+    {
+      "id": "file::docs/specs/05-administration/domain.md",
+      "type": "file",
+      "label": "domain.md",
+      "filePath": "docs/specs/05-administration/domain.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 115,
+      "description": "Domain model for Administration feature defining four core entities (Administration, Step, Instance, InstanceStep) with attributes, relationships, state machines, and invariants.",
+      "symbols": [
+        {
+          "name": "Administration",
+          "kind": "heading",
+          "line": 5
+        },
+        {
+          "name": "Step",
+          "kind": "heading",
+          "line": 36
+        },
+        {
+          "name": "Instance",
+          "kind": "heading",
+          "line": 58
+        },
+        {
+          "name": "InstanceStep",
+          "kind": "heading",
+          "line": 81
+        }
+      ],
+      "exports": [
+        "Administration",
+        "Step",
+        "Instance",
+        "InstanceStep"
+      ]
+    },
+    {
+      "id": "file::docs/specs/05-administration/requirements.md",
+      "type": "file",
+      "label": "requirements.md",
+      "filePath": "docs/specs/05-administration/requirements.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 158,
+      "description": "Requirements specification for Administration including problem statement, objectives, actors, 8 user stories (US-001 to US-008), 9 functional requirements (REQ-WF-001 to REQ-WF-009), 3 non-functional requirements, constraints, edge cases, and dependencies.",
+      "symbols": [
+        {
+          "name": "US-001",
+          "kind": "heading",
+          "line": 21
+        },
+        {
+          "name": "US-002",
+          "kind": "heading",
+          "line": 33
+        },
+        {
+          "name": "US-003",
+          "kind": "heading",
+          "line": 45
+        },
+        {
+          "name": "US-004",
+          "kind": "heading",
+          "line": 56
+        },
+        {
+          "name": "US-005",
+          "kind": "heading",
+          "line": 67
+        },
+        {
+          "name": "US-006",
+          "kind": "heading",
+          "line": 79
+        },
+        {
+          "name": "US-007",
+          "kind": "heading",
+          "line": 91
+        },
+        {
+          "name": "US-008",
+          "kind": "heading",
+          "line": 102
+        },
+        {
+          "name": "REQ-WF-001",
+          "kind": "heading",
+          "line": 115
+        }
+      ],
+      "exports": [
+        "US-001",
+        "US-002",
+        "US-003",
+        "US-004",
+        "US-005",
+        "US-006",
+        "US-007",
+        "US-008",
+        "REQ-WF-001",
+        "REQ-WF-002",
+        "REQ-WF-003",
+        "REQ-WF-004",
+        "REQ-WF-005",
+        "REQ-WF-006",
+        "REQ-WF-007",
+        "REQ-WF-008",
+        "REQ-WF-009",
+        "NFR-WF-001",
+        "NFR-WF-002",
+        "NFR-WF-003"
+      ]
+    },
+    {
+      "id": "file::docs/specs/05-administration/tasks.md",
+      "type": "file",
+      "label": "tasks.md",
+      "filePath": "docs/specs/05-administration/tasks.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 175,
+      "description": "Implementation plan for Administration with 12 sequential tasks (TASK-001 to TASK-012) covering database schema, shared types, repository, service, API routes, composable, UI components, tests, and verification.",
+      "symbols": [
+        {
+          "name": "TASK-001",
+          "kind": "heading",
+          "line": 5
+        },
+        {
+          "name": "TASK-002",
+          "kind": "heading",
+          "line": 19
+        },
+        {
+          "name": "TASK-003",
+          "kind": "heading",
+          "line": 33
+        },
+        {
+          "name": "TASK-004",
+          "kind": "heading",
+          "line": 46
+        },
+        {
+          "name": "TASK-005",
+          "kind": "heading",
+          "line": 59
+        },
+        {
+          "name": "TASK-006",
+          "kind": "heading",
+          "line": 73
+        },
+        {
+          "name": "TASK-007",
+          "kind": "heading",
+          "line": 86
+        },
+        {
+          "name": "TASK-008",
+          "kind": "heading",
+          "line": 100
+        },
+        {
+          "name": "TASK-009",
+          "kind": "heading",
+          "line": 117
+        },
+        {
+          "name": "TASK-010",
+          "kind": "heading",
+          "line": 134
+        },
+        {
+          "name": "TASK-011",
+          "kind": "heading",
+          "line": 148
+        },
+        {
+          "name": "TASK-012",
+          "kind": "heading",
+          "line": 162
+        }
+      ],
+      "exports": [
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008",
+        "TASK-009",
+        "TASK-010",
+        "TASK-011",
+        "TASK-012"
+      ]
+    },
+    {
+      "id": "file::docs/specs/05-administration/test-cases.md",
+      "type": "file",
+      "label": "test-cases.md",
+      "filePath": "docs/specs/05-administration/test-cases.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 61,
+      "description": "Test cases for Administration covering unit tests (UT-WF-001 to UT-WF-004, UT-WI-001 to UT-WI-004), integration tests (IT-WF-001 to IT-WF-002), API tests (AT-WF-001 to AT-WF-009), E2E tests (ET-WF-001 to ET-WF-003), and edge cases (EC-WF-001 to EC-WF-004).",
+      "symbols": [
+        {
+          "name": "UT-WF-001",
+          "kind": "heading",
+          "line": 7
+        },
+        {
+          "name": "UT-WI-001",
+          "kind": "heading",
+          "line": 16
+        },
+        {
+          "name": "IT-WF-001",
+          "kind": "heading",
+          "line": 27
+        },
+        {
+          "name": "AT-WF-001",
+          "kind": "heading",
+          "line": 36
+        },
+        {
+          "name": "ET-WF-001",
+          "kind": "heading",
+          "line": 49
+        },
+        {
+          "name": "EC-WF-001",
+          "kind": "heading",
+          "line": 57
+        }
+      ],
+      "exports": [
+        "UT-WF-001",
+        "UT-WF-002",
+        "UT-WF-003",
+        "UT-WF-004",
+        "UT-WI-001",
+        "UT-WI-002",
+        "UT-WI-003",
+        "UT-WI-004",
+        "IT-WF-001",
+        "IT-WF-002",
+        "AT-WF-001",
+        "AT-WF-002",
+        "AT-WF-003",
+        "AT-WF-004",
+        "AT-WF-005",
+        "AT-WF-006",
+        "AT-WF-007",
+        "AT-WF-008",
+        "AT-WF-009",
+        "ET-WF-001",
+        "ET-WF-002",
+        "ET-WF-003",
+        "EC-WF-001",
+        "EC-WF-002",
+        "EC-WF-003",
+        "EC-WF-004"
+      ]
+    },
+    {
+      "id": "file::docs/specs/05-administration/ui.md",
+      "type": "file",
+      "label": "ui.md",
+      "filePath": "docs/specs/05-administration/ui.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 161,
+      "description": "UI specification for Administration pages including three-panel builder layout, instance list and detail views, visual flow diagram, state badges, and responsive behavior breakpoints.",
+      "symbols": [
+        {
+          "name": "Administrations List",
+          "kind": "heading",
+          "line": 5
+        },
+        {
+          "name": "Administration Builder",
+          "kind": "heading",
+          "line": 11
+        },
+        {
+          "name": "Administration Instance",
+          "kind": "heading",
+          "line": 17
+        },
+        {
+          "name": "Instance List",
+          "kind": "heading",
+          "line": 67
+        },
+        {
+          "name": "Instance Detail",
+          "kind": "heading",
+          "line": 81
+        }
+      ],
+      "exports": [
+        "Administrations List",
+        "Administration Builder",
+        "Administration Instance",
+        "Instance List",
+        "Instance Detail"
+      ]
+    },
+    {
+      "id": "file::docs/specs/05-administration/ux.md",
+      "type": "file",
+      "label": "ux.md",
+      "filePath": "docs/specs/05-administration/ux.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 102,
+      "description": "UX specification for Administration user flows including create workflow, execute workflow, reject workflow, progress tracking, feedback messages, and keyboard shortcuts.",
+      "symbols": [
+        {
+          "name": "Create Workflow",
+          "kind": "heading",
+          "line": 5
+        },
+        {
+          "name": "Execute Workflow",
+          "kind": "heading",
+          "line": 30
+        },
+        {
+          "name": "Reject Workflow",
+          "kind": "heading",
+          "line": 53
+        },
+        {
+          "name": "Track Progress",
+          "kind": "heading",
+          "line": 72
+        }
+      ],
+      "exports": [
+        "Create Workflow",
+        "Execute Workflow",
+        "Reject Workflow",
+        "Track Progress"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file::docs/specs/05-administration/acceptance.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "maps AC-001..AC-011 to REQ-WF-*, US-*, BC-WF-*",
+      "confidence": 0.95
+    },
+    {
+      "source": "file::docs/specs/05-administration/acceptance.md",
+      "target": "file::docs/specs/05-administration/business-rules.md",
+      "type": "references",
+      "label": "references BC-WF-002, BC-WF-003 constraints",
+      "confidence": 0.85
+    },
+    {
+      "source": "file::docs/specs/05-administration/api.md",
+      "target": "file::docs/specs/05-administration/domain.md",
+      "type": "references",
+      "label": "API endpoints implement domain entities Administration, Step, Instance",
+      "confidence": 0.92
+    },
+    {
+      "source": "file::docs/specs/05-administration/api.md",
+      "target": "file::docs/specs/05-administration/business-rules.md",
+      "type": "references",
+      "label": "API validation enforces VR-WF-*, PR-WF-* rules",
+      "confidence": 0.88
+    },
+    {
+      "source": "file::docs/specs/05-administration/business-rules.md",
+      "target": "file::docs/specs/05-administration/domain.md",
+      "type": "references",
+      "label": "rules govern domain entity state machines and invariants",
+      "confidence": 0.93
+    },
+    {
+      "source": "file::docs/specs/05-administration/domain.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "domain model realizes REQ-WF-* requirements",
+      "confidence": 0.87
+    },
+    {
+      "source": "file::docs/specs/05-administration/requirements.md",
+      "target": "file::docs/specs/05-administration/business-rules.md",
+      "type": "references",
+      "label": "requirements define constraints that become business rules",
+      "confidence": 0.9
+    },
+    {
+      "source": "file::docs/specs/05-administration/tasks.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "tasks implement REQ-WF-* functional requirements",
+      "confidence": 0.88
+    },
+    {
+      "source": "file::docs/specs/05-administration/tasks.md",
+      "target": "file::docs/specs/05-administration/api.md",
+      "type": "references",
+      "label": "TASK-005 implements API endpoints from api.md",
+      "confidence": 0.94
+    },
+    {
+      "source": "file::docs/specs/05-administration/tasks.md",
+      "target": "file::docs/specs/05-administration/domain.md",
+      "type": "references",
+      "label": "TASK-001 creates database schema for domain entities",
+      "confidence": 0.91
+    },
+    {
+      "source": "file::docs/specs/05-administration/test-cases.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "test cases verify REQ-WF-*, US-* requirements",
+      "confidence": 0.92
+    },
+    {
+      "source": "file::docs/specs/05-administration/test-cases.md",
+      "target": "file::docs/specs/05-administration/acceptance.md",
+      "type": "references",
+      "label": "test cases validate acceptance criteria",
+      "confidence": 0.89
+    },
+    {
+      "source": "file::docs/specs/05-administration/test-cases.md",
+      "target": "file::docs/specs/05-administration/api.md",
+      "type": "references",
+      "label": "AT-WF-* API tests verify endpoints from api.md",
+      "confidence": 0.9
+    },
+    {
+      "source": "file::docs/specs/05-administration/test-cases.md",
+      "target": "file::docs/specs/05-administration/business-rules.md",
+      "type": "references",
+      "label": "UT-WF-* unit tests verify business rules enforcement",
+      "confidence": 0.87
+    },
+    {
+      "source": "file::docs/specs/05-administration/ui.md",
+      "target": "file::docs/specs/05-administration/domain.md",
+      "type": "references",
+      "label": "UI pages display domain entities Administration, Instance, InstanceStep",
+      "confidence": 0.85
+    },
+    {
+      "source": "file::docs/specs/05-administration/ui.md",
+      "target": "file::docs/specs/05-administration/api.md",
+      "type": "references",
+      "label": "UI consumes API endpoints for data display and actions",
+      "confidence": 0.86
+    },
+    {
+      "source": "file::docs/specs/05-administration/ux.md",
+      "target": "file::docs/specs/05-administration/ui.md",
+      "type": "references",
+      "label": "UX flows map to UI page layouts and components",
+      "confidence": 0.93
+    },
+    {
+      "source": "file::docs/specs/05-administration/ux.md",
+      "target": "file::docs/specs/05-administration/acceptance.md",
+      "type": "references",
+      "label": "UX flows implement acceptance criteria workflows",
+      "confidence": 0.88
+    },
+    {
+      "source": "file::docs/specs/05-administration/ux.md",
+      "target": "file::docs/specs/05-administration/requirements.md",
+      "type": "references",
+      "label": "UX flows realize US-001 through US-008 user stories",
+      "confidence": 0.87
+    }
+  ]
+}

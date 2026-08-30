@@ -1,0 +1,284 @@
+{
+  "batchIndex": 9,
+  "batchFiles": [
+    {
+      "path": "docs/specs/04-template/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 105,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/api.md",
+      "language": "markdown",
+      "sizeLines": 135,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 49,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/domain.md",
+      "language": "markdown",
+      "sizeLines": 121,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/requirements.md",
+      "language": "markdown",
+      "sizeLines": 141,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/tasks.md",
+      "language": "markdown",
+      "sizeLines": 183,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 59,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/ui.md",
+      "language": "markdown",
+      "sizeLines": 167,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/ux.md",
+      "language": "markdown",
+      "sizeLines": 133,
+      "fileCategory": "docs"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "document:docs/specs/04-template/acceptance.md",
+      "type": "document",
+      "name": "Acceptance Criteria — Template",
+      "filePath": "docs/specs/04-template/acceptance.md",
+      "summary": "Defines 11 acceptance criteria (AC-001 to AC-011) for the Template feature, covering creation, unique naming, component insertion, data binding, loop/condition configuration, live preview, publishing, versioning, and empty state. Each criterion maps to requirements and user stories.",
+      "tags": ["template", "acceptance-criteria", "verification", "specification"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/specs/04-template/api.md",
+      "type": "document",
+      "name": "API — Template",
+      "filePath": "docs/specs/04-template/api.md",
+      "summary": "Defines REST API endpoints for Template CRUD operations: GET /api/templates (list), GET /api/templates/:id (detail with bindings/conditions), POST /api/templates (create), PUT /api/templates/:id (update with versioning), DELETE /api/templates/:id, POST /api/templates/:id/publish, POST /api/templates/:id/preview, POST /api/templates/:id/bindings. Includes error response codes (400, 404, 409, 422, 500).",
+      "tags": ["template", "api", "rest", "endpoints", "specification"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/specs/04-template/business-rules.md",
+      "type": "document",
+      "name": "Business Rules — Template",
+      "filePath": "docs/specs/04-template/business-rules.md",
+      "summary": "Defines validation rules (VR-TE-001 to VR-TE-006), permission rules (PR-TE-001 to PR-TE-005), state transition rules (Draft→Published→Archived), business constraints (BC-TE-001 to BC-TE-005), and side effects (SE-TE-001 to SE-TE-004) for the Template feature.",
+      "tags": ["template", "business-rules", "validation", "permissions", "specification"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/specs/04-template/domain.md",
+      "type": "document",
+      "name": "Domain — Template",
+      "filePath": "docs/specs/04-template/domain.md",
+      "summary": "Defines domain entities: Template (with status state machine: Draft→Published→Archived), DataBinding (with source types: administration/global-table/manual/expression/system), ComponentBlock (single/collection modes), and Condition. Describes relationships (Template 1:N DataBinding, N:M Component, 1:N Condition, N:1 Administration, 1:N Document), invariants, and Tiptap content model structure.",
+      "tags": ["template", "domain-model", "entities", "relationships", "specification"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/specs/04-template/requirements.md",
+      "type": "document",
+      "name": "Requirements — Template",
+      "filePath": "docs/specs/04-template/requirements.md",
+      "summary": "Core specification for the Template feature. Defines problem statement (hardcoded document structures), objective (composable document blueprints), actors (Administrator, Staff), 7 user stories (US-001 to US-007), 9 functional requirements (REQ-TE-001 to REQ-TE-009), 3 non-functional requirements (NFR-TE-001 to NFR-TE-003), constraints, edge cases, and dependencies (Component, Global Table, Expression Engine, Tiptap).",
+      "tags": ["template", "requirements", "user-stories", "specification", "core-spec"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/specs/04-template/tasks.md",
+      "type": "document",
+      "name": "Tasks — Template",
+      "filePath": "docs/specs/04-template/tasks.md",
+      "summary": "Implementation plan with 13 tasks (TASK-001 to TASK-013): Database Schema (Drizzle), Shared Types & Schemas (Zod), Repository Layer (TemplateRepository), Service Layer (TemplateService), API Routes, Composable (useTemplate), UI pages (Template List, Builder, Component Picker, Data Binding UI, Preview Panel), Tests, and Verification. Defines dependencies and affected files for each task.",
+      "tags": ["template", "implementation-tasks", "plan", "specification"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/specs/04-template/test-cases.md",
+      "type": "document",
+      "name": "Test Cases — Template",
+      "filePath": "docs/specs/04-template/test-cases.md",
+      "summary": "Defines test cases for Template feature: 4 unit tests for TemplateService (UT-TE-001 to UT-TE-004), 4 unit tests for DataBindingResolver (UT-DB-001 to UT-DB-004), 2 integration tests (IT-TE-001, IT-TE-002), 7 API tests (AT-TE-001 to AT-TE-007), 3 E2E tests (ET-TE-001 to ET-TE-003), and 4 edge cases (EC-TE-001 to EC-TE-004).",
+      "tags": ["template", "test-cases", "testing", "specification"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/specs/04-template/ui.md",
+      "type": "document",
+      "name": "UI — Template",
+      "filePath": "docs/specs/04-template/ui.md",
+      "summary": "UI specification for Template feature: Templates List page (/templates), Template Builder with three-panel layout (Blocks panel, Document Canvas with Tiptap, Data Panel), Template Create page, Component Picker (command palette style), Data Binding UI, Preview Panel (split-screen). Includes responsive behavior (desktop/tablet/mobile), loading/empty/error states, and accessibility requirements.",
+      "tags": ["template", "ui", "interface", "design", "specification"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:docs/specs/04-template/ux.md",
+      "type": "document",
+      "name": "UX — Template",
+      "filePath": "docs/specs/04-template/ux.md",
+      "summary": "UX specification for Template feature: User flows for Create Template, Insert Component, Bind Data, Configure Loop, Configure Condition, and Preview. Includes feedback mechanisms (toasts, badges, checks), keyboard shortcuts (Cmd+S save, Cmd+P preview, Cmd+K palette), and interaction patterns.",
+      "tags": ["template", "ux", "user-flow", "interaction", "specification"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:docs/specs/04-template/acceptance.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "maps acceptance criteria to requirements",
+      "weight": 0.8
+    },
+    {
+      "source": "document:docs/specs/04-template/acceptance.md",
+      "target": "document:docs/specs/04-template/test-cases.md",
+      "type": "related",
+      "label": "acceptance criteria inform test cases",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/04-template/api.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "API endpoints implement functional requirements",
+      "weight": 0.8
+    },
+    {
+      "source": "document:docs/specs/04-template/api.md",
+      "target": "document:docs/specs/04-template/domain.md",
+      "type": "related",
+      "label": "API endpoints use domain entities",
+      "weight": 0.7
+    },
+    {
+      "source": "document:docs/specs/04-template/api.md",
+      "target": "document:docs/specs/04-template/business-rules.md",
+      "type": "validates",
+      "label": "API error responses enforce business rules",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/04-template/business-rules.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "business rules derive from requirements",
+      "weight": 0.8
+    },
+    {
+      "source": "document:docs/specs/04-template/business-rules.md",
+      "target": "document:docs/specs/04-template/domain.md",
+      "type": "defines_schema",
+      "label": "business rules constrain domain entities",
+      "weight": 0.7
+    },
+    {
+      "source": "document:docs/specs/04-template/domain.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "domain model implements requirements",
+      "weight": 0.8
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "implementation tasks fulfill requirements",
+      "weight": 0.8
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/api.md",
+      "type": "related",
+      "label": "TASK-005 implements API endpoints",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/domain.md",
+      "type": "related",
+      "label": "TASK-001 creates database schema for domain entities",
+      "weight": 0.7
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/ui.md",
+      "type": "related",
+      "label": "TASK-007 through TASK-011 implement UI components",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/04-template/tasks.md",
+      "target": "document:docs/specs/04-template/test-cases.md",
+      "type": "related",
+      "label": "TASK-012 implements test cases",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/04-template/test-cases.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "test cases verify requirements",
+      "weight": 0.8
+    },
+    {
+      "source": "document:docs/specs/04-template/test-cases.md",
+      "target": "document:docs/specs/04-template/api.md",
+      "type": "tested_by",
+      "label": "API tests validate endpoint behavior",
+      "weight": 0.7
+    },
+    {
+      "source": "document:docs/specs/04-template/test-cases.md",
+      "target": "document:docs/specs/04-template/business-rules.md",
+      "type": "validates",
+      "label": "unit tests validate business rules",
+      "weight": 0.6
+    },
+    {
+      "source": "document:docs/specs/04-template/ui.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "UI implements REQ-TE-002 (Document Composition Canvas)",
+      "weight": 0.8
+    },
+    {
+      "source": "document:docs/specs/04-template/ui.md",
+      "target": "document:docs/specs/04-template/ux.md",
+      "type": "related",
+      "label": "UI specification aligns with UX flows",
+      "weight": 0.7
+    },
+    {
+      "source": "document:docs/specs/04-template/ux.md",
+      "target": "document:docs/specs/04-template/requirements.md",
+      "type": "documents",
+      "label": "UX flows implement user stories",
+      "weight": 0.8
+    },
+    {
+      "source": "document:docs/specs/04-template/ux.md",
+      "target": "document:docs/specs/04-template/ui.md",
+      "type": "related",
+      "label": "UX flows drive UI component design",
+      "weight": 0.6
+    }
+  ]
+}

@@ -1,0 +1,749 @@
+{
+  "batchIndex": 14,
+  "batchFiles": [
+    {
+      "path": ".opencode/.gitignore",
+      "language": "unknown",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".ua/.understandignore",
+      "language": "unknown",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "sizeLines": 190,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 1642,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "app/.gitignore",
+      "language": "unknown",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/app/app.vue",
+      "language": "vue",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/nuxt.config.ts",
+      "language": "typescript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/public/favicon.ico",
+      "language": "unknown",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/public/robots.txt",
+      "language": "unknown",
+      "sizeLines": 2,
+      "fileCategory": "code"
+    },
+    {
+      "path": "docs/specs/README.md",
+      "language": "markdown",
+      "sizeLines": 76,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "prompts/generate-animejs-skill.md",
+      "language": "markdown",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "prompts/generate-naiveui-skill.md",
+      "language": "markdown",
+      "sizeLines": 229,
+      "fileCategory": "code"
+    },
+    {
+      "path": "prompts/generate-nuxtjs-skill.md",
+      "language": "markdown",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "prompts/generate-tailwindcss-skill.md",
+      "language": "markdown",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "prompts/generate-test-skill.md",
+      "language": "markdown",
+      "sizeLines": 229,
+      "fileCategory": "code"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "file:.opencode/.gitignore",
+      "type": "file",
+      "label": ".opencode/.gitignore",
+      "filePath": ".opencode/.gitignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "sizeLines": 5,
+      "description": "Git ignore rules for .opencode directory. Excludes node_modules, package.json, package-lock.json, bun.lock, and .gitignore from the opencode config directory.",
+      "exports": [],
+      "imports": []
+    },
+    {
+      "id": "file:.ua/.understandignore",
+      "type": "file",
+      "label": ".ua/.understandignore",
+      "filePath": ".ua/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "sizeLines": 63,
+      "description": "Configuration for the Understand analysis tool. Defines file and directory exclusion patterns for knowledge graph generation. Supports gitignore syntax with negation patterns. Includes template patterns for test files across multiple languages (JS/TS, C#, Java, Go, C++, Python, Rust, Ruby, Swift).",
+      "exports": [],
+      "imports": []
+    },
+    {
+      "id": "file:AGENTS.md",
+      "type": "file",
+      "label": "AGENTS.md",
+      "filePath": "AGENTS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 190,
+      "description": "Operational constitution for the Persuratan project. Defines project overview (Dynamic Administration & Document Composition Platform), technology stack (Nuxt 4 + Nitro, Vue 3, TypeScript, SQLite + Drizzle ORM, Tiptap, Zod, Vitest/Playwright, pnpm), repository structure, architecture rules (mandatory layer separation), coding rules, frontend/backend/UI-UX/testing rules, verification rules, SDD workflow, and 10 key principles.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "ProjectOverview",
+          "kind": "concept",
+          "line": 7,
+          "description": "Persuratan is a Dynamic Administration & Document Composition Platform"
+        },
+        {
+          "name": "CoreConceptChain",
+          "kind": "concept",
+          "line": 11,
+          "description": "Global Table \u2192 Component \u2192 Template \u2192 Administration \u2192 Document \u2192 PDF"
+        },
+        {
+          "name": "TechnologyStack",
+          "kind": "constant",
+          "line": 18,
+          "description": "Layer-to-technology mapping table for the project"
+        },
+        {
+          "name": "RepositoryStructure",
+          "kind": "constant",
+          "line": 33,
+          "description": "Complete directory tree of the project"
+        },
+        {
+          "name": "LayerSeparation",
+          "kind": "concept",
+          "line": 90,
+          "description": "Mandatory layer flow: Page \u2192 Component \u2192 Composable \u2192 API Route \u2192 Service \u2192 Repository \u2192 Database"
+        },
+        {
+          "name": "SDDWorkflow",
+          "kind": "concept",
+          "line": 173,
+          "description": "/spec \u2192 /plan \u2192 /implement \u2192 /verify \u2192 /review \u2192 DONE"
+        },
+        {
+          "name": "KeyPrinciples",
+          "kind": "constant",
+          "line": 179,
+          "description": "10 key principles governing the project"
+        }
+      ]
+    },
+    {
+      "id": "file:README.md",
+      "type": "file",
+      "label": "README.md",
+      "filePath": "README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 1642,
+      "description": "Comprehensive project documentation for Spec-Driven Development (SDD) with OpenCode. Covers SDD overview, goals, concepts, workflow architecture, project structure, setup, initialization, all workflow commands (/spec, /plan, /implement, /verify, /review), Global Table example, UI/UX rules, Nuxt.js rules, best practices, definition of done, and daily workflow recommendations.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "SDDOverview",
+          "kind": "concept",
+          "line": 33,
+          "description": "Spec-Driven Development for controlling Vibe Coding with OpenCode"
+        },
+        {
+          "name": "WorkflowArchitecture",
+          "kind": "concept",
+          "line": 264,
+          "description": "Full workflow diagram from USER through /spec, /plan, /implement, /verify, /review to DONE"
+        },
+        {
+          "name": "ProjectStructure",
+          "kind": "constant",
+          "line": 328,
+          "description": "Recommended project directory structure"
+        },
+        {
+          "name": "SpecCommand",
+          "kind": "concept",
+          "line": 467,
+          "description": "/spec creates feature specifications"
+        },
+        {
+          "name": "PlanCommand",
+          "kind": "concept",
+          "line": 542,
+          "description": "/plan creates implementation plans from specifications"
+        },
+        {
+          "name": "ImplementCommand",
+          "kind": "concept",
+          "line": 611,
+          "description": "/implement executes the implementation plan"
+        },
+        {
+          "name": "VerifyCommand",
+          "kind": "concept",
+          "line": 663,
+          "description": "/verify runs typecheck, lint, tests, build, and acceptance criteria"
+        },
+        {
+          "name": "ReviewCommand",
+          "kind": "concept",
+          "line": 744,
+          "description": "/review performs independent code, architecture, UI/UX, security, performance review"
+        },
+        {
+          "name": "DefinitionOfDone",
+          "kind": "concept",
+          "line": 1407,
+          "description": "Complete checklist for feature completion"
+        },
+        {
+          "name": "NuxtJsRules",
+          "kind": "concept",
+          "line": 1103,
+          "description": "Layer separation rules for Nuxt.js applications"
+        },
+        {
+          "name": "UIUXRules",
+          "kind": "concept",
+          "line": 1044,
+          "description": "Visual hierarchy, states, responsive, accessibility rules"
+        },
+        {
+          "name": "BestPractices",
+          "kind": "concept",
+          "line": 1243,
+          "description": "6 best practices for SDD workflow"
+        }
+      ]
+    },
+    {
+      "id": "file:app/.gitignore",
+      "type": "file",
+      "label": "app/.gitignore",
+      "filePath": "app/.gitignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "sizeLines": 24,
+      "description": "Git ignore rules for the Nuxt app directory. Excludes Nuxt dev/build outputs (.output, .data, .nuxt, .nitro, .cache, dist), node_modules, logs, IDE files (.DS_Store, .fleet, .idea), and local env files (.env, .env.*).",
+      "exports": [],
+      "imports": []
+    },
+    {
+      "id": "file:app/app/app.vue",
+      "type": "file",
+      "label": "app.vue",
+      "filePath": "app/app/app.vue",
+      "language": "vue",
+      "fileCategory": "code",
+      "sizeLines": 6,
+      "description": "Root Vue component of the Nuxt application. Contains NuxtRouteAnnouncer for accessibility and NuxtWelcome as placeholder content. This is the entry point component rendered by the Nuxt framework.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "app.vue",
+          "kind": "component",
+          "line": 1,
+          "description": "Root Vue component with template-only composition"
+        }
+      ]
+    },
+    {
+      "id": "file:app/nuxt.config.ts",
+      "type": "file",
+      "label": "nuxt.config.ts",
+      "filePath": "app/nuxt.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "sizeLines": 5,
+      "description": "Nuxt configuration file. Defines compatibility date (2025-07-15) and enables devtools. This is the central configuration for the Nuxt application.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "default",
+          "kind": "config",
+          "line": 2,
+          "description": "Nuxt config with compatibilityDate and devtools enabled"
+        }
+      ]
+    },
+    {
+      "id": "file:app/public/favicon.ico",
+      "type": "file",
+      "label": "favicon.ico",
+      "filePath": "app/public/favicon.ico",
+      "language": "unknown",
+      "fileCategory": "code",
+      "sizeLines": 1,
+      "description": "Binary favicon file served as static asset from the public directory.",
+      "exports": [],
+      "imports": []
+    },
+    {
+      "id": "file:app/public/robots.txt",
+      "type": "file",
+      "label": "robots.txt",
+      "filePath": "app/public/robots.txt",
+      "language": "unknown",
+      "fileCategory": "code",
+      "sizeLines": 2,
+      "description": "Robots.txt configuration. Allows all user agents with no disallow rules (fully crawlable).",
+      "exports": [],
+      "imports": []
+    },
+    {
+      "id": "file:docs/specs/README.md",
+      "type": "file",
+      "label": "specs/README.md",
+      "filePath": "docs/specs/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "sizeLines": 76,
+      "description": "Feature specifications index and guide. Defines spec directory structure, naming convention ({no}-{feature-name}), spec lifecycle (Draft \u2192 Review \u2192 Approved \u2192 Implemented \u2192 Verified \u2192 Done), rules, and lists 7 core features with their status: global-table, expression-engine, component, template, administration, document, render-engine.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "SpecStructure",
+          "kind": "constant",
+          "line": 6,
+          "description": "Standard spec directory with requirements.md, domain.md, business-rules.md, api.md, ui.md, ux.md, acceptance.md, test-cases.md, tasks.md"
+        },
+        {
+          "name": "SpecLifecycle",
+          "kind": "concept",
+          "line": 29,
+          "description": "Draft \u2192 Review \u2192 Approved \u2192 Implemented \u2192 Verified \u2192 Done"
+        },
+        {
+          "name": "FeatureIndex",
+          "kind": "constant",
+          "line": 62,
+          "description": "Index of 7 core features: global-table, expression-engine, component, template, administration, document, render-engine"
+        },
+        {
+          "name": "CoreConceptChain",
+          "kind": "concept",
+          "line": 74,
+          "description": "Global Table \u2192 Component \u2192 Template \u2192 Administration \u2192 Document \u2192 PDF"
+        }
+      ]
+    },
+    {
+      "id": "file:prompts/generate-animejs-skill.md",
+      "type": "file",
+      "label": "generate-animejs-skill.md",
+      "filePath": "prompts/generate-animejs-skill.md",
+      "language": "markdown",
+      "fileCategory": "code",
+      "sizeLines": 228,
+      "description": "Reusable prompt template for generating an OpenCode Skill from Anime.js official documentation. Defines variables (SKILL_NAME=animejs-base-practices, TECHNOLOGY=animejs), learning process for studying documentation, adaptation to Nuxt stack, expected output structure (SKILL.md + references/), writing style, constraints, and success criteria.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "SKILL_NAME",
+          "kind": "variable",
+          "line": 16,
+          "description": "animejs-base-practices"
+        },
+        {
+          "name": "TECHNOLOGY",
+          "kind": "variable",
+          "line": 18,
+          "description": "animejs"
+        },
+        {
+          "name": "PROJECT_STACK",
+          "kind": "variable",
+          "line": 20,
+          "description": "Nuxt"
+        },
+        {
+          "name": "REFERENCE_SKILL",
+          "kind": "variable",
+          "line": 22,
+          "description": ".opencode/skills/crawlee-scraper-skill"
+        },
+        {
+          "name": "LearningProcess",
+          "kind": "concept",
+          "line": 48,
+          "description": "Process for studying official documentation pages"
+        },
+        {
+          "name": "ExpectedOutput",
+          "kind": "concept",
+          "line": 94,
+          "description": "Folder structure with SKILL.md and references/"
+        },
+        {
+          "name": "SuccessCriteria",
+          "kind": "concept",
+          "line": 219,
+          "description": "Criteria for skill completion"
+        }
+      ]
+    },
+    {
+      "id": "file:prompts/generate-naiveui-skill.md",
+      "type": "file",
+      "label": "generate-naiveui-skill.md",
+      "filePath": "prompts/generate-naiveui-skill.md",
+      "language": "markdown",
+      "fileCategory": "code",
+      "sizeLines": 229,
+      "description": "Reusable prompt template for generating an OpenCode Skill from Naive UI official documentation. Defines variables (SKILL_NAME=naiveiu-base-practices, TECHNOLOGY=naiveui), learning process for studying Naive UI docs, adaptation to Nuxt stack, expected output structure, writing style, constraints, and success criteria.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "SKILL_NAME",
+          "kind": "variable",
+          "line": 16,
+          "description": "naiveiu-base-practices"
+        },
+        {
+          "name": "TECHNOLOGY",
+          "kind": "variable",
+          "line": 18,
+          "description": "naiveui"
+        },
+        {
+          "name": "PROJECT_STACK",
+          "kind": "variable",
+          "line": 20,
+          "description": "Nuxt"
+        },
+        {
+          "name": "REFERENCE_SKILL",
+          "kind": "variable",
+          "line": 22,
+          "description": ".opencode/skills/crawlee-scraper-skill"
+        },
+        {
+          "name": "LearningProcess",
+          "kind": "concept",
+          "line": 48,
+          "description": "Process for studying official documentation pages"
+        },
+        {
+          "name": "ExpectedOutput",
+          "kind": "concept",
+          "line": 94,
+          "description": "Folder structure with SKILL.md and references/"
+        },
+        {
+          "name": "SuccessCriteria",
+          "kind": "concept",
+          "line": 219,
+          "description": "Criteria for skill completion"
+        }
+      ]
+    },
+    {
+      "id": "file:prompts/generate-nuxtjs-skill.md",
+      "type": "file",
+      "label": "generate-nuxtjs-skill.md",
+      "filePath": "prompts/generate-nuxtjs-skill.md",
+      "language": "markdown",
+      "fileCategory": "code",
+      "sizeLines": 228,
+      "description": "Reusable prompt template for generating an OpenCode Skill from Nuxt.js official documentation. Defines variables (SKILL_NAME=nuxt-base-practices, TECHNOLOGY=nuxt), learning process for studying Nuxt docs, adaptation to Nuxt stack, expected output structure, writing style, constraints, and success criteria.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "SKILL_NAME",
+          "kind": "variable",
+          "line": 16,
+          "description": "nuxt-base-practices"
+        },
+        {
+          "name": "TECHNOLOGY",
+          "kind": "variable",
+          "line": 18,
+          "description": "nuxt"
+        },
+        {
+          "name": "PROJECT_STACK",
+          "kind": "variable",
+          "line": 20,
+          "description": "Nuxt"
+        },
+        {
+          "name": "REFERENCE_SKILL",
+          "kind": "variable",
+          "line": 22,
+          "description": ".opencode/skills/crawlee-scraper-skill"
+        },
+        {
+          "name": "LearningProcess",
+          "kind": "concept",
+          "line": 48,
+          "description": "Process for studying official documentation pages"
+        },
+        {
+          "name": "ExpectedOutput",
+          "kind": "concept",
+          "line": 94,
+          "description": "Folder structure with SKILL.md and references/"
+        },
+        {
+          "name": "SuccessCriteria",
+          "kind": "concept",
+          "line": 219,
+          "description": "Criteria for skill completion"
+        }
+      ]
+    },
+    {
+      "id": "file:prompts/generate-tailwindcss-skill.md",
+      "type": "file",
+      "label": "generate-tailwindcss-skill.md",
+      "filePath": "prompts/generate-tailwindcss-skill.md",
+      "language": "markdown",
+      "fileCategory": "code",
+      "sizeLines": 228,
+      "description": "Reusable prompt template for generating an OpenCode Skill from Tailwind CSS official documentation. Defines variables (SKILL_NAME=tailwind-base-practices, TECHNOLOGY=tailwindcss), learning process for studying Tailwind docs, adaptation to Nuxt stack, expected output structure, writing style, constraints, and success criteria.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "SKILL_NAME",
+          "kind": "variable",
+          "line": 16,
+          "description": "tailwind-base-practices"
+        },
+        {
+          "name": "TECHNOLOGY",
+          "kind": "variable",
+          "line": 18,
+          "description": "tailwindcss"
+        },
+        {
+          "name": "PROJECT_STACK",
+          "kind": "variable",
+          "line": 20,
+          "description": "Nuxt"
+        },
+        {
+          "name": "REFERENCE_SKILL",
+          "kind": "variable",
+          "line": 22,
+          "description": ".opencode/skills/crawlee-scraper-skill"
+        },
+        {
+          "name": "LearningProcess",
+          "kind": "concept",
+          "line": 48,
+          "description": "Process for studying official documentation pages"
+        },
+        {
+          "name": "ExpectedOutput",
+          "kind": "concept",
+          "line": 94,
+          "description": "Folder structure with SKILL.md and references/"
+        },
+        {
+          "name": "SuccessCriteria",
+          "kind": "concept",
+          "line": 219,
+          "description": "Criteria for skill completion"
+        }
+      ]
+    },
+    {
+      "id": "file:prompts/generate-test-skill.md",
+      "type": "file",
+      "label": "generate-test-skill.md",
+      "filePath": "prompts/generate-test-skill.md",
+      "language": "markdown",
+      "fileCategory": "code",
+      "sizeLines": 229,
+      "description": "Reusable prompt template for generating an OpenCode Skill from Playwright and @nuxt/test-utils official documentation. Defines variables (SKILL_NAME=test-base-practices, TECHNOLOGY=@playwright/test + @nuxt/test-utils), learning process for studying testing docs, adaptation to Nuxt stack, expected output structure, writing style, constraints, and success criteria.",
+      "exports": [],
+      "imports": [],
+      "symbols": [
+        {
+          "name": "SKILL_NAME",
+          "kind": "variable",
+          "line": 16,
+          "description": "test-base-practices"
+        },
+        {
+          "name": "TECHNOLOGY",
+          "kind": "variable",
+          "line": 18,
+          "description": "@playwright/test + @nuxt/test-utils"
+        },
+        {
+          "name": "PROJECT_STACK",
+          "kind": "variable",
+          "line": 20,
+          "description": "Nuxt"
+        },
+        {
+          "name": "REFERENCE_SKILL",
+          "kind": "variable",
+          "line": 22,
+          "description": ".opencode/skills/crawlee-scraper-skill"
+        },
+        {
+          "name": "LearningProcess",
+          "kind": "concept",
+          "line": 48,
+          "description": "Process for studying official documentation pages"
+        },
+        {
+          "name": "ExpectedOutput",
+          "kind": "concept",
+          "line": 94,
+          "description": "Folder structure with SKILL.md and references/"
+        },
+        {
+          "name": "SuccessCriteria",
+          "kind": "concept",
+          "line": 219,
+          "description": "Criteria for skill completion"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:app/app/app.vue",
+      "target": "file:app/nuxt.config.ts",
+      "relation": "configured_by",
+      "label": "configured by"
+    },
+    {
+      "source": "file:README.md",
+      "target": "file:AGENTS.md",
+      "relation": "references",
+      "label": "references AGENTS.md"
+    },
+    {
+      "source": "file:docs/specs/README.md",
+      "target": "file:AGENTS.md",
+      "relation": "references",
+      "label": "references AGENTS.md for SDD workflow"
+    },
+    {
+      "source": "file:AGENTS.md",
+      "target": "file:docs/specs/README.md",
+      "relation": "references",
+      "label": "references specs directory"
+    },
+    {
+      "source": "file:README.md",
+      "target": "file:docs/specs/README.md",
+      "relation": "references",
+      "label": "references specs documentation"
+    },
+    {
+      "source": "file:prompts/generate-animejs-skill.md",
+      "target": "file:prompts/generate-naiveui-skill.md",
+      "relation": "similar_to",
+      "label": "same prompt template pattern"
+    },
+    {
+      "source": "file:prompts/generate-animejs-skill.md",
+      "target": "file:prompts/generate-nuxtjs-skill.md",
+      "relation": "similar_to",
+      "label": "same prompt template pattern"
+    },
+    {
+      "source": "file:prompts/generate-animejs-skill.md",
+      "target": "file:prompts/generate-tailwindcss-skill.md",
+      "relation": "similar_to",
+      "label": "same prompt template pattern"
+    },
+    {
+      "source": "file:prompts/generate-animejs-skill.md",
+      "target": "file:prompts/generate-test-skill.md",
+      "relation": "similar_to",
+      "label": "same prompt template pattern"
+    },
+    {
+      "source": "file:prompts/generate-nuxtjs-skill.md",
+      "target": "file:app/nuxt.config.ts",
+      "relation": "generates_skill_for",
+      "label": "generates skill for Nuxt framework used by this config"
+    },
+    {
+      "source": "file:prompts/generate-tailwindcss-skill.md",
+      "target": "file:AGENTS.md",
+      "relation": "generates_skill_for",
+      "label": "generates skill for Tailwind CSS referenced in tech stack"
+    },
+    {
+      "source": "file:prompts/generate-test-skill.md",
+      "target": "file:AGENTS.md",
+      "relation": "generates_skill_for",
+      "label": "generates skill for testing referenced in verification rules"
+    },
+    {
+      "source": "file:app/.gitignore",
+      "target": "file:app/nuxt.config.ts",
+      "relation": "ignores_outputs_of",
+      "label": "ignores build outputs of Nuxt config"
+    },
+    {
+      "source": "file:.opencode/.gitignore",
+      "target": "file:AGENTS.md",
+      "relation": "part_of",
+      "label": "part of .opencode config referenced in AGENTS.md"
+    },
+    {
+      "source": "file:.ua/.understandignore",
+      "target": "file:README.md",
+      "relation": "excludes_from_analysis",
+      "label": "excludes files from knowledge graph analysis"
+    }
+  ]
+}

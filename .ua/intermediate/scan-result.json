@@ -1,0 +1,763 @@
+{
+  "meta": {
+    "projectRoot": "/home/afdal/Laboratorium/PROJECT/persuratan",
+    "scannedAt": "2026-08-30T00:00:00.000Z",
+    "excludePatterns": []
+  },
+  "project": {
+    "name": "persuratan",
+    "description": "Spec-Driven Development with OpenCode - Workflow Vibe Coding terstruktur untuk project Nuxt.js full-stack",
+    "languages": [
+      "markdown",
+      "yaml",
+      "typescript",
+      "json",
+      "vue"
+    ],
+    "frameworks": [
+      "nuxt"
+    ],
+    "complexity": "moderate"
+  },
+  "files": [
+    {
+      "path": "app/app/app.vue",
+      "language": "vue",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/nuxt.config.ts",
+      "language": "typescript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/package.json",
+      "language": "json",
+      "sizeLines": 22,
+      "fileCategory": "config"
+    },
+    {
+      "path": "app/tsconfig.json",
+      "language": "json",
+      "sizeLines": 18,
+      "fileCategory": "config"
+    },
+    {
+      "path": "app/pnpm-workspace.yaml",
+      "language": "yaml",
+      "sizeLines": 2,
+      "fileCategory": "config"
+    },
+    {
+      "path": "app/pnpm-lock.yaml",
+      "language": "yaml",
+      "sizeLines": 6625,
+      "fileCategory": "config"
+    },
+    {
+      "path": "app/package-lock.json",
+      "language": "json",
+      "sizeLines": 9162,
+      "fileCategory": "config"
+    },
+    {
+      "path": "AGENTS.md",
+      "language": "markdown",
+      "sizeLines": 190,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 1642,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "app/README.md",
+      "language": "markdown",
+      "sizeLines": 75,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/product/vision.md",
+      "language": "markdown",
+      "sizeLines": 43,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/product/users.md",
+      "language": "markdown",
+      "sizeLines": 66,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/product/use-cases.md",
+      "language": "markdown",
+      "sizeLines": 68,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/product/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 68,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/product/glossary.md",
+      "language": "markdown",
+      "sizeLines": 30,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/product/problem.md",
+      "language": "markdown",
+      "sizeLines": 42,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/product/core-concepts.md",
+      "language": "markdown",
+      "sizeLines": 330,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/technology-stack.md",
+      "language": "markdown",
+      "sizeLines": 68,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/api.md",
+      "language": "markdown",
+      "sizeLines": 84,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/overview.md",
+      "language": "markdown",
+      "sizeLines": 75,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/backend.md",
+      "language": "markdown",
+      "sizeLines": 108,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/frontend.md",
+      "language": "markdown",
+      "sizeLines": 76,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/system-context.md",
+      "language": "markdown",
+      "sizeLines": 44,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/database.md",
+      "language": "markdown",
+      "sizeLines": 67,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/architecture-rules.md",
+      "language": "markdown",
+      "sizeLines": 89,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/architecture/security.md",
+      "language": "markdown",
+      "sizeLines": 40,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/design/ux-principles.md",
+      "language": "markdown",
+      "sizeLines": 49,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/design/accessibility.md",
+      "language": "markdown",
+      "sizeLines": 53,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/design/interaction-patterns.md",
+      "language": "markdown",
+      "sizeLines": 110,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/design/ui-principles.md",
+      "language": "markdown",
+      "sizeLines": 58,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/design/component-guidelines.md",
+      "language": "markdown",
+      "sizeLines": 86,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/design/responsive.md",
+      "language": "markdown",
+      "sizeLines": 53,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/design/design-system.md",
+      "language": "markdown",
+      "sizeLines": 103,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/verification-rules.md",
+      "language": "markdown",
+      "sizeLines": 146,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/definition-of-done.md",
+      "language": "markdown",
+      "sizeLines": 73,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/review-rules.md",
+      "language": "markdown",
+      "sizeLines": 122,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/workflow.md",
+      "language": "markdown",
+      "sizeLines": 189,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/implementation-rules.md",
+      "language": "markdown",
+      "sizeLines": 83,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/bootstrap-notes.md",
+      "language": "markdown",
+      "sizeLines": 67,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/sdd/specification-rules.md",
+      "language": "markdown",
+      "sizeLines": 52,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/README.md",
+      "language": "markdown",
+      "sizeLines": 76,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/_template/api.md",
+      "language": "markdown",
+      "sizeLines": 97,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/_template/tasks.md",
+      "language": "markdown",
+      "sizeLines": 143,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/_template/ui.md",
+      "language": "markdown",
+      "sizeLines": 78,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/_template/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 38,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/_template/domain.md",
+      "language": "markdown",
+      "sizeLines": 43,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/_template/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 45,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/_template/requirements.md",
+      "language": "markdown",
+      "sizeLines": 57,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/_template/ux.md",
+      "language": "markdown",
+      "sizeLines": 92,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/_template/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 69,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/01-global-table/api.md",
+      "language": "markdown",
+      "sizeLines": 278,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/01-global-table/tasks.md",
+      "language": "markdown",
+      "sizeLines": 212,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/01-global-table/ui.md",
+      "language": "markdown",
+      "sizeLines": 190,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/01-global-table/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 64,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/01-global-table/domain.md",
+      "language": "markdown",
+      "sizeLines": 144,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/01-global-table/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 91,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/01-global-table/requirements.md",
+      "language": "markdown",
+      "sizeLines": 134,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/01-global-table/ux.md",
+      "language": "markdown",
+      "sizeLines": 215,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/01-global-table/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 186,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/02-expression-engine/api.md",
+      "language": "markdown",
+      "sizeLines": 83,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/02-expression-engine/tasks.md",
+      "language": "markdown",
+      "sizeLines": 111,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/02-expression-engine/ui.md",
+      "language": "markdown",
+      "sizeLines": 56,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/02-expression-engine/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 39,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/02-expression-engine/domain.md",
+      "language": "markdown",
+      "sizeLines": 70,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/02-expression-engine/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 59,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/02-expression-engine/requirements.md",
+      "language": "markdown",
+      "sizeLines": 117,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/02-expression-engine/ux.md",
+      "language": "markdown",
+      "sizeLines": 72,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/02-expression-engine/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 60,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/03-component/api.md",
+      "language": "markdown",
+      "sizeLines": 167,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/03-component/tasks.md",
+      "language": "markdown",
+      "sizeLines": 171,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/03-component/ui.md",
+      "language": "markdown",
+      "sizeLines": 149,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/03-component/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 54,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/03-component/domain.md",
+      "language": "markdown",
+      "sizeLines": 116,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/03-component/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 60,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/03-component/requirements.md",
+      "language": "markdown",
+      "sizeLines": 117,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/03-component/ux.md",
+      "language": "markdown",
+      "sizeLines": 179,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/03-component/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 105,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/api.md",
+      "language": "markdown",
+      "sizeLines": 135,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/tasks.md",
+      "language": "markdown",
+      "sizeLines": 183,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/ui.md",
+      "language": "markdown",
+      "sizeLines": 167,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 49,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/domain.md",
+      "language": "markdown",
+      "sizeLines": 121,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 59,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/requirements.md",
+      "language": "markdown",
+      "sizeLines": 141,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/ux.md",
+      "language": "markdown",
+      "sizeLines": 133,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/04-template/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 105,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/api.md",
+      "language": "markdown",
+      "sizeLines": 153,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/tasks.md",
+      "language": "markdown",
+      "sizeLines": 175,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/ui.md",
+      "language": "markdown",
+      "sizeLines": 161,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 59,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/domain.md",
+      "language": "markdown",
+      "sizeLines": 115,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 61,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/requirements.md",
+      "language": "markdown",
+      "sizeLines": 158,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/ux.md",
+      "language": "markdown",
+      "sizeLines": 102,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/05-administration/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 105,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/06-document/api.md",
+      "language": "markdown",
+      "sizeLines": 80,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/06-document/tasks.md",
+      "language": "markdown",
+      "sizeLines": 168,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/06-document/ui.md",
+      "language": "markdown",
+      "sizeLines": 119,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/06-document/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 40,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/06-document/domain.md",
+      "language": "markdown",
+      "sizeLines": 80,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/06-document/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 44,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/06-document/requirements.md",
+      "language": "markdown",
+      "sizeLines": 121,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/06-document/ux.md",
+      "language": "markdown",
+      "sizeLines": 67,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/06-document/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 69,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/07-render-engine/api.md",
+      "language": "markdown",
+      "sizeLines": 63,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/07-render-engine/tasks.md",
+      "language": "markdown",
+      "sizeLines": 150,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/07-render-engine/ui.md",
+      "language": "markdown",
+      "sizeLines": 75,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/07-render-engine/business-rules.md",
+      "language": "markdown",
+      "sizeLines": 40,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/07-render-engine/domain.md",
+      "language": "markdown",
+      "sizeLines": 86,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/07-render-engine/test-cases.md",
+      "language": "markdown",
+      "sizeLines": 54,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/07-render-engine/requirements.md",
+      "language": "markdown",
+      "sizeLines": 123,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/07-render-engine/ux.md",
+      "language": "markdown",
+      "sizeLines": 70,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/specs/07-render-engine/acceptance.md",
+      "language": "markdown",
+      "sizeLines": 60,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "prompts/generate-animejs-skill.md",
+      "language": "markdown",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "prompts/generate-nuxtjs-skill.md",
+      "language": "markdown",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "prompts/generate-naiveui-skill.md",
+      "language": "markdown",
+      "sizeLines": 229,
+      "fileCategory": "code"
+    },
+    {
+      "path": "prompts/generate-test-skill.md",
+      "language": "markdown",
+      "sizeLines": 229,
+      "fileCategory": "code"
+    },
+    {
+      "path": "prompts/generate-tailwindcss-skill.md",
+      "language": "markdown",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/public/favicon.ico",
+      "language": "unknown",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/public/robots.txt",
+      "language": "unknown",
+      "sizeLines": 2,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/.gitignore",
+      "language": "unknown",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".opencode/.gitignore",
+      "language": "unknown",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".ua/.understandignore",
+      "language": "unknown",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    }
+  ],
+  "importMap": {}
+}

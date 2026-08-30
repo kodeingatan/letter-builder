@@ -1,0 +1,263 @@
+[
+  {
+    "order": 1,
+    "title": "Project Identity & Purpose",
+    "description": "Understand what Persuratan is: a Spec-Driven Development platform for document composition built with Nuxt 4 full-stack. Start here to grasp the core concept: Global Table → Component → Template → Administration → Document → PDF.",
+    "nodeIds": [
+      "file:README.md",
+      "file:AGENTS.md",
+      "document:app/README.md"
+    ],
+    "languageLesson": "Markdown (`.md`) uses `#` for headers, `>` for blockquotes, and `**` for bold. README files are the first entry point for any project — they establish identity, purpose, and quick-start instructions."
+  },
+  {
+    "order": 2,
+    "title": "Technology Stack Overview",
+    "description": "Explore the complete technology inventory across all layers: Nuxt 4 + Nitro for full-stack, Vue 3 + TypeScript for frontend, Drizzle ORM + SQLite for data, and Tiptap for document editing. Understanding the stack prevents wrong tool assumptions.",
+    "nodeIds": [
+      "document:docs/architecture/technology-stack.md",
+      "config:app/package.json",
+      "config:app/tsconfig.json"
+    ],
+    "languageLesson": "TypeScript's `tsconfig.json` uses JSON with comments (though strict JSON forbids them). The `references` array points to Nuxt-generated configs — a pattern called 'project references' for incremental builds."
+  },
+  {
+    "order": 3,
+    "title": "Architecture Overview & Layer Separation",
+    "description": "Learn the three-layer architecture (Client → Server → Data) and the mandatory layer separation rule: Page → Component → Composable → API Route → Service → Repository → Database. This is the most critical architectural constraint.",
+    "nodeIds": [
+      "document:docs/architecture/overview.md",
+      "document:docs/architecture/architecture-rules.md",
+      "document:docs/architecture/system-context.md"
+    ],
+    "languageLesson": "Architecture documents use directional arrows (→) to express flow and dependency. In TypeScript projects, layer separation prevents circular dependencies and keeps code testable."
+  },
+  {
+    "order": 4,
+    "title": "Backend Architecture & Request Flow",
+    "description": "Trace the complete HTTP request flow from Nitro API routes through services to repositories and database. Understand how five domain engines (Expression, Binding, Component, Template, Document) sit between services and repositories.",
+    "nodeIds": [
+      "document:docs/architecture/backend.md",
+      "document:docs/architecture/api.md"
+    ],
+    "languageLesson": "REST API conventions use HTTP methods semantically: GET (read), POST (create), PUT (replace), PATCH (partial update), DELETE (remove). Zod validates inputs server-side — never trust client validation alone."
+  },
+  {
+    "order": 5,
+    "title": "Frontend Architecture & Component Hierarchy",
+    "description": "Understand the Nuxt 4 client structure: pages, components (Primitive → Pattern → Feature → Page), composables, layouts, and Tiptap editor integration with custom ProseMirror nodes for dynamic document content.",
+    "nodeIds": [
+      "document:docs/architecture/frontend.md",
+      "document:docs/design/component-guidelines.md",
+      "file:app/app/app.vue"
+    ],
+    "languageLesson": "Vue 3 Composition API with `<script setup>` is the standard. Components follow a hierarchy: Primitive (atomic) → Pattern (reusable组合) → Feature (business) → Page (route-level). This is analogous to Atomic Design."
+  },
+  {
+    "order": 6,
+    "title": "Database Architecture & Data Strategy",
+    "description": "Learn the hybrid database approach: fixed metadata tables for structure definitions (Global Tables, Components, Templates) combined with JSONB-based dynamic data storage for user-defined records. This enables metadata-driven design.",
+    "nodeIds": [
+      "document:docs/architecture/database.md"
+    ],
+    "languageLesson": "SQLite with Drizzle ORM uses a 'schema-first' approach. JSONB columns store flexible user data while fixed columns store metadata. `nanoid` generates URL-safe unique IDs; `UUID` v4 for globally unique identifiers."
+  },
+  {
+    "order": 7,
+    "title": "Security Model & Authentication",
+    "description": "Explore session-based authentication with HTTP-only cookies (no JWT), role-based authorization (Administrator/Staff/Manager), and Zod-based server-side validation as the authoritative input guard.",
+    "nodeIds": [
+      "document:docs/architecture/security.md"
+    ],
+    "languageLesson": "Session cookies are more secure than JWTs for server-rendered apps because they're automatically sent by the browser and can't be accessed via JavaScript. RBAC (Role-Based Access Control) checks permissions at the service layer."
+  },
+  {
+    "order": 8,
+    "title": "Design System Foundations",
+    "description": "Discover the 'Professional Workspace' design language: color tokens, typography scale, 4px spacing grid, elevation levels, and the component library layering (Nuxt UI → Tokens → App → Feature).",
+    "nodeIds": [
+      "document:docs/design/design-system.md",
+      "document:docs/design/ui-principles.md"
+    ],
+    "languageLesson": "Design tokens are named values (e.g., `--color-primary-500`) that abstract raw values. They enable theming and consistency. CSS custom properties (`--var`) make tokens runtime-switchable."
+  },
+  {
+    "order": 9,
+    "title": "UX Principles & Interaction Patterns",
+    "description": "Learn the eight interaction patterns: workspace navigation, builder canvas, command palette, form submission, destructive confirmation, drag-and-drop, split view, and step wizard. These patterns repeat across all features.",
+    "nodeIds": [
+      "document:docs/design/ux-principles.md",
+      "document:docs/design/interaction-patterns.md",
+      "document:docs/design/responsive.md"
+    ],
+    "languageLesson": "UX patterns are reusable solutions to common interface problems. The 'command palette' (Cmd+K) pattern provides keyboard-first navigation. Responsive design uses breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)."
+  },
+  {
+    "order": 10,
+    "title": "SDD Workflow: The Development Process",
+    "description": "Understand the Spec-Driven Development workflow: Requirement → SPEC → PLAN → IMPLEMENT → VERIFY → REVIEW → FIX → VERIFY → DONE. Every feature must follow this pipeline for quality assurance.",
+    "nodeIds": [
+      "file:docs/sdd/workflow.md",
+      "file:docs/sdd/specification-rules.md",
+      "file:docs/sdd/implementation-rules.md"
+    ],
+    "languageLesson": "SDD is a 'specification-first' methodology. Unlike agile sprints that code-then-document, SDD requires complete specifications before any implementation. The workflow files use markdown checklists and numbered phases."
+  },
+  {
+    "order": 11,
+    "title": "SDD Verification & Definition of Done",
+    "description": "Learn the 10-step verification pipeline and definition of done criteria: typecheck, lint, tests, build, acceptance criteria, and review gates. CRITICAL/HIGH findings block completion.",
+    "nodeIds": [
+      "file:docs/sdd/verification-rules.md",
+      "file:docs/sdd/review-rules.md",
+      "file:docs/sdd/definition-of-done.md"
+    ],
+    "languageLesson": "Quality gates use severity levels: CRITICAL (blocks release), HIGH (must fix), MEDIUM (should fix), LOW (nice to have). The 'definition of done' is a shared checklist that prevents premature feature completion."
+  },
+  {
+    "order": 12,
+    "title": "Feature Spec Anatomy: Global Table",
+    "description": "Examine a complete feature specification. Global Table is the foundation — it defines metadata-driven data structures with columns, records, and lifecycle states (Draft → Published → Archived).",
+    "nodeIds": [
+      "document:docs/specs/01-global-table/requirements.md",
+      "document:docs/specs/01-global-table/domain.md",
+      "document:docs/specs/01-global-table/business-rules.md"
+    ],
+    "languageLesson": "Feature specs follow a standard anatomy: requirements (what), domain (entities + rules), business-rules (constraints), api (endpoints), ui/ux (interface), tasks (implementation), test-cases (verification), acceptance (proof)."
+  },
+  {
+    "order": 13,
+    "title": "Global Table: API & UI Specifications",
+    "description": "See how the Global Table spec translates to REST endpoints (collections, columns, records APIs) and UI pages (Collections List, Workspace, Create). The UI spec includes component hierarchy and responsive behavior.",
+    "nodeIds": [
+      "document:docs/specs/01-global-table/api.md",
+      "document:docs/specs/01-global-table/ui.md",
+      "document:docs/specs/01-global-table/ux.md"
+    ],
+    "languageLesson": "API specs define request/response schemas with Zod. UI specs describe component trees using indentation hierarchy. UX specs map user flows with 'Given/When/Then' acceptance criteria format."
+  },
+  {
+    "order": 14,
+    "title": "Global Table: Tasks & Test Cases",
+    "description": "Review the 14 implementation tasks (schema → types → repository → service → API → composable → UI → tests) and comprehensive test cases covering unit, integration, API, and E2E levels.",
+    "nodeIds": [
+      "document:docs/specs/01-global-table/tasks.md",
+      "document:docs/specs/01-global-table/test-cases.md",
+      "document:docs/specs/01-global-table/acceptance.md"
+    ],
+    "languageLesson": "Task dependencies form a DAG (Directed Acyclic Graph): TASK-001 (schema) must complete before TASK-003 (repository). Test cases use 'UT-' (unit), 'IT-' (integration), 'AT-' (API), 'ET-' (E2E) prefixes for categorization."
+  },
+  {
+    "order": 15,
+    "title": "Expression Engine: Domain & Parsing",
+    "description": "Explore the Expression Engine — a pure domain engine that parses and evaluates mathematical/string/conditional expressions. It uses a Tokenizer → Parser → Evaluator pipeline with AST (Abstract Syntax Tree) nodes.",
+    "nodeIds": [
+      "document:docs/specs/02-expression-engine/domain.md",
+      "document:docs/specs/02-expression-engine/requirements.md",
+      "document:docs/specs/02-expression-engine/business-rules.md"
+    ],
+    "languageLesson": "An AST (Abstract Syntax Tree) represents code as a tree structure. Tokenization splits `'price * qty'` into tokens [`price`, `*`, `qty`]. Parsing builds the tree. Evaluation walks the tree to compute results. This is compiler theory applied to runtime expressions."
+  },
+  {
+    "order": 16,
+    "title": "Expression Engine: Implementation & Tests",
+    "description": "See the 8 implementation tasks in dependency order and 26 test cases. The engine exposes 3 API endpoints: validate (syntax check), evaluate (compute), and resolve (dynamic tokens).",
+    "nodeIds": [
+      "document:docs/specs/02-expression-engine/tasks.md",
+      "document:docs/specs/02-expression-engine/test-cases.md",
+      "document:docs/specs/02-expression-engine/api.md"
+    ],
+    "languageLesson": "Expression engines must handle edge cases: division by zero, undefined variables, circular references, and nesting depth limits. The 'resolve' endpoint handles dynamic token resolution — converting user-facing tokens to internal references."
+  },
+  {
+    "order": 17,
+    "title": "Component Feature: Reusable Document Blocks",
+    "description": "Understand Components — reusable document blocks with dynamic tokens, data requirements, and Tiptap content model. Components have their own lifecycle (Draft → Published → Archived) and support single/collection modes.",
+    "nodeIds": [
+      "document:docs/specs/03-component/domain.md",
+      "document:docs/specs/03-component/requirements.md",
+      "document:docs/specs/03-component/business-rules.md"
+    ],
+    "languageLesson": "Tiptap is a headless rich-text editor built on ProseMirror. Custom nodes (DynamicText, Loop, Condition) extend the editor for document composition. The 'data requirements' pattern declares what data a component needs — enabling validation before use."
+  },
+  {
+    "order": 18,
+    "title": "Component: UI Builder & Implementation",
+    "description": "Explore the Component Builder's three-panel layout (Insert | Canvas | Properties) and the 12 implementation tasks. The builder uses command palette-style insertion and drag-and-drop reordering.",
+    "nodeIds": [
+      "document:docs/specs/03-component/ui.md",
+      "document:docs/specs/03-component/ux.md",
+      "document:docs/specs/03-component/tasks.md"
+    ],
+    "languageLesson": "Three-panel layouts are common in IDEs and design tools: left (insertion/navigation), center (canvas/workspace), right (properties/inspector). This pattern maximizes screen real estate while keeping tools accessible."
+  },
+  {
+    "order": 19,
+    "title": "Template Feature: Document Composition",
+    "description": "Templates compose Components into document blueprints with data bindings, loops, and conditions. The Template Builder adds a Data Panel for binding configuration alongside the three-panel layout.",
+    "nodeIds": [
+      "document:docs/specs/04-template/domain.md",
+      "document:docs/specs/04-template/requirements.md",
+      "document:docs/specs/04-template/api.md"
+    ],
+    "languageLesson": "Data binding connects template variables to data sources (administration, global-table, manual, expression, system). Loops iterate over record collections. Conditions control section visibility. These are document-as-code patterns."
+  },
+  {
+    "order": 20,
+    "title": "Administration & Document Features",
+    "description": "Discover how Administrations orchestrate Templates into workflows, and how Documents are generated instances with HTML storage and PDF rendering. These are the final steps in the data flow pipeline.",
+    "nodeIds": [
+      "file::docs/specs/05-administration/domain.md",
+      "document:docs/specs/06-document/domain.md",
+      "document:docs/specs/06-document/requirements.md"
+    ],
+    "languageLesson": "State machines govern entity lifecycles. Administrations have Steps (sequential tasks), Instances (running executions), and InstanceSteps (per-step state). Documents transition from Generating → Generated/Failed — a common async job pattern."
+  },
+  {
+    "order": 21,
+    "title": "Render Engine & PDF Generation",
+    "description": "The Render Engine is the final pipeline stage: it resolves all bindings, evaluates expressions, renders Tiptap content to HTML, and generates PDFs via Playwright. It's the bridge between templates and output.",
+    "nodeIds": [
+      "file:node::docs/specs/07-render-engine/domain.md",
+      "file:node::docs/specs/07-render-engine/requirements.md",
+      "file:node::docs/specs/07-render-engine/tasks.md"
+    ],
+    "languageLesson": "Playwright (normally for E2E testing) is repurposed for PDF generation — it renders HTML in a real browser engine, ensuring pixel-perfect output. This 'browser-as-a-service' pattern avoids wkhtmltopdf's limitations."
+  },
+  {
+    "order": 22,
+    "title": "Specification Template: Creating New Features",
+    "description": "Study the `_template/` directory — the canonical structure for writing new feature specifications. Every new feature must produce these 8 documents following the same patterns established by existing specs.",
+    "nodeIds": [
+      "file::docs/specs/_template/requirements.md",
+      "file::docs/specs/_template/domain.md",
+      "file::docs/specs/_template/tasks.md",
+      "file::docs/specs/_template/test-cases.md"
+    ],
+    "languageLesson": "Templates use placeholder patterns: `REQ-XXX-NNN` for requirement IDs, `[resource]` for API paths, `[Entity]` for domain classes. The template ensures consistency — every feature spec has the same structure, making codebase navigation predictable."
+  },
+  {
+    "order": 23,
+    "title": "Full Data Flow: End-to-End Pipeline",
+    "description": "Trace the complete data flow: User creates Global Table → defines Columns → adds Records → creates Component with dynamic tokens → assembles Template with bindings → runs Administration workflow → generates Document → renders PDF.",
+    "nodeIds": [
+      "document:docs/architecture/overview.md",
+      "document:docs/specs/01-global-table/domain.md",
+      "document:docs/specs/03-component/domain.md",
+      "document:docs/specs/04-template/domain.md",
+      "document:docs/specs/06-document/domain.md"
+    ],
+    "languageLesson": "Metadata-driven design means the system's behavior is defined by data (column types, component tokens, template bindings) rather than hardcoded logic. This enables users to create new data structures without writing code — the system adapts automatically."
+  },
+  {
+    "order": 24,
+    "title": "Configuration & Project Setup",
+    "description": "Review the build configuration: pnpm workspace setup, Nuxt config, TypeScript references, and the .opencode configuration for AI-assisted development. These files define how the project builds and runs.",
+    "nodeIds": [
+      "config:app/pnpm-workspace.yaml",
+      "config:app/package.json",
+      "file:app/nuxt.config.ts"
+    ],
+    "languageLesson": "pnpm workspaces enable monorepo management with strict dependency isolation. Nuxt config (`nuxt.config.ts`) uses `defineNuxtConfig()` with TypeScript autocomposition. The `postinstall` script runs `nuxt prepare` to generate types."
+  }
+]

@@ -1,0 +1,154 @@
+{
+  "batchIndex": 3,
+  "nodes": [
+    {
+      "id": "document:docs/design/accessibility.md",
+      "type": "document",
+      "name": "accessibility.md",
+      "filePath": "docs/design/accessibility.md",
+      "summary": "Accessibility guidelines covering keyboard navigation, focus management, labels, semantic structure, contrast ratios, screen reader support, and validation feedback for the Persuratan application.",
+      "tags": ["design", "accessibility", "a11y", "documentation", "keyboard", "screen-reader", "contrast"],
+      "complexity": "simple",
+      "languageNotes": "Markdown documentation file with no code."
+    },
+    {
+      "id": "document:docs/design/component-guidelines.md",
+      "type": "document",
+      "name": "component-guidelines.md",
+      "filePath": "docs/design/component-guidelines.md",
+      "summary": "Component development guidelines defining reuse-first philosophy, naming conventions (Primitive/Pattern/Feature/Page), single-responsibility principle, composition over inheritance, variant patterns via props, required interactive states, and file organization structure.",
+      "tags": ["design", "component", "guidelines", "vue", "composition", "naming", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Markdown documentation with Vue code examples."
+    },
+    {
+      "id": "document:docs/design/design-system.md",
+      "type": "document",
+      "name": "design-system.md",
+      "filePath": "docs/design/design-system.md",
+      "summary": "Core design system defining the 'Professional Workspace' design language with foundations: color tokens (primary, semantic), surface system, typography scale, 4px spacing grid, border radius tokens, elevation levels, component library layering (Nuxt UI → Tokens → App → Feature), and Lucide icon system.",
+      "tags": ["design", "design-system", "tokens", "color", "typography", "spacing", "documentation"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown documentation defining token naming conventions and visual foundations."
+    },
+    {
+      "id": "document:docs/design/interaction-patterns.md",
+      "type": "document",
+      "name": "interaction-patterns.md",
+      "filePath": "docs/design/interaction-patterns.md",
+      "summary": "Eight UI interaction patterns: workspace navigation (sidebar/resource/canvas), builder canvas (left/center/right panels), command palette (Cmd+K), form submission with validation, destructive action confirmation, drag and drop, split view (editor + preview), and step wizard with progress indicator.",
+      "tags": ["design", "interaction", "patterns", "ux", "drag-drop", "command-palette", "documentation"],
+      "complexity": "moderate",
+      "languageNotes": "Markdown documentation with ASCII interaction flow diagrams."
+    },
+    {
+      "id": "document:docs/design/responsive.md",
+      "type": "document",
+      "name": "responsive.md",
+      "filePath": "docs/design/responsive.md",
+      "summary": "Responsive design strategy defining breakpoints (sm/md/lg/xl/2xl), desktop workspace layout (sidebar+canvas+properties), tablet collapsible sidebar, mobile single-column with bottom navigation, plus responsive tables, forms, and navigation behavior across breakpoints.",
+      "tags": ["design", "responsive", "breakpoints", "mobile", "layout", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Markdown documentation with breakpoint definitions and layout specifications."
+    },
+    {
+      "id": "document:docs/design/ui-principles.md",
+      "type": "document",
+      "name": "ui-principles.md",
+      "filePath": "docs/design/ui-principles.md",
+      "summary": "UI design principles covering visual hierarchy (title→context→action→content→secondary), consistency via design tokens, density for power users, clarity with one primary action per section, information architecture with tabs/breadcrumbs/sidebar, and the workspace concept (sidebar+canvas+properties).",
+      "tags": ["design", "ui", "principles", "hierarchy", "workspace", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Markdown documentation with ASCII workspace layout diagram."
+    },
+    {
+      "id": "document:docs/design/ux-principles.md",
+      "type": "document",
+      "name": "ux-principles.md",
+      "filePath": "docs/design/ux-principles.md",
+      "summary": "UX principles covering discoverability (visible actions, command palette, empty states), feedback for every action (toasts, dialogs, spinners), error prevention (validate before save, destructive warnings), progressive disclosure, predictable interaction (click/hover/drag conventions), and user efficiency (shortcuts, inline editing, bulk ops).",
+      "tags": ["design", "ux", "principles", "feedback", "discoverability", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Markdown documentation with action-feedback table."
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:docs/design/design-system.md",
+      "target": "document:docs/design/component-guidelines.md",
+      "type": "documents",
+      "label": "defines component library structure referenced by",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/design-system.md",
+      "target": "document:docs/design/accessibility.md",
+      "type": "documents",
+      "label": "color tokens and contrast requirements defined by",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/design-system.md",
+      "target": "document:docs/design/responsive.md",
+      "type": "documents",
+      "label": "desktop-first and responsive design language defined by",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/ui-principles.md",
+      "target": "document:docs/design/design-system.md",
+      "type": "documents",
+      "label": "consistency via design tokens references",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/ui-principles.md",
+      "target": "document:docs/design/component-guidelines.md",
+      "type": "related",
+      "label": "workspace concept and component API alignment",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/ux-principles.md",
+      "target": "document:docs/design/interaction-patterns.md",
+      "type": "documents",
+      "label": "interaction conventions (click/hover/drag/esc) detailed in patterns",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/ux-principles.md",
+      "target": "document:docs/design/accessibility.md",
+      "type": "related",
+      "label": "feedback and error prevention overlap with validation feedback",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/component-guidelines.md",
+      "target": "document:docs/design/accessibility.md",
+      "type": "related",
+      "label": "interactive component states must meet a11y requirements",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/component-guidelines.md",
+      "target": "document:docs/design/responsive.md",
+      "type": "related",
+      "label": "component behavior varies by responsive breakpoint",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/interaction-patterns.md",
+      "target": "document:docs/design/responsive.md",
+      "type": "related",
+      "label": "interaction patterns adapt to responsive breakpoints",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/design/interaction-patterns.md",
+      "target": "document:docs/design/ui-principles.md",
+      "type": "related",
+      "label": "workspace navigation and builder canvas implement UI principles",
+      "weight": 0.5
+    }
+  ]
+}

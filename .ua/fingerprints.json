@@ -1,0 +1,417 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "c873655650071d9ce52aa5d340d6b04639ef3b42",
+  "generatedAt": "2026-08-30T06:13:44.529Z",
+  "files": {
+    "app/app/app.vue": {
+      "filePath": "app/app/app.vue",
+      "contentHash": "e745810823a1b285d65e1912edff0175ab3c1acf0fd591d57edb4ce6db83c856",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 7,
+      "hasStructuralAnalysis": false
+    },
+    "app/nuxt.config.ts": {
+      "filePath": "app/nuxt.config.ts",
+      "contentHash": "8e9e305203eae1f89b19e8d22ceaa7f5d70139badc71e0c9fc585411edff38d1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 6,
+      "hasStructuralAnalysis": true
+    },
+    "AGENTS.md": {
+      "filePath": "AGENTS.md",
+      "contentHash": "15700a620abde52b7f2e57b050d6f3391df25a8feb1f3f197d7d3b198a46a133",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 191,
+      "hasStructuralAnalysis": true
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "c8e3a33996c8a9e318c13732b519748e80277bfca8ffa1b0a3c219c194c14d6d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 1643,
+      "hasStructuralAnalysis": true
+    },
+    "app/README.md": {
+      "filePath": "app/README.md",
+      "contentHash": "4e97c282b059d72bdac1975485a6e6bc262caded17a53dad1171d62b9b9c1e1e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 76,
+      "hasStructuralAnalysis": true
+    },
+    "docs/product/vision.md": {
+      "filePath": "docs/product/vision.md",
+      "contentHash": "d0f1dea3d2f10d094a58d69d89ae7c1606caecaa12323f26fae9d1860fbc6e22",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 44,
+      "hasStructuralAnalysis": true
+    },
+    "docs/product/users.md": {
+      "filePath": "docs/product/users.md",
+      "contentHash": "b9801a9cb85537d08c086807ef13075e56bf8088eb316114712f97aec68cc673",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 67,
+      "hasStructuralAnalysis": true
+    },
+    "docs/product/use-cases.md": {
+      "filePath": "docs/product/use-cases.md",
+      "contentHash": "ca53b2dc403e61b0d395febd8e6a1c613558cd07cb4e1219f128bae4ebeb39a5",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 69,
+      "hasStructuralAnalysis": true
+    },
+    "docs/product/business-rules.md": {
+      "filePath": "docs/product/business-rules.md",
+      "contentHash": "4ddf36df76bcceec211e4eeb4dfbef8bdf00b6e18fc61fe8ed070e51c3626cb2",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 69,
+      "hasStructuralAnalysis": true
+    },
+    "docs/product/glossary.md": {
+      "filePath": "docs/product/glossary.md",
+      "contentHash": "b0e2603431f9253e00321eafe4cf7b083da7daa45983c1a48cd0a5c11be31bc1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 31,
+      "hasStructuralAnalysis": true
+    },
+    "docs/product/problem.md": {
+      "filePath": "docs/product/problem.md",
+      "contentHash": "e4e446a6072da9a2ac5797202d158a12eaa8f9318e8455f4e5d65f2449babe04",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 43,
+      "hasStructuralAnalysis": true
+    },
+    "docs/product/core-concepts.md": {
+      "filePath": "docs/product/core-concepts.md",
+      "contentHash": "ea9002b55934be614ca94f570ebf29cc07c4021843b82dbf679233ba5b8ee8c1",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 331,
+      "hasStructuralAnalysis": true
+    },
+    "docs/architecture/technology-stack.md": {
+      "filePath": "docs/architecture/technology-stack.md",
+      "contentHash": "319506ac830a9c8ff6e23664f102ac070fa67105bb29b9c5acb8004cc0583a57",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 69,
+      "hasStructuralAnalysis": true
+    },
+    "docs/architecture/api.md": {
+      "filePath": "docs/architecture/api.md",
+      "contentHash": "3b167e1fa7e17fccecfde30d392f487c9818e850873dc612e0c7b441f80db1d3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 85,
+      "hasStructuralAnalysis": true
+    },
+    "docs/architecture/overview.md": {
+      "filePath": "docs/architecture/overview.md",
+      "contentHash": "3fc0161ea372ca8c6bf3a6d484d81f9beb430549d7ae8111ac9544ed42d7df6e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 76,
+      "hasStructuralAnalysis": true
+    },
+    "docs/architecture/backend.md": {
+      "filePath": "docs/architecture/backend.md",
+      "contentHash": "7aee77c0a3692c175c168b05e001a4f9c68550589c6ebfe77f90318373a6f93e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 109,
+      "hasStructuralAnalysis": true
+    },
+    "docs/architecture/frontend.md": {
+      "filePath": "docs/architecture/frontend.md",
+      "contentHash": "fae99818673d60c61ed6982e9b4221eb33856793a1c6e0d44f12288d06bbd39e",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 77,
+      "hasStructuralAnalysis": true
+    },
+    "docs/architecture/system-context.md": {
+      "filePath": "docs/architecture/system-context.md",
+      "contentHash": "40d7081b535b904b8cc43f131aa8dab50c251f46edceaf2dbb8e12a936f4cbc7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 45,
+      "hasStructuralAnalysis": true
+    },
+    "docs/architecture/database.md": {
+      "filePath": "docs/architecture/database.md",
+      "contentHash": "83f1a04f23e9027a7003cf814e745878523f8ee75a030d83738b5591dec6a194",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 68,
+      "hasStructuralAnalysis": true
+    },
+    "docs/architecture/architecture-rules.md": {
+      "filePath": "docs/architecture/architecture-rules.md",
+      "contentHash": "1600a72a676aab760267c9892ffb98659d65627ddfaa9ca3731427bef570b38a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 90,
+      "hasStructuralAnalysis": true
+    },
+    "docs/architecture/security.md": {
+      "filePath": "docs/architecture/security.md",
+      "contentHash": "db80aa27c21627431931c759c174eb1586cfa9571644180916e8835ee66a6c9a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 41,
+      "hasStructuralAnalysis": true
+    },
+    "docs/design/ux-principles.md": {
+      "filePath": "docs/design/ux-principles.md",
+      "contentHash": "dde44ce496fd881f8c30b6501216986ea36a87131291cc0c81b03cb59650d0c3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 50,
+      "hasStructuralAnalysis": true
+    },
+    "docs/design/accessibility.md": {
+      "filePath": "docs/design/accessibility.md",
+      "contentHash": "fb931e7ff4893d49d9e83bd16860afae2aa3a1dbe19e2200f3191e389ff7bda6",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 54,
+      "hasStructuralAnalysis": true
+    },
+    "docs/design/interaction-patterns.md": {
+      "filePath": "docs/design/interaction-patterns.md",
+      "contentHash": "958dd18a0adde77c0d8e3ae529e44dddf304850cd1e84b9f8ceb25410e9f366a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 111,
+      "hasStructuralAnalysis": true
+    },
+    "docs/design/ui-principles.md": {
+      "filePath": "docs/design/ui-principles.md",
+      "contentHash": "15364461728e6d5a71890d3433e77473874ea9aaa0fc1dbc969a4d1f946bf26a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 59,
+      "hasStructuralAnalysis": true
+    },
+    "docs/design/component-guidelines.md": {
+      "filePath": "docs/design/component-guidelines.md",
+      "contentHash": "eb2be321c5870cc9ccf7276a348c9202705931d3c17f5f5bdcd12320e3f906f7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 87,
+      "hasStructuralAnalysis": true
+    },
+    "docs/design/responsive.md": {
+      "filePath": "docs/design/responsive.md",
+      "contentHash": "faa3bb152eab6b513f4c205106bcdb27c475c9c8a1d4162eaa4b87dba5c05244",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 54,
+      "hasStructuralAnalysis": true
+    },
+    "docs/design/design-system.md": {
+      "filePath": "docs/design/design-system.md",
+      "contentHash": "178050f3893fcef1e51039c848f34edb47752b93720a49ad9a848f58bb9b234f",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 104,
+      "hasStructuralAnalysis": true
+    },
+    "docs/sdd/verification-rules.md": {
+      "filePath": "docs/sdd/verification-rules.md",
+      "contentHash": "dde304db22f91c778eb36a35964ab0ddbc1f740c7370672a08f68b3dce837f24",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 147,
+      "hasStructuralAnalysis": true
+    },
+    "docs/sdd/definition-of-done.md": {
+      "filePath": "docs/sdd/definition-of-done.md",
+      "contentHash": "1834bf1bfc3b7b20a1273a895930ff361ef0a3a4c84d5b670a2ad2cf338d7010",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 74,
+      "hasStructuralAnalysis": true
+    },
+    "docs/sdd/review-rules.md": {
+      "filePath": "docs/sdd/review-rules.md",
+      "contentHash": "0762417932cc5317656ed1f4ef64fa841f31a235c3fb81f8377f5b145f2a1040",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 123,
+      "hasStructuralAnalysis": true
+    },
+    "docs/sdd/workflow.md": {
+      "filePath": "docs/sdd/workflow.md",
+      "contentHash": "dc7000fd08826e5536c51b60a41b25c3a2b05be99391728c95752853135abff3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 190,
+      "hasStructuralAnalysis": true
+    },
+    "docs/sdd/implementation-rules.md": {
+      "filePath": "docs/sdd/implementation-rules.md",
+      "contentHash": "07ac5539e04abf95a5ad36cdade0e68ecb6f05648aa335322cf670abfd957ad3",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 84,
+      "hasStructuralAnalysis": true
+    },
+    "docs/sdd/bootstrap-notes.md": {
+      "filePath": "docs/sdd/bootstrap-notes.md",
+      "contentHash": "fa373a9404f4ab15d59f8d1aee1637677a4961b7fd07fb8e4d3c5d66611c1816",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 68,
+      "hasStructuralAnalysis": true
+    },
+    "docs/sdd/specification-rules.md": {
+      "filePath": "docs/sdd/specification-rules.md",
+      "contentHash": "1a09a8b8d5ca982dd187c2b62f3c1011c333a10f336020d94b2c24a4023f7a99",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 53,
+      "hasStructuralAnalysis": true
+    },
+    "docs/specs/README.md": {
+      "filePath": "docs/specs/README.md",
+      "contentHash": "2bc2c878e35b1bdbd46ce9eb91c7a645efc7957c9b218887373da717eb3a0d05",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 77,
+      "hasStructuralAnalysis": true
+    },
+    "prompts/generate-animejs-skill.md": {
+      "filePath": "prompts/generate-animejs-skill.md",
+      "contentHash": "ae72360312268a4b544bb74d3d9f0cdeeb0143d01bfd50343590d91ffeda0776",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 229,
+      "hasStructuralAnalysis": true
+    },
+    "prompts/generate-nuxtjs-skill.md": {
+      "filePath": "prompts/generate-nuxtjs-skill.md",
+      "contentHash": "152abd494f587ef823fe9c365d7923514c113f3a6a647062898a7a23bd43d75d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 229,
+      "hasStructuralAnalysis": true
+    },
+    "prompts/generate-naiveui-skill.md": {
+      "filePath": "prompts/generate-naiveui-skill.md",
+      "contentHash": "7baf78823feb4c35edfa4c1931637dc1d0c9e1f13441d180fd65c8cc812afd71",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 230,
+      "hasStructuralAnalysis": true
+    },
+    "prompts/generate-test-skill.md": {
+      "filePath": "prompts/generate-test-skill.md",
+      "contentHash": "6da73def3112b5e05a17744b8846bce520f5a7a16af9cc1456ea261e0419bd14",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 230,
+      "hasStructuralAnalysis": true
+    },
+    "prompts/generate-tailwindcss-skill.md": {
+      "filePath": "prompts/generate-tailwindcss-skill.md",
+      "contentHash": "8346dc300f4d0e19c1c7426ea9c95c407cadc01c51b90a7382de6f520f9015cc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 229,
+      "hasStructuralAnalysis": true
+    }
+  }
+}
