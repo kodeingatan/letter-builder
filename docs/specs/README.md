@@ -44,3 +44,21 @@ This creates the directory and all template files.
 ## Template
 
 See `_template/` directory for the specification template.
+
+## Feature Index
+
+| Feature | Description | Status |
+|---------|-------------|--------|
+| [global-table](global-table/) | Collections and fields for structured data | Draft |
+| [component](component/) | Reusable document building blocks | Draft |
+| [template](template/) | Document composition with bindings, loops, conditions | Draft |
+| [administration](administration/) | Workflows with steps, conditions, roles | Draft |
+| [document](document/) | Generated output (HTML/PDF) with search | Draft |
+| [expression-engine](expression-engine/) | Math/string expression evaluation | Draft |
+| [render-engine](render-engine/) | Template → HTML → PDF resolution | Draft |
+
+## Core Concept Chain
+
+```
+Global Table → Component → Template → Administration → Document → PDF
+```
