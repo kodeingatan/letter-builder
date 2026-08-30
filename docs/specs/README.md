@@ -5,7 +5,7 @@ A feature specification is the **contract** between product requirements and imp
 Every significant feature must have its own specification directory:
 
 ```
-docs/specs/<feature>/
+docs/specs/{no}-{feature-name}/
 ├── requirements.md    # What and why
 ├── domain.md          # Entities and relationships
 ├── business-rules.md  # Validation and constraints
@@ -16,6 +16,12 @@ docs/specs/<feature>/
 ├── test-cases.md      # Test plan
 └── tasks.md           # Implementation tasks
 ```
+
+**Naming Convention:**
+- Format: `{no urut}-{feature-name}`
+- `no urut`: sequential number (01, 02, 03, ...)
+- `feature-name`: kebab-case (e.g., user-management, approval-workflow)
+- Auto-numbered: scan existing folders, increment highest number
 
 ## Spec Lifecycle
 
@@ -39,7 +45,13 @@ Use the `/spec` command:
 /spec <feature-name>
 ```
 
-This creates the directory and all template files.
+This auto-numbers the folder and creates all template files.
+
+Example:
+```
+/spec user-management
+→ creates docs/specs/08-user-management/
+```
 
 ## Template
 

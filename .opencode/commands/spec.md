@@ -55,18 +55,45 @@ Avoid proposing functionality that already exists.
 
 ## Step 3 — Create Specification
 
+### Folder Naming Convention
+
+Folder spec uses format: `{no urut}-{feature-name}`
+
+- `no urut`: sequential number (01, 02, 03, ...)
+- `feature-name`: kebab-case (e.g., user-management, approval-workflow)
+
+### Determine Next Number
+
+Scan `docs/specs/` for existing numbered folders:
+- List all folders matching pattern `XX-*` (two digits + hyphen)
+- Extract the number from each folder
+- Find the highest number
+- New folder number = highest + 1
+
+Example:
+```
+docs/specs/
+├── 01-global-table/
+├── 02-expression-engine/
+├── 03-component/
+└── ...
+
+Next number: 04
+```
+
+### Create Folder
+
 Create:
 
-docs/specs/<feature>/
+docs/specs/{no}-{feature-name}/
 
-Use:
-
-requirements.md
-domain.md
-api.md
-ui.md
-acceptance.md
-tasks.md
+With these files:
+- requirements.md
+- domain.md
+- api.md
+- ui.md
+- acceptance.md
+- tasks.md
 
 ---
 
