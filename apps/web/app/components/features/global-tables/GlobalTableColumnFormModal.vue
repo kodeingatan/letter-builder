@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import {
-  NModal, NForm, NFormItem, NInput, NSelect, NButton,
+  NModal, NForm, NFormItem, NInput, NSelect, NButton, NCheckbox,
   NSpace, NTag, useMessage, type FormInst, type FormRules,
 } from 'naive-ui'
 import { useGlobalTableColumnsStore } from '~/stores/global-table-columns'
@@ -25,7 +25,7 @@ const store = useGlobalTableColumnsStore()
 const formRef = ref<FormInst | null>(null)
 const submitting = ref(false)
 
-const columnTypes = ['text', 'richtext', 'date', 'select', 'number', 'currency', 'image']
+const columnTypes = ['text', 'richtext', 'date', 'select', 'number', 'currency', 'image', 'hidden-computed', 'readonly-computed']
 
 const form = ref({
   name: '',
@@ -38,6 +38,7 @@ const form = ref({
   position: 0,
   options: '',
   format: '',
+  expression: '',
 })
 
 const rules = computed<FormRules>(() => ({
@@ -58,6 +59,17 @@ const rules = computed<FormRules>(() => ({
   ],
   displayName: { required: true, message: 'Display name is required', trigger: 'blur' },
   type: { required: true, message: 'Type is required', trigger: 'change' },
+  expression: {
+    validator: (_rule: unknown, value: string) => {
+      if (['hidden-computed', 'readonly-computed'].includes(form.value.type)) {
+        if (!value || value.trim() === '') {
+          return Promise.reject(new Error('Expression is required for computed columns'))
+        }
+      }
+      return Promise.resolve()
+    },
+    trigger: 'blur',
+  },
 }))
 
 const title = computed(() => props.mode === 'create' ? 'Add Column' : 'Edit Column')
@@ -76,6 +88,7 @@ watch(() => props.visible, (val) => {
         position: props.column.position,
         options: props.column.options ?? '',
         format: props.column.format ?? '',
+        expression: props.column.expression ?? '',
       }
     } else {
       form.value = {
@@ -89,6 +102,7 @@ watch(() => props.visible, (val) => {
         position: 0,
         options: '',
         format: '',
+        expression: '',
       }
     }
     store.fetchAll(props.tableId)
@@ -159,6 +173,22 @@ async function handleSubmit() {
           style="width: 100%"
           @change="optionRules.value = {}"
         />
+      </NFormItem>
+      <NFormItem
+        v-show="form.type === 'hidden-computed' || form.type === 'readonly-computed'"
+        label="Expression"
+        path="expression"
+      >
+        <NInput
+          v-model:value="form.expression"
+          placeholder="e.g. {{harga}} * {{jumlah}}"
+          style="font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;"
+        />
+        <template #feedback>
+          <div class="text-xs text-gray-500 mt-1">
+            Use {{field}} syntax. References must be sibling columns.
+          </div>
+        </template>
       </NFormItem>
       <NFormItem
         label="Options (JSON)"

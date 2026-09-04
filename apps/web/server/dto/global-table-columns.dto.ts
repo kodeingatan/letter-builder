@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const GLOBAL_TABLE_COLUMN_TYPES = ['text', 'richtext', 'date', 'select', 'number', 'currency', 'image'] as const
+export const GLOBAL_TABLE_COLUMN_TYPES = ['text', 'richtext', 'date', 'select', 'number', 'currency', 'image', 'hidden-computed', 'readonly-computed'] as const
 
 export function isGlobalTableColumnType(type: string): type is (typeof GLOBAL_TABLE_COLUMN_TYPES)[number] {
   return GLOBAL_TABLE_COLUMN_TYPES.includes(type as any)
@@ -34,6 +34,7 @@ export const CreateGlobalTableColumnSchema = z.object({
   position: z.number().int().min(0).default(0),
   options: z.string().optional(),
   format: z.string().optional(),
+  expression: z.string().max(2000).optional(),
 })
 
 export type CreateGlobalTableColumnInput = z.infer<typeof CreateGlobalTableColumnSchema>
@@ -48,6 +49,7 @@ export const UpdateGlobalTableColumnSchema = z.object({
   position: z.number().int().min(0).optional(),
   options: z.string().optional(),
   format: z.string().optional(),
+  expression: z.string().max(2000).optional(),
 }).strict()
 
 export type UpdateGlobalTableColumnInput = z.infer<typeof UpdateGlobalTableColumnSchema>

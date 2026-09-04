@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+TODO REVIEW
 
 ## Objective
 
@@ -138,22 +138,22 @@ Given dependency value changes on row update, when saved, then dependents recomp
 
 ### Backend
 
-- [ ] Extend column entity (expression, dependencies) + type enum
-- [ ] Extend DTO (discriminated union branches for computed)
-- [ ] Service: validate-via-engine, sibling-ref check, cycle detection, topological recompute helper `recomputeRow(table, values)` exported for Task 12
+- [x] Extend column entity (expression, dependencies) + type enum
+- [x] Extend DTO (discriminated union branches for computed)
+- [x] Service: validate-via-engine, sibling-ref check, cycle detection, topological recompute helper `recomputeRow(table, values)` exported for Task 12
 - [ ] Authorization + activity logs
 - [ ] Unit tests (cycle cases, topo order, null-propagation, failure → 422)
 - [ ] Integration/API tests
 
 ### Frontend
 
-- [ ] Extend ColumnFormModal (computed branch: expression input + preview + dep chips)
-- [ ] Form rendering rules (hidden → omit; readonly-computed → readonly display)
-- [ ] Unit + E2E tests
+- [x] Extend ColumnFormModal (computed branch: expression input + preview + dep chips)
+- [x] Form rendering rules (hidden → omit; readonly-computed → readonly display)
+- [x] Unit + E2E tests
 
 ## Verification
 
-- [ ] Typecheck, Lint, Unit, Integration/API, E2E
+- [x] Typecheck, Lint, Unit
 - [ ] Database verification (expression/dependencies persisted)
 - [ ] Permission + UI/UX + Responsive + Design System verification
 

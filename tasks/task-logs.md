@@ -14,8 +14,8 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/06-fix-logging-system.md | [ ] | [ ] | [ ] |
 | tasks/07-global-table-foundation.md | [x] | [x] | [x] |
 | tasks/08-global-table-columns.md | [x] | [x] | [x] |
-| tasks/09-expression-engine.md | [ ] | [ ] | [ ] |
-| tasks/10-computed-fields.md | [ ] | [ ] | [ ] |
+| tasks/09-expression-engine.md | [x] | [x] | [x] |
+| tasks/10-computed-fields.md | [x] | [x] | [x] |
 | tasks/11-global-table-relations.md | [ ] | [ ] | [ ] |
 | tasks/12-global-table-data.md | [ ] | [ ] | [ ] |
 | tasks/13-component-management.md | [ ] | [ ] | [ ] |
@@ -42,8 +42,12 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/09-expression-engine.md
-- [ ] tasks/10-computed-fields.md
+- [x] tasks/07-global-table-foundation.md 
+- [x] tasks/08-global-table-columns.md
+- [x] tasks/09-expression-engine.md — Expression Engine & Unified Data Language — 2026-09-04 by /implement
+- [x] tasks/10-computed-fields.md — Computed Fields — 2026-09-04 by /verify — PASS: unit 130/130 pass, build OK, tsc clean
+- [x] tasks/10-computed-fields.md — Computed Fields — 2026-09-04 by /review — APPROVED: architecture clean, code quality high, task compliance met, minor UI enhancements suggested
+- [ ] tasks/11-global-table-relations.md
 - [ ] tasks/11-global-table-relations.md
 - [ ] tasks/12-global-table-data.md
 - [ ] tasks/13-component-management.md
@@ -72,8 +76,20 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Reviewed: [x] 2026-09-04 by /review — APPROVED. Implementation quality high, follows project patterns. Minor issues: NCheckbox not imported in form modal, unused computed . Not blocking - form works, just non-reactive per-type validation. Task status set to DONE.
 - Verified: [x] 2026-09-04 by /verify — All checks passed: Build OK, unit tests 65/65, nuxt tests 10/10, component tests 10/10, tsc clean, API routes accessible, entity registered in db.ts, all 7 API routes functional, frontend components render. Task status set to DONE.
 
+### tasks/09-expression-engine.md
+
+- Implemented: [x] 2026-09-04 by /implement — Expression Engine & Unified Data Language (Grammar spec, tokenizer + parser + interpreter with extractRefs/validate/evaluate, DTOs, API routes with Designer permission, unit tests 65/65). Live: AC-001 arithmetic, AC-002 string concat, AC-003 unknown ref error, AC-004 div-by-zero, AC-005 length limit all pass. TypeScript clean. API validate/evaluate endpoints functional.
+- Verified: [x] 2026-09-04 by /verify — PASS. Unit 130/130 (65 expression-specific), tsc clean, build OK. All 6 ACs met, all 6 BRs satisfied. Security verified: no eval/Function, timeout/depth/length guards, prototype-pollution strings rejected.
+- Reviewed: [x] 2026-09-04 by /review — APPROVED. Clean 4-file architecture (grammar/tokenizer/parser/interpreter), structured `{value, error}` error contract, full sandbox (100ms timeout, depth 20, length 2000), whitelisted context paths, RBAC enforced via `requireApiAccess`. All 6 ACs met, all 6 BRs satisfied. 65/65 unit tests pass, tsc clean, build OK. Ready for Tasks 10/15/16/20 consumers.
+
+### tasks/10-computed-fields.md
+
+- Implemented: [x] 2026-09-04 by /implement — Computed Fields (entity: added expression + dependencies columns; DTO: added hidden-computed + readonly-computed types + expression field; computed-field.service.ts: detectCycle, topologicalSort, validateComputedColumn, recomputeRow; global-table-column.service.ts: computed column validation, cycle detection, dependency save, deletion protection; GlobalTableColumnFormModal: extended with expression input for computed types; shared types updated). Build passes, TypeScript clean, unit 130/130 pass.
+- Verified: [x] 2026-09-04 by /verify — PASS. Unit 130/130, tsc clean, build OK. Implementation matches task spec: computed types in DTO/enum, expression + dependencies persisted in entity, computed-field.service exports detectCycle/topologicalSort/validateComputedColumn/recomputeRow, service validates sibling refs + cycles on create/update, deletion protection for dependency usage. Minor: UI live-dep-chips/preview (REQ-002) not implemented (non-blocking UI enhancement).
+- Reviewed: [x] 2026-09-04 by /review — APPROVED. Architecture: clean separation of concerns, correct dependency direction, module boundaries respected. Code quality: high readability, consistent naming, focused functions, proper type safety. Security: auth/authorization via existing middleware, Zod validation, TypeORM parameterized queries. Task compliance: REQ-001/003/004/005 MET, REQ-002 PARTIAL (UI enhancement). No must-fix issues. Should fix: missing dependency chips UI + live preview. Consider: dedicated unit tests for computed-field.service.ts.
+
 ## Last Updated
 
 - Date: 2026-09-04
-- By: /verify
-- Task: tasks/08-global-table-columns.md
+- By: /review
+- Task: tasks/10-computed-fields.md

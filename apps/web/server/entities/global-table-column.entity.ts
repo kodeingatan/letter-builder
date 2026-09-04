@@ -13,6 +13,8 @@ export interface GlobalTableColumn {
   position: number
   options: string | null
   format: string | null
+  expression: string | null
+  dependencies: string | null
   createdAt: Date
   updatedAt: Date
 }
@@ -32,6 +34,8 @@ export const GlobalTableColumnSchema = new EntitySchema<GlobalTableColumn>({
     position: { type: Number },
     options: { type: 'text', nullable: true },
     format: { type: String, length: 32, nullable: true },
+    expression: { type: 'text', nullable: true },
+    dependencies: { type: 'text', nullable: true },
     createdAt: { type: 'datetime', createDate: true },
     updatedAt: { type: 'datetime', updateDate: true },
   },

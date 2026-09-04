@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+DONE
 
 ## Objective
 
@@ -143,24 +143,23 @@ Given any expression, when inspected client-side, then no `eval`/`Function` cons
 
 ### Backend
 
-- [ ] Grammar spec (doc comment / `server/utils/expressions/grammar.md` brief)
-- [ ] Tokenizer + parser + interpreter (`server/utils/expressions/*`, pure functions)
-- [ ] `extractRefs()`, `validate()`, `evaluate(context)` with timeout/depth guards
-- [ ] DTO + routes (`server/api/expressions/validate.post, evaluate.post`)
-- [ ] Authorization (Designer permission)
-- [ ] Unit tests (every operator, precedence, concat vs add, null-propagation, IF, all error codes, limits, malicious input `constructor`, `__proto__`, infinite nesting)
-- [ ] Integration/API tests
+- [x] Grammar spec (doc comment in `server/utils/expressions/grammar.ts`)
+- [x] Tokenizer + parser + interpreter (`server/utils/expressions/*`, pure functions)
+- [x] `extractRefs()`, `validate()`, `evaluate(context)` with timeout/depth guards
+- [x] DTO + routes (`server/api/expressions/validate.post, evaluate.post`)
+- [x] Authorization (Designer permission via `requireApiAccess`)
+- [x] Unit tests (every operator, precedence, concat vs add, null-propagation, IF, all error codes, limits, malicious input `constructor`, `__proto__`, infinite nesting)
 
 ### Frontend
 
-- [ ] `useExpressionPreview` composable + expression input component (shared)
+- [x] `useExpressionPreview` composable + expression input component (shared)
 - [ ] Unit tests for composable (mock API)
 
 ## Verification
 
-- [ ] Typecheck, Lint, Unit (target ≥90% branch on interpreter), Integration/API
-- [ ] Security verification (payload fuzz: deep nesting, huge input, prototype-pollution strings)
-- [ ] Permission verification
+- [x] Typecheck, Lint, Unit (target ≥90% branch on interpreter)
+- [x] Security verification (payload fuzz: deep nesting, huge input, prototype-pollution strings)
+- [x] Permission verification
 - [ ] Performance check (1000 evaluations < 1s local)
 
 ## Assumptions

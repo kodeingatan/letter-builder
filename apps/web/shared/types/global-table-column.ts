@@ -11,6 +11,8 @@ export interface GlobalTableColumn {
   position: number
   options: string | null
   format: string | null
+  expression: string | null
+  dependencies: string | null
   createdAt: string
   updatedAt: string
 }
@@ -26,6 +28,7 @@ export interface CreateGlobalTableColumn {
   position?: number
   options?: string | null
   format?: string | null
+  expression?: string
 }
 
 export interface UpdateGlobalTableColumn {
@@ -38,6 +41,7 @@ export interface UpdateGlobalTableColumn {
   position?: number
   options?: string | null
   format?: string | null
+  expression?: string
 }
 
 export interface QueryGlobalTableColumn {

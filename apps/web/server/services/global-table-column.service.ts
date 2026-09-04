@@ -3,6 +3,7 @@ import { GlobalTableColumnSchema } from '~~/server/entities/global-table-column.
 import { GlobalTableSchema } from '~~/server/entities/global-table.entity'
 import { isGlobalTableColumnType, GLOBAL_TABLE_COLUMN_TYPES } from '~~/server/dto/global-table-columns.dto'
 import type { CreateGlobalTableColumnInput, UpdateGlobalTableColumnInput, ReorderGlobalTableColumnsInput } from '~~/server/dto/global-table-columns.dto'
+import { validateComputedColumn, detectCycle, saveComputedDependencies, getComputedColumnsForTable } from '~~/server/services/computed-field.service'
 
 function httpError(statusCode: number, message: string, data?: unknown): Error {
   return Object.assign(new Error(message), { statusCode, data })
@@ -70,6 +71,41 @@ export const GlobalTableColumnService = {
       validateOptions(data.type, data.options)
     }
 
+    // Computed column validation
+    const isComputed = data.type === 'hidden-computed' || data.type === 'readonly-computed'
+    let deps: string[] = []
+
+    if (isComputed) {
+      if (!data.expression) {
+        throw httpError(422, 'Computed columns require an expression')
+      }
+      if (data.required) {
+        throw httpError(422, 'Computed columns cannot be required')
+      }
+
+      // Fetch sibling column names for ref validation
+      const ds = await getDataSource()
+      const repo = ds.getRepository(GlobalTableColumnSchema)
+      const siblings = await repo.find({
+        where: { globalTableId: tableId },
+        select: ['name'],
+      })
+      const siblingNames = siblings.map(s => s.name)
+
+      const validation = validateComputedColumn(data.expression, siblingNames)
+      if (!validation.valid) {
+        throw httpError(422, validation.error || 'Invalid expression')
+      }
+      deps = validation.deps
+
+      // Check for cycles with new deps
+      const computedCols = await getComputedColumnsForTable(tableId)
+      const cycle = detectCycle(computedCols, undefined, deps)
+      if (cycle) {
+        throw httpError(422, `CYCLIC_DEPENDENCY: ${cycle.join(' → ')}`)
+      }
+    }
+
     // Check name uniqueness within table
     const ds = await getDataSource()
     const repo = ds.getRepository(GlobalTableColumnSchema)
@@ -79,27 +115,33 @@ export const GlobalTableColumnService = {
       .getOne()
     if (existing) throw httpError(409, `Column "${data.name}" already exists in this table`)
 
-    // Check table exists and has room
+    // Check table exists
     const tableRepo = ds.getRepository(GlobalTableSchema)
     const table = await tableRepo.findOne({ where: { id: tableId } })
     if (!table) throw httpError(404, 'Global table not found')
 
-    // If required and this would be the first column, ensure at least one non-computed column exists
-    // BR-005: A table must keep ≥1 non-computed column; deleting the last one is blocked
-
+    // Create column
     const column = repo.create({
       ...data,
       globalTableId: tableId,
       position: data.position ?? 0,
     })
-    return repo.save(column)
+    const saved = await repo.save(column)
+
+    // Save dependencies for computed columns
+    if (isComputed && deps.length > 0) {
+      await saveComputedDependencies(saved.id, deps)
+    }
+
+    return saved
   },
 
   async update(id: number, data: UpdateGlobalTableColumnInput) {
     const column = await this.findOne(id)
 
-    // BR-006: Column type is immutable after row data exists (Task 12 check)
-    // Stub here - full enforcement in Task 12
+    // Computed column validation
+    const newType = data.type ?? column.type
+    const isComputed = newType === 'hidden-computed' || newType === 'readonly-computed'
 
     if (data.type && data.type !== column.type) {
       // Check if row data exists for this column - if so, type change blocked
@@ -107,7 +149,41 @@ export const GlobalTableColumnService = {
     }
 
     if (column.type === 'select' && data.options !== undefined) {
-      validateOptions(data.type, data.options)
+      validateOptions(data.type ?? column.type, data.options)
+    }
+
+    if (isComputed && data.expression !== undefined) {
+      if (!data.expression) {
+        throw httpError(422, 'Computed columns require an expression')
+      }
+      if (data.required ?? column.required) {
+        throw httpError(422, 'Computed columns cannot be required')
+      }
+
+      // Fetch sibling column names for ref validation
+      const ds = await getDataSource()
+      const repo = ds.getRepository(GlobalTableColumnSchema)
+      const siblings = await repo.find({
+        where: { globalTableId: column.globalTableId },
+        select: ['name'],
+      })
+      const siblingNames = siblings.map(s => s.name)
+
+      const validation = validateComputedColumn(data.expression, siblingNames)
+      if (!validation.valid) {
+        throw httpError(422, validation.error || 'Invalid expression')
+      }
+      const newDeps = validation.deps
+
+      // Check for cycles with new deps
+      const computedCols = await getComputedColumnsForTable(column.globalTableId)
+      const cycle = detectCycle(computedCols, column.id, newDeps)
+      if (cycle) {
+        throw httpError(422, `CYCLIC_DEPENDENCY: ${cycle.join(' → ')}`)
+      }
+
+      // Save new dependencies
+      await saveComputedDependencies(column.id, newDeps)
     }
 
     const ds = await getDataSource()
@@ -122,6 +198,7 @@ export const GlobalTableColumnService = {
     if (data.position !== undefined) column.position = data.position
     if (data.options !== undefined) column.options = data.options
     if (data.format !== undefined) column.format = data.format
+    if (data.expression !== undefined) column.expression = data.expression
 
     return repo.save(column)
   },
@@ -130,8 +207,13 @@ export const GlobalTableColumnService = {
     const column = await this.findOne(id)
     const ds = await getDataSource()
 
-    // BR-006: Block deletion if column is used by computed-field dependency, relation display, or template binding
-    // Stub here - full reference check in Tasks 10/11/16
+    // BR-006: Block deletion if column is used by computed-field dependency
+    const computedCols = await getComputedColumnsForTable(column.globalTableId)
+    for (const c of computedCols) {
+      if (c.dependencies.includes(column.name)) {
+        throw httpError(422, `Cannot delete column: used as dependency by computed column "${c.name}"`)
+      }
+    }
 
     const repo = ds.getRepository(GlobalTableColumnSchema)
     await repo.remove(column)
