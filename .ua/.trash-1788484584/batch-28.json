@@ -1,0 +1,606 @@
+{
+  "nodes": [
+    {
+      "id": "file:apps/web/app/assets/css/animations.css",
+      "type": "file",
+      "name": "animations.css",
+      "filePath": "apps/web/app/assets/css/animations.css",
+      "summary": "CSS animation classes and transitions for slide-up, slide-left, scale effects, button hover states, alert animations, access denied slide-in/out, and detail-view layout styles",
+      "tags": ["css", "animation", "transitions", "detail-view", "ui-patterns"],
+      "complexity": "simple",
+      "languageNotes": "Pure CSS, no imports"
+    },
+    {
+      "id": "file:apps/web/app/assets/css/main.css",
+      "type": "file",
+      "name": "main.css",
+      "filePath": "apps/web/app/assets/css/main.css",
+      "summary": "Global stylesheet importing Tailwind CSS layers and animations.css, defining CSS variables for theme colors (primary, error, warning, success, info), base reset styles, page/fade/layout transitions, and reduced-motion media query",
+      "tags": ["css", "global-styles", "tailwind", "theme", "variables"],
+      "complexity": "simple",
+      "languageNotes": "Imports tailwindcss/theme, tailwindcss/utilities, and animations.css via @import"
+    },
+    {
+      "id": "file:apps/web/app/components/base/Button/Button.vue",
+      "type": "file",
+      "name": "Button.vue",
+      "filePath": "apps/web/app/components/base/Button/Button.vue",
+      "summary": "Base button component with primary/secondary variants and disabled state, rendered as a styled HTML button with slot content",
+      "tags": ["vue", "component", "base", "button", "reusable"],
+      "complexity": "simple",
+      "languageNotes": "Vue 3 script setup with TypeScript, scoped styles"
+    },
+    {
+      "id": "file:apps/web/app/components/common/AccessDeniedAlert.vue",
+      "type": "file",
+      "name": "AccessDeniedAlert.vue",
+      "filePath": "apps/web/app/components/common/AccessDeniedAlert.vue",
+      "summary": "Global access denied notification component that listens for 'rbac-denied' custom events and displays a fixed-position error alert with auto-dismiss after 5 seconds",
+      "tags": ["vue", "component", "rbac", "access-denied", "alert", "event-driven"],
+      "complexity": "moderate",
+      "languageNotes": "Uses Naive UI NAlert/NIcon, @vicons/carbon Locked icon, Teleport to body"
+    },
+    {
+      "id": "function:apps/web/app/components/common/AccessDeniedAlert.vue:handleDenied",
+      "type": "function",
+      "name": "handleDenied",
+      "filePath": "apps/web/app/components/common/AccessDeniedAlert.vue",
+      "summary": "Event handler for rbac-denied custom events that extracts message from detail and shows the alert for 5 seconds",
+      "tags": ["event-handler", "rbac", "access-control"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/components/common/AppTransition.vue",
+      "type": "file",
+      "name": "AppTransition.vue",
+      "filePath": "apps/web/app/components/common/AppTransition.vue",
+      "summary": "Reusable transition wrapper supporting fade, slide-up, slide-left, and scale animation names with configurable mode (out-in, in-out)",
+      "tags": ["vue", "component", "transition", "animation", "reusable"],
+      "complexity": "simple",
+      "languageNotes": "Vue 3 script setup, wraps native Transition element"
+    },
+    {
+      "id": "file:apps/web/app/components/common/AuthForm/AuthForm.vue",
+      "type": "file",
+      "name": "AuthForm.vue",
+      "filePath": "apps/web/app/components/common/AuthForm/AuthForm.vue",
+      "summary": "Authentication form layout wrapper with centered gradient background, title/subtitle header, and white card container for form slots",
+      "tags": ["vue", "component", "auth", "layout", "form"],
+      "complexity": "simple",
+      "languageNotes": "Vue 3 script setup, Tailwind CSS styling"
+    },
+    {
+      "id": "file:apps/web/app/components/common/DataTable/DataTable.vue",
+      "type": "file",
+      "name": "DataTable.vue",
+      "filePath": "apps/web/app/components/common/DataTable/DataTable.vue",
+      "summary": "Reusable data table component with server-side pagination, global search (debounced 300ms), field-specific search, column visibility toggle (persisted to localStorage), sortable columns, and loading/empty states",
+      "tags": ["vue", "component", "data-table", "pagination", "search", "reusable", "naive-ui"],
+      "complexity": "complex",
+      "languageNotes": "Generic component T extends Record<string,any>, uses Naive UI NDataTable, NInput, NButton, NPopover, NCheckbox, NSelect"
+    },
+    {
+      "id": "function:apps/web/app/components/common/DataTable/DataTable.vue:handleSearch",
+      "type": "function",
+      "name": "handleSearch",
+      "filePath": "apps/web/app/components/common/DataTable/DataTable.vue",
+      "summary": "Debounced search handler (300ms) that emits search events to parent component",
+      "tags": ["search", "debounce", "event-emitter"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/components/common/DataTable/DataTable.vue:toggleColumn",
+      "type": "function",
+      "name": "toggleColumn",
+      "filePath": "apps/web/app/components/common/DataTable/DataTable.vue",
+      "summary": "Toggles column visibility and persists the hidden columns set to localStorage",
+      "tags": ["column-visibility", "localStorage", "ui-state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/components/common/DataTable/DataTable.vue:resetFilters",
+      "type": "function",
+      "name": "resetFilters",
+      "filePath": "apps/web/app/components/common/DataTable/DataTable.vue",
+      "summary": "Resets search text, search field, and hidden columns to defaults and clears localStorage",
+      "tags": ["reset", "filter", "ui-state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/components/common/FormField/FormField.vue",
+      "type": "file",
+      "name": "FormField.vue",
+      "filePath": "apps/web/app/components/common/FormField/FormField.vue",
+      "summary": "Reusable form field wrapper with label, optional required indicator, error message display, and slot for input content",
+      "tags": ["vue", "component", "form", "validation", "reusable"],
+      "complexity": "simple",
+      "languageNotes": "Vue 3 script setup with TypeScript"
+    },
+    {
+      "id": "file:apps/web/app/components/features/logging/CodeLinkButton.vue",
+      "type": "file",
+      "name": "CodeLinkButton.vue",
+      "filePath": "apps/web/app/components/features/logging/CodeLinkButton.vue",
+      "summary": "Button group for opening file in VS Code (via vscode:// URI), copying file path, and copying line number to clipboard",
+      "tags": ["vue", "component", "logging", "vscode", "clipboard", "dev-tools"],
+      "complexity": "simple",
+      "languageNotes": "Uses Naive UI NButton, NIcon, NTooltip, NSpace, @vicons/carbon Launch/Copy/Document"
+    },
+    {
+      "id": "function:apps/web/app/components/features/logging/CodeLinkButton.vue:openInVSCode",
+      "type": "function",
+      "name": "openInVSCode",
+      "filePath": "apps/web/app/components/features/logging/CodeLinkButton.vue",
+      "summary": "Opens file in VS Code using vscode:// protocol URI with optional line number",
+      "tags": ["vscode", "uri", "dev-tools"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/components/features/logging/LogLevelBadge.vue",
+      "type": "file",
+      "name": "LogLevelBadge.vue",
+      "filePath": "apps/web/app/components/features/logging/LogLevelBadge.vue",
+      "summary": "Colored tag badge component that maps log levels (TRACE, DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, FATAL, EMERGENCY) to Naive UI tag types",
+      "tags": ["vue", "component", "logging", "badge", "log-level"],
+      "complexity": "simple",
+      "languageNotes": "Imports LogLevel type from shared/types/system-log"
+    },
+    {
+      "id": "file:apps/web/app/components/features/logging/LogDetailDrawer.vue",
+      "type": "file",
+      "name": "LogDetailDrawer.vue",
+      "filePath": "apps/web/app/components/features/logging/LogDetailDrawer.vue",
+      "summary": "Side drawer for displaying log entry details including level badge, timestamp, context, message, stack trace (with syntax highlighting), raw line, and source code link with VS Code integration",
+      "tags": ["vue", "component", "logging", "drawer", "detail-view", "code-inspection"],
+      "complexity": "moderate",
+      "languageNotes": "Uses Naive UI NDrawer/NDrawerContent/NCode, imports LogLevelBadge, LogEntry type from shared"
+    },
+    {
+      "id": "file:apps/web/app/components/features/logging/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "apps/web/app/components/features/logging/index.ts",
+      "summary": "Barrel export file re-exporting LogDetailDrawer, LogLevelBadge, and CodeLinkButton components",
+      "tags": ["typescript", "barrel-export", "module-index"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/GuardDetailDrawer.vue",
+      "type": "file",
+      "name": "GuardDetailDrawer.vue",
+      "filePath": "apps/web/app/components/features/users/GuardDetailDrawer.vue",
+      "summary": "Side drawer displaying guard details including name, description, allow URLs (green tags), deny URLs (red tags), timestamps, with edit action button",
+      "tags": ["vue", "component", "rbac", "guard", "detail-view", "drawer"],
+      "complexity": "moderate",
+      "languageNotes": "Uses $fetch to GET /api/guards/:id, imports Guard type from shared/types/guard"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/GuardFormModal.vue",
+      "type": "file",
+      "name": "GuardFormModal.vue",
+      "filePath": "apps/web/app/components/features/users/GuardFormModal.vue",
+      "summary": "Modal form for creating/editing guards with fields for name, description, allow URLs, and deny URLs using NDynamicInput for dynamic URL list management",
+      "tags": ["vue", "component", "rbac", "guard", "form", "modal", "crud"],
+      "complexity": "moderate",
+      "languageNotes": "Uses useGuardsStore, getErrorMessage, NDynamicInput, Guard/CreateGuard/UpdateGuard types"
+    },
+    {
+      "id": "function:apps/web/app/components/features/users/GuardFormModal.vue:handleSubmit",
+      "type": "function",
+      "name": "handleSubmit",
+      "filePath": "apps/web/app/components/features/users/GuardFormModal.vue",
+      "summary": "Form submission handler that validates form, calls guardsStore.create or guardsStore.update, shows success/error messages, and emits success event",
+      "tags": ["form-submission", "crud", "validation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/GuardTable.vue",
+      "type": "file",
+      "name": "GuardTable.vue",
+      "filePath": "apps/web/app/components/features/users/GuardTable.vue",
+      "summary": "Guard list table using DataTable with columns for ID, name, description, allow/deny URLs (rendered as colored tags), and action buttons (view, edit, delete with confirmation)",
+      "tags": ["vue", "component", "rbac", "guard", "data-table", "crud"],
+      "complexity": "moderate",
+      "languageNotes": "Uses DataTable component, useGuardsStore, render functions (h) for custom column rendering"
+    },
+    {
+      "id": "function:apps/web/app/components/features/users/GuardTable.vue:handleDelete",
+      "type": "function",
+      "name": "handleDelete",
+      "filePath": "apps/web/app/components/features/users/GuardTable.vue",
+      "summary": "Delete handler that calls store.remove and shows success/error message",
+      "tags": ["crud", "delete", "confirmation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/PermissionDetailDrawer.vue",
+      "type": "file",
+      "name": "PermissionDetailDrawer.vue",
+      "filePath": "apps/web/app/components/features/users/PermissionDetailDrawer.vue",
+      "summary": "Side drawer displaying permission details including name, description, HTTP methods (green tags), URLs (blue tags), timestamps, with edit action button",
+      "tags": ["vue", "component", "rbac", "permission", "detail-view", "drawer"],
+      "complexity": "moderate",
+      "languageNotes": "Uses $fetch to GET /api/permissions/:id, imports Permission type from shared/types/permission"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/PermissionFormModal.vue",
+      "type": "file",
+      "name": "PermissionFormModal.vue",
+      "filePath": "apps/web/app/components/features/users/PermissionFormModal.vue",
+      "summary": "Modal form for creating/editing permissions with fields for name, description, HTTP methods (multi-select), and URLs (dynamic input list)",
+      "tags": ["vue", "component", "rbac", "permission", "form", "modal", "crud"],
+      "complexity": "moderate",
+      "languageNotes": "Uses usePermissionsStore, getErrorMessage, NSelect for methods, NDynamicInput for URLs"
+    },
+    {
+      "id": "function:apps/web/app/components/features/users/PermissionFormModal.vue:handleSubmit",
+      "type": "function",
+      "name": "handleSubmit",
+      "filePath": "apps/web/app/components/features/users/PermissionFormModal.vue",
+      "summary": "Form submission handler that validates form, calls permissionsStore.create or update, shows success/error messages",
+      "tags": ["form-submission", "crud", "validation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/PermissionTable.vue",
+      "type": "file",
+      "name": "PermissionTable.vue",
+      "filePath": "apps/web/app/components/features/users/PermissionTable.vue",
+      "summary": "Permission list table using DataTable with columns for ID, name, description, HTTP methods (green tags), URLs (blue tags), and action buttons (view, edit, delete with confirmation)",
+      "tags": ["vue", "component", "rbac", "permission", "data-table", "crud"],
+      "complexity": "moderate",
+      "languageNotes": "Uses DataTable component, usePermissionsStore, render functions (h)"
+    },
+    {
+      "id": "function:apps/web/app/components/features/users/PermissionTable.vue:handleDelete",
+      "type": "function",
+      "name": "handleDelete",
+      "filePath": "apps/web/app/components/features/users/PermissionTable.vue",
+      "summary": "Delete handler that calls store.remove and shows success/error message",
+      "tags": ["crud", "delete", "confirmation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/RoleDetailDrawer.vue",
+      "type": "file",
+      "name": "RoleDetailDrawer.vue",
+      "filePath": "apps/web/app/components/features/users/RoleDetailDrawer.vue",
+      "summary": "Side drawer displaying role details including name, description, associated guards (orange tags), permissions (blue tags), timestamps, with edit action button",
+      "tags": ["vue", "component", "rbac", "role", "detail-view", "drawer"],
+      "complexity": "moderate",
+      "languageNotes": "Uses $fetch to GET /api/roles/:id, imports Role type from shared/types/role"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/RoleFormModal.vue",
+      "type": "file",
+      "name": "RoleFormModal.vue",
+      "filePath": "apps/web/app/components/features/users/RoleFormModal.vue",
+      "summary": "Modal form for creating/editing roles with fields for name, description, guard selection (multi-select), and permission selection (multi-select)",
+      "tags": ["vue", "component", "rbac", "role", "form", "modal", "crud"],
+      "complexity": "moderate",
+      "languageNotes": "Uses useRolesStore, useGuardsStore, usePermissionsStore, NSelect for multi-select"
+    },
+    {
+      "id": "function:apps/web/app/components/features/users/RoleFormModal.vue:handleSubmit",
+      "type": "function",
+      "name": "handleSubmit",
+      "filePath": "apps/web/app/components/features/users/RoleFormModal.vue",
+      "summary": "Form submission handler that validates form, calls rolesStore.create or update, shows success/error messages",
+      "tags": ["form-submission", "crud", "validation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/RoleTable.vue",
+      "type": "file",
+      "name": "RoleTable.vue",
+      "filePath": "apps/web/app/components/features/users/RoleTable.vue",
+      "summary": "Role list table using DataTable with columns for ID, name, description, guards (orange tags), permissions (blue tags), and action buttons (view, edit, delete with confirmation)",
+      "tags": ["vue", "component", "rbac", "role", "data-table", "crud"],
+      "complexity": "moderate",
+      "languageNotes": "Uses DataTable component, useRolesStore, render functions (h)"
+    },
+    {
+      "id": "function:apps/web/app/components/features/users/RoleTable.vue:handleDelete",
+      "type": "function",
+      "name": "handleDelete",
+      "filePath": "apps/web/app/components/features/users/RoleTable.vue",
+      "summary": "Delete handler that calls store.remove and shows success/error message",
+      "tags": ["crud", "delete", "confirmation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/UserDetailDrawer.vue",
+      "type": "file",
+      "name": "UserDetailDrawer.vue",
+      "filePath": "apps/web/app/components/features/users/UserDetailDrawer.vue",
+      "summary": "Side drawer displaying user details including first/last name, username, email, roles (blue tags), timestamps, with edit action button",
+      "tags": ["vue", "component", "user", "detail-view", "drawer"],
+      "complexity": "moderate",
+      "languageNotes": "Uses $fetch to GET /api/users/:id, imports User type from shared/types/user"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/UserFormModal.vue",
+      "type": "file",
+      "name": "UserFormModal.vue",
+      "filePath": "apps/web/app/components/features/users/UserFormModal.vue",
+      "summary": "Modal form for creating/editing users with fields for first/last name, username, email, password (with confirm), and role selection (multi-select)",
+      "tags": ["vue", "component", "user", "form", "modal", "crud", "auth"],
+      "complexity": "moderate",
+      "languageNotes": "Uses useUsersStore, useRolesStore, getErrorMessage, NSelect for roles, conditional password rules"
+    },
+    {
+      "id": "function:apps/web/app/components/features/users/UserFormModal.vue:handleSubmit",
+      "type": "function",
+      "name": "handleSubmit",
+      "filePath": "apps/web/app/components/features/users/UserFormModal.vue",
+      "summary": "Form submission handler that validates form, calls usersStore.create or update with conditional password payload, shows success/error messages",
+      "tags": ["form-submission", "crud", "validation", "auth"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/UserTable.vue",
+      "type": "file",
+      "name": "UserTable.vue",
+      "filePath": "apps/web/app/components/features/users/UserTable.vue",
+      "summary": "User list table using DataTable with columns for ID, first/last name, username, email, roles (blue tags), and action buttons (view, edit, delete with confirmation)",
+      "tags": ["vue", "component", "user", "data-table", "crud"],
+      "complexity": "moderate",
+      "languageNotes": "Uses DataTable component, useUsersStore, render functions (h)"
+    },
+    {
+      "id": "function:apps/web/app/components/features/users/UserTable.vue:handleDelete",
+      "type": "function",
+      "name": "handleDelete",
+      "filePath": "apps/web/app/components/features/users/UserTable.vue",
+      "summary": "Delete handler that calls store.remove and shows success/error message",
+      "tags": ["crud", "delete", "confirmation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/components/features/users/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "apps/web/app/components/features/users/index.ts",
+      "summary": "Barrel export file re-exporting all 12 user management components: UserTable, UserFormModal, UserDetailDrawer, GuardTable, GuardFormModal, GuardDetailDrawer, RoleTable, RoleFormModal, RoleDetailDrawer, PermissionTable, PermissionFormModal, PermissionDetailDrawer",
+      "tags": ["typescript", "barrel-export", "module-index", "rbac"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:apps/web/app/assets/css/main.css",
+      "target": "file:apps/web/app/assets/css/animations.css",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "@import"
+    },
+    {
+      "source": "file:apps/web/app/components/common/AccessDeniedAlert.vue",
+      "target": "file:apps/web/app/components/common/AccessDeniedAlert.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/common/AccessDeniedAlert.vue:handleDenied" }
+    },
+    {
+      "source": "file:apps/web/app/components/common/DataTable/DataTable.vue",
+      "target": "file:apps/web/app/components/common/DataTable/DataTable.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains functions",
+      "metadata": { "functionIds": ["function:apps/web/app/components/common/DataTable/DataTable.vue:handleSearch", "function:apps/web/app/components/common/DataTable/DataTable.vue:toggleColumn", "function:apps/web/app/components/common/DataTable/DataTable.vue:resetFilters"] }
+    },
+    {
+      "source": "file:apps/web/app/components/features/logging/CodeLinkButton.vue",
+      "target": "file:apps/web/app/components/features/logging/CodeLinkButton.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/features/logging/CodeLinkButton.vue:openInVSCode" }
+    },
+    {
+      "source": "file:apps/web/app/components/features/logging/LogDetailDrawer.vue",
+      "target": "file:apps/web/app/components/features/logging/LogLevelBadge.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports component"
+    },
+    {
+      "source": "file:apps/web/app/components/features/logging/index.ts",
+      "target": "file:apps/web/app/components/features/logging/LogDetailDrawer.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/logging/index.ts",
+      "target": "file:apps/web/app/components/features/logging/LogLevelBadge.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/logging/index.ts",
+      "target": "file:apps/web/app/components/features/logging/CodeLinkButton.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/GuardFormModal.vue",
+      "target": "file:apps/web/app/components/features/users/GuardFormModal.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/features/users/GuardFormModal.vue:handleSubmit" }
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/GuardTable.vue",
+      "target": "file:apps/web/app/components/common/DataTable/DataTable.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports component"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/GuardTable.vue",
+      "target": "file:apps/web/app/components/features/users/GuardTable.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/features/users/GuardTable.vue:handleDelete" }
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/PermissionFormModal.vue",
+      "target": "file:apps/web/app/components/features/users/PermissionFormModal.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/features/users/PermissionFormModal.vue:handleSubmit" }
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/PermissionTable.vue",
+      "target": "file:apps/web/app/components/common/DataTable/DataTable.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports component"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/PermissionTable.vue",
+      "target": "file:apps/web/app/components/features/users/PermissionTable.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/features/users/PermissionTable.vue:handleDelete" }
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/RoleFormModal.vue",
+      "target": "file:apps/web/app/components/features/users/RoleFormModal.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/features/users/RoleFormModal.vue:handleSubmit" }
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/RoleTable.vue",
+      "target": "file:apps/web/app/components/common/DataTable/DataTable.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports component"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/RoleTable.vue",
+      "target": "file:apps/web/app/components/features/users/RoleTable.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/features/users/RoleTable.vue:handleDelete" }
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/UserFormModal.vue",
+      "target": "file:apps/web/app/components/features/users/UserFormModal.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/features/users/UserFormModal.vue:handleSubmit" }
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/UserTable.vue",
+      "target": "file:apps/web/app/components/common/DataTable/DataTable.vue",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports component"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/UserTable.vue",
+      "target": "file:apps/web/app/components/features/users/UserTable.vue",
+      "type": "contains",
+      "weight": 1.0,
+      "label": "contains function",
+      "metadata": { "functionId": "function:apps/web/app/components/features/users/UserTable.vue:handleDelete" }
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/UserTable.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/UserFormModal.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/UserDetailDrawer.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/GuardTable.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/GuardFormModal.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/GuardDetailDrawer.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/RoleTable.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/RoleFormModal.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/RoleDetailDrawer.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/PermissionTable.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/PermissionFormModal.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    },
+    {
+      "source": "file:apps/web/app/components/features/users/index.ts",
+      "target": "file:apps/web/app/components/features/users/PermissionDetailDrawer.vue",
+      "type": "exports",
+      "weight": 0.8,
+      "label": "re-exports"
+    }
+  ]
+}

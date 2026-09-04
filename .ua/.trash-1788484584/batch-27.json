@@ -1,0 +1,638 @@
+{
+  "nodes": [
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/wpf.csv",
+      "type": "table",
+      "name": "wpf.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/wpf.csv",
+      "summary": "WPF (Windows Presentation Foundation) stack guidelines dataset with 56 rows covering XAML, Data Binding, Layout, Styling, Commands, Performance, Threading, Accessibility, Architecture, and Testing best practices for .NET WPF desktop development.",
+      "tags": ["wpf", "xaml", "data-binding", "desktop", "dotnet", "accessibility", "mvvm"],
+      "complexity": "simple",
+      "tableMetadata": {"rowCount": 56, "columns": ["No", "Category", "Guideline", "Description", "Do", "Don't", "Code Good", "Code Bad", "Severity", "Docs URL", "Applies To", "Status", "Verified At"]}
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "file",
+      "name": "core.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "summary": "Core BM25 search engine for UI/UX style guides. Handles CSV-based domain search, stack search, tokenization with synonym normalization, BM25 ranking, domain detection, and result formatting across 11 UI/UX domains (style, color, chart, landing, product, ux, typography, icons, gsap, react, web) and 20+ UI stacks.",
+      "tags": ["bm25", "search-engine", "csv", "ui-ux", "nlp", "ranking", "tokenization"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "file",
+      "name": "design_system.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "summary": "Design system generator that aggregates search results and applies reasoning rules to produce comprehensive design system recommendations. Handles color mode resolution (light/dark), design dials (variance, motion, density), persistence (Master + Overrides pattern), and multi-format output (ASCII box, markdown).",
+      "tags": ["design-system", "generator", "color-mode", "reasoning", "persistence", "formatting"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+      "type": "file",
+      "name": "reasoning_contract.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+      "summary": "Closed, non-executable grammar for design-system decision rules. Defines condition signals for 30+ business contexts (booking, dashboard, health, luxury, etc.), validates JSON rule format, and applies deterministic mutations based on query matching. Never executes data — only produces audit trails.",
+      "tags": ["decision-rules", "grammar", "validation", "deterministic", "business-context"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/search.py",
+      "type": "file",
+      "name": "search.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/search.py",
+      "summary": "CLI entry point for the UI/UX Pro Max search engine. Supports domain search, stack search, design system generation with design dials (variance, motion, density), and persistence (Master + Overrides pattern). Token-optimized output for Claude consumption.",
+      "tags": ["cli", "entry-point", "argparse", "search", "design-system"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "type": "file",
+      "name": "validate_data.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "summary": "Stdlib-only data integrity guardrail for ui-ux-pro-max. Validates CSV structure, column contracts, duplicate detection, JSON parsing, WCAG contrast ratios, font licenses, icon semantics, chart accessibility, and stack freshness. Runs as standalone pre-publish/CI check.",
+      "tags": ["validation", "data-integrity", "wcag", "accessibility", "ci-check", "guardrail"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py",
+      "type": "file",
+      "name": "test_catalog_refresh.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py",
+      "summary": "Offline contract tests for deterministic upstream catalog refreshes (Google Fonts, Phosphor Icons). Tests API-to-CSV pipeline, approval flow, override handling, and snapshot isolation to ensure reproducible catalog updates.",
+      "tags": ["test", "catalog", "google-fonts", "phosphor-icons", "deterministic"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "type": "file",
+      "name": "test_core.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "summary": "Stdlib-only regression tests for core.py and design_system.py. Tests BM25 tokenizer, domain detection, search ranking, stack search, design system generation, persistence, and CLI integration. Uses unittest, not pytest.",
+      "tags": ["test", "regression", "bm25", "search", "design-system"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_core_data_quality.py",
+      "type": "file",
+      "name": "test_core_data_quality.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_core_data_quality.py",
+      "summary": "Semantic quality contracts for core UI/UX datasets. Tests color contrast ratios, chart accessibility (WCAG, text fallbacks, non-color guidance), icon semantics (roles, contexts, usage requirements), and typography (font families, CSS imports).",
+      "tags": ["test", "data-quality", "accessibility", "wcag", "contrast"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "type": "file",
+      "name": "test_data_contracts.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "summary": "Cross-file semantic contracts for curated design data. Tests style taxonomy, color palette consistency, landing page patterns, typography pairings, reasoning rule validation, and stack guideline freshness across the entire dataset.",
+      "tags": ["test", "contracts", "taxonomy", "cross-file", "consistency"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "type": "file",
+      "name": "test_design_system_mode.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "summary": "Regression tests for color-mode coherence in design_system.py. Validates dark/light mode resolution, palette derivation, anti-pattern filtering, WCAG contrast ratios, and style mode detection to prevent mode mismatches.",
+      "tags": ["test", "color-mode", "dark-mode", "regression", "coherence"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_native_desktop_stack_freshness.py",
+      "type": "file",
+      "name": "test_native_desktop_stack_freshness.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_native_desktop_stack_freshness.py",
+      "summary": "Freshness and migration contracts for native, desktop, and 3D stacks (React Native, Flutter, SwiftUI, Jetpack Compose, Avalonia, UWP, WinUI, WPF, Uno, JavaFX, Three.js, Laravel). Validates status, version applicability, and docs URL official host restrictions.",
+      "tags": ["test", "freshness", "native", "desktop", "migration"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py",
+      "type": "file",
+      "name": "test_relevance_evaluator.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py",
+      "summary": "Unit tests for metric math (precision@k, MRR, nDCG) and relevance fixture validation. Tests the evaluate-relevance.py script's scoring functions and judgment matching against identity fields.",
+      "tags": ["test", "relevance", "metrics", "precision", "ndcg", "mrr"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+      "type": "file",
+      "name": "test_style_taxonomy.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+      "summary": "Regression tests for the public style taxonomy and search contract. Validates style status distribution, deterministic alias resolution, dark-primary detection, and search result consistency across style domain queries.",
+      "tags": ["test", "taxonomy", "style", "regression", "search"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_text_layout_resilience.py",
+      "type": "file",
+      "name": "test_text_layout_resilience.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_text_layout_resilience.py",
+      "summary": "Canonical regression contracts for resilient UI text layouts. Tests heading line balance, long token wrapping, text reflow, truncation, compact label semantics, chip collection reflow, and cancellable state transitions across UX guidelines and Tailwind CSS.",
+      "tags": ["test", "text-layout", "resilience", "ux", "tailwind"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_web_stack_freshness.py",
+      "type": "file",
+      "name": "test_web_stack_freshness.py",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_web_stack_freshness.py",
+      "summary": "Freshness and generation-isolation contracts for web stack guidance. Validates row freshness metadata (Status, Applies To, Verified At), official docs URL restrictions, and generation isolation between web stacks.",
+      "tags": ["test", "freshness", "web-stack", "isolation", "metadata"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/vue-best-practices/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".opencode/skills/vue-best-practices/SKILL.md",
+      "summary": "Vue.js best practices skill guide. Enforces Composition API with <script setup lang='ts'>, covers Vue 3, SSR, Volar, vue-tsc. Core principles: predictable state, explicit data flow, small components, avoid unnecessary re-renders, readability.",
+      "tags": ["vue", "best-practices", "composition-api", "typescript", "nuxt"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.opencode/skills/vue-best-practices/references/state-management.md",
+      "type": "document",
+      "name": "state-management.md",
+      "filePath": ".opencode/skills/vue-best-practices/references/state-management.md",
+      "summary": "Vue 3 state management reference covering Pinia (recommended) vs Options API patterns, reactive state, computed properties, watchers, provide/inject, and component-local state.",
+      "tags": ["vue", "state-management", "pinia", "reactivity"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.opencode/skills/vue-best-practices/references/updated-hook-performance.md",
+      "type": "document",
+      "name": "updated-hook-performance.md",
+      "filePath": ".opencode/skills/vue-best-practices/references/updated-hook-performance.md",
+      "summary": "Vue 3 updated hook performance reference. Covers onUpdated lifecycle, nextTick usage, batch updates, performance pitfalls, and alternatives (watchEffect, watch) for reactive data changes.",
+      "tags": ["vue", "performance", "updated-hook", "lifecycle", "nexttick"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.ua/.understandignore",
+      "type": "config",
+      "name": ".understandignore",
+      "filePath": ".ua/.understandignore",
+      "summary": "Understand-Anything ignore configuration. Defines file/directory exclusion patterns using .gitignore syntax for analysis filtering. Includes suggestions for test files, docs, and build artifacts.",
+      "tags": ["config", "ignore", "analysis", "exclusion"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:AGENTS.md",
+      "type": "document",
+      "name": "AGENTS.md",
+      "filePath": "AGENTS.md",
+      "summary": "Agent guide for the Business Management System (BMS) project. Documents Nuxt 4 monolith architecture, RBAC model, Nitro server, TypeORM with SQLite, JWT auth, and development workflow.",
+      "tags": ["documentation", "agent-guide", "architecture", "bms"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/.nuxtrc",
+      "type": "config",
+      "name": ".nuxtrc",
+      "filePath": "apps/web/.nuxtrc",
+      "summary": "Nuxt runtime configuration file. Empty file — no custom Nuxt options configured.",
+      "tags": ["nuxt", "config"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/.storybook/main.ts",
+      "type": "file",
+      "name": "main.ts",
+      "filePath": "apps/web/.storybook/main.ts",
+      "summary": "Storybook configuration for Vue 3 + Vite. Configures story patterns (*.mdx, *.stories.*) and addons (a11y, docs) using @storybook/vue3-vite framework.",
+      "tags": ["storybook", "config", "vue3", "vite"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/.storybook/preview.ts",
+      "type": "file",
+      "name": "preview.ts",
+      "filePath": "apps/web/.storybook/preview.ts",
+      "summary": "Storybook preview configuration. Imports global CSS, sets control matchers (color, date), and configures a11y test mode.",
+      "tags": ["storybook", "preview", "css", "a11y"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/app.vue",
+      "type": "file",
+      "name": "app.vue",
+      "filePath": "apps/web/app/app.vue",
+      "summary": "Root Vue component for the BMS application. Wraps NuxtPage in NMessageProvider and NuxtLayout for global notification and layout management.",
+      "tags": ["vue", "root-component", "nuxt", "layout"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/core.py:BM25",
+      "type": "class",
+      "name": "BM25",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "summary": "BM25 ranking algorithm implementation for text search. Handles tokenization with synonym normalization, IDF computation, document frequency tracking, and relevance scoring with configurable k1 and b parameters.",
+      "tags": ["bm25", "ranking", "search", "nlp"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/core.py:search",
+      "type": "function",
+      "name": "search",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "summary": "Main search function. Accepts query, domain, max_results. Auto-detects domain if not specified, loads CSV corpus, builds BM25 index, ranks results, applies thresholds, and returns structured search results with suggestions.",
+      "tags": ["search", "entry-point", "domain-detection"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/core.py:search_stack",
+      "type": "function",
+      "name": "search_stack",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "summary": "Stack-specific search function. Loads stack CSV, filters by current applicability, builds BM25 index, and returns ranked stack guidelines with code examples.",
+      "tags": ["search", "stack", "guidelines"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/core.py:detect_domain",
+      "type": "function",
+      "name": "detect_domain",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "summary": "Auto-detects the most relevant domain for a query using keyword matching against domain-specific CSVs. Returns (domain, runner_up) tuple.",
+      "tags": ["domain-detection", "classification", "keyword-matching"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/design_system.py:DesignSystemGenerator",
+      "type": "class",
+      "name": "DesignSystemGenerator",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "summary": "Design system generator class. Loads reasoning rules, styles, and landing patterns. Generates comprehensive design system recommendations by aggregating search results across product, style, color, landing, and typography domains.",
+      "tags": ["design-system", "generator", "aggregation"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/design_system.py:generate_design_system",
+      "type": "function",
+      "name": "generate_design_system",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "summary": "Public API for design system generation. Accepts query, project name, format, persistence options, and design dials (variance, motion, density). Returns text output, structured design system, and persistence status.",
+      "tags": ["design-system", "public-api", "generation"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/design_system.py:_resolve_color_mode",
+      "type": "function",
+      "name": "_resolve_color_mode",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "summary": "Resolves whether the design system should use light or dark mode based on query keywords and style metadata. Uses dark-primary markers and query markers for detection.",
+      "tags": ["color-mode", "dark-mode", "resolution"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/design_system.py:_select_palette_for_mode",
+      "type": "function",
+      "name": "_select_palette_for_mode",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "summary": "Selects the best-matching color palette for the resolved mode. Filters dark palettes when dark mode is active, derives dark surfaces from light palettes when needed.",
+      "tags": ["palette", "color", "selection"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py:parse_decision_rules",
+      "type": "function",
+      "name": "parse_decision_rules",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+      "summary": "Parses canonical condition -> action-array JSON representation. Validates conditions against ALLOWED_CONDITIONS, action prefixes, token formats, and pattern/mode values.",
+      "tags": ["validation", "json-parsing", "decision-rules"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py:apply_decision_rules",
+      "type": "function",
+      "name": "apply_decision_rules",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+      "summary": "Applies decision rules to a query. Returns deterministic mutations (style_ids, constraints, pattern, mode) and audit trail. Never executes data — only produces mutations.",
+      "tags": ["decision-rules", "mutation", "deterministic"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py:contrast_ratio",
+      "type": "function",
+      "name": "contrast_ratio",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "summary": "Computes WCAG contrast ratio for two opaque six-digit sRGB hex colors. Used for accessibility validation of color pairs.",
+      "tags": ["wcag", "contrast", "accessibility", "validation"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py:_check_file",
+      "type": "function",
+      "name": "_check_file",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "summary": "Validates a single CSV file: checks existence, parses headers, verifies required columns, detects duplicate primary keys, and validates JSON columns.",
+      "tags": ["validation", "csv", "file-check"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py:_check_style_contract",
+      "type": "function",
+      "name": "_check_style_contract",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "summary": "Validates style taxonomy contracts: unique Style IDs, valid Status values, supplemental row parent requirements, and deprecated row replacement targets.",
+      "tags": ["validation", "style-taxonomy", "contract"]
+    },
+    {
+      "id": "function:.opencode/skills/ui-ux-pro-max/scripts/search.py:format_output",
+      "type": "function",
+      "name": "format_output",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/search.py",
+      "summary": "Formats search results for Claude consumption. Truncates long fields (except code/checklists), handles redirects, suggests closest terms on no-match, and formats stack/domain results.",
+      "tags": ["formatting", "output", "truncation"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports search, DATA_DIR"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports apply_decision_rules, parse_decision_rules"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/search.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports CSV_CONFIG, AVAILABLE_STACKS, MAX_RESULTS, UNTRUNCATED_COLS, search, search_stack"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/search.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports generate_design_system"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports CSV_CONFIG, STACK_CONFIG, STACK_CURRENT_APPLICABILITY, _STACK_COLS, DATA_DIR"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports parse_decision_rules"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports core, BM25, detect_domain, search, search_stack, CSV_CONFIG, AVAILABLE_STACKS"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports DesignSystemGenerator, generate_design_system"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_core_data_quality.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports search"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_core_data_quality.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports validation helpers and constants"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports AVAILABLE_STACKS, STACK_CONFIG"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports DesignSystemGenerator"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports apply_decision_rules, parse_decision_rules"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports validate_data, _check_reasoning_contract"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports color mode functions and DesignSystemGenerator"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_native_desktop_stack_freshness.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports DATA_DIR, STACK_CONFIG, STACK_CURRENT_APPLICABILITY, search_stack"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_native_desktop_stack_freshness.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports STACK_OFFICIAL_HOSTS"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+      "type": "related",
+      "weight": 0.5,
+      "label": "tests evaluation logic (external script)"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports search"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports _style_is_dark_primary"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_text_layout_resilience.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports search, search_stack"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_web_stack_freshness.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports DATA_DIR, STACK_CONFIG, WEB_STACKS, search_stack"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_web_stack_freshness.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "type": "imports",
+      "weight": 0.7,
+      "label": "imports STACK_OFFICIAL_HOSTS"
+    },
+    {
+      "source": "function:.opencode/skills/ui-ux-pro-max/scripts/core.py:search",
+      "target": "function:.opencode/skills/ui-ux-pro-max/scripts/core.py:BM25",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "instantiates and queries BM25 for ranking"
+    },
+    {
+      "source": "function:.opencode/skills/ui-ux-pro-max/scripts/core.py:search_stack",
+      "target": "function:.opencode/skills/ui-ux-pro-max/scripts/core.py:BM25",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "instantiates and queries BM25 for stack ranking"
+    },
+    {
+      "source": "function:.opencode/skills/ui-ux-pro-max/scripts/design_system.py:generate_design_system",
+      "target": "function:.opencode/skills/ui-ux-pro-max/scripts/design_system.py:DesignSystemGenerator",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "creates and invokes DesignSystemGenerator"
+    },
+    {
+      "source": "function:.opencode/skills/ui-ux-pro-max/scripts/design_system.py:DesignSystemGenerator",
+      "target": "function:.opencode/skills/ui-ux-pro-max/scripts/core.py:search",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "calls search() for each design domain"
+    },
+    {
+      "source": "function:.opencode/skills/ui-ux-pro-max/scripts/design_system.py:DesignSystemGenerator",
+      "target": "function:.opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py:apply_decision_rules",
+      "type": "calls",
+      "weight": 0.8,
+      "label": "applies decision rules to query"
+    },
+    {
+      "source": "function:.opencode/skills/ui-ux-pro-max/scripts/search.py:format_output",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "depends_on",
+      "weight": 0.6,
+      "label": "depends on search result structure"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/wpf.csv",
+      "type": "reads_from",
+      "weight": 0.5,
+      "label": "reads wpf.csv via STACK_CONFIG"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/wpf.csv",
+      "type": "validates",
+      "weight": 0.5,
+      "label": "validates wpf.csv structure and contracts"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "tested_by",
+      "weight": 0.5,
+      "label": "tests core.py functions"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "tested_by",
+      "weight": 0.5,
+      "label": "tests design_system.py"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+      "type": "tested_by",
+      "weight": 0.5,
+      "label": "tests color mode coherence"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_core_data_quality.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "type": "tested_by",
+      "weight": 0.5,
+      "label": "tests data quality validation"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+      "type": "tested_by",
+      "weight": 0.5,
+      "label": "tests cross-file data contracts"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "tested_by",
+      "weight": 0.5,
+      "label": "tests style taxonomy"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_text_layout_resilience.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "tested_by",
+      "weight": 0.5,
+      "label": "tests text layout resilience"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_native_desktop_stack_freshness.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "tested_by",
+      "weight": 0.5,
+      "label": "tests native/desktop stack freshness"
+    },
+    {
+      "source": "file:.opencode/skills/ui-ux-pro-max/scripts/tests/test_web_stack_freshness.py",
+      "target": "file:.opencode/skills/ui-ux-pro-max/scripts/core.py",
+      "type": "tested_by",
+      "weight": 0.5,
+      "label": "tests web stack freshness"
+    },
+    {
+      "source": "file:apps/web/.storybook/main.ts",
+      "target": "file:apps/web/.storybook/preview.ts",
+      "type": "related",
+      "weight": 0.5,
+      "label": "storybook config files"
+    },
+    {
+      "source": "file:apps/web/app/app.vue",
+      "target": "file:apps/web/.nuxtrc",
+      "type": "configures",
+      "weight": 0.4,
+      "label": "Nuxt root component uses Nuxt config"
+    }
+  ]
+}

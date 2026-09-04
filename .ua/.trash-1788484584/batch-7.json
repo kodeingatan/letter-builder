@@ -1,0 +1,72 @@
+{
+  "nodes": [
+    {
+      "id": "table:.opencode/skills/design/data/cip/deliverables.csv:deliverables",
+      "type": "table",
+      "name": "CIP Deliverables",
+      "filePath": ".opencode/skills/design/data/cip/deliverables.csv",
+      "summary": "Corporate Identity Package (CIP) deliverables catalog listing 50 brand identity items across categories: Core Identity, Stationery, Security Access, Office Environment, Apparel, Promotional, Vehicle, Digital, Product, Events, and Documents. Each deliverable includes category, keywords, description, dimensions, file format, logo placement, color usage, typography notes, mockup context, best practices, and common mistakes to avoid.",
+      "tags": ["data", "cip", "brand-identity", "design-assets", "catalog"],
+      "complexity": "simple",
+      "metadata": {
+        "rowCount": 50,
+        "columns": ["No", "Deliverable", "Category", "Keywords", "Description", "Dimensions", "File Format", "Logo Placement", "Color Usage", "Typography Notes", "Mockup Context", "Best Practices", "Avoid"],
+        "categories": ["Core Identity", "Stationery", "Security Access", "Office Environment", "Apparel", "Promotional", "Vehicle", "Digital", "Product", "Events", "Documents"]
+      }
+    },
+    {
+      "id": "table:.opencode/skills/design/data/cip/industries.csv:industries",
+      "type": "table",
+      "name": "CIP Industries",
+      "filePath": ".opencode/skills/design/data/cip/industries.csv",
+      "summary": "Industry-specific CIP style guide mapping 20 industries to their recommended visual identity systems. Each entry defines the CIP style approach, primary/secondary color palettes, typography choices, key deliverables, mood/atmosphere, best practices, and patterns to avoid for that industry sector.",
+      "tags": ["data", "cip", "industry-styles", "design-guidelines", "color-palettes"],
+      "complexity": "simple",
+      "metadata": {
+        "rowCount": 20,
+        "columns": ["No", "Industry", "Keywords", "CIP Style", "Primary Colors", "Secondary Colors", "Typography", "Key Deliverables", "Mood", "Best Practices", "Avoid"],
+        "industries": ["Technology", "Finance Banking", "Legal", "Healthcare", "Real Estate", "Hospitality", "Food Beverage", "Fashion", "Beauty Cosmetics", "Education", "Sports Fitness", "Entertainment", "Automotive", "Construction", "Agriculture", "Non-Profit", "Consulting", "Retail", "Manufacturing", "Logistics"]
+      }
+    },
+    {
+      "id": "table:.opencode/skills/design/data/cip/mockup-contexts.csv:mockup-contexts",
+      "type": "table",
+      "name": "CIP Mockup Contexts",
+      "filePath": ".opencode/skills/design/data/cip/mockup-contexts.csv",
+      "summary": "Presentation mockup scene definitions for showcasing CIP brand materials. Contains 20 contexts across categories (Stationery, Modern, Premium, Clean, Environment, Vehicle, Events, Digital, Product, Apparel, Catalog) with scene descriptions, lighting conditions, environments, props, camera angles, backgrounds, style notes, and AI prompt modifiers for generating realistic mockups.",
+      "tags": ["data", "cip", "mockups", "presentation", "photography", "ai-prompts"],
+      "complexity": "simple",
+      "metadata": {
+        "rowCount": 20,
+        "columns": ["No", "Context Name", "Category", "Keywords", "Scene Description", "Lighting", "Environment", "Props", "Camera Angle", "Background", "Style Notes", "Best For", "Prompt Modifiers"],
+        "categories": ["Stationery", "Modern", "Premium", "Clean", "Environment", "Vehicle", "Events", "Digital", "Product", "Apparel", "Catalog"]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "table:.opencode/skills/design/data/cip/deliverables.csv:deliverables",
+      "target": "table:.opencode/skills/design/data/cip/mockup-contexts.csv:mockup-contexts",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7,
+      "description": "Deliverables reference mockup contexts for presentation (Mockup Context column in deliverables.csv maps to Context Name in mockup-contexts.csv)"
+    },
+    {
+      "source": "table:.opencode/skills/design/data/cip/deliverables.csv:deliverables",
+      "target": "table:.opencode/skills/design/data/cip/industries.csv:industries",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Deliverables are selected based on industry-specific requirements (Key Deliverables column in industries.csv maps to Deliverable names in deliverables.csv)"
+    },
+    {
+      "source": "table:.opencode/skills/design/data/cip/industries.csv:industries",
+      "target": "table:.opencode/skills/design/data/cip/mockup-contexts.csv:mockup-contexts",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5,
+      "description": "Industry styles influence mockup context selection for brand-appropriate presentation"
+    }
+  ]
+}

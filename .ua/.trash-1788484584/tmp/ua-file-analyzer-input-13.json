@@ -1,0 +1,20 @@
+{
+  "batch_index": 13,
+  "project_root": "/home/afdal/Laboratorium/Bisnis Digital/bms",
+  "ua_dir": "/home/afdal/Laboratorium/Bisnis Digital/bms/.ua",
+  "skill_directory": "/home/afdal/.agents/skills/understand",
+  "files": [
+    ".opencode/skills/tailwind-base-practices/references/anti-patterns.md",
+    ".opencode/skills/tailwind-base-practices/references/best-practices.md",
+    ".opencode/skills/tailwind-base-practices/references/colors.md",
+    ".opencode/skills/tailwind-base-practices/references/dark-mode.md",
+    ".opencode/skills/tailwind-base-practices/references/grid-layout.md",
+    ".opencode/skills/tailwind-base-practices/references/responsive-design.md",
+    ".opencode/skills/tailwind-base-practices/references/spacing.md",
+    ".opencode/skills/tailwind-base-practices/references/syntax.md",
+    ".opencode/skills/tailwind-base-practices/references/theming.md",
+    ".opencode/skills/tailwind-base-practices/references/typography.md",
+    ".opencode/skills/tailwind-base-practices/references/utilities.md"
+  ],
+  "batch_import_data": {}
+}

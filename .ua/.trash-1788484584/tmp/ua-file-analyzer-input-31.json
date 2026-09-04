@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/home/afdal/Laboratorium/Bisnis Digital/bms",
+  "batchFiles": [
+    {"path": "apps/web/server/api/guards/index.get.ts", "language": "typescript", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "apps/web/server/api/guards/index.post.ts", "language": "typescript", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "apps/web/server/api/permissions/[id].delete.ts", "language": "typescript", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "apps/web/server/api/permissions/[id].get.ts", "language": "typescript", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "apps/web/server/api/permissions/[id].put.ts", "language": "typescript", "sizeLines": 20, "fileCategory": "code"},
+    {"path": "apps/web/server/api/permissions/index.get.ts", "language": "typescript", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "apps/web/server/api/permissions/index.post.ts", "language": "typescript", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "apps/web/server/api/roles/[id].delete.ts", "language": "typescript", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "apps/web/server/api/roles/[id].get.ts", "language": "typescript", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "apps/web/server/api/roles/[id].put.ts", "language": "typescript", "sizeLines": 20, "fileCategory": "code"},
+    {"path": "apps/web/server/api/roles/index.get.ts", "language": "typescript", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "apps/web/server/api/roles/index.post.ts", "language": "typescript", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "apps/web/server/api/settings/index.get.ts", "language": "typescript", "sizeLines": 6, "fileCategory": "code"},
+    {"path": "apps/web/server/api/settings/index.put.ts", "language": "typescript", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "apps/web/server/api/settings/upload.post.ts", "language": "typescript", "sizeLines": 23, "fileCategory": "code"},
+    {"path": "apps/web/server/api/storage/[...path].get.ts", "language": "typescript", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "apps/web/server/api/system-logs/files/[filename].get.ts", "language": "typescript", "sizeLines": 20, "fileCategory": "code"},
+    {"path": "apps/web/server/api/system-logs/files/index.get.ts", "language": "typescript", "sizeLines": 10, "fileCategory": "code"},
+    {"path": "apps/web/server/api/system-logs/stats/[filename].get.ts", "language": "typescript", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "apps/web/server/api/users/[id].delete.ts", "language": "typescript", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "apps/web/server/api/users/[id].get.ts", "language": "typescript", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "apps/web/server/api/users/[id].put.ts", "language": "typescript", "sizeLines": 20, "fileCategory": "code"},
+    {"path": "apps/web/server/api/users/index.get.ts", "language": "typescript", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "apps/web/server/api/users/index.post.ts", "language": "typescript", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "apps/web/server/dto/activity-logs.dto.ts", "language": "typescript", "sizeLines": 17, "fileCategory": "code"}
+  ],
+  "batchImportData": {}
+}

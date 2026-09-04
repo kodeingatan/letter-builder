@@ -1,0 +1,207 @@
+{
+  "nodes": [
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-api.json",
+      "type": "config",
+      "name": "google-api.json",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-api.json",
+      "summary": "Google Fonts API response fixture in webfontList format. Contains two sample font families (Zeta Serif and Alpha Sans) with variants, subsets, file URLs, categories, and variable font axes metadata.",
+      "tags": ["fixture", "test-data", "google-fonts", "api-response", "json"],
+      "language": "json",
+      "fileCategory": "config",
+      "sizeLines": 36,
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-catalog.json",
+      "type": "config",
+      "name": "google-catalog.json",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-catalog.json",
+      "summary": "Google Fonts catalog metadata fixture in familyMetadataList format. Contains detailed font metadata for Zeta Serif and Alpha Sans including classifications, popularity/trending ranks, designer info, axes definitions, and open-source flags.",
+      "tags": ["fixture", "test-data", "google-fonts", "catalog", "metadata", "json"],
+      "language": "json",
+      "fileCategory": "config",
+      "sizeLines": 33,
+      "complexity": "simple"
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-existing.csv:google-existing",
+      "type": "table",
+      "name": "google-existing.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-existing.csv",
+      "summary": "Existing Google fonts CSV data fixture with columns: Family, Category, Stroke, Classifications, Keywords, Styles, Variable Axes, Subsets, Designers, Popularity Rank, Trending Rank, Is Noto, Date Added, Last Modified, Google Fonts URL. Contains two sample rows for Alpha Sans and Zeta Serif with pre-existing reviewed keywords.",
+      "tags": ["fixture", "test-data", "google-fonts", "csv", "tabular-data"],
+      "language": "csv",
+      "fileCategory": "data",
+      "sizeLines": 3,
+      "complexity": "simple",
+      "columns": ["Family", "Category", "Stroke", "Classifications", "Keywords", "Styles", "Variable Axes", "Subsets", "Designers", "Popularity Rank", "Trending Rank", "Is Noto", "Date Added", "Last Modified", "Google Fonts URL"],
+      "rowCount": 2
+    },
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-metadata.json",
+      "type": "config",
+      "name": "google-metadata.json",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-metadata.json",
+      "summary": "Google font metadata fixture containing family-level metadata with designer names, license types (APACHE2, OFL), and date added fields. Includes an empty excludedFamilies array.",
+      "tags": ["fixture", "test-data", "google-fonts", "metadata", "json"],
+      "language": "json",
+      "fileCategory": "config",
+      "sizeLines": 17,
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-overrides.json",
+      "type": "config",
+      "name": "google-overrides.json",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-overrides.json",
+      "summary": "Google font keyword overrides fixture. Contains a families object with per-family keyword overrides, used to test the catalog refresh merge logic for overriding reviewed keywords.",
+      "tags": ["fixture", "test-data", "google-fonts", "overrides", "json"],
+      "language": "json",
+      "fileCategory": "config",
+      "sizeLines": 7,
+      "complexity": "simple"
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/icons-curated.csv:icons-curated",
+      "type": "table",
+      "name": "icons-curated.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/icons-curated.csv",
+      "summary": "Curated icons CSV data fixture with columns: No, Category, Icon Name, Keywords, Library, Import Code, Usage, Best For, Style, Semantic Role, Allowed Contexts. Contains three sample icon entries from Phosphor and Heroicons libraries.",
+      "tags": ["fixture", "test-data", "icons", "csv", "tabular-data", "phosphor"],
+      "language": "csv",
+      "fileCategory": "data",
+      "sizeLines": 4,
+      "complexity": "simple",
+      "columns": ["No", "Category", "Icon Name", "Keywords", "Library", "Import Code", "Usage", "Best For", "Style", "Semantic Role", "Allowed Contexts"],
+      "rowCount": 3
+    },
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-core.json",
+      "type": "config",
+      "name": "phosphor-core.json",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-core.json",
+      "summary": "Phosphor icons core registry fixture. Array of icon definitions with name, pascal_name, codepoint, categories, figma_category, tags, and version info (published_in, updated_in). Includes an alias example (arrow-left/back-arrow).",
+      "tags": ["fixture", "test-data", "phosphor-icons", "icon-registry", "json"],
+      "language": "json",
+      "fileCategory": "config",
+      "sizeLines": 23,
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-package.json",
+      "type": "config",
+      "name": "phosphor-package.json",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-package.json",
+      "summary": "Phosphor icons core package.json fixture. Defines package name (@phosphor-icons/core), version (2.1.1), license (MIT), and exports map for SVG assets across six weight variants (thin, light, regular, bold, fill, duotone).",
+      "tags": ["fixture", "test-data", "phosphor-icons", "package-manifest", "json"],
+      "language": "json",
+      "fileCategory": "config",
+      "sizeLines": 13,
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-exports.json",
+      "type": "config",
+      "name": "phosphor-react-exports.json",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-exports.json",
+      "summary": "Phosphor icons React exports fixture. Maps client and SSR export lists, listing available React component names (Acorn, ArrowLeft, IconContext) for each rendering mode.",
+      "tags": ["fixture", "test-data", "phosphor-icons", "react-exports", "json"],
+      "language": "json",
+      "fileCategory": "config",
+      "sizeLines": 4,
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-package.json",
+      "type": "config",
+      "name": "phosphor-react-package.json",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-package.json",
+      "summary": "Phosphor icons React package.json fixture. Defines package name (@phosphor-icons/react), version (2.1.10), and license (MIT).",
+      "tags": ["fixture", "test-data", "phosphor-icons", "package-manifest", "json"],
+      "language": "json",
+      "fileCategory": "config",
+      "sizeLines": 5,
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-api.json",
+      "target": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-catalog.json",
+      "type": "related",
+      "label": "same font families (Zeta Serif, Alpha Sans) in different API formats",
+      "weight": 0.7
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-api.json",
+      "target": "table:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-existing.csv:google-existing",
+      "type": "related",
+      "label": "API response data overlaps with existing CSV entries",
+      "weight": 0.6
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-catalog.json",
+      "target": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-metadata.json",
+      "type": "related",
+      "label": "catalog metadata supplements font family metadata",
+      "weight": 0.7
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-catalog.json",
+      "target": "table:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-existing.csv:google-existing",
+      "type": "related",
+      "label": "catalog data is merged with existing CSV during refresh",
+      "weight": 0.7
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-metadata.json",
+      "target": "table:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-existing.csv:google-existing",
+      "type": "related",
+      "label": "metadata provides designer/license info for CSV rows",
+      "weight": 0.6
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-overrides.json",
+      "target": "table:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-existing.csv:google-existing",
+      "type": "related",
+      "label": "overrides are applied to existing CSV keywords during refresh",
+      "weight": 0.7
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-core.json",
+      "target": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-package.json",
+      "type": "related",
+      "label": "core icon registry belongs to @phosphor-icons/core package",
+      "weight": 0.8
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-core.json",
+      "target": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-exports.json",
+      "type": "related",
+      "label": "core icons are exported as React components",
+      "weight": 0.7
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-exports.json",
+      "target": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-package.json",
+      "type": "related",
+      "label": "React exports belong to @phosphor-icons/react package",
+      "weight": 0.8
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-core.json",
+      "target": "table:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/icons-curated.csv:icons-curated",
+      "type": "related",
+      "label": "curated CSV references Phosphor icons from core registry",
+      "weight": 0.6
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-exports.json",
+      "target": "table:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/icons-curated.csv:icons-curated",
+      "type": "related",
+      "label": "curated CSV import codes match React export component names",
+      "weight": 0.6
+    }
+  ]
+}

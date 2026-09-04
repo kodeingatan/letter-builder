@@ -1,0 +1,300 @@
+{
+  "nodes": [
+    {
+      "id": "document:tasks/01-migrate-admin-panel-to-nuxt.md",
+      "type": "document",
+      "name": "01-migrate-admin-panel-to-nuxt",
+      "filePath": "tasks/01-migrate-admin-panel-to-nuxt.md",
+      "summary": "Master migration plan converting separate Vue 3 + Vite + NestJS admin-panel into a Nuxt 4 monolith. Covers full architecture mapping (pages, layouts, components, composables, stores, server API routes, entities, services, DTOs, middleware, plugins), dependency installation, nuxt.config.ts setup, server-side TypeORM with SQLite, JWT auth, RBAC implementation, and phased implementation plan (setup, entities, services, DTOs, API routes, frontend pages, composables, stores, middleware, layout).",
+      "tags": ["nuxt", "migration", "architecture", "vue", "typescript", "typeorm", "rbac", "planning"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 964,
+      "nonEmptyLines": 780,
+      "sections": [
+        { "heading": "Overview", "level": 2, "line": 3 },
+        { "heading": "Mapping Arsitektur", "level": 2, "line": 12 },
+        { "heading": "Nuxt 4 Structure (target)", "level": 3, "line": 14 },
+        { "heading": "Phase 1: Project Setup & Configuration", "level": 2, "line": 193 },
+        { "heading": "Install Dependencies", "level": 3, "line": 195 },
+        { "heading": "Update nuxt.config.ts", "level": 3, "line": 231 },
+        { "heading": "Copy & Adapt .opencode/", "level": 3, "line": 275 },
+        { "heading": "Phase 2: Server Entities & Database", "level": 2, "line": 301 },
+        { "heading": "Phase 3: Server Services", "level": 2, "line": 400 },
+        { "heading": "Phase 4: Server DTOs", "level": 2, "line": 500 },
+        { "heading": "Phase 5: API Routes", "level": 2, "line": 600 },
+        { "heading": "Phase 6: Frontend Pages", "level": 2, "line": 700 },
+        { "heading": "Phase 7: Composables & Stores", "level": 2, "line": 800 },
+        { "heading": "Phase 8: Middleware & Layout", "level": 2, "line": 900 }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "id": "document:tasks/02-fix-nuxt-dev-errors.md",
+      "type": "document",
+      "name": "02-fix-nuxt-dev-errors",
+      "filePath": "tasks/02-fix-nuxt-dev-errors.md",
+      "summary": "Fixes critical dev errors after Nuxt 4 migration. Root causes: localStorage SSR crash in auth middleware, missing AuthLayout component (double-wrapping with layout system), Pinia stores not auto-imported, duplicate BaseButton name, $fetch response wrapping mismatch (double .data), window.dispatchEvent SSR crash in useApi, and duplicate type exports. Provides 8-phase implementation plan with verification steps.",
+      "tags": ["nuxt", "ssr", "pinia", "error-fix", "middleware", "typescript", "vue"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 347,
+      "nonEmptyLines": 280,
+      "sections": [
+        { "heading": "Overview", "level": 2, "line": 3 },
+        { "heading": "Error Log (Captured)", "level": 2, "line": 12 },
+        { "heading": "Root Cause Analysis", "level": 2, "line": 28 },
+        { "heading": "localStorage is not defined (CRITICAL)", "level": 3, "line": 30 },
+        { "heading": "AuthLayout component not found (CRITICAL)", "level": 3, "line": 43 },
+        { "heading": "Pinia stores not auto-imported (HIGH)", "level": 3, "line": 56 },
+        { "heading": "Duplicate BaseButton component name (MEDIUM)", "level": 3, "line": 66 },
+        { "heading": "$fetch response wrapping mismatch (MEDIUM)", "level": 3, "line": 74 },
+        { "heading": "window.dispatchEvent in useApi.ts (MEDIUM)", "level": 3, "line": 92 },
+        { "heading": "Implementation Plan", "level": 2, "line": 105 },
+        { "heading": "Phase 1: Fix Critical SSR Error (localStorage)", "level": 3, "line": 107 },
+        { "heading": "Phase 2: Fix AuthLayout Component Resolution", "level": 3, "line": 133 },
+        { "heading": "Phase 3: Fix Pinia Auto-Imports", "level": 3, "line": 187 },
+        { "heading": "Phase 4: Fix Duplicate BaseButton", "level": 3, "line": 207 },
+        { "heading": "Phase 5: Fix $fetch Response Wrapping", "level": 3, "line": 220 },
+        { "heading": "Phase 6: Fix SSR-sensitive Code in Composables", "level": 3, "line": 249 },
+        { "heading": "Phase 7: Clean Up Duplicate Type Exports", "level": 3, "line": 280 },
+        { "heading": "Phase 8: Verify & Test", "level": 3, "line": 299 }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "id": "document:tasks/03-fix-auth-response-mismatch.md",
+      "type": "document",
+      "name": "03-fix-auth-response-mismatch",
+      "filePath": "tasks/03-fix-auth-response-mismatch.md",
+      "summary": "Fixes login crash caused by $fetch type parameter wrapping mismatch. Auth store methods (login, register, fetchProfile, updateProfile) used $fetch<{ data: AuthResponse }> but server returns flat { accessToken, user } without data wrapper. All other stores (users, roles, permissions, guards, settings) were already correct. Single file change to stores/auth.ts, estimated 15 minutes.",
+      "tags": ["auth", "store", "fetch", "type-safety", "bug-fix", "pinia", "typescript"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 241,
+      "nonEmptyLines": 195,
+      "sections": [
+        { "heading": "Overview", "level": 2, "line": 3 },
+        { "heading": "Root Cause Analysis", "level": 2, "line": 18 },
+        { "heading": "Stores lainnya — TIDAK ada masalah", "level": 3, "line": 36 },
+        { "heading": "Server API Routes — Tidak perlu diubah", "level": 3, "line": 46 },
+        { "heading": "Implementation Plan", "level": 2, "line": 56 },
+        { "heading": "Phase 1: Fix login() method", "level": 3, "line": 58 },
+        { "heading": "Phase 2: Fix register() method", "level": 3, "line": 94 },
+        { "heading": "Phase 3: Fix fetchProfile() method", "level": 3, "line": 130 },
+        { "heading": "Phase 4: Fix updateProfile() method", "level": 3, "line": 156 },
+        { "heading": "Phase 5: Hapus import type yang tidak diperlukan", "level": 3, "line": 186 },
+        { "heading": "Phase 6: Verifikasi semua stores", "level": 3, "line": 194 },
+        { "heading": "Phase 7: Test login flow", "level": 3, "line": 206 },
+        { "heading": "Execution Order", "level": 2, "line": 219 },
+        { "heading": "Catatan", "level": 2, "line": 236 }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 14
+      }
+    },
+    {
+      "id": "document:tasks/04-testing-and-quality-infrastructure.md",
+      "type": "document",
+      "name": "04-testing-and-quality-infrastructure",
+      "filePath": "tasks/04-testing-and-quality-infrastructure.md",
+      "summary": "Comprehensive testing infrastructure setup for the BMS project. Covers Vitest + @nuxt/test-utils configuration (unit + nuxt projects), Playwright E2E config, test directory structure, npm scripts, logic extraction from stores to testable composables (useUsersData, useRolesData, usePermissionsData, useGuardsData), anime.js client plugin, unit tests for utilities (error, url-matcher, icons), component tests (AuthForm, FormField, DataTable), and E2E tests (auth, users CRUD, roles CRUD).",
+      "tags": ["testing", "vitest", "playwright", "e2e", "unit-test", "nuxt", "quality", "composable"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 612,
+      "nonEmptyLines": 490,
+      "sections": [
+        { "heading": "Overview", "level": 2, "line": 3 },
+        { "heading": "Current State Analysis", "level": 2, "line": 16 },
+        { "heading": "Best Practices Applied", "level": 2, "line": 43 },
+        { "heading": "Implementation Plan", "level": 2, "line": 58 },
+        { "heading": "Phase 1: Setup Testing Infrastructure", "level": 3, "line": 60 },
+        { "heading": "Install dependencies", "level": 4, "line": 64 },
+        { "heading": "Create vitest.config.ts", "level": 4, "line": 73 },
+        { "heading": "Create playwright.config.ts", "level": 4, "line": 103 },
+        { "heading": "Create test directory structure", "level": 4, "line": 124 },
+        { "heading": "Add npm scripts", "level": 4, "line": 148 },
+        { "heading": "Phase 2: Ekstraksi Logic ke Functions (Testable)", "level": 3, "line": 166 },
+        { "heading": "Ekstrak useUsersStore logic ke composable", "level": 4, "line": 172 },
+        { "heading": "Ekstrak useRolesStore logic", "level": 4, "line": 185 },
+        { "heading": "Ekstrak usePermissionsStore logic", "level": 4, "line": 194 },
+        { "heading": "Ekstrak useGuardsStore logic", "level": 4, "line": 204 },
+        { "heading": "Phase 3: anime.js Client Plugin", "level": 3, "line": 214 },
+        { "heading": "Phase 4: Unit Tests", "level": 3, "line": 265 },
+        { "heading": "Phase 5: Component Tests", "level": 3, "line": 350 },
+        { "heading": "Phase 6: E2E Tests", "level": 3, "line": 450 },
+        { "heading": "Phase 7: Storybook Setup", "level": 3, "line": 550 }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 20
+      }
+    },
+    {
+      "id": "document:tasks/05-auth-fix.md",
+      "type": "document",
+      "name": "05-auth-fix",
+      "filePath": "tasks/05-auth-fix.md",
+      "summary": "End-to-end auth flow fix. Critical issue: all entity stores (guards, roles, permissions, users, settings) make $fetch calls WITHOUT Authorization header, causing 401 Unauthorized on all data tables. Also fixes guest middleware not redirecting/clearing store, redundant fetchProfile() on every page (moved to layout), and useMessage() SSR crash in Naive UI components. Recommends refactoring stores to use useApi composable for centralized token attachment.",
+      "tags": ["auth", "authorization", "middleware", "store", "ssr", "bug-fix", "rbac", "token"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 303,
+      "nonEmptyLines": 245,
+      "sections": [
+        { "heading": "Overview", "level": 2, "line": 3 },
+        { "heading": "Root Cause Analysis", "level": 2, "line": 12 },
+        { "heading": "CRITICAL: Entity stores tidak kirim Authorization header", "level": 3, "line": 14 },
+        { "heading": "HIGH: Guest middleware tidak redirect & desync store", "level": 3, "line": 32 },
+        { "heading": "HIGH: SSR auth enforcement tidak ada", "level": 3, "line": 47 },
+        { "heading": "MEDIUM: Redundant fetchProfile() di setiap page", "level": 3, "line": 53 },
+        { "heading": "MEDIUM: useMessage() di SSR", "level": 3, "line": 59 },
+        { "heading": "Implementation Plan", "level": 2, "line": 67 },
+        { "heading": "Phase 1: Fix Entity Stores — Authorization Header (CRITICAL)", "level": 3, "line": 69 },
+        { "heading": "Alternatif: Refactor ke useApi composable (RECOMMENDED)", "level": 4, "line": 100 },
+        { "heading": "Phase 2: Fix Auth Middleware (HIGH)", "level": 3, "line": 131 },
+        { "heading": "Phase 3: Fix fetchProfile Redundancy (MEDIUM)", "level": 3, "line": 173 },
+        { "heading": "Phase 4: Fix useMessage SSR Issue (MEDIUM)", "level": 3, "line": 207 },
+        { "heading": "Phase 5: Fix Settings/Profile useMessage (MEDIUM)", "level": 3, "line": 234 },
+        { "heading": "Phase 6: Verification (CRITICAL)", "level": 3, "line": 245 },
+        { "heading": "Execution Order", "level": 2, "line": 271 },
+        { "heading": "Decisions Needed", "level": 2, "line": 288 },
+        { "heading": "Anti-Patterns to Avoid", "level": 2, "line": 296 }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "id": "document:tasks/fix-logging-system.md",
+      "type": "document",
+      "name": "fix-logging-system",
+      "filePath": "tasks/fix-logging-system.md",
+      "summary": "Fixes broken logging system across three areas: (1) DataTable duplicate empty state, (2) Activity logs incomplete — missing login/logout logging, action filter case mismatch (uppercase vs lowercase), entity mapping gaps, unused level/metadata fields, (3) System logs non-functional — no logs directory, no logging library, raw string[] parsing, DTO/frontend param mismatch, missing row key, level count mismatch. Implements pino logger, 10-phase plan covering all fixes.",
+      "tags": ["logging", "activity-logs", "system-logs", "pino", "datatable", "bug-fix", "middleware"],
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 214,
+      "nonEmptyLines": 175,
+      "sections": [
+        { "heading": "Masalah yang Ditemukan", "level": 2, "line": 3 },
+        { "heading": "No Data Duplikat di System Logs", "level": 3, "line": 5 },
+        { "heading": "Activity Logs Tidak Lengkap", "level": 3, "line": 10 },
+        { "heading": "System Logs Tidak Berfungsi", "level": 3, "line": 17 },
+        { "heading": "Rencana Implementasi", "level": 2, "line": 27 },
+        { "heading": "Tahap 1: Fix No Data Duplikat", "level": 3, "line": 29 },
+        { "heading": "Tahap 2: Fix Activity Logs — Action Filter Case Mismatch", "level": 3, "line": 38 },
+        { "heading": "Tahap 3: Activity Logs — Tambah Logging Login/Logout", "level": 3, "line": 59 },
+        { "heading": "Tahap 4: Activity Logs — Tambah Level dan Metadata", "level": 3, "line": 75 },
+        { "heading": "Tahap 5: System Logs — Install Logging Library & Setup", "level": 3, "line": 89 },
+        { "heading": "Tahap 6: System Logs — Integrasi Logger ke Server", "level": 3, "line": 108 },
+        { "heading": "Tahap 7: System Logs — Perbaiki Service Parsing", "level": 3, "line": 122 },
+        { "heading": "Tahap 8: System Logs — Fix Frontend Type & Row Key", "level": 3, "line": 142 },
+        { "heading": "Tahap 9: System Logs — Fix Statistik Level", "level": 3, "line": 154 },
+        { "heading": "Tahap 10: System Logs — Buat Log Directory", "level": 3, "line": 166 },
+        { "heading": "Urutan Eksekusi", "level": 2, "line": 173 },
+        { "heading": "File yang Perlu Diubah", "level": 2, "line": 188 },
+        { "heading": "Estimasi", "level": 2, "line": 209 }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:tasks/01-migrate-admin-panel-to-nuxt.md",
+      "target": "document:tasks/02-fix-nuxt-dev-errors.md",
+      "type": "related",
+      "weight": 0.9
+    },
+    {
+      "source": "document:tasks/01-migrate-admin-panel-to-nuxt.md",
+      "target": "document:tasks/03-fix-auth-response-mismatch.md",
+      "type": "related",
+      "weight": 0.8
+    },
+    {
+      "source": "document:tasks/01-migrate-admin-panel-to-nuxt.md",
+      "target": "document:tasks/04-testing-and-quality-infrastructure.md",
+      "type": "related",
+      "weight": 0.8
+    },
+    {
+      "source": "document:tasks/01-migrate-admin-panel-to-nuxt.md",
+      "target": "document:tasks/05-auth-fix.md",
+      "type": "related",
+      "weight": 0.85
+    },
+    {
+      "source": "document:tasks/01-migrate-admin-panel-to-nuxt.md",
+      "target": "document:tasks/fix-logging-system.md",
+      "type": "related",
+      "weight": 0.7
+    },
+    {
+      "source": "document:tasks/02-fix-nuxt-dev-errors.md",
+      "target": "document:tasks/03-fix-auth-response-mismatch.md",
+      "type": "related",
+      "weight": 0.85
+    },
+    {
+      "source": "document:tasks/02-fix-nuxt-dev-errors.md",
+      "target": "document:tasks/05-auth-fix.md",
+      "type": "related",
+      "weight": 0.8
+    },
+    {
+      "source": "document:tasks/03-fix-auth-response-mismatch.md",
+      "target": "document:tasks/05-auth-fix.md",
+      "type": "related",
+      "weight": 0.9
+    },
+    {
+      "source": "document:tasks/04-testing-and-quality-infrastructure.md",
+      "target": "document:tasks/05-auth-fix.md",
+      "type": "related",
+      "weight": 0.6
+    },
+    {
+      "source": "document:tasks/04-testing-and-quality-infrastructure.md",
+      "target": "document:tasks/fix-logging-system.md",
+      "type": "related",
+      "weight": 0.5
+    },
+    {
+      "source": "document:tasks/05-auth-fix.md",
+      "target": "document:tasks/fix-logging-system.md",
+      "type": "related",
+      "weight": 0.6
+    }
+  ]
+}

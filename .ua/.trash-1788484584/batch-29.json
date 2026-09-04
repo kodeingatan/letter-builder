@@ -1,0 +1,456 @@
+{
+  "nodes": [
+    {
+      "id": "file:apps/web/app/composables/useApi.ts",
+      "type": "file",
+      "name": "useApi.ts",
+      "filePath": "apps/web/app/composables/useApi.ts",
+      "summary": "Composable that creates an Axios HTTP client instance with JWT auth interceptor (attaches Bearer token), 401 auto-logout, and 403 RBAC-denied event dispatching.",
+      "tags": ["composable", "http", "axios", "auth", "api"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/web/app/composables/useApi.ts:useApi",
+      "type": "function",
+      "name": "useApi",
+      "filePath": "apps/web/app/composables/useApi.ts",
+      "summary": "Returns a configured Axios instance with request/response interceptors for JWT auth, 401 redirect, and 403 custom event dispatch.",
+      "tags": ["composable", "http-client", "auth"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/composables/useAuthorization.ts",
+      "type": "file",
+      "name": "useAuthorization.ts",
+      "filePath": "apps/web/app/composables/useAuthorization.ts",
+      "summary": "Composable providing RBAC role, permission, and guard URL access checking functions (hasRole, hasPermission, canAccessUrl) derived from auth store user data.",
+      "tags": ["composable", "rbac", "authorization", "guards", "permissions"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/web/app/composables/useAuthorization.ts:useAuthorization",
+      "type": "function",
+      "name": "useAuthorization",
+      "filePath": "apps/web/app/composables/useAuthorization.ts",
+      "summary": "Computes user roles, permissions, and guard URLs from auth store; provides hasRole, hasPermission, and canAccessUrl checking functions.",
+      "tags": ["composable", "rbac", "access-control"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/composables/useDataTable.ts",
+      "type": "file",
+      "name": "useDataTable.ts",
+      "filePath": "apps/web/app/composables/useDataTable.ts",
+      "summary": "Composable managing DataTable state: search text/field, sort, column visibility, debounce, and filter reset with reactive watchers triggering fetch.",
+      "tags": ["composable", "data-table", "state-management", "search", "pagination"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/web/app/composables/useDataTable.ts:useDataTable",
+      "type": "function",
+      "name": "useDataTable",
+      "filePath": "apps/web/app/composables/useDataTable.ts",
+      "summary": "Creates reactive DataTable state (search, sort, column visibility) with debounced search and auto-fetch watchers.",
+      "tags": ["composable", "data-table", "reactive-state"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/composables/useGuardsData.ts",
+      "type": "file",
+      "name": "useGuardsData.ts",
+      "filePath": "apps/web/app/composables/useGuardsData.ts",
+      "summary": "Utility functions for Guard entities: display name formatting, find-by-name/id, filter-by-type (allow/deny), and sort-by-name.",
+      "tags": ["composable", "guard", "rbac", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/composables/useGuardsData.ts:formatGuardDisplayName",
+      "type": "function",
+      "name": "formatGuardDisplayName",
+      "filePath": "apps/web/app/composables/useGuardsData.ts",
+      "summary": "Returns the guardName as display string for a Guard entity.",
+      "tags": ["utility", "guard", "formatting"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/composables/useGuardsData.ts:findGuardByName",
+      "type": "function",
+      "name": "findGuardByName",
+      "filePath": "apps/web/app/composables/useGuardsData.ts",
+      "summary": "Finds a Guard by its guardName in an array of guards.",
+      "tags": ["utility", "guard", "search"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/composables/useGuardsData.ts:filterGuardsByType",
+      "type": "function",
+      "name": "filterGuardsByType",
+      "filePath": "apps/web/app/composables/useGuardsData.ts",
+      "summary": "Filters guards that have at least one URL with the specified type (allow or deny).",
+      "tags": ["utility", "guard", "filter"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/composables/usePageTransition.ts",
+      "type": "file",
+      "name": "usePageTransition.ts",
+      "filePath": "apps/web/app/composables/usePageTransition.ts",
+      "summary": "Composable wrapping Anime.js for page transitions: fadeInUp, fadeIn, staggerFadeIn, slideInLeft animations with SSR safety checks.",
+      "tags": ["composable", "animation", "animejs", "page-transition"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/web/app/composables/usePageTransition.ts:usePageTransition",
+      "type": "function",
+      "name": "usePageTransition",
+      "filePath": "apps/web/app/composables/usePageTransition.ts",
+      "summary": "Returns animation helpers (fadeInUp, fadeIn, staggerFadeIn, slideInLeft) using Anime.js from Nuxt plugin.",
+      "tags": ["composable", "animation", "ui-transition"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/composables/usePermissionsData.ts",
+      "type": "file",
+      "name": "usePermissionsData.ts",
+      "filePath": "apps/web/app/composables/usePermissionsData.ts",
+      "summary": "Utility functions for Permission entities: display name formatting, find-by-name, filter-by-method/url, and sort-by-name.",
+      "tags": ["composable", "permission", "rbac", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/composables/usePermissionsData.ts:filterPermissionsByMethod",
+      "type": "function",
+      "name": "filterPermissionsByMethod",
+      "filePath": "apps/web/app/composables/usePermissionsData.ts",
+      "summary": "Filters permissions that have at least one method matching the specified HTTP method.",
+      "tags": ["utility", "permission", "filter"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/composables/useRolesData.ts",
+      "type": "file",
+      "name": "useRolesData.ts",
+      "filePath": "apps/web/app/composables/useRolesData.ts",
+      "summary": "Utility functions for Role entities: display name formatting, find-by-name/id, filter-with-permissions, and sort-by-name.",
+      "tags": ["composable", "role", "rbac", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/composables/useRolesData.ts:filterRolesWithPermissions",
+      "type": "function",
+      "name": "filterRolesWithPermissions",
+      "filePath": "apps/web/app/composables/useRolesData.ts",
+      "summary": "Filters roles that have at least one permission assigned.",
+      "tags": ["utility", "role", "filter"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/composables/useUsersData.ts",
+      "type": "file",
+      "name": "useUsersData.ts",
+      "filePath": "apps/web/app/composables/useUsersData.ts",
+      "summary": "Utility functions for User entities: display name formatting, initials extraction, filter-by-role, find-by-email/username, and sort-by-name.",
+      "tags": ["composable", "user", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/composables/useUsersData.ts:formatUserDisplayName",
+      "type": "function",
+      "name": "formatUserDisplayName",
+      "filePath": "apps/web/app/composables/useUsersData.ts",
+      "summary": "Returns full name (firstName + lastName) as display string for a User.",
+      "tags": ["utility", "user", "formatting"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/composables/useUsersData.ts:getUserInitials",
+      "type": "function",
+      "name": "getUserInitials",
+      "filePath": "apps/web/app/composables/useUsersData.ts",
+      "summary": "Returns first character of firstName + first character of lastName as initials.",
+      "tags": ["utility", "user", "formatting"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/composables/useUsersData.ts:filterUsersByRole",
+      "type": "function",
+      "name": "filterUsersByRole",
+      "filePath": "apps/web/app/composables/useUsersData.ts",
+      "summary": "Filters users that have a role with the specified roleName.",
+      "tags": ["utility", "user", "filter"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/middleware/auth.ts",
+      "type": "file",
+      "name": "auth.ts",
+      "filePath": "apps/web/app/middleware/auth.ts",
+      "summary": "Nuxt route middleware handling auth guard: server-side cookie check, client-side token restoration from localStorage, route meta requiresAuth/guest/requiredRoles enforcement, and RBAC-denied event dispatch.",
+      "tags": ["middleware", "auth", "route-guard", "rbac"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/plugins/animejs.client.ts",
+      "type": "file",
+      "name": "animejs.client.ts",
+      "filePath": "apps/web/app/plugins/animejs.client.ts",
+      "summary": "Client-side Nuxt plugin that imports and provides the Anime.js animation library as $anime via Nuxt's provide/inject.",
+      "tags": ["plugin", "animejs", "animation", "client-only"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/plugins/naiveui-components.ts",
+      "type": "file",
+      "name": "naiveui-components.ts",
+      "filePath": "apps/web/app/plugins/naiveui-components.ts",
+      "summary": "Nuxt plugin that globally registers the NMessageProvider component from Naive UI for use in templates without explicit imports.",
+      "tags": ["plugin", "naive-ui", "component-registration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/plugins/naiveui.client.ts",
+      "type": "file",
+      "name": "naiveui.client.ts",
+      "filePath": "apps/web/app/plugins/naiveui.client.ts",
+      "summary": "Client-side Nuxt plugin that provides the Naive UI theme overrides (from naiveui-theme.ts) as $naiveui.theme.",
+      "tags": ["plugin", "naive-ui", "theming", "client-only"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/utils/error.ts",
+      "type": "file",
+      "name": "error.ts",
+      "filePath": "apps/web/app/utils/error.ts",
+      "summary": "Utility to extract user-friendly error messages from Axios/API error responses, falling back to a provided default message.",
+      "tags": ["utility", "error-handling", "api"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/utils/error.ts:getErrorMessage",
+      "type": "function",
+      "name": "getErrorMessage",
+      "filePath": "apps/web/app/utils/error.ts",
+      "summary": "Extracts error message from Axios error response data or error object, joining arrays and falling back to default.",
+      "tags": ["utility", "error-extraction"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/utils/icons.ts",
+      "type": "file",
+      "name": "icons.ts",
+      "filePath": "apps/web/app/utils/icons.ts",
+      "summary": "Utility that wraps any Vue component into a renderable Naive UI NIcon wrapper for use in menu items and buttons.",
+      "tags": ["utility", "icons", "naive-ui", "rendering"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/utils/icons.ts:renderIcon",
+      "type": "function",
+      "name": "renderIcon",
+      "filePath": "apps/web/app/utils/icons.ts",
+      "summary": "Wraps a Vue component into a function returning NIcon for use in Naive UI menu/button icon slots.",
+      "tags": ["utility", "icon-renderer"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/utils/naiveui-theme.ts",
+      "type": "file",
+      "name": "naiveui-theme.ts",
+      "filePath": "apps/web/app/utils/naiveui-theme.ts",
+      "summary": "Naive UI GlobalThemeOverrides defining the app's design system: primary blue (#3B82F6), Inter font, 6px border radius, light color palette, and component-specific overrides for Button, Input, Card.",
+      "tags": ["config", "theme", "naive-ui", "design-system"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/utils/url-matcher.ts",
+      "type": "file",
+      "name": "url-matcher.ts",
+      "filePath": "apps/web/app/utils/url-matcher.ts",
+      "summary": "URL pattern matcher supporting exact match, wildcard prefix (/*), and trailing slash normalization for RBAC guard URL matching.",
+      "tags": ["utility", "url-matching", "rbac", "guards"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/app/utils/url-matcher.ts:matchUrlPattern",
+      "type": "function",
+      "name": "matchUrlPattern",
+      "filePath": "apps/web/app/utils/url-matcher.ts",
+      "summary": "Matches a URL against a pattern supporting /* wildcards and trailing slash normalization.",
+      "tags": ["utility", "url-matching"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/app.vue",
+      "type": "file",
+      "name": "app.vue",
+      "filePath": "apps/web/app/app.vue",
+      "summary": "Root Vue component wrapping NuxtLayout and NuxtPage inside NMessageProvider for global message notifications.",
+      "tags": ["root-component", "vue", "nuxt"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/layouts/auth.vue",
+      "type": "file",
+      "name": "auth.vue",
+      "filePath": "apps/web/app/layouts/auth.vue",
+      "summary": "Auth layout with split-screen design: image panel (settings-driven gradient/image with app branding) and form panel (slot for login/register content). Supports configurable image position via route meta.",
+      "tags": ["layout", "auth", "login", "register", "responsive"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/layouts/default.vue",
+      "type": "file",
+      "name": "default.vue",
+      "filePath": "apps/web/app/layouts/default.vue",
+      "summary": "Default authenticated layout with collapsible sidebar navigation (role-based menu items), header with user dropdown (profile/logout), and content area. Uses settings store for app name and auth store for user data.",
+      "tags": ["layout", "dashboard", "sidebar", "navigation", "rbac-menu"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:apps/web/app/pages/index.vue",
+      "type": "file",
+      "name": "index.vue",
+      "filePath": "apps/web/app/pages/index.vue",
+      "summary": "Root index page that immediately redirects to /login using navigateTo.",
+      "tags": ["page", "redirect"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/pages/login.vue",
+      "type": "file",
+      "name": "login.vue",
+      "filePath": "apps/web/app/pages/login.vue",
+      "summary": "Login page with email/password form using Naive UI components, form validation, auth store login integration, error handling via getErrorMessage, and animated transitions.",
+      "tags": ["page", "auth", "login", "form", "validation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/pages/register.vue",
+      "type": "file",
+      "name": "register.vue",
+      "filePath": "apps/web/app/pages/register.vue",
+      "summary": "Registration page with multi-field form (firstName, lastName, username, email, password, confirmPassword), validation rules, auth store register integration, and animated transitions.",
+      "tags": ["page", "auth", "register", "form", "validation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/pages/dashboard/index.vue",
+      "type": "file",
+      "name": "index.vue",
+      "filePath": "apps/web/app/pages/dashboard/index.vue",
+      "summary": "Dashboard home page displaying user profile info card and quick-action buttons (Manage Users, Roles, Permissions, Guards) with navigation to respective CRUD pages.",
+      "tags": ["page", "dashboard", "home", "quick-actions"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/pages/dashboard/activity-logs.vue",
+      "type": "file",
+      "name": "activity-logs.vue",
+      "filePath": "apps/web/app/pages/dashboard/activity-logs.vue",
+      "summary": "Activity logs page with DataTable for paginated log entries, action/entity/level filter selects, detail drawer with full log info (user, action, entity, description, IP, user agent, metadata).",
+      "tags": ["page", "activity-logs", "audit", "data-table", "filtering"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:apps/web/app/pages/dashboard/guards.vue",
+      "type": "file",
+      "name": "guards.vue",
+      "filePath": "apps/web/app/pages/dashboard/guards.vue",
+      "summary": "Guards management page composing GuardTable, GuardFormModal (create/edit), and GuardDetailDrawer with event-driven state management.",
+      "tags": ["page", "guards", "rbac", "crud"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/pages/dashboard/permissions.vue",
+      "type": "file",
+      "name": "permissions.vue",
+      "filePath": "apps/web/app/pages/dashboard/permissions.vue",
+      "summary": "Permissions management page composing PermissionTable, PermissionFormModal (create/edit), and PermissionDetailDrawer with event-driven state management.",
+      "tags": ["page", "permissions", "rbac", "crud"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/pages/dashboard/profile.vue",
+      "type": "file",
+      "name": "profile.vue",
+      "filePath": "apps/web/app/pages/dashboard/profile.vue",
+      "summary": "Profile page with two cards: profile info form (firstName, lastName, username, email) and change password form (currentPassword, newPassword, confirmPassword), both with validation and auth store integration.",
+      "tags": ["page", "profile", "settings", "password-change"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/app/pages/dashboard/roles.vue",
+      "type": "file",
+      "name": "roles.vue",
+      "filePath": "apps/web/app/pages/dashboard/roles.vue",
+      "summary": "Roles management page composing RoleTable, RoleFormModal (create/edit), and RoleDetailDrawer with event-driven state management.",
+      "tags": ["page", "roles", "rbac", "crud"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/app/pages/dashboard/settings.vue",
+      "type": "file",
+      "name": "settings.vue",
+      "filePath": "apps/web/app/pages/dashboard/settings.vue",
+      "summary": "Application settings page with cards for app name, description, favicon upload, and login background (image upload with gradient fallback color pickers). Uses settings store for persistence.",
+      "tags": ["page", "settings", "admin", "file-upload", "theming"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:apps/web/app/pages/dashboard/system-logs.vue",
+      "type": "file",
+      "name": "system-logs.vue",
+      "filePath": "apps/web/app/pages/dashboard/system-logs.vue",
+      "summary": "System logs viewer with file selector, level filter, statistics bar (counts per level), DataTable for log entries, and LogDetailDrawer. Fetches log files list and content from API.",
+      "tags": ["page", "system-logs", "monitoring", "data-table"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:apps/web/app/pages/dashboard/users.vue",
+      "type": "file",
+      "name": "users.vue",
+      "filePath": "apps/web/app/pages/dashboard/users.vue",
+      "summary": "Users management page composing UserTable, UserFormModal (create/edit), and UserDetailDrawer with event-driven state management.",
+      "tags": ["page", "users", "crud", "management"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {"source": "function:apps/web/app/composables/useApi.ts:useApi", "target": "file:apps/web/app/composables/useApi.ts", "type": "exports", "weight": 0.8},
+    {"source": "file:apps/web/app/composables/useApi.ts", "target": "file:apps/web/app/composables/useAuthorization.ts", "type": "related", "weight": 0.5},
+    {"source": "function:apps/web/app/composables/useAuthorization.ts:useAuthorization", "target": "file:apps/web/app/composables/useAuthorization.ts", "type": "exports", "weight": 0.8},
+    {"source": "file:apps/web/app/composables/useAuthorization.ts", "target": "file:apps/web/app/utils/url-matcher.ts", "type": "imports", "weight": 0.7},
+    {"source": "function:apps/web/app/composables/useDataTable.ts:useDataTable", "target": "file:apps/web/app/composables/useDataTable.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/composables/useGuardsData.ts:formatGuardDisplayName", "target": "file:apps/web/app/composables/useGuardsData.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/composables/useGuardsData.ts:findGuardByName", "target": "file:apps/web/app/composables/useGuardsData.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/composables/useGuardsData.ts:filterGuardsByType", "target": "file:apps/web/app/composables/useGuardsData.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/composables/usePageTransition.ts:usePageTransition", "target": "file:apps/web/app/composables/usePageTransition.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/composables/usePermissionsData.ts:filterPermissionsByMethod", "target": "file:apps/web/app/composables/usePermissionsData.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/composables/useRolesData.ts:filterRolesWithPermissions", "target": "file:apps/web/app/composables/useRolesData.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/composables/useUsersData.ts:formatUserDisplayName", "target": "file:apps/web/app/composables/useUsersData.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/composables/useUsersData.ts:getUserInitials", "target": "file:apps/web/app/composables/useUsersData.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/composables/useUsersData.ts:filterUsersByRole", "target": "file:apps/web/app/composables/useUsersData.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/utils/error.ts:getErrorMessage", "target": "file:apps/web/app/utils/error.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/utils/icons.ts:renderIcon", "target": "file:apps/web/app/utils/icons.ts", "type": "exports", "weight": 0.8},
+    {"source": "function:apps/web/app/utils/url-matcher.ts:matchUrlPattern", "target": "file:apps/web/app/utils/url-matcher.ts", "type": "exports", "weight": 0.8},
+    {"source": "file:apps/web/app/pages/login.vue", "target": "file:apps/web/app/utils/error.ts", "type": "imports", "weight": 0.7},
+    {"source": "file:apps/web/app/pages/register.vue", "target": "file:apps/web/app/utils/error.ts", "type": "imports", "weight": 0.7},
+    {"source": "file:apps/web/app/pages/dashboard/profile.vue", "target": "file:apps/web/app/utils/error.ts", "type": "imports", "weight": 0.7},
+    {"source": "file:apps/web/app/plugins/naiveui.client.ts", "target": "file:apps/web/app/utils/naiveui-theme.ts", "type": "imports", "weight": 0.7},
+    {"source": "file:apps/web/app/pages/dashboard/index.vue", "target": "file:apps/web/app/layouts/default.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/dashboard/users.vue", "target": "file:apps/web/app/layouts/default.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/dashboard/roles.vue", "target": "file:apps/web/app/layouts/default.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/dashboard/permissions.vue", "target": "file:apps/web/app/layouts/default.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/dashboard/guards.vue", "target": "file:apps/web/app/layouts/default.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/dashboard/activity-logs.vue", "target": "file:apps/web/app/layouts/default.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/dashboard/system-logs.vue", "target": "file:apps/web/app/layouts/default.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/dashboard/settings.vue", "target": "file:apps/web/app/layouts/default.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/dashboard/profile.vue", "target": "file:apps/web/app/layouts/default.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/login.vue", "target": "file:apps/web/app/layouts/auth.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/pages/register.vue", "target": "file:apps/web/app/layouts/auth.vue", "type": "related", "weight": 0.5},
+    {"source": "file:apps/web/app/layouts/default.vue", "target": "file:apps/web/app/composables/useAuthorization.ts", "type": "imports", "weight": 0.7},
+    {"source": "file:apps/web/app/app.vue", "target": "file:apps/web/app/plugins/naiveui-components.ts", "type": "depends_on", "weight": 0.6},
+    {"source": "file:apps/web/app/pages/dashboard/activity-logs.vue", "target": "file:apps/web/app/composables/useDataTable.ts", "type": "depends_on", "weight": 0.6},
+    {"source": "file:apps/web/app/pages/dashboard/system-logs.vue", "target": "file:apps/web/app/composables/useDataTable.ts", "type": "depends_on", "weight": 0.6}
+  ]
+}

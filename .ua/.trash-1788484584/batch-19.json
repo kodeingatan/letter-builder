@@ -1,0 +1,51 @@
+{
+  "nodes": [
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-baseline.json",
+      "type": "config",
+      "name": "Relevance Baseline Results",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-baseline.json",
+      "summary": "Regression baseline results for UI/UX relevance retrieval testing. Contains 94 test case results with actual retrieved items, diagnostic metadata (margin, top_score, token_coverage), per-case grades and scores (MRR@3, NDCG@3, P@1, P@3), and aggregate metrics split by calibration (44 cases) and held_out (44 cases). Used as the reference baseline for detecting regressions in the relevance engine.",
+      "tags": ["testing", "relevance", "baseline", "regression", "ui-ux-pro-max", "fixture"]
+    },
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-cases.json",
+      "type": "config",
+      "name": "Relevance Test Cases",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-cases.json",
+      "summary": "Test case definitions for evaluating the ui-ux-pro-max relevance engine. Defines schema version, grade semantics (2=direct, 1=useful, 0=not relevant), global negative applicability (hard-negatives across 12 domains and 23 stacks), and 94 cases spanning domain queries (style, color, chart, landing, product, ux, typography, icons, gsap, react, web, google-fonts), stack-specific queries (23 frameworks), auto-routing tests, hard-negatives (gibberish, out-of-scope), and design-system coherence cases.",
+      "tags": ["testing", "relevance", "test-cases", "grading", "ui-ux-pro-max", "fixture"]
+    },
+    {
+      "id": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-thresholds.json",
+      "type": "config",
+      "name": "Relevance Quality Gates",
+      "filePath": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-thresholds.json",
+      "summary": "Quality gate configuration for the relevance retrieval system. Defines provisional baseline regression gates with metric floors for routingAccuracy (≥0.875), precisionAt1 (≥0.763), precisionAt3 (≥0.382), mrrAt3 (≥0.836), ndcgAt3 (≥0.837), negativeAbstention (≥0.912), typoRecoveryAt3 (≥1.0), and designSystemCoherence (≥0.719). Includes split-specific thresholds for calibration and held_out subsets, sample minimums per category, 16 locked regression cases, and proposed final quality targets.",
+      "tags": ["testing", "relevance", "quality-gates", "thresholds", "regression", "ui-ux-pro-max", "fixture"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-cases.json",
+      "target": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-baseline.json",
+      "type": "defines",
+      "weight": 0.9,
+      "label": "test cases define the inputs that produce baseline results"
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-thresholds.json",
+      "target": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-baseline.json",
+      "type": "validates",
+      "weight": 0.85,
+      "label": "thresholds gate whether baseline results meet quality standards"
+    },
+    {
+      "source": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-thresholds.json",
+      "target": "config:.opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-cases.json",
+      "type": "constrains",
+      "weight": 0.7,
+      "label": "thresholds define sample minimums per case category"
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "nodes": [
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/anti-patterns.md",
+      "type": "document",
+      "name": "Nuxt Anti-Patterns",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/anti-patterns.md",
+      "summary": "Documentation of common Nuxt.js anti-patterns to avoid, covering component patterns, state management, data fetching, routing, server patterns, performance, and error handling.",
+      "tags": ["nuxt", "vue", "anti-patterns", "best-practices", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation with code examples"
+    },
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "type": "document",
+      "name": "Nuxt Best Practices",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "summary": "Comprehensive guide to Nuxt.js best practices covering project structure, components, composables, routing, data fetching, state management, server, error handling, performance, security, TypeScript, testing, and deployment.",
+      "tags": ["nuxt", "vue", "best-practices", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation"
+    },
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/configuration.md",
+      "type": "document",
+      "name": "Nuxt Configuration",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/configuration.md",
+      "summary": "Guide to Nuxt.js configuration including nuxt.config.ts, environment overrides, runtimeConfig, app.config.ts, and external configuration files.",
+      "tags": ["nuxt", "configuration", "runtime-config", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation with code examples"
+    },
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/data-fetching.md",
+      "type": "document",
+      "name": "Nuxt Data Fetching",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/data-fetching.md",
+      "summary": "Documentation of Nuxt.js data fetching tools including $fetch, useFetch, and useAsyncData with options, return values, and best practices.",
+      "tags": ["nuxt", "data-fetching", "ssr", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation with code examples"
+    },
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/folder-structure.md",
+      "type": "document",
+      "name": "Nuxt Directory Structure",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/folder-structure.md",
+      "summary": "Guide to Nuxt.js directory structure including app/, public/, server/, shared/, test/, content/, modules/, and layers/ directories.",
+      "tags": ["nuxt", "directory-structure", "project-structure", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation"
+    },
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/error-handling.md",
+      "type": "document",
+      "name": "Nuxt Error Handling",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/error-handling.md",
+      "summary": "Documentation of Nuxt.js error handling including Vue errors, error pages, error utilities (useError, createError, showError, clearError), and NuxtErrorBoundary.",
+      "tags": ["nuxt", "error-handling", "vue", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation with code examples"
+    },
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/routing.md",
+      "type": "document",
+      "name": "Nuxt Routing",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/routing.md",
+      "summary": "Documentation of Nuxt.js routing including file-system routing, navigation, route parameters, route middleware, route validation, and code splitting.",
+      "tags": ["nuxt", "routing", "navigation", "middleware", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation with code examples"
+    },
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/server.md",
+      "type": "document",
+      "name": "Nuxt Server (Nitro)",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/server.md",
+      "summary": "Documentation of Nuxt.js server capabilities powered by Nitro, including server endpoints, middleware, plugins, utils, universal deployment, and hybrid rendering with routeRules.",
+      "tags": ["nuxt", "nitro", "server", "deployment", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation with code examples"
+    },
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/state-management.md",
+      "type": "document",
+      "name": "Nuxt State Management",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/state-management.md",
+      "summary": "Documentation of Nuxt.js state management including useState composable, best practices, async data initialization, shared state with composables, and Pinia integration.",
+      "tags": ["nuxt", "state-management", "pinia", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation with code examples"
+    },
+    {
+      "id": "document:.opencode/skills/nuxt-base-practices/references/styling.md",
+      "type": "document",
+      "name": "Nuxt Styling",
+      "filePath": ".opencode/skills/nuxt-base-practices/references/styling.md",
+      "summary": "Documentation of Nuxt.js styling including local stylesheets, external stylesheets, preprocessors, SFC styling, PostCSS, and third-party libraries.",
+      "tags": ["nuxt", "styling", "css", "documentation"],
+      "complexity": "simple",
+      "languageNotes": "Indonesian language documentation with code examples"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/anti-patterns.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "type": "related",
+      "weight": 0.7,
+      "description": "Anti-patterns document complements best practices by showing what to avoid"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/anti-patterns.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/data-fetching.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Anti-patterns for data fetching are covered in data-fetching documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/anti-patterns.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/routing.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Anti-patterns for routing are covered in routing documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/anti-patterns.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/server.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Anti-patterns for server are covered in server documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/anti-patterns.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/state-management.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Anti-patterns for state management are covered in state-management documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/anti-patterns.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/error-handling.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Anti-patterns for error handling are covered in error-handling documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/configuration.md",
+      "type": "related",
+      "weight": 0.7,
+      "description": "Best practices reference configuration guidelines"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/folder-structure.md",
+      "type": "related",
+      "weight": 0.7,
+      "description": "Best practices reference directory structure"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/data-fetching.md",
+      "type": "related",
+      "weight": 0.7,
+      "description": "Best practices for data fetching are detailed in data-fetching documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/routing.md",
+      "type": "related",
+      "weight": 0.7,
+      "description": "Best practices for routing are detailed in routing documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/server.md",
+      "type": "related",
+      "weight": 0.7,
+      "description": "Best practices for server are detailed in server documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/state-management.md",
+      "type": "related",
+      "weight": 0.7,
+      "description": "Best practices for state management are detailed in state-management documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/error-handling.md",
+      "type": "related",
+      "weight": 0.7,
+      "description": "Best practices for error handling are detailed in error-handling documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/best-practices.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/styling.md",
+      "type": "related",
+      "weight": 0.7,
+      "description": "Best practices for styling are detailed in styling documentation"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/configuration.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/folder-structure.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Configuration files are placed in specific directories as documented"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/configuration.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/server.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Server configuration is part of overall Nuxt configuration"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/data-fetching.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/server.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Data fetching often involves server-side operations"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/data-fetching.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/state-management.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Fetched data is often stored in state management"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/routing.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/folder-structure.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Routing files are organized in the directory structure"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/routing.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/server.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Route middleware can be implemented on the server side"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/server.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/configuration.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Server configuration is part of Nuxt configuration"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/state-management.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/data-fetching.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "State management often stores fetched data"
+    },
+    {
+      "source": "document:.opencode/skills/nuxt-base-practices/references/styling.md",
+      "target": "document:.opencode/skills/nuxt-base-practices/references/folder-structure.md",
+      "type": "related",
+      "weight": 0.6,
+      "description": "Style files are organized in the directory structure"
+    }
+  ]
+}

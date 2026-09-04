@@ -1,0 +1,156 @@
+{
+  "batchIndex": 28,
+  "files": [
+    {
+      "path": "apps/web/app/assets/css/animations.css",
+      "language": "css",
+      "sizeLines": 157,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "apps/web/app/assets/css/main.css",
+      "language": "css",
+      "sizeLines": 68,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "apps/web/app/components/base/Button/Button.vue",
+      "language": "vue",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/common/AccessDeniedAlert.vue",
+      "language": "vue",
+      "sizeLines": 73,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/common/AppTransition.vue",
+      "language": "vue",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/common/AuthForm/AuthForm.vue",
+      "language": "vue",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/common/DataTable/DataTable.vue",
+      "language": "vue",
+      "sizeLines": 222,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/common/FormField/FormField.vue",
+      "language": "vue",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/logging/CodeLinkButton.vue",
+      "language": "vue",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/logging/LogDetailDrawer.vue",
+      "language": "vue",
+      "sizeLines": 175,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/logging/LogLevelBadge.vue",
+      "language": "vue",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/logging/index.ts",
+      "language": "typescript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/GuardDetailDrawer.vue",
+      "language": "vue",
+      "sizeLines": 140,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/GuardFormModal.vue",
+      "language": "vue",
+      "sizeLines": 114,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/GuardTable.vue",
+      "language": "vue",
+      "sizeLines": 151,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/PermissionDetailDrawer.vue",
+      "language": "vue",
+      "sizeLines": 140,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/PermissionFormModal.vue",
+      "language": "vue",
+      "sizeLines": 130,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/PermissionTable.vue",
+      "language": "vue",
+      "sizeLines": 149,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/RoleDetailDrawer.vue",
+      "language": "vue",
+      "sizeLines": 140,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/RoleFormModal.vue",
+      "language": "vue",
+      "sizeLines": 139,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/RoleTable.vue",
+      "language": "vue",
+      "sizeLines": 149,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/UserDetailDrawer.vue",
+      "language": "vue",
+      "sizeLines": 138,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/UserFormModal.vue",
+      "language": "vue",
+      "sizeLines": 161,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/UserTable.vue",
+      "language": "vue",
+      "sizeLines": 141,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/app/components/features/users/index.ts",
+      "language": "typescript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {}
+}

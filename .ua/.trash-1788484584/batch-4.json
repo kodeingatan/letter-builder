@@ -1,0 +1,280 @@
+{
+  "batch_index": 4,
+  "nodes": [
+    {
+      "id": "doc:approval-checklist",
+      "type": "document",
+      "label": "Asset Approval Checklist",
+      "path": ".opencode/skills/brand/references/approval-checklist.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "asset-approval",
+        "lineCount": 169,
+        "sections": ["Quick Review", "Visual Elements", "Accessibility", "Content Quality", "Technical Requirements", "Legal & Compliance", "Review Status"],
+        "checklistItems": true
+      }
+    },
+    {
+      "id": "doc:asset-organization",
+      "type": "document",
+      "label": "Asset Organization Guide",
+      "path": ".opencode/skills/brand/references/asset-organization.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "asset-organization",
+        "lineCount": 157,
+        "sections": ["Directory Structure", "Naming Convention", "Metadata Schema", "Tagging System", "File Organization Best Practices", "Search Patterns", "Cleanup Workflow"]
+      }
+    },
+    {
+      "id": "doc:brand-guideline-template",
+      "type": "document",
+      "label": "Brand Guidelines Template",
+      "path": ".opencode/skills/brand/references/brand-guideline-template.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "brand-guidelines-template",
+        "lineCount": 140,
+        "sections": ["Document Structure", "Color Palette", "Typography", "Logo Usage", "Voice & Tone", "Imagery Guidelines", "Extractable Fields"],
+        "role": "master-template"
+      }
+    },
+    {
+      "id": "doc:color-palette-management",
+      "type": "document",
+      "label": "Color Palette Management",
+      "path": ".opencode/skills/brand/references/color-palette-management.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "color-system",
+        "lineCount": 186,
+        "sections": ["Color System Structure", "Color Documentation Format", "Accessibility Requirements", "Color Extraction", "Brand Compliance Validation", "Color Usage Guidelines", "Color Palette Examples"]
+      }
+    },
+    {
+      "id": "doc:consistency-checklist",
+      "type": "document",
+      "label": "Brand Consistency Checklist",
+      "path": ".opencode/skills/brand/references/consistency-checklist.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "brand-consistency",
+        "lineCount": 94,
+        "sections": ["Visual Consistency", "Voice Consistency", "Channel Audit", "Common Issues", "Audit Frequency"],
+        "checklistItems": true
+      }
+    },
+    {
+      "id": "doc:logo-usage-rules",
+      "type": "document",
+      "label": "Logo Usage Rules",
+      "path": ".opencode/skills/brand/references/logo-usage-rules.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "logo-guidelines",
+        "lineCount": 185,
+        "sections": ["Logo Variants", "Clear Space", "Minimum Size", "Color Usage", "Incorrect Usage", "Co-branding", "File Formats", "Platform-Specific Guidelines", "Logo Approval Process"]
+      }
+    },
+    {
+      "id": "doc:messaging-framework",
+      "type": "document",
+      "label": "Messaging Framework",
+      "path": ".opencode/skills/brand/references/messaging-framework.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "messaging",
+        "lineCount": 85,
+        "sections": ["Framework Structure", "Core Statements", "Message Architecture", "Message by Audience", "Message Testing"]
+      }
+    },
+    {
+      "id": "doc:typography-specifications",
+      "type": "document",
+      "label": "Typography Specifications",
+      "path": ".opencode/skills/brand/references/typography-specifications.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "typography",
+        "lineCount": 214,
+        "sections": ["Font Stack Structure", "Type Scale", "Font Weights", "Line Height Guidelines", "Letter Spacing", "Paragraph Spacing", "CSS Implementation", "Common Font Pairings", "Accessibility"]
+      }
+    },
+    {
+      "id": "doc:update",
+      "type": "document",
+      "label": "Brand Update Command",
+      "path": ".opencode/skills/brand/references/update.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "brand-update-workflow",
+        "lineCount": 118,
+        "sections": ["Overview", "Workflow", "Files Modified", "Skills Used", "Color Presets"],
+        "role": "command-skill"
+      }
+    },
+    {
+      "id": "doc:visual-identity",
+      "type": "document",
+      "label": "Visual Identity Basics",
+      "path": ".opencode/skills/brand/references/visual-identity.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "visual-identity",
+        "lineCount": 96,
+        "sections": ["Core Visual Elements", "Visual Guidelines Template", "Quick Checks"]
+      }
+    },
+    {
+      "id": "doc:voice-framework",
+      "type": "document",
+      "label": "Brand Voice Framework",
+      "path": ".opencode/skills/brand/references/voice-framework.md",
+      "properties": {
+        "fileType": "markdown",
+        "category": "brand-skill-reference",
+        "topic": "brand-voice",
+        "lineCount": 88,
+        "sections": ["Voice vs. Tone", "Voice Dimensions", "Voice Development Process", "Voice Testing", "Voice Guide Template"]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc:approval-checklist",
+      "target": "doc:logo-usage-rules",
+      "type": "references",
+      "label": "references logo usage rules for visual approval"
+    },
+    {
+      "source": "doc:approval-checklist",
+      "target": "doc:color-palette-management",
+      "type": "references",
+      "label": "references color compliance rules"
+    },
+    {
+      "source": "doc:approval-checklist",
+      "target": "doc:typography-specifications",
+      "type": "references",
+      "label": "references typography requirements"
+    },
+    {
+      "source": "doc:approval-checklist",
+      "target": "doc:voice-framework",
+      "type": "references",
+      "label": "references brand voice for copy review"
+    },
+    {
+      "source": "doc:approval-checklist",
+      "target": "doc:messaging-framework",
+      "type": "references",
+      "label": "references messaging alignment"
+    },
+    {
+      "source": "doc:asset-organization",
+      "target": "doc:logo-usage-rules",
+      "type": "references",
+      "label": "references logo file organization structure"
+    },
+    {
+      "source": "doc:brand-guideline-template",
+      "target": "doc:color-palette-management",
+      "type": "references",
+      "label": "template includes color palette section"
+    },
+    {
+      "source": "doc:brand-guideline-template",
+      "target": "doc:typography-specifications",
+      "type": "references",
+      "label": "template includes typography section"
+    },
+    {
+      "source": "doc:brand-guideline-template",
+      "target": "doc:logo-usage-rules",
+      "type": "references",
+      "label": "template includes logo usage section"
+    },
+    {
+      "source": "doc:brand-guideline-template",
+      "target": "doc:voice-framework",
+      "type": "references",
+      "label": "template includes voice & tone section"
+    },
+    {
+      "source": "doc:brand-guideline-template",
+      "target": "doc:visual-identity",
+      "type": "references",
+      "label": "template covers visual identity elements"
+    },
+    {
+      "source": "doc:consistency-checklist",
+      "target": "doc:logo-usage-rules",
+      "type": "references",
+      "label": "checks logo consistency"
+    },
+    {
+      "source": "doc:consistency-checklist",
+      "target": "doc:color-palette-management",
+      "type": "references",
+      "label": "checks color consistency"
+    },
+    {
+      "source": "doc:consistency-checklist",
+      "target": "doc:typography-specifications",
+      "type": "references",
+      "label": "checks typography consistency"
+    },
+    {
+      "source": "doc:consistency-checklist",
+      "target": "doc:voice-framework",
+      "type": "references",
+      "label": "checks voice consistency"
+    },
+    {
+      "source": "doc:consistency-checklist",
+      "target": "doc:messaging-framework",
+      "type": "references",
+      "label": "checks messaging alignment"
+    },
+    {
+      "source": "doc:update",
+      "target": "doc:brand-guideline-template",
+      "type": "references",
+      "label": "updates brand guidelines document"
+    },
+    {
+      "source": "doc:update",
+      "target": "doc:color-palette-management",
+      "type": "references",
+      "label": "syncs color palette to design tokens"
+    },
+    {
+      "source": "doc:visual-identity",
+      "target": "doc:logo-usage-rules",
+      "type": "references",
+      "label": "covers logo visual identity"
+    },
+    {
+      "source": "doc:visual-identity",
+      "target": "doc:color-palette-management",
+      "type": "references",
+      "label": "covers color palette structure"
+    },
+    {
+      "source": "doc:visual-identity",
+      "target": "doc:typography-specifications",
+      "type": "references",
+      "label": "covers typography basics"
+    }
+  ]
+}

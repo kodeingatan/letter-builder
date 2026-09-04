@@ -1,0 +1,104 @@
+{
+  "nodes": [
+    {
+      "id": "document:.opencode/skills/ui-styling/references/canvas-design-system.md",
+      "type": "document",
+      "name": "Canvas Design System",
+      "filePath": ".opencode/skills/ui-styling/references/canvas-design-system.md",
+      "summary": "Visual design philosophy, systematic composition, and sophisticated visual communication for canvas-based designs. Covers design philosophy creation, visual expression, core principles, and implementation guidelines.",
+      "tags": ["design", "canvas", "visual-communication", "composition", "ui-styling", "reference"]
+    },
+    {
+      "id": "document:.opencode/skills/ui-styling/references/shadcn-accessibility.md",
+      "type": "document",
+      "name": "shadcn/ui Accessibility Patterns",
+      "filePath": ".opencode/skills/ui-styling/references/shadcn-accessibility.md",
+      "summary": "ARIA patterns, keyboard navigation, screen reader support, and accessible component usage for shadcn/ui built on Radix UI primitives. Covers focus management, form accessibility, and testing checklists.",
+      "tags": ["accessibility", "shadcn", "radix-ui", "aria", "keyboard-navigation", "reference"]
+    },
+    {
+      "id": "document:.opencode/skills/ui-styling/references/shadcn-components.md",
+      "type": "document",
+      "name": "shadcn/ui Component Reference",
+      "filePath": ".opencode/skills/ui-styling/references/shadcn-components.md",
+      "summary": "Complete catalog of shadcn/ui components with usage patterns and installation. Covers form inputs, layout/navigation, overlays/dialogs, feedback/status, and display components.",
+      "tags": ["shadcn", "components", "react", "ui-library", "reference"]
+    },
+    {
+      "id": "document:.opencode/skills/ui-styling/references/shadcn-theming.md",
+      "type": "document",
+      "name": "shadcn/ui Theming & Customization",
+      "filePath": ".opencode/skills/ui-styling/references/shadcn-theming.md",
+      "summary": "Theme configuration, CSS variables, dark mode, and component customization for shadcn/ui. Covers dark mode setup, CSS variable system, color customization, and component variants.",
+      "tags": ["shadcn", "theming", "dark-mode", "css-variables", "customization", "reference"]
+    },
+    {
+      "id": "document:.opencode/skills/ui-styling/references/tailwind-customization.md",
+      "type": "document",
+      "name": "Tailwind CSS Customization",
+      "filePath": ".opencode/skills/ui-styling/references/tailwind-customization.md",
+      "summary": "Config file structure, custom utilities, plugins, and theme extensions for Tailwind CSS v4. Covers @theme directive, color/typography/spacing customization, custom utilities, and plugins.",
+      "tags": ["tailwind", "css", "customization", "theming", "plugins", "reference"]
+    },
+    {
+      "id": "document:.opencode/skills/ui-styling/references/tailwind-responsive.md",
+      "type": "document",
+      "name": "Tailwind CSS Responsive Design",
+      "filePath": ".opencode/skills/ui-styling/references/tailwind-responsive.md",
+      "summary": "Mobile-first breakpoints, responsive utilities, and adaptive layouts for Tailwind CSS. Covers breakpoint system, responsive patterns, container queries, and testing checklists.",
+      "tags": ["tailwind", "responsive", "mobile-first", "breakpoints", "layout", "reference"]
+    },
+    {
+      "id": "document:.opencode/skills/ui-styling/references/tailwind-utilities.md",
+      "type": "document",
+      "name": "Tailwind CSS Utility Reference",
+      "filePath": ".opencode/skills/ui-styling/references/tailwind-utilities.md",
+      "summary": "Core utility classes for layout, spacing, typography, colors, borders, and shadows in Tailwind CSS. Comprehensive reference for display, flexbox, grid, spacing, and visual utilities.",
+      "tags": ["tailwind", "utilities", "css", "layout", "typography", "reference"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:.opencode/skills/ui-styling/references/canvas-design-system.md",
+      "target": "document:.opencode/skills/ui-styling/references/shadcn-components.md",
+      "type": "related",
+      "weight": 0.5,
+      "label": "visual design principles inform component design"
+    },
+    {
+      "source": "document:.opencode/skills/ui-styling/references/shadcn-accessibility.md",
+      "target": "document:.opencode/skills/ui-styling/references/shadcn-components.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "accessibility patterns for shadcn/ui components"
+    },
+    {
+      "source": "document:.opencode/skills/ui-styling/references/shadcn-theming.md",
+      "target": "document:.opencode/skills/ui-styling/references/shadcn-components.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "theming system for shadcn/ui components"
+    },
+    {
+      "source": "document:.opencode/skills/ui-styling/references/shadcn-theming.md",
+      "target": "document:.opencode/skills/ui-styling/references/tailwind-customization.md",
+      "type": "depends_on",
+      "weight": 0.6,
+      "label": "shadcn theming relies on Tailwind CSS customization"
+    },
+    {
+      "source": "document:.opencode/skills/ui-styling/references/tailwind-responsive.md",
+      "target": "document:.opencode/skills/ui-styling/references/tailwind-utilities.md",
+      "type": "related",
+      "weight": 0.5,
+      "label": "responsive design uses Tailwind utility classes"
+    },
+    {
+      "source": "document:.opencode/skills/ui-styling/references/tailwind-customization.md",
+      "target": "document:.opencode/skills/ui-styling/references/tailwind-utilities.md",
+      "type": "depends_on",
+      "weight": 0.6,
+      "label": "custom utilities extend base Tailwind utilities"
+    }
+  ]
+}

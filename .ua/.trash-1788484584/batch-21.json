@@ -1,0 +1,87 @@
+{
+  "batchIndex": 21,
+  "nodes": [
+    {
+      "id": "document:apps/web/README.md",
+      "type": "document",
+      "label": "Project overview",
+      "filePath": "apps/web/README.md",
+      "lines": 75,
+      "properties": {
+        "content": "Nuxt Minimal Starter documentation with setup, development server, production build, and preview instructions",
+        "framework": "nuxt",
+        "commands": ["npm install", "npm run dev", "npm run build", "npm run preview"],
+        "mentionsDocs": ["https://nuxt.com/docs/getting-started/introduction", "https://nuxt.com/docs/getting-started/deployment"]
+      }
+    },
+    {
+      "id": "config:apps/web/package.json",
+      "type": "config",
+      "label": "Nuxt 4 project dependencies and scripts",
+      "filePath": "apps/web/package.json",
+      "lines": 60,
+      "properties": {
+        "name": "business-management-system",
+        "type": "module",
+        "private": true,
+        "scripts": {
+          "build": "nuxt build",
+          "dev": "nuxt dev",
+          "generate": "nuxt generate",
+          "preview": "nuxt preview",
+          "postinstall": "nuxt prepare",
+          "storybook": "storybook dev -p 6006",
+          "build-storybook": "storybook build",
+          "test": "vitest",
+          "test:unit": "vitest --project unit",
+          "test:nuxt": "vitest --project nuxt",
+          "test:e2e": "playwright test",
+          "test:e2e:debug": "playwright test --debug"
+        },
+        "framework": "nuxt",
+        "frameworkVersion": "^4.5.0",
+        "dependencies": ["@pinia/nuxt", "@vicons/carbon", "animejs", "axios", "bcrypt", "better-sqlite3", "class-transformer", "class-validator", "jsonwebtoken", "naive-ui", "nuxt", "pinia", "typeorm", "vue", "vue-router", "zod"],
+        "devDependencies": ["@nuxt/devtools", "@nuxt/test-utils", "@playwright/test", "@storybook/addon-a11y", "@storybook/addon-docs", "@storybook/vue3-vite", "@tailwindcss/vite", "tailwindcss", "typescript", "vitest", "vue-tsc", "happy-dom"],
+        "testingFrameworks": ["vitest", "playwright"],
+        "uiLibraries": ["naive-ui", "@vicons/carbon"],
+        "cssFramework": "tailwindcss",
+        "stateManagement": ["pinia", "@pinia/nuxt"],
+        "orm": "typeorm",
+        "database": "better-sqlite3",
+        "validation": "zod"
+      }
+    },
+    {
+      "id": "config:apps/web/tsconfig.json",
+      "type": "config",
+      "label": "TypeScript configuration",
+      "filePath": "apps/web/tsconfig.json",
+      "lines": 18,
+      "properties": {
+        "references": [
+          "./.nuxt/tsconfig.app.json",
+          "./.nuxt/tsconfig.server.json",
+          "./.nuxt/tsconfig.shared.json",
+          "./.nuxt/tsconfig.node.json"
+        ],
+        "typescriptVersion": "~6.0.2",
+        "projectReferences": true,
+        "nuxtTypescript": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:apps/web/package.json",
+      "target": "config:apps/web/tsconfig.json",
+      "relationship": "configures",
+      "description": "package.json defines TypeScript dependency (~6.0.2) and vue-tsc which tsconfig.json configures"
+    },
+    {
+      "source": "document:apps/web/README.md",
+      "target": "config:apps/web/package.json",
+      "relationship": "documents",
+      "description": "README documents the project setup and npm scripts defined in package.json"
+    }
+  ]
+}

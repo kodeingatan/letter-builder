@@ -1,0 +1,24 @@
+{
+  "projectRoot": "/home/afdal/Laboratorium/Bisnis Digital/bms",
+  "batchFiles": [
+    {
+      "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-baseline.json",
+      "language": "json",
+      "sizeLines": 3366,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-cases.json",
+      "language": "json",
+      "sizeLines": 111,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-thresholds.json",
+      "language": "json",
+      "sizeLines": 100,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": []
+}

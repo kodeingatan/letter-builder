@@ -1,0 +1,141 @@
+[
+  {
+    "order": 1,
+    "title": "Project Overview",
+    "description": "Start with the documentation to understand the BMS admin panel with RBAC, its tech stack (Nuxt 4, Naive UI, TypeORM, SQLite), and core concepts (User → Role → Permission → Guard).",
+    "nodeIds": [
+      "document:apps/web/README.md",
+      "document:docs/PRD.md"
+    ]
+  },
+  {
+    "order": 2,
+    "title": "Architecture & Data Model",
+    "description": "Review the system architecture and database schema to understand the Nitro server routes, TypeORM entities, RBAC flow, and entity relationships.",
+    "nodeIds": [
+      "document:docs/architecture.md",
+      "document:docs/database.md",
+      "document:docs/design-system.md"
+    ]
+  },
+  {
+    "order": 3,
+    "title": "Server Infrastructure",
+    "description": "Examine the server foundation: database connection (SQLite), JWT authentication, password hashing, and middleware for auth/activity logging.",
+    "nodeIds": [
+      "file:apps/web/server/utils/db.ts",
+      "file:apps/web/server/utils/jwt.ts",
+      "file:apps/web/server/utils/password.ts",
+      "file:apps/web/server/middleware/auth.ts",
+      "file:apps/web/server/middleware/activity-logger.ts",
+      "file:apps/web/server/plugins/database.server.ts"
+    ]
+  },
+  {
+    "order": 4,
+    "title": "Database Entities",
+    "description": "Review all 9 TypeORM EntitySchema definitions: User, Role, Permission, Guard, and their junction tables (guard_urls, permission_methods, permission_urls, activity_logs, settings).",
+    "nodeIds": [
+      "file:apps/web/server/entities/user.entity.ts",
+      "file:apps/web/server/entities/role.entity.ts",
+      "file:apps/web/server/entities/permission.entity.ts",
+      "file:apps/web/server/entities/guard.entity.ts",
+      "file:apps/web/server/entities/guard-url.entity.ts",
+      "file:apps/web/server/entities/permission-method.entity.ts",
+      "file:apps/web/server/entities/permission-url.entity.ts",
+      "file:apps/web/server/entities/activity-log.entity.ts",
+      "file:apps/web/server/entities/setting.entity.ts"
+    ]
+  },
+  {
+    "order": 5,
+    "title": "API Layer",
+    "description": "Explore the Nitro API routes: auth (register, login, profile), CRUD endpoints for users/roles/permissions/guards, activity logs, system logs, settings, and file storage.",
+    "nodeIds": [
+      "file:apps/web/server/api/auth/login.post.ts",
+      "file:apps/web/server/api/users/index.get.ts",
+      "file:apps/web/server/api/roles/index.get.ts",
+      "file:apps/web/server/api/permissions/index.get.ts",
+      "file:apps/web/server/api/guards/index.get.ts"
+    ]
+  },
+  {
+    "order": 6,
+    "title": "Services & Business Logic",
+    "description": "Review the service layer: auth service (JWT, password), CRUD services with pagination/search, RBAC guard/permission checking, and the seeder service for initial data.",
+    "nodeIds": [
+      "file:apps/web/server/services/auth.service.ts",
+      "file:apps/web/server/services/users.service.ts",
+      "file:apps/web/server/services/seeder.service.ts",
+      "file:apps/web/server/services/guards.service.ts",
+      "file:apps/web/server/services/permissions.service.ts"
+    ]
+  },
+  {
+    "order": 7,
+    "title": "Shared Types",
+    "description": "Examine the TypeScript type definitions shared between frontend and backend: User, Role, Permission, Guard, ActivityLog, API response types.",
+    "nodeIds": [
+      "file:apps/web/shared/types/user.ts",
+      "file:apps/web/shared/types/auth.ts",
+      "file:apps/web/shared/types/role.ts",
+      "file:apps/web/shared/types/permission.ts",
+      "file:apps/web/shared/types/guard.ts"
+    ]
+  },
+  {
+    "order": 8,
+    "title": "Frontend Foundation",
+    "description": "Understand the Nuxt 4 app setup: app.vue entry, layouts (default with sidebar, auth for login/register), route middleware for JWT validation, and Pinia stores for state management.",
+    "nodeIds": [
+      "file:apps/web/app/app.vue",
+      "file:apps/web/app/layouts/default.vue",
+      "file:apps/web/app/layouts/auth.vue",
+      "file:apps/web/app/middleware/auth.ts",
+      "file:apps/web/app/stores/auth.ts"
+    ]
+  },
+  {
+    "order": 9,
+    "title": "Frontend Composables",
+    "description": "Review the Vue composables: useApi (Axios with auth interceptor), useAuthorization (RBAC checks), useDataTable (search/sort/pagination), and feature-specific data composables.",
+    "nodeIds": [
+      "file:apps/web/app/composables/useApi.ts",
+      "file:apps/web/app/composables/useAuthorization.ts",
+      "file:apps/web/app/composables/useDataTable.ts",
+      "file:apps/web/app/composables/useUsersData.ts"
+    ]
+  },
+  {
+    "order": 10,
+    "title": "UI Components",
+    "description": "Explore the component architecture: base Button, common components (DataTable, AuthForm, FormField, AccessDeniedAlert), and feature-specific components for users/roles/permissions/guards.",
+    "nodeIds": [
+      "file:apps/web/app/components/common/DataTable/DataTable.vue",
+      "file:apps/web/app/components/common/AuthForm/AuthForm.vue",
+      "file:apps/web/app/components/features/users/UserTable.vue",
+      "file:apps/web/app/components/features/users/UserFormModal.vue"
+    ]
+  },
+  {
+    "order": 11,
+    "title": "Dashboard Pages",
+    "description": "Review the dashboard pages: main dashboard, user/role/permission/guard management, activity logs, system logs, profile, and settings.",
+    "nodeIds": [
+      "file:apps/web/app/pages/dashboard/index.vue",
+      "file:apps/web/app/pages/dashboard/users.vue",
+      "file:apps/web/app/pages/dashboard/roles.vue",
+      "file:apps/web/app/pages/dashboard/settings.vue"
+    ]
+  },
+  {
+    "order": 12,
+    "title": "Testing & Quality",
+    "description": "Examine the test infrastructure: unit tests for utils and composables, component tests with @nuxt/test-utils, and E2E tests with Playwright.",
+    "nodeIds": [
+      "file:apps/web/test/unit/utils/error.test.ts",
+      "file:apps/web/test/unit/composables/useUsersData.test.ts",
+      "file:apps/web/test/e2e/auth.spec.ts"
+    ]
+  }
+]

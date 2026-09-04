@@ -1,0 +1,28 @@
+{
+  "projectRoot": "/home/afdal/Laboratorium/Bisnis Digital/bms",
+  "batchFiles": [
+    {
+      "path": ".opencode/commands/init-project.md",
+      "language": "markdown",
+      "sizeLines": 833,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".opencode/commands/knowledge.md",
+      "language": "markdown",
+      "sizeLines": 25,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".opencode/commands/task.md",
+      "language": "markdown",
+      "sizeLines": 538,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    ".opencode/commands/init-project.md": [],
+    ".opencode/commands/knowledge.md": [],
+    ".opencode/commands/task.md": []
+  }
+}

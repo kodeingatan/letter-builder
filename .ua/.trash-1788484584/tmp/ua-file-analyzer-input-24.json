@@ -1,0 +1,41 @@
+{
+  "files": [
+    {
+      "path": "tasks/01-migrate-admin-panel-to-nuxt.md",
+      "type": "markdown",
+      "category": "docs",
+      "lines": 964
+    },
+    {
+      "path": "tasks/02-fix-nuxt-dev-errors.md",
+      "type": "markdown",
+      "category": "docs",
+      "lines": 347
+    },
+    {
+      "path": "tasks/03-fix-auth-response-mismatch.md",
+      "type": "markdown",
+      "category": "docs",
+      "lines": 241
+    },
+    {
+      "path": "tasks/04-testing-and-quality-infrastructure.md",
+      "type": "markdown",
+      "category": "docs",
+      "lines": 612
+    },
+    {
+      "path": "tasks/05-auth-fix.md",
+      "type": "markdown",
+      "category": "docs",
+      "lines": 303
+    },
+    {
+      "path": "tasks/fix-logging-system.md",
+      "type": "markdown",
+      "category": "docs",
+      "lines": 214
+    }
+  ],
+  "batchIndex": 24
+}

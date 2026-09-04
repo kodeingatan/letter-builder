@@ -1,0 +1,36 @@
+{
+  "projectRoot": "/home/afdal/Laboratorium/Bisnis Digital/bms",
+  "batchFiles": [
+    {
+      "path": ".opencode/skills/ui-ux-pro-max/data/app-interface.csv",
+      "language": "csv",
+      "sizeLines": 33,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".opencode/skills/ui-ux-pro-max/data/catalog-summary.json",
+      "language": "json",
+      "sizeLines": 78,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".opencode/skills/ui-ux-pro-max/data/charts.csv",
+      "language": "csv",
+      "sizeLines": 26,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".opencode/skills/ui-ux-pro-max/data/typography.csv",
+      "language": "csv",
+      "sizeLines": 75,
+      "fileCategory": "data"
+    },
+    {
+      "path": ".opencode/skills/ui-ux-pro-max/data/ux-guidelines.csv",
+      "language": "csv",
+      "sizeLines": 120,
+      "fileCategory": "data"
+    }
+  ],
+  "batchImportData": {}
+}

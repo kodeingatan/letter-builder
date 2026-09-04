@@ -1,0 +1,39 @@
+{
+  "projectRoot": "/home/afdal/Laboratorium/Bisnis Digital/bms",
+  "batchIndex": 12,
+  "totalBatches": 12,
+  "batchFiles": [
+    {
+      "path": ".opencode/skills/slides/references/copywriting-formulas.md",
+      "language": "markdown",
+      "sizeLines": 84,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".opencode/skills/slides/references/create.md",
+      "language": "markdown",
+      "sizeLines": 4,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".opencode/skills/slides/references/html-template.md",
+      "language": "markdown",
+      "sizeLines": 295,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".opencode/skills/slides/references/layout-patterns.md",
+      "language": "markdown",
+      "sizeLines": 137,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".opencode/skills/slides/references/slide-strategies.md",
+      "language": "markdown",
+      "sizeLines": 94,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {},
+  "neighborMap": {}
+}

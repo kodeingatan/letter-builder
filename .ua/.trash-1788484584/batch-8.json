@@ -1,0 +1,264 @@
+{
+  "nodes": [
+    {
+      "id": "file::colors.csv",
+      "type": "file",
+      "label": "colors.csv",
+      "filePath": ".opencode/skills/design/data/logo/colors.csv",
+      "lines": 56,
+      "description": "Logo color palette data with 55 entries covering psychology, best use cases, and hex color codes"
+    },
+    {
+      "id": "file::industries.csv",
+      "type": "file",
+      "label": "industries.csv",
+      "filePath": ".opencode/skills/design/data/logo/industries.csv",
+      "lines": 56,
+      "description": "Industry-specific logo design data with 55 entries covering styles, colors, typography, and symbols"
+    },
+    {
+      "id": "file::styles.csv",
+      "type": "file",
+      "label": "styles.csv",
+      "filePath": ".opencode/skills/design/data/logo/styles.csv",
+      "lines": 56,
+      "description": "Logo design style data with 55 entries covering categories, effects, complexity, and eras"
+    },
+    {
+      "id": "table::colors.csv::palette",
+      "type": "table",
+      "label": "Color Palettes",
+      "columns": ["No", "Palette Name", "Category", "Keywords", "Primary Hex", "Secondary Hex", "Accent Hex", "Background Hex", "Text Hex", "Psychology", "Best For", "Avoid For"],
+      "rowCount": 55
+    },
+    {
+      "id": "table::industries.csv::industry",
+      "type": "table",
+      "label": "Industry Specifications",
+      "columns": ["No", "Industry", "Keywords", "Recommended Styles", "Primary Colors", "Typography", "Common Symbols", "Mood", "Best Practices", "Avoid"],
+      "rowCount": 55
+    },
+    {
+      "id": "table::styles.csv::style",
+      "type": "table",
+      "label": "Logo Styles",
+      "columns": ["No", "Style Name", "Category", "Keywords", "Primary Colors", "Secondary Colors", "Typography", "Effects", "Best For", "Avoid For", "Complexity", "Era"],
+      "rowCount": 55
+    },
+    {
+      "id": "data::colors::classic-blue-trust",
+      "type": "data",
+      "label": "Classic Blue Trust",
+      "fields": {"name": "Classic Blue Trust", "category": "Professional", "primaryHex": "#003366", "bestFor": "Finance legal healthcare corporate", "avoidFor": "Entertainment children playful"}
+    },
+    {
+      "id": "data::colors::tech-gradient",
+      "type": "data",
+      "label": "Tech Gradient",
+      "fields": {"name": "Tech Gradient", "category": "Technology", "primaryHex": "#6366F1", "bestFor": "Tech startups SaaS AI companies", "avoidFor": "Traditional heritage artisan"}
+    },
+    {
+      "id": "data::colors::eco-green",
+      "type": "data",
+      "label": "Eco Green",
+      "fields": {"name": "Eco Green", "category": "Nature", "primaryHex": "#228B22", "bestFor": "Organic eco wellness environmental", "avoidFor": "Luxury tech industrial"}
+    },
+    {
+      "id": "data::colors::luxury-gold",
+      "type": "data",
+      "label": "Luxury Gold",
+      "fields": {"name": "Luxury Gold", "category": "Premium", "primaryHex": "#1C1917", "bestFor": "Luxury fashion jewelry hotels", "avoidFor": "Budget casual children"}
+    },
+    {
+      "id": "data::colors::vibrant-coral",
+      "type": "data",
+      "label": "Vibrant Coral",
+      "fields": {"name": "Vibrant Coral", "category": "Energetic", "primaryHex": "#FF6B6B", "bestFor": "Food social media lifestyle", "avoidFor": "Corporate medical serious"}
+    },
+    {
+      "id": "data::industries::technology",
+      "type": "data",
+      "label": "Technology",
+      "fields": {"industry": "Technology", "recommendedStyles": "Minimalist Abstract Mark Gradient Geometric", "typography": "Modern sans-serif geometric", "mood": "Innovative forward-thinking modern"}
+    },
+    {
+      "id": "data::industries::healthcare",
+      "type": "data",
+      "label": "Healthcare",
+      "fields": {"industry": "Healthcare", "recommendedStyles": "Corporate Professional Minimal Line Art", "typography": "Clean professional sans-serif", "mood": "Trustworthy caring professional"}
+    },
+    {
+      "id": "data::industries::finance",
+      "type": "data",
+      "label": "Finance",
+      "fields": {"industry": "Finance", "recommendedStyles": "Corporate Emblem Lettermark Wordmark", "typography": "Traditional serif or modern sans", "mood": "Stable trustworthy established"}
+    },
+    {
+      "id": "data::industries::legal",
+      "type": "data",
+      "label": "Legal",
+      "fields": {"industry": "Legal", "recommendedStyles": "Wordmark Emblem Crest Lettermark", "typography": "Serif traditional professional", "mood": "Authoritative trustworthy serious"}
+    },
+    {
+      "id": "data::styles::minimalist",
+      "type": "data",
+      "label": "Minimalist",
+      "fields": {"styleName": "Minimalist", "category": "General", "complexity": "Low", "era": "2010s-Present", "bestFor": "Tech startups SaaS apps professional services"}
+    },
+    {
+      "id": "data::styles::wordmark",
+      "type": "data",
+      "label": "Wordmark",
+      "fields": {"styleName": "Wordmark", "category": "Typography", "complexity": "Low", "era": "Classic", "bestFor": "Established brands name recognition"}
+    },
+    {
+      "id": "data::styles::lettermark",
+      "type": "data",
+      "label": "Lettermark",
+      "fields": {"styleName": "Lettermark", "category": "Typography", "complexity": "Medium", "era": "Classic", "bestFor": "Long company names professional firms"}
+    },
+    {
+      "id": "data::styles::pictorial-mark",
+      "type": "data",
+      "label": "Pictorial Mark",
+      "fields": {"styleName": "Pictorial Mark", "category": "Symbol", "complexity": "Medium", "era": "Classic", "bestFor": "Recognizable brands global companies"}
+    },
+    {
+      "id": "data::styles::abstract-mark",
+      "type": "data",
+      "label": "Abstract Mark",
+      "fields": {"styleName": "Abstract Mark", "category": "Symbol", "complexity": "Medium", "era": "Modern", "bestFor": "Tech companies differentiating brands"}
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge::file::colors.csv::contains::table::colors.csv::palette",
+      "source": "file::colors.csv",
+      "target": "table::colors.csv::palette",
+      "type": "contains"
+    },
+    {
+      "id": "edge::file::industries.csv::contains::table::industries.csv::industry",
+      "source": "file::industries.csv",
+      "target": "table::industries.csv::industry",
+      "type": "contains"
+    },
+    {
+      "id": "edge::file::styles.csv::contains::table::styles.csv::style",
+      "source": "file::styles.csv",
+      "target": "table::styles.csv::style",
+      "type": "contains"
+    },
+    {
+      "id": "edge::table::colors.csv::palette::has_row::data::colors::classic-blue-trust",
+      "source": "table::colors.csv::palette",
+      "target": "data::colors::classic-blue-trust",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::colors.csv::palette::has_row::data::colors::tech-gradient",
+      "source": "table::colors.csv::palette",
+      "target": "data::colors::tech-gradient",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::colors.csv::palette::has_row::data::colors::eco-green",
+      "source": "table::colors.csv::palette",
+      "target": "data::colors::eco-green",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::colors.csv::palette::has_row::data::colors::luxury-gold",
+      "source": "table::colors.csv::palette",
+      "target": "data::colors::luxury-gold",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::colors.csv::palette::has_row::data::colors::vibrant-coral",
+      "source": "table::colors.csv::palette",
+      "target": "data::colors::vibrant-coral",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::industries.csv::industry::has_row::data::industries::technology",
+      "source": "table::industries.csv::industry",
+      "target": "data::industries::technology",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::industries.csv::industry::has_row::data::industries::healthcare",
+      "source": "table::industries.csv::industry",
+      "target": "data::industries::healthcare",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::industries.csv::industry::has_row::data::industries::finance",
+      "source": "table::industries.csv::industry",
+      "target": "data::industries::finance",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::industries.csv::industry::has_row::data::industries::legal",
+      "source": "table::industries.csv::industry",
+      "target": "data::industries::legal",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::styles.csv::style::has_row::data::styles::minimalist",
+      "source": "table::styles.csv::style",
+      "target": "data::styles::minimalist",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::styles.csv::style::has_row::data::styles::wordmark",
+      "source": "table::styles.csv::style",
+      "target": "data::styles::wordmark",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::styles.csv::style::has_row::data::styles::lettermark",
+      "source": "table::styles.csv::style",
+      "target": "data::styles::lettermark",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::styles.csv::style::has_row::data::styles::pictorial-mark",
+      "source": "table::styles.csv::style",
+      "target": "data::styles::pictorial-mark",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::table::styles.csv::style::has_row::data::styles::abstract-mark",
+      "source": "table::styles.csv::style",
+      "target": "data::styles::abstract-mark",
+      "type": "has_row"
+    },
+    {
+      "id": "edge::data::colors::tech-gradient::refers_to::data::styles::abstract-mark",
+      "source": "data::colors::tech-gradient",
+      "target": "data::styles::abstract-mark",
+      "type": "refers_to",
+      "label": "category match"
+    },
+    {
+      "id": "edge::data::industries::technology::refers_to::data::colors::tech-gradient",
+      "source": "data::industries::technology",
+      "target": "data::colors::tech-gradient",
+      "type": "refers_to",
+      "label": "color match"
+    },
+    {
+      "id": "edge::data::styles::minimalist::refers_to::data::industries::technology",
+      "source": "data::styles::minimalist",
+      "target": "data::industries::technology",
+      "type": "refers_to",
+      "label": "style-industry match"
+    }
+  ],
+  "batchIndex": 8,
+  "summary": {
+    "totalNodes": 20,
+    "totalEdges": 20,
+    "nodeTypes": {"file": 3, "table": 3, "data": 14}
+  }
+}

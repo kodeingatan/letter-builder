@@ -1,0 +1,26 @@
+{
+  "batchIndex": 21,
+  "files": [
+    {
+      "path": "apps/web/README.md",
+      "type": "markdown",
+      "lines": 75,
+      "role": "docs",
+      "content": "# Nuxt Minimal Starter\n\nLook at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.\n\n## Setup\n\nMake sure to install dependencies:\n\n```bash\n# npm\nnpm install\n\n# pnpm\npnpm install\n\n# yarn\nyarn install\n\n# bun\nbun install\n```\n\n## Development Server\n\nStart the development server on `http://localhost:3000`:\n\n```bash\n# npm\nnpm run dev\n\n# pnpm\npnpm dev\n\n# yarn\nyarn dev\n\n# bun\nbun run dev\n```\n\n## Production\n\nBuild the application for production:\n\n```bash\n# npm\nnpm run build\n\n# pnpm\npnpm build\n\n# yarn\nyarn build\n\n# bun\nbun run build\n```\n\nLocally preview production build:\n\n```bash\n# npm\nnpm run preview\n\n# pnpm\npnpm preview\n\n# yarn\nyarn preview\n\n# bun\nbun run preview\n```\n\nCheck out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information."
+    },
+    {
+      "path": "apps/web/package.json",
+      "type": "json",
+      "lines": 60,
+      "role": "config",
+      "content": "{\n  \"name\": \"business-management-system\",\n  \"type\": \"module\",\n  \"private\": true,\n  \"scripts\": {\n    \"build\": \"nuxt build\",\n    \"dev\": \"nuxt dev\",\n    \"generate\": \"nuxt generate\",\n    \"preview\": \"nuxt preview\",\n    \"postinstall\": \"nuxt prepare\",\n    \"storybook\": \"storybook dev -p 6006\",\n    \"build-storybook\": \"storybook build\",\n    \"test\": \"vitest\",\n    \"test:unit\": \"vitest --project unit\",\n    \"test:nuxt\": \"vitest --project nuxt\",\n    \"test:e2e\": \"playwright test\",\n    \"test:e2e:debug\": \"playwright test --debug\"\n  },\n  \"dependencies\": {\n    \"@pinia/nuxt\": \"^1.0.2\",\n    \"@vicons/carbon\": \"^0.13.0\",\n    \"animejs\": \"^4.5.0\",\n    \"axios\": \"^1.19.0\",\n    \"bcrypt\": \"^6.0.0\",\n    \"better-sqlite3\": \"^12.11.1\",\n    \"class-transformer\": \"^0.5.1\",\n    \"class-validator\": \"^0.15.1\",\n    \"jsonwebtoken\": \"^9.0.2\",\n    \"naive-ui\": \"^2.44.1\",\n    \"nuxt\": \"^4.5.0\",\n    \"pinia\": \"^4.0.2\",\n    \"typeorm\": \"^1.1.0\",\n    \"vue\": \"^3.5.40\",\n    \"vue-router\": \"^5.2.0\",\n    \"zod\": \"^3.24.0\"\n  },\n  \"devDependencies\": {\n    \"@nuxt/devtools\": \"^2.5.0\",\n    \"@nuxt/test-utils\": \"^4.1.0\",\n    \"@playwright/test\": \"^1.62.1\",\n    \"@storybook/addon-a11y\": \"^10.5.7\",\n    \"@storybook/addon-docs\": \"^10.5.7\",\n    \"@storybook/vue3-vite\": \"^10.5.7\",\n    \"@tailwindcss/vite\": \"^4.3.3\",\n    \"@types/bcrypt\": \"^5.0.2\",\n    \"@types/better-sqlite3\": \"^7.6.12\",\n    \"@types/jsonwebtoken\": \"^9.0.9\",\n    \"@vue/test-utils\": \"^2.4.11\",\n    \"happy-dom\": \"^20.11.6\",\n    \"tailwindcss\": \"^4.3.3\",\n    \"typescript\": \"~6.0.2\",\n    \"vitest\": \"^4.1.11\",\n    \"vue-tsc\": \"^3.3.9\"\n  },\n  \"allowScripts\": {\n    \"esbuild@0.28.2\": true,\n    \"bcrypt@6.0.0\": true,\n    \"better-sqlite3@12.11.1\": true\n  }\n}"
+    },
+    {
+      "path": "apps/web/tsconfig.json",
+      "type": "json",
+      "lines": 18,
+      "role": "config",
+      "content": "{\n  // https://nuxt.com/docs/guide/concepts/typescript\n  \"files\": [],\n  \"references\": [\n    {\n      \"path\": \"./.nuxt/tsconfig.app.json\"\n    },\n    {\n      \"path\": \"./.nuxt/tsconfig.server.json\"\n    },\n    {\n      \"path\": \"./.nuxt/tsconfig.shared.json\"\n    },\n    {\n      \"path\": \"./.nuxt/tsconfig.node.json\"\n    }\n  ]\n}"
+    }
+  ]
+}

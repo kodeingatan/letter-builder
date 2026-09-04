@@ -1,0 +1,128 @@
+{
+  "batchIndex": 2,
+  "filesAnalyzed": 3,
+  "nodes": [
+    {
+      "id": "doc:.opencode/commands/init-project.md",
+      "type": "document",
+      "path": ".opencode/commands/init-project.md",
+      "language": "markdown",
+      "category": "docs",
+      "summary": "Opencode command for understanding a project and creating/updating AGENTS.md as the AI agent operational guide. Covers 20 sections: project discovery, technology stack detection, architecture analysis, coding conventions, frontend/backend/database conventions, core concept detection, development workflow (SDD), conflict detection, and AGENTS.md structure template.",
+      "tags": ["opencode", "command", "documentation", "AGENTS.md", "project-initialization", "SDD", "knowledge-management"],
+      "complexity": "high",
+      "lineCount": 833,
+      "sectionCount": 27,
+      "description": "Comprehensive project understanding command that inspects repository structure, detects technology stack, discovers architecture, identifies coding conventions, analyzes permanent knowledge docs, and produces/maintains AGENTS.md as the authoritative project guide for AI coding agents."
+    },
+    {
+      "id": "doc:.opencode/commands/knowledge.md",
+      "type": "document",
+      "path": ".opencode/commands/knowledge.md",
+      "language": "markdown",
+      "category": "docs",
+      "summary": "Opencode command for creating or updating permanent project knowledge documents (PRD, architecture, database, design-system) by delegating to the permanent-knowledge skill.",
+      "tags": ["opencode", "command", "documentation", "permanent-knowledge", "PRD", "architecture", "design-system"],
+      "complexity": "low",
+      "lineCount": 25,
+      "sectionCount": 0,
+      "description": "Thin command wrapper that loads the permanent-knowledge skill to inspect the repository, understand the project, identify the Core Concept, and create/update docs/PRD.md, docs/architecture.md, docs/database.md, and docs/design-system.md."
+    },
+    {
+      "id": "doc:.opencode/commands/task.md",
+      "type": "document",
+      "path": ".opencode/commands/task.md",
+      "language": "markdown",
+      "category": "docs",
+      "summary": "Opencode command for generating or updating SDD (Spec-Driven Development) task specifications. Produces complete mini-specifications with requirements, domain model, API design, UI/UX spec, acceptance criteria, implementation checklist, and verification steps.",
+      "tags": ["opencode", "command", "documentation", "SDD", "task-specification", "acceptance-criteria", "UI/UX", "cross-document-consistency"],
+      "complexity": "high",
+      "lineCount": 538,
+      "sectionCount": 11,
+      "description": "Generates structured SDD task specifications covering: project knowledge reading, existing task analysis, task identity (NN-kebab-case), scope determination, mini-specification generation (with Domain, Data Model, API, UI/UX, Acceptance Criteria, Implementation, Verification sections), cross-document consistency checks, and final response reporting."
+    },
+    {
+      "id": "concept:SDD-workflow",
+      "type": "concept",
+      "name": "SDD Workflow",
+      "description": "Spec-Driven Development workflow: Permanent Knowledge → Task → Plan → Implement → Verify → Review. This is the core development methodology defined by these opencode commands.",
+      "tags": ["SDD", "workflow", "development-methodology"]
+    },
+    {
+      "id": "concept:permanent-knowledge",
+      "type": "concept",
+      "name": "Permanent Knowledge",
+      "description": "Project-level documentation suite: docs/PRD.md, docs/architecture.md, docs/database.md, docs/design-system.md. These are authoritative references maintained by the knowledge command and consumed by init-project and task commands.",
+      "tags": ["documentation", "PRD", "architecture", "database", "design-system"]
+    },
+    {
+      "id": "concept:AGENTS.md",
+      "type": "concept",
+      "name": "AGENTS.md",
+      "description": "The primary output of init-project.md — a comprehensive operational guide for AI coding agents describing project overview, core concept, tech stack, architecture, conventions, coding guidelines, verification commands, and development workflow.",
+      "tags": ["AGENTS.md", "AI-agent-guide", "project-configuration"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc:.opencode/commands/init-project.md",
+      "target": "concept:SDD-workflow",
+      "relationship": "defines",
+      "description": "init-project.md defines the SDD workflow stages (Permanent Knowledge → Task → Plan → Implement → Verify → Review) in section 13"
+    },
+    {
+      "source": "doc:.opencode/commands/init-project.md",
+      "target": "concept:permanent-knowledge",
+      "relationship": "references",
+      "description": "init-project.md instructs agents to inspect docs/PRD.md, docs/architecture.md, docs/database.md, docs/design-system.md as project knowledge"
+    },
+    {
+      "source": "doc:.opencode/commands/init-project.md",
+      "target": "concept:AGENTS.md",
+      "relationship": "produces",
+      "description": "init-project.md's primary output is creating or updating AGENTS.md"
+    },
+    {
+      "source": "doc:.opencode/commands/init-project.md",
+      "target": "doc:.opencode/commands/knowledge.md",
+      "relationship": "sequential-dependency",
+      "description": "init-project.md references the SDD workflow where /knowledge is a prior step for establishing permanent knowledge"
+    },
+    {
+      "source": "doc:.opencode/commands/init-project.md",
+      "target": "doc:.opencode/commands/task.md",
+      "relationship": "sequential-dependency",
+      "description": "init-project.md's final response recommends /task as the next step after understanding the project"
+    },
+    {
+      "source": "doc:.opencode/commands/knowledge.md",
+      "target": "concept:permanent-knowledge",
+      "relationship": "produces",
+      "description": "knowledge.md delegates to the permanent-knowledge skill to create/update PRD, architecture, database, and design-system docs"
+    },
+    {
+      "source": "doc:.opencode/commands/knowledge.md",
+      "target": "concept:SDD-workflow",
+      "relationship": "participates-in",
+      "description": "knowledge.md is the first step in the SDD workflow (Permanent Knowledge phase)"
+    },
+    {
+      "source": "doc:.opencode/commands/task.md",
+      "target": "concept:permanent-knowledge",
+      "relationship": "references",
+      "description": "task.md requires reading AGENTS.md, docs/PRD.md, docs/architecture.md, docs/database.md, docs/design-system.md before generating task specifications"
+    },
+    {
+      "source": "doc:.opencode/commands/task.md",
+      "target": "concept:SDD-workflow",
+      "relationship": "participates-in",
+      "description": "task.md is the second step in the SDD workflow (Task phase), generating structured task specifications"
+    },
+    {
+      "source": "doc:.opencode/commands/task.md",
+      "target": "concept:AGENTS.md",
+      "relationship": "references",
+      "description": "task.md reads AGENTS.md as the first step of project knowledge"
+    }
+  ]
+}

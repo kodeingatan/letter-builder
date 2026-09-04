@@ -1,0 +1,19 @@
+{
+  "batchIndex": 26,
+  "files": [
+    ".opencode/skills/design/scripts/cip/core.py",
+    ".opencode/skills/design/scripts/cip/generate.py",
+    ".opencode/skills/design/scripts/cip/render-html.py",
+    ".opencode/skills/design/scripts/cip/search.py",
+    ".opencode/skills/design/scripts/icon/generate.py",
+    ".opencode/skills/design/scripts/logo/core.py",
+    ".opencode/skills/design/scripts/logo/generate.py",
+    ".opencode/skills/design/scripts/logo/search.py"
+  ],
+  "imports": {
+    ".opencode/skills/design/scripts/cip/generate.py": ["core"],
+    ".opencode/skills/design/scripts/cip/render-html.py": ["core"],
+    ".opencode/skills/design/scripts/cip/search.py": ["core"],
+    ".opencode/skills/design/scripts/logo/search.py": ["core"]
+  }
+}

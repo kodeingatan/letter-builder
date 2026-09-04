@@ -1,0 +1,389 @@
+{
+  "nodes": [
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/angular.csv",
+      "type": "file",
+      "name": "angular.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/angular.csv",
+      "summary": "Angular UI/UX best practices covering components, routing, state, forms, services, dependency injection, testing, performance, accessibility, and security for Angular 22.x",
+      "tags": ["angular", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/astro.csv",
+      "type": "file",
+      "name": "astro.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/astro.csv",
+      "summary": "Astro framework UI/UX best practices covering islands architecture, components, content collections, routing, data fetching, and performance optimization",
+      "tags": ["astro", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv",
+      "type": "file",
+      "name": "avalonia.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv",
+      "summary": "Avalonia UI cross-platform desktop framework best practices covering XAML, MVVM, data binding, styling, layouts, and platform-specific adaptations",
+      "tags": ["avalonia", "ui-ux", "best-practices", "csv", "data", "desktop"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+      "type": "file",
+      "name": "flutter.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+      "summary": "Flutter UI/UX best practices covering widgets, state management, layouts, navigation, animations, and platform integration for mobile and web",
+      "tags": ["flutter", "ui-ux", "best-practices", "csv", "data", "mobile"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+      "type": "file",
+      "name": "html-tailwind.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+      "summary": "HTML and Tailwind CSS best practices covering semantic markup, utility classes, responsive design, accessibility, and component patterns",
+      "tags": ["html", "tailwind", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/javafx.csv",
+      "type": "file",
+      "name": "javafx.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/javafx.csv",
+      "summary": "JavaFX UI best practices covering FXML, CSS styling, controllers, bindings, layouts, scene builder, and modern JavaFX patterns",
+      "tags": ["javafx", "ui-ux", "best-practices", "csv", "data", "desktop"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv",
+      "type": "file",
+      "name": "jetpack-compose.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv",
+      "summary": "Jetpack Compose Android UI best practices covering composable functions, state, recomposition, theming, navigation, and performance",
+      "tags": ["jetpack-compose", "android", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/laravel.csv",
+      "type": "file",
+      "name": "laravel.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/laravel.csv",
+      "summary": "Laravel PHP framework UI/UX best practices covering Blade templates, Livewire, Inertia.js, forms, validation, and frontend integration",
+      "tags": ["laravel", "php", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+      "type": "file",
+      "name": "nextjs.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+      "summary": "Next.js React framework UI/UX best practices covering App Router, server components, data fetching, caching, routing, and performance optimization",
+      "tags": ["nextjs", "react", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+      "type": "file",
+      "name": "nuxt-ui.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+      "summary": "Nuxt UI component library best practices covering pre-built components, theming, icons, forms, modals, notifications, and Vue 3 integration",
+      "tags": ["nuxt-ui", "vue", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+      "type": "file",
+      "name": "nuxtjs.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+      "summary": "Nuxt 3 Vue framework UI/UX best practices covering pages, layouts, composables, middleware, plugins, server routes, and rendering modes",
+      "tags": ["nuxt", "vue", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+      "type": "file",
+      "name": "react-native.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+      "summary": "React Native mobile UI best practices covering components, navigation, styling, animations, performance, and platform-specific code",
+      "tags": ["react-native", "mobile", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv",
+      "type": "file",
+      "name": "react.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/react.csv",
+      "summary": "React UI/UX best practices covering hooks, components, props, events, forms, performance optimization, and component patterns for React 19.2.x",
+      "tags": ["react", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+      "type": "file",
+      "name": "shadcn.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+      "summary": "shadcn/ui component library best practices covering installation, theming, forms, tables, modals, notifications, and Radix UI integration",
+      "tags": ["shadcn", "react", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+      "type": "file",
+      "name": "svelte.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+      "summary": "Svelte UI/UX best practices covering runes reactivity, props, bindings, events, transitions, stores, and Svelte 5 migration patterns",
+      "tags": ["svelte", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+      "type": "file",
+      "name": "swiftui.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+      "summary": "SwiftUI iOS/macOS UI best practices covering views, state management, layout, modifiers, animations, gestures, and data flow patterns",
+      "tags": ["swiftui", "ios", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv",
+      "type": "file",
+      "name": "threejs.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv",
+      "summary": "Three.js 3D graphics best practices covering scene setup, cameras, lighting, materials, geometries, animations, and performance optimization",
+      "tags": ["threejs", "3d", "webgl", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/uno.csv",
+      "type": "file",
+      "name": "uno.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/uno.csv",
+      "summary": "Uno Platform cross-platform UI best practices covering XAML, MVVM, responsive layouts, platform adaptation, and .NET integration",
+      "tags": ["uno-platform", "cross-platform", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv",
+      "type": "file",
+      "name": "uwp.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv",
+      "summary": "Universal Windows Platform UI best practices covering XAML, adaptive layouts, navigation, data binding, and Windows-specific features",
+      "tags": ["uwp", "windows", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv",
+      "type": "file",
+      "name": "vue.csv",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/vue.csv",
+      "summary": "Vue 3 UI/UX best practices covering Composition API, reactivity, watchers, props, emits, directives, components, transitions, and TypeScript integration",
+      "tags": ["vue", "ui-ux", "best-practices", "csv", "data"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/angular.csv:guidelines",
+      "type": "table",
+      "name": "Angular Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/angular.csv",
+      "summary": "50 UI/UX guidelines for Angular 22.x covering components, routing, state, forms, services, dependency injection, testing, performance, accessibility, and security",
+      "tags": ["angular", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/astro.csv:guidelines",
+      "type": "table",
+      "name": "Astro Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/astro.csv",
+      "summary": "53 UI/UX guidelines for Astro framework covering islands, components, content collections, routing, and performance",
+      "tags": ["astro", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv:guidelines",
+      "type": "table",
+      "name": "Avalonia Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv",
+      "summary": "56 UI/UX guidelines for Avalonia UI covering XAML, MVVM, data binding, styling, and cross-platform desktop development",
+      "tags": ["avalonia", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/flutter.csv:guidelines",
+      "type": "table",
+      "name": "Flutter Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+      "summary": "52 UI/UX guidelines for Flutter covering widgets, state management, layouts, navigation, animations, and platform integration",
+      "tags": ["flutter", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv:guidelines",
+      "type": "table",
+      "name": "HTML & Tailwind Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+      "summary": "59 UI/UX guidelines for HTML and Tailwind CSS covering semantic markup, utility classes, responsive design, and accessibility",
+      "tags": ["html", "tailwind", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/javafx.csv:guidelines",
+      "type": "table",
+      "name": "JavaFX Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/javafx.csv",
+      "summary": "75 UI/UX guidelines for JavaFX covering FXML, CSS, controllers, bindings, layouts, and modern JavaFX patterns",
+      "tags": ["javafx", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv:guidelines",
+      "type": "table",
+      "name": "Jetpack Compose Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv",
+      "summary": "52 UI/UX guidelines for Jetpack Compose covering composable functions, state, recomposition, theming, and navigation",
+      "tags": ["jetpack-compose", "android", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/laravel.csv:guidelines",
+      "type": "table",
+      "name": "Laravel Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/laravel.csv",
+      "summary": "50 UI/UX guidelines for Laravel covering Blade, Livewire, Inertia.js, forms, validation, and frontend integration",
+      "tags": ["laravel", "php", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv:guidelines",
+      "type": "table",
+      "name": "Next.js Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+      "summary": "61 UI/UX guidelines for Next.js covering App Router, server components, data fetching, caching, and performance",
+      "tags": ["nextjs", "react", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv:guidelines",
+      "type": "table",
+      "name": "Nuxt UI Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+      "summary": "70 UI/UX guidelines for Nuxt UI component library covering theming, icons, forms, modals, and Vue 3 integration",
+      "tags": ["nuxt-ui", "vue", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv:guidelines",
+      "type": "table",
+      "name": "Nuxt.js Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+      "summary": "67 UI/UX guidelines for Nuxt 3 covering pages, layouts, composables, middleware, plugins, and rendering modes",
+      "tags": ["nuxt", "vue", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv:guidelines",
+      "type": "table",
+      "name": "React Native Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+      "summary": "51 UI/UX guidelines for React Native covering components, navigation, styling, animations, and platform-specific code",
+      "tags": ["react-native", "mobile", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv:guidelines",
+      "type": "table",
+      "name": "React Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/react.csv",
+      "summary": "61 UI/UX guidelines for React 19.2.x covering hooks, components, props, events, forms, and performance optimization",
+      "tags": ["react", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv:guidelines",
+      "type": "table",
+      "name": "shadcn/ui Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+      "summary": "68 UI/UX guidelines for shadcn/ui covering installation, theming, forms, tables, modals, and Radix UI integration",
+      "tags": ["shadcn", "react", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv:guidelines",
+      "type": "table",
+      "name": "Svelte Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+      "summary": "55 UI/UX guidelines for Svelte covering runes, props, bindings, events, transitions, stores, and migration patterns",
+      "tags": ["svelte", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/swiftui.csv:guidelines",
+      "type": "table",
+      "name": "SwiftUI Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+      "summary": "50 UI/UX guidelines for SwiftUI covering views, state management, layout, modifiers, animations, and data flow",
+      "tags": ["swiftui", "ios", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv:guidelines",
+      "type": "table",
+      "name": "Three.js Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv",
+      "summary": "53 UI/UX guidelines for Three.js covering scene setup, cameras, lighting, materials, geometries, and performance",
+      "tags": ["threejs", "3d", "webgl", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/uno.csv:guidelines",
+      "type": "table",
+      "name": "Uno Platform Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/uno.csv",
+      "summary": "59 UI/UX guidelines for Uno Platform covering XAML, MVVM, responsive layouts, and .NET cross-platform integration",
+      "tags": ["uno-platform", "cross-platform", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv:guidelines",
+      "type": "table",
+      "name": "UWP Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv",
+      "summary": "55 UI/UX guidelines for UWP covering XAML, adaptive layouts, navigation, data binding, and Windows features",
+      "tags": ["uwp", "windows", "guidelines", "ui-ux", "table"]
+    },
+    {
+      "id": "table:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv:guidelines",
+      "type": "table",
+      "name": "Vue Guidelines",
+      "filePath": ".opencode/skills/ui-ux-pro-max/data/stacks/vue.csv",
+      "summary": "49 UI/UX guidelines for Vue 3 covering Composition API, reactivity, watchers, props, emits, components, and TypeScript",
+      "tags": ["vue", "guidelines", "ui-ux", "table"]
+    }
+  ],
+  "edges": [
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/angular.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/angular.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/astro.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/astro.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/flutter.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/flutter.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/javafx.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/javafx.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/laravel.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/laravel.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/swiftui.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/swiftui.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/uno.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/uno.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv", "target": "table:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv:guidelines", "type": "contains", "weight": 1.0, "label": "contains guidelines table"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv", "type": "related", "weight": 0.5, "label": "React ecosystem"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv", "type": "related", "weight": 0.5, "label": "React ecosystem"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv", "type": "related", "weight": 0.5, "label": "React ecosystem"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv", "type": "related", "weight": 0.5, "label": "Vue ecosystem"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv", "type": "related", "weight": 0.5, "label": "Vue ecosystem"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv", "type": "related", "weight": 0.5, "label": "SvelteKit related"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "type": "depends_on", "weight": 0.6, "label": "Tailwind used with React"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv", "type": "depends_on", "weight": 0.6, "label": "Tailwind used with Vue"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv", "type": "depends_on", "weight": 0.6, "label": "Tailwind used with Svelte"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "type": "depends_on", "weight": 0.6, "label": "shadcn/ui built on React"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv", "type": "depends_on", "weight": 0.6, "label": "Nuxt UI built on Vue"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv", "type": "depends_on", "weight": 0.6, "label": "Nuxt built on Vue"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "type": "depends_on", "weight": 0.6, "label": "Next.js built on React"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "type": "depends_on", "weight": 0.6, "label": "React Native uses React"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/uno.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv", "type": "related", "weight": 0.5, "label": "Uno Platform extends UWP concepts"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv", "type": "related", "weight": 0.5, "label": "Avalonia similar to UWP/XAML"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/javafx.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv", "type": "related", "weight": 0.5, "label": "Desktop UI frameworks"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/swiftui.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv", "type": "related", "weight": 0.5, "label": "Mobile declarative UI"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/angular.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "type": "similar_to", "weight": 0.5, "label": "Competing frontend frameworks"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/angular.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv", "type": "similar_to", "weight": 0.5, "label": "Competing frontend frameworks"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/laravel.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv", "type": "similar_to", "weight": 0.5, "label": "Backend frameworks with SSR"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/react.csv", "type": "related", "weight": 0.5, "label": "Three.js used with React"},
+    {"source": "file:.opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv", "target": "file:.opencode/skills/ui-ux-pro-max/data/stacks/vue.csv", "type": "related", "weight": 0.5, "label": "Three.js used with Vue"}
+  ]
+}

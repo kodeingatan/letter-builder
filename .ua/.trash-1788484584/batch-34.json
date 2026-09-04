@@ -1,0 +1,398 @@
+{
+  "nodes": [
+    {
+      "id": "file:apps/web/stories/Header.stories.ts",
+      "type": "file",
+      "name": "Header.stories.ts",
+      "filePath": "apps/web/stories/Header.stories.ts",
+      "summary": "Storybook story definitions for the Header component, including LoggedIn and LoggedOut variants with mock user data.",
+      "tags": ["storybook", "component-story", "testing", "vue"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/stories/Header.vue",
+      "type": "file",
+      "name": "Header.vue",
+      "filePath": "apps/web/stories/Header.vue",
+      "summary": "Vue component for the application header with login/logout buttons and user display.",
+      "tags": ["vue-component", "header", "ui", "authentication"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/stories/LoginPage.stories.ts",
+      "type": "file",
+      "name": "LoginPage.stories.ts",
+      "filePath": "apps/web/stories/LoginPage.stories.ts",
+      "summary": "Storybook story definition for the LoginPage component with default story variant.",
+      "tags": ["storybook", "component-story", "testing", "vue"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/stories/LoginPage.test.ts",
+      "type": "file",
+      "name": "LoginPage.test.ts",
+      "filePath": "apps/web/stories/LoginPage.test.ts",
+      "summary": "Storybook test file for LoginPage component verifying form rendering and register link functionality.",
+      "tags": ["storybook-test", "component-test", "vue", "authentication"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/stories/Page.stories.ts",
+      "type": "file",
+      "name": "Page.stories.ts",
+      "filePath": "apps/web/stories/Page.stories.ts",
+      "summary": "Storybook story definitions for the Page component with LoggedIn and LoggedOut variants.",
+      "tags": ["storybook", "component-story", "testing", "vue"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/stories/Page.vue",
+      "type": "file",
+      "name": "Page.vue",
+      "filePath": "apps/web/stories/Page.vue",
+      "summary": "Vue component for the main page layout with header integration and user authentication state.",
+      "tags": ["vue-component", "page-layout", "ui", "authentication"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/stories/RegisterPage.stories.ts",
+      "type": "file",
+      "name": "RegisterPage.stories.ts",
+      "filePath": "apps/web/stories/RegisterPage.stories.ts",
+      "summary": "Storybook story definition for the RegisterPage component with default story variant.",
+      "tags": ["storybook", "component-story", "testing", "vue"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/stories/RegisterPage.test.ts",
+      "type": "file",
+      "name": "RegisterPage.test.ts",
+      "filePath": "apps/web/stories/RegisterPage.test.ts",
+      "summary": "Storybook test file for RegisterPage component verifying form rendering, login link, and password mismatch error handling.",
+      "tags": ["storybook-test", "component-test", "vue", "authentication"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/stories/assets/avif-test-image.avif",
+      "type": "file",
+      "name": "avif-test-image.avif",
+      "filePath": "apps/web/stories/assets/avif-test-image.avif",
+      "summary": "AVIF format test image asset used for Storybook testing and component visualization.",
+      "tags": ["image-asset", "test-data", "avif", "storybook"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:apps/web/test-results/.last-run.json",
+      "type": "config",
+      "name": ".last-run.json",
+      "filePath": "apps/web/test-results/.last-run.json",
+      "summary": "Test execution results file storing the last test run status and failed test information.",
+      "tags": ["test-results", "configuration", "testing", "status"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/test/e2e/auth.spec.ts",
+      "type": "file",
+      "name": "auth.spec.ts",
+      "filePath": "apps/web/test/e2e/auth.spec.ts",
+      "summary": "Playwright end-to-end tests for authentication flows including login validation, error handling, and redirect behavior.",
+      "tags": ["e2e-test", "playwright", "authentication", "testing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/test/e2e/crud.spec.ts",
+      "type": "file",
+      "name": "crud.spec.ts",
+      "filePath": "apps/web/test/e2e/crud.spec.ts",
+      "summary": "Playwright end-to-end tests for CRUD pages including dashboard, users, roles, permissions, guards, activity logs, and settings.",
+      "tags": ["e2e-test", "playwright", "crud", "testing", "dashboard"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/web/test/e2e/crud.spec.ts:loginAsAdmin",
+      "type": "function",
+      "name": "loginAsAdmin",
+      "filePath": "apps/web/test/e2e/crud.spec.ts",
+      "lineRange": [3, 12],
+      "summary": "Helper function to authenticate as admin user for E2E tests, navigating to login page and filling credentials.",
+      "tags": ["test-helper", "authentication", "playwright", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/test/nuxt/components/BaseButton.nuxt.spec.ts",
+      "type": "file",
+      "name": "BaseButton.nuxt.spec.ts",
+      "filePath": "apps/web/test/nuxt/components/BaseButton.nuxt.spec.ts",
+      "summary": "Nuxt component test for BaseButton component using @nuxt/test-utils for rendering and behavior verification.",
+      "tags": ["component-test", "nuxt", "vue", "testing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/test/nuxt/components/FormField.nuxt.spec.ts",
+      "type": "file",
+      "name": "FormField.nuxt.spec.ts",
+      "filePath": "apps/web/test/nuxt/components/FormField.nuxt.spec.ts",
+      "summary": "Nuxt component test for FormField component using @nuxt/test-utils for rendering and behavior verification.",
+      "tags": ["component-test", "nuxt", "vue", "testing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/test/unit/composables/useGuardsData.test.ts",
+      "type": "file",
+      "name": "useGuardsData.test.ts",
+      "filePath": "apps/web/test/unit/composables/useGuardsData.test.ts",
+      "summary": "Unit tests for useGuardsData composable functions including guard display name formatting, finding guards by name/id, filtering by type, and sorting.",
+      "tags": ["unit-test", "composable", "testing", "guards"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/test/unit/composables/usePermissionsData.test.ts",
+      "type": "file",
+      "name": "usePermissionsData.test.ts",
+      "filePath": "apps/web/test/unit/composables/usePermissionsData.test.ts",
+      "summary": "Unit tests for usePermissionsData composable functions including permission display name formatting, finding permissions by name/id, and sorting.",
+      "tags": ["unit-test", "composable", "testing", "permissions"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/test/unit/composables/useRolesData.test.ts",
+      "type": "file",
+      "name": "useRolesData.test.ts",
+      "filePath": "apps/web/test/unit/composables/useRolesData.test.ts",
+      "summary": "Unit tests for useRolesData composable functions including role display name formatting, finding roles by name/id, and sorting.",
+      "tags": ["unit-test", "composable", "testing", "roles"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/test/unit/composables/useUsersData.test.ts",
+      "type": "file",
+      "name": "useUsersData.test.ts",
+      "filePath": "apps/web/test/unit/composables/useUsersData.test.ts",
+      "summary": "Unit tests for useUsersData composable functions including user display name formatting, finding users by username/email/id, and sorting.",
+      "tags": ["unit-test", "composable", "testing", "users"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/test/unit/utils/error.test.ts",
+      "type": "file",
+      "name": "error.test.ts",
+      "filePath": "apps/web/test/unit/utils/error.test.ts",
+      "summary": "Unit tests for error utility functions including error message extraction and formatting.",
+      "tags": ["unit-test", "utility", "testing", "error-handling"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/test/unit/utils/icons.test.ts",
+      "type": "file",
+      "name": "icons.test.ts",
+      "filePath": "apps/web/test/unit/utils/icons.test.ts",
+      "summary": "Unit tests for icon utility functions and icon component rendering.",
+      "tags": ["unit-test", "utility", "testing", "icons"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/test/unit/utils/url-matcher.test.ts",
+      "type": "file",
+      "name": "url-matcher.test.ts",
+      "filePath": "apps/web/test/unit/utils/url-matcher.test.ts",
+      "summary": "Unit tests for URL matching utility functions used in route guard and permission checking.",
+      "tags": ["unit-test", "utility", "testing", "url-matching"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:apps/web/vitest.config.ts",
+      "type": "config",
+      "name": "vitest.config.ts",
+      "filePath": "apps/web/vitest.config.ts",
+      "summary": "Vitest configuration for unit and component testing with path aliases and test environment setup.",
+      "tags": ["configuration", "testing", "vitest", "build-system"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:opencode.json",
+      "type": "config",
+      "name": "opencode.json",
+      "filePath": "opencode.json",
+      "summary": "OpenCode configuration file for AI-powered development tools and agent settings.",
+      "tags": ["configuration", "ai-tools", "development", "opencode"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:apps/web/stories/Header.stories.ts",
+      "target": "file:apps/web/stories/Header.vue",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/web/stories/Header.vue",
+      "target": "file:apps/web/stories/Header.vue",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/web/stories/LoginPage.test.ts",
+      "target": "file:apps/web/stories/LoginPage.stories.ts",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:apps/web/stories/Page.stories.ts",
+      "target": "file:apps/web/stories/Page.vue",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/web/stories/Page.vue",
+      "target": "file:apps/web/stories/Header.vue",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/web/stories/RegisterPage.test.ts",
+      "target": "file:apps/web/stories/RegisterPage.stories.ts",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:apps/web/test/e2e/auth.spec.ts",
+      "target": "file:apps/web/test/e2e/crud.spec.ts",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:apps/web/test/e2e/crud.spec.ts",
+      "target": "function:apps/web/test/e2e/crud.spec.ts:loginAsAdmin",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/web/test/unit/composables/useGuardsData.test.ts",
+      "target": "file:apps/web/test/unit/composables/useGuardsData.test.ts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/web/test/unit/composables/usePermissionsData.test.ts",
+      "target": "file:apps/web/test/unit/composables/usePermissionsData.test.ts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/web/test/unit/composables/useRolesData.test.ts",
+      "target": "file:apps/web/test/unit/composables/useRolesData.test.ts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/web/test/unit/composables/useUsersData.test.ts",
+      "target": "file:apps/web/test/unit/composables/useUsersData.test.ts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/web/test/unit/utils/error.test.ts",
+      "target": "file:apps/web/test/unit/utils/error.test.ts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/web/test/unit/utils/icons.test.ts",
+      "target": "file:apps/web/test/unit/utils/icons.test.ts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:apps/web/test/unit/utils/url-matcher.test.ts",
+      "target": "file:apps/web/test/unit/utils/url-matcher.test.ts",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "config:apps/web/vitest.config.ts",
+      "target": "file:apps/web/test/unit/composables/useGuardsData.test.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:apps/web/vitest.config.ts",
+      "target": "file:apps/web/test/unit/composables/usePermissionsData.test.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:apps/web/vitest.config.ts",
+      "target": "file:apps/web/test/unit/composables/useRolesData.test.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:apps/web/vitest.config.ts",
+      "target": "file:apps/web/test/unit/composables/useUsersData.test.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:apps/web/vitest.config.ts",
+      "target": "file:apps/web/test/unit/utils/error.test.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:apps/web/vitest.config.ts",
+      "target": "file:apps/web/test/unit/utils/icons.test.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:apps/web/vitest.config.ts",
+      "target": "file:apps/web/test/unit/utils/url-matcher.test.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:apps/web/test-results/.last-run.json",
+      "target": "file:apps/web/test/e2e/auth.spec.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:apps/web/test-results/.last-run.json",
+      "target": "file:apps/web/test/e2e/crud.spec.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:opencode.json",
+      "target": "file:apps/web/vitest.config.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

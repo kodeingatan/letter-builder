@@ -1,0 +1,516 @@
+{
+  "nodes": [
+    {
+      "id": "doc::anti-patterns",
+      "type": "document",
+      "label": "Anti-Patterns",
+      "path": ".opencode/skills/test-base-practices/references/anti-patterns.md",
+      "content_summary": "12 anti-patterns to avoid in Playwright testing: testing implementation details, CSS/XPath selectors, manual assertions, hardcoded waits, dependent tests, testing third-party services, ignoring test isolation, not using web-first assertions, excessive @apply in tests, flaky selectors, not cleaning up, mixing runtime/E2E in same file."
+    },
+    {
+      "id": "doc::best-practices",
+      "type": "document",
+      "label": "Best Practices",
+      "path": ".opencode/skills/test-base-practices/references/best-practices.md",
+      "content_summary": "Testing best practices covering philosophy (test user-visible behavior, isolation, avoid third-party), locator best practices (role/label/text over CSS/XPath), assertion best practices (web-first, soft assertions), test organization (directory structure, file naming, grouping), debugging, performance (parallel, sharding), and linting."
+    },
+    {
+      "id": "doc::ci-cd",
+      "type": "document",
+      "label": "CI/CD Setup",
+      "path": ".opencode/skills/test-base-practices/references/ci-cd.md",
+      "content_summary": "CI/CD setup for Playwright tests. Covers GitHub Actions basic setup and with Nuxt build, optimization (install only needed browser, sharding, caching dependencies), and other CI platforms (GitLab CI, CircleCI)."
+    },
+    {
+      "id": "doc::common-patterns",
+      "type": "document",
+      "label": "Common Patterns",
+      "path": ".opencode/skills/test-base-practices/references/common-patterns.md",
+      "content_summary": "Common Playwright test patterns: login helper, form submission, table verification, API mocking, file upload, responsive testing, drag and drop, authentication with storage state, and multiple browser testing."
+    },
+    {
+      "id": "doc::component-testing",
+      "type": "document",
+      "label": "Component Testing",
+      "path": ".opencode/skills/test-base-practices/references/component-testing.md",
+      "content_summary": "Component testing with @nuxt/test-utils: mountSuspended (mount Vue components in Nuxt environment), renderSuspended (Testing Library integration), mockNuxtImport (mock auto-imports), mockComponent (mock Nuxt components), registerEndpoint (mock Nitro endpoints), and built-in mocks."
+    },
+    {
+      "id": "doc::configuration",
+      "type": "document",
+      "label": "Configuration",
+      "path": ".opencode/skills/test-base-practices/references/configuration.md",
+      "content_summary": "Configuration for Vitest (multi-project setup, simple Nuxt-only setup), Playwright (with @nuxt/test-utils, test-file config override), environment variables (.env.test), and timeout configuration for both Vitest and Playwright."
+    },
+    {
+      "id": "doc::debugging",
+      "type": "document",
+      "label": "Debugging",
+      "path": ".opencode/skills/test-base-practices/references/debugging.md",
+      "content_summary": "Debugging techniques: local debugging (Playwright Inspector, UI Mode, VS Code extension), traces (generate, view, features), HTML report, console logging, screenshots on failure, videos, and debug tips."
+    },
+    {
+      "id": "doc::e2e-testing",
+      "type": "document",
+      "label": "E2E Testing",
+      "path": ".opencode/skills/test-base-practices/references/e2e-testing.md",
+      "content_summary": "End-to-end testing with @nuxt/test-utils: setup options (Nuxt config, timings, features like build/server/port/browser), APIs ($fetch, fetch, url, createPage), testing against external host, and integration with Vitest and Playwright test runners."
+    },
+    {
+      "id": "doc::installation",
+      "type": "document",
+      "label": "Installation",
+      "path": ".opencode/skills/test-base-practices/references/installation.md",
+      "content_summary": "Installation guide: dependencies for Playwright + Nuxt (E2E), Vitest + @nuxt/test-utils (Unit/Nuxt), Vitest + @vue/test-utils (Unit). Browser installation, configuration files (playwright.config.ts, vitest.config.ts, nuxt.config.ts), and package.json scripts."
+    },
+    {
+      "id": "doc::official-documentation",
+      "type": "document",
+      "label": "Official Documentation",
+      "path": ".opencode/skills/test-base-practices/references/official-documentation.md",
+      "content_summary": "Links to official documentation for Playwright, @nuxt/test-utils, and related tools (Vitest, @vue/test-utils, happy-dom, jsdom). Key pages listed for both Playwright and @nuxt/test-utils."
+    },
+    {
+      "id": "doc::page-object-models",
+      "type": "document",
+      "label": "Page Object Models",
+      "path": ".opencode/skills/test-base-practices/references/page-object-models.md",
+      "content_summary": "Page Object Model pattern: basic example (LoginPage), usage in tests, integration with fixtures, nested pages (DashboardPage with Sidebar, Header), and best practices (one class per page, locator as properties, methods as user actions, use fixtures for DI)."
+    },
+    {
+      "id": "doc::playwright-actions",
+      "type": "document",
+      "label": "Playwright Actions",
+      "path": ".opencode/skills/test-base-practices/references/playwright-actions.md",
+      "content_summary": "Playwright actions: navigation (goto, goBack, goForward, reload), interactions (click, fill, check/uncheck, select, hover, focus, keyboard, file upload, drag and drop), waiting (waitForURL, waitForSelector, waitForFunction, waitForTimeout), dialogs, screenshots, and evaluation."
+    },
+    {
+      "id": "doc::playwright-assertions",
+      "type": "document",
+      "label": "Playwright Assertions",
+      "path": ".opencode/skills/test-base-practices/references/playwright-assertions.md",
+      "content_summary": "Playwright assertions: web-first assertions (auto-wait and retry), locator assertions (toBeChecked, toBeEnabled, toBeVisible, toHaveText, etc.), page assertions (toHaveTitle, toHaveURL), generic assertions, soft assertions, visual comparisons, and common patterns."
+    },
+    {
+      "id": "doc::playwright-fixtures",
+      "type": "document",
+      "label": "Playwright Fixtures",
+      "path": ".opencode/skills/test-base-practices/references/playwright-fixtures.md",
+      "content_summary": "Playwright fixtures: built-in fixtures (page, browser, context, request), custom fixtures (extend test, page with setup, auth fixture), Nuxt test fixtures (@nuxt/test-utils/playwright), worker-scoped fixtures, and test options."
+    },
+    {
+      "id": "doc::playwright-locators",
+      "type": "document",
+      "label": "Playwright Locators",
+      "path": ".opencode/skills/test-base-practices/references/playwright-locators.md",
+      "content_summary": "Playwright locators: philosophy (auto-wait and retry), locator strategies priority (role, text, label, placeholder, alt text, title, test ID), chaining and filtering, locator types (CSS/XPath to avoid), auto-generated locators (codegen), and element state assertions."
+    },
+    {
+      "id": "doc::test-isolation",
+      "type": "document",
+      "label": "Test Isolation",
+      "path": ".opencode/skills/test-base-practices/references/test-isolation.md",
+      "content_summary": "Test isolation: browser context isolation (cookies, localStorage, sessionStorage), test hooks (beforeEach/afterEach, beforeAll/afterAll), global setup, state isolation patterns (fresh state per test, shared auth state), and Nuxt runtime environment considerations."
+    },
+    {
+      "id": "doc::unit-testing",
+      "type": "document",
+      "label": "Unit Testing",
+      "path": ".opencode/skills/test-base-practices/references/unit-testing.md",
+      "content_summary": "Unit testing with @nuxt/test-utils: overview (Vitest as test runner, test directory structure), running tests (all, unit only, nuxt only, watch mode), opting out of Nuxt environment, naming conventions, and important notes (cannot mix runtime/e2e, global Nuxt app, no global state mutation)."
+    },
+    {
+      "id": "skill::test-base-practices",
+      "type": "skill",
+      "label": "test-base-practices",
+      "path": ".opencode/skills/test-base-practices/SKILL.md",
+      "content_summary": "Skill for testing Vue 3 + Nuxt using Playwright (E2E) and Vitest + @nuxt/test-utils (unit/component testing). Covers installation, configuration, locators, assertions, fixtures, page object models, CI/CD, debugging."
+    },
+    {
+      "id": "concept::playwright",
+      "type": "concept",
+      "label": "Playwright",
+      "description": "End-to-end testing framework by Microsoft. Provides browser automation, locators, assertions, fixtures, and trace viewer."
+    },
+    {
+      "id": "concept::vitest",
+      "type": "concept",
+      "label": "Vitest",
+      "description": "Fast unit test runner for Vite. Used with @nuxt/test-utils for unit and Nuxt component testing."
+    },
+    {
+      "id": "concept::nuxt-test-utils",
+      "type": "concept",
+      "label": "@nuxt/test-utils",
+      "description": "Testing utilities for Nuxt. Provides mountSuspended, renderSuspended, mockNuxtImport, mockComponent, registerEndpoint, $fetch, createPage."
+    },
+    {
+      "id": "concept::testing-library",
+      "type": "concept",
+      "label": "@testing-library/vue",
+      "description": "Testing library for Vue components. Used via renderSuspended for Testing Library integration."
+    },
+    {
+      "id": "concept::mountSuspended",
+      "type": "concept",
+      "label": "mountSuspended",
+      "description": "Mount Vue component in Nuxt environment with async setup and plugin injections."
+    },
+    {
+      "id": "concept::mockNuxtImport",
+      "type": "concept",
+      "label": "mockNuxtImport",
+      "description": "Mock Nuxt auto-imports. Once per mocked import per test file."
+    },
+    {
+      "id": "concept::registerEndpoint",
+      "type": "concept",
+      "label": "registerEndpoint",
+      "description": "Create mock Nitro endpoints for component testing."
+    },
+    {
+      "id": "concept::page-object-model",
+      "type": "concept",
+      "label": "Page Object Model",
+      "description": "Pattern that encapsulates page structure into reusable classes. Reduces duplication, improves maintainability."
+    },
+    {
+      "id": "concept::web-first-assertions",
+      "type": "concept",
+      "label": "Web-First Assertions",
+      "description": "Playwright assertions that auto-wait and retry until condition is met."
+    },
+    {
+      "id": "concept::test-isolation-pattern",
+      "type": "concept",
+      "label": "Test Isolation",
+      "description": "Each test gets its own BrowserContext with isolated cookies, localStorage, sessionStorage."
+    },
+    {
+      "id": "concept::locator-strategies",
+      "type": "concept",
+      "label": "Locator Strategies",
+      "description": "Priority order for finding elements: role > text > label > placeholder > alt text > title > test ID."
+    },
+    {
+      "id": "concept::ci-cd-pattern",
+      "type": "concept",
+      "label": "CI/CD for Testing",
+      "description": "Continuous integration setup for automated testing. Supports GitHub Actions, GitLab CI, CircleCI."
+    },
+    {
+      "id": "concept::fixtures",
+      "type": "concept",
+      "label": "Fixtures",
+      "description": "Custom test setup/teardown. Worker-scoped or test-scoped. Built-in: page, browser, context, request."
+    },
+    {
+      "id": "concept::traces",
+      "type": "concept",
+      "label": "Traces",
+      "description": "Playwright trace viewer for debugging. Records timeline, DOM snapshots, network requests, console logs."
+    }
+  ],
+  "edges": [
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::anti-patterns",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::best-practices",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::ci-cd",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::common-patterns",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::component-testing",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::configuration",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::debugging",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::e2e-testing",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::installation",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::official-documentation",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::page-object-models",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::playwright-actions",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::playwright-assertions",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::playwright-fixtures",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::playwright-locators",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::test-isolation",
+      "type": "contains"
+    },
+    {
+      "source": "skill::test-base-practices",
+      "target": "doc::unit-testing",
+      "type": "contains"
+    },
+    {
+      "source": "doc::playwright-locators",
+      "target": "concept::playwright",
+      "type": "describes"
+    },
+    {
+      "source": "doc::playwright-assertions",
+      "target": "concept::playwright",
+      "type": "describes"
+    },
+    {
+      "source": "doc::playwright-actions",
+      "target": "concept::playwright",
+      "type": "describes"
+    },
+    {
+      "source": "doc::playwright-fixtures",
+      "target": "concept::playwright",
+      "type": "describes"
+    },
+    {
+      "source": "doc::debugging",
+      "target": "concept::playwright",
+      "type": "describes"
+    },
+    {
+      "source": "doc::common-patterns",
+      "target": "concept::playwright",
+      "type": "describes"
+    },
+    {
+      "source": "doc::unit-testing",
+      "target": "concept::vitest",
+      "type": "describes"
+    },
+    {
+      "source": "doc::configuration",
+      "target": "concept::vitest",
+      "type": "describes"
+    },
+    {
+      "source": "doc::installation",
+      "target": "concept::vitest",
+      "type": "describes"
+    },
+    {
+      "source": "doc::component-testing",
+      "target": "concept::nuxt-test-utils",
+      "type": "describes"
+    },
+    {
+      "source": "doc::e2e-testing",
+      "target": "concept::nuxt-test-utils",
+      "type": "describes"
+    },
+    {
+      "source": "doc::unit-testing",
+      "target": "concept::nuxt-test-utils",
+      "type": "describes"
+    },
+    {
+      "source": "doc::installation",
+      "target": "concept::nuxt-test-utils",
+      "type": "describes"
+    },
+    {
+      "source": "doc::configuration",
+      "target": "concept::nuxt-test-utils",
+      "type": "describes"
+    },
+    {
+      "source": "doc::component-testing",
+      "target": "concept::mountSuspended",
+      "type": "describes"
+    },
+    {
+      "source": "doc::component-testing",
+      "target": "concept::mockNuxtImport",
+      "type": "describes"
+    },
+    {
+      "source": "doc::component-testing",
+      "target": "concept::registerEndpoint",
+      "type": "describes"
+    },
+    {
+      "source": "doc::component-testing",
+      "target": "concept::testing-library",
+      "type": "describes"
+    },
+    {
+      "source": "doc::page-object-models",
+      "target": "concept::page-object-model",
+      "type": "describes"
+    },
+    {
+      "source": "doc::playwright-assertions",
+      "target": "concept::web-first-assertions",
+      "type": "describes"
+    },
+    {
+      "source": "doc::best-practices",
+      "target": "concept::web-first-assertions",
+      "type": "references"
+    },
+    {
+      "source": "doc::anti-patterns",
+      "target": "concept::web-first-assertions",
+      "type": "references"
+    },
+    {
+      "source": "doc::test-isolation",
+      "target": "concept::test-isolation-pattern",
+      "type": "describes"
+    },
+    {
+      "source": "doc::anti-patterns",
+      "target": "concept::test-isolation-pattern",
+      "type": "references"
+    },
+    {
+      "source": "doc::best-practices",
+      "target": "concept::test-isolation-pattern",
+      "type": "references"
+    },
+    {
+      "source": "doc::playwright-locators",
+      "target": "concept::locator-strategies",
+      "type": "describes"
+    },
+    {
+      "source": "doc::best-practices",
+      "target": "concept::locator-strategies",
+      "type": "references"
+    },
+    {
+      "source": "doc::anti-patterns",
+      "target": "concept::locator-strategies",
+      "type": "references"
+    },
+    {
+      "source": "doc::ci-cd",
+      "target": "concept::ci-cd-pattern",
+      "type": "describes"
+    },
+    {
+      "source": "doc::playwright-fixtures",
+      "target": "concept::fixtures",
+      "type": "describes"
+    },
+    {
+      "source": "doc::page-object-models",
+      "target": "concept::fixtures",
+      "type": "references"
+    },
+    {
+      "source": "doc::debugging",
+      "target": "concept::traces",
+      "type": "describes"
+    },
+    {
+      "source": "doc::ci-cd",
+      "target": "concept::traces",
+      "type": "references"
+    },
+    {
+      "source": "doc::official-documentation",
+      "target": "concept::playwright",
+      "type": "references"
+    },
+    {
+      "source": "doc::official-documentation",
+      "target": "concept::nuxt-test-utils",
+      "type": "references"
+    },
+    {
+      "source": "doc::official-documentation",
+      "target": "concept::vitest",
+      "type": "references"
+    },
+    {
+      "source": "doc::best-practices",
+      "target": "concept::locator-strategies",
+      "type": "describes"
+    },
+    {
+      "source": "doc::best-practices",
+      "target": "concept::fixtures",
+      "type": "references"
+    },
+    {
+      "source": "doc::common-patterns",
+      "target": "concept::fixtures",
+      "type": "references"
+    },
+    {
+      "source": "doc::common-patterns",
+      "target": "concept::page-object-model",
+      "type": "references"
+    },
+    {
+      "source": "doc::e2e-testing",
+      "target": "concept::fixtures",
+      "type": "references"
+    },
+    {
+      "source": "doc::configuration",
+      "target": "concept::fixtures",
+      "type": "references"
+    },
+    {
+      "source": "doc::anti-patterns",
+      "target": "concept::test-isolation-pattern",
+      "type": "describes"
+    }
+  ]
+}

@@ -1,0 +1,700 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 7,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 7
+    }
+  },
+  "results": [
+    {
+      "path": ".opencode/skills/design-system/references/component-specs.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 236,
+      "nonEmptyLines": 182,
+      "sections": [
+        {
+          "heading": "Component Specifications",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Button",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Variants",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "Sizes",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "States",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "Anatomy",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "Input",
+          "level": 2,
+          "line": 50
+        },
+        {
+          "heading": "Variants",
+          "level": 3,
+          "line": 52
+        },
+        {
+          "heading": "Sizes",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "States",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "Anatomy",
+          "level": 3,
+          "line": 81
+        },
+        {
+          "heading": "Card",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "Variants",
+          "level": 3,
+          "line": 95
+        },
+        {
+          "heading": "Anatomy",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "Spacing",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "Badge",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "Variants",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "Sizes",
+          "level": 3,
+          "line": 145
+        },
+        {
+          "heading": "Alert",
+          "level": 2,
+          "line": 155
+        },
+        {
+          "heading": "Variants",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "Anatomy",
+          "level": 3,
+          "line": 166
+        },
+        {
+          "heading": "Dialog",
+          "level": 2,
+          "line": 177
+        },
+        {
+          "heading": "Sizes",
+          "level": 3,
+          "line": 179
+        },
+        {
+          "heading": "Anatomy",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "Table",
+          "level": 2,
+          "line": 208
+        },
+        {
+          "heading": "Row States",
+          "level": 3,
+          "line": 210
+        },
+        {
+          "heading": "Cell Alignment",
+          "level": 3,
+          "line": 219
+        },
+        {
+          "heading": "Spacing",
+          "level": 3,
+          "line": 228
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 28
+      }
+    },
+    {
+      "path": ".opencode/skills/design-system/references/component-tokens.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 214,
+      "nonEmptyLines": 170,
+      "sections": [
+        {
+          "heading": "Component Tokens",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Button Tokens",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Input Tokens",
+          "level": 2,
+          "line": 49
+        },
+        {
+          "heading": "Card Tokens",
+          "level": 2,
+          "line": 81
+        },
+        {
+          "heading": "Badge Tokens",
+          "level": 2,
+          "line": 104
+        },
+        {
+          "heading": "Alert Tokens",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "Dialog/Modal Tokens",
+          "level": 2,
+          "line": 151
+        },
+        {
+          "heading": "Table Tokens",
+          "level": 2,
+          "line": 171
+        },
+        {
+          "heading": "Usage Example",
+          "level": 2,
+          "line": 193
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": ".opencode/skills/design-system/references/primitive-tokens.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 203,
+      "nonEmptyLines": 175,
+      "sections": [
+        {
+          "heading": "Primitive Tokens",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Color Scales",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Gray Scale",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "Primary Colors (Blue)",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "Status Colors",
+          "level": 3,
+          "line": 42
+        },
+        {
+          "heading": "Spacing Scale",
+          "level": 2,
+          "line": 63
+        },
+        {
+          "heading": "Typography Scale",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "Border Radius",
+          "level": 2,
+          "line": 131
+        },
+        {
+          "heading": "Shadows",
+          "level": 2,
+          "line": 147
+        },
+        {
+          "heading": "Motion / Duration",
+          "level": 2,
+          "line": 166
+        },
+        {
+          "heading": "Z-Index Scale",
+          "level": 2,
+          "line": 186
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 11
+      }
+    },
+    {
+      "path": ".opencode/skills/design-system/references/semantic-tokens.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 215,
+      "nonEmptyLines": 165,
+      "sections": [
+        {
+          "heading": "Semantic Tokens",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Color Semantics",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Background & Foreground",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "Primary",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "Secondary",
+          "level": 3,
+          "line": 36
+        },
+        {
+          "heading": "Muted",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "Accent",
+          "level": 3,
+          "line": 55
+        },
+        {
+          "heading": "Destructive",
+          "level": 3,
+          "line": 64
+        },
+        {
+          "heading": "Status Colors",
+          "level": 3,
+          "line": 74
+        },
+        {
+          "heading": "Border & Ring",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "Spacing Semantics",
+          "level": 2,
+          "line": 102
+        },
+        {
+          "heading": "Typography Semantics",
+          "level": 2,
+          "line": 123
+        },
+        {
+          "heading": "Interactive States",
+          "level": 2,
+          "line": 143
+        },
+        {
+          "heading": "Dark Mode Overrides",
+          "level": 2,
+          "line": 162
+        },
+        {
+          "heading": "Usage Patterns",
+          "level": 2,
+          "line": 189
+        },
+        {
+          "heading": "Applying Semantic Tokens",
+          "level": 3,
+          "line": 191
+        },
+        {
+          "heading": "Theme Switching",
+          "level": 3,
+          "line": 208
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": ".opencode/skills/design-system/references/states-and-variants.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 241,
+      "nonEmptyLines": 187,
+      "sections": [
+        {
+          "heading": "States and Variants",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Interactive States",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "State Definitions",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "State Priority",
+          "level": 3,
+          "line": 18
+        },
+        {
+          "heading": "State Transitions",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "Focus States",
+          "level": 2,
+          "line": 48
+        },
+        {
+          "heading": "Focus Ring Spec",
+          "level": 3,
+          "line": 50
+        },
+        {
+          "heading": "Focus Within",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Disabled States",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "Visual Treatment",
+          "level": 3,
+          "line": 79
+        },
+        {
+          "heading": "Accessibility",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "Loading States",
+          "level": 2,
+          "line": 103
+        },
+        {
+          "heading": "Spinner Placement",
+          "level": 3,
+          "line": 105
+        },
+        {
+          "heading": "Loading Treatment",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "Error States",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "Visual Indicators",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "Error Messages",
+          "level": 3,
+          "line": 155
+        },
+        {
+          "heading": "Variant Patterns",
+          "level": 2,
+          "line": 162
+        },
+        {
+          "heading": "Color Variants",
+          "level": 3,
+          "line": 164
+        },
+        {
+          "heading": "Size Variants",
+          "level": 3,
+          "line": 186
+        },
+        {
+          "heading": "Accessibility Requirements",
+          "level": 2,
+          "line": 209
+        },
+        {
+          "heading": "Color Contrast",
+          "level": 3,
+          "line": 211
+        },
+        {
+          "heading": "State Indicators",
+          "level": 3,
+          "line": 220
+        },
+        {
+          "heading": "ARIA States",
+          "level": 3,
+          "line": 227
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 24
+      }
+    },
+    {
+      "path": ".opencode/skills/design-system/references/tailwind-integration.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 251,
+      "nonEmptyLines": 212,
+      "sections": [
+        {
+          "heading": "Tailwind Integration",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "CSS Variables Setup",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Base Layer",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "Tailwind Config",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "tailwind.config.ts",
+          "level": 3,
+          "line": 61
+        },
+        {
+          "heading": "HSL Format Benefits",
+          "level": 2,
+          "line": 115
+        },
+        {
+          "heading": "Component Classes",
+          "level": 2,
+          "line": 128
+        },
+        {
+          "heading": "Button Example",
+          "level": 3,
+          "line": 130
+        },
+        {
+          "heading": "Spacing Integration",
+          "level": 2,
+          "line": 174
+        },
+        {
+          "heading": "Animation Tokens",
+          "level": 2,
+          "line": 189
+        },
+        {
+          "heading": "Dark Mode Toggle",
+          "level": 2,
+          "line": 218
+        },
+        {
+          "heading": "shadcn/ui Alignment",
+          "level": 2,
+          "line": 232
+        },
+        {
+          "heading": "Using with shadcn/ui",
+          "level": 3,
+          "line": 241
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": ".opencode/skills/design-system/references/token-architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 224,
+      "nonEmptyLines": 176,
+      "sections": [
+        {
+          "heading": "Token Architecture",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Layer Overview",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "Why Three Layers?",
+          "level": 2,
+          "line": 20
+        },
+        {
+          "heading": "Layer 1: Primitive Tokens",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "Layer 2: Semantic Tokens",
+          "level": 2,
+          "line": 62
+        },
+        {
+          "heading": "Layer 3: Component Tokens",
+          "level": 2,
+          "line": 94
+        },
+        {
+          "heading": "Dark Mode",
+          "level": 2,
+          "line": 123
+        },
+        {
+          "heading": "Naming Convention",
+          "level": 2,
+          "line": 137
+        },
+        {
+          "heading": "Categories",
+          "level": 2,
+          "line": 149
+        },
+        {
+          "heading": "File Organization",
+          "level": 2,
+          "line": 160
+        },
+        {
+          "heading": "Migration from Flat Tokens",
+          "level": 2,
+          "line": 186
+        },
+        {
+          "heading": "W3C DTCG Alignment",
+          "level": 2,
+          "line": 209
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 12
+      }
+    }
+  ]
+}

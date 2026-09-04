@@ -1,0 +1,287 @@
+{
+  "nodes": [
+    {
+      "id": "document:.opencode/skills/design/references/banner-sizes-and-styles.md",
+      "type": "document",
+      "name": "banner-sizes-and-styles.md",
+      "filePath": ".opencode/skills/design/references/banner-sizes-and-styles.md",
+      "summary": "Complete reference for banner sizes across social media, web/display ads, website, and print formats. Defines 22 art direction styles (minimalist, bold typography, gradient, photo-based, glassmorphism, neon, duotone, etc.) and design principles including visual hierarchy (3-zone rule), safe zones, CTA rules, typography guidelines, and print specifications.",
+      "tags": ["banner", "design", "social-media", "advertising", "art-direction", "typography", "print"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/cip-deliverable-guide.md",
+      "type": "document",
+      "name": "cip-deliverable-guide.md",
+      "filePath": ".opencode/skills/design/references/cip-deliverable-guide.md",
+      "summary": "Specifications for Corporate Identity Program (CIP) deliverables including primary logo, logo variations, stationery set (business cards, letterhead, envelope), office environment (reception signage, wayfinding, wall graphics), apparel (polo shirts, uniforms), vehicle branding, digital assets (social media, email signatures), and events/promotional items.",
+      "tags": ["cip", "corporate-identity", "branding", "deliverables", "stationery", "apparel", "vehicle"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/cip-design.md",
+      "type": "document",
+      "name": "cip-design.md",
+      "filePath": ".opencode/skills/design/references/cip-design.md",
+      "summary": "CIP Design reference covering 50+ deliverables, 20 styles, 20 industries. Documents scripts for searching deliverables/styles/industries (search.py), generating CIP mockups with Gemini Flash/Pro (generate.py), rendering HTML presentations (render-html.py), and the BM25 search engine (core.py). Includes workflow: generate CIP brief, generate mockups with logo, render HTML presentation.",
+      "tags": ["cip", "design", "mockups", "gemini", "html-presentation", "workflow"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/cip-prompt-engineering.md",
+      "type": "document",
+      "name": "cip-prompt-engineering.md",
+      "filePath": ".opencode/skills/design/references/cip-prompt-engineering.md",
+      "summary": "Prompt engineering guide for CIP mockup generation. Covers base prompt structure, deliverable-specific modifiers (business card, letterhead, signage, vehicle, apparel), style modifiers (corporate minimal, luxury premium, modern tech, warm organic), lighting modifiers, context modifiers, quality modifiers, and negative prompts to avoid unwanted results.",
+      "tags": ["cip", "prompt-engineering", "ai-generation", "mockups", "photography"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/cip-style-guide.md",
+      "type": "document",
+      "name": "cip-style-guide.md",
+      "filePath": ".opencode/skills/design/references/cip-style-guide.md",
+      "summary": "CIP design style guide defining 8 style categories: Corporate Minimal, Modern Tech, Luxury Premium, Classic Traditional, Warm Organic, Bold Dynamic, Fresh Modern, and Soft Elegant. Each style specifies recommended industries, color palettes with hex codes, typography, materials, and finishes. Includes color psychology quick reference.",
+      "tags": ["cip", "style-guide", "color-palette", "typography", "materials", "finishes"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/design-routing.md",
+      "type": "document",
+      "name": "design-routing.md",
+      "filePath": ".opencode/skills/design/references/design-routing.md",
+      "summary": "Routing guide mapping design tasks to the appropriate sub-skill. Covers 8 design skills (brand, design-system, ui-styling, logo-design, cip-design, slides, banner-design, icon-design) with task-type routing, question-type routing, multi-skill workflows (new project setup, design system migration, component creation), and skill dependency chains.",
+      "tags": ["design", "routing", "workflow", "skills", "architecture", "multi-skill"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/icon-design.md",
+      "type": "document",
+      "name": "icon-design.md",
+      "filePath": ".opencode/skills/design/references/icon-design.md",
+      "summary": "Icon design reference for AI-powered SVG icon generation using Gemini 3.1 Pro Preview. Covers 15 icon styles (outlined, filled, duotone, thin, bold, rounded, sharp, flat, gradient, glassmorphism, pixel, hand-drawn, isometric, glyph, animated-ready), 12 categories (navigation, action, communication, media, file, user, commerce, data, development, social, weather, map), multi-size export, and SVG best practices.",
+      "tags": ["icon", "svg", "ai-generation", "gemini", "ui-design", "styles"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/logo-color-psychology.md",
+      "type": "document",
+      "name": "logo-color-psychology.md",
+      "filePath": ".opencode/skills/design/references/logo-color-psychology.md",
+      "summary": "Color psychology reference for logo design. Covers primary color meanings (blue, red, green, yellow/gold, purple, orange, black, white) with industry associations, hex examples, and pairings. Includes color combinations by industry, color harmony types (monochromatic, complementary, analogous, triadic), accessibility considerations (WCAG AA 4.5:1), and quick reference palettes for tech, eco, luxury, healthcare, and food.",
+      "tags": ["color-psychology", "logo", "branding", "accessibility", "palettes", "industry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/logo-design.md",
+      "type": "document",
+      "name": "logo-design.md",
+      "filePath": ".opencode/skills/design/references/logo-design.md",
+      "summary": "Logo design reference for AI-powered logo generation with 55+ styles, 30 color palettes, 25 industry guides using Gemini Nano Banana. Documents scripts (search.py, generate.py, core.py), available logo styles organized by category (general, aesthetic, modern, clever), color psychology summary, industry defaults, and the workflow: generate design brief, generate logo variations, optional HTML preview.",
+      "tags": ["logo", "design", "ai-generation", "gemini", "styles", "color-palettes"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/logo-prompt-engineering.md",
+      "type": "document",
+      "name": "logo-prompt-engineering.md",
+      "filePath": ".opencode/skills/design/references/logo-prompt-engineering.md",
+      "summary": "Logo AI prompt engineering guide. Covers core prompt structure, effective keywords by style (minimalist, vintage/retro, luxury/premium, modern/tech, playful/fun, organic/natural), negative prompts, industry-specific prompts (tech startup, healthcare, restaurant, fashion, eco), technical requirements (scalability, versatility, quality), and prompt templates for quick generation, detailed briefs, and variations.",
+      "tags": ["logo", "prompt-engineering", "ai-generation", "gemini", "keywords", "templates"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/logo-style-guide.md",
+      "type": "document",
+      "name": "logo-style-guide.md",
+      "filePath": ".opencode/skills/design/references/logo-style-guide.md",
+      "summary": "Logo style guide defining 7 core logo types (wordmark, lettermark, pictorial mark, abstract mark, mascot, emblem, combination mark) with examples and use cases. Covers 6 aesthetic styles (minimalist, vintage/retro, luxury/premium, geometric, organic/natural, gradient/modern), a style selection matrix by brand type, and a scalability checklist for favicon to business card sizes.",
+      "tags": ["logo", "style-guide", "branding", "types", "scalability", "design-principles"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/slides-copywriting-formulas.md",
+      "type": "document",
+      "name": "slides-copywriting-formulas.md",
+      "filePath": ".opencode/skills/design/references/slides-copywriting-formulas.md",
+      "summary": "25 copywriting formulas for persuasive slide copy. Core formulas: PAS (Problem-Agitate-Solution), AIDA (Attention-Interest-Desire-Action), FAB (Features-Advantages-Benefits), Cost of Inaction, Before-After-Bridge. Includes formula-to-slide mapping, headline patterns (power words, contrast patterns, social proof patterns), and quick reference by need (urgency, trust, value, action, story, data).",
+      "tags": ["copywriting", "slides", "formulas", "aida", "pas", "fab", "persuasion"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/slides-create.md",
+      "type": "document",
+      "name": "slides-create.md",
+      "filePath": ".opencode/skills/design/references/slides-create.md",
+      "summary": "Brief instruction to invoke the slides skill for creating persuasive HTML slides using design tokens, Chart.js, and the slide knowledge database. Contains a task argument placeholder.",
+      "tags": ["slides", "creation", "skill-invocation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/slides-html-template.md",
+      "type": "document",
+      "name": "slides-html-template.md",
+      "filePath": ".opencode/skills/design/references/slides-html-template.md",
+      "summary": "Complete HTML slide template with 16:9 aspect ratio container, CSS design tokens, responsive breakpoints (desktop, tablet, mobile), navigation controls (progress bar, prev/next buttons, keyboard/click handlers), Chart.js integration examples (line, bar, doughnut, radar), animation classes (fade-up, count, scale, stagger), background image support, and CSS variables reference.",
+      "tags": ["html", "template", "slides", "chartjs", "responsive", "animation", "css-variables"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/slides-layout-patterns.md",
+      "type": "document",
+      "name": "slides-layout-patterns.md",
+      "filePath": ".opencode/skills/design/references/slides-layout-patterns.md",
+      "summary": "25 slide layout patterns with CSS structures and animation classes. Includes layout selection by use case (title, problem, solution, feature grid, metrics dashboard, comparison, timeline, team, quote, two-column, big number, product screenshot, pricing, CTA), CSS structures for each layout, component variants (card styles, metric styles), visual treatments, and a layout decision flow.",
+      "tags": ["slides", "layout", "css", "grid", "responsive", "animation", "components"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/slides-strategies.md",
+      "type": "document",
+      "name": "slides-strategies.md",
+      "filePath": ".opencode/skills/design/references/slides-strategies.md",
+      "summary": "15 proven deck structures with emotion arcs. Strategies include YC Seed Deck (10-12 slides), Guy Kawasaki (10 slides), Series A (12-15), Product Demo (5-8), Sales Pitch (7-10), Nancy Duarte Sparkline, Problem-Solution-Benefit, QBR, Team All-Hands, Conference Talk, Workshop, Case Study, Competitive Analysis, Board Meeting, and Webinar. Each includes slide count, goal, audience, and emotion arc.",
+      "tags": ["slides", "strategy", "pitch-deck", "emotion-arc", "presentation", "sales"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/slides.md",
+      "type": "document",
+      "name": "slides.md",
+      "filePath": ".opencode/skills/design/references/slides.md",
+      "summary": "Slides reference overview for strategic HTML presentation design with Chart.js data visualization, design tokens, responsive layouts, and copywriting formulas. Documents the knowledge base structure (5 reference files), when to use (marketing, data-driven, strategic, copywriting, investor/sales/team), key features, and the 6-step workflow.",
+      "tags": ["slides", "overview", "chartjs", "design-tokens", "copywriting"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:.opencode/skills/design/references/social-photos-design.md",
+      "type": "document",
+      "name": "social-photos-design.md",
+      "filePath": ".opencode/skills/design/references/social-photos-design.md",
+      "summary": "Social media image design guide using HTML/CSS rendering and screenshot export. Covers platform sizes (Instagram, Facebook, Twitter/X, LinkedIn, Pinterest, YouTube, TikTok, Threads), an 8-step workflow (activate project management, analyze requirements, generate ideas, design HTML files, screenshot export via Chrome headless/Playwright/Puppeteer, verify and fix, generate report, organize output), design best practices by platform, art direction styles, color/contrast guidelines, and typography hierarchy.",
+      "tags": ["social-media", "design", "html", "screenshot", "platforms", "workflow", "export"],
+      "complexity": "complex"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:.opencode/skills/design/references/cip-design.md",
+      "target": "document:.opencode/skills/design/references/cip-deliverable-guide.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references deliverable specifications"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/cip-design.md",
+      "target": "document:.opencode/skills/design/references/cip-style-guide.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references design styles"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/cip-design.md",
+      "target": "document:.opencode/skills/design/references/cip-prompt-engineering.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references prompt engineering"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/logo-design.md",
+      "target": "document:.opencode/skills/design/references/logo-style-guide.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references style descriptions"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/logo-design.md",
+      "target": "document:.opencode/skills/design/references/logo-color-psychology.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references color meanings"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/logo-design.md",
+      "target": "document:.opencode/skills/design/references/logo-prompt-engineering.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references prompt engineering"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/slides.md",
+      "target": "document:.opencode/skills/design/references/slides-create.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references creation guide"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/slides.md",
+      "target": "document:.opencode/skills/design/references/slides-layout-patterns.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references layout patterns"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/slides.md",
+      "target": "document:.opencode/skills/design/references/slides-html-template.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references HTML template"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/slides.md",
+      "target": "document:.opencode/skills/design/references/slides-copywriting-formulas.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references copywriting formulas"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/slides.md",
+      "target": "document:.opencode/skills/design/references/slides-strategies.md",
+      "type": "documents",
+      "weight": 0.5,
+      "label": "references strategies"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/design-routing.md",
+      "target": "document:.opencode/skills/design/references/logo-design.md",
+      "type": "related",
+      "weight": 0.5,
+      "label": "routes to logo-design skill"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/design-routing.md",
+      "target": "document:.opencode/skills/design/references/cip-design.md",
+      "type": "related",
+      "weight": 0.5,
+      "label": "routes to cip-design skill"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/design-routing.md",
+      "target": "document:.opencode/skills/design/references/slides.md",
+      "type": "related",
+      "weight": 0.5,
+      "label": "routes to slides skill"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/design-routing.md",
+      "target": "document:.opencode/skills/design/references/icon-design.md",
+      "type": "related",
+      "weight": 0.5,
+      "label": "routes to icon-design skill"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/design-routing.md",
+      "target": "document:.opencode/skills/design/references/banner-sizes-and-styles.md",
+      "type": "related",
+      "weight": 0.5,
+      "label": "routes to banner-design skill"
+    },
+    {
+      "source": "document:.opencode/skills/design/references/social-photos-design.md",
+      "target": "document:.opencode/skills/design/references/banner-sizes-and-styles.md",
+      "type": "related",
+      "weight": 0.5,
+      "label": "shares art direction styles and platform sizes"
+    }
+  ]
+}

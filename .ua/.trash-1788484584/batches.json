@@ -1,0 +1,4226 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 467,
+  "totalBatches": 34,
+  "exportsByPath": {
+    ".opencode/skills/brand/scripts/extract-colors.cjs": [],
+    ".opencode/skills/brand/scripts/inject-brand-context.cjs": [],
+    ".opencode/skills/brand/scripts/sync-brand-to-tokens.cjs": [],
+    ".opencode/skills/brand/scripts/tests/test_sync_brand_to_tokens.py": [
+      "test_sync_parses_bundled_starter_template"
+    ],
+    ".opencode/skills/brand/scripts/validate-asset.cjs": [],
+    ".opencode/skills/design-system/scripts/embed-tokens.cjs": [],
+    ".opencode/skills/design-system/scripts/fetch-background.py": [
+      "resolve_token_reference",
+      "load_brand_colors",
+      "load_backgrounds_config",
+      "get_overlay_css",
+      "get_curated_images",
+      "get_pexels_search_url",
+      "get_background_image",
+      "generate_css_for_background",
+      "main"
+    ],
+    ".opencode/skills/design-system/scripts/generate-slide.py": [
+      "_e",
+      "_safe_url",
+      "generate_title_slide",
+      "generate_problem_slide",
+      "generate_solution_slide",
+      "generate_metrics_slide",
+      "generate_chart_slide",
+      "generate_testimonial_slide",
+      "generate_cta_slide",
+      "generate_deck",
+      "main"
+    ],
+    ".opencode/skills/design-system/scripts/generate-tokens.cjs": [],
+    ".opencode/skills/design-system/scripts/html-token-validator.py": [
+      "ValidationResult",
+      "load_css_variables",
+      "is_inside_block",
+      "is_allowed_exception",
+      "is_allowed_rgba",
+      "get_context",
+      "validate_html",
+      "validate_file",
+      "validate_directory",
+      "print_result",
+      "print_summary",
+      "main"
+    ],
+    ".opencode/skills/design-system/scripts/search-slides.py": [
+      "format_result",
+      "format_context",
+      "main"
+    ],
+    ".opencode/skills/design-system/scripts/slide-token-validator.py": [
+      "main"
+    ],
+    ".opencode/skills/design-system/scripts/slide_search_core.py": [
+      "BM25",
+      "_load_csv",
+      "_search_csv",
+      "detect_domain",
+      "search",
+      "search_all",
+      "_load_decision_csv",
+      "get_layout_for_goal",
+      "get_typography_for_slide",
+      "get_color_for_emotion",
+      "get_background_config",
+      "should_use_full_bleed",
+      "calculate_pattern_break",
+      "search_with_context"
+    ],
+    ".opencode/skills/design-system/scripts/tests/test_validate_tokens.py": [
+      "_run",
+      "test_flags_hardcoded_hex_sharing_line_with_token",
+      "test_token_only_line_reports_no_violation"
+    ],
+    ".opencode/skills/design-system/scripts/validate-tokens.cjs": [],
+    ".opencode/skills/design/scripts/cip/core.py": [
+      "BM25",
+      "_load_csv",
+      "_search_csv",
+      "detect_domain",
+      "search",
+      "search_all",
+      "get_cip_brief"
+    ],
+    ".opencode/skills/design/scripts/cip/generate.py": [
+      "load_logo_image",
+      "load_env",
+      "build_cip_prompt",
+      "generate_with_nano_banana",
+      "generate_cip_set",
+      "check_logo_required",
+      "main"
+    ],
+    ".opencode/skills/design/scripts/cip/render-html.py": [
+      "get_image_base64",
+      "get_deliverable_info",
+      "generate_html",
+      "main"
+    ],
+    ".opencode/skills/design/scripts/cip/search.py": [
+      "format_results",
+      "format_brief",
+      "main"
+    ],
+    ".opencode/skills/design/scripts/icon/generate.py": [
+      "load_env",
+      "extract_svgs",
+      "apply_color",
+      "apply_viewbox_size",
+      "generate_icon",
+      "generate_batch",
+      "generate_sizes",
+      "main"
+    ],
+    ".opencode/skills/design/scripts/logo/core.py": [
+      "BM25",
+      "_load_csv",
+      "_search_csv",
+      "detect_domain",
+      "search",
+      "search_all"
+    ],
+    ".opencode/skills/design/scripts/logo/generate.py": [
+      "load_env",
+      "enhance_prompt",
+      "generate_logo",
+      "generate_batch",
+      "main"
+    ],
+    ".opencode/skills/design/scripts/logo/search.py": [
+      "format_output",
+      "generate_design_brief"
+    ],
+    ".opencode/skills/ui-styling/scripts/shadcn_add.py": [
+      "ShadcnInstaller",
+      "main"
+    ],
+    ".opencode/skills/ui-styling/scripts/tailwind_config_gen.py": [
+      "TailwindConfigGenerator",
+      "main"
+    ],
+    ".opencode/skills/ui-styling/scripts/tests/test_shadcn_add.py": [
+      "TestShadcnInstaller"
+    ],
+    ".opencode/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py": [
+      "TestTailwindConfigGenerator",
+      "_strip_to_object",
+      "TestGeneratedConfigIsValidJs"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/core.py": [
+      "_normalize",
+      "BM25",
+      "_file_signature",
+      "_load_csv_snapshot",
+      "_load_csv",
+      "_get_bm25",
+      "_query_coverage",
+      "_search_csv_detailed",
+      "_search_csv",
+      "_passes_threshold",
+      "_suggest_terms",
+      "_suggest_identities",
+      "_row_identities",
+      "_load_product_keywords",
+      "_domain_keywords",
+      "_contains_phrase",
+      "_rewrite_query_for_domain",
+      "detect_domain",
+      "_style_identity",
+      "_exact_row_identity",
+      "_load_rows_or_empty",
+      "_project_row",
+      "_valid_max_results",
+      "_exact_match_diagnostic",
+      "_style_search_destination",
+      "search",
+      "_stack_query_requests_legacy",
+      "_stack_row_filter",
+      "_exact_stack_identifier",
+      "_legacy_successor_guidance",
+      "search_stack"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/design_system.py": [
+      "_resolve_dial",
+      "_relative_luminance",
+      "_palette_is_dark",
+      "_contrast_ratio",
+      "_style_is_dark_primary",
+      "_query_wants_dark",
+      "_resolve_color_mode",
+      "_derive_dark_palette",
+      "_select_palette_for_mode",
+      "_filter_anti_patterns_for_mode",
+      "DesignSystemGenerator",
+      "hex_to_ansi",
+      "ansi_ljust",
+      "section_header",
+      "format_ascii_box",
+      "format_markdown",
+      "generate_design_system",
+      "safe_slug",
+      "_write_persisted_file",
+      "persist_design_system",
+      "format_master_md",
+      "format_page_override_md",
+      "_generate_intelligent_overrides",
+      "_detect_page_type"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py": [
+      "_object_without_duplicates",
+      "parse_decision_rules",
+      "_validate_action",
+      "apply_decision_rules"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/search.py": [
+      "format_output"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py": [
+      "CatalogRefreshTest"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_core.py": [
+      "TestTokenizer",
+      "TestBm25CoreBehavior",
+      "TestSearchDomains",
+      "TestDomainDetection",
+      "TestPersistence",
+      "TestReasoningMatch",
+      "TestDiagnosticsContracts"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_core_data_quality.py": [
+      "read_rows",
+      "TestSemanticColors",
+      "TestAccessibilityGuidance",
+      "TestChartsTypographyAndIcons",
+      "TestCurrentReactGuidance"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py": [
+      "read_rows",
+      "split_values",
+      "style_identities",
+      "TestStyleIdentityContract",
+      "TestReasoningContract",
+      "TestLandingAndStackContract",
+      "TestGeneratedCatalogContract"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py": [
+      "TestLuminance",
+      "TestModeResolution",
+      "TestPaletteSelection",
+      "TestAntiPatternGating",
+      "TestEndToEndCoherence"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_native_desktop_stack_freshness.py": [
+      "_rows",
+      "TestNativeDesktopStackFreshness"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py": [
+      "TestMetricMath",
+      "TestFixtureValidation",
+      "TestThresholdGate"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py": [
+      "read_rows",
+      "TestStyleTaxonomy"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_text_layout_resilience.py": [
+      "read_rows",
+      "TestTextLayoutRetrieval",
+      "TestTextLayoutDataContracts"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/tests/test_web_stack_freshness.py": [
+      "_rows",
+      "TestWebStackFreshness"
+    ],
+    ".opencode/skills/ui-ux-pro-max/scripts/validate_data.py": [
+      "_relative_luminance",
+      "contrast_ratio",
+      "_read_rows",
+      "_check_file",
+      "_split",
+      "_valid_date",
+      "_valid_confidence",
+      "_check_style_contract",
+      "_check_reasoning_contract",
+      "_check_color_contract",
+      "_check_chart_contract",
+      "_font_families",
+      "_font_names",
+      "_configured_font_names",
+      "_imported_weights",
+      "_declared_weights",
+      "_check_typography_contract",
+      "_load_catalog_json",
+      "_catalog_date",
+      "_valid_google_fonts_exclusion_source",
+      "_check_font_catalog",
+      "_check_phosphor_catalog",
+      "_check_catalog_summary",
+      "_check_catalog_contract",
+      "_check_icon_contract",
+      "_check_ux_contract",
+      "_check_motion_contract",
+      "_check_app_interface_contract",
+      "_check_react_contract",
+      "_check_landing_claims",
+      "_check_core_data_contract",
+      "_valid_provenance_source",
+      "_check_stack_freshness_contract",
+      "_valid_dataset_source_key",
+      "_valid_catalog_source_key",
+      "_check_provenance",
+      "validate",
+      "main"
+    ],
+    ".ua/.understandignore": [],
+    "apps/web/.nuxtrc": [],
+    "apps/web/.storybook/main.ts": [],
+    "apps/web/.storybook/preview.ts": [
+      "parameters"
+    ],
+    "apps/web/app/app.vue": [],
+    "apps/web/app/components/base/Button/Button.vue": [],
+    "apps/web/app/components/common/AccessDeniedAlert.vue": [],
+    "apps/web/app/components/common/AppTransition.vue": [],
+    "apps/web/app/components/common/AuthForm/AuthForm.vue": [],
+    "apps/web/app/components/common/DataTable/DataTable.vue": [],
+    "apps/web/app/components/common/FormField/FormField.vue": [],
+    "apps/web/app/components/features/logging/CodeLinkButton.vue": [],
+    "apps/web/app/components/features/logging/LogDetailDrawer.vue": [],
+    "apps/web/app/components/features/logging/LogLevelBadge.vue": [],
+    "apps/web/app/components/features/logging/index.ts": [
+      "LogDetailDrawer",
+      "LogLevelBadge",
+      "CodeLinkButton"
+    ],
+    "apps/web/app/components/features/users/GuardDetailDrawer.vue": [],
+    "apps/web/app/components/features/users/GuardFormModal.vue": [],
+    "apps/web/app/components/features/users/GuardTable.vue": [],
+    "apps/web/app/components/features/users/PermissionDetailDrawer.vue": [],
+    "apps/web/app/components/features/users/PermissionFormModal.vue": [],
+    "apps/web/app/components/features/users/PermissionTable.vue": [],
+    "apps/web/app/components/features/users/RoleDetailDrawer.vue": [],
+    "apps/web/app/components/features/users/RoleFormModal.vue": [],
+    "apps/web/app/components/features/users/RoleTable.vue": [],
+    "apps/web/app/components/features/users/UserDetailDrawer.vue": [],
+    "apps/web/app/components/features/users/UserFormModal.vue": [],
+    "apps/web/app/components/features/users/UserTable.vue": [],
+    "apps/web/app/components/features/users/index.ts": [
+      "UserTable",
+      "UserFormModal",
+      "UserDetailDrawer",
+      "GuardTable",
+      "GuardFormModal",
+      "GuardDetailDrawer",
+      "RoleTable",
+      "RoleFormModal",
+      "RoleDetailDrawer",
+      "PermissionTable",
+      "PermissionFormModal",
+      "PermissionDetailDrawer"
+    ],
+    "apps/web/app/composables/useApi.ts": [
+      "useApi"
+    ],
+    "apps/web/app/composables/useAuthorization.ts": [
+      "useAuthorization"
+    ],
+    "apps/web/app/composables/useDataTable.ts": [
+      "useDataTable"
+    ],
+    "apps/web/app/composables/useGuardsData.ts": [
+      "formatGuardDisplayName",
+      "findGuardByName",
+      "findGuardById",
+      "filterGuardsByType",
+      "sortGuardsByName"
+    ],
+    "apps/web/app/composables/usePageTransition.ts": [
+      "usePageTransition"
+    ],
+    "apps/web/app/composables/usePermissionsData.ts": [
+      "formatPermissionDisplayName",
+      "findPermissionByName",
+      "filterPermissionsByMethod",
+      "filterPermissionsByUrl",
+      "sortPermissionsByName"
+    ],
+    "apps/web/app/composables/useRolesData.ts": [
+      "formatRoleDisplayName",
+      "findRoleByName",
+      "findRoleById",
+      "filterRolesWithPermissions",
+      "sortRolesByName"
+    ],
+    "apps/web/app/composables/useUsersData.ts": [
+      "formatUserDisplayName",
+      "getUserInitials",
+      "filterUsersByRole",
+      "findUserByEmail",
+      "findUserByUsername",
+      "sortUsersByName"
+    ],
+    "apps/web/app/layouts/auth.vue": [],
+    "apps/web/app/layouts/default.vue": [],
+    "apps/web/app/middleware/auth.ts": [],
+    "apps/web/app/pages/dashboard/activity-logs.vue": [],
+    "apps/web/app/pages/dashboard/guards.vue": [],
+    "apps/web/app/pages/dashboard/index.vue": [],
+    "apps/web/app/pages/dashboard/permissions.vue": [],
+    "apps/web/app/pages/dashboard/profile.vue": [],
+    "apps/web/app/pages/dashboard/roles.vue": [],
+    "apps/web/app/pages/dashboard/settings.vue": [],
+    "apps/web/app/pages/dashboard/system-logs.vue": [],
+    "apps/web/app/pages/dashboard/users.vue": [],
+    "apps/web/app/pages/index.vue": [],
+    "apps/web/app/pages/login.vue": [],
+    "apps/web/app/pages/register.vue": [],
+    "apps/web/app/plugins/animejs.client.ts": [],
+    "apps/web/app/plugins/naiveui-components.ts": [],
+    "apps/web/app/plugins/naiveui.client.ts": [],
+    "apps/web/app/stores/auth.ts": [
+      "useAuthStore"
+    ],
+    "apps/web/app/stores/guards.ts": [
+      "useGuardsStore"
+    ],
+    "apps/web/app/stores/permissions.ts": [
+      "usePermissionsStore"
+    ],
+    "apps/web/app/stores/roles.ts": [
+      "useRolesStore"
+    ],
+    "apps/web/app/stores/settings.ts": [
+      "useSettingsStore"
+    ],
+    "apps/web/app/stores/users.ts": [
+      "useUsersStore"
+    ],
+    "apps/web/app/utils/error.ts": [
+      "getErrorMessage"
+    ],
+    "apps/web/app/utils/icons.ts": [
+      "renderIcon"
+    ],
+    "apps/web/app/utils/naiveui-theme.ts": [
+      "themeOverrides"
+    ],
+    "apps/web/app/utils/url-matcher.ts": [
+      "matchUrlPattern"
+    ],
+    "apps/web/db.sqlite": [],
+    "apps/web/nuxt.config.ts": [],
+    "apps/web/playwright.config.ts": [],
+    "apps/web/server/api/activity-logs/[id].get.ts": [],
+    "apps/web/server/api/activity-logs/index.get.ts": [],
+    "apps/web/server/api/activity-logs/stats.get.ts": [],
+    "apps/web/server/api/auth/login.post.ts": [],
+    "apps/web/server/api/auth/password.patch.ts": [],
+    "apps/web/server/api/auth/profile.get.ts": [],
+    "apps/web/server/api/auth/profile.patch.ts": [],
+    "apps/web/server/api/auth/register.post.ts": [],
+    "apps/web/server/api/guards/[id].delete.ts": [],
+    "apps/web/server/api/guards/[id].get.ts": [],
+    "apps/web/server/api/guards/[id].put.ts": [],
+    "apps/web/server/api/guards/index.get.ts": [],
+    "apps/web/server/api/guards/index.post.ts": [],
+    "apps/web/server/api/permissions/[id].delete.ts": [],
+    "apps/web/server/api/permissions/[id].get.ts": [],
+    "apps/web/server/api/permissions/[id].put.ts": [],
+    "apps/web/server/api/permissions/index.get.ts": [],
+    "apps/web/server/api/permissions/index.post.ts": [],
+    "apps/web/server/api/roles/[id].delete.ts": [],
+    "apps/web/server/api/roles/[id].get.ts": [],
+    "apps/web/server/api/roles/[id].put.ts": [],
+    "apps/web/server/api/roles/index.get.ts": [],
+    "apps/web/server/api/roles/index.post.ts": [],
+    "apps/web/server/api/settings/index.get.ts": [],
+    "apps/web/server/api/settings/index.put.ts": [],
+    "apps/web/server/api/settings/upload.post.ts": [],
+    "apps/web/server/api/storage/[...path].get.ts": [],
+    "apps/web/server/api/system-logs/files/[filename].get.ts": [],
+    "apps/web/server/api/system-logs/files/index.get.ts": [],
+    "apps/web/server/api/system-logs/stats/[filename].get.ts": [],
+    "apps/web/server/api/users/[id].delete.ts": [],
+    "apps/web/server/api/users/[id].get.ts": [],
+    "apps/web/server/api/users/[id].put.ts": [],
+    "apps/web/server/api/users/index.get.ts": [],
+    "apps/web/server/api/users/index.post.ts": [],
+    "apps/web/server/dto/activity-logs.dto.ts": [
+      "QueryActivityLogSchema"
+    ],
+    "apps/web/server/dto/auth.dto.ts": [
+      "LoginSchema",
+      "RegisterSchema",
+      "UpdateProfileSchema",
+      "ChangePasswordSchema"
+    ],
+    "apps/web/server/dto/guards.dto.ts": [
+      "CreateGuardSchema",
+      "UpdateGuardSchema"
+    ],
+    "apps/web/server/dto/permissions.dto.ts": [
+      "CreatePermissionSchema",
+      "UpdatePermissionSchema"
+    ],
+    "apps/web/server/dto/roles.dto.ts": [
+      "CreateRoleSchema",
+      "UpdateRoleSchema"
+    ],
+    "apps/web/server/dto/settings.dto.ts": [
+      "UpdateSettingSchema"
+    ],
+    "apps/web/server/dto/system-logs.dto.ts": [
+      "QuerySystemLogSchema"
+    ],
+    "apps/web/server/dto/users.dto.ts": [
+      "QuerySchema",
+      "CreateUserSchema",
+      "UpdateUserSchema"
+    ],
+    "apps/web/server/entities/activity-log.entity.ts": [
+      "ActivityLogSchema"
+    ],
+    "apps/web/server/entities/guard-url.entity.ts": [
+      "GuardUrlSchema"
+    ],
+    "apps/web/server/entities/guard.entity.ts": [
+      "GuardSchema"
+    ],
+    "apps/web/server/entities/permission-method.entity.ts": [
+      "PermissionMethodSchema"
+    ],
+    "apps/web/server/entities/permission-url.entity.ts": [
+      "PermissionUrlSchema"
+    ],
+    "apps/web/server/entities/permission.entity.ts": [
+      "PermissionSchema"
+    ],
+    "apps/web/server/entities/role.entity.ts": [
+      "RoleSchema"
+    ],
+    "apps/web/server/entities/setting.entity.ts": [
+      "SettingSchema"
+    ],
+    "apps/web/server/entities/user.entity.ts": [
+      "UserSchema"
+    ],
+    "apps/web/server/middleware/activity-logger.ts": [],
+    "apps/web/server/middleware/auth.ts": [],
+    "apps/web/server/plugins/database.server.ts": [],
+    "apps/web/server/services/activity-logs.service.ts": [
+      "ActivityLogsService"
+    ],
+    "apps/web/server/services/auth.service.ts": [
+      "AuthService"
+    ],
+    "apps/web/server/services/guards.service.ts": [
+      "GuardsService"
+    ],
+    "apps/web/server/services/permissions.service.ts": [
+      "PermissionsService"
+    ],
+    "apps/web/server/services/roles.service.ts": [
+      "RolesService"
+    ],
+    "apps/web/server/services/seeder.service.ts": [
+      "seedDatabase"
+    ],
+    "apps/web/server/services/settings.service.ts": [
+      "SettingsService"
+    ],
+    "apps/web/server/services/storage.service.ts": [
+      "StorageService"
+    ],
+    "apps/web/server/services/system-logs.service.ts": [
+      "SystemLogsService"
+    ],
+    "apps/web/server/services/users.service.ts": [
+      "UsersService"
+    ],
+    "apps/web/server/utils/db.ts": [
+      "getDataSource"
+    ],
+    "apps/web/server/utils/jwt.ts": [
+      "signToken",
+      "verifyToken"
+    ],
+    "apps/web/server/utils/password.ts": [
+      "hashPassword",
+      "comparePassword"
+    ],
+    "apps/web/server/utils/url-matcher.ts": [
+      "matchUrlPattern"
+    ],
+    "apps/web/shared/types/activity-log.ts": [],
+    "apps/web/shared/types/api.ts": [],
+    "apps/web/shared/types/auth.ts": [],
+    "apps/web/shared/types/guard.ts": [],
+    "apps/web/shared/types/index.ts": [],
+    "apps/web/shared/types/permission.ts": [],
+    "apps/web/shared/types/role.ts": [],
+    "apps/web/shared/types/system-log.ts": [],
+    "apps/web/shared/types/user.ts": [],
+    "apps/web/stories/AppLayout/AppLayout.stories.ts": [
+      "Default"
+    ],
+    "apps/web/stories/AuthForm/AuthForm.stories.ts": [
+      "Default",
+      "WithoutSubtitle"
+    ],
+    "apps/web/stories/AuthForm/AuthForm.test.ts": [
+      "RendersTitle",
+      "RendersSubtitle",
+      "RendersChildren"
+    ],
+    "apps/web/stories/Button.stories.ts": [
+      "Primary",
+      "Secondary",
+      "Large",
+      "Small"
+    ],
+    "apps/web/stories/Button.vue": [],
+    "apps/web/stories/DashboardPage.stories.ts": [
+      "Default"
+    ],
+    "apps/web/stories/FormField/FormField.stories.ts": [
+      "Default",
+      "WithError",
+      "Required"
+    ],
+    "apps/web/stories/FormField/FormField.test.ts": [
+      "RendersLabel",
+      "ShowsRequiredIndicator",
+      "ShowsError"
+    ],
+    "apps/web/stories/Header.stories.ts": [
+      "LoggedIn",
+      "LoggedOut"
+    ],
+    "apps/web/stories/Header.vue": [],
+    "apps/web/stories/LoginPage.stories.ts": [
+      "Default"
+    ],
+    "apps/web/stories/LoginPage.test.ts": [
+      "RendersLoginForm",
+      "HasRegisterLink"
+    ],
+    "apps/web/stories/Page.stories.ts": [
+      "LoggedIn",
+      "LoggedOut"
+    ],
+    "apps/web/stories/Page.vue": [],
+    "apps/web/stories/RegisterPage.stories.ts": [
+      "Default"
+    ],
+    "apps/web/stories/RegisterPage.test.ts": [
+      "RendersRegisterForm",
+      "HasLoginLink",
+      "PasswordMismatchError"
+    ],
+    "apps/web/stories/assets/avif-test-image.avif": [],
+    "apps/web/test/e2e/auth.spec.ts": [],
+    "apps/web/test/e2e/crud.spec.ts": [],
+    "apps/web/test/nuxt/components/BaseButton.nuxt.spec.ts": [],
+    "apps/web/test/nuxt/components/FormField.nuxt.spec.ts": [],
+    "apps/web/test/unit/composables/useGuardsData.test.ts": [],
+    "apps/web/test/unit/composables/usePermissionsData.test.ts": [],
+    "apps/web/test/unit/composables/useRolesData.test.ts": [],
+    "apps/web/test/unit/composables/useUsersData.test.ts": [],
+    "apps/web/test/unit/utils/error.test.ts": [],
+    "apps/web/test/unit/utils/icons.test.ts": [],
+    "apps/web/test/unit/utils/url-matcher.test.ts": [],
+    "apps/web/vitest.config.ts": []
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": ".opencode/agents/architect.md",
+          "language": "markdown",
+          "sizeLines": 39,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/agents/backend.md",
+          "language": "markdown",
+          "sizeLines": 43,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/agents/frontend.md",
+          "language": "markdown",
+          "sizeLines": 41,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/agents/product.md",
+          "language": "markdown",
+          "sizeLines": 24,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/agents/qa.md",
+          "language": "markdown",
+          "sizeLines": 36,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/agents/reviewer.md",
+          "language": "markdown",
+          "sizeLines": 44,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/agents/uiux.md",
+          "language": "markdown",
+          "sizeLines": 72,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/agents/architect.md": [],
+        ".opencode/agents/backend.md": [],
+        ".opencode/agents/frontend.md": [],
+        ".opencode/agents/product.md": [],
+        ".opencode/agents/qa.md": [],
+        ".opencode/agents/reviewer.md": [],
+        ".opencode/agents/uiux.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": ".opencode/commands/init-project.md",
+          "language": "markdown",
+          "sizeLines": 833,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/commands/knowledge.md",
+          "language": "markdown",
+          "sizeLines": 25,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/commands/task.md",
+          "language": "markdown",
+          "sizeLines": 538,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/commands/init-project.md": [],
+        ".opencode/commands/knowledge.md": [],
+        ".opencode/commands/task.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": ".opencode/skills/animejs-base-practices/references/anti-patterns.md",
+          "language": "markdown",
+          "sizeLines": 256,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/animejs-base-practices/references/best-practices.md",
+          "language": "markdown",
+          "sizeLines": 234,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/animejs-base-practices/references/common-patterns.md",
+          "language": "markdown",
+          "sizeLines": 329,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/animejs-base-practices/references/concepts.md",
+          "language": "markdown",
+          "sizeLines": 337,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/animejs-base-practices/references/easings.md",
+          "language": "markdown",
+          "sizeLines": 115,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/animejs-base-practices/references/faq.md",
+          "language": "markdown",
+          "sizeLines": 151,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/animejs-base-practices/references/installation.md",
+          "language": "markdown",
+          "sizeLines": 103,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/animejs-base-practices/references/production-recommendations.md",
+          "language": "markdown",
+          "sizeLines": 186,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/animejs-base-practices/references/anti-patterns.md": [],
+        ".opencode/skills/animejs-base-practices/references/best-practices.md": [],
+        ".opencode/skills/animejs-base-practices/references/common-patterns.md": [],
+        ".opencode/skills/animejs-base-practices/references/concepts.md": [],
+        ".opencode/skills/animejs-base-practices/references/easings.md": [],
+        ".opencode/skills/animejs-base-practices/references/faq.md": [],
+        ".opencode/skills/animejs-base-practices/references/installation.md": [],
+        ".opencode/skills/animejs-base-practices/references/production-recommendations.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 4,
+      "files": [
+        {
+          "path": ".opencode/skills/brand/references/approval-checklist.md",
+          "language": "markdown",
+          "sizeLines": 169,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/asset-organization.md",
+          "language": "markdown",
+          "sizeLines": 157,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/brand-guideline-template.md",
+          "language": "markdown",
+          "sizeLines": 140,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/color-palette-management.md",
+          "language": "markdown",
+          "sizeLines": 186,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/consistency-checklist.md",
+          "language": "markdown",
+          "sizeLines": 94,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/logo-usage-rules.md",
+          "language": "markdown",
+          "sizeLines": 185,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/messaging-framework.md",
+          "language": "markdown",
+          "sizeLines": 85,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/typography-specifications.md",
+          "language": "markdown",
+          "sizeLines": 214,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/update.md",
+          "language": "markdown",
+          "sizeLines": 118,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/visual-identity.md",
+          "language": "markdown",
+          "sizeLines": 96,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/references/voice-framework.md",
+          "language": "markdown",
+          "sizeLines": 88,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/brand/references/approval-checklist.md": [],
+        ".opencode/skills/brand/references/asset-organization.md": [],
+        ".opencode/skills/brand/references/brand-guideline-template.md": [],
+        ".opencode/skills/brand/references/color-palette-management.md": [],
+        ".opencode/skills/brand/references/consistency-checklist.md": [],
+        ".opencode/skills/brand/references/logo-usage-rules.md": [],
+        ".opencode/skills/brand/references/messaging-framework.md": [],
+        ".opencode/skills/brand/references/typography-specifications.md": [],
+        ".opencode/skills/brand/references/update.md": [],
+        ".opencode/skills/brand/references/visual-identity.md": [],
+        ".opencode/skills/brand/references/voice-framework.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 5,
+      "files": [
+        {
+          "path": ".opencode/skills/design-system/data/slide-backgrounds.csv",
+          "language": "csv",
+          "sizeLines": 11,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design-system/data/slide-charts.csv",
+          "language": "csv",
+          "sizeLines": 26,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design-system/data/slide-color-logic.csv",
+          "language": "csv",
+          "sizeLines": 14,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design-system/data/slide-copy.csv",
+          "language": "csv",
+          "sizeLines": 26,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design-system/data/slide-layout-logic.csv",
+          "language": "csv",
+          "sizeLines": 16,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design-system/data/slide-layouts.csv",
+          "language": "csv",
+          "sizeLines": 26,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design-system/data/slide-strategies.csv",
+          "language": "csv",
+          "sizeLines": 16,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design-system/data/slide-typography.csv",
+          "language": "csv",
+          "sizeLines": 15,
+          "fileCategory": "data"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/design-system/data/slide-backgrounds.csv": [],
+        ".opencode/skills/design-system/data/slide-charts.csv": [],
+        ".opencode/skills/design-system/data/slide-color-logic.csv": [],
+        ".opencode/skills/design-system/data/slide-copy.csv": [],
+        ".opencode/skills/design-system/data/slide-layout-logic.csv": [],
+        ".opencode/skills/design-system/data/slide-layouts.csv": [],
+        ".opencode/skills/design-system/data/slide-strategies.csv": [],
+        ".opencode/skills/design-system/data/slide-typography.csv": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 6,
+      "files": [
+        {
+          "path": ".opencode/skills/design-system/references/component-specs.md",
+          "language": "markdown",
+          "sizeLines": 236,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design-system/references/component-tokens.md",
+          "language": "markdown",
+          "sizeLines": 214,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design-system/references/primitive-tokens.md",
+          "language": "markdown",
+          "sizeLines": 203,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design-system/references/semantic-tokens.md",
+          "language": "markdown",
+          "sizeLines": 215,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design-system/references/states-and-variants.md",
+          "language": "markdown",
+          "sizeLines": 241,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design-system/references/tailwind-integration.md",
+          "language": "markdown",
+          "sizeLines": 251,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design-system/references/token-architecture.md",
+          "language": "markdown",
+          "sizeLines": 224,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/design-system/references/component-specs.md": [],
+        ".opencode/skills/design-system/references/component-tokens.md": [],
+        ".opencode/skills/design-system/references/primitive-tokens.md": [],
+        ".opencode/skills/design-system/references/semantic-tokens.md": [],
+        ".opencode/skills/design-system/references/states-and-variants.md": [],
+        ".opencode/skills/design-system/references/tailwind-integration.md": [],
+        ".opencode/skills/design-system/references/token-architecture.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 7,
+      "files": [
+        {
+          "path": ".opencode/skills/design/data/cip/deliverables.csv",
+          "language": "csv",
+          "sizeLines": 50,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design/data/cip/industries.csv",
+          "language": "csv",
+          "sizeLines": 20,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design/data/cip/mockup-contexts.csv",
+          "language": "csv",
+          "sizeLines": 20,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design/data/cip/styles.csv",
+          "language": "csv",
+          "sizeLines": 20,
+          "fileCategory": "data"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/design/data/cip/deliverables.csv": [],
+        ".opencode/skills/design/data/cip/industries.csv": [],
+        ".opencode/skills/design/data/cip/mockup-contexts.csv": [],
+        ".opencode/skills/design/data/cip/styles.csv": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 8,
+      "files": [
+        {
+          "path": ".opencode/skills/design/data/logo/colors.csv",
+          "language": "csv",
+          "sizeLines": 56,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design/data/logo/industries.csv",
+          "language": "csv",
+          "sizeLines": 56,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/design/data/logo/styles.csv",
+          "language": "csv",
+          "sizeLines": 56,
+          "fileCategory": "data"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/design/data/logo/colors.csv": [],
+        ".opencode/skills/design/data/logo/industries.csv": [],
+        ".opencode/skills/design/data/logo/styles.csv": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 9,
+      "files": [
+        {
+          "path": ".opencode/skills/design/references/banner-sizes-and-styles.md",
+          "language": "markdown",
+          "sizeLines": 118,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/cip-deliverable-guide.md",
+          "language": "markdown",
+          "sizeLines": 95,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/cip-design.md",
+          "language": "markdown",
+          "sizeLines": 121,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/cip-prompt-engineering.md",
+          "language": "markdown",
+          "sizeLines": 84,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/cip-style-guide.md",
+          "language": "markdown",
+          "sizeLines": 68,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/design-routing.md",
+          "language": "markdown",
+          "sizeLines": 207,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/icon-design.md",
+          "language": "markdown",
+          "sizeLines": 122,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/logo-color-psychology.md",
+          "language": "markdown",
+          "sizeLines": 101,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/logo-design.md",
+          "language": "markdown",
+          "sizeLines": 92,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/logo-prompt-engineering.md",
+          "language": "markdown",
+          "sizeLines": 158,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/logo-style-guide.md",
+          "language": "markdown",
+          "sizeLines": 109,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/slides-copywriting-formulas.md",
+          "language": "markdown",
+          "sizeLines": 84,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/slides-create.md",
+          "language": "markdown",
+          "sizeLines": 4,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/slides-html-template.md",
+          "language": "markdown",
+          "sizeLines": 295,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/slides-layout-patterns.md",
+          "language": "markdown",
+          "sizeLines": 137,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/slides-strategies.md",
+          "language": "markdown",
+          "sizeLines": 94,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/slides.md",
+          "language": "markdown",
+          "sizeLines": 42,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/references/social-photos-design.md",
+          "language": "markdown",
+          "sizeLines": 329,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/design/references/banner-sizes-and-styles.md": [],
+        ".opencode/skills/design/references/cip-deliverable-guide.md": [],
+        ".opencode/skills/design/references/cip-design.md": [],
+        ".opencode/skills/design/references/cip-prompt-engineering.md": [],
+        ".opencode/skills/design/references/cip-style-guide.md": [],
+        ".opencode/skills/design/references/design-routing.md": [],
+        ".opencode/skills/design/references/icon-design.md": [],
+        ".opencode/skills/design/references/logo-color-psychology.md": [],
+        ".opencode/skills/design/references/logo-design.md": [],
+        ".opencode/skills/design/references/logo-prompt-engineering.md": [],
+        ".opencode/skills/design/references/logo-style-guide.md": [],
+        ".opencode/skills/design/references/slides-copywriting-formulas.md": [],
+        ".opencode/skills/design/references/slides-create.md": [],
+        ".opencode/skills/design/references/slides-html-template.md": [],
+        ".opencode/skills/design/references/slides-layout-patterns.md": [],
+        ".opencode/skills/design/references/slides-strategies.md": [],
+        ".opencode/skills/design/references/slides.md": [],
+        ".opencode/skills/design/references/social-photos-design.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 10,
+      "files": [
+        {
+          "path": ".opencode/skills/naiveui-practices/references/anti-patterns.md",
+          "language": "markdown",
+          "sizeLines": 282,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/references/best-practices.md",
+          "language": "markdown",
+          "sizeLines": 289,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/references/components.md",
+          "language": "markdown",
+          "sizeLines": 186,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/references/datatable.md",
+          "language": "markdown",
+          "sizeLines": 266,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/references/feedback.md",
+          "language": "markdown",
+          "sizeLines": 265,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/references/form-system.md",
+          "language": "markdown",
+          "sizeLines": 194,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/references/installation.md",
+          "language": "markdown",
+          "sizeLines": 126,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/references/layout.md",
+          "language": "markdown",
+          "sizeLines": 230,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/references/official-documentation.md",
+          "language": "markdown",
+          "sizeLines": 55,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/references/theming.md",
+          "language": "markdown",
+          "sizeLines": 197,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/naiveui-practices/references/anti-patterns.md": [],
+        ".opencode/skills/naiveui-practices/references/best-practices.md": [],
+        ".opencode/skills/naiveui-practices/references/components.md": [],
+        ".opencode/skills/naiveui-practices/references/datatable.md": [],
+        ".opencode/skills/naiveui-practices/references/feedback.md": [],
+        ".opencode/skills/naiveui-practices/references/form-system.md": [],
+        ".opencode/skills/naiveui-practices/references/installation.md": [],
+        ".opencode/skills/naiveui-practices/references/layout.md": [],
+        ".opencode/skills/naiveui-practices/references/official-documentation.md": [],
+        ".opencode/skills/naiveui-practices/references/theming.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 11,
+      "files": [
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/anti-patterns.md",
+          "language": "markdown",
+          "sizeLines": 184,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/best-practices.md",
+          "language": "markdown",
+          "sizeLines": 87,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/configuration.md",
+          "language": "markdown",
+          "sizeLines": 123,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/data-fetching.md",
+          "language": "markdown",
+          "sizeLines": 125,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/error-handling.md",
+          "language": "markdown",
+          "sizeLines": 97,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/folder-structure.md",
+          "language": "markdown",
+          "sizeLines": 66,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/installation.md",
+          "language": "markdown",
+          "sizeLines": 53,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/official-documentation.md",
+          "language": "markdown",
+          "sizeLines": 47,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/routing.md",
+          "language": "markdown",
+          "sizeLines": 114,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/server.md",
+          "language": "markdown",
+          "sizeLines": 94,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/state-management.md",
+          "language": "markdown",
+          "sizeLines": 90,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/styling.md",
+          "language": "markdown",
+          "sizeLines": 153,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/references/views.md",
+          "language": "markdown",
+          "sizeLines": 87,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/nuxt-base-practices/references/anti-patterns.md": [],
+        ".opencode/skills/nuxt-base-practices/references/best-practices.md": [],
+        ".opencode/skills/nuxt-base-practices/references/configuration.md": [],
+        ".opencode/skills/nuxt-base-practices/references/data-fetching.md": [],
+        ".opencode/skills/nuxt-base-practices/references/error-handling.md": [],
+        ".opencode/skills/nuxt-base-practices/references/folder-structure.md": [],
+        ".opencode/skills/nuxt-base-practices/references/installation.md": [],
+        ".opencode/skills/nuxt-base-practices/references/official-documentation.md": [],
+        ".opencode/skills/nuxt-base-practices/references/routing.md": [],
+        ".opencode/skills/nuxt-base-practices/references/server.md": [],
+        ".opencode/skills/nuxt-base-practices/references/state-management.md": [],
+        ".opencode/skills/nuxt-base-practices/references/styling.md": [],
+        ".opencode/skills/nuxt-base-practices/references/views.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 12,
+      "files": [
+        {
+          "path": ".opencode/skills/slides/references/copywriting-formulas.md",
+          "language": "markdown",
+          "sizeLines": 84,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/slides/references/create.md",
+          "language": "markdown",
+          "sizeLines": 4,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/slides/references/html-template.md",
+          "language": "markdown",
+          "sizeLines": 295,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/slides/references/layout-patterns.md",
+          "language": "markdown",
+          "sizeLines": 137,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/slides/references/slide-strategies.md",
+          "language": "markdown",
+          "sizeLines": 94,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/slides/references/copywriting-formulas.md": [],
+        ".opencode/skills/slides/references/create.md": [],
+        ".opencode/skills/slides/references/html-template.md": [],
+        ".opencode/skills/slides/references/layout-patterns.md": [],
+        ".opencode/skills/slides/references/slide-strategies.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 13,
+      "files": [
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/anti-patterns.md",
+          "language": "markdown",
+          "sizeLines": 179,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/best-practices.md",
+          "language": "markdown",
+          "sizeLines": 131,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/colors.md",
+          "language": "markdown",
+          "sizeLines": 82,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/custom-styles.md",
+          "language": "markdown",
+          "sizeLines": 151,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/dark-mode.md",
+          "language": "markdown",
+          "sizeLines": 71,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/installation.md",
+          "language": "markdown",
+          "sizeLines": 47,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/nuxt-integration.md",
+          "language": "markdown",
+          "sizeLines": 117,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/official-docs.md",
+          "language": "markdown",
+          "sizeLines": 48,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/responsive-design.md",
+          "language": "markdown",
+          "sizeLines": 68,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/theme.md",
+          "language": "markdown",
+          "sizeLines": 107,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/references/utility-classes.md",
+          "language": "markdown",
+          "sizeLines": 90,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/tailwind-base-practices/references/anti-patterns.md": [],
+        ".opencode/skills/tailwind-base-practices/references/best-practices.md": [],
+        ".opencode/skills/tailwind-base-practices/references/colors.md": [],
+        ".opencode/skills/tailwind-base-practices/references/custom-styles.md": [],
+        ".opencode/skills/tailwind-base-practices/references/dark-mode.md": [],
+        ".opencode/skills/tailwind-base-practices/references/installation.md": [],
+        ".opencode/skills/tailwind-base-practices/references/nuxt-integration.md": [],
+        ".opencode/skills/tailwind-base-practices/references/official-docs.md": [],
+        ".opencode/skills/tailwind-base-practices/references/responsive-design.md": [],
+        ".opencode/skills/tailwind-base-practices/references/theme.md": [],
+        ".opencode/skills/tailwind-base-practices/references/utility-classes.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 14,
+      "files": [
+        {
+          "path": ".opencode/skills/test-base-practices/references/anti-patterns.md",
+          "language": "markdown",
+          "sizeLines": 162,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/best-practices.md",
+          "language": "markdown",
+          "sizeLines": 159,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/ci-cd.md",
+          "language": "markdown",
+          "sizeLines": 109,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/common-patterns.md",
+          "language": "markdown",
+          "sizeLines": 140,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/component-testing.md",
+          "language": "markdown",
+          "sizeLines": 181,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/configuration.md",
+          "language": "markdown",
+          "sizeLines": 131,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/debugging.md",
+          "language": "markdown",
+          "sizeLines": 113,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/e2e-testing.md",
+          "language": "markdown",
+          "sizeLines": 131,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/installation.md",
+          "language": "markdown",
+          "sizeLines": 111,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/official-documentation.md",
+          "language": "markdown",
+          "sizeLines": 47,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/page-object-models.md",
+          "language": "markdown",
+          "sizeLines": 122,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/playwright-actions.md",
+          "language": "markdown",
+          "sizeLines": 115,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/playwright-assertions.md",
+          "language": "markdown",
+          "sizeLines": 91,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/playwright-fixtures.md",
+          "language": "markdown",
+          "sizeLines": 121,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/playwright-locators.md",
+          "language": "markdown",
+          "sizeLines": 114,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/test-isolation.md",
+          "language": "markdown",
+          "sizeLines": 112,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/references/unit-testing.md",
+          "language": "markdown",
+          "sizeLines": 62,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/test-base-practices/references/anti-patterns.md": [],
+        ".opencode/skills/test-base-practices/references/best-practices.md": [],
+        ".opencode/skills/test-base-practices/references/ci-cd.md": [],
+        ".opencode/skills/test-base-practices/references/common-patterns.md": [],
+        ".opencode/skills/test-base-practices/references/component-testing.md": [],
+        ".opencode/skills/test-base-practices/references/configuration.md": [],
+        ".opencode/skills/test-base-practices/references/debugging.md": [],
+        ".opencode/skills/test-base-practices/references/e2e-testing.md": [],
+        ".opencode/skills/test-base-practices/references/installation.md": [],
+        ".opencode/skills/test-base-practices/references/official-documentation.md": [],
+        ".opencode/skills/test-base-practices/references/page-object-models.md": [],
+        ".opencode/skills/test-base-practices/references/playwright-actions.md": [],
+        ".opencode/skills/test-base-practices/references/playwright-assertions.md": [],
+        ".opencode/skills/test-base-practices/references/playwright-fixtures.md": [],
+        ".opencode/skills/test-base-practices/references/playwright-locators.md": [],
+        ".opencode/skills/test-base-practices/references/test-isolation.md": [],
+        ".opencode/skills/test-base-practices/references/unit-testing.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 15,
+      "files": [
+        {
+          "path": ".opencode/skills/ui-styling/references/canvas-design-system.md",
+          "language": "markdown",
+          "sizeLines": 320,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/references/shadcn-accessibility.md",
+          "language": "markdown",
+          "sizeLines": 471,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/references/shadcn-components.md",
+          "language": "markdown",
+          "sizeLines": 424,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/references/shadcn-theming.md",
+          "language": "markdown",
+          "sizeLines": 373,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/references/tailwind-customization.md",
+          "language": "markdown",
+          "sizeLines": 483,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/references/tailwind-responsive.md",
+          "language": "markdown",
+          "sizeLines": 382,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/references/tailwind-utilities.md",
+          "language": "markdown",
+          "sizeLines": 455,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/ui-styling/references/canvas-design-system.md": [],
+        ".opencode/skills/ui-styling/references/shadcn-accessibility.md": [],
+        ".opencode/skills/ui-styling/references/shadcn-components.md": [],
+        ".opencode/skills/ui-styling/references/shadcn-theming.md": [],
+        ".opencode/skills/ui-styling/references/tailwind-customization.md": [],
+        ".opencode/skills/ui-styling/references/tailwind-responsive.md": [],
+        ".opencode/skills/ui-styling/references/tailwind-utilities.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 16,
+      "files": [
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/app-interface.csv",
+          "language": "csv",
+          "sizeLines": 33,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/catalog-summary.json",
+          "language": "json",
+          "sizeLines": 78,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/charts.csv",
+          "language": "csv",
+          "sizeLines": 26,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/colors.csv",
+          "language": "csv",
+          "sizeLines": 193,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/data-provenance.json",
+          "language": "json",
+          "sizeLines": 1348,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/google-font-licenses.json",
+          "language": "json",
+          "sizeLines": 20185,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/google-fonts.csv",
+          "language": "csv",
+          "sizeLines": 1935,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/icons.csv",
+          "language": "csv",
+          "sizeLines": 106,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/landing.csv",
+          "language": "csv",
+          "sizeLines": 35,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/motion.csv",
+          "language": "csv",
+          "sizeLines": 18,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/phosphor-icons-upstream.json",
+          "language": "json",
+          "sizeLines": 32582,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/products.csv",
+          "language": "csv",
+          "sizeLines": 193,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/react-performance.csv",
+          "language": "csv",
+          "sizeLines": 45,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/styles.csv",
+          "language": "csv",
+          "sizeLines": 89,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/typography.csv",
+          "language": "csv",
+          "sizeLines": 75,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/ui-reasoning.csv",
+          "language": "csv",
+          "sizeLines": 193,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/ux-guidelines.csv",
+          "language": "csv",
+          "sizeLines": 120,
+          "fileCategory": "data"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/ui-ux-pro-max/data/app-interface.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/catalog-summary.json": [],
+        ".opencode/skills/ui-ux-pro-max/data/charts.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/colors.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/data-provenance.json": [],
+        ".opencode/skills/ui-ux-pro-max/data/google-font-licenses.json": [],
+        ".opencode/skills/ui-ux-pro-max/data/google-fonts.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/icons.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/landing.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/motion.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/phosphor-icons-upstream.json": [],
+        ".opencode/skills/ui-ux-pro-max/data/products.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/react-performance.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/styles.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/typography.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/ui-reasoning.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/ux-guidelines.csv": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 17,
+      "files": [
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/angular.csv",
+          "language": "csv",
+          "sizeLines": 51,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/astro.csv",
+          "language": "csv",
+          "sizeLines": 54,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv",
+          "language": "csv",
+          "sizeLines": 57,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/flutter.csv",
+          "language": "csv",
+          "sizeLines": 53,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv",
+          "language": "csv",
+          "sizeLines": 60,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/javafx.csv",
+          "language": "csv",
+          "sizeLines": 76,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv",
+          "language": "csv",
+          "sizeLines": 53,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/laravel.csv",
+          "language": "csv",
+          "sizeLines": 51,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv",
+          "language": "csv",
+          "sizeLines": 62,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv",
+          "language": "csv",
+          "sizeLines": 71,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv",
+          "language": "csv",
+          "sizeLines": 68,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv",
+          "language": "csv",
+          "sizeLines": 52,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/react.csv",
+          "language": "csv",
+          "sizeLines": 62,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv",
+          "language": "csv",
+          "sizeLines": 69,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv",
+          "language": "csv",
+          "sizeLines": 56,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/swiftui.csv",
+          "language": "csv",
+          "sizeLines": 51,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv",
+          "language": "csv",
+          "sizeLines": 54,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/uno.csv",
+          "language": "csv",
+          "sizeLines": 60,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv",
+          "language": "csv",
+          "sizeLines": 56,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/vue.csv",
+          "language": "csv",
+          "sizeLines": 50,
+          "fileCategory": "data"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/ui-ux-pro-max/data/stacks/angular.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/astro.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/avalonia.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/flutter.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/javafx.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/jetpack-compose.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/laravel.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/nextjs.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/nuxt-ui.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/nuxtjs.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/react-native.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/react.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/shadcn.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/svelte.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/swiftui.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/threejs.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/uno.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/uwp.csv": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/vue.csv": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 18,
+      "files": [
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-api.json",
+          "language": "json",
+          "sizeLines": 36,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-catalog.json",
+          "language": "json",
+          "sizeLines": 33,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-existing.csv",
+          "language": "csv",
+          "sizeLines": 3,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-metadata.json",
+          "language": "json",
+          "sizeLines": 17,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-overrides.json",
+          "language": "json",
+          "sizeLines": 7,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/icons-curated.csv",
+          "language": "csv",
+          "sizeLines": 4,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-core.json",
+          "language": "json",
+          "sizeLines": 23,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-package.json",
+          "language": "json",
+          "sizeLines": 13,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-exports.json",
+          "language": "json",
+          "sizeLines": 4,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-package.json",
+          "language": "json",
+          "sizeLines": 5,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-api.json": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-catalog.json": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-existing.csv": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-metadata.json": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/google-overrides.json": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/icons-curated.csv": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-core.json": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-package.json": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-exports.json": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/catalogs/phosphor-react-package.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 19,
+      "files": [
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-baseline.json",
+          "language": "json",
+          "sizeLines": 3366,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-cases.json",
+          "language": "json",
+          "sizeLines": 111,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-thresholds.json",
+          "language": "json",
+          "sizeLines": 100,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-baseline.json": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-cases.json": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/fixtures/relevance-thresholds.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 20,
+      "files": [
+        {
+          "path": ".opencode/skills/vue-best-practices/references/animation-class-based-technique.md",
+          "language": "markdown",
+          "sizeLines": 254,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/animation-state-driven-technique.md",
+          "language": "markdown",
+          "sizeLines": 291,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/component-async.md",
+          "language": "markdown",
+          "sizeLines": 97,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/component-data-flow.md",
+          "language": "markdown",
+          "sizeLines": 307,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/component-fallthrough-attrs.md",
+          "language": "markdown",
+          "sizeLines": 174,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/component-keep-alive.md",
+          "language": "markdown",
+          "sizeLines": 137,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/component-slots.md",
+          "language": "markdown",
+          "sizeLines": 216,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/component-suspense.md",
+          "language": "markdown",
+          "sizeLines": 228,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/component-teleport.md",
+          "language": "markdown",
+          "sizeLines": 108,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/component-transition-group.md",
+          "language": "markdown",
+          "sizeLines": 128,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/component-transition.md",
+          "language": "markdown",
+          "sizeLines": 125,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/composables.md",
+          "language": "markdown",
+          "sizeLines": 290,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/directives.md",
+          "language": "markdown",
+          "sizeLines": 162,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/perf-avoid-component-abstraction-in-lists.md",
+          "language": "markdown",
+          "sizeLines": 159,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/perf-v-once-v-memo-directives.md",
+          "language": "markdown",
+          "sizeLines": 182,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/perf-virtualize-large-lists.md",
+          "language": "markdown",
+          "sizeLines": 187,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/plugins.md",
+          "language": "markdown",
+          "sizeLines": 166,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/reactivity.md",
+          "language": "markdown",
+          "sizeLines": 344,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/render-functions.md",
+          "language": "markdown",
+          "sizeLines": 201,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/sfc.md",
+          "language": "markdown",
+          "sizeLines": 310,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/vue-best-practices/references/animation-class-based-technique.md": [],
+        ".opencode/skills/vue-best-practices/references/animation-state-driven-technique.md": [],
+        ".opencode/skills/vue-best-practices/references/component-async.md": [],
+        ".opencode/skills/vue-best-practices/references/component-data-flow.md": [],
+        ".opencode/skills/vue-best-practices/references/component-fallthrough-attrs.md": [],
+        ".opencode/skills/vue-best-practices/references/component-keep-alive.md": [],
+        ".opencode/skills/vue-best-practices/references/component-slots.md": [],
+        ".opencode/skills/vue-best-practices/references/component-suspense.md": [],
+        ".opencode/skills/vue-best-practices/references/component-teleport.md": [],
+        ".opencode/skills/vue-best-practices/references/component-transition-group.md": [],
+        ".opencode/skills/vue-best-practices/references/component-transition.md": [],
+        ".opencode/skills/vue-best-practices/references/composables.md": [],
+        ".opencode/skills/vue-best-practices/references/directives.md": [],
+        ".opencode/skills/vue-best-practices/references/perf-avoid-component-abstraction-in-lists.md": [],
+        ".opencode/skills/vue-best-practices/references/perf-v-once-v-memo-directives.md": [],
+        ".opencode/skills/vue-best-practices/references/perf-virtualize-large-lists.md": [],
+        ".opencode/skills/vue-best-practices/references/plugins.md": [],
+        ".opencode/skills/vue-best-practices/references/reactivity.md": [],
+        ".opencode/skills/vue-best-practices/references/render-functions.md": [],
+        ".opencode/skills/vue-best-practices/references/sfc.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 21,
+      "files": [
+        {
+          "path": "apps/web/README.md",
+          "language": "markdown",
+          "sizeLines": 75,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "apps/web/package.json",
+          "language": "json",
+          "sizeLines": 60,
+          "fileCategory": "config"
+        },
+        {
+          "path": "apps/web/tsconfig.json",
+          "language": "json",
+          "sizeLines": 18,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "apps/web/README.md": [],
+        "apps/web/package.json": [],
+        "apps/web/tsconfig.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 22,
+      "files": [
+        {
+          "path": "apps/web/stories/Configure.mdx",
+          "language": "markdown",
+          "sizeLines": 388,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "apps/web/stories/button.css",
+          "language": "css",
+          "sizeLines": 30,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "apps/web/stories/header.css",
+          "language": "css",
+          "sizeLines": 32,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "apps/web/stories/page.css",
+          "language": "css",
+          "sizeLines": 68,
+          "fileCategory": "markup"
+        }
+      ],
+      "batchImportData": {
+        "apps/web/stories/Configure.mdx": [],
+        "apps/web/stories/button.css": [],
+        "apps/web/stories/header.css": [],
+        "apps/web/stories/page.css": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 23,
+      "files": [
+        {
+          "path": "docs/PRD.md",
+          "language": "markdown",
+          "sizeLines": 552,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/architecture.md",
+          "language": "markdown",
+          "sizeLines": 662,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/database.md",
+          "language": "markdown",
+          "sizeLines": 413,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "docs/design-system.md",
+          "language": "markdown",
+          "sizeLines": 813,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "docs/PRD.md": [],
+        "docs/architecture.md": [],
+        "docs/database.md": [],
+        "docs/design-system.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 24,
+      "files": [
+        {
+          "path": "tasks/01-migrate-admin-panel-to-nuxt.md",
+          "language": "markdown",
+          "sizeLines": 964,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "tasks/02-fix-nuxt-dev-errors.md",
+          "language": "markdown",
+          "sizeLines": 347,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "tasks/03-fix-auth-response-mismatch.md",
+          "language": "markdown",
+          "sizeLines": 241,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "tasks/04-testing-and-quality-infrastructure.md",
+          "language": "markdown",
+          "sizeLines": 612,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "tasks/05-auth-fix.md",
+          "language": "markdown",
+          "sizeLines": 303,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "tasks/fix-logging-system.md",
+          "language": "markdown",
+          "sizeLines": 214,
+          "fileCategory": "docs"
+        }
+      ],
+      "batchImportData": {
+        "tasks/01-migrate-admin-panel-to-nuxt.md": [],
+        "tasks/02-fix-nuxt-dev-errors.md": [],
+        "tasks/03-fix-auth-response-mismatch.md": [],
+        "tasks/04-testing-and-quality-infrastructure.md": [],
+        "tasks/05-auth-fix.md": [],
+        "tasks/fix-logging-system.md": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 25,
+      "files": [
+        {
+          "path": ".opencode/skills/animejs-base-practices/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 214,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/banner-design/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 196,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/banner-design/references/banner-sizes-and-styles.md",
+          "language": "markdown",
+          "sizeLines": 118,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 97,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/brand/scripts/extract-colors.cjs",
+          "language": "javascript",
+          "sizeLines": 341,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/brand/scripts/inject-brand-context.cjs",
+          "language": "javascript",
+          "sizeLines": 349,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/brand/scripts/sync-brand-to-tokens.cjs",
+          "language": "javascript",
+          "sizeLines": 248,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/brand/scripts/tests/test_sync_brand_to_tokens.py",
+          "language": "python",
+          "sizeLines": 52,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/brand/scripts/validate-asset.cjs",
+          "language": "javascript",
+          "sizeLines": 387,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/brand/templates/brand-guidelines-starter.md",
+          "language": "markdown",
+          "sizeLines": 275,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/crawlee-scraper-skill/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 60,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design-system/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 244,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/embed-tokens.cjs",
+          "language": "javascript",
+          "sizeLines": 99,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/fetch-background.py",
+          "language": "python",
+          "sizeLines": 317,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/generate-slide.py",
+          "language": "python",
+          "sizeLines": 770,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/generate-tokens.cjs",
+          "language": "javascript",
+          "sizeLines": 205,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/html-token-validator.py",
+          "language": "python",
+          "sizeLines": 327,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/search-slides.py",
+          "language": "python",
+          "sizeLines": 218,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/slide-token-validator.py",
+          "language": "python",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/slide_search_core.py",
+          "language": "python",
+          "sizeLines": 453,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/tests/test_validate_tokens.py",
+          "language": "python",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/scripts/validate-tokens.cjs",
+          "language": "javascript",
+          "sizeLines": 246,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design-system/templates/design-tokens-starter.json",
+          "language": "json",
+          "sizeLines": 143,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/design/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 313,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/design/data/icon/styles.csv",
+          "language": "csv",
+          "sizeLines": 16,
+          "fileCategory": "data"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/animejs-base-practices/SKILL.md": [],
+        ".opencode/skills/banner-design/SKILL.md": [],
+        ".opencode/skills/banner-design/references/banner-sizes-and-styles.md": [],
+        ".opencode/skills/brand/SKILL.md": [],
+        ".opencode/skills/brand/scripts/extract-colors.cjs": [],
+        ".opencode/skills/brand/scripts/inject-brand-context.cjs": [],
+        ".opencode/skills/brand/scripts/sync-brand-to-tokens.cjs": [],
+        ".opencode/skills/brand/scripts/tests/test_sync_brand_to_tokens.py": [],
+        ".opencode/skills/brand/scripts/validate-asset.cjs": [],
+        ".opencode/skills/brand/templates/brand-guidelines-starter.md": [],
+        ".opencode/skills/crawlee-scraper-skill/SKILL.md": [],
+        ".opencode/skills/design-system/SKILL.md": [],
+        ".opencode/skills/design-system/scripts/embed-tokens.cjs": [],
+        ".opencode/skills/design-system/scripts/fetch-background.py": [],
+        ".opencode/skills/design-system/scripts/generate-slide.py": [],
+        ".opencode/skills/design-system/scripts/generate-tokens.cjs": [],
+        ".opencode/skills/design-system/scripts/html-token-validator.py": [],
+        ".opencode/skills/design-system/scripts/search-slides.py": [],
+        ".opencode/skills/design-system/scripts/slide-token-validator.py": [],
+        ".opencode/skills/design-system/scripts/slide_search_core.py": [],
+        ".opencode/skills/design-system/scripts/tests/test_validate_tokens.py": [],
+        ".opencode/skills/design-system/scripts/validate-tokens.cjs": [],
+        ".opencode/skills/design-system/templates/design-tokens-starter.json": [],
+        ".opencode/skills/design/SKILL.md": [],
+        ".opencode/skills/design/data/icon/styles.csv": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 26,
+      "files": [
+        {
+          "path": ".opencode/skills/design/scripts/cip/core.py",
+          "language": "python",
+          "sizeLines": 215,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design/scripts/cip/generate.py",
+          "language": "python",
+          "sizeLines": 484,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design/scripts/cip/render-html.py",
+          "language": "python",
+          "sizeLines": 424,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design/scripts/cip/search.py",
+          "language": "python",
+          "sizeLines": 127,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design/scripts/icon/generate.py",
+          "language": "python",
+          "sizeLines": 487,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design/scripts/logo/core.py",
+          "language": "python",
+          "sizeLines": 175,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design/scripts/logo/generate.py",
+          "language": "python",
+          "sizeLines": 362,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/design/scripts/logo/search.py",
+          "language": "python",
+          "sizeLines": 114,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/naiveui-practices/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 173,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/nuxt-base-practices/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 186,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/permanent-knowledge/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 865,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/slides/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 40,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/tailwind-base-practices/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 180,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/test-base-practices/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 263,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/LICENSE.txt",
+          "language": "txt",
+          "sizeLines": 201,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 324,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/scripts/requirements.txt",
+          "language": "txt",
+          "sizeLines": 17,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/scripts/shadcn_add.py",
+          "language": "python",
+          "sizeLines": 308,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/scripts/tailwind_config_gen.py",
+          "language": "python",
+          "sizeLines": 473,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/scripts/tests/coverage-ui.json",
+          "language": "json",
+          "sizeLines": 0,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/scripts/tests/requirements.txt",
+          "language": "txt",
+          "sizeLines": 3,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/scripts/tests/test_shadcn_add.py",
+          "language": "python",
+          "sizeLines": 266,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py",
+          "language": "python",
+          "sizeLines": 394,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 425,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/winui.csv",
+          "language": "csv",
+          "sizeLines": 60,
+          "fileCategory": "data"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/design/scripts/cip/core.py": [],
+        ".opencode/skills/design/scripts/cip/generate.py": [],
+        ".opencode/skills/design/scripts/cip/render-html.py": [],
+        ".opencode/skills/design/scripts/cip/search.py": [],
+        ".opencode/skills/design/scripts/icon/generate.py": [],
+        ".opencode/skills/design/scripts/logo/core.py": [],
+        ".opencode/skills/design/scripts/logo/generate.py": [],
+        ".opencode/skills/design/scripts/logo/search.py": [],
+        ".opencode/skills/naiveui-practices/SKILL.md": [],
+        ".opencode/skills/nuxt-base-practices/SKILL.md": [],
+        ".opencode/skills/permanent-knowledge/SKILL.md": [],
+        ".opencode/skills/slides/SKILL.md": [],
+        ".opencode/skills/tailwind-base-practices/SKILL.md": [],
+        ".opencode/skills/test-base-practices/SKILL.md": [],
+        ".opencode/skills/ui-styling/LICENSE.txt": [],
+        ".opencode/skills/ui-styling/SKILL.md": [],
+        ".opencode/skills/ui-styling/scripts/requirements.txt": [],
+        ".opencode/skills/ui-styling/scripts/shadcn_add.py": [],
+        ".opencode/skills/ui-styling/scripts/tailwind_config_gen.py": [],
+        ".opencode/skills/ui-styling/scripts/tests/coverage-ui.json": [],
+        ".opencode/skills/ui-styling/scripts/tests/requirements.txt": [],
+        ".opencode/skills/ui-styling/scripts/tests/test_shadcn_add.py": [],
+        ".opencode/skills/ui-styling/scripts/tests/test_tailwind_config_gen.py": [],
+        ".opencode/skills/ui-ux-pro-max/SKILL.md": [],
+        ".opencode/skills/ui-ux-pro-max/data/stacks/winui.csv": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 27,
+      "files": [
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/data/stacks/wpf.csv",
+          "language": "csv",
+          "sizeLines": 57,
+          "fileCategory": "data"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/core.py",
+          "language": "python",
+          "sizeLines": 993,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/design_system.py",
+          "language": "python",
+          "sizeLines": 1643,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py",
+          "language": "python",
+          "sizeLines": 123,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/search.py",
+          "language": "python",
+          "sizeLines": 171,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py",
+          "language": "python",
+          "sizeLines": 354,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_core.py",
+          "language": "python",
+          "sizeLines": 343,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_core_data_quality.py",
+          "language": "python",
+          "sizeLines": 198,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+          "language": "python",
+          "sizeLines": 421,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+          "language": "python",
+          "sizeLines": 189,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_native_desktop_stack_freshness.py",
+          "language": "python",
+          "sizeLines": 176,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py",
+          "language": "python",
+          "sizeLines": 182,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py",
+          "language": "python",
+          "sizeLines": 175,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_text_layout_resilience.py",
+          "language": "python",
+          "sizeLines": 120,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/tests/test_web_stack_freshness.py",
+          "language": "python",
+          "sizeLines": 177,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/ui-ux-pro-max/scripts/validate_data.py",
+          "language": "python",
+          "sizeLines": 1091,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/SKILL.md",
+          "language": "markdown",
+          "sizeLines": 154,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/state-management.md",
+          "language": "markdown",
+          "sizeLines": 135,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".opencode/skills/vue-best-practices/references/updated-hook-performance.md",
+          "language": "markdown",
+          "sizeLines": 187,
+          "fileCategory": "docs"
+        },
+        {
+          "path": ".ua/.understandignore",
+          "language": "unknown",
+          "sizeLines": 63,
+          "fileCategory": "code"
+        },
+        {
+          "path": "AGENTS.md",
+          "language": "markdown",
+          "sizeLines": 477,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "apps/web/.nuxtrc",
+          "language": "unknown",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/.storybook/main.ts",
+          "language": "typescript",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/.storybook/preview.ts",
+          "language": "typescript",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/app.vue",
+          "language": "vue",
+          "sizeLines": 7,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        ".opencode/skills/ui-ux-pro-max/data/stacks/wpf.csv": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/core.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/design_system.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/reasoning_contract.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/search.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_catalog_refresh.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_core.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_core_data_quality.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_native_desktop_stack_freshness.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_relevance_evaluator.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_style_taxonomy.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_text_layout_resilience.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/tests/test_web_stack_freshness.py": [],
+        ".opencode/skills/ui-ux-pro-max/scripts/validate_data.py": [],
+        ".opencode/skills/vue-best-practices/SKILL.md": [],
+        ".opencode/skills/vue-best-practices/references/state-management.md": [],
+        ".opencode/skills/vue-best-practices/references/updated-hook-performance.md": [],
+        ".ua/.understandignore": [],
+        "AGENTS.md": [],
+        "apps/web/.nuxtrc": [],
+        "apps/web/.storybook/main.ts": [],
+        "apps/web/.storybook/preview.ts": [],
+        "apps/web/app/app.vue": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 28,
+      "files": [
+        {
+          "path": "apps/web/app/assets/css/animations.css",
+          "language": "css",
+          "sizeLines": 157,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "apps/web/app/assets/css/main.css",
+          "language": "css",
+          "sizeLines": 68,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "apps/web/app/components/base/Button/Button.vue",
+          "language": "vue",
+          "sizeLines": 34,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/common/AccessDeniedAlert.vue",
+          "language": "vue",
+          "sizeLines": 73,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/common/AppTransition.vue",
+          "language": "vue",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/common/AuthForm/AuthForm.vue",
+          "language": "vue",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/common/DataTable/DataTable.vue",
+          "language": "vue",
+          "sizeLines": 222,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/common/FormField/FormField.vue",
+          "language": "vue",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/logging/CodeLinkButton.vue",
+          "language": "vue",
+          "sizeLines": 52,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/logging/LogDetailDrawer.vue",
+          "language": "vue",
+          "sizeLines": 175,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/logging/LogLevelBadge.vue",
+          "language": "vue",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/logging/index.ts",
+          "language": "typescript",
+          "sizeLines": 3,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/GuardDetailDrawer.vue",
+          "language": "vue",
+          "sizeLines": 140,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/GuardFormModal.vue",
+          "language": "vue",
+          "sizeLines": 114,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/GuardTable.vue",
+          "language": "vue",
+          "sizeLines": 151,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/PermissionDetailDrawer.vue",
+          "language": "vue",
+          "sizeLines": 140,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/PermissionFormModal.vue",
+          "language": "vue",
+          "sizeLines": 130,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/PermissionTable.vue",
+          "language": "vue",
+          "sizeLines": 149,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/RoleDetailDrawer.vue",
+          "language": "vue",
+          "sizeLines": 140,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/RoleFormModal.vue",
+          "language": "vue",
+          "sizeLines": 139,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/RoleTable.vue",
+          "language": "vue",
+          "sizeLines": 149,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/UserDetailDrawer.vue",
+          "language": "vue",
+          "sizeLines": 138,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/UserFormModal.vue",
+          "language": "vue",
+          "sizeLines": 161,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/UserTable.vue",
+          "language": "vue",
+          "sizeLines": 141,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/components/features/users/index.ts",
+          "language": "typescript",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "apps/web/app/assets/css/animations.css": [],
+        "apps/web/app/assets/css/main.css": [],
+        "apps/web/app/components/base/Button/Button.vue": [],
+        "apps/web/app/components/common/AccessDeniedAlert.vue": [],
+        "apps/web/app/components/common/AppTransition.vue": [],
+        "apps/web/app/components/common/AuthForm/AuthForm.vue": [],
+        "apps/web/app/components/common/DataTable/DataTable.vue": [],
+        "apps/web/app/components/common/FormField/FormField.vue": [],
+        "apps/web/app/components/features/logging/CodeLinkButton.vue": [],
+        "apps/web/app/components/features/logging/LogDetailDrawer.vue": [],
+        "apps/web/app/components/features/logging/LogLevelBadge.vue": [],
+        "apps/web/app/components/features/logging/index.ts": [],
+        "apps/web/app/components/features/users/GuardDetailDrawer.vue": [],
+        "apps/web/app/components/features/users/GuardFormModal.vue": [],
+        "apps/web/app/components/features/users/GuardTable.vue": [],
+        "apps/web/app/components/features/users/PermissionDetailDrawer.vue": [],
+        "apps/web/app/components/features/users/PermissionFormModal.vue": [],
+        "apps/web/app/components/features/users/PermissionTable.vue": [],
+        "apps/web/app/components/features/users/RoleDetailDrawer.vue": [],
+        "apps/web/app/components/features/users/RoleFormModal.vue": [],
+        "apps/web/app/components/features/users/RoleTable.vue": [],
+        "apps/web/app/components/features/users/UserDetailDrawer.vue": [],
+        "apps/web/app/components/features/users/UserFormModal.vue": [],
+        "apps/web/app/components/features/users/UserTable.vue": [],
+        "apps/web/app/components/features/users/index.ts": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 29,
+      "files": [
+        {
+          "path": "apps/web/app/composables/useApi.ts",
+          "language": "typescript",
+          "sizeLines": 37,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/composables/useAuthorization.ts",
+          "language": "typescript",
+          "sizeLines": 69,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/composables/useDataTable.ts",
+          "language": "typescript",
+          "sizeLines": 84,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/composables/useGuardsData.ts",
+          "language": "typescript",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/composables/usePageTransition.ts",
+          "language": "typescript",
+          "sizeLines": 45,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/composables/usePermissionsData.ts",
+          "language": "typescript",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/composables/useRolesData.ts",
+          "language": "typescript",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/composables/useUsersData.ts",
+          "language": "typescript",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/layouts/auth.vue",
+          "language": "vue",
+          "sizeLines": 145,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/layouts/default.vue",
+          "language": "vue",
+          "sizeLines": 260,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/middleware/auth.ts",
+          "language": "typescript",
+          "sizeLines": 62,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/dashboard/activity-logs.vue",
+          "language": "vue",
+          "sizeLines": 400,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/dashboard/guards.vue",
+          "language": "vue",
+          "sizeLines": 51,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/dashboard/index.vue",
+          "language": "vue",
+          "sizeLines": 138,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/dashboard/permissions.vue",
+          "language": "vue",
+          "sizeLines": 51,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/dashboard/profile.vue",
+          "language": "vue",
+          "sizeLines": 217,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/dashboard/roles.vue",
+          "language": "vue",
+          "sizeLines": 51,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/dashboard/settings.vue",
+          "language": "vue",
+          "sizeLines": 403,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/dashboard/system-logs.vue",
+          "language": "vue",
+          "sizeLines": 297,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/dashboard/users.vue",
+          "language": "vue",
+          "sizeLines": 51,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/index.vue",
+          "language": "vue",
+          "sizeLines": 3,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/login.vue",
+          "language": "vue",
+          "sizeLines": 108,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/pages/register.vue",
+          "language": "vue",
+          "sizeLines": 163,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/plugins/animejs.client.ts",
+          "language": "typescript",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/plugins/naiveui-components.ts",
+          "language": "typescript",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "apps/web/app/composables/useApi.ts": [],
+        "apps/web/app/composables/useAuthorization.ts": [],
+        "apps/web/app/composables/useDataTable.ts": [],
+        "apps/web/app/composables/useGuardsData.ts": [],
+        "apps/web/app/composables/usePageTransition.ts": [],
+        "apps/web/app/composables/usePermissionsData.ts": [],
+        "apps/web/app/composables/useRolesData.ts": [],
+        "apps/web/app/composables/useUsersData.ts": [],
+        "apps/web/app/layouts/auth.vue": [],
+        "apps/web/app/layouts/default.vue": [],
+        "apps/web/app/middleware/auth.ts": [],
+        "apps/web/app/pages/dashboard/activity-logs.vue": [],
+        "apps/web/app/pages/dashboard/guards.vue": [],
+        "apps/web/app/pages/dashboard/index.vue": [],
+        "apps/web/app/pages/dashboard/permissions.vue": [],
+        "apps/web/app/pages/dashboard/profile.vue": [],
+        "apps/web/app/pages/dashboard/roles.vue": [],
+        "apps/web/app/pages/dashboard/settings.vue": [],
+        "apps/web/app/pages/dashboard/system-logs.vue": [],
+        "apps/web/app/pages/dashboard/users.vue": [],
+        "apps/web/app/pages/index.vue": [],
+        "apps/web/app/pages/login.vue": [],
+        "apps/web/app/pages/register.vue": [],
+        "apps/web/app/plugins/animejs.client.ts": [],
+        "apps/web/app/plugins/naiveui-components.ts": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 30,
+      "files": [
+        {
+          "path": "apps/web/app/plugins/naiveui.client.ts",
+          "language": "typescript",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/stores/auth.ts",
+          "language": "typescript",
+          "sizeLines": 152,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/stores/guards.ts",
+          "language": "typescript",
+          "sizeLines": 126,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/stores/permissions.ts",
+          "language": "typescript",
+          "sizeLines": 126,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/stores/roles.ts",
+          "language": "typescript",
+          "sizeLines": 126,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/stores/settings.ts",
+          "language": "typescript",
+          "sizeLines": 105,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/stores/users.ts",
+          "language": "typescript",
+          "sizeLines": 126,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/utils/error.ts",
+          "language": "typescript",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/utils/icons.ts",
+          "language": "typescript",
+          "sizeLines": 7,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/utils/naiveui-theme.ts",
+          "language": "typescript",
+          "sizeLines": 74,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/app/utils/url-matcher.ts",
+          "language": "typescript",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/db.sqlite",
+          "language": "sqlite",
+          "sizeLines": 66,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/nuxt.config.ts",
+          "language": "typescript",
+          "sizeLines": 62,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/playwright.config.ts",
+          "language": "typescript",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/activity-logs/[id].get.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/activity-logs/index.get.ts",
+          "language": "typescript",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/activity-logs/stats.get.ts",
+          "language": "typescript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/auth/login.post.ts",
+          "language": "typescript",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/auth/password.patch.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/auth/profile.get.ts",
+          "language": "typescript",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/auth/profile.patch.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/auth/register.post.ts",
+          "language": "typescript",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/guards/[id].delete.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/guards/[id].get.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/guards/[id].put.ts",
+          "language": "typescript",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "apps/web/app/plugins/naiveui.client.ts": [],
+        "apps/web/app/stores/auth.ts": [],
+        "apps/web/app/stores/guards.ts": [],
+        "apps/web/app/stores/permissions.ts": [],
+        "apps/web/app/stores/roles.ts": [],
+        "apps/web/app/stores/settings.ts": [],
+        "apps/web/app/stores/users.ts": [],
+        "apps/web/app/utils/error.ts": [],
+        "apps/web/app/utils/icons.ts": [],
+        "apps/web/app/utils/naiveui-theme.ts": [],
+        "apps/web/app/utils/url-matcher.ts": [],
+        "apps/web/db.sqlite": [],
+        "apps/web/nuxt.config.ts": [],
+        "apps/web/playwright.config.ts": [],
+        "apps/web/server/api/activity-logs/[id].get.ts": [],
+        "apps/web/server/api/activity-logs/index.get.ts": [],
+        "apps/web/server/api/activity-logs/stats.get.ts": [],
+        "apps/web/server/api/auth/login.post.ts": [],
+        "apps/web/server/api/auth/password.patch.ts": [],
+        "apps/web/server/api/auth/profile.get.ts": [],
+        "apps/web/server/api/auth/profile.patch.ts": [],
+        "apps/web/server/api/auth/register.post.ts": [],
+        "apps/web/server/api/guards/[id].delete.ts": [],
+        "apps/web/server/api/guards/[id].get.ts": [],
+        "apps/web/server/api/guards/[id].put.ts": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 31,
+      "files": [
+        {
+          "path": "apps/web/server/api/guards/index.get.ts",
+          "language": "typescript",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/guards/index.post.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/permissions/[id].delete.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/permissions/[id].get.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/permissions/[id].put.ts",
+          "language": "typescript",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/permissions/index.get.ts",
+          "language": "typescript",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/permissions/index.post.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/roles/[id].delete.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/roles/[id].get.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/roles/[id].put.ts",
+          "language": "typescript",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/roles/index.get.ts",
+          "language": "typescript",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/roles/index.post.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/settings/index.get.ts",
+          "language": "typescript",
+          "sizeLines": 6,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/settings/index.put.ts",
+          "language": "typescript",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/settings/upload.post.ts",
+          "language": "typescript",
+          "sizeLines": 23,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/storage/[...path].get.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/system-logs/files/[filename].get.ts",
+          "language": "typescript",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/system-logs/files/index.get.ts",
+          "language": "typescript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/system-logs/stats/[filename].get.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/users/[id].delete.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/users/[id].get.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/users/[id].put.ts",
+          "language": "typescript",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/users/index.get.ts",
+          "language": "typescript",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/api/users/index.post.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/dto/activity-logs.dto.ts",
+          "language": "typescript",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "apps/web/server/api/guards/index.get.ts": [],
+        "apps/web/server/api/guards/index.post.ts": [],
+        "apps/web/server/api/permissions/[id].delete.ts": [],
+        "apps/web/server/api/permissions/[id].get.ts": [],
+        "apps/web/server/api/permissions/[id].put.ts": [],
+        "apps/web/server/api/permissions/index.get.ts": [],
+        "apps/web/server/api/permissions/index.post.ts": [],
+        "apps/web/server/api/roles/[id].delete.ts": [],
+        "apps/web/server/api/roles/[id].get.ts": [],
+        "apps/web/server/api/roles/[id].put.ts": [],
+        "apps/web/server/api/roles/index.get.ts": [],
+        "apps/web/server/api/roles/index.post.ts": [],
+        "apps/web/server/api/settings/index.get.ts": [],
+        "apps/web/server/api/settings/index.put.ts": [],
+        "apps/web/server/api/settings/upload.post.ts": [],
+        "apps/web/server/api/storage/[...path].get.ts": [],
+        "apps/web/server/api/system-logs/files/[filename].get.ts": [],
+        "apps/web/server/api/system-logs/files/index.get.ts": [],
+        "apps/web/server/api/system-logs/stats/[filename].get.ts": [],
+        "apps/web/server/api/users/[id].delete.ts": [],
+        "apps/web/server/api/users/[id].get.ts": [],
+        "apps/web/server/api/users/[id].put.ts": [],
+        "apps/web/server/api/users/index.get.ts": [],
+        "apps/web/server/api/users/index.post.ts": [],
+        "apps/web/server/dto/activity-logs.dto.ts": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 32,
+      "files": [
+        {
+          "path": "apps/web/server/dto/auth.dto.ts",
+          "language": "typescript",
+          "sizeLines": 39,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/dto/guards.dto.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/dto/permissions.dto.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/dto/roles.dto.ts",
+          "language": "typescript",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/dto/settings.dto.ts",
+          "language": "typescript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/dto/system-logs.dto.ts",
+          "language": "typescript",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/dto/users.dto.ts",
+          "language": "typescript",
+          "sizeLines": 36,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/entities/activity-log.entity.ts",
+          "language": "typescript",
+          "sizeLines": 42,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/entities/guard-url.entity.ts",
+          "language": "typescript",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/entities/guard.entity.ts",
+          "language": "typescript",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/entities/permission-method.entity.ts",
+          "language": "typescript",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/entities/permission-url.entity.ts",
+          "language": "typescript",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/entities/permission.entity.ts",
+          "language": "typescript",
+          "sizeLines": 34,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/entities/role.entity.ts",
+          "language": "typescript",
+          "sizeLines": 49,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/entities/setting.entity.ts",
+          "language": "typescript",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/entities/user.entity.ts",
+          "language": "typescript",
+          "sizeLines": 39,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/middleware/activity-logger.ts",
+          "language": "typescript",
+          "sizeLines": 41,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/middleware/auth.ts",
+          "language": "typescript",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/plugins/database.server.ts",
+          "language": "typescript",
+          "sizeLines": 7,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/services/activity-logs.service.ts",
+          "language": "typescript",
+          "sizeLines": 62,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/services/auth.service.ts",
+          "language": "typescript",
+          "sizeLines": 67,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/services/guards.service.ts",
+          "language": "typescript",
+          "sizeLines": 98,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/services/permissions.service.ts",
+          "language": "typescript",
+          "sizeLines": 100,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/services/roles.service.ts",
+          "language": "typescript",
+          "sizeLines": 83,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/services/seeder.service.ts",
+          "language": "typescript",
+          "sizeLines": 297,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "apps/web/server/dto/auth.dto.ts": [],
+        "apps/web/server/dto/guards.dto.ts": [],
+        "apps/web/server/dto/permissions.dto.ts": [],
+        "apps/web/server/dto/roles.dto.ts": [],
+        "apps/web/server/dto/settings.dto.ts": [],
+        "apps/web/server/dto/system-logs.dto.ts": [],
+        "apps/web/server/dto/users.dto.ts": [],
+        "apps/web/server/entities/activity-log.entity.ts": [],
+        "apps/web/server/entities/guard-url.entity.ts": [],
+        "apps/web/server/entities/guard.entity.ts": [],
+        "apps/web/server/entities/permission-method.entity.ts": [],
+        "apps/web/server/entities/permission-url.entity.ts": [],
+        "apps/web/server/entities/permission.entity.ts": [],
+        "apps/web/server/entities/role.entity.ts": [],
+        "apps/web/server/entities/setting.entity.ts": [],
+        "apps/web/server/entities/user.entity.ts": [],
+        "apps/web/server/middleware/activity-logger.ts": [],
+        "apps/web/server/middleware/auth.ts": [],
+        "apps/web/server/plugins/database.server.ts": [],
+        "apps/web/server/services/activity-logs.service.ts": [],
+        "apps/web/server/services/auth.service.ts": [],
+        "apps/web/server/services/guards.service.ts": [],
+        "apps/web/server/services/permissions.service.ts": [],
+        "apps/web/server/services/roles.service.ts": [],
+        "apps/web/server/services/seeder.service.ts": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 33,
+      "files": [
+        {
+          "path": "apps/web/server/services/settings.service.ts",
+          "language": "typescript",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/services/storage.service.ts",
+          "language": "typescript",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/services/system-logs.service.ts",
+          "language": "typescript",
+          "sizeLines": 53,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/services/users.service.ts",
+          "language": "typescript",
+          "sizeLines": 100,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/utils/db.ts",
+          "language": "typescript",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/utils/jwt.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/utils/password.ts",
+          "language": "typescript",
+          "sizeLines": 9,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/server/utils/url-matcher.ts",
+          "language": "typescript",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/shared/types/activity-log.ts",
+          "language": "typescript",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/shared/types/api.ts",
+          "language": "typescript",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/shared/types/auth.ts",
+          "language": "typescript",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/shared/types/guard.ts",
+          "language": "typescript",
+          "sizeLines": 37,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/shared/types/index.ts",
+          "language": "typescript",
+          "sizeLines": 2,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/shared/types/permission.ts",
+          "language": "typescript",
+          "sizeLines": 42,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/shared/types/role.ts",
+          "language": "typescript",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/shared/types/system-log.ts",
+          "language": "typescript",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/shared/types/user.ts",
+          "language": "typescript",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/AppLayout/AppLayout.stories.ts",
+          "language": "typescript",
+          "sizeLines": 47,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/AuthForm/AuthForm.stories.ts",
+          "language": "typescript",
+          "sizeLines": 50,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/AuthForm/AuthForm.test.ts",
+          "language": "typescript",
+          "sizeLines": 66,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/Button.stories.ts",
+          "language": "typescript",
+          "sizeLines": 50,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/Button.vue",
+          "language": "vue",
+          "sizeLines": 38,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/DashboardPage.stories.ts",
+          "language": "typescript",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/FormField/FormField.stories.ts",
+          "language": "typescript",
+          "sizeLines": 66,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/FormField/FormField.test.ts",
+          "language": "typescript",
+          "sizeLines": 50,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "apps/web/server/services/settings.service.ts": [],
+        "apps/web/server/services/storage.service.ts": [],
+        "apps/web/server/services/system-logs.service.ts": [],
+        "apps/web/server/services/users.service.ts": [],
+        "apps/web/server/utils/db.ts": [],
+        "apps/web/server/utils/jwt.ts": [],
+        "apps/web/server/utils/password.ts": [],
+        "apps/web/server/utils/url-matcher.ts": [],
+        "apps/web/shared/types/activity-log.ts": [],
+        "apps/web/shared/types/api.ts": [],
+        "apps/web/shared/types/auth.ts": [],
+        "apps/web/shared/types/guard.ts": [],
+        "apps/web/shared/types/index.ts": [],
+        "apps/web/shared/types/permission.ts": [],
+        "apps/web/shared/types/role.ts": [],
+        "apps/web/shared/types/system-log.ts": [],
+        "apps/web/shared/types/user.ts": [],
+        "apps/web/stories/AppLayout/AppLayout.stories.ts": [],
+        "apps/web/stories/AuthForm/AuthForm.stories.ts": [],
+        "apps/web/stories/AuthForm/AuthForm.test.ts": [],
+        "apps/web/stories/Button.stories.ts": [],
+        "apps/web/stories/Button.vue": [],
+        "apps/web/stories/DashboardPage.stories.ts": [],
+        "apps/web/stories/FormField/FormField.stories.ts": [],
+        "apps/web/stories/FormField/FormField.test.ts": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 34,
+      "files": [
+        {
+          "path": "apps/web/stories/Header.stories.ts",
+          "language": "typescript",
+          "sizeLines": 43,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/Header.vue",
+          "language": "vue",
+          "sizeLines": 53,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/LoginPage.stories.ts",
+          "language": "typescript",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/LoginPage.test.ts",
+          "language": "typescript",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/Page.stories.ts",
+          "language": "typescript",
+          "sizeLines": 36,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/Page.vue",
+          "language": "vue",
+          "sizeLines": 73,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/RegisterPage.stories.ts",
+          "language": "typescript",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/RegisterPage.test.ts",
+          "language": "typescript",
+          "sizeLines": 58,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/stories/assets/avif-test-image.avif",
+          "language": "avif",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test-results/.last-run.json",
+          "language": "json",
+          "sizeLines": 3,
+          "fileCategory": "config"
+        },
+        {
+          "path": "apps/web/test/e2e/auth.spec.ts",
+          "language": "typescript",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/e2e/crud.spec.ts",
+          "language": "typescript",
+          "sizeLines": 74,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/nuxt/components/BaseButton.nuxt.spec.ts",
+          "language": "typescript",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/nuxt/components/FormField.nuxt.spec.ts",
+          "language": "typescript",
+          "sizeLines": 48,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/unit/composables/useGuardsData.test.ts",
+          "language": "typescript",
+          "sizeLines": 79,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/unit/composables/usePermissionsData.test.ts",
+          "language": "typescript",
+          "sizeLines": 77,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/unit/composables/useRolesData.test.ts",
+          "language": "typescript",
+          "sizeLines": 71,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/unit/composables/useUsersData.test.ts",
+          "language": "typescript",
+          "sizeLines": 94,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/unit/utils/error.test.ts",
+          "language": "typescript",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/unit/utils/icons.test.ts",
+          "language": "typescript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/test/unit/utils/url-matcher.test.ts",
+          "language": "typescript",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "apps/web/vitest.config.ts",
+          "language": "typescript",
+          "sizeLines": 32,
+          "fileCategory": "code"
+        },
+        {
+          "path": "opencode.json",
+          "language": "json",
+          "sizeLines": 2,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "apps/web/stories/Header.stories.ts": [],
+        "apps/web/stories/Header.vue": [],
+        "apps/web/stories/LoginPage.stories.ts": [],
+        "apps/web/stories/LoginPage.test.ts": [],
+        "apps/web/stories/Page.stories.ts": [],
+        "apps/web/stories/Page.vue": [],
+        "apps/web/stories/RegisterPage.stories.ts": [],
+        "apps/web/stories/RegisterPage.test.ts": [],
+        "apps/web/stories/assets/avif-test-image.avif": [],
+        "apps/web/test-results/.last-run.json": [],
+        "apps/web/test/e2e/auth.spec.ts": [],
+        "apps/web/test/e2e/crud.spec.ts": [],
+        "apps/web/test/nuxt/components/BaseButton.nuxt.spec.ts": [],
+        "apps/web/test/nuxt/components/FormField.nuxt.spec.ts": [],
+        "apps/web/test/unit/composables/useGuardsData.test.ts": [],
+        "apps/web/test/unit/composables/usePermissionsData.test.ts": [],
+        "apps/web/test/unit/composables/useRolesData.test.ts": [],
+        "apps/web/test/unit/composables/useUsersData.test.ts": [],
+        "apps/web/test/unit/utils/error.test.ts": [],
+        "apps/web/test/unit/utils/icons.test.ts": [],
+        "apps/web/test/unit/utils/url-matcher.test.ts": [],
+        "apps/web/vitest.config.ts": [],
+        "opencode.json": []
+      },
+      "neighborMap": {}
+    }
+  ]
+}

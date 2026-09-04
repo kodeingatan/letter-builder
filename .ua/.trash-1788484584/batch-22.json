@@ -1,0 +1,314 @@
+{
+  "batchIndex": 22,
+  "nodes": [
+    {
+      "id": "file::apps/web/stories/Configure.mdx",
+      "type": "document",
+      "label": "Configure.mdx",
+      "filePath": "apps/web/stories/Configure.mdx",
+      "fileType": "mdx",
+      "language": "mdx",
+      "lines": 388,
+      "category": "docs",
+      "description": "Storybook configuration documentation page with guides for styling, context mocking, asset loading, autodocs, Chromatic publishing, Figma plugin, testing, accessibility, theming, and addons",
+      "imports": [
+        "Meta from @storybook/addon-docs/blocks",
+        "Github from ./assets/github.svg",
+        "Discord from ./assets/discord.svg",
+        "Youtube from ./assets/youtube.svg",
+        "Tutorials from ./assets/tutorials.svg",
+        "Styling from ./assets/styling.png",
+        "Context from ./assets/context.png",
+        "Assets from ./assets/assets.png",
+        "Docs from ./assets/docs.png",
+        "Share from ./assets/share.png",
+        "FigmaPlugin from ./assets/figma-plugin.png",
+        "Testing from ./assets/testing.png",
+        "Accessibility from ./assets/accessibility.png",
+        "Theming from ./assets/theming.png",
+        "AddonLibrary from ./assets/addon-library.png"
+      ],
+      "exports": [
+        "RightArrow (component)"
+      ],
+      "cssClasses": [
+        "sb-container",
+        "sb-section-title",
+        "sb-section",
+        "sb-section-item",
+        "sb-section-item-heading",
+        "sb-section-item-paragraph",
+        "sb-action-link",
+        "sb-features-grid",
+        "sb-grid-item",
+        "sb-socials",
+        "sb-explore-image",
+        "sb-addon",
+        "sb-addon-text",
+        "sb-addon-img"
+      ],
+      "storybookMeta": {
+        "title": "Configure your project"
+      },
+      "externalLinks": [
+        "https://storybook.js.org/docs/configure/styling-and-css/",
+        "https://storybook.js.org/docs/writing-stories/decorators/",
+        "https://storybook.js.org/docs/configure/images-and-assets/",
+        "https://storybook.js.org/docs/writing-docs/autodocs/",
+        "https://storybook.js.org/docs/sharing/publish-storybook/",
+        "https://storybook.js.org/docs/sharing/design-integrations/",
+        "https://storybook.js.org/docs/writing-tests/",
+        "https://storybook.js.org/docs/writing-tests/accessibility-testing/",
+        "https://storybook.js.org/docs/configure/theming/",
+        "https://storybook.js.org/addons/",
+        "https://github.com/storybookjs/storybook",
+        "https://discord.gg/storybook",
+        "https://www.youtube.com/@chromaticui",
+        "https://storybook.js.org/tutorials/"
+      ]
+    },
+    {
+      "id": "file::apps/web/stories/button.css",
+      "type": "css-markup",
+      "label": "button.css",
+      "filePath": "apps/web/stories/button.css",
+      "fileType": "css",
+      "language": "css",
+      "lines": 30,
+      "category": "markup",
+      "description": "CSS styles for Storybook button component with primary/secondary variants and small/medium/large sizes",
+      "cssClasses": [
+        "storybook-button",
+        "storybook-button--primary",
+        "storybook-button--secondary",
+        "storybook-button--small",
+        "storybook-button--medium",
+        "storybook-button--large"
+      ],
+      "designTokens": {
+        "colors": {
+          "primary-bg": "#555ab9",
+          "primary-color": "white",
+          "secondary-bg": "transparent",
+          "secondary-color": "#333",
+          "secondary-shadow": "rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset"
+        },
+        "spacing": {
+          "small": "10px 16px",
+          "medium": "11px 20px",
+          "large": "12px 24px"
+        },
+        "typography": {
+          "fontFamily": "'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+          "fontWeight": "700",
+          "fontSize": {
+            "small": "12px",
+            "medium": "14px",
+            "large": "16px"
+          }
+        },
+        "borderRadius": "3em"
+      }
+    },
+    {
+      "id": "file::apps/web/stories/header.css",
+      "type": "css-markup",
+      "label": "header.css",
+      "filePath": "apps/web/stories/header.css",
+      "fileType": "css",
+      "language": "css",
+      "lines": 32,
+      "category": "markup",
+      "description": "CSS styles for Storybook header component with flex layout, logo, title, and welcome message",
+      "cssClasses": [
+        "storybook-header",
+        "storybook-header svg",
+        "storybook-header h1",
+        "storybook-header button + button",
+        "storybook-header .welcome"
+      ],
+      "designTokens": {
+        "colors": {
+          "welcome-color": "#333"
+        },
+        "spacing": {
+          "padding": "15px 20px",
+          "title-margin": "6px 0 6px 10px",
+          "button-gap": "10px",
+          "welcome-margin": "10px"
+        },
+        "typography": {
+          "fontFamily": "'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+          "titleWeight": "700",
+          "titleSize": "20px",
+          "welcomeSize": "14px"
+        },
+        "border": "1px solid rgba(0, 0, 0, 0.1)"
+      }
+    },
+    {
+      "id": "file::apps/web/stories/page.css",
+      "type": "css-markup",
+      "label": "page.css",
+      "filePath": "apps/web/stories/page.css",
+      "fileType": "css",
+      "language": "css",
+      "lines": 68,
+      "category": "markup",
+      "description": "CSS styles for Storybook page component with typography, links, lists, and tip badge",
+      "cssClasses": [
+        "storybook-page",
+        "storybook-page h2",
+        "storybook-page p",
+        "storybook-page a",
+        "storybook-page ul",
+        "storybook-page li",
+        "storybook-page .tip",
+        "storybook-page .tip-wrapper",
+        "storybook-page .tip-wrapper svg",
+        "storybook-page .tip-wrapper svg path"
+      ],
+      "designTokens": {
+        "colors": {
+          "text": "#333",
+          "tip-bg": "#e7fdd8",
+          "tip-color": "#357a14",
+          "tip-svg-fill": "#1ea7fd"
+        },
+        "spacing": {
+          "padding": "48px 20px",
+          "maxWidth": "600px",
+          "listPadding": "30px",
+          "liMargin": "8px",
+          "tip-padding": "4px 12px",
+          "tip-margin": "10px",
+          "tip-wrapper-margin": "40px 0"
+        },
+        "typography": {
+          "fontFamily": "'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+          "fontSize": "14px",
+          "lineHeight": "24px",
+          "h2Size": "32px",
+          "tipSize": "11px",
+          "tipLineHeight": "12px",
+          "tipWrapperSize": "13px",
+          "tipWrapperLineHeight": "20px",
+          "tipWeight": "700"
+        },
+        "borderRadius": "1em"
+      }
+    },
+    {
+      "id": "config::storybook::docs",
+      "type": "config",
+      "label": "Storybook Docs Configuration",
+      "configType": "storybook-docs",
+      "description": "Storybook documentation configuration for Configure page",
+      "meta": {
+        "title": "Configure your project",
+        "renderer": "vue3"
+      },
+      "features": [
+        "styling-and-css",
+        "context-mocking",
+        "assets-and-resources",
+        "autodocs",
+        "chromatic-publishing",
+        "figma-plugin",
+        "testing",
+        "accessibility-testing",
+        "theming",
+        "addons"
+      ]
+    },
+    {
+      "id": "config::storybook::css::button",
+      "type": "config",
+      "label": "Button CSS Config",
+      "configType": "css-component",
+      "description": "Button component CSS configuration with variants and sizes",
+      "component": "button",
+      "variants": ["primary", "secondary"],
+      "sizes": ["small", "medium", "large"],
+      "baseClass": "storybook-button"
+    },
+    {
+      "id": "config::storybook::css::header",
+      "type": "config",
+      "label": "Header CSS Config",
+      "configType": "css-component",
+      "description": "Header component CSS configuration with flex layout",
+      "component": "header",
+      "baseClass": "storybook-header",
+      "layout": "flex"
+    },
+    {
+      "id": "config::storybook::css::page",
+      "type": "config",
+      "label": "Page CSS Config",
+      "configType": "css-component",
+      "description": "Page component CSS configuration with typography and tip badge",
+      "component": "page",
+      "baseClass": "storybook-page",
+      "features": ["typography", "lists", "tip-badge"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file::apps/web/stories/Configure.mdx",
+      "target": "config::storybook::docs",
+      "type": "defines",
+      "description": "Configure.mdx defines Storybook docs configuration"
+    },
+    {
+      "source": "file::apps/web/stories/button.css",
+      "target": "config::storybook::css::button",
+      "type": "defines",
+      "description": "button.css defines button CSS component config"
+    },
+    {
+      "source": "file::apps/web/stories/header.css",
+      "target": "config::storybook::css::header",
+      "type": "defines",
+      "description": "header.css defines header CSS component config"
+    },
+    {
+      "source": "file::apps/web/stories/page.css",
+      "target": "config::storybook::css::page",
+      "type": "defines",
+      "description": "page.css defines page CSS component config"
+    },
+    {
+      "source": "config::storybook::css::button",
+      "target": "config::storybook::css::header",
+      "type": "sibling",
+      "description": "Button and header CSS files are sibling Storybook component styles"
+    },
+    {
+      "source": "config::storybook::css::header",
+      "target": "config::storybook::css::page",
+      "type": "sibling",
+      "description": "Header and page CSS files are sibling Storybook component styles"
+    },
+    {
+      "source": "file::apps/web/stories/Configure.mdx",
+      "target": "config::storybook::css::button",
+      "type": "references",
+      "description": "Configure.mdx documentation references Storybook component styles"
+    }
+  ],
+  "metadata": {
+    "totalFiles": 4,
+    "totalNodes": 8,
+    "totalEdges": 7,
+    "fileTypes": {
+      "mdx": 1,
+      "css": 3
+    },
+    "categories": {
+      "docs": 1,
+      "markup": 3
+    },
+    "analysisTimestamp": "2026-09-04T00:00:00.000Z"
+  }
+}

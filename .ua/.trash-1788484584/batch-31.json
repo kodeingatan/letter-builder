@@ -1,0 +1,1086 @@
+{
+  "nodes": [
+    {
+      "id": "endpoint:apps/web/server/api/guards/index.get.ts:GET /api/guards",
+      "type": "endpoint",
+      "name": "GET /api/guards",
+      "filePath": "apps/web/server/api/guards/index.get.ts",
+      "summary": "API route handler for listing guards with query validation and JWT authentication",
+      "tags": ["api", "endpoint", "guards", "list", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/guards/index.get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/guards/index.get.ts",
+      "summary": "Event handler that validates JWT token, parses query parameters, and returns paginated guards list",
+      "tags": ["handler", "auth", "query-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/guards/index.post.ts:POST /api/guards",
+      "type": "endpoint",
+      "name": "POST /api/guards",
+      "filePath": "apps/web/server/api/guards/index.post.ts",
+      "summary": "API route handler for creating a new guard with body validation and JWT authentication",
+      "tags": ["api", "endpoint", "guards", "create", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/guards/index.post.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/guards/index.post.ts",
+      "summary": "Event handler that validates JWT token, parses request body with CreateGuardSchema, and creates guard",
+      "tags": ["handler", "auth", "body-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/permissions/[id].delete.ts:DELETE /api/permissions/:id",
+      "type": "endpoint",
+      "name": "DELETE /api/permissions/:id",
+      "filePath": "apps/web/server/api/permissions/[id].delete.ts",
+      "summary": "API route handler for deleting a permission by ID with JWT authentication",
+      "tags": ["api", "endpoint", "permissions", "delete", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/permissions/[id].delete.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/permissions/[id].delete.ts",
+      "summary": "Event handler that validates JWT token, extracts ID from route params, and removes permission",
+      "tags": ["handler", "auth", "param-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/permissions/[id].get.ts:GET /api/permissions/:id",
+      "type": "endpoint",
+      "name": "GET /api/permissions/:id",
+      "filePath": "apps/web/server/api/permissions/[id].get.ts",
+      "summary": "API route handler for fetching a single permission by ID with JWT authentication",
+      "tags": ["api", "endpoint", "permissions", "get", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/permissions/[id].get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/permissions/[id].get.ts",
+      "summary": "Event handler that validates JWT token, extracts ID from route params, and returns permission",
+      "tags": ["handler", "auth", "param-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/permissions/[id].put.ts:PUT /api/permissions/:id",
+      "type": "endpoint",
+      "name": "PUT /api/permissions/:id",
+      "filePath": "apps/web/server/api/permissions/[id].put.ts",
+      "summary": "API route handler for updating a permission by ID with body validation and JWT authentication",
+      "tags": ["api", "endpoint", "permissions", "update", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/permissions/[id].put.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/permissions/[id].put.ts",
+      "summary": "Event handler that validates JWT token, extracts ID, parses body with UpdatePermissionSchema, and updates permission",
+      "tags": ["handler", "auth", "body-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/permissions/index.get.ts:GET /api/permissions",
+      "type": "endpoint",
+      "name": "GET /api/permissions",
+      "filePath": "apps/web/server/api/permissions/index.get.ts",
+      "summary": "API route handler for listing permissions with query validation and JWT authentication",
+      "tags": ["api", "endpoint", "permissions", "list", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/permissions/index.get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/permissions/index.get.ts",
+      "summary": "Event handler that validates JWT token, parses query parameters, and returns paginated permissions list",
+      "tags": ["handler", "auth", "query-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/permissions/index.post.ts:POST /api/permissions",
+      "type": "endpoint",
+      "name": "POST /api/permissions",
+      "filePath": "apps/web/server/api/permissions/index.post.ts",
+      "summary": "API route handler for creating a new permission with body validation and JWT authentication",
+      "tags": ["api", "endpoint", "permissions", "create", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/permissions/index.post.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/permissions/index.post.ts",
+      "summary": "Event handler that validates JWT token, parses request body with CreatePermissionSchema, and creates permission",
+      "tags": ["handler", "auth", "body-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/roles/[id].delete.ts:DELETE /api/roles/:id",
+      "type": "endpoint",
+      "name": "DELETE /api/roles/:id",
+      "filePath": "apps/web/server/api/roles/[id].delete.ts",
+      "summary": "API route handler for deleting a role by ID with JWT authentication",
+      "tags": ["api", "endpoint", "roles", "delete", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/roles/[id].delete.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/roles/[id].delete.ts",
+      "summary": "Event handler that validates JWT token, extracts ID from route params, and removes role",
+      "tags": ["handler", "auth", "param-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/roles/[id].get.ts:GET /api/roles/:id",
+      "type": "endpoint",
+      "name": "GET /api/roles/:id",
+      "filePath": "apps/web/server/api/roles/[id].get.ts",
+      "summary": "API route handler for fetching a single role by ID with JWT authentication",
+      "tags": ["api", "endpoint", "roles", "get", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/roles/[id].get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/roles/[id].get.ts",
+      "summary": "Event handler that validates JWT token, extracts ID from route params, and returns role",
+      "tags": ["handler", "auth", "param-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/roles/[id].put.ts:PUT /api/roles/:id",
+      "type": "endpoint",
+      "name": "PUT /api/roles/:id",
+      "filePath": "apps/web/server/api/roles/[id].put.ts",
+      "summary": "API route handler for updating a role by ID with body validation and JWT authentication",
+      "tags": ["api", "endpoint", "roles", "update", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/roles/[id].put.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/roles/[id].put.ts",
+      "summary": "Event handler that validates JWT token, extracts ID, parses body with UpdateRoleSchema, and updates role",
+      "tags": ["handler", "auth", "body-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/roles/index.get.ts:GET /api/roles",
+      "type": "endpoint",
+      "name": "GET /api/roles",
+      "filePath": "apps/web/server/api/roles/index.get.ts",
+      "summary": "API route handler for listing roles with query validation and JWT authentication",
+      "tags": ["api", "endpoint", "roles", "list", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/roles/index.get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/roles/index.get.ts",
+      "summary": "Event handler that validates JWT token, parses query parameters, and returns paginated roles list",
+      "tags": ["handler", "auth", "query-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/roles/index.post.ts:POST /api/roles",
+      "type": "endpoint",
+      "name": "POST /api/roles",
+      "filePath": "apps/web/server/api/roles/index.post.ts",
+      "summary": "API route handler for creating a new role with body validation and JWT authentication",
+      "tags": ["api", "endpoint", "roles", "create", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/roles/index.post.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/roles/index.post.ts",
+      "summary": "Event handler that validates JWT token, parses request body with CreateRoleSchema, and creates role",
+      "tags": ["handler", "auth", "body-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/settings/index.get.ts:GET /api/settings",
+      "type": "endpoint",
+      "name": "GET /api/settings",
+      "filePath": "apps/web/server/api/settings/index.get.ts",
+      "summary": "API route handler for listing all application settings (no auth required)",
+      "tags": ["api", "endpoint", "settings", "list", "public"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/settings/index.get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/settings/index.get.ts",
+      "summary": "Event handler that returns all application settings without authentication",
+      "tags": ["handler", "public"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/settings/index.put.ts:PUT /api/settings",
+      "type": "endpoint",
+      "name": "PUT /api/settings",
+      "filePath": "apps/web/server/api/settings/index.put.ts",
+      "summary": "API route handler for updating application settings with JWT authentication",
+      "tags": ["api", "endpoint", "settings", "update", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/settings/index.put.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/settings/index.put.ts",
+      "summary": "Event handler that validates JWT token, parses body with UpdateSettingSchema, and upserts settings",
+      "tags": ["handler", "auth", "body-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/settings/upload.post.ts:POST /api/settings/upload",
+      "type": "endpoint",
+      "name": "POST /api/settings/upload",
+      "filePath": "apps/web/server/api/settings/upload.post.ts",
+      "summary": "API route handler for uploading files with multipart form data and JWT authentication",
+      "tags": ["api", "endpoint", "settings", "upload", "jwt-auth", "file-upload"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:apps/web/server/api/settings/upload.post.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/settings/upload.post.ts",
+      "summary": "Event handler that validates JWT token, reads multipart form data, extracts file and subfolder, and saves via StorageService",
+      "tags": ["handler", "auth", "multipart", "file-upload"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/storage/[...path].get.ts:GET /api/storage/:path",
+      "type": "endpoint",
+      "name": "GET /api/storage/:path",
+      "filePath": "apps/web/server/api/storage/[...path].get.ts",
+      "summary": "API route handler for serving static files from storage with streaming response",
+      "tags": ["api", "endpoint", "storage", "file-serving", "streaming"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/storage/[...path].get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/storage/[...path].get.ts",
+      "summary": "Event handler that parses catch-all path, resolves file path via StorageService, and streams file content",
+      "tags": ["handler", "file-serving", "streaming"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/system-logs/files/[filename].get.ts:GET /api/system-logs/files/:filename",
+      "type": "endpoint",
+      "name": "GET /api/system-logs/files/:filename",
+      "filePath": "apps/web/server/api/system-logs/files/[filename].get.ts",
+      "summary": "API route handler for reading system log file content with query parameters and JWT authentication",
+      "tags": ["api", "endpoint", "system-logs", "read", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/system-logs/files/[filename].get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/system-logs/files/[filename].get.ts",
+      "summary": "Event handler that validates JWT token, extracts filename, parses query with QuerySystemLogSchema, and reads log content",
+      "tags": ["handler", "auth", "query-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/system-logs/files/index.get.ts:GET /api/system-logs/files",
+      "type": "endpoint",
+      "name": "GET /api/system-logs/files",
+      "filePath": "apps/web/server/api/system-logs/files/index.get.ts",
+      "summary": "API route handler for listing available system log files with JWT authentication",
+      "tags": ["api", "endpoint", "system-logs", "list", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/system-logs/files/index.get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/system-logs/files/index.get.ts",
+      "summary": "Event handler that validates JWT token and returns list of system log files",
+      "tags": ["handler", "auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/system-logs/stats/[filename].get.ts:GET /api/system-logs/stats/:filename",
+      "type": "endpoint",
+      "name": "GET /api/system-logs/stats/:filename",
+      "filePath": "apps/web/server/api/system-logs/stats/[filename].get.ts",
+      "summary": "API route handler for fetching statistics of a specific system log file with JWT authentication",
+      "tags": ["api", "endpoint", "system-logs", "stats", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/system-logs/stats/[filename].get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/system-logs/stats/[filename].get.ts",
+      "summary": "Event handler that validates JWT token, extracts filename, and returns log file statistics",
+      "tags": ["handler", "auth", "param-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/users/[id].delete.ts:DELETE /api/users/:id",
+      "type": "endpoint",
+      "name": "DELETE /api/users/:id",
+      "filePath": "apps/web/server/api/users/[id].delete.ts",
+      "summary": "API route handler for deleting a user by ID with JWT authentication",
+      "tags": ["api", "endpoint", "users", "delete", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/users/[id].delete.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/users/[id].delete.ts",
+      "summary": "Event handler that validates JWT token, extracts ID from route params, and removes user",
+      "tags": ["handler", "auth", "param-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/users/[id].get.ts:GET /api/users/:id",
+      "type": "endpoint",
+      "name": "GET /api/users/:id",
+      "filePath": "apps/web/server/api/users/[id].get.ts",
+      "summary": "API route handler for fetching a single user by ID with JWT authentication",
+      "tags": ["api", "endpoint", "users", "get", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/users/[id].get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/users/[id].get.ts",
+      "summary": "Event handler that validates JWT token, extracts ID from route params, and returns user",
+      "tags": ["handler", "auth", "param-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/users/[id].put.ts:PUT /api/users/:id",
+      "type": "endpoint",
+      "name": "PUT /api/users/:id",
+      "filePath": "apps/web/server/api/users/[id].put.ts",
+      "summary": "API route handler for updating a user by ID with body validation and JWT authentication",
+      "tags": ["api", "endpoint", "users", "update", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/users/[id].put.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/users/[id].put.ts",
+      "summary": "Event handler that validates JWT token, extracts ID, parses body with UpdateUserSchema, and updates user",
+      "tags": ["handler", "auth", "body-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/users/index.get.ts:GET /api/users",
+      "type": "endpoint",
+      "name": "GET /api/users",
+      "filePath": "apps/web/server/api/users/index.get.ts",
+      "summary": "API route handler for listing users with query validation and JWT authentication",
+      "tags": ["api", "endpoint", "users", "list", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/users/index.get.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/users/index.get.ts",
+      "summary": "Event handler that validates JWT token, parses query parameters, and returns paginated users list",
+      "tags": ["handler", "auth", "query-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "endpoint:apps/web/server/api/users/index.post.ts:POST /api/users",
+      "type": "endpoint",
+      "name": "POST /api/users",
+      "filePath": "apps/web/server/api/users/index.post.ts",
+      "summary": "API route handler for creating a new user with body validation and JWT authentication",
+      "tags": ["api", "endpoint", "users", "create", "jwt-auth"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/api/users/index.post.ts:default",
+      "type": "function",
+      "name": "default",
+      "filePath": "apps/web/server/api/users/index.post.ts",
+      "summary": "Event handler that validates JWT token, parses request body with CreateUserSchema, and creates user",
+      "tags": ["handler", "auth", "body-validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/server/dto/activity-logs.dto.ts",
+      "type": "file",
+      "name": "activity-logs.dto.ts",
+      "filePath": "apps/web/server/dto/activity-logs.dto.ts",
+      "summary": "Zod validation schema for activity log queries with pagination, filtering by action/entity/user/level/date range, and sorting options",
+      "tags": ["dto", "validation", "zod", "activity-logs", "schema"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:apps/web/server/dto/activity-logs.dto.ts:QueryActivityLogSchema",
+      "type": "function",
+      "name": "QueryActivityLogSchema",
+      "filePath": "apps/web/server/dto/activity-logs.dto.ts",
+      "summary": "Zod schema for validating activity log query parameters including pagination, search, filters, and sorting",
+      "tags": ["schema", "validation", "zod"],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:apps/web/server/services/guards.service.ts",
+      "type": "service",
+      "name": "GuardsService",
+      "filePath": "apps/web/server/services/guards.service.ts",
+      "summary": "Service for managing guards CRUD operations with pagination support",
+      "tags": ["service", "guards", "crud", "pagination"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:apps/web/server/services/permissions.service.ts",
+      "type": "service",
+      "name": "PermissionsService",
+      "filePath": "apps/web/server/services/permissions.service.ts",
+      "summary": "Service for managing permissions CRUD operations with pagination support",
+      "tags": ["service", "permissions", "crud", "pagination"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:apps/web/server/services/roles.service.ts",
+      "type": "service",
+      "name": "RolesService",
+      "filePath": "apps/web/server/services/roles.service.ts",
+      "summary": "Service for managing roles CRUD operations with pagination support",
+      "tags": ["service", "roles", "crud", "pagination"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:apps/web/server/services/users.service.ts",
+      "type": "service",
+      "name": "UsersService",
+      "filePath": "apps/web/server/services/users.service.ts",
+      "summary": "Service for managing users CRUD operations with pagination support",
+      "tags": ["service", "users", "crud", "pagination"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:apps/web/server/services/settings.service.ts",
+      "type": "service",
+      "name": "SettingsService",
+      "filePath": "apps/web/server/services/settings.service.ts",
+      "summary": "Service for managing application settings with bulk upsert capability",
+      "tags": ["service", "settings", "configuration"],
+      "complexity": "simple"
+    },
+    {
+      "id": "service:apps/web/server/services/storage.service.ts",
+      "type": "service",
+      "name": "StorageService",
+      "filePath": "apps/web/server/services/storage.service.ts",
+      "summary": "Service for file storage operations including save, path resolution, and file management",
+      "tags": ["service", "storage", "file-management"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "service:apps/web/server/services/system-logs.service.ts",
+      "type": "service",
+      "name": "SystemLogsService",
+      "filePath": "apps/web/server/services/system-logs.service.ts",
+      "summary": "Service for reading and analyzing system log files with content retrieval and statistics",
+      "tags": ["service", "system-logs", "file-reading"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:apps/web/server/utils/jwt.ts",
+      "type": "file",
+      "name": "jwt.ts",
+      "filePath": "apps/web/server/utils/jwt.ts",
+      "summary": "JWT utility for token verification and signing using jsonwebtoken library",
+      "tags": ["utility", "jwt", "auth", "security"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/server/dto/users.dto.ts",
+      "type": "file",
+      "name": "users.dto.ts",
+      "filePath": "apps/web/server/dto/users.dto.ts",
+      "summary": "Zod validation schemas for user-related operations including QuerySchema, CreateUserSchema, UpdateUserSchema",
+      "tags": ["dto", "validation", "zod", "users", "schema"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/server/dto/guards.dto.ts",
+      "type": "file",
+      "name": "guards.dto.ts",
+      "filePath": "apps/web/server/dto/guards.dto.ts",
+      "summary": "Zod validation schemas for guard-related operations including CreateGuardSchema, UpdateGuardSchema",
+      "tags": ["dto", "validation", "zod", "guards", "schema"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/server/dto/permissions.dto.ts",
+      "type": "file",
+      "name": "permissions.dto.ts",
+      "filePath": "apps/web/server/dto/permissions.dto.ts",
+      "summary": "Zod validation schemas for permission-related operations including CreatePermissionSchema, UpdatePermissionSchema",
+      "tags": ["dto", "validation", "zod", "permissions", "schema"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/server/dto/roles.dto.ts",
+      "type": "file",
+      "name": "roles.dto.ts",
+      "filePath": "apps/web/server/dto/roles.dto.ts",
+      "summary": "Zod validation schemas for role-related operations including CreateRoleSchema, UpdateRoleSchema",
+      "tags": ["dto", "validation", "zod", "roles", "schema"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/server/dto/settings.dto.ts",
+      "type": "file",
+      "name": "settings.dto.ts",
+      "filePath": "apps/web/server/dto/settings.dto.ts",
+      "summary": "Zod validation schemas for settings operations including UpdateSettingSchema",
+      "tags": ["dto", "validation", "zod", "settings", "schema"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:apps/web/server/dto/system-logs.dto.ts",
+      "type": "file",
+      "name": "system-logs.dto.ts",
+      "filePath": "apps/web/server/dto/system-logs.dto.ts",
+      "summary": "Zod validation schemas for system log queries including QuerySystemLogSchema",
+      "tags": ["dto", "validation", "zod", "system-logs", "schema"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "endpoint:apps/web/server/api/guards/index.get.ts:GET /api/guards",
+      "target": "function:apps/web/server/api/guards/index.get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/guards/index.get.ts:default",
+      "target": "service:apps/web/server/services/guards.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/guards/index.get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/guards/index.get.ts:default",
+      "target": "file:apps/web/server/dto/users.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/guards/index.post.ts:POST /api/guards",
+      "target": "function:apps/web/server/api/guards/index.post.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/guards/index.post.ts:default",
+      "target": "service:apps/web/server/services/guards.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/guards/index.post.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/guards/index.post.ts:default",
+      "target": "file:apps/web/server/dto/guards.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/permissions/[id].delete.ts:DELETE /api/permissions/:id",
+      "target": "function:apps/web/server/api/permissions/[id].delete.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/[id].delete.ts:default",
+      "target": "service:apps/web/server/services/permissions.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/[id].delete.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/permissions/[id].get.ts:GET /api/permissions/:id",
+      "target": "function:apps/web/server/api/permissions/[id].get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/[id].get.ts:default",
+      "target": "service:apps/web/server/services/permissions.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/[id].get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/permissions/[id].put.ts:PUT /api/permissions/:id",
+      "target": "function:apps/web/server/api/permissions/[id].put.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/[id].put.ts:default",
+      "target": "service:apps/web/server/services/permissions.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/[id].put.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/[id].put.ts:default",
+      "target": "file:apps/web/server/dto/permissions.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/permissions/index.get.ts:GET /api/permissions",
+      "target": "function:apps/web/server/api/permissions/index.get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/index.get.ts:default",
+      "target": "service:apps/web/server/services/permissions.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/index.get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/index.get.ts:default",
+      "target": "file:apps/web/server/dto/users.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/permissions/index.post.ts:POST /api/permissions",
+      "target": "function:apps/web/server/api/permissions/index.post.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/index.post.ts:default",
+      "target": "service:apps/web/server/services/permissions.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/index.post.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/permissions/index.post.ts:default",
+      "target": "file:apps/web/server/dto/permissions.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/roles/[id].delete.ts:DELETE /api/roles/:id",
+      "target": "function:apps/web/server/api/roles/[id].delete.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/roles/[id].delete.ts:default",
+      "target": "service:apps/web/server/services/roles.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/roles/[id].delete.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/roles/[id].get.ts:GET /api/roles/:id",
+      "target": "function:apps/web/server/api/roles/[id].get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/roles/[id].get.ts:default",
+      "target": "service:apps/web/server/services/roles.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/roles/[id].get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/roles/[id].put.ts:PUT /api/roles/:id",
+      "target": "function:apps/web/server/api/roles/[id].put.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/roles/[id].put.ts:default",
+      "target": "service:apps/web/server/services/roles.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/roles/[id].put.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/roles/[id].put.ts:default",
+      "target": "file:apps/web/server/dto/roles.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/roles/index.get.ts:GET /api/roles",
+      "target": "function:apps/web/server/api/roles/index.get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/roles/index.get.ts:default",
+      "target": "service:apps/web/server/services/roles.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/roles/index.get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/roles/index.get.ts:default",
+      "target": "file:apps/web/server/dto/users.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/roles/index.post.ts:POST /api/roles",
+      "target": "function:apps/web/server/api/roles/index.post.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/roles/index.post.ts:default",
+      "target": "service:apps/web/server/services/roles.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/roles/index.post.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/roles/index.post.ts:default",
+      "target": "file:apps/web/server/dto/roles.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/settings/index.get.ts:GET /api/settings",
+      "target": "function:apps/web/server/api/settings/index.get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/settings/index.get.ts:default",
+      "target": "service:apps/web/server/services/settings.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/settings/index.put.ts:PUT /api/settings",
+      "target": "function:apps/web/server/api/settings/index.put.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/settings/index.put.ts:default",
+      "target": "service:apps/web/server/services/settings.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/settings/index.put.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/settings/index.put.ts:default",
+      "target": "file:apps/web/server/dto/settings.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/settings/upload.post.ts:POST /api/settings/upload",
+      "target": "function:apps/web/server/api/settings/upload.post.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/settings/upload.post.ts:default",
+      "target": "service:apps/web/server/services/storage.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/settings/upload.post.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/storage/[...path].get.ts:GET /api/storage/:path",
+      "target": "function:apps/web/server/api/storage/[...path].get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/storage/[...path].get.ts:default",
+      "target": "service:apps/web/server/services/storage.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/system-logs/files/[filename].get.ts:GET /api/system-logs/files/:filename",
+      "target": "function:apps/web/server/api/system-logs/files/[filename].get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/system-logs/files/[filename].get.ts:default",
+      "target": "service:apps/web/server/services/system-logs.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/system-logs/files/[filename].get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/system-logs/files/[filename].get.ts:default",
+      "target": "file:apps/web/server/dto/system-logs.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/system-logs/files/index.get.ts:GET /api/system-logs/files",
+      "target": "function:apps/web/server/api/system-logs/files/index.get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/system-logs/files/index.get.ts:default",
+      "target": "service:apps/web/server/services/system-logs.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/system-logs/files/index.get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/system-logs/stats/[filename].get.ts:GET /api/system-logs/stats/:filename",
+      "target": "function:apps/web/server/api/system-logs/stats/[filename].get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/system-logs/stats/[filename].get.ts:default",
+      "target": "service:apps/web/server/services/system-logs.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/system-logs/stats/[filename].get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/users/[id].delete.ts:DELETE /api/users/:id",
+      "target": "function:apps/web/server/api/users/[id].delete.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/users/[id].delete.ts:default",
+      "target": "service:apps/web/server/services/users.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/users/[id].delete.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/users/[id].get.ts:GET /api/users/:id",
+      "target": "function:apps/web/server/api/users/[id].get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/users/[id].get.ts:default",
+      "target": "service:apps/web/server/services/users.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/users/[id].get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "endpoint:apps/web/server/api/users/[id].put.ts:PUT /api/users/:id",
+      "target": "function:apps/web/server/api/users/[id].put.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/users/[id].put.ts:default",
+      "target": "service:apps/web/server/services/users.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/users/[id].put.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/users/[id].put.ts:default",
+      "target": "file:apps/web/server/dto/users.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/users/index.get.ts:GET /api/users",
+      "target": "function:apps/web/server/api/users/index.get.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/users/index.get.ts:default",
+      "target": "service:apps/web/server/services/users.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/users/index.get.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/users/index.get.ts:default",
+      "target": "file:apps/web/server/dto/users.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "endpoint:apps/web/server/api/users/index.post.ts:POST /api/users",
+      "target": "function:apps/web/server/api/users/index.post.ts:default",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "function:apps/web/server/api/users/index.post.ts:default",
+      "target": "service:apps/web/server/services/users.service.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/users/index.post.ts:default",
+      "target": "file:apps/web/server/utils/jwt.ts",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:apps/web/server/api/users/index.post.ts:default",
+      "target": "file:apps/web/server/dto/users.dto.ts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:apps/web/server/dto/activity-logs.dto.ts",
+      "target": "function:apps/web/server/dto/activity-logs.dto.ts:QueryActivityLogSchema",
+      "type": "contains",
+      "weight": 1.0
+    }
+  ]
+}

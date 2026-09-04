@@ -1,0 +1,217 @@
+{
+  "nodes": [
+    {
+      "id": "doc::design-system/references/component-specs.md",
+      "type": "document",
+      "label": "Component Specifications",
+      "filePath": ".opencode/skills/design-system/references/component-specs.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 236,
+      "sectionCount": 28,
+      "keySections": [
+        "Button (variants, sizes, states, anatomy)",
+        "Input (variants, sizes, states, anatomy)",
+        "Card (variants, anatomy, spacing)",
+        "Badge (variants, sizes)",
+        "Alert (variants, anatomy)",
+        "Dialog (sizes, anatomy)",
+        "Table (row states, cell alignment, spacing)"
+      ],
+      "summary": "Detailed specifications for core UI components including Button, Input, Card, Badge, Alert, Dialog, and Table with their variants, sizes, states, and anatomy."
+    },
+    {
+      "id": "doc::design-system/references/component-tokens.md",
+      "type": "document",
+      "label": "Component Tokens",
+      "filePath": ".opencode/skills/design-system/references/component-tokens.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 214,
+      "sectionCount": 9,
+      "keySections": [
+        "Button Tokens (primary, secondary, outline, ghost, destructive)",
+        "Input Tokens (background, border, focus, error, disabled)",
+        "Card Tokens (background, shadow, spacing)",
+        "Badge Tokens (default, secondary, outline, destructive)",
+        "Alert Tokens (default, destructive)",
+        "Dialog/Modal Tokens (overlay, content, spacing)",
+        "Table Tokens (header, body, border)",
+        "Usage Example"
+      ],
+      "summary": "Component-specific CSS variable tokens referencing the semantic layer for Button, Input, Card, Badge, Alert, Dialog, and Table."
+    },
+    {
+      "id": "doc::design-system/references/primitive-tokens.md",
+      "type": "document",
+      "label": "Primitive Tokens",
+      "filePath": ".opencode/skills/design-system/references/primitive-tokens.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 203,
+      "sectionCount": 11,
+      "keySections": [
+        "Color Scales (Gray, Primary/Blue, Status)",
+        "Spacing Scale (4px base)",
+        "Typography Scale (font sizes, line heights, weights, tracking)",
+        "Border Radius",
+        "Shadows (sm, default, md, lg, xl, 2xl, inner)",
+        "Motion / Duration (75ms to 1000ms + semantic)",
+        "Z-Index Scale (0 to tooltip: 1400)"
+      ],
+      "summary": "Raw design values forming the foundation of the design system: color scales, spacing, typography, border radius, shadows, motion durations, and z-index."
+    },
+    {
+      "id": "doc::design-system/references/semantic-tokens.md",
+      "type": "document",
+      "label": "Semantic Tokens",
+      "filePath": ".opencode/skills/design-system/references/semantic-tokens.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 215,
+      "sectionCount": 17,
+      "keySections": [
+        "Color Semantics (background, primary, secondary, muted, accent, destructive, status)",
+        "Border & Ring",
+        "Spacing Semantics (component, section, page)",
+        "Typography Semantics (headings, body, labels, captions)",
+        "Interactive States (focus ring, opacity, transitions)",
+        "Dark Mode Overrides",
+        "Usage Patterns (applying semantic tokens, theme switching)"
+      ],
+      "summary": "Purpose-based aliases referencing primitive tokens for colors, spacing, typography, interactive states, and dark mode."
+    },
+    {
+      "id": "doc::design-system/references/states-and-variants.md",
+      "type": "document",
+      "label": "States and Variants",
+      "filePath": ".opencode/skills/design-system/references/states-and-variants.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 241,
+      "sectionCount": 24,
+      "keySections": [
+        "Interactive States (definitions, priority, transitions)",
+        "Focus States (ring spec, focus-within)",
+        "Disabled States (visual treatment, accessibility)",
+        "Loading States (spinner placement, treatment)",
+        "Error States (visual indicators, error messages)",
+        "Variant Patterns (color variants, size variants)",
+        "Accessibility Requirements (contrast, ARIA states)"
+      ],
+      "summary": "Component state definitions and variant patterns covering interactive states, focus, disabled, loading, error, color/size variants, and accessibility."
+    },
+    {
+      "id": "doc::design-system/references/tailwind-integration.md",
+      "type": "document",
+      "label": "Tailwind Integration",
+      "filePath": ".opencode/skills/design-system/references/tailwind-integration.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 251,
+      "sectionCount": 13,
+      "keySections": [
+        "CSS Variables Setup (HSL format, light/dark)",
+        "Tailwind Config (colors, borderRadius)",
+        "HSL Format Benefits (opacity modifiers)",
+        "Component Classes (button variants and sizes)",
+        "Spacing Integration",
+        "Animation Tokens (durations, keyframes)",
+        "Dark Mode Toggle",
+        "shadcn/ui Alignment"
+      ],
+      "summary": "Maps design system tokens to Tailwind CSS configuration with HSL format, component classes, dark mode, and shadcn/ui compatibility."
+    },
+    {
+      "id": "doc::design-system/references/token-architecture.md",
+      "type": "document",
+      "label": "Token Architecture",
+      "filePath": ".opencode/skills/design-system/references/token-architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 224,
+      "sectionCount": 12,
+      "keySections": [
+        "Layer Overview (3-layer diagram)",
+        "Why Three Layers?",
+        "Layer 1: Primitive Tokens",
+        "Layer 2: Semantic Tokens",
+        "Layer 3: Component Tokens",
+        "Dark Mode (semantic override approach)",
+        "Naming Convention",
+        "File Organization",
+        "Migration from Flat Tokens",
+        "W3C DTCG Alignment"
+      ],
+      "summary": "Three-layer token architecture (primitive → semantic → component) with naming conventions, file organization, and W3C DTCG alignment."
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc::design-system/references/token-architecture.md",
+      "target": "doc::design-system/references/primitive-tokens.md",
+      "type": "describes_layer",
+      "label": "defines Layer 1"
+    },
+    {
+      "source": "doc::design-system/references/token-architecture.md",
+      "target": "doc::design-system/references/semantic-tokens.md",
+      "type": "describes_layer",
+      "label": "defines Layer 2"
+    },
+    {
+      "source": "doc::design-system/references/token-architecture.md",
+      "target": "doc::design-system/references/component-tokens.md",
+      "type": "describes_layer",
+      "label": "defines Layer 3"
+    },
+    {
+      "source": "doc::design-system/references/semantic-tokens.md",
+      "target": "doc::design-system/references/primitive-tokens.md",
+      "type": "references",
+      "label": "aliases primitives"
+    },
+    {
+      "source": "doc::design-system/references/component-tokens.md",
+      "target": "doc::design-system/references/semantic-tokens.md",
+      "type": "references",
+      "label": "references semantic tokens"
+    },
+    {
+      "source": "doc::design-system/references/component-tokens.md",
+      "target": "doc::design-system/references/component-specs.md",
+      "type": "implements",
+      "label": "tokenizes components"
+    },
+    {
+      "source": "doc::design-system/references/component-specs.md",
+      "target": "doc::design-system/references/states-and-variants.md",
+      "type": "defines_states_for",
+      "label": "uses state definitions"
+    },
+    {
+      "source": "doc::design-system/references/tailwind-integration.md",
+      "target": "doc::design-system/references/semantic-tokens.md",
+      "type": "maps",
+      "label": "converts to Tailwind config"
+    },
+    {
+      "source": "doc::design-system/references/tailwind-integration.md",
+      "target": "doc::design-system/references/primitive-tokens.md",
+      "type": "maps",
+      "label": "uses primitive color format"
+    },
+    {
+      "source": "doc::design-system/references/states-and-variants.md",
+      "target": "doc::design-system/references/semantic-tokens.md",
+      "type": "references",
+      "label": "uses semantic tokens for states"
+    },
+    {
+      "source": "doc::design-system/references/token-architecture.md",
+      "target": "doc::design-system/references/states-and-variants.md",
+      "type": "references",
+      "label": "dark mode override pattern"
+    }
+  ]
+}
