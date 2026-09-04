@@ -1,6 +1,6 @@
 ---
-
-## description: Generate the complete SDD task roadmap from one Core Concept and project context
+description: Generate the complete SDD task roadmap from one Core Concept and project context
+---
 
 # Generate Complete Tasks
 

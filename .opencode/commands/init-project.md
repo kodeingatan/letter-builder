@@ -1,6 +1,6 @@
 ---
-
-## description: Understand the entire project and create or update AGENTS.md with verified project knowledge
+description: Understand the entire project and create or update AGENTS.md with verified project knowledge
+---
 
 You are responsible for understanding the current project and maintaining `AGENTS.md` as the project's operational instruction and architecture guide for AI coding agents.
 

@@ -1,6 +1,6 @@
 ---
-
-## description: Create a detailed implementation plan from a task specification
+description: Create a detailed implementation plan from a task specification
+---
 
 Create a detailed implementation plan from a task specification in `tasks/`.
 

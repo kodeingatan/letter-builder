@@ -1,6 +1,6 @@
 ---
-
-## description: Verify the implementation against the task specification
+description: Verify the implementation against the task specification
+---
 
 Verify the implementation against the task specification and run all checks.
 

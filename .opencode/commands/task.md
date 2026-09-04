@@ -1,6 +1,6 @@
 ---
-
-## description: Generate or update an SDD task specification from a single feature/context parameter
+description: Generate or update an SDD task specification from a single feature/context parameter
+---
 
 Generate or update a task specification using exactly one parameter.
 

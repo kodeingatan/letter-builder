@@ -1,6 +1,6 @@
 ---
-
-## description: Review the implementation quality and provide feedback
+description: Review the implementation quality and provide feedback
+---
 
 Review the implementation quality, architecture decisions, and code quality.
 
