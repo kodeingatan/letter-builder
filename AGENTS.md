@@ -452,6 +452,7 @@ Always consult before implementation:
 - `docs/database.md` — Entity schema, relationships, seed data
 - `docs/design-system.md` — Design tokens, component specs, UI patterns
 - `tasks/` — Current implementation task lists
+- `.ua/` when available and relevant for project relationships and knowledge graph context
 
 ## Important Rules
 
@@ -465,7 +466,7 @@ Always consult before implementation:
 - **Password security** — Always hash with bcrypt, strip from API responses
 - **JWT secret** — Set `JWT_SECRET` env var for production
 - **Native addons** — `better-sqlite3` and `bcrypt` may need rebuild after install
-- **No `.ua/` knowledge graph** — Not present in this repository
+- **`.ua/` knowledge graph** — Available at project root, contains 754 nodes and 1036 edges mapping project structure, relationships, and architecture
 
 ## Verification
 
