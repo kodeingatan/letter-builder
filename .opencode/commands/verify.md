@@ -316,6 +316,8 @@ Do NOT:
 - modify code (except auto-fix critical issues)
 - commit changes
 
+Exception: updating `tasks/task-logs.md` per #11 IS required and allowed.
+
 ---
 
 # 10. Final Response
@@ -335,6 +337,9 @@ Suggestions: N
 Tests: {pass}/{total} passing
 Build: PASS/FAIL
 
+Task Logs:
+- tasks/task-logs.md updated — Verified checked for this task if Status PASS, otherwise left unchecked (see #11)
+
 Next Step:
 
 # If PASS:
@@ -344,3 +349,36 @@ Next Step:
 Fix issues, then:
 /verify tasks/NN-task-name.md
 ```
+
+---
+
+# 11. Update Task Logs (Mandatory Final Step)
+
+After `/verify` finishes, you MUST update `tasks/task-logs.md` by checking off what has been verified.
+
+This step is mandatory — do NOT skip it.
+
+### 11.1 Rules
+
+1. Read `tasks/task-logs.md`. If it does not exist → CREATE it using the template in `/gen-tasks` #23.2, then apply rule 2.
+2. Update ONLY the verification tracking for the current task (`tasks/NN-task-name.md`):
+   - If Status is **PASS**:
+     - Overview table: set `Verified` column to `[x]` for this task row.
+     - Move entry from `## Belum Diverifikasi` (`- [ ] tasks/NN-...`) to `## Sudah Diverifikasi` (`- [x] tasks/NN-... — {Task Name} — {date} by /verify — PASS`).
+     - Detail per Task: set `Verified: [x] {date} by /verify — {summary: tests/build results}`.
+   - If Status is **FAIL / PARTIAL**:
+     - Do NOT check `[x]`. Keep `[ ]` in Overview and `Belum Diverifikasi`.
+     - Detail per Task: set `Verified: [ ] {date} by /verify — FAIL/PARTIAL: {N critical, N minor — see report}`.
+   - Update `## Last Updated` (`Date`, `By: /verify`, task file name).
+3. Do NOT touch `Implemented` or `Reviewed` checklists — those belong to `/implement` and `/review`.
+4. Do NOT reset any existing `[x]` to `[ ]`.
+5. Only mark `Verified [x]` when verification genuinely PASSED (build + tests + checklist per #5).
+
+### 11.2 Verification
+
+Before finishing `/verify`, ensure:
+
+- [ ] `tasks/task-logs.md` exists
+- [ ] Current task `Verified` state matches verification Status (PASS → `[x]`, FAIL/PARTIAL → `[ ]`)
+- [ ] Current task in correct section (Sudah vs Belum Diverifikasi)
+- [ ] Implemented / Reviewed states untouched

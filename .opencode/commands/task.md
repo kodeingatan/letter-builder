@@ -483,7 +483,7 @@ and explain the conflict.
 
 # 9. Do Not Implement
 
-This command ONLY generates or updates the task specification.
+This command ONLY generates or updates the task specification plus `tasks/task-logs.md` (see #11).
 
 Do NOT:
 
@@ -496,7 +496,7 @@ Do NOT:
 * install packages
 * run implementation
 
-The output of this command is the SDD task specification only.
+The output of this command is the SDD task specification + `tasks/task-logs.md` update only.
 
 ---
 
@@ -530,9 +530,42 @@ Consistency:
 - Database: OK/CONFLICT
 - Design System: OK/CONFLICT
 
+Task Logs:
+- tasks/task-logs.md created/updated (see #11)
+
 Next recommended step:
 
 /plan tasks/NN-task-name.md
 ```
 
 Do not provide implementation code unless explicitly requested.
+
+---
+
+# 11. Task Logs (Mandatory Final Step)
+
+After the task specification is generated/updated, you MUST create or update `tasks/task-logs.md` to record what has NOT yet been implemented, verified, and reviewed.
+
+This step is mandatory and is part of `/task` execution — do NOT skip it.
+
+### 11.1 Rules
+
+1. If `tasks/task-logs.md` does not exist → CREATE it using the same template as `/gen-tasks` #23.2, listing all `tasks/NN-*.md` (excluding `task-logs.md` itself).
+2. If it already exists → UPDATE it:
+   - add the current task (`tasks/NN-task-name.md`) if not yet listed,
+   - preserve existing `[x]` states for already implemented/verified/reviewed items — never reset `[x]` to `[ ]`,
+   - update `Last Updated` (`Date`, `By: /task`, `Source: $ARGUMENTS` summary),
+   - update the `Overview` row and `Detail per Task` section for the current task,
+   - ensure the current task appears under `Belum Implementasi` / `Belum Diverifikasi` / `Belum Direview` with `[ ]` unless it was already marked `[x]` by `/implement`, `/verify`, `/review`.
+3. A newly created task via `/task` defaults to `[ ]` (belum) for Implemented, Verified, and Reviewed.
+4. An updated task via `/task` (existing file edited) MUST NOT reset its existing `[x]` states.
+5. Do NOT modify application source code in this step — only `tasks/task-logs.md`.
+
+### 11.2 Verification
+
+Before finishing `/task`, ensure:
+
+- [ ] `tasks/task-logs.md` exists
+- [ ] Current task is listed in Overview and Detail per Task
+- [ ] Current task status in `tasks/task-logs.md` matches its `## Status` in `tasks/NN-*.md`
+- [ ] No existing `[x]` was reset

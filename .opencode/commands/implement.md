@@ -342,6 +342,8 @@ Do NOT:
 - change database schema without task specification
 - commit changes (wait for `/verify` and `/review`)
 
+Exception: updating `tasks/task-logs.md` per #13 IS required and allowed.
+
 ---
 
 # 12. Final Response
@@ -361,9 +363,41 @@ Files Modified:
 - path/to/file3.ts
 - path/to/file4.ts
 
+Task Logs:
+- tasks/task-logs.md updated — Implemented checked for this task (see #13)
+
 Status: Ready for verification
 
 Next Step:
 
 /verify tasks/NN-task-name.md
 ```
+
+---
+
+# 13. Update Task Logs (Mandatory Final Step)
+
+After `/implement` finishes, you MUST update `tasks/task-logs.md` by checking off what has been implemented.
+
+This step is mandatory — do NOT skip it.
+
+### 13.1 Rules
+
+1. Read `tasks/task-logs.md`. If it does not exist → CREATE it using the template in `/gen-tasks` #23.2, then mark the current task as implemented.
+2. Update ONLY the implementation tracking for the current task (`tasks/NN-task-name.md`):
+   - Overview table: set `Implemented` column to `[x]` for this task row.
+   - Move entry from `## Belum Implementasi` (`- [ ] tasks/NN-...`) to `## Sudah Implementasi` (`- [x] tasks/NN-... — {Task Name} — {date} by /implement`).
+   - Detail per Task section: set `Implemented: [x] {date} by /implement — {short notes: files created/modified}`.
+   - Update `## Last Updated` (`Date`, `By: /implement`, task file name).
+3. Do NOT touch `Verified` or `Reviewed` checklists — those belong to `/verify` and `/review`.
+4. Do NOT reset any existing `[x]` to `[ ]`.
+5. Do NOT mark implementation `[x]` if implementation failed or was aborted — leave `[ ]` and note the reason under Detail `Notes`.
+
+### 13.2 Verification
+
+Before finishing `/implement`, ensure:
+
+- [ ] `tasks/task-logs.md` exists
+- [ ] Current task `Implemented` is `[x]` in Overview + Detail
+- [ ] Current task moved from Belum → Sudah Implementasi
+- [ ] Verified / Reviewed states untouched

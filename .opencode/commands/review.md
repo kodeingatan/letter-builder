@@ -359,6 +359,8 @@ Do NOT:
 - approve without reading the code
 - modify code (this is review only)
 
+Exception: updating `tasks/task-logs.md` per #13 IS required and allowed.
+
 ---
 
 # 12. Final Response
@@ -374,6 +376,9 @@ Status: APPROVED / CHANGES REQUESTED / REVISION NEEDED
 Must Fix: N issues
 Should Fix: N issues
 Consider: N suggestions
+
+Task Logs:
+- tasks/task-logs.md updated — Reviewed checked for this task if Status APPROVED, otherwise left unchecked (see #13)
 
 Next Step:
 
@@ -392,3 +397,37 @@ Fix the issues, then:
 The task specification may need updating:
 /task "describe what needs to change"
 ```
+
+---
+
+# 13. Update Task Logs (Mandatory Final Step)
+
+After `/review` finishes, you MUST update `tasks/task-logs.md` by checking off what has been reviewed.
+
+This step is mandatory — do NOT skip it.
+
+### 13.1 Rules
+
+1. Read `tasks/task-logs.md`. If it does not exist → CREATE it using the template in `/gen-tasks` #23.2, then apply rule 2.
+2. Update ONLY the review tracking for the current task (`tasks/NN-task-name.md`):
+   - If Status is **APPROVED**:
+     - Overview table: set `Reviewed` column to `[x]` for this task row.
+     - Move entry from `## Belum Direview` (`- [ ] tasks/NN-...`) to `## Sudah Direview` (`- [x] tasks/NN-... — {Task Name} — {date} by /review — APPROVED`).
+     - Detail per Task: set `Reviewed: [x] {date} by /review — APPROVED: {short summary}`.
+     - Optionally update the task file `## Status` to `DONE` if it was `TODO REVIEW` and review is APPROVED.
+   - If Status is **CHANGES REQUESTED / REVISION NEEDED**:
+     - Do NOT check `[x]`. Keep `[ ]` in Overview and `Belum Direview`.
+     - Detail per Task: set `Reviewed: [ ] {date} by /review — CHANGES REQUESTED/REVISION NEEDED: {N must-fix, N should-fix}`.
+   - Update `## Last Updated` (`Date`, `By: /review`, task file name).
+3. Do NOT touch `Implemented` or `Verified` checklists — those belong to `/implement` and `/verify`.
+4. Do NOT reset any existing `[x]` to `[ ]`.
+5. Only mark `Reviewed [x]` when review genuinely APPROVED (no must-fix issues, per #10 Approval Criteria).
+
+### 13.2 Verification
+
+Before finishing `/review`, ensure:
+
+- [ ] `tasks/task-logs.md` exists
+- [ ] Current task `Reviewed` state matches review Status (APPROVED → `[x]`, otherwise → `[ ]`)
+- [ ] Current task in correct section (Sudah vs Belum Direview)
+- [ ] Implemented / Verified states untouched
