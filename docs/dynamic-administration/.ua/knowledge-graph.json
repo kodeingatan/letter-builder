@@ -1,0 +1,3076 @@
+{
+  "version": "1.0.0",
+  "kind": "knowledge",
+  "project": {
+    "name": "BMS Core Concepts Wiki",
+    "languages": [
+      "markdown"
+    ],
+    "frameworks": [
+      "karpathy-wiki"
+    ],
+    "description": "Knowledge graph for BMS Core Concepts Wiki",
+    "analyzedAt": "2026-09-04T07:24:32.738244+00:00",
+    "gitCommitHash": "b96249b87a45d583aa4d39e7f67f3f7f8b842cfe"
+  },
+  "nodes": [
+    {
+      "id": "article:administration",
+      "type": "article",
+      "name": "Administration = Data Collection Process",
+      "filePath": "administration.md",
+      "summary": "**Template menjelaskan bentuk dokumen.**",
+      "tags": [
+        "administration system"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "step",
+          "template",
+          "multi-template-administration",
+          "overall-flow",
+          "konsep-utama"
+        ],
+        "category": "Administration System",
+        "content": "# Administration = Data Collection Process\n\n**Template menjelaskan bentuk dokumen.**\n\nSedangkan **Administration menjelaskan proses pengisian data untuk menghasilkan dokumen.**\n\nContoh:\n\n```text\nAdministration:\nSurat Keputusan Pengangkatan\n```\n\nAdministration memiliki:\n\n```text\nStep 1\nData dasar surat\n\nStep 2\nData pegawai\n\nStep 3\nData keputusan\n\nStep 4\nPreview\n```\n\n## Related Concepts\n\n- [[step]] \u2014 step merupakan tahap pengumpulan data\n- [[template]] \u2014 administration menggunakan template\n- [[multi-template-administration]] \u2014 satu administration bisa memiliki beberapa template\n- [[overall-flow]] \u2014 alur keseluruhan sistem\n- [[konsep-utama]]\n",
+        "backlinks": [
+          "article:core-object-model",
+          "article:final-concept",
+          "article:generated-menu",
+          "article:konsep-utama",
+          "article:multi-template-administration",
+          "article:overall-flow",
+          "article:runtime-flow",
+          "article:step",
+          "article:template"
+        ]
+      }
+    },
+    {
+      "id": "article:architecture-principles",
+      "type": "article",
+      "name": "Prinsip Arsitektur yang Harus Dijaga",
+      "filePath": "architecture-principles.md",
+      "summary": "Agar sistem tidak menjadi sulit dikembangkan, gunakan prinsip berikut:",
+      "tags": [
+        "platform architecture"
+      ],
+      "complexity": "moderate",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "konsep-utama",
+          "global-table",
+          "component",
+          "template",
+          "rendering-engine",
+          "final-concept"
+        ],
+        "category": "Platform Architecture",
+        "content": "# Prinsip Arsitektur yang Harus Dijaga\n\nAgar sistem tidak menjadi sulit dikembangkan, gunakan prinsip berikut:\n\n### 1. Metadata-driven\n\nJangan hard-code:\n\n```text\nPegawai\nSurat Tugas\nSurat Keputusan\n```\n\nTetapi definisikan melalui metadata.\n\n### 2. Component-driven\n\nSemua bagian dokumen yang dapat digunakan kembali harus menjadi component.\n\n### 3. Template-driven\n\nTemplate hanya menentukan **struktur dokumen**.\n\n### 4. Data-driven\n\nData berasal dari:\n\n```text\nGlobal Table\nAdministration\nManual Input\nSystem Data\n```\n\n### 5. Schema-driven\n\nUI form dibuat berdasarkan schema.\n\n```text\nColumn Definition\n       \u2193\nForm Renderer\n       \u2193\nInput\n```\n\n### 6. Renderer-driven\n\nJangan membuat PDF secara khusus untuk setiap template.\n\nGunakan:\n\n```text\nTemplate\n   \u2193\nGeneric Renderer\n   \u2193\nPDF\n```\n\n### 7. Versioned\n\nTemplate dan Component sebaiknya memiliki version.\n\nMisalnya:\n\n```text\nSurat Tugas\nv1\nv2\nv3\n```\n\nDokumen lama tetap menggunakan versi ketika dibuat.\n\n## Related Concepts\n\n- [[konsep-utama]] \u2014 konsep utama aplikasi\n- [[global-table]] \u2014 metadata-driven data engine\n- [[component]] \u2014 component-driven document blocks\n- [[template]] \u2014 template-driven document structure\n- [[rendering-engine]] \u2014 renderer-driven document rendering\n- [[final-concept]] \u2014 ringkasan konsep\n",
+        "backlinks": [
+          "article:final-concept"
+        ]
+      }
+    },
+    {
+      "id": "article:column-type",
+      "type": "article",
+      "name": "Column Type = Behavior Data",
+      "filePath": "column-type.md",
+      "summary": "Setiap column memiliki **type**.",
+      "tags": [
+        "data layer"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "global-table",
+          "computed-field",
+          "expression-engine",
+          "crud-generated-table"
+        ],
+        "category": "Data Layer",
+        "content": "# Column Type = Behavior Data\n\nSetiap column memiliki **type**.\n\nType bukan hanya menentukan jenis data, tetapi juga menentukan bagaimana data tersebut:\n\n1. disimpan,\n2. diinput,\n3. ditampilkan,\n4. divalidasi,\n5. diformat,\n6. dicari,\n7. diurutkan.\n\nContoh:\n\n```text\ntext\n   \u2193\nText Input\n```\n\n```text\nrichtext\n   \u2193\nRich Text Editor\n```\n\n```text\ndate\n   \u2193\nDate Picker\n   \u2193\nFormat Display\n```\n\n```text\nselect\n   \u2193\nSelect\n   \u2193\nOptions\n```\n\n```text\nselect-table-relation\n   \u2193\nRelation Selector\n   \u2193\nGlobal Table\n```\n\n```text\nnumber + currency\n   \u2193\nNumber Input\n   \u2193\nCurrency Formatter\n```\n\nDengan demikian:\n\n```text\nColumn Type\n    \u2193\nData Behavior\n    \u2193\nInput Component\n    \u2193\nDisplay Component\n    \u2193\nValidation\n    \u2193\nSearch / Order behavior\n```\n\n## Related Concepts\n\n- [[global-table]] \u2014 column adalah bagian dari Global Table\n- [[computed-field]] \u2014 operation column sebagai computed data\n- [[expression-engine]] \u2014 engine untuk evaluasi ekspresi\n- [[crud-generated-table]] \u2014 UI yang dihasilkan dari column definition\n",
+        "backlinks": [
+          "article:computed-field",
+          "article:crud-generated-table",
+          "article:global-table",
+          "article:multi-relation",
+          "article:relation-data-provider"
+        ]
+      }
+    },
+    {
+      "id": "article:component-looping",
+      "type": "article",
+      "name": "Component Looping = Collection Component",
+      "filePath": "component-looping.md",
+      "summary": "Component looping bukan hanya \"component yang diulang\".",
+      "tags": [
+        "component system"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "component",
+          "template",
+          "template-component-loop",
+          "data-requirement"
+        ],
+        "category": "Component System",
+        "content": "# Component Looping = Collection Component\n\nComponent looping bukan hanya \"component yang diulang\".\n\nKonsep yang lebih tepat:\n\n> **Component memiliki mode Single atau Collection.**\n\n### Single\n\n```text\nComponent\n    \u2193\n1 data\n    \u2193\n1 output\n```\n\n### Collection\n\n```text\nComponent\n    \u2193\nCollection\n    \u2193\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 item 1       \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 item 2       \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 item 3       \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\nContoh component:\n\n```text\nDaftar Pegawai\n```\n\nRequirements:\n\n```text\nnama\nnip\njabatan\n```\n\nTemplate memilih:\n\n```text\nTable: Pegawai\n```\n\nKemudian:\n\n```text\nSelected rows:\n\u2611 Afdal\n\u2611 Budi\n\u2610 Citra\n\u2611 Dedi\n```\n\nEngine menghasilkan:\n\n```text\nAfdal\nBudi\nDedi\n```\n\n## Related Concepts\n\n- [[component]] \u2014 component memiliki mode single/collection\n- [[template]] \u2014 template menentukan source data untuk looping\n- [[template-component-loop]] \u2014 kombinasi template + component + loop\n- [[data-requirement]] \u2014 requirement yang sama untuk setiap item\n",
+        "backlinks": [
+          "article:component",
+          "article:template-component-loop"
+        ]
+      }
+    },
+    {
+      "id": "article:component",
+      "type": "article",
+      "name": "Component Persuratan = Reusable Document Block",
+      "filePath": "component.md",
+      "summary": "Component adalah:",
+      "tags": [
+        "component system"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "data-requirement",
+          "component-looping",
+          "template",
+          "data-binding",
+          "konsep-utama"
+        ],
+        "category": "Component System",
+        "content": "# Component Persuratan = Reusable Document Block\n\nComponent adalah:\n\n> **Potongan dokumen yang dapat digunakan berulang kali.**\n\nContoh:\n\n```text\nKop Surat\n```\n\n```text\nIdentitas Pegawai\n```\n\n```text\nParagraf Menimbang\n```\n\n```text\nTabel Daftar Pegawai\n```\n\n```text\nTanda Tangan\n```\n\n```text\nFooter\n```\n\nComponent memiliki:\n\n```text\nComponent\n\u2502\n\u251c\u2500\u2500 Name\n\u251c\u2500\u2500 Looping\n\u251c\u2500\u2500 Content\n\u251c\u2500\u2500 Data Requirements\n\u2514\u2500\u2500 Preview\n```\n\n## Component Bukan Data\n\nIni prinsip yang sangat penting.\n\nComponent **tidak memiliki data final**.\n\nComponent hanya mengatakan:\n\n```text\nSaya membutuhkan:\n\nnama\nnip\njabatan\n```\n\nKemudian Template yang memberikan sumber datanya.\n\nJadi:\n\n```text\nComponent\n    \u2502\n    \u2502 requires\n    \u25bc\nData Requirement\n    \u2502\n    \u2502 supplied by\n    \u25bc\nTemplate\n```\n\nDengan demikian component bisa digunakan berkali-kali.\n\n## Related Concepts\n\n- [[data-requirement]] \u2014 contract antara component dan template\n- [[component-looping]] \u2014 component mode single vs collection\n- [[template]] \u2014 template menyediakan data untuk component\n- [[data-binding]] \u2014 binding data ke component\n- [[konsep-utama]]\n",
+        "backlinks": [
+          "article:architecture-principles",
+          "article:component-looping",
+          "article:context-menu",
+          "article:core-object-model",
+          "article:data-binding",
+          "article:data-requirement",
+          "article:final-concept",
+          "article:konsep-utama",
+          "article:overall-flow",
+          "article:rendering-engine",
+          "article:rich-text-template",
+          "article:template-component-loop",
+          "article:template",
+          "article:unified-data-language"
+        ]
+      }
+    },
+    {
+      "id": "article:computed-field",
+      "type": "article",
+      "name": "Operation Column = Computed Field",
+      "filePath": "computed-field.md",
+      "summary": "`hidden-operation-text` dan `readonly-operation-text` sebaiknya dianggap sebagai:",
+      "tags": [
+        "data layer"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "column-type",
+          "expression-engine",
+          "global-table"
+        ],
+        "category": "Data Layer",
+        "content": "# Operation Column = Computed Field\n\n`hidden-operation-text` dan `readonly-operation-text` sebaiknya dianggap sebagai:\n\n> **Computed Field**\n\nbukan sekadar input type.\n\nMisalnya:\n\n```text\nharga \u00d7 jumlah\n```\n\nmenghasilkan:\n\n```text\n20000 \u00d7 3 = 60000\n```\n\nAtau:\n\n```text\nnama + \" - \" + jabatan\n```\n\nmenghasilkan:\n\n```text\nAfdal - Programmer\n```\n\nMaka konsepnya:\n\n```text\nComputed Field\n       \u2502\n       \u251c\u2500\u2500 Expression\n       \u2502\n       \u251c\u2500\u2500 Dependencies\n       \u2502\n       \u2514\u2500\u2500 Result\n```\n\n### Perbedaan\n\n**Hidden Computed**\n\n```text\nData \u2192 dihitung \u2192 disimpan\n```\n\ntetapi input tidak ditampilkan.\n\n**Readonly Computed**\n\n```text\nData \u2192 dihitung \u2192 ditampilkan\n```\n\ntetapi user tidak dapat mengubah hasilnya.\n\n## Related Concepts\n\n- [[column-type]] \u2014 type menentukan behavior\n- [[expression-engine]] \u2014 engine untuk evaluasi ekspresi\n- [[global-table]] \u2014 computed field adalah bagian dari column definition\n",
+        "backlinks": [
+          "article:column-type",
+          "article:expression-engine",
+          "article:global-table"
+        ]
+      }
+    },
+    {
+      "id": "article:context-menu",
+      "type": "article",
+      "name": "Context Menu = Insert Dynamic Component",
+      "filePath": "context-menu.md",
+      "summary": "Saat user klik kanan pada editor:",
+      "tags": [
+        "template system"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "rich-text-template",
+          "component",
+          "data-requirement",
+          "data-binding"
+        ],
+        "category": "Template System",
+        "content": "# Context Menu = Insert Dynamic Component\n\nSaat user klik kanan pada editor:\n\n```text\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Insert Component             \u2502\n\u2502 Insert Dynamic Text          \u2502\n\u2502 Insert Dynamic Image         \u2502\n\u2502 Insert Table                 \u2502\n\u2502 Insert Page Break            \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\nJika memilih component:\n\n```text\nComponent:\nIdentitas Pegawai\n```\n\nsistem membaca:\n\n```text\nRequirements:\n\nnama\nnip\njabatan\n```\n\nKemudian meminta user menentukan sumber data.\n\n## Related Concepts\n\n- [[rich-text-template]] \u2014 editor di mana context menu muncul\n- [[component]] \u2014 component yang diinsert\n- [[data-requirement]] \u2014 requirement yang dibaca saat insert\n- [[data-binding]] \u2014 user menentukan sumber data\n",
+        "backlinks": [
+          "article:rich-text-template",
+          "article:template"
+        ]
+      }
+    },
+    {
+      "id": "article:core-object-model",
+      "type": "article",
+      "name": "Core Object Model",
+      "filePath": "core-object-model.md",
+      "summary": "Jika diringkas menjadi objek:",
+      "tags": [
+        "platform architecture"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "global-table",
+          "component",
+          "template",
+          "administration",
+          "konsep-utama"
+        ],
+        "category": "Platform Architecture",
+        "content": "# Core Object Model\n\nJika diringkas menjadi objek:\n\n```text\nGLOBAL TABLE\n    \u2502\n    \u2514\u2500\u2500 COLUMN\n\nCOMPONENT\n    \u2502\n    \u2514\u2500\u2500 DATA REQUIREMENT\n\nTEMPLATE\n    \u2502\n    \u251c\u2500\u2500 CONTENT\n    \u251c\u2500\u2500 COMPONENT\n    \u251c\u2500\u2500 BINDING\n    \u251c\u2500\u2500 LOOP\n    \u2514\u2500\u2500 CONDITION\n\nADMINISTRATION\n    \u2502\n    \u2514\u2500\u2500 STEP\n          \u2502\n          \u251c\u2500\u2500 TEMPLATE\n          \u2514\u2500\u2500 DATA\n\nDOCUMENT\n    \u2502\n    \u251c\u2500\u2500 DATA SNAPSHOT\n    \u251c\u2500\u2500 TEMPLATE VERSION\n    \u2514\u2500\u2500 RENDERED OUTPUT\n```\n\n## Related Concepts\n\n- [[global-table]] \u2014 data engine\n- [[component]] \u2014 reusable document block\n- [[template]] \u2014 blueprint dokumen\n- [[administration]] \u2014 workflow dokumen\n- [[konsep-utama]]\n",
+        "backlinks": [
+          "article:final-concept"
+        ]
+      }
+    },
+    {
+      "id": "article:crud-generated-table",
+      "type": "article",
+      "name": "CRUD Generated Table",
+      "filePath": "crud-generated-table.md",
+      "summary": "Global Table secara otomatis menghasilkan behavior:",
+      "tags": [
+        "data layer"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "global-table",
+          "column-type"
+        ],
+        "category": "Data Layer",
+        "content": "# CRUD Generated Table\n\nGlobal Table secara otomatis menghasilkan behavior:\n\n```text\nBrowse\n   \u2502\n   \u251c\u2500\u2500 Search\n   \u251c\u2500\u2500 Column visibility\n   \u251c\u2500\u2500 Sorting\n   \u2514\u2500\u2500 Pagination\n\nCreate\n   \u2502\n   \u2514\u2500\u2500 Generate form dari Column Definition\n\nEdit\n   \u2502\n   \u2514\u2500\u2500 Generate form dari Column Definition\n\nDelete\n```\n\nMisalnya column:\n\n```text\nname = \"tanggal_lahir\"\ntype = \"date\"\nformat = \"m-d-Y\"\nrequired = true\nsearchable = true\norderable = true\n```\n\nUI otomatis mengetahui:\n\n```text\nInput     \u2192 Date Picker\nDisplay   \u2192 08-30-2026\nRequired  \u2192 Yes\nSearch    \u2192 Enabled\nSort      \u2192 Enabled\n```\n\n## Related Concepts\n\n- [[global-table]] \u2014 global table menghasilkan CRUD\n- [[column-type]] \u2014 type menentukan UI component\n",
+        "backlinks": [
+          "article:column-type",
+          "article:global-table"
+        ]
+      }
+    },
+    {
+      "id": "article:data-binding",
+      "type": "article",
+      "name": "Data Binding",
+      "filePath": "data-binding.md",
+      "summary": "Setiap kebutuhan component harus memiliki binding.",
+      "tags": [
+        "template system"
+      ],
+      "complexity": "moderate",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "component",
+          "data-requirement",
+          "template",
+          "expression-engine",
+          "unified-data-language",
+          "global-table"
+        ],
+        "category": "Template System",
+        "content": "# Data Binding\n\nSetiap kebutuhan component harus memiliki binding.\n\nMisalnya component membutuhkan:\n\n```text\nnama\nnip\njabatan\n```\n\nTemplate memberikan:\n\n```text\nnama\n   \u2193\nAdministrasi.nama\n\nnip\n   \u2193\nPegawai.nip\n\njabatan\n   \u2193\nPegawai.jabatan\n```\n\nSumber data dapat berasal dari:\n\n```text\n1. Administration Data\n2. Global Table\n3. Manual Input\n4. Expression\n5. System Data\n```\n\nContoh:\n\n```text\n{{current_date}}\n{{user.name}}\n{{administration.nama}}\n{{pegawai.nip}}\n```\n\n## Related Concepts\n\n- [[component]] \u2014 component memiliki data requirement\n- [[data-requirement]] \u2014 requirement yang harus di-bind\n- [[template]] \u2014 template menentukan binding\n- [[expression-engine]] \u2014 expression dapat digunakan sebagai binding\n- [[unified-data-language]] \u2014 satu bahasa data untuk binding\n- [[global-table]] \u2014 data dari global table sebagai sumber binding\n",
+        "backlinks": [
+          "article:component",
+          "article:context-menu",
+          "article:data-requirement",
+          "article:expression-engine",
+          "article:relation-data-provider",
+          "article:rendering-engine",
+          "article:rich-text-template",
+          "article:template-component-loop",
+          "article:template",
+          "article:unified-data-language"
+        ]
+      }
+    },
+    {
+      "id": "article:data-requirement",
+      "type": "article",
+      "name": "Data Requirement = Contract",
+      "filePath": "data-requirement.md",
+      "summary": "Setiap component memiliki **data requirement**.",
+      "tags": [
+        "component system"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "component",
+          "template",
+          "data-binding",
+          "expression-engine"
+        ],
+        "category": "Component System",
+        "content": "# Data Requirement = Contract\n\nSetiap component memiliki **data requirement**.\n\nContoh:\n\n```text\nComponent:\nSurat Pernyataan\n\nRequirements:\n\nnama           \u2192 text\nnip            \u2192 text\njabatan        \u2192 text\ntanggal        \u2192 date\nfoto           \u2192 image\n```\n\nIni dapat dianggap sebagai:\n\n> **Contract antara Component dan Template.**\n\nComponent berkata:\n\n```text\nSaya membutuhkan:\nnama\nnip\njabatan\n```\n\nTemplate harus menjawab:\n\n```text\nnama      \u2192 Administrasi.nama\nnip       \u2192 Pegawai.nip\njabatan   \u2192 Pegawai.jabatan\n```\n\natau:\n\n```text\nnama \u2192 input manual\n```\n\natau:\n\n```text\nnama \u2192 expression\n```\n\n## Related Concepts\n\n- [[component]] \u2014 component memiliki data requirement\n- [[template]] \u2014 template menyediakan data binding\n- [[data-binding]] \u2014 mekanisme binding data ke component\n- [[expression-engine]] \u2014 expression dapat digunakan sebagai sumber data\n",
+        "backlinks": [
+          "article:component-looping",
+          "article:component",
+          "article:context-menu",
+          "article:data-binding"
+        ]
+      }
+    },
+    {
+      "id": "article:expression-engine",
+      "type": "article",
+      "name": "Expression Engine",
+      "filePath": "expression-engine.md",
+      "summary": "Karena operation akan digunakan di banyak tempat, sebaiknya dibuat satu konsep:",
+      "tags": [
+        "expression engine"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "computed-field",
+          "unified-data-language",
+          "global-table",
+          "data-binding",
+          "template"
+        ],
+        "category": "Expression Engine",
+        "content": "# Expression Engine\n\nKarena operation akan digunakan di banyak tempat, sebaiknya dibuat satu konsep:\n\n> **Expression Engine**\n\nEngine ini menangani:\n\n```text\n+\n-\n*\n/\n++\n\"string\"\n```\n\ndan nantinya bisa dikembangkan menjadi:\n\n```text\nIF\nELSE\nROUND\nSUM\nCOUNT\nMIN\nMAX\nDATE_FORMAT\nCONCAT\n```\n\nContoh:\n\n```text\n{{harga}} * {{jumlah}}\n```\n\natau:\n\n```text\n{{nama}} ++ \" - \" ++ {{jabatan}}\n```\n\nDengan begitu expression tidak hanya digunakan Global Table.\n\nNantinya bisa digunakan juga oleh:\n\n* Component\n* Template\n* Conditional rendering\n* Computed field\n* Document generation\n\nIni akan membuat sistem jauh lebih konsisten.\n\n## Related Concepts\n\n- [[computed-field]] \u2014 computed field menggunakan expression engine\n- [[unified-data-language]] \u2014 satu bahasa data untuk seluruh sistem\n- [[global-table]] \u2014 expression dapat digunakan di column definition\n- [[data-binding]] \u2014 binding menggunakan expression\n- [[template]] \u2014 template menggunakan expression untuk conditional/looping\n",
+        "backlinks": [
+          "article:column-type",
+          "article:computed-field",
+          "article:data-binding",
+          "article:data-requirement",
+          "article:global-table",
+          "article:rendering-engine",
+          "article:unified-data-language"
+        ]
+      }
+    },
+    {
+      "id": "article:final-concept",
+      "type": "article",
+      "name": "Konsep Final yang Paling Sederhana",
+      "filePath": "final-concept.md",
+      "summary": "Kalau seluruh aplikasi harus dijelaskan kepada developer hanya dengan **satu diagram**, saya akan menggunakan ini:",
+      "tags": [
+        "platform architecture"
+      ],
+      "complexity": "moderate",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "konsep-utama",
+          "global-table",
+          "component",
+          "template",
+          "administration",
+          "rendering-engine",
+          "architecture-principles",
+          "core-object-model"
+        ],
+        "category": "Platform Architecture",
+        "content": "# Konsep Final yang Paling Sederhana\n\nKalau seluruh aplikasi harus dijelaskan kepada developer hanya dengan **satu diagram**, saya akan menggunakan ini:\n\n```text\n                         \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                         \u2502    GLOBAL TABLE   \u2502\n                         \u2502                   \u2502\n                         \u2502 Data Definition   \u2502\n                         \u2502 Columns           \u2502\n                         \u2502 Relations         \u2502\n                         \u2502 Computed Fields   \u2502\n                         \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                   \u2502\n                                   \u2502 DATA\n                                   \u25bc\n                         \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                         \u2502    COMPONENT      \u2502\n                         \u2502                   \u2502\n                         \u2502 Reusable Content  \u2502\n                         \u2502 Data Requirement  \u2502\n                         \u2502 Single / Loop     \u2502\n                         \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                   \u2502\n                                   \u2502 COMPOSE\n                                   \u25bc\n                         \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                         \u2502     TEMPLATE      \u2502\n                         \u2502                   \u2502\n                         \u2502 RichText          \u2502\n                         \u2502 Component         \u2502\n                         \u2502 Binding           \u2502\n                         \u2502 Loop               \u2502\n                         \u2502 Condition         \u2502\n                         \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                   \u2502\n                                   \u2502 USED BY\n                                   \u25bc\n                         \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                         \u2502  ADMINISTRATION   \u2502\n                         \u2502                   \u2502\n                         \u2502 Workflow          \u2502\n                         \u2502 Step 1            \u2502\n                         \u2502 Step 2            \u2502\n                         \u2502 Step 3            \u2502\n                         \u2502 Data Completion   \u2502\n                         \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                                   \u2502\n                                   \u2502 GENERATE\n                                   \u25bc\n                         \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                         \u2502     DOCUMENT      \u2502\n                         \u2502                   \u2502\n                         \u2502 Data Snapshot     \u2502\n                         \u2502 Rendered Content  \u2502\n                         \u2502 PDF               \u2502\n                         \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\n## Related Concepts\n\n- [[konsep-utama]]\n- [[global-table]]\n- [[component]]\n- [[template]]\n- [[administration]]\n- [[rendering-engine]]\n- [[architecture-principles]]\n- [[core-object-model]]\n",
+        "backlinks": [
+          "article:architecture-principles"
+        ]
+      }
+    },
+    {
+      "id": "article:generated-menu",
+      "type": "article",
+      "name": "Generated Menu",
+      "filePath": "generated-menu.md",
+      "summary": "Menu tidak dibuat manual satu per satu.",
+      "tags": [
+        "ui generation"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "global-table",
+          "administration",
+          "konsep-utama"
+        ],
+        "category": "UI Generation",
+        "content": "# Generated Menu\n\nMenu tidak dibuat manual satu per satu.\n\nKetika Global Table dibuat:\n\n```text\nGlobal Table:\nPegawai\n```\n\nsistem dapat menghasilkan:\n\n```text\nData\n \u2514\u2500\u2500 Pegawai\n```\n\nKetika Administration dibuat:\n\n```text\nAdministration:\nSurat Keputusan\n```\n\nsistem menghasilkan:\n\n```text\nPersuratan\n \u2514\u2500\u2500 Surat Keputusan\n```\n\nJadi menu merupakan:\n\n> **Projection dari metadata yang sudah dibuat user.**\n\nBukan hard-coded menu.\n\n## Related Concepts\n\n- [[global-table]] \u2014 menu dihasilkan dari global table metadata\n- [[administration]] \u2014 menu dihasilkan dari administration metadata\n- [[konsep-utama]]\n",
+        "backlinks": [
+          "article:global-table"
+        ]
+      }
+    },
+    {
+      "id": "article:global-table",
+      "type": "article",
+      "name": "Global Table = Data Engine",
+      "filePath": "global-table.md",
+      "summary": "**Global Table** adalah fondasi penyimpanan data dinamis.",
+      "tags": [
+        "data layer"
+      ],
+      "complexity": "moderate",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "column-type",
+          "computed-field",
+          "expression-engine",
+          "crud-generated-table",
+          "relation-data-provider",
+          "generated-menu",
+          "konsep-utama"
+        ],
+        "category": "Data Layer",
+        "content": "# Global Table = Data Engine\n\n**Global Table** adalah fondasi penyimpanan data dinamis.\n\nTujuannya:\n\n> User dapat membuat struktur tabel tanpa developer membuat migration/entity/controller/service baru secara manual.\n\nContoh user membuat:\n\n```text\nPegawai\n```\n\ndengan columns:\n\n```text\nnama\nnip\njabatan\npangkat\ntanggal_lahir\nfoto\nstatus\n```\n\nSistem kemudian menyediakan CRUD secara otomatis berdasarkan definisi tersebut.\n\nJadi:\n\n```text\nGlobal Table Definition\n        \u2502\n        \u251c\u2500\u2500 Table Name\n        \u251c\u2500\u2500 Display Name\n        \u2502\n        \u2514\u2500\u2500 Columns\n              \u251c\u2500\u2500 Name\n              \u251c\u2500\u2500 Display Name\n              \u251c\u2500\u2500 Type\n              \u251c\u2500\u2500 Default Value\n              \u251c\u2500\u2500 Required\n              \u251c\u2500\u2500 Searchable\n              \u2514\u2500\u2500 Orderable\n```\n\nGlobal Table bukan sekadar tabel database.\n\nIa adalah:\n\n> **Metadata yang mendefinisikan struktur, behavior, dan UI sebuah data table.**\n\n## Related Concepts\n\n- [[column-type]] \u2014 tipe data menentukan behavior input/display\n- [[computed-field]] \u2014 field hasil kalkulasi\n- [[expression-engine]] \u2014 engine untuk evaluasi ekspresi\n- [[crud-generated-table]] \u2014 CRUD behavior yang dihasilkan otomatis\n- [[relation-data-provider]] \u2014 relasi antar tabel\n- [[generated-menu]] \u2014 menu yang dihasilkan dari metadata\n- [[konsep-utama]]\n",
+        "backlinks": [
+          "article:architecture-principles",
+          "article:column-type",
+          "article:computed-field",
+          "article:core-object-model",
+          "article:crud-generated-table",
+          "article:data-binding",
+          "article:expression-engine",
+          "article:final-concept",
+          "article:generated-menu",
+          "article:konsep-utama",
+          "article:multi-relation",
+          "article:overall-flow",
+          "article:relation-data-provider",
+          "article:template-component-loop",
+          "article:unified-data-language"
+        ]
+      }
+    },
+    {
+      "id": "article:konsep-utama",
+      "type": "article",
+      "name": "Konsep Utama \u2014 Dynamic Administration & Document Composition Platform",
+      "filePath": "konsep-utama.md",
+      "summary": "Aplikasi dibangun dengan konsep:",
+      "tags": [
+        "platform architecture"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "global-table",
+          "component",
+          "template",
+          "administration",
+          "overall-flow"
+        ],
+        "category": "Platform Architecture",
+        "content": "# Konsep Utama \u2014 Dynamic Administration & Document Composition Platform\n\nAplikasi dibangun dengan konsep:\n\n> **Data \u2192 Component \u2192 Template \u2192 Administration \u2192 Document**\n\natau secara keseluruhan:\n\n```text\n                    PLATFORM\n                       \u2502\n        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n        \u2502              \u2502              \u2502\n        \u25bc              \u25bc              \u25bc\n   GLOBAL TABLE    COMPONENT       TEMPLATE\n        \u2502              \u2502              \u2502\n        \u2502              \u2502              \u2502\n        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                       \u2502\n                       \u25bc\n               ADMINISTRATION\n                       \u2502\n                       \u25bc\n                GENERATED DOCUMENT\n                       \u2502\n                       \u25bc\n                     PDF\n```\n\nMasing-masing bagian memiliki tanggung jawab berbeda.\n\nLihat juga: [[global-table]], [[component]], [[template]], [[administration]], [[overall-flow]]\n",
+        "backlinks": [
+          "article:administration",
+          "article:architecture-principles",
+          "article:component",
+          "article:core-object-model",
+          "article:final-concept",
+          "article:generated-menu",
+          "article:global-table",
+          "article:overall-flow"
+        ]
+      }
+    },
+    {
+      "id": "article:multi-relation",
+      "type": "article",
+      "name": "Multi Relation",
+      "filePath": "multi-relation.md",
+      "summary": "Untuk:",
+      "tags": [
+        "data layer"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "relation-data-provider",
+          "global-table",
+          "column-type"
+        ],
+        "category": "Data Layer",
+        "content": "# Multi Relation\n\nUntuk:\n\n```text\nselect table relation multiple\n```\n\nhasilnya bukan satu relation:\n\n```text\npegawai \u2192 department\n```\n\ntetapi collection:\n\n```text\npegawai \u2192 departments[]\n```\n\nContoh:\n\n```text\n\u2611 Teknologi Informasi\n\u2611 Keuangan\n\u2610 Kepegawaian\n```\n\nKemudian data disimpan sebagai relationship collection.\n\n## Related Concepts\n\n- [[relation-data-provider]] \u2014 single relation\n- [[global-table]] \u2014 multi relation adalah bagian dari global table\n- [[column-type]] \u2014 select-table-relation-multiple sebagai column type\n",
+        "backlinks": [
+          "article:relation-data-provider"
+        ]
+      }
+    },
+    {
+      "id": "article:multi-template-administration",
+      "type": "article",
+      "name": "Administration Tidak Harus Memiliki Template Tunggal",
+      "filePath": "multi-template-administration.md",
+      "summary": "Satu Administration dapat terdiri dari beberapa Template.",
+      "tags": [
+        "administration system"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "administration",
+          "template",
+          "step"
+        ],
+        "category": "Administration System",
+        "content": "# Administration Tidak Harus Memiliki Template Tunggal\n\nSatu Administration dapat terdiri dari beberapa Template.\n\nContoh:\n\n```text\nAdministration\nSurat Perjalanan Dinas\n\u2502\n\u251c\u2500\u2500 Step 1\n\u2502   \u2514\u2500\u2500 Template: Surat Tugas\n\u2502\n\u251c\u2500\u2500 Step 2\n\u2502   \u2514\u2500\u2500 Template: Surat Perjalanan Dinas\n\u2502\n\u251c\u2500\u2500 Step 3\n\u2502   \u2514\u2500\u2500 Template: Rincian Biaya\n\u2502\n\u2514\u2500\u2500 Step 4\n    \u2514\u2500\u2500 Template: Laporan Perjalanan\n```\n\nJadi:\n\n> **Administration adalah workflow dokumen.**\n\nSedangkan:\n\n> **Template adalah blueprint dokumen pada suatu step.**\n\n## Related Concepts\n\n- [[administration]] \u2014 administration menggunakan template\n- [[template]] \u2014 template adalah blueprint dokumen\n- [[step]] \u2014 step adalah tahap pengumpulan data\n",
+        "backlinks": [
+          "article:administration",
+          "article:step"
+        ]
+      }
+    },
+    {
+      "id": "article:overall-flow",
+      "type": "article",
+      "name": "Alur Keseluruhan",
+      "filePath": "overall-flow.md",
+      "summary": "Ini adalah core flow aplikasi:",
+      "tags": [
+        "platform architecture"
+      ],
+      "complexity": "moderate",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "global-table",
+          "component",
+          "template",
+          "administration",
+          "rendering-engine",
+          "runtime-flow",
+          "konsep-utama"
+        ],
+        "category": "Platform Architecture",
+        "content": "# Alur Keseluruhan\n\nIni adalah core flow aplikasi:\n\n```text\n                    GLOBAL TABLE\n                         \u2502\n                         \u2502 menyediakan data\n                         \u25bc\n                  DATA AVAILABLE\n                         \u2502\n                         \u2502\n                         \u25bc\n                    COMPONENT\n                         \u2502\n                membutuhkan data\n                         \u2502\n                         \u25bc\n                 DATA REQUIREMENT\n                         \u2502\n                         \u2502 digunakan oleh\n                         \u25bc\n                     TEMPLATE\n                         \u2502\n                  disusun menjadi\n                         \u2502\n                         \u25bc\n                    DOCUMENT\n                         \u2502\n                         \u2502 digunakan oleh\n                         \u25bc\n                 ADMINISTRATION\n                         \u2502\n                     memiliki\n                         \u2502\n                         \u25bc\n                      STEPS\n                         \u2502\n                  mengumpulkan data\n                         \u2502\n                         \u25bc\n                  DATA COMPLETION\n                         \u2502\n                         \u25bc\n                  RENDER ENGINE\n                         \u2502\n                 \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                 \u25bc                \u25bc\n               HTML              PDF\n```\n\n## Related Concepts\n\n- [[global-table]] \u2014 fondasi data\n- [[component]] \u2014 reusable document block\n- [[template]] \u2014 blueprint dokumen\n- [[administration]] \u2014 workflow dokumen\n- [[rendering-engine]] \u2014 engine untuk render dokumen\n- [[runtime-flow]] \u2014 flow runtime saat user membuat surat\n- [[konsep-utama]]\n",
+        "backlinks": [
+          "article:administration",
+          "article:konsep-utama",
+          "article:rendering-engine",
+          "article:runtime-flow"
+        ]
+      }
+    },
+    {
+      "id": "article:relation-data-provider",
+      "type": "article",
+      "name": "Relation sebagai Data Provider",
+      "filePath": "relation-data-provider.md",
+      "summary": "`select table relation` sebaiknya dianggap sebagai:",
+      "tags": [
+        "data layer"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "global-table",
+          "multi-relation",
+          "column-type",
+          "data-binding"
+        ],
+        "category": "Data Layer",
+        "content": "# Relation sebagai Data Provider\n\n`select table relation` sebaiknya dianggap sebagai:\n\n> **Relationship Data Provider**\n\nContoh:\n\n```text\nPegawai\n   \u2502\n   \u2514\u2500\u2500 department_id\n             \u2502\n             \u25bc\n        Department\n```\n\nSelector mengambil:\n\n```text\nDepartment\n\u251c\u2500\u2500 code\n\u251c\u2500\u2500 name\n\u2514\u2500\u2500 description\n```\n\nTetapi user dapat menentukan:\n\n```text\nDisplay:\n\u2611 code\n\u2611 name\n\nValue:\nid\n```\n\nHasil:\n\n```text\n001 - Teknologi Informasi\n002 - Keuangan\n003 - Kepegawaian\n```\n\n## Related Concepts\n\n- [[global-table]] \u2014 relation adalah bagian dari global table\n- [[multi-relation]] \u2014 multiple relation\n- [[column-type]] \u2014 select-table-relation sebagai column type\n- [[data-binding]] \u2014 relation sebagai sumber data binding\n",
+        "backlinks": [
+          "article:global-table",
+          "article:multi-relation"
+        ]
+      }
+    },
+    {
+      "id": "article:rendering-engine",
+      "type": "article",
+      "name": "Rendering Engine",
+      "filePath": "rendering-engine.md",
+      "summary": "Semua dokumen akhirnya diproses oleh satu engine:",
+      "tags": [
+        "rendering"
+      ],
+      "complexity": "moderate",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "template",
+          "component",
+          "data-binding",
+          "expression-engine",
+          "runtime-flow",
+          "overall-flow"
+        ],
+        "category": "Rendering",
+        "content": "# Rendering Engine\n\nSemua dokumen akhirnya diproses oleh satu engine:\n\n```text\n             RENDER ENGINE\n                  \u2502\n        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n        \u25bc         \u25bc          \u25bc\n      Data     Component   Template\n        \u2502         \u2502          \u2502\n        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                  \u25bc\n            Resolve Tree\n                  \u2502\n        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n        \u25bc         \u25bc         \u25bc\n      Binding    Loop    Condition\n        \u2502         \u2502         \u2502\n        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                  \u25bc\n              HTML DOM\n                  \u2502\n                  \u25bc\n                 PDF\n```\n\nEngine harus mengetahui cara menangani:\n\n```text\nText\nImage\nRichText\nComponent\nLoop\nCondition\nTable\nPage Break\nData Binding\nExpression\n```\n\n## Related Concepts\n\n- [[template]] \u2014 template di-render oleh engine\n- [[component]] \u2014 component di-resolve oleh engine\n- [[data-binding]] \u2014 binding di-resolve oleh engine\n- [[expression-engine]] \u2014 expression dievaluasi oleh engine\n- [[runtime-flow]] \u2014 flow rendering saat user membuat surat\n- [[overall-flow]] \u2014 alur keseluruhan sistem\n",
+        "backlinks": [
+          "article:architecture-principles",
+          "article:final-concept",
+          "article:overall-flow",
+          "article:runtime-flow"
+        ]
+      }
+    },
+    {
+      "id": "article:rich-text-template",
+      "type": "article",
+      "name": "Rich Text Template = Composition Canvas",
+      "filePath": "rich-text-template.md",
+      "summary": "Editor template adalah tempat user menyusun dokumen.",
+      "tags": [
+        "template system"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "template",
+          "context-menu",
+          "component",
+          "data-binding"
+        ],
+        "category": "Template System",
+        "content": "# Rich Text Template = Composition Canvas\n\nEditor template adalah tempat user menyusun dokumen.\n\nMisalnya:\n\n```text\nDengan ini menerangkan bahwa:\n\n[ COMPONENT: Identitas Pegawai ]\n\nYang bersangkutan telah melaksanakan:\n\n[ COMPONENT: Daftar Kegiatan ]\n\nDemikian surat ini dibuat.\n\n[ COMPONENT: Tanda Tangan ]\n```\n\nJadi editor bukan sekadar richtext editor.\n\nIa sebenarnya adalah:\n\n> **Document Composition Canvas**\n\nyang dapat berisi:\n\n```text\nText\nImage\nTable\nComponent\nDynamic Data\nLoop\nCondition\nPage Break\n```\n\n## Related Concepts\n\n- [[template]] \u2014 template adalah blueprint dokumen\n- [[context-menu]] \u2014 context menu untuk insert dynamic component\n- [[component]] \u2014 component diinsert ke dalam template\n- [[data-binding]] \u2014 binding data diatur di editor\n",
+        "backlinks": [
+          "article:context-menu",
+          "article:template"
+        ]
+      }
+    },
+    {
+      "id": "article:runtime-flow",
+      "type": "article",
+      "name": "Runtime Flow",
+      "filePath": "runtime-flow.md",
+      "summary": "Ketika user membuat surat:",
+      "tags": [
+        "rendering"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "administration",
+          "step",
+          "rendering-engine",
+          "overall-flow"
+        ],
+        "category": "Rendering",
+        "content": "# Runtime Flow\n\nKetika user membuat surat:\n\n```text\nUser\n \u2502\n \u25bc\nPilih Administration\n \u2502\n \u25bc\nStep 1\n \u2502\n \u251c\u2500\u2500 isi data\n \u2502\n \u25bc\nStep 2\n \u2502\n \u251c\u2500\u2500 pilih template\n \u2502\n \u251c\u2500\u2500 pilih data\n \u2502\n \u25bc\nStep 3\n \u2502\n \u251c\u2500\u2500 isi data\n \u2502\n \u25bc\nComplete\n \u2502\n \u25bc\nResolve Data\n \u2502\n \u25bc\nResolve Component\n \u2502\n \u25bc\nResolve Binding\n \u2502\n \u25bc\nResolve Loop\n \u2502\n \u25bc\nResolve Condition\n \u2502\n \u25bc\nRender Document\n \u2502\n \u25bc\nPDF\n```\n\n## Related Concepts\n\n- [[administration]] \u2014 user memilih administration\n- [[step]] \u2014 step-step dalam administration\n- [[rendering-engine]] \u2014 engine untuk render dokumen\n- [[overall-flow]] \u2014 alur keseluruhan sistem\n",
+        "backlinks": [
+          "article:overall-flow",
+          "article:rendering-engine"
+        ]
+      }
+    },
+    {
+      "id": "article:step",
+      "type": "article",
+      "name": "Step = Data Gathering Session",
+      "filePath": "step.md",
+      "summary": "Step merupakan:",
+      "tags": [
+        "administration system"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "administration",
+          "template",
+          "multi-template-administration"
+        ],
+        "category": "Administration System",
+        "content": "# Step = Data Gathering Session\n\nStep merupakan:\n\n> **Satu tahap pengumpulan data.**\n\nContoh:\n\n```text\nStep 1\nInformasi Surat\n\n- nomor surat\n- tanggal\n- perihal\n\nStep 2\nInformasi Pegawai\n\n- nama\n- NIP\n- jabatan\n\nStep 3\nInformasi Keputusan\n\n- dasar keputusan\n- tanggal berlaku\n```\n\nStep dapat dibuat sebanyak yang diperlukan.\n\n## Related Concepts\n\n- [[administration]] \u2014 administration memiliki step-step\n- [[template]] \u2014 step dapat menggunakan template\n- [[multi-template-administration]] \u2014 satu administration bisa memiliki beberapa template\n",
+        "backlinks": [
+          "article:administration",
+          "article:multi-template-administration",
+          "article:runtime-flow"
+        ]
+      }
+    },
+    {
+      "id": "article:template-component-loop",
+      "type": "article",
+      "name": "Template + Component + Loop",
+      "filePath": "template-component-loop.md",
+      "summary": "Inilah kombinasi paling penting.",
+      "tags": [
+        "template system"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "template",
+          "component",
+          "component-looping",
+          "data-binding",
+          "global-table"
+        ],
+        "category": "Template System",
+        "content": "# Template + Component + Loop\n\nInilah kombinasi paling penting.\n\nMisalnya:\n\n```text\nTemplate Surat Tugas\n```\n\nberisi:\n\n```text\nDengan ini menugaskan:\n\n[ Component: Daftar Pegawai ]\n```\n\nComponent:\n\n```text\nis_looping = true\n```\n\nRequirement:\n\n```text\nnama\nnip\njabatan\n```\n\nTemplate menentukan:\n\n```text\nSource:\nGlobal Table \u2192 Pegawai\n\nRows:\n\u2611 Afdal\n\u2611 Budi\n\u2611 Citra\n```\n\nRenderer:\n\n```text\nfor each selected employee:\n\n    render Component\n```\n\nOutput:\n\n```text\n1. Afdal\n   NIP: 123\n   Jabatan: Programmer\n\n2. Budi\n   NIP: 456\n   Jabatan: Analis\n\n3. Citra\n   NIP: 789\n   Jabatan: Staff\n```\n\n## Related Concepts\n\n- [[template]] \u2014 template adalah blueprint dokumen\n- [[component]] \u2014 component di-loop oleh template\n- [[component-looping]] \u2014 component mode collection\n- [[data-binding]] \u2014 binding data untuk setiap item\n- [[global-table]] \u2014 source data dari global table\n",
+        "backlinks": [
+          "article:component-looping",
+          "article:template"
+        ]
+      }
+    },
+    {
+      "id": "article:template",
+      "type": "article",
+      "name": "Template Persuratan = Document Composition",
+      "filePath": "template.md",
+      "summary": "Template adalah:",
+      "tags": [
+        "template system"
+      ],
+      "complexity": "moderate",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "component",
+          "data-binding",
+          "rich-text-template",
+          "context-menu",
+          "template-component-loop",
+          "administration"
+        ],
+        "category": "Template System",
+        "content": "# Template Persuratan = Document Composition\n\nTemplate adalah:\n\n> **Blueprint sebuah dokumen.**\n\nTemplate tidak menyimpan data surat tertentu.\n\nTemplate hanya menentukan:\n\n```text\ndokumen terdiri dari apa\n```\n\nContoh:\n\n```text\nTemplate Surat Keputusan\n\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Kop Surat                \u2502\n\u251c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 Judul                    \u2502\n\u2502 Pembukaan                \u2502\n\u2502 Menimbang                \u2502\n\u2502 Mengingat                \u2502\n\u2502 Component Pegawai        \u2502\n\u2502 Ketetapan                \u2502\n\u2502 Penutup                  \u2502\n\u2502 Tanda Tangan             \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n```\n\nTemplate terdiri dari:\n\n```text\nTemplate\n   \u2502\n   \u251c\u2500\u2500 Static Content\n   \u2502\n   \u251c\u2500\u2500 Components\n   \u2502\n   \u251c\u2500\u2500 Data Binding\n   \u2502\n   \u251c\u2500\u2500 Conditions\n   \u2502\n   \u2514\u2500\u2500 Looping\n```\n\n## Related Concepts\n\n- [[component]] \u2014 template menggunakan component\n- [[data-binding]] \u2014 binding data ke component\n- [[rich-text-template]] \u2014 editor untuk menyusun template\n- [[context-menu]] \u2014 insert dynamic component\n- [[template-component-loop]] \u2014 kombinasi template + component + loop\n- [[administration]] \u2014 administration menggunakan template\n",
+        "backlinks": [
+          "article:administration",
+          "article:architecture-principles",
+          "article:component-looping",
+          "article:component",
+          "article:core-object-model",
+          "article:data-binding",
+          "article:data-requirement",
+          "article:expression-engine",
+          "article:final-concept",
+          "article:konsep-utama",
+          "article:multi-template-administration",
+          "article:overall-flow",
+          "article:rendering-engine",
+          "article:rich-text-template",
+          "article:step",
+          "article:template-component-loop",
+          "article:unified-data-language"
+        ]
+      }
+    },
+    {
+      "id": "article:unified-data-language",
+      "type": "article",
+      "name": "Satu Bahasa Data untuk Seluruh Sistem",
+      "filePath": "unified-data-language.md",
+      "summary": "Agar sistem tidak menjadi rumit, gunakan satu konsep data reference.",
+      "tags": [
+        "expression engine"
+      ],
+      "complexity": "simple",
+      "knowledgeMeta": {
+        "wikilinks": [
+          "expression-engine",
+          "data-binding",
+          "global-table",
+          "component",
+          "template"
+        ],
+        "category": "Expression Engine",
+        "content": "# Satu Bahasa Data untuk Seluruh Sistem\n\nAgar sistem tidak menjadi rumit, gunakan satu konsep data reference.\n\nMisalnya:\n\n```text\n{{data.nama}}\n{{data.pegawai.nama}}\n{{data.pegawai.nip}}\n```\n\nUntuk collection:\n\n```text\n{{data.pegawai}}\n```\n\nUntuk expression:\n\n```text\n{{data.harga * data.jumlah}}\n```\n\nUntuk component:\n\n```text\n{{component.identitas_pegawai}}\n```\n\nDengan demikian seluruh sistem menggunakan prinsip yang sama:\n\n```text\nGlobal Table\n     \u2193\nData Context\n     \u2193\nExpression Engine\n     \u2193\nComponent\n     \u2193\nTemplate\n     \u2193\nRenderer\n```\n\n## Related Concepts\n\n- [[expression-engine]] \u2014 engine untuk evaluasi ekspresi\n- [[data-binding]] \u2014 binding menggunakan bahasa data yang sama\n- [[global-table]] \u2014 data berasal dari global table\n- [[component]] \u2014 component menggunakan data reference\n- [[template]] \u2014 template menggunakan data reference\n",
+        "backlinks": [
+          "article:data-binding",
+          "article:expression-engine"
+        ]
+      }
+    },
+    {
+      "id": "topic:platform-architecture",
+      "type": "topic",
+      "name": "Platform Architecture",
+      "summary": "Category from index: Platform Architecture (5 articles)",
+      "tags": [
+        "category"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "topic:data-layer",
+      "type": "topic",
+      "name": "Data Layer",
+      "summary": "Category from index: Data Layer (6 articles)",
+      "tags": [
+        "category"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "topic:expression-engine",
+      "type": "topic",
+      "name": "Expression Engine",
+      "summary": "Category from index: Expression Engine (2 articles)",
+      "tags": [
+        "category"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "topic:component-system",
+      "type": "topic",
+      "name": "Component System",
+      "summary": "Category from index: Component System (3 articles)",
+      "tags": [
+        "category"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "topic:template-system",
+      "type": "topic",
+      "name": "Template System",
+      "summary": "Category from index: Template System (5 articles)",
+      "tags": [
+        "category"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "topic:administration-system",
+      "type": "topic",
+      "name": "Administration System",
+      "summary": "Category from index: Administration System (3 articles)",
+      "tags": [
+        "category"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "topic:rendering",
+      "type": "topic",
+      "name": "Rendering",
+      "summary": "Category from index: Rendering (2 articles)",
+      "tags": [
+        "category"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "topic:ui-generation",
+      "type": "topic",
+      "name": "UI Generation",
+      "summary": "Category from index: UI Generation (1 articles)",
+      "tags": [
+        "category"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "source:core-conpect",
+      "type": "source",
+      "name": "core-conpect.md",
+      "filePath": "raw/core-conpect.md",
+      "summary": "Raw source (.md, 21 KB)",
+      "tags": [
+        "raw",
+        "md"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:versioning",
+      "type": "entity",
+      "name": "Versioning",
+      "summary": "Architectural principle that templates and components should maintain version history, so old documents render with the version that existed when they were created.",
+      "tags": [
+        "architecture",
+        "template",
+        "component",
+        "version"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "entity:data-snapshot",
+      "type": "entity",
+      "name": "Data Snapshot",
+      "summary": "A frozen copy of input data captured at the time a document is generated, ensuring the document remains consistent with the data state at creation time.",
+      "tags": [
+        "document",
+        "data",
+        "persistence"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "entity:template-version",
+      "type": "entity",
+      "name": "Template Version",
+      "summary": "A specific versioned revision of a template that a document references, enabling old documents to keep using the template structure they were created with.",
+      "tags": [
+        "template",
+        "version",
+        "document"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "entity:validation",
+      "type": "entity",
+      "name": "Validation Behavior",
+      "summary": "The validation rules automatically derived from column type definitions, determining what inputs are acceptable for each field.",
+      "tags": [
+        "column",
+        "data",
+        "integrity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:row-selection",
+      "type": "entity",
+      "name": "Row Selection",
+      "summary": "The process where a template chooses specific rows from a global table to populate a collection component, producing filtered output items.",
+      "tags": [
+        "component",
+        "template",
+        "data",
+        "collection"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "entity:document-output",
+      "type": "entity",
+      "name": "Document Output",
+      "summary": "The final rendered result of a document, produced by combining a template version, a data snapshot, and the rendering engine.",
+      "tags": [
+        "document",
+        "rendering",
+        "output"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:template-defines-form-administration-defines-process",
+      "type": "claim",
+      "name": "Template vs Administration distinction",
+      "summary": "Template defines document form/structure while Administration defines the data collection process that produces documents.",
+      "sourceArticle": "article:administration",
+      "tags": [
+        "claim",
+        "definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:column-type-governs-full-data-lifecycle",
+      "type": "claim",
+      "name": "Column type governs full data lifecycle",
+      "summary": "A column type determines how data is stored, input, displayed, validated, formatted, searched, and ordered \u2014 it is the single source of truth for field behavior.",
+      "sourceArticle": "article:column-type",
+      "tags": [
+        "claim",
+        "data-behavior"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:component-is-not-data",
+      "type": "claim",
+      "name": "Components do not hold final data",
+      "summary": "Components declare data requirements but never hold final data themselves; templates supply the data that fulfills component requirements.",
+      "sourceArticle": "article:component",
+      "tags": [
+        "claim",
+        "architecture",
+        "principle"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:component-has-single-or-collection-mode",
+      "type": "claim",
+      "name": "Component looping is single vs collection mode",
+      "summary": "Components operate in either single mode (1 data \u2192 1 output) or collection mode (many rows \u2192 many outputs), and collection mode uses row selection from a data source.",
+      "sourceArticle": "article:component-looping",
+      "tags": [
+        "claim",
+        "component-behavior"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:architecture-is-metadata-and-schema-driven",
+      "type": "claim",
+      "name": "System is metadata and schema driven",
+      "summary": "The platform architecture avoids hardcoding by being metadata-driven, component-driven, template-driven, data-driven, schema-driven, and renderer-driven.",
+      "sourceArticle": "article:architecture-principles",
+      "tags": [
+        "claim",
+        "architecture",
+        "principle"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:old-documents-use-version-at-creation-time",
+      "type": "claim",
+      "name": "Old documents preserve creation-time versions",
+      "summary": "When a template or component is versioned, previously generated documents continue to use the version that existed at the time they were created.",
+      "sourceArticle": "article:architecture-principles",
+      "tags": [
+        "claim",
+        "versioning",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:computed-field-expression-evaluated-by-engine",
+      "type": "claim",
+      "name": "Computed fields use expression engine",
+      "summary": "Computed fields evaluate expressions (e.g. harga \u00d7 jumlah) via the expression engine, with hidden computed storing results and readonly computed displaying them.",
+      "sourceArticle": "article:computed-field",
+      "tags": [
+        "claim",
+        "expression",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:crud-is-derived-from-column-metadata",
+      "type": "claim",
+      "name": "CRUD UI is derived from column metadata",
+      "summary": "Global tables automatically generate browse, create, edit, and delete behaviors \u2014 the UI form is produced directly from column definitions.",
+      "sourceArticle": "article:crud-generated-table",
+      "tags": [
+        "claim",
+        "ui-generation",
+        "data"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:context-menu-reads-component-requirements",
+      "type": "claim",
+      "name": "Context menu reads component requirements on insert",
+      "summary": "When a user inserts a component via the context menu, the system reads the component's data requirements and prompts the user to specify data sources.",
+      "sourceArticle": "article:context-menu",
+      "tags": [
+        "claim",
+        "template-editor",
+        "interaction"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:document-snapshot-template-version-rendered-output",
+      "type": "claim",
+      "name": "Document is composed of snapshot, version, and output",
+      "summary": "A document consists of three parts: a data snapshot (input data at creation time), a template version (template revision used), and rendered output (final result).",
+      "sourceArticle": "article:core-object-model",
+      "tags": [
+        "claim",
+        "document-model",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:schema-driven-form-from-column-definition",
+      "type": "claim",
+      "name": "Forms are generated from column definitions",
+      "summary": "UI forms are produced by a form renderer that consumes column definitions as schema \u2014 column definition flows into form renderer, which produces the input interface.",
+      "sourceArticle": "article:architecture-principles",
+      "tags": [
+        "claim",
+        "ui-generation",
+        "schema"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:generic-renderer-replaces-per-template-pdfs",
+      "type": "claim",
+      "name": "Generic renderer replaces per-template PDF generation",
+      "summary": "Instead of creating individual PDF generation logic for each template, a single generic renderer consumes any template and produces the document output.",
+      "sourceArticle": "article:architecture-principles",
+      "tags": [
+        "claim",
+        "rendering",
+        "architecture"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:system-data",
+      "type": "entity",
+      "name": "System Data",
+      "summary": "Automatically provided data values (current_date, user.name, etc.) that serve as one of five binding source types for data binding.",
+      "tags": [
+        "data-source",
+        "binding",
+        "system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:conditional-rendering",
+      "type": "entity",
+      "name": "Conditional Rendering",
+      "summary": "Runtime logic that shows or hides UI elements based on expression evaluation. Planned as a future consumer of the expression engine alongside components, templates, and computed fields.",
+      "tags": [
+        "expression",
+        "ui-generation",
+        "rendering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "entity:data-completion-tracker",
+      "type": "entity",
+      "name": "Data Completion Tracker",
+      "summary": "Mechanism within Administration that tracks whether all required data across steps and templates has been provided before a step or document can proceed.",
+      "tags": [
+        "administration",
+        "workflow",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:five-binding-source-types",
+      "type": "claim",
+      "name": "Five data binding source types",
+      "summary": "Data binding has exactly five source types: (1) Administration Data, (2) Global Table, (3) Manual Input, (4) Expression, (5) System Data.",
+      "sourceArticle": "article:data-binding",
+      "tags": [
+        "binding",
+        "architecture"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:data-requirement-as-contract",
+      "type": "claim",
+      "name": "Data requirement is a contract",
+      "summary": "Data requirement functions as a contract between Component and Template: the Component declares what data it needs, and the Template must provide bindings for all of them.",
+      "sourceArticle": "article:data-requirement",
+      "tags": [
+        "component",
+        "template",
+        "contract"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:expression-engine-cross-module-reuse",
+      "type": "claim",
+      "name": "Expression engine is designed for cross-module reuse",
+      "summary": "The expression engine is explicitly designed to be shared across Component, Template, Conditional rendering, Computed field, and Document generation \u2014 making the system more consistent than having per-module expression logic.",
+      "sourceArticle": "article:expression-engine",
+      "tags": [
+        "expression",
+        "architecture",
+        "reuse"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:document-as-data-snapshot",
+      "type": "claim",
+      "name": "Documents are immutable data snapshots",
+      "summary": "Generated documents contain a Data Snapshot, meaning the document's data is frozen at generation time and does not change when source data changes.",
+      "sourceArticle": "article:final-concept",
+      "tags": [
+        "document",
+        "immutability",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:menu-is-metadata-projection",
+      "type": "claim",
+      "name": "Menu is a projection of metadata",
+      "summary": "Navigation menus are not hard-coded; they are automatically generated as projections of user-created metadata (Global Tables and Administrations).",
+      "sourceArticle": "article:generated-menu",
+      "tags": [
+        "ui-generation",
+        "metadata"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:global-table-is-metadata-not-table",
+      "type": "claim",
+      "name": "Global Table is metadata, not a database table",
+      "summary": "Global Table is metadata that defines the structure, behavior, and UI of a data table \u2014 it is not simply a database table but a complete definition layer.",
+      "sourceArticle": "article:global-table",
+      "tags": [
+        "data-layer",
+        "metadata"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:platform-core-pipeline",
+      "type": "claim",
+      "name": "Platform core pipeline",
+      "summary": "The entire platform follows a linear pipeline: Data (Global Table) \u2192 Component \u2192 Template \u2192 Administration \u2192 Document \u2192 PDF.",
+      "sourceArticle": "article:konsep-utama",
+      "tags": [
+        "architecture",
+        "pipeline"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:admin-is-workflow-template-is-blueprint",
+      "type": "claim",
+      "name": "Administration is workflow, Template is blueprint",
+      "summary": "Administration represents a document workflow (process), while Template represents a document blueprint at a specific step (artifact). One Administration can contain multiple Templates across multiple steps.",
+      "sourceArticle": "article:multi-template-administration",
+      "tags": [
+        "administration",
+        "template",
+        "workflow"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:multi-relation-stores-collections",
+      "type": "claim",
+      "name": "Multi-relation stores relationship collections",
+      "summary": "Multi-relation does not produce a single reference (e.g., pegawai \u2192 department) but instead stores a collection of relationships (pegawai \u2192 departments[]).",
+      "sourceArticle": "article:multi-relation",
+      "tags": [
+        "data-layer",
+        "relation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:column-attributes-drive-ui-behavior",
+      "type": "claim",
+      "name": "Column attributes drive UI behavior",
+      "summary": "Global Table column attributes like Searchable and Orderable directly determine how the generated CRUD UI behaves \u2014 the UI is a reflection of column metadata.",
+      "sourceArticle": "article:global-table",
+      "tags": [
+        "data-layer",
+        "ui-generation",
+        "metadata"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:data-context",
+      "type": "entity",
+      "name": "Data Context",
+      "summary": "Intermediate layer between global table and expression engine. Raw data from global tables is loaded into a structured context object (e.g. {{data.pegawai.nama}}) that the expression engine evaluates. Bridges storage and computation.",
+      "tags": [
+        "data-layer",
+        "expression-engine",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "entity:resolve-tree",
+      "type": "entity",
+      "name": "Resolve Tree",
+      "summary": "Intermediate processing stage in the rendering engine where all references (binding, loop, condition) are resolved into a concrete document tree before producing HTML DOM or PDF output.",
+      "tags": [
+        "rendering",
+        "pipeline",
+        "architecture"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "entity:display-value-pattern",
+      "type": "entity",
+      "name": "Display-Value Separation Pattern",
+      "summary": "Pattern used in relation data providers where user-configurable display fields (shown in UI) are separated from value fields (the actual ID/reference stored). Enables human-readable selection backed by foreign keys.",
+      "tags": [
+        "data-layer",
+        "ui-pattern",
+        "relation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:sequential-pipeline",
+      "type": "entity",
+      "name": "Sequential Pipeline Architecture",
+      "summary": "Architectural pattern used throughout the system where processing occurs in a strict ordered sequence. Seen in the overall flow (global-table \u2192 component \u2192 template \u2192 administration \u2192 steps \u2192 render) and in the rendering engine (data \u2192 component \u2192 binding \u2192 loop \u2192 condition \u2192 HTML \u2192 PDF).",
+      "tags": [
+        "architecture",
+        "pipeline",
+        "system-design"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "entity:page-break",
+      "type": "entity",
+      "name": "Page Break",
+      "summary": "A rendering concern handled by the rendering engine to control document pagination. Supported as a first-class element alongside text, image, table, and other content types in both templates and the composition canvas.",
+      "tags": [
+        "rendering",
+        "template",
+        "pagination"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:collection-rendering",
+      "type": "entity",
+      "name": "Collection Rendering Pattern",
+      "summary": "Pattern where a component marked as is_looping=true iterates over selected rows from a global table source, rendering the component template once per item. Produces numbered/sequential output (e.g. 1. Afdal, 2. Budi, 3. Citra).",
+      "tags": [
+        "template",
+        "component",
+        "loop",
+        "rendering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "entity:unified-data-reference-syntax",
+      "type": "entity",
+      "name": "Unified Data Reference Syntax",
+      "summary": "Single dot-notation syntax ({{data.field}}, {{data.relation.field}}, {{component.name}}) used across the entire system for referencing data. Applies to expressions, bindings, loops, and component data, ensuring one consistent language from global table to rendered output.",
+      "tags": [
+        "expression-engine",
+        "data-binding",
+        "convention"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:static-content",
+      "type": "entity",
+      "name": "Static Content",
+      "summary": "Non-dynamic text, images, and formatting that form the fixed skeleton of a template. Unlike components, data bindings, conditions, and loops, static content does not change between document instances.",
+      "tags": [
+        "template",
+        "composition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "entity:document-composition-canvas",
+      "type": "entity",
+      "name": "Document Composition Canvas",
+      "summary": "The conceptual model of the template editor as more than a rich text editor \u2014 it is a canvas where users compose documents by inserting static text, images, tables, components, dynamic data, loops, conditions, and page breaks into a structured layout.",
+      "tags": [
+        "template",
+        "editor",
+        "ui-pattern"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:single-engine-dual-output",
+      "type": "claim",
+      "name": "Single engine produces both HTML and PDF",
+      "summary": "All documents are processed by a single rendering engine that produces both HTML DOM and PDF as output formats.",
+      "sourceArticle": "article:rendering-engine",
+      "tags": [
+        "claim",
+        "rendering"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:relation-separates-display-value",
+      "type": "claim",
+      "name": "Relations separate display from value fields",
+      "summary": "Relation selectors allow users to configure which fields are shown in the UI (display) versus which field is stored as the actual reference value, enabling human-readable selection backed by foreign keys.",
+      "sourceArticle": "article:relation-data-provider",
+      "tags": [
+        "claim",
+        "data-layer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:editor-is-composition-canvas",
+      "type": "claim",
+      "name": "Template editor is a composition canvas, not just a rich text editor",
+      "summary": "The template editor supports inserting text, images, tables, components, dynamic data, loops, conditions, and page breaks \u2014 making it a Document Composition Canvas rather than a simple WYSIWYG editor.",
+      "sourceArticle": "article:rich-text-template",
+      "tags": [
+        "claim",
+        "template"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:unified-data-syntax-across-system",
+      "type": "claim",
+      "name": "System uses one data reference syntax everywhere",
+      "summary": "The entire system uses a single dot-notation syntax ({{data.field}}, {{data.relation.field}}, {{component.name}}) from global table through expression engine, components, templates, and final rendering.",
+      "sourceArticle": "article:unified-data-language",
+      "tags": [
+        "claim",
+        "convention"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:steps-are-sequential-data-gathering",
+      "type": "claim",
+      "name": "Steps are sequential data gathering sessions",
+      "summary": "Each step in an administration represents one phase of data collection (e.g. letter info, employee info, decision info), and steps are executed sequentially until data completion.",
+      "sourceArticle": "article:step",
+      "tags": [
+        "claim",
+        "administration"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:template-component-loop-is-core",
+      "type": "claim",
+      "name": "Template+Component+Loop is the most important combination",
+      "summary": "The combination of template, component, and looping is the most important pattern in the system. It enables dynamic document generation by iterating over global table data and rendering components per item.",
+      "sourceArticle": "article:template-component-loop",
+      "tags": [
+        "claim",
+        "template",
+        "architecture"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:template-is-data-agnostic",
+      "type": "claim",
+      "name": "Templates are data-agnostic blueprints",
+      "summary": "Templates define document structure (static content, components, bindings, conditions, looping) but do not store any specific letter or document data. They are reusable blueprints.",
+      "sourceArticle": "article:template",
+      "tags": [
+        "claim",
+        "template"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:resolution-pipeline-is-ordered",
+      "type": "claim",
+      "name": "Data resolution follows a strict ordered pipeline",
+      "summary": "After step completion, data is resolved in a specific order: Resolve Data \u2192 Resolve Component \u2192 Resolve Binding \u2192 Resolve Loop \u2192 Resolve Condition \u2192 Render Document \u2192 PDF.",
+      "sourceArticle": "article:runtime-flow",
+      "tags": [
+        "claim",
+        "rendering",
+        "pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "claim:data-context-bridges-storage-computation",
+      "type": "claim",
+      "name": "Data context bridges global table storage and expression engine computation",
+      "summary": "Global table data is loaded into a data context object that the expression engine evaluates, providing a single structured interface between raw storage and computed expressions.",
+      "sourceArticle": "article:unified-data-language",
+      "tags": [
+        "claim",
+        "data-layer",
+        "expression-engine"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "claim:engine-handles-nine-element-types",
+      "type": "claim",
+      "name": "Rendering engine handles nine element types",
+      "summary": "The rendering engine must handle Text, Image, RichText, Component, Loop, Condition, Table, Page Break, and Data Binding/Expression as first-class element types.",
+      "sourceArticle": "article:rendering-engine",
+      "tags": [
+        "claim",
+        "rendering"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "article:administration",
+      "target": "article:step",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:administration",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:administration",
+      "target": "article:multi-template-administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:administration",
+      "target": "article:overall-flow",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:administration",
+      "target": "article:konsep-utama",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:architecture-principles",
+      "target": "article:konsep-utama",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:architecture-principles",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:architecture-principles",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:architecture-principles",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:architecture-principles",
+      "target": "article:rendering-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:architecture-principles",
+      "target": "article:final-concept",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:column-type",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:column-type",
+      "target": "article:computed-field",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:column-type",
+      "target": "article:expression-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:column-type",
+      "target": "article:crud-generated-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:component-looping",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:component-looping",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:component-looping",
+      "target": "article:template-component-loop",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:component-looping",
+      "target": "article:data-requirement",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:component",
+      "target": "article:data-requirement",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:component",
+      "target": "article:component-looping",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:component",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:component",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:component",
+      "target": "article:konsep-utama",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:computed-field",
+      "target": "article:column-type",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:computed-field",
+      "target": "article:expression-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:computed-field",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:context-menu",
+      "target": "article:rich-text-template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:context-menu",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:context-menu",
+      "target": "article:data-requirement",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:context-menu",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:core-object-model",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:core-object-model",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:core-object-model",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:core-object-model",
+      "target": "article:administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:core-object-model",
+      "target": "article:konsep-utama",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:crud-generated-table",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:crud-generated-table",
+      "target": "article:column-type",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-binding",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-binding",
+      "target": "article:data-requirement",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-binding",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-binding",
+      "target": "article:expression-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-binding",
+      "target": "article:unified-data-language",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-binding",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-requirement",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-requirement",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-requirement",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:data-requirement",
+      "target": "article:expression-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:expression-engine",
+      "target": "article:computed-field",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:expression-engine",
+      "target": "article:unified-data-language",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:expression-engine",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:expression-engine",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:expression-engine",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:final-concept",
+      "target": "article:konsep-utama",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:final-concept",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:final-concept",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:final-concept",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:final-concept",
+      "target": "article:administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:final-concept",
+      "target": "article:rendering-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:final-concept",
+      "target": "article:architecture-principles",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:final-concept",
+      "target": "article:core-object-model",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:generated-menu",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:generated-menu",
+      "target": "article:administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:generated-menu",
+      "target": "article:konsep-utama",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:global-table",
+      "target": "article:column-type",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:global-table",
+      "target": "article:computed-field",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:global-table",
+      "target": "article:expression-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:global-table",
+      "target": "article:crud-generated-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:global-table",
+      "target": "article:relation-data-provider",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:global-table",
+      "target": "article:generated-menu",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:global-table",
+      "target": "article:konsep-utama",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:konsep-utama",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:konsep-utama",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:konsep-utama",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:konsep-utama",
+      "target": "article:administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:konsep-utama",
+      "target": "article:overall-flow",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:multi-relation",
+      "target": "article:relation-data-provider",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:multi-relation",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:multi-relation",
+      "target": "article:column-type",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:multi-template-administration",
+      "target": "article:administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:multi-template-administration",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:multi-template-administration",
+      "target": "article:step",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "article:administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "article:rendering-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "article:runtime-flow",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "article:konsep-utama",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:relation-data-provider",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:relation-data-provider",
+      "target": "article:multi-relation",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:relation-data-provider",
+      "target": "article:column-type",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:relation-data-provider",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "article:expression-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "article:runtime-flow",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "article:overall-flow",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rich-text-template",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rich-text-template",
+      "target": "article:context-menu",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rich-text-template",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:rich-text-template",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:runtime-flow",
+      "target": "article:administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:runtime-flow",
+      "target": "article:step",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:runtime-flow",
+      "target": "article:rendering-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:runtime-flow",
+      "target": "article:overall-flow",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:step",
+      "target": "article:administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:step",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:step",
+      "target": "article:multi-template-administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template-component-loop",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template-component-loop",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template-component-loop",
+      "target": "article:component-looping",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template-component-loop",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template-component-loop",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template",
+      "target": "article:rich-text-template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template",
+      "target": "article:context-menu",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template",
+      "target": "article:template-component-loop",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:template",
+      "target": "article:administration",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:unified-data-language",
+      "target": "article:expression-engine",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:unified-data-language",
+      "target": "article:data-binding",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:unified-data-language",
+      "target": "article:global-table",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:unified-data-language",
+      "target": "article:component",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:unified-data-language",
+      "target": "article:template",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "article:konsep-utama",
+      "target": "topic:platform-architecture",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "topic:platform-architecture",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:core-object-model",
+      "target": "topic:platform-architecture",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:final-concept",
+      "target": "topic:platform-architecture",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:architecture-principles",
+      "target": "topic:platform-architecture",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:global-table",
+      "target": "topic:data-layer",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:column-type",
+      "target": "topic:data-layer",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:computed-field",
+      "target": "topic:data-layer",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:crud-generated-table",
+      "target": "topic:data-layer",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:relation-data-provider",
+      "target": "topic:data-layer",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:multi-relation",
+      "target": "topic:data-layer",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:expression-engine",
+      "target": "topic:expression-engine",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:unified-data-language",
+      "target": "topic:expression-engine",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:component",
+      "target": "topic:component-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:data-requirement",
+      "target": "topic:component-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:component-looping",
+      "target": "topic:component-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:template",
+      "target": "topic:template-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:rich-text-template",
+      "target": "topic:template-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:context-menu",
+      "target": "topic:template-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:data-binding",
+      "target": "topic:template-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:template-component-loop",
+      "target": "topic:template-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:administration",
+      "target": "topic:administration-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:step",
+      "target": "topic:administration-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:multi-template-administration",
+      "target": "topic:administration-system",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "topic:rendering",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:runtime-flow",
+      "target": "topic:rendering",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:generated-menu",
+      "target": "topic:ui-generation",
+      "type": "categorized_under",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "article:administration",
+      "target": "article:core-object-model",
+      "type": "related",
+      "description": "Administration steps are a sub-structure of the Core Object Model; administration is how data flows into documents through steps, templates, and data sources.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:architecture-principles",
+      "target": "article:column-type",
+      "type": "related",
+      "description": "Schema-driven architecture principle means column definitions implicitly define form rendering \u2014 column-type determines the UI component used in generated forms.",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "article:component-looping",
+      "target": "article:global-table",
+      "type": "related",
+      "description": "Collection mode requires selecting rows from a global table; the template acts as the bridge between component data requirements and global table data.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:computed-field",
+      "target": "article:crud-generated-table",
+      "type": "related",
+      "description": "Computed fields exist as column definitions within global tables, so they also appear in auto-generated CRUD forms with their expression behavior.",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "article:context-menu",
+      "target": "article:core-object-model",
+      "type": "related",
+      "description": "Context menu is the UI mechanism for editing template content in the Core Object Model \u2014 it reads component requirements and triggers data binding.",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "article:component",
+      "target": "article:global-table",
+      "type": "related",
+      "description": "Components declare data requirements but rely on global tables as the actual data source that fulfills those requirements.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:template",
+      "target": "article:global-table",
+      "type": "related",
+      "description": "Templates bind to global tables as their data provider, connecting document structure to the underlying data engine.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:data-binding",
+      "target": "article:administration",
+      "type": "related",
+      "description": "Data binding lists 'Administration Data' as one of five binding sources and uses examples like 'Administrasi.nama', but does not wikilink to the administration article.",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "article:data-requirement",
+      "target": "article:global-table",
+      "type": "related",
+      "description": "Data requirement examples show bindings to Global Table fields (e.g., Pegawai.nip), but the article does not wikilink to global-table as a data source.",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "article:data-requirement",
+      "target": "article:administration",
+      "type": "related",
+      "description": "Data requirement examples reference administration data paths (Administrasi.nama), but do not wikilink to administration.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:expression-engine",
+      "target": "article:component",
+      "type": "related",
+      "description": "Expression engine explicitly states it will be used by Components, but does not wikilink to the component article.",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "article:expression-engine",
+      "target": "article:rendering-engine",
+      "type": "related",
+      "description": "Expression engine lists 'Document generation' as a future consumer, which overlaps with rendering-engine's responsibility for PDF output.",
+      "weight": 0.5,
+      "direction": "forward"
+    },
+    {
+      "source": "article:final-concept",
+      "target": "article:rich-text-template",
+      "type": "related",
+      "description": "The final-concept diagram lists 'RichText' as a Template attribute, which directly corresponds to the rich-text-template article, but does not wikilink it.",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "article:konsep-utama",
+      "target": "article:rendering-engine",
+      "type": "related",
+      "description": "The konsep-utama pipeline ends with 'Generated Document \u2192 PDF', which is rendering-engine's domain, but does not wikilink to rendering-engine.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:global-table",
+      "target": "article:data-binding",
+      "type": "related",
+      "description": "Global Table data serves as one of five binding sources in data-binding, but global-table does not wikilink to data-binding.",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "article:multi-relation",
+      "target": "article:component",
+      "type": "related",
+      "description": "Multi-relation data (relationship collections) is consumed by components via data requirements, but multi-relation does not wikilink to component.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:generated-menu",
+      "target": "article:component",
+      "type": "related",
+      "description": "Generated menu derives from global-table and administration metadata, both of which contain components, but generated-menu does not account for the component layer that feeds into administration.",
+      "weight": 0.4,
+      "direction": "forward"
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "entity:data-context",
+      "type": "related",
+      "description": "The DATA AVAILABLE stage in the overall flow implies creation of a data context from global table data before it reaches components.",
+      "weight": 0.8,
+      "direction": "forward"
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "entity:resolve-tree",
+      "type": "related",
+      "description": "The rendering engine diagram explicitly shows a Resolve Tree stage between input resolution and final output generation.",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "article:relation-data-provider",
+      "target": "entity:display-value-pattern",
+      "type": "related",
+      "description": "The article demonstrates separating display fields (code, name) from value fields (id) in relation selectors \u2014 an implicit design pattern.",
+      "weight": 0.85,
+      "direction": "forward"
+    },
+    {
+      "source": "article:overall-flow",
+      "target": "entity:sequential-pipeline",
+      "type": "related",
+      "description": "The overall flow diagram reveals a strict sequential pipeline architecture that governs the entire document generation process.",
+      "weight": 0.75,
+      "direction": "forward"
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "entity:page-break",
+      "type": "related",
+      "description": "Page Break is listed as one of the element types the engine must handle, but has no dedicated article.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:template-component-loop",
+      "target": "entity:collection-rendering",
+      "type": "related",
+      "description": "The article demonstrates the collection rendering pattern: loop through selected global table rows, render component per item.",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "article:unified-data-language",
+      "target": "entity:unified-data-reference-syntax",
+      "type": "related",
+      "description": "The article defines the {{data.field}} dot-notation syntax as the single data reference language across the system.",
+      "weight": 0.9,
+      "direction": "forward"
+    },
+    {
+      "source": "article:template",
+      "target": "entity:static-content",
+      "type": "related",
+      "description": "Template structure explicitly lists Static Content as the first component type, alongside components, bindings, conditions, and loops.",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "article:rich-text-template",
+      "target": "entity:document-composition-canvas",
+      "type": "related",
+      "description": "The article redefines the template editor as a Document Composition Canvas rather than a simple rich text editor.",
+      "weight": 0.85,
+      "direction": "forward"
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "article:global-table",
+      "type": "related",
+      "description": "The rendering engine's input stage requires data from global tables, but no wikilink connects them directly.",
+      "weight": 0.7,
+      "direction": "forward"
+    },
+    {
+      "source": "article:rendering-engine",
+      "target": "article:step",
+      "type": "related",
+      "description": "The runtime flow shows that step completion triggers the rendering engine, but rendering-engine does not link to step.",
+      "weight": 0.65,
+      "direction": "forward"
+    },
+    {
+      "source": "article:rich-text-template",
+      "target": "article:step",
+      "type": "related",
+      "description": "Template editing (composition canvas) occurs within a step's data gathering session, but these articles don't cross-link.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:step",
+      "target": "article:data-binding",
+      "type": "related",
+      "description": "Steps collect data that subsequently feeds into data binding during rendering, but step does not link to data-binding.",
+      "weight": 0.55,
+      "direction": "forward"
+    },
+    {
+      "source": "article:step",
+      "target": "article:rendering-engine",
+      "type": "related",
+      "description": "Step completion triggers the rendering pipeline, but step only links to administration, template, and multi-template-administration.",
+      "weight": 0.65,
+      "direction": "forward"
+    },
+    {
+      "source": "article:runtime-flow",
+      "target": "article:global-table",
+      "type": "related",
+      "description": "The 'Resolve Data' phase in runtime flow pulls from global tables, but runtime-flow doesn't link to global-table.",
+      "weight": 0.6,
+      "direction": "forward"
+    },
+    {
+      "source": "article:template-component-loop",
+      "target": "article:administration",
+      "type": "related",
+      "description": "The most important combination (template+component+loop) is orchestrated by administrations, but template-component-loop doesn't link to administration.",
+      "weight": 0.55,
+      "direction": "forward"
+    },
+    {
+      "source": "article:unified-data-language",
+      "target": "article:rendering-engine",
+      "type": "related",
+      "description": "The renderer consumes the unified data reference syntax to produce output, but unified-data-language doesn't link to rendering-engine.",
+      "weight": 0.65,
+      "direction": "forward"
+    },
+    {
+      "source": "article:relation-data-provider",
+      "target": "article:expression-engine",
+      "type": "related",
+      "description": "Relation data accessed via {{data.relation.field}} syntax flows through the expression engine, but relation-data-provider doesn't link to expression-engine.",
+      "weight": 0.55,
+      "direction": "forward"
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:platform-architecture",
+      "name": "Platform Architecture",
+      "description": "Platform Architecture (10 nodes)",
+      "nodeIds": [
+        "article:konsep-utama",
+        "article:overall-flow",
+        "article:core-object-model",
+        "article:final-concept",
+        "article:architecture-principles",
+        "topic:platform-architecture",
+        "entity:data-context",
+        "entity:sequential-pipeline",
+        "entity:data-snapshot",
+        "entity:system-data"
+      ]
+    },
+    {
+      "id": "layer:data-layer",
+      "name": "Data Layer",
+      "description": "Data Layer (12 nodes)",
+      "nodeIds": [
+        "article:global-table",
+        "article:column-type",
+        "article:computed-field",
+        "article:crud-generated-table",
+        "article:relation-data-provider",
+        "article:multi-relation",
+        "topic:data-layer",
+        "entity:display-value-pattern",
+        "claim:column-type-governs-full-data-lifecycle",
+        "claim:computed-field-expression-evaluated-by-engine",
+        "claim:global-table-is-metadata-not-table",
+        "claim:multi-relation-stores-collections"
+      ]
+    },
+    {
+      "id": "layer:expression-engine",
+      "name": "Expression Engine",
+      "description": "Expression Engine (6 nodes)",
+      "nodeIds": [
+        "article:expression-engine",
+        "article:unified-data-language",
+        "topic:expression-engine",
+        "entity:unified-data-reference-syntax",
+        "entity:conditional-rendering",
+        "claim:expression-engine-cross-module-reuse"
+      ]
+    },
+    {
+      "id": "layer:component-system",
+      "name": "Component System",
+      "description": "Component System (9 nodes)",
+      "nodeIds": [
+        "article:component",
+        "article:data-requirement",
+        "article:component-looping",
+        "topic:component-system",
+        "claim:component-is-not-data",
+        "claim:component-has-single-or-collection-mode",
+        "claim:context-menu-reads-component-requirements",
+        "claim:data-requirement-as-contract",
+        "claim:template-component-loop-is-core"
+      ]
+    },
+    {
+      "id": "layer:template-system",
+      "name": "Template System",
+      "description": "Template System (14 nodes)",
+      "nodeIds": [
+        "article:template",
+        "article:rich-text-template",
+        "article:context-menu",
+        "article:data-binding",
+        "article:template-component-loop",
+        "topic:template-system",
+        "entity:collection-rendering",
+        "entity:static-content",
+        "entity:document-composition-canvas",
+        "entity:template-version",
+        "claim:document-snapshot-template-version-rendered-output",
+        "claim:generic-renderer-replaces-per-template-pdfs",
+        "claim:admin-is-workflow-template-is-blueprint",
+        "claim:template-is-data-agnostic"
+      ]
+    },
+    {
+      "id": "layer:administration-system",
+      "name": "Administration System",
+      "description": "Administration System (6 nodes)",
+      "nodeIds": [
+        "article:administration",
+        "article:step",
+        "article:multi-template-administration",
+        "topic:administration-system",
+        "claim:template-defines-form-administration-defines-process",
+        "claim:steps-are-sequential-data-gathering"
+      ]
+    },
+    {
+      "id": "layer:rendering",
+      "name": "Rendering",
+      "description": "Rendering (5 nodes)",
+      "nodeIds": [
+        "article:rendering-engine",
+        "article:runtime-flow",
+        "topic:rendering",
+        "entity:resolve-tree",
+        "entity:page-break"
+      ]
+    },
+    {
+      "id": "layer:ui-generation",
+      "name": "UI Generation",
+      "description": "UI Generation (2 nodes)",
+      "nodeIds": [
+        "article:generated-menu",
+        "topic:ui-generation"
+      ]
+    },
+    {
+      "id": "layer:other",
+      "name": "Other",
+      "description": "Uncategorized nodes (22)",
+      "nodeIds": [
+        "source:core-conpect",
+        "entity:versioning",
+        "entity:validation",
+        "entity:row-selection",
+        "entity:document-output",
+        "claim:architecture-is-metadata-and-schema-driven",
+        "claim:old-documents-use-version-at-creation-time",
+        "claim:crud-is-derived-from-column-metadata",
+        "claim:schema-driven-form-from-column-definition",
+        "entity:data-completion-tracker",
+        "claim:five-binding-source-types",
+        "claim:document-as-data-snapshot",
+        "claim:menu-is-metadata-projection",
+        "claim:platform-core-pipeline",
+        "claim:column-attributes-drive-ui-behavior",
+        "claim:single-engine-dual-output",
+        "claim:relation-separates-display-value",
+        "claim:editor-is-composition-canvas",
+        "claim:unified-data-syntax-across-system",
+        "claim:resolution-pipeline-is-ordered",
+        "claim:data-context-bridges-storage-computation",
+        "claim:engine-handles-nine-element-types"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Platform Architecture",
+      "description": "Explore the Platform Architecture section (5 articles)",
+      "nodeIds": [
+        "article:konsep-utama",
+        "article:overall-flow",
+        "article:core-object-model"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "Data Layer",
+      "description": "Explore the Data Layer section (6 articles)",
+      "nodeIds": [
+        "article:global-table",
+        "article:column-type",
+        "article:computed-field"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Expression Engine",
+      "description": "Explore the Expression Engine section (2 articles)",
+      "nodeIds": [
+        "article:expression-engine",
+        "article:unified-data-language"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "Component System",
+      "description": "Explore the Component System section (3 articles)",
+      "nodeIds": [
+        "article:component",
+        "article:data-requirement",
+        "article:component-looping"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Template System",
+      "description": "Explore the Template System section (5 articles)",
+      "nodeIds": [
+        "article:template",
+        "article:rich-text-template",
+        "article:context-menu"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "Administration System",
+      "description": "Explore the Administration System section (3 articles)",
+      "nodeIds": [
+        "article:administration",
+        "article:step",
+        "article:multi-template-administration"
+      ]
+    },
+    {
+      "order": 7,
+      "title": "Rendering",
+      "description": "Explore the Rendering section (2 articles)",
+      "nodeIds": [
+        "article:rendering-engine",
+        "article:runtime-flow"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "UI Generation",
+      "description": "Explore the UI Generation section (1 articles)",
+      "nodeIds": [
+        "article:generated-menu"
+      ]
+    }
+  ]
+}

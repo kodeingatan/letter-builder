@@ -765,6 +765,55 @@ meta: {
 
 ---
 
+## Dynamic Administration UI Patterns (INTENDED DIRECTION)
+
+> Modul Dynamic Administration (Global Table, Component, Template, Administration) merupakan arah pengembangan masa depan. Bagian ini mendokumentasikan arah UI yang diinginkan, BELUM sepenuhnya diimplementasikan. Prinsip desain mengikuti spesifikasi Naive UI + Tailwind yang sudah ada.
+
+### Metadata-driven / Schema-driven UI
+
+- Menu navigasi bukan hard-coded — dihasilkan (generated) dari metadata:
+  - Tiap Global Table → item menu di bawah grup **Data**
+  - Tiap Administration → item menu di bawah grup **Persuratan**
+- Form dibuat otomatis dari column/schema definition:
+  ```
+  Column Definition → Form Renderer → Input Component
+  ```
+
+### Column Type → Input/Display Component Mapping (Intended)
+
+| Column Type | Input Component | Display |
+|-------------|----------------|---------|
+| text | `NInput` | Teks |
+| richtext | Rich text editor (contenteditable) | HTML |
+| date | `NDatePicker` | Format display (`m-d-Y`) |
+| select | `NSelect` (options) | Tag/label |
+| number / currency | `NInputNumber` | Format number/currency |
+| select-table-relation | Relation selector (dari Global Table) | Referensi data |
+| image | Upload input | `NImage` |
+| hidden-operation-text | (no input — computed) | hidden / readonly |
+
+### CRUD Generated Table (Intended)
+
+Secara otomatis menghasilkan Browse/Create/Edit/Delete dengan:
+- Browse: global search, column visibility, sorting, pagination → menggunakan komponen `DataTable` yang sudah ada
+- Create/Edit: form yang di-generate dari column definition
+- Delete: konfirmasi
+
+### Template Rich Text Editor (Intended)
+
+- Rich text editor untuk menyusun blueprint dokumen
+- Context menu untuk insert dynamic component
+- Data binding/placeholder menggunakan unified data language, contoh: `{{data.pegawai.nip}}`
+- Mendukung loop & condition pada bagian template
+
+### Administration Workflow UI (Intended)
+
+- Multi-step wizard (mengikuti `NSteps` / `NStep`) — satu step = satu tahap pengumpulan data
+- Step dapat memakai template (blueprint)
+- Badan alur: pilih Administration → isi step demi step → resolve & render → PDF/HTML
+
+---
+
 ## Profile Page
 
 ### Endpoint

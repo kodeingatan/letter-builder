@@ -1,10 +1,16 @@
 # Product Requirements Document (PRD)
 
-## 1. Overview
+## 1. Product Overview
 
-**Nama Project**: Component Stories — Admin Panel User Management System
+**Nama Project**: BMS — Dynamic Administration & Document Composition Platform
 
-**Tujuan**: Membangun admin panel untuk manajemen user dengan sistem role-based access control (RBAC) yang memungkinkan admin mengelola user, role, permission, dan guard secara terpusat.
+**Tujuan**: Membangun platform manajemen administrasi yang metadata-driven. Inti platform adalah konsep **Data → Component → Template → Administration → Document**, di mana non-developer dapat mendefinisikan struktur data (Global Table), blok dokumen yang dapat digunakan kembali (Component), blueprint dokumen (Template), dan workflow pengumpulan data (Administration) untuk akhirnya menghasilkan dokumen (PDF/HTML).
+
+**Core Concept** (dokumentasi asli: `docs/dynamic-administration/`):
+
+> `Data → Component → Template → Administration → Document`
+
+**Current Implementation State**: Saat ini (per dokumentasi ini) aplikasi sudah mengimplementasikan fondasi **User Management System dengan RBAC** — admin panel untuk mengelola user, role, permission, dan guard secara terpusat. Modul Dynamic Administration (Global Table, Component, Template, Administration, Document, Expression Engine, Rendering Engine) merupakan **arah pengembangan masa depan** dan BELUM diimplementasikan dalam kode.
 
 **Tech Stack**:
 - Frontend: Nuxt 4 + Vue 3 + TypeScript + Naive UI + Tailwind CSS v4
@@ -13,7 +19,195 @@
 
 ---
 
-## 2. Tujuan Aplikasi
+## 2. Product Vision
+
+Menjadi platform pembuat sistem administrasi (persuratan & dokumen) yang dapat dikonfigurasi sepenuhnya melalui metadata, sehingga setiap instansi/departemen dapat mendefinisikan struktur data, formulir, template dokumen, dan workflow mereka sendiri tanpa perlu menulis kode.
+
+---
+
+## 3. Problem Statement
+
+Membuat surat/dokumen administrasi (mis. Surat Keputusan, Surat Tugas) secara konvensional membutuhkan:
+- Struktur data yang di-hardcode (`Pegawai`, `Surat Tugas`, dll.)
+- Development manual (migration, entity, controller, service) untuk setiap jenis data baru
+- Penulisan PDF secara khusus untuk setiap template
+
+Platform ini memecahkan masalah tersebut dengan pendekatan metadata-driven sehingga setiap jenis data dan dokumen baru dapat ditambahkan melalui konfigurasi, bukan kode.
+
+---
+
+## 4. Goals
+
+1. Memungkinkan user membuat struktur data tabel dinamis tanpa development manual (Global Table)
+2. Menyediakan CRUD otomatis berdasarkan definisi Global Table
+3. Komponen dokumen yang dapat digunakan kembali lintas template (Component)
+4. Komposisi dokumen berbasis template dengan rich text + data binding (Template)
+5. Workflow pengumpulan data bertahap (Administration + Step)
+6. Rendering dokumen generik ke HTML/PDF (Rendering Engine)
+7. Menu yang dihasilkan otomatis dari metadata (Generated Menu)
+8. Menjaga keamanan akses berbasis RBAC sebagai fondasi platform
+
+---
+
+## 5. Non-Goals
+
+- Bukan editor layout dokumen tingkat print-ready (mis. seperti Adobe) dalam versi awal
+- Bukan database migration visual berfitur penuh pada versi awal
+- Bukan sistem approval/workflow multi-role yang kompleks pada versi awal
+- Fitur Expression Engine lanjutan (IF, SUM, DATE_FORMAT, dll) bersifat pengembangan bertahap
+
+---
+
+## 6. Target Users
+
+- **Admin Platform** — mendefinisikan Global Table, Component, Template, Administration
+- **Staff/Operator** — menjalankan Administration (mengisi data, menghasilkan dokumen)
+- **Administrator Sistem** — mengelola user, role, permission, guard (RBAC)
+
+---
+
+## 7. User Roles
+
+RBAC Foundation (sudah diimplementasikan): Super Admin, Admin, User, dsb. — dikelola via modul User/Role/Permission/Guard.
+
+Dynamic Administration roles (arah masa depan):
+- **Designer** — membuat/mengedit Global Table, Component, Template, Administration metadata
+- **Operator** — menjalankan Administration untuk menghasilkan dokumen
+
+---
+
+## 8. Core Concepts
+
+### 8.1 Core Concept Utama
+
+```text
+GLOBAL TABLE (data) → COMPONENT (konten reusable) → TEMPLATE (blueprint dokumen) → ADMINISTRATION (workflow) → DOCUMENT (output PDF/HTML)
+```
+
+1. **Global Table** — Metadata yang mendefinisikan struktur data dinamis (nama, display name, columns). Setiap Global Table otomatis menghasilkan CRUD, form, dan UI browse.
+2. **Component** — Potongan dokumen reusable (Kop Surat, Identitas Pegawai, Tanda Tangan) yang mendeklarasikan "data requirement" (contract) sebagai sumber datanya.
+3. **Template** — Blueprint dokumen yang menyusun static content + components + data binding + conditions + looping.
+4. **Administration** — Proses/workflow pengumpulan data bertahap (Step) untuk menghasilkan dokumen. Satu Administration bisa memakai banyak Template.
+5. **Document** — Hasil akhir: snapshot data + versi template + output ter-render (PDF/HTML).
+
+### 8.2 Prinsip Arsitektur
+
+- **Metadata-driven** — data & UI didefinisikan lewat metadata, bukan hard-code
+- **Component-driven** — bagian dokumen reusable dijadikan component
+- **Template-driven** — template hanya menentukan struktur dokumen
+- **Data-driven** — data dari Global Table, Administration, manual input, system data
+- **Schema-driven** — form dibuat dari schema column definition
+- **Renderer-driven** — satu generic renderer untuk semua template
+- **Versioned** — template & component punya versi; dokumen lama tetap pakai versi saat dibuat
+
+---
+
+## 9. Major User Workflows
+
+### 9.1 RBAC Administration (Sudah Diimplementasikan)
+
+1. Admin mengelola user, role, permission, guard
+2. User login → JWT → otorisasi berbasis role/guard/permission
+
+### 9.2 Dynamic Administration (Rencana)
+
+1. **Designer** mendefinisikan Global Table (columns, types, relations, computed fields)
+2. Sistem menghasilkan CRUD + menu otomatis
+3. **Designer** membuat Component dengan data requirement
+4. **Designer** membuat Template (rich text + binding + loop + condition)
+5. **Designer** membuat Administration dengan Step-step
+6. **Operator** menjalankan Administration → isi data per step → pilih template
+7. Sistem resolve data → component → binding → loop → condition → render dokumen → PDF
+
+---
+
+## 10. Functional Requirements
+
+### 10.1 RBAC Modules (Sudah Diimplementasikan)
+
+Lihat detail di bawah (Dashboard, User Management, Role Management, Permission Management, Guard Management, Activity Logs, System Logs, Settings).
+
+### 10.2 Dynamic Administration Modules (Rencana)
+
+| Modul | Deskripsi |
+|-------|-----------|
+| Global Table Management | Definisikan tabel dinamis: name, display name, columns (name, type, default, required, searchable, orderable, computed) |
+| Component Management | Definisikan reusable document block + data requirement |
+| Template Management | Komposisi dokumen: rich text, insert component, data binding, loop, condition, versioning |
+| Administration Management | Definisikan workflow: step-step, template per step, field data per step, multi-template |
+| Document Management | Snapshot data + versi template + output ter-render; tampilkan/download PDF & HTML |
+| Expression Engine | Evaluasi ekspresi: arithmetic, string concat, nanti IF/SUM/ROUND/DATE_FORMAT |
+| Rendering Engine | Resolve tree (binding/loop/condition) → HTML DOM → PDF |
+
+---
+
+## 11. Business Rules
+
+1. Global Table adalah sumber data yang dapat dikonsumsi oleh Component/Template
+2. Component TIDAK memiliki data final — ia mendeklarasikan data requirement yang disuplai oleh Template
+3. Template menentukan binding untuk setiap data requirement component
+4. Satu Administration dapat memiliki banyak Template (satu per step)
+5. Dokumen menyimpan data snapshot + versi template agar output lama tetap valid
+6. Menu merupakan projection dari metadata, bukan hard-coded
+7. Sumber data binding: Administration Data, Global Table, Manual Input, Expression, System Data
+8. Semua operasi metadata wajib diziarahkan melalui RBAC (keamanan platform)
+9. Unifikasi data reference & expression melalui satu "bahasa data" (`{{data.*}}`) untuk seluruh sistem
+
+---
+
+## 12. Constraints
+
+- Database: SQLite (better-sqlite3) — cocok untuk skala kecil hingga sedang
+- Metadata-driven: menyiratkan kebutuhan schema fleksibel untuk data Global Table
+- `synchronize: true` untuk development; migrasi produksi belum dikonfigurasi
+- Ekspresi dievaluasi server-side (keamanan)
+
+---
+
+## 13. Important Edge Cases
+
+- Global Table dengan relasi antar tabel (select-table-relation)
+- Computed field yang bergantung pada field lain (dependencies) — nilai dihitung ulang saat dependency berubah
+- Looping component terhadap collection data (daftar pegawai)
+- Conditional rendering bagian dokumen berdasarkan data
+- Dokumen lama vs versi template baru — dokumen memakai versi saat dibuat
+- Multi-template dalam satu Administration
+
+---
+
+## 14. Product Principles
+
+- Metadata-first: konfigurasi diutamakan daripada kode untuk struktur data & dokumen
+- Reusability: semua bagian dokumen reusable menjadi component
+- Consistent data language: satu bahasa data & ekspresi di seluruh modul
+- Security foundation: RBAC melindungi seluruh operasi platform
+
+---
+
+## 15. Glossary
+
+- **Global Table**: definisi data dinamis yang menghasilkan CRUD
+- **Column Type**: menentukan behavior simpan/input/tampil/validasi/format/cari/urut
+- **Computed Field**: field hasil kalkulasi (hidden atau readonly) via expression
+- **Component**: blok dokumen reusable dengan data requirement
+- **Data Requirement**: contract antara component dan template (field apa yang dibutuhkan)
+- **Template**: blueprint dokumen (struktur, binding, loop, condition)
+- **Administration**: workflow pengumpulan data (step-step)
+- **Step**: satu tahap pengumpulan data dalam administration
+- **Document**: output akhir (data snapshot + template version + rendered output)
+- **Expression Engine**: engine evaluasi ekspresi
+- **Rendering Engine**: engine resolve tree → HTML → PDF
+- **Generated Menu**: menu yang dihasilkan dari metadata
+
+---
+
+---
+
+# Bagian II — Current Implementation Detail (RBAC Foundation)
+
+> Berikut adalah detail spesifikasi tahap saat ini yang sudah diimplementasikan. Bagian ini merupakan dokumentasi **current state** RBAC foundation, di atasnya akan dibangun modul Dynamic Administration (Bagian I).
+
+## A. Tujuan Aplikasi (Current)
 
 Admin panel untuk **User Management System** yang menyediakan:
 
@@ -26,9 +220,9 @@ Admin panel untuk **User Management System** yang menyediakan:
 
 ---
 
-## 3. Daftar Fitur
+## B. Daftar Fitur
 
-### 3.1 Dashboard
+### B.1 Dashboard
 
 **Halaman utama admin panel** yang menampilkan:
 
@@ -63,7 +257,7 @@ User Management
 
 ---
 
-### 3.2 User Management
+### B.2 User Management
 
 **Halaman kelola user** dengan fitur:
 
@@ -106,7 +300,7 @@ Roles: [Super Admin]
 
 ---
 
-### 3.3 Role Management
+### B.3 Role Management
 
 **Halaman kelola role** dengan fitur:
 
@@ -150,7 +344,7 @@ Roles: [Super Admin]
 
 ---
 
-### 3.4 Permission Management
+### B.4 Permission Management
 
 **Halaman kelola permission** dengan fitur:
 
@@ -199,7 +393,7 @@ Roles: [Super Admin]
 
 ---
 
-### 3.5 Guard Management
+### B.5 Guard Management
 
 **Halaman kelola guard** dengan fitur:
 
@@ -249,7 +443,7 @@ Roles: [Super Admin]
 
 ---
 
-### 3.6 Table Browse Features
+### B.6 Table Browse Features
 
 Semua halaman tabel (Users, Roles, Permissions, Guards) menggunakan komponen **DataTable** yang reusable dengan fitur:
 
@@ -308,7 +502,7 @@ Semua halaman tabel (Users, Roles, Permissions, Guards) menggunakan komponen **D
 
 ---
 
-## 4. Alur Authorization
+## C. Alur Authorization
 
 ```
 Request masuk
@@ -350,7 +544,7 @@ Response dikirim
 
 ---
 
-## 5. API Endpoints (Existing + Planned)
+## D. API Endpoints (Existing + Planned)
 
 ### Auth API (Sudah Ada)
 
@@ -418,7 +612,7 @@ Response dikirim
 
 ---
 
-## 6. Client Routes
+## E. Client Routes
 
 ### File-Based Routing (Nuxt Pages)
 
@@ -448,7 +642,7 @@ Sistem (group)
 
 ---
 
-## 7. Non-Functional Requirements
+## F. Non-Functional Requirements
 
 ### Security
 - Password di-hash dengan bcrypt (salt rounds: 10)
@@ -471,7 +665,7 @@ Sistem (group)
 
 ---
 
-## 8. Seed Data Summary
+## G. Seed Data Summary
 
 ### Users
 | Username | Email | Password | Role |
@@ -514,7 +708,7 @@ Sistem (group)
 
 ---
 
-## 9. Client-Side Authorization
+## H. Client-Side Authorization
 
 ### Access Denied Handling
 

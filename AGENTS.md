@@ -2,9 +2,16 @@
 
 ## Project Overview
 
-**Business Management System (BMS)** — Admin panel for user management with RBAC (Role-Based Access Control). Manages users, roles, permissions, guards, activity logs, system logs, and application settings.
+**Business Management System (BMS)** — **Dynamic Administration & Document Composition Platform**. Metadata-driven platform to define data structures (Global Tables), reusable document blocks (Components), document blueprints (Templates), and data-collection workflows (Administration) to generate documents (PDF/HTML).
 
 **Core Concept**:
+```
+GLOBAL TABLE (data) → COMPONENT (reusable content) → TEMPLATE (blueprint) → ADMINISTRATION (workflow) → DOCUMENT (PDF/HTML)
+```
+
+**Current Implementation State**: The **RBAC foundation** is fully implemented — admin panel for user management with RBAC (Role-Based Access Control). Manages users, roles, permissions, guards, activity logs, system logs, and application settings. The Dynamic Administration modules (Global Table, Component, Template, Administration, Expression Engine, Rendering Engine) are **planned/intended** and NOT yet in code. See `docs/dynamic-administration/` for the wiki and knowledge graph of the intended design.
+
+**RBAC Core Concept** (current foundation):
 ```
 User → Role → Permission → Guard
   │       │         │          │

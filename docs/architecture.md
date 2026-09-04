@@ -8,6 +8,65 @@ Single Nuxt 4 package:
 
 ---
 
+## Dynamic Administration Layers (PLANNED)
+
+> Per `docs/PRD.md`, platform saat ini mengimplementasikan fondasi **RBAC**. Modul Dynamic Administration (Global Table, Component, Template, Administration, Expression Engine, Rendering Engine) adalah **arah pengembangan masa depan** dan BELUM ada di kode.
+
+### Layer Stack (Intended)
+
+```text
+┌──────────────────────────────────────────────────────┐
+│                    UI GENERATION                       │
+│  Generated Menu  •  Schema-driven Forms  •  Browse    │
+├──────────────────────────────────────────────────────┤
+│                  ADMINISTRATION SYSTEM               │
+│  Workflow  •  Steps  •  Data Gathering               │
+├──────────────────────────────────────────────────────┤
+│                  TEMPLATE SYSTEM                      │
+│  RichText  •  Components  •  Binding  •  Loop  • Cond │
+│  (Versioned)                                          │
+├──────────────────────────────────────────────────────┤
+│                  COMPONENT SYSTEM                     │
+│  Reusable Blocks  •  Data Requirement (contract)     │
+├──────────────────────────────────────────────────────┤
+│                 EXPRESSION ENGINE                     │
+│  Arithmetic  •  String Concat  •  (IF/SUM/ROUND/dll) │
+├──────────────────────────────────────────────────────┤
+│                 DATA LAYER (Global Table)             │
+│  Definitions  •  Columns  •  Relations  • Computed   │
+│  CRUD Generation  •  Data Context                    │
+├──────────────────────────────────────────────────────┤
+│                   RENDERING ENGINE                    │
+│  Resolve Tree (Binding/Loop/Condition) → HTML → PDF  │
+└──────────────────────────────────────────────────────┘
+```
+
+### Architecture Rules (Intended)
+
+1. **Metadata-driven** — data & UI didefinisikan lewat metadata, bukan hard-code
+2. **Component-driven** — bagian dokumen reusable dijadikan component
+3. **Template-driven** — template hanya menentukan struktur dokumen
+4. **Data-driven** — data berasal dari Global Table / Administration / manual / system
+5. **Schema-driven** — form dibuat dari column/schema definition
+6. **Renderer-driven** — satu generic renderer untuk semua template
+7. **Versioned** — template & component memiliki versi
+8. **Unified data language** — satu bahasa reference & ekspresi (`{{data.*}}`) lintas modul
+9. **RBAC sebagai penjaga** — semua operasi metadata & rendering wajib dilindungi otorisasi
+
+### Module Boundaries (Intended)
+
+| Concern | Responsibility | Example |
+|---------|---------------|---------|
+| Global Table | Data definition + auto CRUD | `Pegawai` dengan columns |
+| Component | Reusable document block | Kop Surat, Identitas Pegawai |
+| Template | Document blueprint (structure) | Template Surat Keputusan |
+| Administration | Data collection workflow | Surat Keputusan (multi-step) |
+| Document | Data snapshot + rendered output | Hasil surat (PDF/HTML) |
+| Expression Engine | Expression evaluation | `{{harga}} * {{jumlah}}` |
+| Rendering Engine | Resolve tree → HTML → PDF | Generic renderer |
+
+---
+
 ## Nuxt 4 Project Structure
 
 ```
