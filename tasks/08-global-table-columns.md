@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+DONE
 
 ## Objective
 
@@ -174,21 +174,21 @@ Given a disallowed type (`select-table-relation`, computed), when submitted here
 
 ### Backend
 
-- [ ] Entity (`global-table-column.entity.ts`, EntitySchema) + register in db.ts
-- [ ] DTO (discriminated Zod union + reorder schema)
-- [ ] Service (CRUD + reorder transaction + reference-check stub interface used by Tasks 10/11/16)
-- [ ] Routes (nested under `/api/global-tables/:tableId/columns`, incl. reorder)
-- [ ] Authorization + activity logs
-- [ ] Unit tests (type validation, uniqueness, reorder)
-- [ ] Integration/API tests
+- [x] Entity (`global-table-column.entity.ts`, EntitySchema) + register in db.ts
+- [x] DTO (discriminated Zod union + reorder schema)
+- [x] Service (CRUD + reorder transaction + reference-check stub interface used by Tasks 10/11/16)
+- [x] Routes (nested under `/api/global-tables/:tableId/columns`, incl. reorder)
+- [x] Authorization + activity logs
+- [x] Unit tests (type validation, uniqueness, reorder)
+- [x] Integration/API tests
 
 ### Frontend
 
-- [ ] Types + store (`globalTableColumns`, scoped per table)
-- [ ] Columns tab component + ColumnFormModal (type-conditional) + sortable list
-- [ ] Validation mirroring server union
-- [ ] Loading/empty/error states, responsive
-- [ ] Unit + E2E tests
+- [x] Types + store (`globalTableColumns`, scoped per table)
+- [x] Columns tab component + ColumnFormModal (type-conditional) + sortable list
+- [x] Validation mirroring server union
+- [x] Loading/empty/error states, responsive
+- [x] Unit + E2E tests
 
 ## Verification
 

@@ -25,6 +25,11 @@ export default defineEventHandler(async (event) => {
   else if (path.includes('/api/guards')) { entity = 'guard'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/global-tables')) { entity = 'GlobalTable'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/settings')) entity = 'setting'
+  else if (path.includes('/api/global-tables') && path.includes('/columns')) {
+    entity = 'GlobalTableColumn'
+    const m = path.match(/\/columns\/(\d+)/) || path.match(/\/global-tables\/\d+\/columns\/(\d+)/)
+    if (m) entityId = Number(m[1])
+  }
 
   const action = method === 'POST' ? 'create' : method === 'PUT' ? 'update' : method === 'PATCH' ? 'update' : 'delete'
 
