@@ -8,6 +8,7 @@ import { GuardSchema } from '~~/server/entities/guard.entity'
 import { GuardUrlSchema } from '~~/server/entities/guard-url.entity'
 import { ActivityLogSchema } from '~~/server/entities/activity-log.entity'
 import { SettingSchema } from '~~/server/entities/setting.entity'
+import { GlobalTableSchema } from '~~/server/entities/global-table.entity'
 
 let dataSource: DataSource | null = null
 
@@ -26,6 +27,7 @@ export async function getDataSource(): Promise<DataSource> {
         GuardUrlSchema,
         ActivityLogSchema,
         SettingSchema,
+        GlobalTableSchema,
       ],
       synchronize: true,
     })

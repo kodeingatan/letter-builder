@@ -25,6 +25,7 @@ import {
   Activity,
   Report,
   Settings,
+  DataTable as DataTableIcon,
 } from '@vicons/carbon'
 
 const route = useRoute()
@@ -76,6 +77,19 @@ const menuOptions = computed<MenuOption[]>(() => {
   ]
 
   if (hasAnyRole(['Admin', 'Super Admin'])) {
+    options.push({
+      label: 'Data',
+      key: 'data',
+      icon: renderIcon(DataTableIcon),
+      children: [
+        {
+          label: renderMenuLabel('Global Tables', '/dashboard/data/global-tables'),
+          key: 'global-tables',
+          icon: renderIcon(DataTableIcon),
+        },
+      ],
+    })
+
     options.push({
       label: 'User Management',
       key: 'user-management',
@@ -133,6 +147,7 @@ const menuOptions = computed<MenuOption[]>(() => {
 
 const routeKeyMap: Record<string, string> = {
   '/dashboard': 'dashboard',
+  '/dashboard/data/global-tables': 'global-tables',
   '/dashboard/users': 'users',
   '/dashboard/guards': 'guards',
   '/dashboard/roles': 'roles',

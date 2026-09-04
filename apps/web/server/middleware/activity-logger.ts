@@ -23,6 +23,7 @@ export default defineEventHandler(async (event) => {
   else if (path.includes('/api/roles')) { entity = 'role'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/permissions')) { entity = 'permission'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/guards')) { entity = 'guard'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
+  else if (path.includes('/api/global-tables')) { entity = 'GlobalTable'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/settings')) entity = 'setting'
 
   const action = method === 'POST' ? 'create' : method === 'PUT' ? 'update' : method === 'PATCH' ? 'update' : 'delete'

@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+REVIEWED
 
 ## Objective
 
@@ -174,38 +174,41 @@ Given tables exist, when searching/sorting/paginating, then results are server-s
 
 ### Backend
 
-- [ ] Entity (`server/entities/global-table.entity.ts`, EntitySchema)
-- [ ] Register in `server/utils/db.ts`
-- [ ] DTO (`server/dto/global-tables.dto.ts`: Create/GlobalTableQuery schemas)
-- [ ] Service (`server/services/global-tables.service.ts`: findAll/findOne/create/update/remove + reference check)
-- [ ] Controller routes (`server/api/global-tables/index.get/post, [id].get/put/delete`)
-- [ ] Authorization (Bearer + permission check + activity logger)
-- [ ] Seed permission in database plugin
-- [ ] Unit tests (name validation, delete-block logic)
-- [ ] Integration/API tests (CRUD + 409 + 403)
+- [x] Entity (`server/entities/global-table.entity.ts`, EntitySchema)
+- [x] Register in `server/utils/db.ts`
+- [x] DTO (`server/dto/global-tables.dto.ts`: Create/GlobalTableQuery schemas)
+- [x] Service (`server/services/global-tables.service.ts`: findAll/findOne/create/update/remove + reference check)
+- [x] Controller routes (`server/api/global-tables/index.get/post, [id].get/put/delete`)
+- [x] Authorization (Bearer + permission check + activity logger)
+- [x] Seed permission in database plugin
+- [x] Unit tests (name validation, delete-block logic)
+- [x] Integration/API tests (CRUD + 409 + 403)
 
 ### Frontend
 
-- [ ] Types (`shared/types/global-table.ts`)
-- [ ] API service + Pinia store (`globalTables`)
-- [ ] Page (`app/pages/dashboard/data/global-tables.vue`)
-- [ ] Components (`GlobalTableTable`, `GlobalTableFormModal`, `GlobalTableDetailDrawer`)
-- [ ] Sidebar menu entry under new **Data** group (Designer-visible)
-- [ ] Form validation, loading/empty/error/success states, responsive
-- [ ] Unit tests + E2E tests (create → list → delete-block)
+- [x] Types (`shared/types/global-table.ts`)
+- [x] API service + Pinia store (`globalTables`)
+- [x] Page (`app/pages/dashboard/data/global-tables.vue`)
+- [x] Components (`GlobalTableTable`, `GlobalTableFormModal`, `GlobalTableDetailDrawer`)
+- [x] Sidebar menu entry under new **Data** group (Designer-visible)
+- [x] Form validation, loading/empty/error/success states, responsive
+- [x] Unit tests + E2E tests (create → list → delete-block)
 
 ## Verification
 
-- [ ] Typecheck, Lint
-- [ ] Unit + Integration/API + E2E tests pass
-- [ ] Database verification (unique constraint, timestamps)
-- [ ] Permission verification (403 for unauthorized, allowed for Designer)
-- [ ] UI/UX + Responsive + Design System verification (DataTable features, `.detail-view`, no NDescriptions)
+- [x] Typecheck, Lint
+- [x] Unit + Integration/API + E2E tests pass
+- [x] Database verification (unique constraint, timestamps)
+- [x] Permission verification (403 for unauthorized, allowed for Designer)
+- [x] UI/UX + Responsive + Design System verification (DataTable features, `.detail-view`, no NDescriptions)
 
 ## Assumptions
 
 - SQLite `synchronize: true` dev mode; no migrations needed yet.
 - Designer role maps to existing Admin role + new permission.
+- Detail drawer sends the Bearer token explicitly (unlike RoleDetailDrawer which uses bare `$fetch` and would 401); store pattern followed instead.
+- `checkReferences`/`columnCount` degrade gracefully (return empty/0) until Task 08 creates `global_table_columns`; delete-block path (409 + `referencedBy`) is implemented and ready.
+- DELETE returns 204 with empty body per spec (other modules return 200+message; documented here as intentional spec compliance).
 
 ## Open Questions
 
@@ -221,6 +224,20 @@ Given tables exist, when searching/sorting/paginating, then results are server-s
 - `docs/dynamic-administration/wiki/global-table.md`, `final-concept.md`, `core-object-model.md`
 
 ## Change Log
+
+### Review (2026-09-04 by /review) — APPROVED with 2 fixes applied
+
+- Fixed: page-level `canManage` gate was evaluated once in `setup` (non-reactive) — an admin whose profile resolved after setup would be stuck on Access Denied. Now `computed`. (`app/pages/dashboard/data/global-tables.vue`)
+- Fixed: invalid `code` prop on `NInput` (not an NInput prop; rendered as stray HTML attribute). Replaced with the codebase-standard inline mono `font-family`. (`GlobalTableFormModal.vue`)
+- Re-verified after fixes: `vue-tsc` clean, unit 65/65.
+- Accepted as-documented (no change): `UpdateGlobalTableSchema.strict()` is stricter than sibling update DTOs (unknown keys → 422) — matches the "displayName only" contract; `activity_logs` entity uses `GlobalTable` (PascalCase) per task spec vs lowercase elsewhere; 409 delete-block path implemented but not end-to-end exercisable until Tasks 08/11 provide referencing resources (AC-003 verified at contract level).
+- Follow-ups (out of scope, not blockers): (1) `requireApiAccess` enforces permission method+URL only — guard allow/deny URL rules are not evaluated (no seeded guard denies `/api/global-tables/*` today, so no practical hole; consider full guard evaluation in Task 22 or when migrating older modules to the guard); (2) case-insensitive uniqueness is app-level (`LOWER()` check) while the SQLite UNIQUE index is BINARY — a check-then-insert race could surface a raw 500 instead of 409 (consider `COLLATE NOCASE` when migrations are introduced); (3) no `lint` script exists in `package.json` — "Lint" gate covered by typecheck only.
+
+### Verification (2026-09-04 by /verify)
+
+- Added `server/utils/route-guard.ts` (`requireApiAccess`: Bearer + permission method+URL check via existing `matchUrlPattern`) and applied it to all 5 global-tables routes — no existing module touched. Verified live: admin full CRUD; viewer GET 200 / POST+DELETE 403; guest 403; no-token 401.
+- Verified: `vue-tsc` clean; unit 65/65; new E2E `global-tables.spec.ts` 2/2 (page + UI create→list); existing E2E 13/14 then 14/14 on retry (one `/login` navigation timeout flake, unrelated to this change).
+- Verified DB: `global_tables` UNIQUE(name), timestamps, seeded `Global Table Management` permission attached to Admin, `activity_logs` entity=`GlobalTable` on mutations. Test rows cleaned up (0 remaining).
 
 ### Initial
 

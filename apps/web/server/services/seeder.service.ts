@@ -20,13 +20,53 @@ export async function seedDatabase(ds: DataSource) {
   const settingsRepo = ds.getRepository(SettingSchema)
 
   const userCount = await usersRepo.count()
-  if (userCount > 0) return
+  if (userCount > 0) {
+    await seedGlobalTablePermission(ds)
+    return
+  }
 
   const guards = await seedGuards(guardsRepo, guardUrlsRepo)
   const permissions = await seedPermissions(permissionsRepo, permissionMethodsRepo, permissionUrlsRepo)
   const roles = await seedRoles(rolesRepo, guards, permissions)
   await seedUsers(usersRepo, roles)
   await seedSettings(settingsRepo)
+  await seedGlobalTablePermission(ds)
+}
+
+/**
+ * Idempotent seed for the Global Table Management permission (Task 07).
+ * Runs on every startup so existing databases also receive the permission,
+ * and attaches it to the Admin role when missing.
+ */
+async function seedGlobalTablePermission(ds: DataSource) {
+  const permissionsRepo = ds.getRepository(PermissionSchema)
+  const permissionMethodsRepo = ds.getRepository(PermissionMethodSchema)
+  const permissionUrlsRepo = ds.getRepository(PermissionUrlSchema)
+  const rolesRepo = ds.getRepository(RoleSchema)
+
+  let permission = await permissionsRepo.findOne({ where: { permissionName: 'Global Table Management' } })
+  if (!permission) {
+    permission = permissionsRepo.create({
+      permissionName: 'Global Table Management',
+      description: 'Manage Global Table metadata (CRUD)',
+    })
+    await permissionsRepo.save(permission)
+    await permissionMethodsRepo.save([
+      permissionMethodsRepo.create({ method: 'GET', permission }),
+      permissionMethodsRepo.create({ method: 'POST', permission }),
+      permissionMethodsRepo.create({ method: 'PUT', permission }),
+      permissionMethodsRepo.create({ method: 'DELETE', permission }),
+    ])
+    await permissionUrlsRepo.save(
+      permissionUrlsRepo.create({ url: '/api/global-tables/*', permission }),
+    )
+  }
+
+  const admin = await rolesRepo.findOne({ where: { roleName: 'Admin' } })
+  if (admin && !(admin.permissions ?? []).some((p: any) => p.permissionName === 'Global Table Management')) {
+    admin.permissions = [...(admin.permissions ?? []), permission]
+    await rolesRepo.save(admin)
+  }
 }
 
 async function seedGuards(guardsRepo: any, guardUrlsRepo: any) {
