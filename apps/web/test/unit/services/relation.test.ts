@@ -15,6 +15,10 @@ vi.mock('~~/server/entities/global-table-column.entity', () => ({
   GlobalTableColumnSchema: {},
 }))
 
+vi.mock('~~/server/entities/global-table-row.entity', () => ({
+  GlobalTableRowSchema: {},
+}))
+
 vi.mock('~~/server/dto/global-table-columns.dto', () => ({
   RelationConfigSchema: {
     safeParse: vi.fn((data: any) => ({ success: true, data })),
@@ -287,15 +291,11 @@ describe('relation.service', () => {
 
     it('returns false when row does not exist in target table', async () => {
       mockGetDataSource.mockResolvedValue({
-        getRepository: vi.fn().mockImplementation((schema: string) => {
-          if (schema === 'global_table_data_1') {
-            return { count: vi.fn().mockResolvedValue(0) }
-          }
-          return {
-            find: vi.fn().mockResolvedValue([
-              { id: 1, name: 'ref_col', type: 'select-table-relation', globalTableId: 2 },
-            ]),
-          }
+        getRepository: vi.fn().mockReturnValue({
+          find: vi.fn().mockResolvedValue([
+            { id: 1, name: 'ref_col', type: 'select-table-relation', globalTableId: 2 },
+          ]),
+          count: vi.fn().mockResolvedValue(0),
         }),
       })
 
@@ -306,20 +306,15 @@ describe('relation.service', () => {
 
     it('detects single relation reference', async () => {
       mockGetDataSource.mockResolvedValue({
-        getRepository: vi.fn().mockImplementation((schema: string) => {
-          if (schema === 'global_table_data_1') {
-            return { count: vi.fn().mockResolvedValue(1) }
-          }
-          if (schema === 'global_table_data_2') {
-            return {
-              createQueryBuilder: vi.fn().mockReturnValue({
-                where: vi.fn().mockReturnThis(),
-                getCount: vi.fn().mockResolvedValue(5),
-              }),
+        getRepository: vi.fn().mockReturnValue({
+          find: vi.fn().mockImplementation((opts: any) => {
+            // Owner table rows carry JSON-per-row values (Task 12 store)
+            if (opts?.where && 'globalTableId' in opts.where && !('relationTableId' in opts.where)) {
+              return Promise.resolve([
+                { id: 10, globalTableId: 2, values: JSON.stringify({ user_id: 1 }) },
+              ])
             }
-          }
-          return {
-            find: vi.fn().mockResolvedValue([
+            return Promise.resolve([
               {
                 id: 1,
                 name: 'user_id',
@@ -327,8 +322,9 @@ describe('relation.service', () => {
                 globalTableId: 2,
                 relationConfig: JSON.stringify({ displayColumns: ['name'], onTargetDelete: 'restrict' }),
               },
-            ]),
-          }
+            ])
+          }),
+          count: vi.fn().mockResolvedValue(1),
         }),
       })
 

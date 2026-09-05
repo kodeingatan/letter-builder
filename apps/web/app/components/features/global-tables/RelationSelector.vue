@@ -117,7 +117,7 @@ function renderTag(option: SelectOption) {
     :options="options"
     :loading="loading"
     :multiple="multiple"
-    :clearable="clearable && !required"
+    :clearable="clearable"
     :disabled="disabled"
     :placeholder="placeholder || 'Select...'"
     filterable

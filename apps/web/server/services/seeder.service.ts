@@ -25,6 +25,45 @@ export async function seedDatabase(ds: DataSource) {
   await seedUsers(usersRepo, roles)
   await seedSettings(settingsRepo)
   await seedGlobalTablePermission(ds)
+  await seedComponentPermission(ds)
+}
+
+/**
+ * Idempotent seed for the Component Management permission (Task 13).
+ * Runs on every startup so existing databases also receive the permission,
+ * and attaches it to the Admin / Super Admin roles when missing.
+ */
+async function seedComponentPermission(ds: DataSource) {
+  const permissionsRepo = ds.getRepository(PermissionSchema)
+  const permissionMethodsRepo = ds.getRepository(PermissionMethodSchema)
+  const permissionUrlsRepo = ds.getRepository(PermissionUrlSchema)
+  const rolesRepo = ds.getRepository(RoleSchema)
+
+  let permission = await permissionsRepo.findOne({ where: { permissionName: 'Component Management' } })
+  if (!permission) {
+    permission = permissionsRepo.create({
+      permissionName: 'Component Management',
+      description: 'Manage reusable document components (CRUD, publish, preview)',
+    })
+    await permissionsRepo.save(permission)
+    await permissionMethodsRepo.save([
+      permissionMethodsRepo.create({ method: 'GET', permission }),
+      permissionMethodsRepo.create({ method: 'POST', permission }),
+      permissionMethodsRepo.create({ method: 'PUT', permission }),
+      permissionMethodsRepo.create({ method: 'DELETE', permission }),
+    ])
+    await permissionUrlsRepo.save(
+      permissionUrlsRepo.create({ url: '/api/components/*', permission }),
+    )
+  }
+
+  for (const roleName of ['Admin', 'Super Admin']) {
+    const role = await rolesRepo.findOne({ where: { roleName } })
+    if (role && !(role.permissions ?? []).some((p: any) => p.permissionName === 'Component Management')) {
+      role.permissions = [...(role.permissions ?? []), permission]
+      await rolesRepo.save(role)
+    }
+  }
 }
 
 /**
@@ -54,6 +93,16 @@ async function seedGlobalTablePermission(ds: DataSource) {
     await permissionUrlsRepo.save(
       permissionUrlsRepo.create({ url: '/api/global-tables/*', permission }),
     )
+    // Task 12: generated row CRUD lives under /api/data/* (+ legacy lookup
+    // provider path). Existing databases receive coverage via this upsert.
+    const existingUrls = (permission as any).urls ?? []
+    const covered = new Set(existingUrls.map((u: any) => u.url))
+    const extraUrls = ['/api/data/*', '/api/global-tables/*/rows/*'].filter((u) => !covered.has(u))
+    if (extraUrls.length) {
+      await permissionUrlsRepo.save(
+        extraUrls.map((url) => permissionUrlsRepo.create({ url, permission })),
+      )
+    }
   }
 
   // Attach Global Table Management permission to Admin role

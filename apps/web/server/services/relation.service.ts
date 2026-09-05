@@ -1,6 +1,7 @@
 import { getDataSource } from '~~/server/utils/db'
 import { GlobalTableSchema } from '~~/server/entities/global-table.entity'
 import { GlobalTableColumnSchema } from '~~/server/entities/global-table-column.entity'
+import { GlobalTableRowSchema } from '~~/server/entities/global-table-row.entity'
 import { RelationConfigSchema } from '~~/server/dto/global-table-columns.dto'
 
 export interface LookupItem {
@@ -71,31 +72,39 @@ export async function lookupRelationRows(
     throw httpError(404, 'Target table not found')
   }
 
-  const dataTableName = `global_table_data_${targetTableId}`
-  let qb = ds.manager.createQueryBuilder().from(dataTableName, 'row')
+  // JSON-per-row store (Task 12): all rows live in global_table_rows.
+  const entities: any[] = await ds.getRepository(GlobalTableRowSchema).find({
+    where: { globalTableId: targetTableId },
+    order: { id: 'ASC' },
+  })
+  const parsed = entities.map((e) => {
+    let values: Record<string, any> = {}
+    try {
+      values = JSON.parse(e.values)
+    } catch {
+      values = {}
+    }
+    return { id: e.id, ...values }
+  })
 
-  if (search) {
-    const searchConditions = config.displayColumns.map((col) => `CAST(row.${col} AS TEXT) LIKE :search`)
-    qb = qb.where(`(${searchConditions.join(' OR ')})`, { search: `%${search}%` })
-  }
+  const needle = (search ?? '').toLowerCase()
+  const filtered = needle
+    ? parsed.filter((r) =>
+        config.displayColumns.some((col) => String(r[col] ?? '').toLowerCase().includes(needle)),
+      )
+    : parsed
 
-  const total = await qb.getCount()
-  const rows = await qb
-    .select('row.id')
-    .addSelect(config.displayColumns.map(col => `row.${col}`), config.displayColumns)
-    .skip((page - 1) * limit)
-    .take(limit)
-    .orderBy('row.id', 'ASC')
-    .getRawMany()
+  const total = filtered.length
+  const paged = filtered.slice((page - 1) * limit, page * limit)
 
-  const data: LookupItem[] = rows.map(row => {
+  const data: LookupItem[] = paged.map((row) => {
     const raw: Record<string, any> = { id: row.id }
     for (const col of config.displayColumns) {
       raw[col] = row[col]
     }
     return {
       id: row.id,
-      label: config.displayColumns.map(col => String(row[col] ?? '')).join(config.separator ?? ' - '),
+      label: config.displayColumns.map((col) => String(row[col] ?? '')).join(config.separator ?? ' - '),
       raw,
     }
   })
@@ -139,9 +148,8 @@ export async function validateRelationConfig(
     return { valid: false, error: `Display columns not found on target: ${missingColumns.join(', ')}` }
   }
 
-  const ownerColumns = await ds.getRepository(GlobalTableColumnSchema).find({
+  const ownerColumns: any[] = await ds.getRepository(GlobalTableColumnSchema).find({
     where: { globalTableId: ownerTableId },
-    select: ['name', 'type'],
   })
   const ownerRelationCols = ownerColumns.filter(c => c.type === 'select-table-relation' || c.type === 'select-table-relation-multiple')
 
@@ -190,9 +198,9 @@ export async function isRowReferenced(tableId: number, rowId: number): Promise<{
     return { isReferenced: false, relationCols: [] }
   }
 
-  // Verify the row actually exists in the target table
-  const globalTableDataRepo = ds.getRepository(`global_table_data_${tableId}`)
-  const rowExists = await globalTableDataRepo.count({ where: { id: rowId } })
+  // Verify the row actually exists in the target table (JSON-per-row store)
+  const rowRepo = ds.getRepository(GlobalTableRowSchema)
+  const rowExists = await rowRepo.count({ where: { id: rowId, globalTableId: tableId } as any })
   if (rowExists === 0) {
     return { isReferenced: false, relationCols: [] }
   }
@@ -205,45 +213,51 @@ export async function isRowReferenced(tableId: number, rowId: number): Promise<{
       continue
     }
 
-    // Check the owner table's data for references to this row
-    const ownerDataRepo = ds.getRepository(`global_table_data_${column.globalTableId}`)
-    const ownerColumnName = column.name
+    // Check the owner table's rows for references to this row id
+    const ownerRows: any[] = await rowRepo.find({ where: { globalTableId: (column as any).globalTableId } as any })
+    const ownerColumnName = (column as any).name
 
-    if (column.type === 'select-table-relation') {
-      // Single relation: check if any row has this column value = rowId
-      const count = await ownerDataRepo
-        .createQueryBuilder()
-        .where(`"${ownerColumnName}" = :rowId`, { rowId })
-        .getCount()
+    if ((column as any).type === 'select-table-relation') {
+      // Single relation: any owner row whose column value = rowId
+      const count = ownerRows.filter((r) => {
+        try {
+          const vals = JSON.parse(r.values)
+          return Number(vals[ownerColumnName]) === rowId
+        } catch {
+          return false
+        }
+      }).length
       if (count > 0) {
         referencedFromColumns.push({
-          id: column.id,
-          name: column.name,
+          id: (column as any).id,
+          name: (column as any).name,
           onTargetDelete: config.onTargetDelete || 'restrict',
         })
       }
     }
 
-    if (column.type === 'select-table-relation-multiple') {
-      // Multi relation: check if any row has this column containing rowId in JSON array
-      const rows = await ownerDataRepo.find()
-      for (const row of rows as any[]) {
-        const val = row[ownerColumnName]
-        if (val) {
-          try {
-            const ids = typeof val === 'string' ? JSON.parse(val) : val
-            if (Array.isArray(ids) && ids.includes(rowId)) {
-              referencedFromColumns.push({
-                id: column.id,
-                name: column.name,
-                onTargetDelete: config.onTargetDelete || 'detach',
-              })
-              break
-            }
-          } catch {
-            // Ignore parse errors
+    if ((column as any).type === 'select-table-relation-multiple') {
+      // Multi relation: any owner row whose column array contains rowId
+      let hit = false
+      for (const r of ownerRows) {
+        try {
+          const vals = JSON.parse(r.values)
+          const val = vals[ownerColumnName]
+          const ids = typeof val === 'string' ? JSON.parse(val) : val
+          if (Array.isArray(ids) && ids.map(Number).includes(rowId)) {
+            hit = true
+            break
           }
+        } catch {
+          // Ignore parse errors
         }
+      }
+      if (hit) {
+        referencedFromColumns.push({
+          id: (column as any).id,
+          name: (column as any).name,
+          onTargetDelete: config.onTargetDelete || 'detach',
+        })
       }
     }
   }

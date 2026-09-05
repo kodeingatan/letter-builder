@@ -19,11 +19,16 @@ export default defineEventHandler(async (event) => {
   let entity = 'unknown'
   let entityId: number | undefined
 
+  // Task 12: /api/data/* writes are logged by TableDataService with
+  // entity = table displayName (BR-006). Skip here to avoid double-logging.
+  if (path.includes('/api/data/')) return
+
   if (path.includes('/api/users')) { entity = 'user'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/roles')) { entity = 'role'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/permissions')) { entity = 'permission'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/guards')) { entity = 'guard'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/global-tables')) { entity = 'GlobalTable'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
+  else if (path.includes('/api/components')) { entity = 'Component'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/settings')) entity = 'setting'
   else if (path.includes('/api/global-tables') && path.includes('/columns')) {
     entity = 'GlobalTableColumn'

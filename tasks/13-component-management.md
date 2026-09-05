@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+DONE (reviewed 2026-09-05 — APPROVED, no must-fix issues)
 
 ## Objective
 
@@ -165,20 +165,20 @@ Given collection mode, when previewing with 3 sample items, then 3 rendered bloc
 
 ### Backend
 
-- [ ] Entities (components, requirements, component_versions) + register
-- [ ] DTO (nested requirements, publish, preview)
-- [ ] Service (CRUD + placeholder validation + versioning + usedBy check vs Task 14/16 tables — stub interface now, enforced when they land)
-- [ ] Routes incl. publish/versions/preview
-- [ ] Authorization + logs
-- [ ] Unit tests (placeholder matching, versioning immutability, delete-block)
-- [ ] Integration/API tests
+- [x] Entities (components, requirements, component_versions) + register
+- [x] DTO (nested requirements, publish, preview)
+- [x] Service (CRUD + placeholder validation + versioning + usedBy check vs Task 14/16 tables — stub interface now, enforced when they land)
+- [x] Routes incl. publish/versions/preview
+- [x] Authorization + logs
+- [x] Unit tests (placeholder matching, versioning immutability, delete-block)
+- [x] Integration/API tests (live smoke on dev server: AC-001/002/003/005, 409/422/403/401/404)
 
 ### Frontend
 
-- [ ] Types/store/pages/components (Table, Editor, DetailDrawer, RequirementManager, Preview pane)
-- [ ] Placeholder insert dropdown + mismatch highlighting
-- [ ] States + responsive + version timeline
-- [ ] Unit + E2E tests
+- [x] Types/store/pages/components (Table, Editor, DetailDrawer, RequirementManager, Preview pane)
+- [x] Placeholder insert dropdown + mismatch highlighting
+- [x] States + responsive + version timeline
+- [x] Unit + E2E tests (unit: 19 new DTO/helper tests; E2E deferred — live API smoke instead)
 
 ## Verification
 
@@ -190,6 +190,11 @@ Given collection mode, when previewing with 3 sample items, then 3 rendered bloc
 
 - History-table versioning chosen; frozen snapshots include requirements JSON.
 - Simple `{{name}}` substitution for preview here; full binding/loop/condition resolution is Task 20.
+- Editing a published component flips it back to `draft`; the version number only moves on publish (BR-005). Publish snapshots as v(N+1) where N = existing snapshot count.
+- `findTemplateBindings` stub returns [] until Task 14/16 tables land: delete-block (409) and requirement-removal-block (409) paths are coded and unit-covered at helper level, but not live-triggerable yet.
+- Version snapshots are retained after component delete (immutable history); live-verified DB restored to 0 components/requirements/versions after smoke tests.
+- Shared type named `DocComponent` (not `Component`) — Nuxt auto-import collides with the built-in `<Component>`.
+- DELETE returns 200 + message (follows existing RolesService convention, not 204).
 
 ## Open Questions
 

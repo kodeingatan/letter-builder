@@ -10,6 +10,12 @@ import { ActivityLogSchema } from '~~/server/entities/activity-log.entity'
 import { SettingSchema } from '~~/server/entities/setting.entity'
 import { GlobalTableSchema } from '~~/server/entities/global-table.entity'
 import { GlobalTableColumnSchema } from '~~/server/entities/global-table-column.entity'
+import { GlobalTableRowSchema } from '~~/server/entities/global-table-row.entity'
+import {
+  ComponentSchema,
+  ComponentDataRequirementSchema,
+  ComponentVersionSchema,
+} from '~~/server/entities/component.entity'
 
 let dataSource: DataSource | null = null
 
@@ -30,6 +36,10 @@ export async function getDataSource(): Promise<DataSource> {
         SettingSchema,
         GlobalTableSchema,
         GlobalTableColumnSchema,
+        GlobalTableRowSchema,
+        ComponentSchema,
+        ComponentDataRequirementSchema,
+        ComponentVersionSchema,
       ],
       synchronize: true,
     })

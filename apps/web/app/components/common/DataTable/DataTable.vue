@@ -30,6 +30,8 @@ const props = withDefaults(defineProps<{
   searchableFields?: { label: string; value: string }[]
   sortBy?: string
   sortOrder?: 'ASC' | 'DESC'
+  storageKey?: string
+  emptyDescription?: string
 }>(), {
   loading: false,
   page: 1,
@@ -38,6 +40,8 @@ const props = withDefaults(defineProps<{
   searchPlaceholder: 'Search...',
   sortBy: 'id',
   sortOrder: 'DESC',
+  storageKey: 'datatable-hidden-columns',
+  emptyDescription: 'No data found',
 })
 
 const emit = defineEmits<{
@@ -51,12 +55,12 @@ const emit = defineEmits<{
 const searchText = ref('')
 const searchField = ref<string | undefined>(undefined)
 
-const STORAGE_KEY = 'datatable-hidden-columns'
+const STORAGE_KEY = computed(() => props.storageKey)
 const hiddenColumns = ref<Set<string>>(new Set())
 
 onMounted(() => {
   try {
-    const stored = localStorage.getItem(STORAGE_KEY)
+    const stored = localStorage.getItem(STORAGE_KEY.value)
     if (stored) {
       hiddenColumns.value = new Set(JSON.parse(stored))
     }
@@ -66,7 +70,7 @@ onMounted(() => {
 })
 
 watch(hiddenColumns, (val) => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify([...val]))
+  localStorage.setItem(STORAGE_KEY.value, JSON.stringify([...val]))
 }, { deep: true })
 
 const visibleColumnDefs = computed(() =>
@@ -132,7 +136,7 @@ function resetFilters() {
   searchText.value = ''
   searchField.value = undefined
   hiddenColumns.value = new Set()
-  localStorage.removeItem(STORAGE_KEY)
+  localStorage.removeItem(STORAGE_KEY.value)
   emit('search', '')
   emit('search-field-change', '')
 }
@@ -213,7 +217,7 @@ function resetFilters() {
       />
     </NSpin>
 
-    <NEmpty v-if="!loading && (data ?? []).length === 0" description="No data found" />
+    <NEmpty v-if="!loading && (data ?? []).length === 0" :description="emptyDescription" />
 
     <div v-if="total > 0" class="text-sm text-gray-500">
       Showing {{ (page - 1) * limit + 1 }}-{{ Math.min(page * limit, total) }} of {{ total }}

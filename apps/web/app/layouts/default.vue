@@ -91,6 +91,19 @@ const menuOptions = computed<MenuOption[]>(() => {
     })
 
     options.push({
+      label: 'Dokumen',
+      key: 'dokumen',
+      icon: renderIcon(Document),
+      children: [
+        {
+          label: renderMenuLabel('Components', '/dashboard/docs/components'),
+          key: 'components',
+          icon: renderIcon(Document),
+        },
+      ],
+    })
+
+    options.push({
       label: 'User Management',
       key: 'user-management',
       icon: renderIcon(UserMultiple),
@@ -148,6 +161,7 @@ const menuOptions = computed<MenuOption[]>(() => {
 const routeKeyMap: Record<string, string> = {
   '/dashboard': 'dashboard',
   '/dashboard/data/global-tables': 'global-tables',
+  '/dashboard/docs/components': 'components',
   '/dashboard/users': 'users',
   '/dashboard/guards': 'guards',
   '/dashboard/roles': 'roles',

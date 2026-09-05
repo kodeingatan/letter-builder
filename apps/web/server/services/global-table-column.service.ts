@@ -89,9 +89,8 @@ export const GlobalTableColumnService = {
       const repo = ds.getRepository(GlobalTableColumnSchema)
       const siblings = await repo.find({
         where: { globalTableId: tableId },
-        select: ['name'],
       })
-      const siblingNames = siblings.map(s => s.name)
+      const siblingNames = siblings.map((s: any) => s.name)
 
       const validation = validateComputedColumn(data.expression, siblingNames)
       if (!validation.valid) {
@@ -187,9 +186,8 @@ export const GlobalTableColumnService = {
       const repo = ds.getRepository(GlobalTableColumnSchema)
       const siblings = await repo.find({
         where: { globalTableId: column.globalTableId },
-        select: ['name'],
       })
-      const siblingNames = siblings.map(s => s.name)
+      const siblingNames = siblings.map((s: any) => s.name)
 
       const validation = validateComputedColumn(data.expression, siblingNames)
       if (!validation.valid) {

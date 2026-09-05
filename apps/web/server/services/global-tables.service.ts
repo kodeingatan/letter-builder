@@ -116,7 +116,14 @@ export const GlobalTablesService = {
     if (existing) throw httpError(409, `Global table "${data.name}" already exists`)
 
     const table = repo.create({ name: data.name, displayName: data.displayName })
-    return repo.save(table)
+    const saved = await repo.save(table)
+
+    // Task 12: auto-provision per-table Data:{name}:Read/Write permissions (lazy, best-effort)
+    try {
+      const { TableDataService } = await import('~~/server/services/table-data.service')
+      await TableDataService.ensureTableDataPermissions(saved as any)
+    } catch {}
+    return saved
   },
 
   async update(id: number, data: UpdateGlobalTableInput) {

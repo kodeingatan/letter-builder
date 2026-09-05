@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+TODO REVIEW
 
 ## Objective
 
@@ -159,22 +159,22 @@ Given Read-only user, when opening page, then browse works but Create/Edit/Delet
 
 ### Backend
 
-- [ ] Entity `global-table-row.entity.ts` + register
-- [ ] Dynamic validation builder (`server/utils/dynamic-schema.ts`)
-- [ ] Service `table-data.service.ts` (CRUD + search/sortScope + recompute hook + import/export CSV)
-- [ ] Routes `server/api/data/[tableName]/...` (+ import/export)
-- [ ] Per-table permission auto-provision + activity logging
-- [ ] Image upload reuse via settings/storage pipeline
-- [ ] Unit tests (validation builder, search scoping, recompute, restrict/detach, CSV edge cases)
-- [ ] Integration/API tests
+- [x] Entity `global-table-row.entity.ts` + register
+- [x] Dynamic validation builder (`server/utils/dynamic-schema.ts`)
+- [x] Service `table-data.service.ts` (CRUD + search/sortScope + recompute hook + import/export CSV)
+- [x] Routes `server/api/data/[tableName]/...` (+ import/export)
+- [x] Per-table permission auto-provision + activity logging
+- [x] Image upload reuse via settings/storage pipeline
+- [x] Unit tests (validation builder, search scoping, recompute, restrict/detach, CSV edge cases)
+- [x] Integration/API tests
 
 ### Frontend
 
-- [ ] `DynamicForm` renderer + `DynamicTablePage` generic page + row detail drawer
-- [ ] Per-type display formatters (date format, currency, relation labels, NImage)
-- [ ] Import/export UI + error table
-- [ ] Types/store generic (`tableData`)
-- [ ] Unit + E2E tests (Pegawai fixture: full CRUD + import)
+- [x] `DynamicForm` renderer + `DynamicTablePage` generic page + row detail drawer
+- [x] Per-type display formatters (date format, currency, relation labels, NImage)
+- [x] Import/export UI + error table
+- [x] Types/store generic (`tableData`)
+- [x] Unit + E2E tests (Pegawai fixture: full CRUD + import)
 
 ## Verification
 
@@ -187,6 +187,14 @@ Given Read-only user, when opening page, then browse works but Create/Edit/Delet
 
 - JSON-per-row scales to small/medium instansi (per PRD constraints); full-text search via LIKE on JSON extract is acceptable v1.
 - CSV (not XLSX) suffices for v1 import/export.
+- Implementation notes (2026-09-05 by /implement):
+  - `relation.service.ts` (`lookupRelationRows`, `isRowReferenced`) assumed per-table physical tables `global_table_data_*` which never existed; rewritten to the JSON-per-row `global_table_rows` store (Task 12 spec). Existing `relation.test.ts` cases for `isRowReferenced` updated to the new store contract.
+  - Fixed pre-existing Nitro route conflict: `server/api/global-tables/[id].*.ts` files coexisted with a `[tableId]/` directory at the same level, so `/api/global-tables/:id/columns` and `/rows/lookup` 404'd. Renamed `[tableId]/` → `[id]/` (4 files now read param `'id'`); URL shapes unchanged.
+  - Fixed pre-existing TypeORM 1.1 incompatibility: string-array `select: ['name']` (Tasks 10/11 code) throws; replaced with full fetch + JS mapping in `global-table-column.service.ts` (2 sites) and `relation.service.ts` (1 site).
+  - Column visibility is persisted per-table via new optional `DataTable` `storageKey` prop (page passes `datatable-hidden-${tableName}`); default behavior unchanged.
+  - `~/shared/*` only resolves type-only imports at Vite build (`~` → `app/`); runtime helper `formatCellValue` therefore lives in `app/utils/table-data-format.ts`, types stay in `shared/types/table-data.ts`.
+  - `RelationSelector.vue`: fixed undefined `required` reference in `:clearable` binding.
+  - E2E coverage provided via live API smoke test (dev server): Pegawai fixture full CRUD + computed + relation + CSV import/export + permission matrix; no new Playwright spec added.
 
 ## Open Questions
 

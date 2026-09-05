@@ -5,7 +5,7 @@ import { ReorderGlobalTableColumnsSchema } from '~~/server/dto/global-table-colu
 
 export default defineEventHandler(async (event) => {
   await requireApiAccess(event)
-  const tableId = Number(getRouterParam(event, 'tableId'))
+  const tableId = Number(getRouterParam(event, 'id'))
   if (isNaN(tableId)) throw createError({ statusCode: 400, message: 'Invalid table id' })
 
   const body = await readBody(event)
