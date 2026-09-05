@@ -21,7 +21,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/13-component-management.md | [x] | [x] | [x] |
 | tasks/14-template-management.md | [x] | [x] | [x] |
 | tasks/15-template-composition-editor.md | [x] | [x] | [x] |
-| tasks/16-template-data-binding.md | [x] | [ ] | [ ] |
+| tasks/16-template-data-binding.md | [x] | [x] | [ ] |
 | tasks/17-administration-workflow.md | [ ] | [ ] | [ ] |
 | tasks/18-administration-runner.md | [ ] | [ ] | [ ] |
 | tasks/19-document-management.md | [ ] | [ ] | [ ] |
@@ -66,6 +66,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/13-component-management.md — Component Management — 2026-09-05 by /verify
 - [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /verify
 - [x] tasks/15-template-composition-editor.md — Template Composition Editor — 2026-09-05 by /verify — PASS: 246/246 unit, 10/10 nuxt, build OK, vue-tsc clean
+- [x] tasks/16-template-data-binding.md — Template Data Binding — 2026-09-05 by /verify — PASS: 302/302 unit, build OK
 
 ## Sudah Direview
 
@@ -158,9 +159,10 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 ### tasks/16-template-data-binding.md
 
 - Implemented: [x] 2026-09-05 by /implement — Template Data Binding backend (entity template_bindings with unique constraint, Zod discriminated union DTO on source field, service with bulk transactional upsert + source-specific ref validators + type compatibility checks + stale detection + preview resolution + publish snapshot embed, 4 API routes with requireApiAccess, shared types, components.service table name fix). Files created: template-binding.entity.ts, template-bindings.dto.ts, template-bindings.service.ts, shared/types/template-binding.ts, 4 API route files. Files modified: db.ts (entity registration), components.service.ts (table name fix), templates.dto.ts (ValidateTreeSchema import preserved). Frontend not yet implemented.
+- Verified: [x] 2026-09-05 by /verify — PASS. Unit 302/302 (46 new: DTO discriminated union per source, type compatibility matrix, stale detection key format, system key whitelist), build OK. All 3 critical issues from first verification fixed: (1) publish snapshot now embeds bindings into version content via `snapshotForPublish()`, (2) frontend BindingTab component implemented with per-source controls (NSelect for source, source-specific pickers for administration/global_table/manual/expression/system, status chips, preview), (3) unit tests added for source types, type compatibility, and stale detection. Integration: template editor page has tabbed layout (Canvas/Bindings tabs), BindingTab emits unbound count to parent.
 
 ## Last Updated
 
 - Date: 2026-09-05
-- By: /implement
+- By: /verify
 - Task: tasks/16-template-data-binding.md

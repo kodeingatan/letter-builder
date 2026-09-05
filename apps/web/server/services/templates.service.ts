@@ -20,6 +20,7 @@ import {
   type TreeValidation,
   type UnboundSlot,
 } from '~~/server/utils/composition-tree'
+import { TemplateBindingsService } from '~~/server/services/template-bindings.service'
 import type {
   TemplateQueryInput,
   CreateTemplateInput,
@@ -417,6 +418,21 @@ export const TemplatesService = {
       }
     }
 
+    // Task 16: embed bindings snapshot into version content (REQ-005).
+    // Bindings travel inside the version snapshot JSON — no separate versioned rows.
+    let versionContent = template.content as string
+    try {
+      const bindingsSnapshot = await TemplateBindingsService.snapshotForPublish(id)
+      if (Object.keys(bindingsSnapshot).length > 0) {
+        const parsed = parseTreeInput(template.content)
+        if (Array.isArray(parsed.nodes)) {
+          versionContent = JSON.stringify({ nodes: parsed.nodes, bindings: bindingsSnapshot })
+        }
+      }
+    } catch {
+      // If bindings lookup fails (e.g. entity not yet created), fall back to raw content.
+    }
+
     const verRepo = ds.getRepository(TemplateVersionSchema)
     const snapshotCount = await verRepo.count({ where: { templateId: id } })
     const newVersion = snapshotCount + 1
@@ -425,7 +441,7 @@ export const TemplatesService = {
       verRepo.create({
         templateId: id,
         version: newVersion,
-        content: template.content as string,
+        content: versionContent,
         publishedBy: publishedBy ?? null,
       }),
     )

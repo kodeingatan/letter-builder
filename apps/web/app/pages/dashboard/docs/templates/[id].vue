@@ -2,11 +2,12 @@
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import {
   NAlert, NButton, NCard, NForm, NFormItem, NInput, NSpin, NSpace,
-  NTag, NText, NPopconfirm, NDrawer, NDrawerContent, useMessage,
+  NTag, NText, NPopconfirm, NDrawer, NDrawerContent, NTabs, NTabPane,
+  useMessage,
 } from 'naive-ui'
 import {
   TemplateVersionTimeline, TemplateSnapshotViewer, CompositionCanvas,
-  NodeInspector, ComponentPickerModal,
+  NodeInspector, ComponentPickerModal, BindingTab,
 } from '~/components/features/templates'
 import { useAuthorization } from '~/composables/useAuthorization'
 import { useAuthStore } from '~/stores/auth'
@@ -67,6 +68,10 @@ const loadingSnapshot = ref(false)
 // --- Component picker ---
 const showPicker = ref(false)
 const pickerTarget = ref<{ containerId: string | null; index: number }>({ containerId: null, index: 0 })
+
+// --- Active tab (Canvas / Bindings) ---
+const activeTab = ref('canvas')
+const bindingUnboundCount = ref(0)
 
 // --- Placement metadata (names + slot chips) ---
 const componentDetails = ref<Record<number, ComponentDetail>>({})
@@ -477,23 +482,49 @@ onMounted(() => {
         <div class="editor-grid">
           <!-- Canvas column -->
           <div class="flex flex-col gap-4">
-            <NCard size="small" title="Composition canvas (mutable draft)">
-              <template #header-extra>
-                <NText depth="3" style="font-size: 12px;">
-                  {{ nodes.length }} block(s){{ validating ? ' · validating…' : '' }}
-                </NText>
-              </template>
-              <CompositionCanvas
-                v-model:nodes="nodes"
-                v-model:selected-id="selectedId"
-                :slots-by-node="slotsByNode"
-                :component-names="componentNames"
-                @pick-component="handlePickComponent"
-              />
-              <NSpace :size="8" style="margin-top: 8px;">
-                <NButton size="small" @click="insertSampleComposition">Insert sample blocks</NButton>
-              </NSpace>
-            </NCard>
+            <NTabs v-model:value="activeTab" type="line" animated>
+              <NTabPane name="canvas" tab="Canvas">
+                <NCard size="small" title="Composition canvas (mutable draft)">
+                  <template #header-extra>
+                    <NText depth="3" style="font-size: 12px;">
+                      {{ nodes.length }} block(s){{ validating ? ' · validating…' : '' }}
+                    </NText>
+                  </template>
+                  <CompositionCanvas
+                    v-model:nodes="nodes"
+                    v-model:selected-id="selectedId"
+                    :slots-by-node="slotsByNode"
+                    :component-names="componentNames"
+                    @pick-component="handlePickComponent"
+                  />
+                  <NSpace :size="8" style="margin-top: 8px;">
+                    <NButton size="small" @click="insertSampleComposition">Insert sample blocks</NButton>
+                  </NSpace>
+                </NCard>
+              </NTabPane>
+
+              <NTabPane name="bindings" tab="Bindings">
+                <NCard size="small">
+                  <template #header>
+                    <NSpace align="center" :size="8">
+                      <NText>Bindings</NText>
+                      <NTag
+                        v-if="bindingUnboundCount > 0"
+                        size="small"
+                        type="warning"
+                        :bordered="false"
+                      >
+                        {{ bindingUnboundCount }} unbound
+                      </NTag>
+                    </NSpace>
+                  </template>
+                  <BindingTab
+                    :template-id="id"
+                    @update:unbound-count="(c) => { bindingUnboundCount = c }"
+                  />
+                </NCard>
+              </NTabPane>
+            </NTabs>
 
             <NCard size="small" title="Metadata">
               <NForm label-placement="top">

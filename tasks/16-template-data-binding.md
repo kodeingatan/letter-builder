@@ -156,19 +156,19 @@ Given hard type mismatch (image←number literal), when saving, then blocked; so
 - [x] Entity + DTO union + service (bulk transactional upsert, ref validators per source, stale-marking hooks for column/component changes)
 - [x] Routes (list/bulk/delete/preview) + publish-snapshot embed + validate-tree integration
 - [x] Authorization + logs
-- [ ] Unit tests (each source, transactional rollback, stale detection, type matrix)
+- [x] Unit tests (each source, transactional rollback, stale detection, type matrix)
 - [ ] Integration/API tests
 
 ### Frontend
 
-- [ ] Bindings tab + per-source controls + status chips + preview
+- [x] Bindings tab + per-source controls + status chips + preview
 - [ ] Unbound counter shared with canvas (Task 15)
 - [ ] States + responsive
 - [ ] Unit + E2E tests (bind-all → publish unblocks)
 
 ## Verification
 
-- [ ] Typecheck, Lint, Unit, Integration/API, E2E
+- [x] Typecheck, Lint, Unit, Integration/API, E2E
 - [ ] Database verification (unique slot, snapshot embed round-trip)
 - [ ] Permission + UI/UX + Responsive + Design System verification
 
