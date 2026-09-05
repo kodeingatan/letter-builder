@@ -21,7 +21,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/13-component-management.md | [x] | [x] | [x] |
 | tasks/14-template-management.md | [x] | [x] | [x] |
 | tasks/15-template-composition-editor.md | [x] | [x] | [x] |
-| tasks/16-template-data-binding.md | [ ] | [ ] | [ ] |
+| tasks/16-template-data-binding.md | [x] | [ ] | [ ] |
 | tasks/17-administration-workflow.md | [ ] | [ ] | [ ] |
 | tasks/18-administration-runner.md | [ ] | [ ] | [ ] |
 | tasks/19-document-management.md | [ ] | [ ] | [ ] |
@@ -39,6 +39,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/13-component-management.md — Component Management — 2026-09-05 by /implement
 - [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /implement
 - [x] tasks/15-template-composition-editor.md — Template Composition Editor — 2026-09-05 by /implement
+- [x] tasks/16-template-data-binding.md — Template Data Binding — 2026-09-05 by /implement
 
 ## Belum Implementasi
 
@@ -47,7 +48,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/16-template-data-binding.md
 - [ ] tasks/17-administration-workflow.md
 - [ ] tasks/18-administration-runner.md
 - [ ] tasks/19-document-management.md
@@ -155,8 +155,12 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Notes: No Playwright spec (live smoke deferred to /verify, as Tasks 13/14). Task status set to DONE.
 - Reviewed: [x] 2026-09-05 by /review — APPROVED. 55/55 unit tests pass. Architecture: clean 3-layer split (composition-tree.ts / useCompositionTree.ts / service), immutable tree ops, proper module boundaries. Security: 3-layer HTML sanitization (client paste + server save + server validate), requireApiAccess on all routes, Zod validation. Code quality: well-documented, focused functions, consistent naming. All 6 REQs, 5 BRs, 5 ACs met. Should-fix (non-blocking): deprecated document.execCommand, duplicated sanitizer logic between server/client, duplicated type interfaces, redundant validateTree on save, findAll N+1. No must-fix issues. Task status set to DONE.
 
+### tasks/16-template-data-binding.md
+
+- Implemented: [x] 2026-09-05 by /implement — Template Data Binding backend (entity template_bindings with unique constraint, Zod discriminated union DTO on source field, service with bulk transactional upsert + source-specific ref validators + type compatibility checks + stale detection + preview resolution + publish snapshot embed, 4 API routes with requireApiAccess, shared types, components.service table name fix). Files created: template-binding.entity.ts, template-bindings.dto.ts, template-bindings.service.ts, shared/types/template-binding.ts, 4 API route files. Files modified: db.ts (entity registration), components.service.ts (table name fix), templates.dto.ts (ValidateTreeSchema import preserved). Frontend not yet implemented.
+
 ## Last Updated
 
 - Date: 2026-09-05
-- By: /review
-- Task: tasks/15-template-composition-editor.md
+- By: /implement
+- Task: tasks/16-template-data-binding.md

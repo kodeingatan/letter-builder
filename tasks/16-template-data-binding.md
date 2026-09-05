@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+IN PROGRESS
 
 ## Objective
 
@@ -153,9 +153,9 @@ Given hard type mismatch (image←number literal), when saving, then blocked; so
 
 ### Backend
 
-- [ ] Entity + DTO union + service (bulk transactional upsert, ref validators per source, stale-marking hooks for column/component changes)
-- [ ] Routes (list/bulk/delete/preview) + publish-snapshot embed + validate-tree integration
-- [ ] Authorization + logs
+- [x] Entity + DTO union + service (bulk transactional upsert, ref validators per source, stale-marking hooks for column/component changes)
+- [x] Routes (list/bulk/delete/preview) + publish-snapshot embed + validate-tree integration
+- [x] Authorization + logs
 - [ ] Unit tests (each source, transactional rollback, stale detection, type matrix)
 - [ ] Integration/API tests
 

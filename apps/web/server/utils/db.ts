@@ -20,6 +20,7 @@ import {
   TemplateSchema,
   TemplateVersionSchema,
 } from '~~/server/entities/template.entity'
+import { TemplateBindingSchema } from '~~/server/entities/template-binding.entity'
 
 let dataSource: DataSource | null = null
 
@@ -46,6 +47,7 @@ export async function getDataSource(): Promise<DataSource> {
         ComponentVersionSchema,
         TemplateSchema,
         TemplateVersionSchema,
+        TemplateBindingSchema,
       ],
       synchronize: true,
     })

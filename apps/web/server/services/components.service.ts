@@ -39,12 +39,11 @@ function assertNoDuplicateRequirements(requirements: ComponentRequirementInput[]
  */
 async function findTemplateBindings(componentId: number): Promise<Array<{ id: number; name: string }>> {
   const ds = await getDataSource()
-  // Task 16 binding table (conventional name); enforced when it lands.
-  if (ds.hasMetadata('template_component_bindings')) {
+  if (ds.hasMetadata('template_bindings')) {
     try {
       const rows: Array<{ templateId: number; templateName: string }> = await ds.query(
         `SELECT b."templateId" AS "templateId", t.name AS "templateName"
-         FROM template_component_bindings b
+         FROM template_bindings b
          LEFT JOIN templates t ON t.id = b."templateId"
          WHERE b."componentId" = ?`,
         [componentId],
