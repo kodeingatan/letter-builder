@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+TODO REVIEW
 
 ## Objective
 
@@ -151,18 +151,18 @@ Given pasted `<script>` content, when inserted, then script is stripped and no s
 
 ### Backend
 
-- [ ] Node-shape Zod schemas + tree validator (unbound scan, condition/token validation via Task 09, loop config checks)
-- [ ] `validate-tree` endpoint + publish-guard extension
-- [ ] Unit tests (every node kind, nesting limits, sanitization, unbound detection)
-- [ ] Integration/API tests
+- [x] Node-shape Zod schemas + tree validator (unbound scan, condition/token validation via Task 09, loop config checks)
+- [x] `validate-tree` endpoint + publish-guard extension
+- [x] Unit tests (every node kind, nesting limits, sanitization, unbound detection)
+- [ ] Integration/API tests (deferred to /verify live smoke, per Tasks 13/14 precedent)
 
 ### Frontend
 
-- [ ] Canvas editor component + toolbar + context menu + inspector panel + structural preview
-- [ ] Component picker (version-aware) + loop source config + condition input (Task 09 preview hook)
-- [ ] Tree ↔ JSON serialization round-trip
-- [ ] States + responsive + sanitization
-- [ ] Unit + E2E tests (compose → save → reload → publish-block → bind-ready)
+- [x] Canvas editor component + toolbar + context menu + inspector panel + structural preview
+- [x] Component picker (version-aware) + loop source config + condition input (Task 09 preview hook)
+- [x] Tree ↔ JSON serialization round-trip
+- [x] States + responsive + sanitization
+- [x] Unit tests (compose → save → reload → publish-block → bind-ready shapes); E2E deferred to /verify
 
 ## Verification
 
@@ -175,6 +175,11 @@ Given pasted `<script>` content, when inserted, then script is stripped and no s
 
 - Custom contenteditable canvas acceptable v1; full TipTap/ProseMirror migration is a later optimization, tree shape stays stable.
 - Row filter builder is "lite" (field+operator+value AND-chain); advanced filters deferred.
+- Task 14 legacy skeletons (`{type,text}` nodes without `kind`) upgrade one-way to text/component composition nodes on editor load; snapshots freeze verbatim either way.
+- Condition "boolean-coercible" (BR-003): Task 09-invalid expressions block save/publish; syntactically valid but non-comparison-shaped expressions (arithmetic/bare refs) save with a warning and truthiness-coerce at render time.
+- Unbound slots block Publish (422 UNBOUND_REQUIREMENTS) but stay draft-legal on Save, so Designers can compose before Task 16 binding.
+- No Playwright spec added (consistent with Tasks 13/14); lifecycle verified via unit tests + /verify live API smoke.
+- Loop-must-wrap-component is a non-blocking warning, not an error, so Designers can scaffold containers before picking components.
 
 ## Open Questions
 

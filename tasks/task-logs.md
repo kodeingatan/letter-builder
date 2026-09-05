@@ -20,7 +20,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/12-global-table-data.md | [x] | [x] | [ ] |
 | tasks/13-component-management.md | [x] | [x] | [x] |
 | tasks/14-template-management.md | [x] | [x] | [x] |
-| tasks/15-template-composition-editor.md | [ ] | [ ] | [ ] |
+| tasks/15-template-composition-editor.md | [x] | [ ] | [ ] |
 | tasks/16-template-data-binding.md | [ ] | [ ] | [ ] |
 | tasks/17-administration-workflow.md | [ ] | [ ] | [ ] |
 | tasks/18-administration-runner.md | [ ] | [ ] | [ ] |
@@ -38,6 +38,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/12-global-table-data.md — Global Table Data & Generated CRUD — 2026-09-05 by /implement
 - [x] tasks/13-component-management.md — Component Management — 2026-09-05 by /implement
 - [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /implement
+- [x] tasks/15-template-composition-editor.md — Template Composition Editor — 2026-09-05 by /implement
 
 ## Belum Implementasi
 
@@ -46,7 +47,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/15-template-composition-editor.md
 - [ ] tasks/16-template-data-binding.md
 - [ ] tasks/17-administration-workflow.md
 - [ ] tasks/18-administration-runner.md
@@ -135,8 +135,13 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Reviewed: [x] 2026-09-05 by /review — APPROVED. Full review of 20 new files + 4 modified: EntitySchema pair (templates/template_versions) with UNIQUE(templateId,version), self-contained Zod DTO, pure template-helpers (17/17 unit tests green on re-run), service with draft/publish/rollback-as-draft + guarded usedBy stubs, 8 API routes all behind requireApiAccess, seeder permission mirroring Task 13, activity-logger mapping, Pinia store + composable + 5 components + list/editor pages following DataTable + .detail-view conventions. No must-fix. Should-fix (non-blocking): findAll N+1 findUsages per row, publish count+1 without transaction (UNIQUE-collision surfaces raw driver error), no DB-level FK on template_versions, DetailDrawer/editor bypass store.fetchOne, triple-duplicated skeleton validation (DTO/helpers/composable). Task status set to DONE.
 - Notes: AC-004 409 path coded but stubbed (no administration/document tables until Tasks 17/19). No Playwright spec (live smoke instead, as Task 13). Task status set to DONE.
 
+### tasks/15-template-composition-editor.md
+
+- Implemented: [x] 2026-09-05 by /implement — Template Composition Editor (pure server/utils/composition-tree.ts: 8 node kinds, shape validation, Task 09 token/condition checks, loop config, allowlist-lite sanitizer, nesting ≤3; templates.service validateTree + publish-guard extension 422 UNBOUND_REQUIREMENTS/INVALID_TREE + authoritative sanitize+validate on save; ValidateTreeSchema DTO; POST /api/templates/:id/validate-tree route; shared composition types; pure useCompositionTree composable incl. legacy upgrade + round-trip; CompositionCanvas + CompositionNodeView + NodeInspector + ComponentPickerModal; editor page upgraded to canvas + inspector + structural preview + debounced live validation + mobile bottom drawer; store.validateTree). Unit 246/246 (38 new), vue-tsc clean, build OK.
+- Notes: No Playwright spec (live smoke deferred to /verify, as Tasks 13/14). Task status set to TODO REVIEW.
+
 ## Last Updated
 
 - Date: 2026-09-05
-- By: /review
-- Task: tasks/14-template-management.md
+- By: /implement
+- Task: tasks/15-template-composition-editor.md

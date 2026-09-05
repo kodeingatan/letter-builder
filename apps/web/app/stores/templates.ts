@@ -8,6 +8,7 @@ import type {
   CreateTemplate,
   QueryTemplate,
   UpdateTemplate,
+  TreeValidationResult,
 } from '~/shared/types/template'
 import type { PaginatedResponse } from '~/shared/types/api'
 import { useAuthStore } from '~/stores/auth'
@@ -169,6 +170,20 @@ export const useTemplatesStore = defineStore('templates', () => {
     }
   }
 
+  /** Live editor feedback (Task 15): validate a candidate tree without saving. */
+  async function validateTree(id: number, content: unknown) {
+    try {
+      return await $fetch<TreeValidationResult>(`/api/templates/${id}/validate-tree`, {
+        method: 'POST',
+        body: { content },
+        headers: authHeaders(),
+      })
+    } catch (e: any) {
+      error.value = e.data?.message || 'Failed to validate tree'
+      throw e
+    }
+  }
+
   function setPage(p: number) { page.value = p }
   function setLimit(l: number) { limit.value = l; page.value = 1 }
   function setSearch(s: string) { search.value = s; page.value = 1 }
@@ -192,7 +207,7 @@ export const useTemplatesStore = defineStore('templates', () => {
 
   return {
     templates, total, page, limit, search, searchField, sortBy, sortOrder, loading, error,
-    fetchAll, fetchOne, fetchVersion, create, update, publish, rollback, remove,
+    fetchAll, fetchOne, fetchVersion, create, update, publish, rollback, remove, validateTree,
     setPage, setLimit, setSearch, setSearchField, setSort, resetFilters,
   }
 })

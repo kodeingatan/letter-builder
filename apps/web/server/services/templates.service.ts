@@ -1,6 +1,25 @@
 import { getDataSource } from '~~/server/utils/db'
 import { TemplateSchema, TemplateVersionSchema } from '~~/server/entities/template.entity'
+import {
+  ComponentSchema,
+  ComponentDataRequirementSchema,
+  ComponentVersionSchema,
+} from '~~/server/entities/component.entity'
+import { GlobalTableSchema } from '~~/server/entities/global-table.entity'
+import { GlobalTableRowSchema } from '~~/server/entities/global-table-row.entity'
 import { isNonEmptyContent, countMeaningfulNodes } from '~~/server/utils/template-helpers'
+import {
+  validateNodeShapes,
+  parseTreeInput,
+  hasCompositionNodes,
+  sanitizeTree,
+  collectPlacements,
+  isSlotBound,
+  type CompositionNode,
+  type TreeIssue,
+  type TreeValidation,
+  type UnboundSlot,
+} from '~~/server/utils/composition-tree'
 import type {
   TemplateQueryInput,
   CreateTemplateInput,
@@ -52,6 +71,169 @@ async function findUsages(templateId: number): Promise<TemplateUsage> {
   }
 
   return { steps, documents, stepCount: steps.length, documentCount: documents.length }
+}
+
+/**
+ * Composition-tree validation (Task 15). Pure shape checks live in
+ * `server/utils/composition-tree.ts`; the DB-backed checks below resolve
+ * component placements (BR-001), loop source tables + rowIds (BR-002), and
+ * unbound requirement slots (REQ-006). Legacy Task 14 skeletons (nodes
+ * without `kind`) pass through untouched.
+ */
+async function checkPlacementRequirements(
+  ds: any,
+  nodeId: string,
+  path: string,
+  componentId: unknown,
+  componentVersion: unknown,
+  bindings: Record<string, unknown>,
+  errors: TreeIssue[],
+  unbound: UnboundSlot[],
+): Promise<void> {
+  if (typeof componentId !== 'number' || isNaN(componentId)) return // shape error already reported
+  const component: any = await ds.getRepository(ComponentSchema).findOne({ where: { id: componentId } })
+  if (!component) {
+    errors.push({ path: `${path}.attrs.componentId`, message: `Component #${componentId} not found` })
+    return
+  }
+  const verRepo = ds.getRepository(ComponentVersionSchema)
+  let snapshot: any = null
+  if (componentVersion !== undefined) {
+    snapshot = await verRepo.findOne({ where: { componentId, version: componentVersion } })
+    if (!snapshot) {
+      errors.push({
+        path: `${path}.attrs.componentVersion`,
+        message: `Component "${component.name}" has no published v${componentVersion}`,
+      })
+      return
+    }
+  } else {
+    // BR-001: unpinned placements resolve the latest-published version.
+    const snapshots: any[] = await verRepo
+      .createQueryBuilder('v')
+      .where('v.componentId = :id', { id: componentId })
+      .orderBy('v.version', 'DESC')
+      .limit(1)
+      .getMany()
+    snapshot = snapshots[0] ?? null
+    if (!snapshot) {
+      errors.push({
+        path: `${path}.attrs.componentVersion`,
+        message: `Component "${component.name}" has no published version yet (publish the component first)`,
+      })
+      return
+    }
+  }
+  let requirements: Array<{ name: string; type: string }> = []
+  try {
+    const parsed = JSON.parse(snapshot.requirements)
+    if (Array.isArray(parsed)) requirements = parsed
+  } catch {
+    // Fall back to live requirements when the snapshot payload is unreadable.
+    const live: any[] = await ds.getRepository(ComponentDataRequirementSchema).find({ where: { componentId } })
+    requirements = live.map((r) => ({ name: r.name, type: r.type }))
+  }
+  for (const req of requirements) {
+    if (!isSlotBound(bindings[req.name])) {
+      unbound.push({
+        nodeId,
+        componentId,
+        componentName: component.name,
+        requirement: req.name,
+        type: req.type,
+      })
+    }
+  }
+}
+
+async function checkLoopSources(
+  ds: any,
+  nodes: CompositionNode[],
+  basePath: string,
+  errors: TreeIssue[],
+  warnings: TreeIssue[],
+): Promise<void> {
+  for (let index = 0; index < nodes.length; index++) {
+    const node = nodes[index]
+    const path = `${basePath}[${index}]`
+    if (!isCompositionNode(node)) continue
+    if (node.kind === 'loop') {
+      const source = (node.attrs ?? {}).source
+      if (source && typeof source === 'object' && typeof source.tableName === 'string' && source.tableName.trim()) {
+        // BR-002: loop source table must exist (case-insensitive name match).
+        const tables: any[] = await ds
+          .getRepository(GlobalTableSchema)
+          .createQueryBuilder('t')
+          .where('LOWER(t.name) = LOWER(:name)', { name: source.tableName.trim() })
+          .getMany()
+        const table = tables[0]
+        if (!table) {
+          errors.push({ path: `${path}.attrs.source.tableName`, message: `Source table "${source.tableName}" does not exist` })
+        } else if (source.mode === 'selected' && Array.isArray(source.rowIds)) {
+          const wanted = source.rowIds.map((v: unknown) => Number(v)).filter((v: number) => !isNaN(v))
+          if (wanted.length) {
+            const found: any[] = await ds
+              .getRepository(GlobalTableRowSchema)
+              .createQueryBuilder('r')
+              .where('r.globalTableId = :tableId', { tableId: table.id })
+              .andWhere('r.id IN (:...ids)', { ids: wanted })
+              .getMany()
+            const foundIds = new Set(found.map((r) => r.id))
+            for (const id of wanted) {
+              if (!foundIds.has(id)) {
+                // BR-002: stale ids warn, never silently drop.
+                warnings.push({ path: `${path}.attrs.source.rowIds`, message: `Row #${id} no longer exists in table "${table.name}"` })
+              }
+            }
+          }
+        }
+      }
+    }
+    if (Array.isArray(node.children)) {
+      await checkLoopSources(ds, node.children, `${path}.children`, errors, warnings)
+    }
+  }
+}
+
+/**
+ * Full composition validation for a draft tree: shape-level checks plus
+ * DB-backed placement/loop checks. `unbound` never affects `valid` —
+ * unbound slots block Publish, not Save (REQ-006).
+ */
+async function validateCompositionNodes(nodes: unknown[]): Promise<TreeValidation> {
+  const shape = validateNodeShapes(nodes)
+  const errors = [...shape.errors]
+  const warnings = [...shape.warnings]
+  const unbound: UnboundSlot[] = []
+  const empty: TreeValidation = {
+    valid: false,
+    errors,
+    warnings,
+    unbound,
+    stats: shape.stats,
+  }
+  if (errors.length > 0 || !hasCompositionNodes(nodes)) {
+    empty.valid = errors.length === 0
+    return empty
+  }
+  const ds = await getDataSource()
+  // NOTE: validate against the original array (cast) so error paths keep
+  // their real indices when legacy nodes interleave with composition nodes.
+  const asNodes = nodes as CompositionNode[]
+  for (const placement of collectPlacements(asNodes)) {
+    await checkPlacementRequirements(
+      ds,
+      placement.nodeId,
+      placement.path,
+      placement.componentId,
+      placement.componentVersion,
+      placement.bindings,
+      errors,
+      unbound,
+    )
+  }
+  await checkLoopSources(ds, asNodes, 'nodes', errors, warnings)
+  return { valid: errors.length === 0, errors, warnings, unbound, stats: shape.stats }
 }
 
 async function findOneWithRelations(id: number) {
@@ -115,6 +297,29 @@ export const TemplatesService = {
     return findOneWithRelations(id)
   },
 
+  /**
+   * Live editor feedback (Task 15 API): validate a candidate draft tree
+   * without persisting it. `content` accepts the JSON string or the parsed
+   * `{ nodes: [...] }` object. Always 200s — problems surface via
+   * `errors` (save-blocking) and `unbound` (publish-blocking).
+   */
+  async validateTree(id: number, content: unknown): Promise<TreeValidation> {
+    const ds = await getDataSource()
+    const template = await ds.getRepository(TemplateSchema).findOne({ where: { id } })
+    if (!template) throw httpError(404, 'Template not found')
+    const parsed = parseTreeInput(content)
+    if (!Array.isArray(parsed.nodes)) {
+      return {
+        valid: false,
+        errors: [{ path: 'content', message: parsed.error ?? 'Content must be a JSON document tree { nodes: [...] }' }],
+        warnings: [],
+        unbound: [],
+        stats: { nodeCount: 0, placementCount: 0, loopCount: 0, conditionCount: 0, tokenCount: 0 },
+      }
+    }
+    return validateCompositionNodes(parsed.nodes)
+  },
+
   async create(data: CreateTemplateInput) {
     const ds = await getDataSource()
     const repo = ds.getRepository(TemplateSchema)
@@ -154,7 +359,27 @@ export const TemplatesService = {
       template.name = data.name
     }
     if (data.description !== undefined) template.description = data.description
-    if (data.content !== undefined) template.content = data.content
+    if (data.content !== undefined) {
+      // Task 15: pasted HTML is sanitized authoritatively on save (AC-005)
+      // and structural problems (bad shapes, invalid conditions/tokens per
+      // AC-003, unknown components) block the save. Unbound slots stay
+      // draft-legal — only Publish rejects them (REQ-006).
+      const trimmed = typeof data.content === 'string' ? data.content.trim() : ''
+      if (trimmed) {
+        const parsed = parseTreeInput(data.content)
+        if (!Array.isArray(parsed.nodes)) {
+          throw httpError(422, parsed.error ?? 'Content must be a JSON document tree { nodes: [...] }')
+        }
+        const sanitized = sanitizeTree(parsed.nodes as CompositionNode[])
+        const checked = await validateCompositionNodes(sanitized)
+        if (checked.errors.length > 0) {
+          throw httpError(422, checked.errors[0].message, { code: 'INVALID_TREE', errors: checked.errors })
+        }
+        template.content = JSON.stringify({ nodes: sanitized })
+      } else {
+        template.content = data.content
+      }
+    }
     // Editing after publish reopens the working copy as draft; the version
     // counter only moves on publish.
     if (template.status === 'published' && data.content !== undefined) template.status = 'draft'
@@ -172,6 +397,24 @@ export const TemplatesService = {
 
     if (!isNonEmptyContent(template.content)) {
       throw httpError(422, 'Cannot publish an empty template: content must contain at least one text node or component placement ({ nodes: [...] })')
+    }
+
+    // Task 15 publish-guard extension: composition trees must be
+    // structurally valid and carry zero unbound requirement slots (REQ-006,
+    // AC-004). Legacy Task 14 skeletons skip this gate.
+    const parsed = parseTreeInput(template.content)
+    if (Array.isArray(parsed.nodes) && hasCompositionNodes(parsed.nodes)) {
+      const checked = await validateCompositionNodes(parsed.nodes)
+      if (checked.errors.length > 0) {
+        throw httpError(422, checked.errors[0].message, { code: 'INVALID_TREE', errors: checked.errors })
+      }
+      if (checked.unbound.length > 0) {
+        const names = checked.unbound.map((s) => `"${s.componentName ?? `#${s.componentId}`} · ${s.requirement}"`)
+        throw httpError(422, `Cannot publish: ${checked.unbound.length} unbound requirement slot(s): ${names.join(', ')}`, {
+          code: 'UNBOUND_REQUIREMENTS',
+          slots: checked.unbound,
+        })
+      }
     }
 
     const verRepo = ds.getRepository(TemplateVersionSchema)

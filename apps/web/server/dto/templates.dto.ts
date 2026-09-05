@@ -50,6 +50,19 @@ export const TemplateQuerySchema = z.object({
   sortOrder: z.enum(['ASC', 'DESC']).default('DESC'),
 })
 
+/**
+ * Candidate draft tree for live editor feedback (Task 15
+ * `POST /api/templates/:id/validate-tree`). Accepts the JSON string or the
+ * parsed `{ nodes: [...] }` object — structural checks run server-side.
+ */
+export const ValidateTreeSchema = z.object({
+  content: z.unknown().refine(
+    (value) => typeof value === 'string' || (typeof value === 'object' && value !== null),
+    { message: 'Content must be a JSON document tree { nodes: [...] }' },
+  ),
+})
+
 export type CreateTemplateInput = z.infer<typeof CreateTemplateSchema>
 export type UpdateTemplateInput = z.infer<typeof UpdateTemplateSchema>
 export type TemplateQueryInput = z.infer<typeof TemplateQuerySchema>
+export type ValidateTreeInput = z.infer<typeof ValidateTreeSchema>

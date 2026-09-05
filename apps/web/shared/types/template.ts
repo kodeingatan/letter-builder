@@ -67,3 +67,62 @@ export interface QueryTemplate {
   sortBy?: string
   sortOrder?: 'ASC' | 'DESC'
 }
+
+// --- Composition Editor (Task 15) -------------------------------------------
+
+export type CompositionKind =
+  | 'text'
+  | 'image'
+  | 'table'
+  | 'component'
+  | 'data-token'
+  | 'loop'
+  | 'condition'
+  | 'page-break'
+
+export interface CompositionNode {
+  id: string
+  kind: CompositionKind
+  attrs?: Record<string, any>
+  children?: CompositionNode[]
+}
+
+export interface LoopSourceConfig {
+  tableName: string
+  mode: 'all' | 'selected' | 'filtered'
+  rowIds?: number[]
+  filter?: Array<{ field: string; operator: string; value?: unknown }>
+}
+
+export interface TreeIssue {
+  path: string
+  message: string
+}
+
+export interface UnboundSlot {
+  nodeId: string
+  componentId: number
+  componentName?: string
+  requirement: string
+  type: string
+}
+
+export interface TreeValidationResult {
+  valid: boolean
+  errors: TreeIssue[]
+  warnings: TreeIssue[]
+  unbound: UnboundSlot[]
+  stats: {
+    nodeCount: number
+    placementCount: number
+    loopCount: number
+    conditionCount: number
+    tokenCount: number
+  }
+}
+
+export interface SlotChip {
+  name: string
+  type: string
+  bound: boolean
+}
