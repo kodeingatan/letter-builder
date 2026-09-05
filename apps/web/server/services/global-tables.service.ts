@@ -22,15 +22,20 @@ function httpError(statusCode: number, message: string, data?: unknown): Error {
 export const GlobalTablesService = {
   async checkReferences(id: number): Promise<GlobalTableReference> {
     const ds = await getDataSource()
+    
+    // Handle case where global_table_columns table doesn't exist yet
+    if (!ds.hasMetadata('global_table_columns')) {
+      return { relations: [], bindings: [] }
+    }
+
     const referencedBy: GlobalTableReference = { relations: [], bindings: [] }
 
-    // Column relations (Task 08: global_table_columns.relationTableId).
-    // Guarded so the foundation works before the columns table exists.
-    if (ds.hasMetadata('global_table_columns')) {
+    try {
       const rows: Array<{ globalTableId: number; name: string }> = await ds.query(
         'SELECT "globalTableId", name FROM global_table_columns WHERE "relationTableId" = ?',
         [id],
       )
+      
       if (rows.length) {
         const ownerIds = [...new Set(rows.map((r) => r.globalTableId))]
         const owners = ownerIds.length
@@ -47,6 +52,10 @@ export const GlobalTablesService = {
           columnName: r.name,
         }))
       }
+    } catch (error) {
+      // Log the error but return empty references to prevent 500
+      console.error(`Error checking references for table ${id}:`, error)
+      return referencedBy
     }
 
     return referencedBy

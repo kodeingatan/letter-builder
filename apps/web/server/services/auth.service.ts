@@ -38,7 +38,18 @@ export const AuthService = {
   async getProfile(userId: number) {
     const ds = await getDataSource()
     const repo = ds.getRepository(UserSchema)
-    const user = await repo.findOne({ where: { id: userId } })
+    const user = await repo.findOne({
+      where: { id: userId },
+      relations: {
+        roles: {
+          guards: true,
+          permissions: {
+            methods: true,
+            urls: true,
+          },
+        },
+      },
+    })
     if (!user) throw new Error('User not found')
     const { password: _, ...userWithoutPassword } = user
     return userWithoutPassword
