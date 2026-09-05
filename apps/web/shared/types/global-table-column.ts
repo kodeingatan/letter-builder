@@ -13,8 +13,16 @@ export interface GlobalTableColumn {
   format: string | null
   expression: string | null
   dependencies: string | null
+  relationTableId: number | null
+  relationConfig: RelationConfig | null
   createdAt: string
   updatedAt: string
+}
+
+export interface RelationConfig {
+  displayColumns: string[]
+  separator?: string
+  onTargetDelete?: 'restrict' | 'detach'
 }
 
 export interface CreateGlobalTableColumn {
@@ -29,6 +37,8 @@ export interface CreateGlobalTableColumn {
   options?: string | null
   format?: string | null
   expression?: string
+  relationTableId?: number | null
+  relationConfig?: RelationConfig | null
 }
 
 export interface UpdateGlobalTableColumn {
@@ -42,6 +52,8 @@ export interface UpdateGlobalTableColumn {
   options?: string | null
   format?: string | null
   expression?: string
+  relationTableId?: number | null
+  relationConfig?: RelationConfig | null
 }
 
 export interface QueryGlobalTableColumn {

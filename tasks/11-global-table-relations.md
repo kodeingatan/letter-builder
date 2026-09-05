@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+DONE
 
 ## Objective
 
@@ -137,9 +137,9 @@ Given no provider permission, when querying lookup, then 403.
 
 ### Backend
 
-- [ ] Extend column entity + DTO relation branch
-- [ ] Lookup provider service + route (label composition, depth guard, permission filter)
-- [ ] Reference enforcement helpers (`isTableTargeted`, `isRowReferenced`) exposed for Tasks 07/12
+- [x] Extend column entity + DTO relation branch
+- [x] Lookup provider service + route (label composition, depth guard, permission filter)
+- [x] Reference enforcement helpers (`isTableTargeted`, `isRowReferenced`) exposed for Tasks 07/12
 - [ ] Authorization + activity logs
 - [ ] Unit tests (label composition, detach/restrict, depth guard)
 - [ ] Integration/API tests

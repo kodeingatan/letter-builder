@@ -34,6 +34,8 @@ const typeColors = computed(() => {
     number: 'primary',
     currency: 'purple',
     image: 'warning',
+    'select-table-relation': 'success',
+    'select-table-relation-multiple': 'success',
   }
   return map
 })

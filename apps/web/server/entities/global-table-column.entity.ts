@@ -15,6 +15,8 @@ export interface GlobalTableColumn {
   format: string | null
   expression: string | null
   dependencies: string | null
+  relationTableId: number | null
+  relationConfig: string | null
   createdAt: Date
   updatedAt: Date
 }
@@ -36,11 +38,14 @@ export const GlobalTableColumnSchema = new EntitySchema<GlobalTableColumn>({
     format: { type: String, length: 32, nullable: true },
     expression: { type: 'text', nullable: true },
     dependencies: { type: 'text', nullable: true },
+    relationTableId: { type: 'int', nullable: true },
+    relationConfig: { type: 'text', nullable: true },
     createdAt: { type: 'datetime', createDate: true },
     updatedAt: { type: 'datetime', updateDate: true },
   },
   indices: [
     { name: 'IDX_GLOBAL_TABLE_COLUMN_TABLE_ID_NAME', columns: ['globalTableId', 'name'], unique: true },
     { name: 'IDX_GLOBAL_TABLE_COLUMN_TABLE_ID_POSITION', columns: ['globalTableId', 'position'] },
+    { name: 'IDX_GLOBAL_TABLE_COLUMN_RELATION_TABLE_ID', columns: ['relationTableId'] },
   ],
 })

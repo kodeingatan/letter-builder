@@ -1,18 +1,22 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
-import type { GlobalTable, QueryGlobalTable } from '~/shared/types/global-table'
+import { ref, computed } from 'vue'
+import type {
+  GlobalTable,
+  QueryGlobalTable,
+  CreateGlobalTable,
+  UpdateGlobalTable
+} from '~/shared/types/global-table'
 import type { PaginatedResponse } from '~/shared/types/api'
 import { useAuthStore } from '~/stores/auth'
 
 export const useGlobalTablesStore = defineStore('globalTables', () => {
-  const globalTables = ref<GlobalTable[]>([])
+  const tables = ref<GlobalTable[]>([])
   const total = ref(0)
   const page = ref(1)
   const limit = ref(20)
   const search = ref('')
-  const sortBy = ref('id')
-  const sortOrder = ref<'ASC' | 'DESC'>('DESC')
-  const searchField = ref('')
+  const sortBy = ref('name')
+  const sortOrder = ref<'ASC' | 'DESC'>('ASC')
   const loading = ref(false)
   const error = ref<string | null>(null)
 
@@ -24,7 +28,6 @@ export const useGlobalTablesStore = defineStore('globalTables', () => {
         page: params?.page ?? page.value,
         limit: params?.limit ?? limit.value,
         search: params?.search ?? (search.value || undefined),
-        searchField: params?.searchField ?? (searchField.value || undefined),
         sortBy: params?.sortBy ?? sortBy.value,
         sortOrder: params?.sortOrder ?? sortOrder.value,
       }
@@ -32,20 +35,36 @@ export const useGlobalTablesStore = defineStore('globalTables', () => {
         params: query as any,
         headers: { Authorization: `Bearer ${useAuthStore().token}` },
       })
-      globalTables.value = response.data
+      tables.value = response.data
       total.value = response.total
       page.value = response.page
       limit.value = response.limit
       return response
     } catch (e: any) {
-      error.value = e.data?.message || 'Failed to fetch global tables'
+      error.value = e.data?.message || 'Failed to fetch tables'
       throw e
     } finally {
       loading.value = false
     }
   }
 
-  async function create(data: Partial<GlobalTable>) {
+  async function fetchOne(id: number) {
+    loading.value = true
+    error.value = null
+    try {
+      const response = await $fetch<GlobalTable>(`/api/global-tables/${id}`, {
+        headers: { Authorization: `Bearer ${useAuthStore().token}` },
+      })
+      return response
+    } catch (e: any) {
+      error.value = e.data?.message || 'Failed to fetch table'
+      throw e
+    } finally {
+      loading.value = false
+    }
+  }
+
+  async function create(data: CreateGlobalTable) {
     loading.value = true
     error.value = null
     try {
@@ -57,14 +76,14 @@ export const useGlobalTablesStore = defineStore('globalTables', () => {
       await fetchAll()
       return response
     } catch (e: any) {
-      error.value = e.data?.message || 'Failed to create global table'
+      error.value = e.data?.message || 'Failed to create table'
       throw e
     } finally {
       loading.value = false
     }
   }
 
-  async function update(id: number, data: Partial<GlobalTable>) {
+  async function update(id: number, data: UpdateGlobalTable) {
     loading.value = true
     error.value = null
     try {
@@ -76,7 +95,7 @@ export const useGlobalTablesStore = defineStore('globalTables', () => {
       await fetchAll()
       return response
     } catch (e: any) {
-      error.value = e.data?.message || 'Failed to update global table'
+      error.value = e.data?.message || 'Failed to update table'
       throw e
     } finally {
       loading.value = false
@@ -93,7 +112,7 @@ export const useGlobalTablesStore = defineStore('globalTables', () => {
       })
       await fetchAll()
     } catch (e: any) {
-      error.value = e.data?.message || 'Failed to delete global table'
+      error.value = e.data?.message || 'Failed to delete table'
       throw e
     } finally {
       loading.value = false
@@ -112,15 +131,22 @@ export const useGlobalTablesStore = defineStore('globalTables', () => {
     }
     page.value = 1
   }
-  function setSearchField(field: string) { searchField.value = field; page.value = 1 }
   function resetFilters() {
-    page.value = 1; search.value = ''; sortBy.value = 'id'
-    sortOrder.value = 'DESC'; searchField.value = ''
+    page.value = 1
+    search.value = ''
+    sortBy.value = 'name'
+    sortOrder.value = 'ASC'
   }
 
+  const tableOptions = computed(() => tables.value.map(t => ({
+    label: t.displayName,
+    value: t.id,
+  })))
+
   return {
-    globalTables, total, page, limit, search, sortBy, sortOrder, searchField, loading, error,
-    fetchAll, create, update, remove,
-    setPage, setLimit, setSearch, setSort, setSearchField, resetFilters,
+    tables, total, page, limit, search, sortBy, sortOrder, loading, error,
+    fetchAll, fetchOne, create, update, remove,
+    setPage, setLimit, setSearch, setSort, resetFilters,
+    tableOptions,
   }
 })

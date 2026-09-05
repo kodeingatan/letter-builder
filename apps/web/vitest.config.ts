@@ -3,12 +3,14 @@ import { defineVitestProject } from '@nuxt/test-utils/config'
 import { fileURLToPath } from 'node:url'
 
 const appDir = fileURLToPath(new URL('./app', import.meta.url))
+const serverDir = fileURLToPath(new URL('./server', import.meta.url))
 
 export default defineConfig({
   resolve: {
     alias: {
       '~': appDir,
       '@': fileURLToPath(new URL('./shared', import.meta.url)),
+      '~~': serverDir,
     },
   },
   test: {

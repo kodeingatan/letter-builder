@@ -1,9 +1,10 @@
 import { getDataSource } from '~~/server/utils/db'
 import { GlobalTableColumnSchema } from '~~/server/entities/global-table-column.entity'
 import { GlobalTableSchema } from '~~/server/entities/global-table.entity'
-import { isGlobalTableColumnType, GLOBAL_TABLE_COLUMN_TYPES } from '~~/server/dto/global-table-columns.dto'
+import { isGlobalTableColumnType, GLOBAL_TABLE_COLUMN_TYPES, isRelationalType } from '~~/server/dto/global-table-columns.dto'
 import type { CreateGlobalTableColumnInput, UpdateGlobalTableColumnInput, ReorderGlobalTableColumnsInput } from '~~/server/dto/global-table-columns.dto'
 import { validateComputedColumn, detectCycle, saveComputedDependencies, getComputedColumnsForTable } from '~~/server/services/computed-field.service'
+import { validateRelationConfig, parseRelationConfig } from '~~/server/services/relation.service'
 
 function httpError(statusCode: number, message: string, data?: unknown): Error {
   return Object.assign(new Error(message), { statusCode, data })
@@ -98,12 +99,33 @@ export const GlobalTableColumnService = {
       }
       deps = validation.deps
 
-      // Check for cycles with new deps
-      const computedCols = await getComputedColumnsForTable(tableId)
-      const cycle = detectCycle(computedCols, undefined, deps)
-      if (cycle) {
-        throw httpError(422, `CYCLIC_DEPENDENCY: ${cycle.join(' → ')}`)
+// Check for cycles with new deps
+    const computedCols = await getComputedColumnsForTable(tableId)
+    const cycle = detectCycle(computedCols, undefined, deps)
+    if (cycle) {
+      throw httpError(422, `CYCLIC_DEPENDENCY: ${cycle.join(' → ')}`)
+    }
+
+    // Relation column validation
+    const isRelational = isRelationalType(data.type)
+    if (isRelational) {
+      if (!data.relationTableId) {
+        throw httpError(422, 'Relation columns require relationTableId')
       }
+      if (!data.relationConfig) {
+        throw httpError(422, 'Relation columns require relationConfig')
+      }
+      
+      const validation = await validateRelationConfig(
+        data.relationTableId,
+        data.relationConfig,
+        tableId,
+        data.name
+      )
+      if (!validation.valid) {
+        throw httpError(422, validation.error || 'Invalid relation configuration')
+      }
+    }
     }
 
     // Check name uniqueness within table
@@ -184,6 +206,24 @@ export const GlobalTableColumnService = {
 
       // Save new dependencies
       await saveComputedDependencies(column.id, newDeps)
+    }
+
+    // Relation column validation on update
+    if (data.type !== undefined || data.relationTableId !== undefined || data.relationConfig !== undefined) {
+      const relType = data.type ?? column.type
+      if (isRelationalType(relType)) {
+        const relTableId = data.relationTableId ?? column.relationTableId
+        const relConfig = data.relationConfig ?? column.relationConfig
+
+        if (!relTableId || !relConfig) {
+          throw httpError(422, 'Relation columns require relationTableId and relationConfig')
+        }
+
+        const validation = await validateRelationConfig(relTableId, relConfig, column.globalTableId, column.name)
+        if (!validation.valid) {
+          throw httpError(422, validation.error || 'Invalid relation configuration')
+        }
+      }
     }
 
     const ds = await getDataSource()

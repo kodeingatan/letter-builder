@@ -2,9 +2,10 @@
 import { ref, computed, watch } from 'vue'
 import {
   NModal, NForm, NFormItem, NInput, NSelect, NButton, NCheckbox,
-  NSpace, NTag, useMessage, type FormInst, type FormRules,
+  NSpace, NTag, NRadio, useMessage, type FormInst, type FormRules,
 } from 'naive-ui'
 import { useGlobalTableColumnsStore } from '~/stores/global-table-columns'
+import { useAuthStore } from '~/stores/auth'
 import { getErrorMessage } from '~/utils/error'
 import type { CreateGlobalTableColumn, UpdateGlobalTableColumn } from '~/shared/types/global-table-column'
 
@@ -22,10 +23,13 @@ const emit = defineEmits<{
 
 const message = useMessage()
 const store = useGlobalTableColumnsStore()
+const auth = useAuthStore()
 const formRef = ref<FormInst | null>(null)
 const submitting = ref(false)
+const globalTables = ref<Array<{ id: number; name: string; displayName: string }>>([])
+const targetColumns = ref<Array<{ name: string; displayName: string; type: string }>>([])
 
-const columnTypes = ['text', 'richtext', 'date', 'select', 'number', 'currency', 'image', 'hidden-computed', 'readonly-computed']
+const columnTypes = ['text', 'richtext', 'date', 'select', 'number', 'currency', 'image', 'hidden-computed', 'readonly-computed', 'select-table-relation', 'select-table-relation-multiple']
 
 const form = ref({
   name: '',
@@ -39,6 +43,42 @@ const form = ref({
   options: '',
   format: '',
   expression: '',
+  relationTableId: null as number | null,
+  relationConfig: null as { displayColumns: string[]; separator: string; onTargetDelete: string } | null,
+})
+
+const relationConfig = computed({
+  get: () => form.value.relationConfig,
+  set: (val: { displayColumns: string[]; separator: string; onTargetDelete: string } | null) => {
+    form.value.relationConfig = val
+  },
+})
+
+const relationDisplayColumns = computed<string[]>({
+  get: () => form.value.relationConfig?.displayColumns ?? [],
+  set: (val: string[]) => {
+    if (form.value.relationConfig) {
+      form.value.relationConfig.displayColumns = val
+    }
+  },
+})
+
+const relationSeparator = computed<string>({
+  get: () => form.value.relationConfig?.separator ?? ' - ',
+  set: (val: string) => {
+    if (form.value.relationConfig) {
+      form.value.relationConfig.separator = val
+    }
+  },
+})
+
+const relationOnTargetDelete = computed<string>({
+  get: () => form.value.relationConfig?.onTargetDelete ?? 'restrict',
+  set: (val: string) => {
+    if (form.value.relationConfig) {
+      form.value.relationConfig.onTargetDelete = val
+    }
+  },
 })
 
 const rules = computed<FormRules>(() => ({
@@ -70,12 +110,70 @@ const rules = computed<FormRules>(() => ({
     },
     trigger: 'blur',
   },
+  'relationConfig.displayColumns': [
+    {
+      validator: (_rule: unknown, value: string[]) => {
+        if (isRelationalType(form.value.type) && (!value || value.length === 0)) {
+          return Promise.reject(new Error('At least one display column is required'))
+        }
+        return Promise.resolve()
+      },
+      trigger: 'blur',
+    }
+  ],
 }))
 
 const title = computed(() => props.mode === 'create' ? 'Add Column' : 'Edit Column')
 
-watch(() => props.visible, (val) => {
+function isRelationalType(type: string): boolean {
+  return type === 'select-table-relation' || type === 'select-table-relation-multiple'
+}
+
+async function loadGlobalTables() {
+  try {
+    const response = await $fetch<Array<{ id: number; name: string; displayName: string }>>(
+      '/api/global-tables',
+      {
+        headers: { Authorization: `Bearer ${auth.token}` },
+      }
+    )
+    globalTables.value = response
+  } catch (e) {
+    console.error('Failed to load global tables', e)
+  }
+}
+
+async function loadTargetColumns(tableId: number) {
+  if (!tableId) {
+    targetColumns.value = []
+    return
+  }
+  try {
+    const response = await $fetch<Array<{ name: string; displayName: string; type: string }>>(
+      `/api/global-tables/${tableId}/columns`,
+      {
+        headers: { Authorization: `Bearer ${auth.token}` },
+      }
+    )
+    targetColumns.value = response.filter(
+      c => c.type !== 'hidden-computed' && c.type !== 'readonly-computed'
+    )
+  } catch (e) {
+    console.error('Failed to load target columns', e)
+  }
+}
+
+function getRelationDisplayColumns(tableId: number): string[] {
+  return targetColumns.value.map(c => c.name)
+}
+
+function getGlobalTablesMap(): Array<{ label: string; value: number }> {
+  return globalTables.value.map(t => ({ label: t.displayName || t.name, value: t.id }))
+}
+
+watch(() => props.visible, async (val) => {
   if (val) {
+    await loadGlobalTables()
     if (props.mode === 'edit' && props.column) {
       form.value = {
         name: props.column.name,
@@ -89,6 +187,17 @@ watch(() => props.visible, (val) => {
         options: props.column.options ?? '',
         format: props.column.format ?? '',
         expression: props.column.expression ?? '',
+        relationTableId: props.column.relationTableId ?? null,
+        relationConfig: props.column.relationConfig
+          ? {
+              displayColumns: props.column.relationConfig.displayColumns,
+              separator: props.column.relationConfig.separator || ' - ',
+              onTargetDelete: props.column.relationConfig.onTargetDelete || 'restrict',
+            }
+          : null,
+      }
+      if (props.column.relationTableId) {
+        await loadTargetColumns(props.column.relationTableId)
       }
     } else {
       form.value = {
@@ -103,16 +212,37 @@ watch(() => props.visible, (val) => {
         options: '',
         format: '',
         expression: '',
+        relationTableId: null,
+        relationConfig: null,
       }
     }
     store.fetchAll(props.tableId)
   }
 })
 
-const optionRules = computed(() => {
-  if (form.value.type !== 'select') return {}
-  if (!form.value.options) return { options: { required: true, message: 'Options are required for select type' } }
-  return {}
+watch(() => form.value.type, (newType) => {
+  if (!isRelationalType(newType)) {
+    form.value.relationTableId = null
+    form.value.relationConfig = null
+  } else {
+    if (!form.value.relationConfig) {
+      form.value.relationConfig = { displayColumns: [], separator: ' - ', onTargetDelete: 'restrict' }
+    }
+  }
+})
+
+watch(() => form.value.relationTableId, async (newId) => {
+  if (newId) {
+    await loadTargetColumns(newId)
+    if (form.value.relationConfig && form.value.relationConfig.displayColumns.length === 0) {
+      const available = targetColumns.value.map(c => c.name)
+      if (available.length > 0) {
+        form.value.relationConfig.displayColumns = available.slice(0, Math.min(3, available.length))
+      }
+    }
+  } else {
+    targetColumns.value = []
+  }
 })
 
 async function handleSubmit() {
@@ -172,6 +302,55 @@ async function handleSubmit() {
           filterable
           style="width: 100%"
           @change="optionRules.value = {}"
+        />
+      </NFormItem>
+      <NFormItem
+        v-show="isRelationalType(form.type)"
+        label="Relation Table"
+        path="relationTableId"
+      >
+        <NSelect
+          v-model:value="form.relationTableId"
+          :options="getGlobalTablesMap()"
+          filterable
+          style="width: 100%"
+          placeholder="Select target table"
+        />
+        <template #placeholder>
+          <span>Select target table</span>
+        </template>
+      </NFormItem>
+      <NFormItem
+        v-show="isRelationalType(form.type)"
+        label="Display Columns"
+        path="relationConfig.displayColumns"
+      >
+        <NSpace vertical size="2" style="width: 100%">
+          <NCheckbox
+            v-for="(col, index) in getRelationDisplayColumns(form.relationTableId ?? 0)"
+            :key="index"
+            :value="relationDisplayColumns.includes(col)"
+            @input="(val) => relationDisplayColumns = val ? [...relationDisplayColumns, col] : relationDisplayColumns.filter(c => c !== col)"
+          >
+            {{ col }}
+          </NCheckbox>
+        </NSpace>
+      </NFormItem>
+      <NFormItem
+        v-show="isRelationalType(form.type)"
+        label="Separator"
+        path="relationConfig.separator"
+      >
+        <NInput v-model:value="relationSeparator" placeholder=" - " />
+      </NFormItem>
+      <NFormItem
+        v-show="isRelationalType(form.type)"
+        label="On Target Delete"
+        path="relationConfig.onTargetDelete"
+      >
+        <NRadio
+          v-model:value="relationOnTargetDelete"
+          :options="[{ label: 'Restrict', value: 'restrict' }, { label: 'Detach', value: 'detach' }]"
         />
       </NFormItem>
       <NFormItem
