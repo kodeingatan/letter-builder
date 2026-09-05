@@ -19,7 +19,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/11-global-table-relations.md | [x] | [x] | [x] |
 | tasks/12-global-table-data.md | [x] | [x] | [ ] |
 | tasks/13-component-management.md | [x] | [x] | [x] |
-| tasks/14-template-management.md | [ ] | [ ] | [ ] |
+| tasks/14-template-management.md | [x] | [x] | [x] |
 | tasks/15-template-composition-editor.md | [ ] | [ ] | [ ] |
 | tasks/16-template-data-binding.md | [ ] | [ ] | [ ] |
 | tasks/17-administration-workflow.md | [ ] | [ ] | [ ] |
@@ -37,6 +37,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/11-global-table-relations.md — Global Table Relations — 2026-09-05 by /implement
 - [x] tasks/12-global-table-data.md — Global Table Data & Generated CRUD — 2026-09-05 by /implement
 - [x] tasks/13-component-management.md — Component Management — 2026-09-05 by /implement
+- [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /implement
 
 ## Belum Implementasi
 
@@ -45,7 +46,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/14-template-management.md
 - [ ] tasks/15-template-composition-editor.md
 - [ ] tasks/16-template-data-binding.md
 - [ ] tasks/17-administration-workflow.md
@@ -63,6 +63,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/10-computed-fields.md — Computed Fields — 2026-09-04 by /review — APPROVED
 - [x] tasks/11-global-table-relations.md — Global Table Relations — 2026-09-05 by /review — APPROVED
 - [x] tasks/13-component-management.md — Component Management — 2026-09-05 by /review — APPROVED
+- [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /review — APPROVED
 
 ## Belum Direview
 
@@ -73,7 +74,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
 - [ ] tasks/12-global-table-data.md
-- [ ] tasks/14-template-management.md
 - [ ] tasks/15-template-composition-editor.md
 - [ ] tasks/16-template-data-binding.md
 - [ ] tasks/17-administration-workflow.md
@@ -128,8 +128,15 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Reviewed: [x] 2026-09-05 by /review — APPROVED. Full review: 8 API routes all behind requireApiAccess, Zod on all inputs, placeholder validation BR-003 + 422/409 paths, history-table versioning immutable (v1 byte-identical verified), usedBy stub per spec (AC-004 coded + helper-covered, live-blocked until Task 14/16). Frontend follows DataTable + .detail-view + NTag/NAlert conventions; DocComponent naming avoids auto-import collision. Fresh evidence: unit 191/191, vue-tsc clean. No must-fix. Should-fix (non-blocking): client live preview renders 1 block in collection mode (useComponentsData.ts:72 ignores items — server AC-005 correct); N+1 requirementCount per row in findAll; no FK relations on component entities (service deletes explicitly, versions retained by design); v-html preview without sanitizer (Designer-trusted, Task 20 owns full renderer); DetailDrawer bypasses store.fetchOne; whitespace-only names pass min(1). Task status set to DONE.
 - Notes: AC-004 409 path coded but stubbed (no template tables until Task 14/16). Task status set to TODO REVIEW.
 
+### tasks/14-template-management.md
+
+- Implemented: [x] 2026-09-05 by /implement — Template Management (entities templates/template_versions + db registration, DTO with self-contained skeleton check, pure template-helpers + 17 unit tests, service with draft/publish/rollback-as-draft/usedBy stubs for Tasks 17/19, 8 API routes with requireApiAccess, Template Management seeder permission, activity-logger mapping, shared types, composable, Pinia store, 5 components, list + editor pages, Dokumen sidebar group). Live-verified: create 201 draft v0 (AC-001), empty-publish 422 (AC-005), publish v1/v2 with byte-frozen v1 (AC-002), rollback-to-v1 → draft + publish → v3 history untouched (AC-003), dup-name 409, invalid-JSON 422, missing-version 404, viewer GET 200/POST 403, guest 401, delete 200 + 404 after, permission seeded, logs entity=Template. vue-tsc clean, unit 208/208, build OK. Test rows cleaned up (0 templates/versions/template-logs).
+- Verified: [x] 2026-09-05 by /verify — PASS. Unit 208/208 (14 files), nuxt 10/10, vue-tsc clean, build OK. Live re-verified on dev server (fixtures cleaned up after): AC-001 create 201 draft v0, AC-005 empty-publish 422, AC-002 publish v1/v2 with byte-frozen v1, AC-003 rollback-to-v1 → draft + publish → v3 (v1/v2 untouched), dup-name 409 (case-insensitive), bad-JSON + overlong-name 422, missing-version 404, viewer GET 200/POST+DELETE 403, guest 401, delete 200 + 404 after, detail shape has versions/usedBy/usageCount/nodeCount, Template Management permission seeded, activity logs entity=Template, pages SSR 302 same as existing pages, UNIQUE(templateId,version) index in sqlite_master. DB restored (0/0/0). Minor (non-blocking): AC-004 409 coded but stubbed per spec (no step/document tables until Tasks 17/19); no DB-level FK (matches convention, explicit delete); DELETE 200 not 204 (convention); no Playwright spec (live smoke, as Task 13).
+- Reviewed: [x] 2026-09-05 by /review — APPROVED. Full review of 20 new files + 4 modified: EntitySchema pair (templates/template_versions) with UNIQUE(templateId,version), self-contained Zod DTO, pure template-helpers (17/17 unit tests green on re-run), service with draft/publish/rollback-as-draft + guarded usedBy stubs, 8 API routes all behind requireApiAccess, seeder permission mirroring Task 13, activity-logger mapping, Pinia store + composable + 5 components + list/editor pages following DataTable + .detail-view conventions. No must-fix. Should-fix (non-blocking): findAll N+1 findUsages per row, publish count+1 without transaction (UNIQUE-collision surfaces raw driver error), no DB-level FK on template_versions, DetailDrawer/editor bypass store.fetchOne, triple-duplicated skeleton validation (DTO/helpers/composable). Task status set to DONE.
+- Notes: AC-004 409 path coded but stubbed (no administration/document tables until Tasks 17/19). No Playwright spec (live smoke instead, as Task 13). Task status set to DONE.
+
 ## Last Updated
 
 - Date: 2026-09-05
 - By: /review
-- Task: tasks/13-component-management.md
+- Task: tasks/14-template-management.md

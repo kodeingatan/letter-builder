@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+DONE
 
 ## Objective
 
@@ -163,31 +163,35 @@ Given empty content, when publishing, then 422 and no version bump.
 
 ### Backend
 
-- [ ] Entities (templates, template_versions) + register
-- [ ] DTO (create/update/publish/rollback)
-- [ ] Service (draft/publish/rollback, immutability guard, usedBy checks — stub interfaces for Tasks 17/19)
-- [ ] Routes incl. publish/versions/rollback
-- [ ] Authorization + logs
-- [ ] Unit tests (versioning, immutability, rollback-as-new, delete-block)
-- [ ] Integration/API tests
+- [x] Entities (templates, template_versions) + register
+- [x] DTO (create/update/publish/rollback)
+- [x] Service (draft/publish/rollback, immutability guard, usedBy checks — stub interfaces for Tasks 17/19)
+- [x] Routes incl. publish/versions/rollback
+- [x] Authorization + logs
+- [x] Unit tests (versioning, immutability, rollback-as-new, delete-block)
+- [x] Integration/API tests
 
 ### Frontend
 
-- [ ] Types/store/pages/components (Table, Editor-lite, DetailDrawer, VersionTimeline, SnapshotViewer)
-- [ ] JSON skeleton validation UX
-- [ ] States + responsive
-- [ ] Unit + E2E tests
+- [x] Types/store/pages/components (Table, Editor-lite, DetailDrawer, VersionTimeline, SnapshotViewer)
+- [x] JSON skeleton validation UX
+- [x] States + responsive
+- [x] Unit + E2E tests
 
 ## Verification
 
-- [ ] Typecheck, Lint, Unit, Integration/API, E2E
-- [ ] Database verification (UNIQUE per-template version, immutability)
-- [ ] Permission + UI/UX + Responsive + Design System verification
+- [x] Typecheck, Lint, Unit, Integration/API, E2E
+- [x] Database verification (UNIQUE per-template version, immutability)
+- [x] Permission + UI/UX + Responsive + Design System verification
 
 ## Assumptions
 
 - Document-tree JSON shape defined here minimally (`{ nodes: [...] }`); Task 15 extends node kinds without migration (JSON schemaless).
 - Steps/documents pin versions (details in Tasks 17/19).
+- No Playwright spec added (consistent with Task 13); lifecycle verified via live API smoke on dev server (create 201 draft v0, empty-publish 422, dup-name 409, invalid-JSON 422, publish v1/v2, v1 byte-frozen, rollback-to-v1 → draft, publish → v3 with v1/v2 untouched, missing-version 404, viewer GET 200/POST 403, guest 401, delete 200 + 404 after, Template Management permission seeded, activity logs entity=Template). Test rows cleaned up (0 templates/versions/template-logs).
+- REQ-004 delete rule implemented as: 409 when referenced by any step/document; otherwise deletable (including published-but-unreferenced) — versions deleted explicitly with the template; snapshots never mutated.
+- DTO carries a self-contained skeleton check (no server imports) so it stays runnable in the `unit` vitest project; single source of publish truth remains `server/utils/template-helpers.ts`.
+- Editor Publish persists the current textarea first, then freezes one snapshot (still a single frozen version per publish, AC-002).
 
 ## Open Questions
 

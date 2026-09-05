@@ -16,6 +16,10 @@ import {
   ComponentDataRequirementSchema,
   ComponentVersionSchema,
 } from '~~/server/entities/component.entity'
+import {
+  TemplateSchema,
+  TemplateVersionSchema,
+} from '~~/server/entities/template.entity'
 
 let dataSource: DataSource | null = null
 
@@ -40,6 +44,8 @@ export async function getDataSource(): Promise<DataSource> {
         ComponentSchema,
         ComponentDataRequirementSchema,
         ComponentVersionSchema,
+        TemplateSchema,
+        TemplateVersionSchema,
       ],
       synchronize: true,
     })
