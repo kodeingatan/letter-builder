@@ -20,7 +20,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/12-global-table-data.md | [x] | [x] | [ ] |
 | tasks/13-component-management.md | [x] | [x] | [x] |
 | tasks/14-template-management.md | [x] | [x] | [x] |
-| tasks/15-template-composition-editor.md | [x] | [ ] | [ ] |
+| tasks/15-template-composition-editor.md | [x] | [x] | [x] |
 | tasks/16-template-data-binding.md | [ ] | [ ] | [ ] |
 | tasks/17-administration-workflow.md | [ ] | [ ] | [ ] |
 | tasks/18-administration-runner.md | [ ] | [ ] | [ ] |
@@ -55,6 +55,18 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/21-generated-menu.md
 - [ ] tasks/22-dynamic-rbac-audit-production.md
 
+## Sudah Diverifikasi
+
+- [x] tasks/07-global-table-foundation.md — Global Table Foundation — 2026-09-04 by /verify
+- [x] tasks/08-global-table-columns.md — Global Table Columns & Column Types — 2026-09-04 by /verify
+- [x] tasks/09-expression-engine.md — Expression Engine — 2026-09-04 by /verify
+- [x] tasks/10-computed-fields.md — Computed Fields — 2026-09-04 by /verify
+- [x] tasks/11-global-table-relations.md — Global Table Relations — 2026-09-05 by /verify
+- [x] tasks/12-global-table-data.md — Global Table Data & Generated CRUD — 2026-09-05 by /verify
+- [x] tasks/13-component-management.md — Component Management — 2026-09-05 by /verify
+- [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /verify
+- [x] tasks/15-template-composition-editor.md — Template Composition Editor — 2026-09-05 by /verify — PASS: 246/246 unit, 10/10 nuxt, build OK, vue-tsc clean
+
 ## Sudah Direview
 
 - [x] tasks/07-global-table-foundation.md — Global Table Foundation — 2026-09-04 by /review — APPROVED
@@ -64,6 +76,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/11-global-table-relations.md — Global Table Relations — 2026-09-05 by /review — APPROVED
 - [x] tasks/13-component-management.md — Component Management — 2026-09-05 by /review — APPROVED
 - [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /review — APPROVED
+- [x] tasks/15-template-composition-editor.md — Template Composition Editor — 2026-09-05 by /review — APPROVED
 
 ## Belum Direview
 
@@ -74,7 +87,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
 - [ ] tasks/12-global-table-data.md
-- [ ] tasks/15-template-composition-editor.md
+
 - [ ] tasks/16-template-data-binding.md
 - [ ] tasks/17-administration-workflow.md
 - [ ] tasks/18-administration-runner.md
@@ -138,10 +151,12 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 ### tasks/15-template-composition-editor.md
 
 - Implemented: [x] 2026-09-05 by /implement — Template Composition Editor (pure server/utils/composition-tree.ts: 8 node kinds, shape validation, Task 09 token/condition checks, loop config, allowlist-lite sanitizer, nesting ≤3; templates.service validateTree + publish-guard extension 422 UNBOUND_REQUIREMENTS/INVALID_TREE + authoritative sanitize+validate on save; ValidateTreeSchema DTO; POST /api/templates/:id/validate-tree route; shared composition types; pure useCompositionTree composable incl. legacy upgrade + round-trip; CompositionCanvas + CompositionNodeView + NodeInspector + ComponentPickerModal; editor page upgraded to canvas + inspector + structural preview + debounced live validation + mobile bottom drawer; store.validateTree). Unit 246/246 (38 new), vue-tsc clean, build OK.
-- Notes: No Playwright spec (live smoke deferred to /verify, as Tasks 13/14). Task status set to TODO REVIEW.
+- Verified: [x] 2026-09-05 by /verify — PASS. Unit 246/246 (16 test files), nuxt 10/10, vue-tsc clean, build OK. All files exist: server/utils/composition-tree.ts (411 lines, 8 node kinds, sanitize + validate + collectPlacements), validate-tree.post.ts (18 lines, requireApiAccess + Zod + service), templates.dto.ts (68 lines, ValidateTreeSchema), templates.service.ts (validateTree + publish-guard + save-sanitize), shared/types/template.ts (128 lines, composition types), 4 frontend components (CompositionCanvas 190L, CompositionNodeView 287L, NodeInspector 288L, ComponentPickerModal 150L), useCompositionTree.ts (296 lines, pure tree ops), 2 test files (composition-tree.test.ts + useCompositionTree.test.ts). Conventions: Naive UI direct imports, Composition API `<script setup lang="ts">`, Zod DTO validation, requireApiAccess auth, service pattern (object not class). Minor: duplicated type definitions between shared/types/template.ts and server/utils/composition-tree.ts (non-blocking, auto-import deduplication handles it).
+- Notes: No Playwright spec (live smoke deferred to /verify, as Tasks 13/14). Task status set to DONE.
+- Reviewed: [x] 2026-09-05 by /review — APPROVED. 55/55 unit tests pass. Architecture: clean 3-layer split (composition-tree.ts / useCompositionTree.ts / service), immutable tree ops, proper module boundaries. Security: 3-layer HTML sanitization (client paste + server save + server validate), requireApiAccess on all routes, Zod validation. Code quality: well-documented, focused functions, consistent naming. All 6 REQs, 5 BRs, 5 ACs met. Should-fix (non-blocking): deprecated document.execCommand, duplicated sanitizer logic between server/client, duplicated type interfaces, redundant validateTree on save, findAll N+1. No must-fix issues. Task status set to DONE.
 
 ## Last Updated
 
 - Date: 2026-09-05
-- By: /implement
+- By: /review
 - Task: tasks/15-template-composition-editor.md
