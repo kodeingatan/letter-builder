@@ -202,7 +202,7 @@ function resetFilters() {
     <NSpin :show="loading">
       <NDataTable
         :columns="uiColumns"
-        :data="data"
+        :data="data ?? []"
         :pagination="pagination"
         :row-key="(row: T) => row.id"
         :single-line="false"
@@ -213,7 +213,7 @@ function resetFilters() {
       />
     </NSpin>
 
-    <NEmpty v-if="!loading && data.length === 0" description="No data found" />
+    <NEmpty v-if="!loading && (data ?? []).length === 0" description="No data found" />
 
     <div v-if="total > 0" class="text-sm text-gray-500">
       Showing {{ (page - 1) * limit + 1 }}-{{ Math.min(page * limit, total) }} of {{ total }}

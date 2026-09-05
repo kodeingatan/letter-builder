@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { tokenize } from '../../../../server/utils/expressions/tokenizer'
 import { Parser } from '../../../../server/utils/expressions/parser'
-import { evaluate, extractRefs, validate, type EvalContext, parse } from '../../../../server/utils/expressions'
+import { evaluate, extractRefs, validate, parse } from '../../../../server/utils/expressions'
+import type { EvalContext } from '../../../../server/utils/expressions/interpreter'
 import { MAX_EXPRESSION_LENGTH } from '../../../../server/utils/expressions/grammar'
 
 describe('tokenizer', () => {

@@ -1,6 +1,6 @@
 import { ref, computed, watch } from 'vue'
 import { useApi } from '~/composables/useApi'
-import type { EvalContext } from '~~/server/utils/expressions'
+import type { EvalContext } from '~~/server/utils/expressions/interpreter'
 import { extractRefs, validate } from '~~/server/utils/expressions'
 
 export function useExpressionPreview() {

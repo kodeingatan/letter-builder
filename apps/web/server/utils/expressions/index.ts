@@ -9,10 +9,9 @@
 
 import { tokenize } from './tokenizer'
 import { Parser, type ExprNode } from './parser'
-import { evaluate as interpreterEvaluate, type EvalContext, type EvalResult } from './interpreter'
+import { evaluateAst } from './interpreter'
+import type { EvalContext, EvalResult } from './interpreter'
 import { MAX_EXPRESSION_LENGTH, MAX_AST_DEPTH } from './grammar'
-
-export type { EvalContext, EvalResult }
 
 /**
  * Parse an expression string into an AST.
@@ -113,7 +112,7 @@ export function validate(
   }
 
   if (sampleContext) {
-    const result = interpreterEvaluate(ast, sampleContext)
+    const result = evaluateAst(ast, sampleContext)
     if (result.error && result.error.startsWith('UNKNOWN_REF:')) {
       return { valid: false, refs, error: result.error }
     }
@@ -155,5 +154,5 @@ export function evaluate(expression: string, context: EvalContext): EvalResult {
     return { value: null, error: `SYNTAX_ERROR: ${msg}` }
   }
 
-  return interpreterEvaluate(ast, context)
+  return evaluateAst(ast, context)
 }

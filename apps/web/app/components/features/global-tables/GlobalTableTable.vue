@@ -108,7 +108,7 @@ onMounted(() => {
   <div>
     <DataTable
       :columns="columns"
-      :data="store.globalTables"
+      :data="store.tables"
       :loading="store.loading"
       :page="store.page"
       :limit="store.limit"

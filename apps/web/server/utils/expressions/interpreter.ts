@@ -28,7 +28,7 @@ export interface EvalResult {
 
 const EVAL_TIMEOUT_MS_VALUE = EVAL_TIMEOUT_MS
 
-export function evaluate(ast: ExprNode, context: EvalContext, startAt = 0): EvalResult {
+export function evaluateAst(ast: ExprNode, context: EvalContext, startAt = 0): EvalResult {
   const startTime = Date.now()
   const result = evaluateNode(ast, context, 0, startTime)
   if (Date.now() - startTime > EVAL_TIMEOUT_MS_VALUE) {
