@@ -25,7 +25,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/17-administration-workflow.md | [x] | [x] | [x] |
 | tasks/18-administration-runner.md | [x] | [x] | [x] |
 | tasks/19-document-management.md | [x] | [x] | [x] |
-| tasks/20-rendering-engine.md | [x] | [x] | [ ] |
+| tasks/20-rendering-engine.md | [x] | [x] | [x] |
 | tasks/21-generated-menu.md | [ ] | [ ] | [ ] |
 | tasks/22-dynamic-rbac-audit-production.md | [ ] | [ ] | [ ] |
 
@@ -86,6 +86,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/17-administration-workflow.md — Administration Workflow — 2026-09-06 by /review — APPROVED
 - [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /review — APPROVED
 - [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /review — APPROVED
+- [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /review — APPROVED
 
 ## Belum Direview
 
@@ -97,7 +98,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/06-fix-logging-system.md
 - [ ] tasks/12-global-table-data.md
 
-- [ ] tasks/20-rendering-engine.md
 - [ ] tasks/21-generated-menu.md
 - [ ] tasks/22-dynamic-rbac-audit-production.md
 
@@ -190,10 +190,10 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 
 - Implemented: [x] 2026-09-06 by /implement — Rendering Engine (pure pipeline server/utils/rendering/: types/context/pipeline/sanitizer/print-css/pdf + render-guard rate-limit+semaphore; render.dto + POST /api/render/preview; rendering.service previewWithTree/previewForTemplate/renderForDocument + tableData freeze; DocumentsService issuance wired to engine with persisted PDFs; Rendering Preview seeder permission; activity-logger Render entity; shared DocumentPreview + useRenderPreview + shared/types/render). Unit 389/389 (31 new), nuxt 15/15 (5 new), vue-tsc clean, build OK. Live: AC-001 3-block collection preview, AC-002 false-condition exclusion, AC-003 MISSING_DATA, AC-004 byte-identical, AC-005 500+truncation live, AC-006 script stripped, viewer POST 403/guest 401/payload 422, reseed on restored DB. Fixtures cleaned, db.sqlite restored.
 - Verified: [x] 2026-09-06 by /verify — PASS: unit 389/389 (27 files), nuxt 15/15 (3 files), vue-tsc clean, build OK. Live re-verified on dev server (fixtures + 22 trace activity-logs cleaned, db.sqlite restored to identical id set): AC-001 3-block loop (NIP/jabatan), AC-002 false-condition excluded warning-free, AC-003 MISSING_DATA + empty string, AC-004 byte-identical HTML (sha256 equal), AC-005 500 blocks + LOOP_TRUNCATED + truncation marker, AC-006 script/onerror stripped, AC-007 semaphore 503+Retry-After unit-covered (render-guard.test.ts), preview-by-templateId branch 200 + fixture deleted, unknown kind → UNKNOWN_NODE warning (no crash), viewer POST 403 / guest 401 / empty payload 422. Minor non-blocking: pure-TS PDF writer instead of Chromium (declared assumption, upgrade boundary htmlToPdf kept); no renderWarnings column (warnings logged + reproducible from frozen dataSnapshot, declared); Rendering Preview seeded to Admin/Super Admin only (no Designer/Operator roles exist); no Playwright spec (live smoke per Tasks 13–19 convention).
-- Reviewed: [ ] 2026-09-06 by /review
+- Reviewed: [x] 2026-09-06 by /review — APPROVED. Full review of pure pipeline (types/context/pipeline/sanitizer/print-css/pdf) + render-guard + DTO + preview route + rendering.service + documents.service issuance wiring + DocumentPreview/useRenderPreview/shared types + 5 test files. No must-fix. 6 should-fix (image allowlist wider than spec; issuance bypasses semaphore; renderForDocument ignores parseTreeInput error; missingImageBox incomplete escaping; N+1 sequential snapshot queries; dead assembleIssueHtml/pdf allObjects code) + 7 consider. Fresh evidence: rendering-focused unit 31/31 green.
 
 ## Last Updated
 
 - Date: 2026-09-06
-- By: /verify
+- By: /review
 - Task: tasks/20-rendering-engine.md
