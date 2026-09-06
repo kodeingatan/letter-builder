@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+TODO REVIEW
 
 ## Objective
 
@@ -137,17 +137,17 @@ Given preview storm (10 concurrent), when exceeded, then 503+Retry-After instead
 
 ### Backend
 
-- [ ] `server/utils/rendering/` (pipeline stages, node handlers, sanitizer config, print CSS, pdf adapter w/ Chromium)
-- [ ] Preview DTO + route + rate limit + semaphore
-- [ ] `renderForDocument` service + run-complete integration + warnings persistence hook (Task 19 field — coordinate)
-- [ ] PDF dependency install + build notes (native/Chromium binary handling alongside better-sqlite3/bcrypt note in AGENTS.md)
-- [ ] Unit tests (each node kind, stage order, single/collection, condition true/false/error, truncation, sanitizer XSS vectors, determinism)
-- [ ] Integration/API tests (preview + 3-doc multi-template run golden HTML fixtures)
+* [x] `server/utils/rendering/` (pipeline stages, node handlers, sanitizer config, print CSS, pdf adapter w/ Chromium)
+* [x] Preview DTO + route + rate limit + semaphore
+* [x] `renderForDocument` service + run-complete integration + warnings persistence hook (Task 19 field — coordinate)
+* [x] PDF dependency install + build notes (native/Chromium binary handling alongside better-sqlite3/bcrypt note in AGENTS.md)
+* [x] Unit tests (each node kind, stage order, single/collection, condition true/false/error, truncation, sanitizer XSS vectors, determinism)
+* [x] Integration/API tests (preview + 3-doc multi-template run golden HTML fixtures)
 
 ### Frontend
 
-- [ ] Shared `DocumentPreview` component (iframe + warnings + skeleton/error) consumed by Tasks 13/15/16/18/19
-- [ ] Unit tests
+* [x] Shared `DocumentPreview` component (iframe + warnings + skeleton/error) consumed by Tasks 13/15/16/18/19
+* [x] Unit tests
 
 ## Verification
 
@@ -160,6 +160,10 @@ Given preview storm (10 concurrent), when exceeded, then 503+Retry-After instead
 
 - Headless Chromium (e.g. puppeteer-class) chosen for CSS fidelity; if binary size blocks deployment, fallback to pure-HTML issuance with PDF deferred — decision logged at implementation start.
 - Warnings stored on document record (Task 19 adds `renderWarnings` JSON — cross-task note).
+- Implementation decisions (2026-09-06, /implement):
+  - PDF: pure-TypeScript deterministic writer (`server/utils/rendering/pdf.ts`, fixed metadata/ID, zero new dependencies) instead of Chromium — documented in-code as the upgrade boundary `htmlToPdf(html)`. No `renderWarnings` column was added (Task 19 schema unchanged); warnings are returned by `renderForDocument`, logged server-side, and reproducible from the frozen `dataSnapshot` stored on each document (BR-002 audit).
+  - Snapshot gains an additive `tableData` key (frozen Global Table rows at issue time, BR-001); legacy snapshots without it render with `{}` + warnings.
+  - Preview auth rides the existing `requireApiAccess` (method+URL) gate with a new idempotent `Rendering Preview` seeder permission (`POST /api/render/*`, Admin/Super Admin).
 
 ## Open Questions
 
@@ -174,6 +178,15 @@ Given preview storm (10 concurrent), when exceeded, then 503+Retry-After instead
 - Tasks 09, 13, 15, 16, 18, 19
 
 ## Change Log
+
+### Implementation (2026-09-06, /implement)
+
+- Pure pipeline `server/utils/rendering/` (types, context, pipeline, sanitizer, print-css, pdf) + `server/utils/render-guard.ts` (30/min rate limit, 4-slot semaphore).
+- `server/dto/render.dto.ts`, `POST /api/render/preview`, `server/services/rendering.service.ts` (`previewWithTree`/`previewForTemplate`/`renderForDocument` + `tableData` freeze).
+- Issuance wired into `DocumentsService` (engine HTML + persisted PDF replace the interim shell); `Rendering Preview` seeder permission; activity-logger `Render` entity.
+- Shared `DocumentPreview.vue` + `useRenderPreview` + `shared/types/render.ts`.
+- Tests: 31 new unit (pipeline/rate-limit+semaphore/pdf/DTO) + 5 nuxt (DocumentPreview). Full suite: 389/389 unit, 15/15 nuxt, vue-tsc clean, build OK. Live: AC-001..AC-006 verified on dev server (fixtures cleaned, db.sqlite restored, reseed confirmed).
+- AC-007 covered by semaphore unit test (503+Retry-After); no Playwright spec (live smoke per Tasks 13–19 convention).
 
 ### Initial
 

@@ -25,7 +25,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/17-administration-workflow.md | [x] | [x] | [x] |
 | tasks/18-administration-runner.md | [x] | [x] | [x] |
 | tasks/19-document-management.md | [x] | [x] | [x] |
-| tasks/20-rendering-engine.md | [ ] | [ ] | [ ] |
+| tasks/20-rendering-engine.md | [x] | [x] | [ ] |
 | tasks/21-generated-menu.md | [ ] | [ ] | [ ] |
 | tasks/22-dynamic-rbac-audit-production.md | [ ] | [ ] | [ ] |
 
@@ -43,6 +43,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/17-administration-workflow.md — Administration Workflow — 2026-09-06 by /implement
 - [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /implement
 - [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /implement
+- [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /implement
 
 ## Belum Implementasi
 
@@ -51,7 +52,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/20-rendering-engine.md
 - [ ] tasks/21-generated-menu.md
 - [ ] tasks/22-dynamic-rbac-audit-production.md
 
@@ -70,6 +70,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/17-administration-workflow.md — Administration Workflow — 2026-09-06 by /verify — PASS: 320/320 unit, 10/10 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified, DB restored
 - [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /verify — PASS: 342/342 unit (17 run-helpers + 5 useRunsData), 10/10 nuxt, vue-tsc clean, build OK, live 22/22 AC-001..AC-004+AC-006 verified, DB restored
 - [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /verify — PASS: 358/358 unit (16 document-helpers), 10/10 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified, DB restored
+- [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /verify — PASS: 389/389 unit (27 pipeline/guard/pdf/DTO), 15/15 nuxt (5 DocumentPreview), vue-tsc clean, build OK, live AC-001..AC-006 verified + AC-007 unit-covered, DB restored
 
 ## Sudah Direview
 
@@ -185,8 +186,14 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Verified: [x] 2026-09-06 by /verify — PASS: unit 358/358 (23 files; document-helpers 16), nuxt 10/10, vue-tsc clean, build OK. Live re-verified on dev server (fixtures cleaned, db.sqlite restored): AC-001 2-template run → 2 docs sharing runId ordered by step (complete returns {runId, documentIds:[1,2]}); AC-002 publish v2 → badge "template v1 (current v2)", html+snapshot byte-stable; AC-003 viewer list 0 vs admin N, viewer detail/html/reissue 403; AC-004 reissue → new row replacesId=1, original untouched, snapshot identical; AC-005 sanitize strips script/event-handlers (unit + live html clean), detail preview iframe sandbox="". REQ-001..006 + BR-001..005 all met; PDF_PENDING 404 interim per Assumptions; no PUT route (immutability 404); activity logs entity=Document; Document Management permission seeded; pages SSR 302 same as existing. Minor non-blocking: no Playwright/API-integration spec (live smoke per Tasks 13–18 convention, matches unchecked boxes); reissue/purge gated by Admin role rather than separate `Document Reissue` permission (spec-allowed "admin-gated"); pre-existing PUT /api/users partial-{roleIds} RangeError observed (users-service, out of scope).
 - Reviewed: [x] 2026-09-06 by /review — APPROVED: clean helpers/service/routes split, row-level own-vs-all scoping + admin-gated reissue/purge, sanitized HTML + sandboxed preview, drift badges, issuance wired into run-complete. 8 should-fix (dead Zod snapshot schema, heavy list payload, N+1 enrich, post-commit issuance without retry, reissue UI/server gate mismatch, detail-view class deviation, generic blob filenames, stale runs.service comment) + 6 consider. Fresh evidence: unit 358/358.
 
+### tasks/20-rendering-engine.md
+
+- Implemented: [x] 2026-09-06 by /implement — Rendering Engine (pure pipeline server/utils/rendering/: types/context/pipeline/sanitizer/print-css/pdf + render-guard rate-limit+semaphore; render.dto + POST /api/render/preview; rendering.service previewWithTree/previewForTemplate/renderForDocument + tableData freeze; DocumentsService issuance wired to engine with persisted PDFs; Rendering Preview seeder permission; activity-logger Render entity; shared DocumentPreview + useRenderPreview + shared/types/render). Unit 389/389 (31 new), nuxt 15/15 (5 new), vue-tsc clean, build OK. Live: AC-001 3-block collection preview, AC-002 false-condition exclusion, AC-003 MISSING_DATA, AC-004 byte-identical, AC-005 500+truncation live, AC-006 script stripped, viewer POST 403/guest 401/payload 422, reseed on restored DB. Fixtures cleaned, db.sqlite restored.
+- Verified: [x] 2026-09-06 by /verify — PASS: unit 389/389 (27 files), nuxt 15/15 (3 files), vue-tsc clean, build OK. Live re-verified on dev server (fixtures + 22 trace activity-logs cleaned, db.sqlite restored to identical id set): AC-001 3-block loop (NIP/jabatan), AC-002 false-condition excluded warning-free, AC-003 MISSING_DATA + empty string, AC-004 byte-identical HTML (sha256 equal), AC-005 500 blocks + LOOP_TRUNCATED + truncation marker, AC-006 script/onerror stripped, AC-007 semaphore 503+Retry-After unit-covered (render-guard.test.ts), preview-by-templateId branch 200 + fixture deleted, unknown kind → UNKNOWN_NODE warning (no crash), viewer POST 403 / guest 401 / empty payload 422. Minor non-blocking: pure-TS PDF writer instead of Chromium (declared assumption, upgrade boundary htmlToPdf kept); no renderWarnings column (warnings logged + reproducible from frozen dataSnapshot, declared); Rendering Preview seeded to Admin/Super Admin only (no Designer/Operator roles exist); no Playwright spec (live smoke per Tasks 13–19 convention).
+- Reviewed: [ ] 2026-09-06 by /review
+
 ## Last Updated
 
 - Date: 2026-09-06
-- By: /review
-- Task: tasks/19-document-management.md
+- By: /verify
+- Task: tasks/20-rendering-engine.md

@@ -30,6 +30,43 @@ export async function seedDatabase(ds: DataSource) {
   await seedAdministrationPermission(ds)
   await seedAdministrationRunPermission(ds)
   await seedDocumentPermission(ds)
+  await seedRenderPermission(ds)
+}
+
+/**
+ * Idempotent seed for the Rendering Preview permission (Task 20).
+ * Covers the shared preview endpoint `POST /api/render/preview` used by
+ * every editor/runner preview pane. Issuance itself is internal
+ * (run-complete hook) and needs no route grant.
+ */
+async function seedRenderPermission(ds: DataSource) {
+  const permissionsRepo = ds.getRepository(PermissionSchema)
+  const permissionMethodsRepo = ds.getRepository(PermissionMethodSchema)
+  const permissionUrlsRepo = ds.getRepository(PermissionUrlSchema)
+  const rolesRepo = ds.getRepository(RoleSchema)
+
+  let permission = await permissionsRepo.findOne({ where: { permissionName: 'Rendering Preview' } })
+  if (!permission) {
+    permission = permissionsRepo.create({
+      permissionName: 'Rendering Preview',
+      description: 'Preview rendered documents (shared rendering engine)',
+    })
+    await permissionsRepo.save(permission)
+    await permissionMethodsRepo.save([
+      permissionMethodsRepo.create({ method: 'POST', permission }),
+    ])
+    await permissionUrlsRepo.save([
+      permissionUrlsRepo.create({ url: '/api/render/*', permission }),
+    ])
+  }
+
+  for (const roleName of ['Admin', 'Super Admin']) {
+    const role = await rolesRepo.findOne({ where: { roleName } })
+    if (role && !(role.permissions ?? []).some((p: any) => p.permissionName === 'Rendering Preview')) {
+      role.permissions = [...(role.permissions ?? []), permission]
+      await rolesRepo.save(role)
+    }
+  }
 }
 
 /**
