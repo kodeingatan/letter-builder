@@ -23,7 +23,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/15-template-composition-editor.md | [x] | [x] | [x] |
 | tasks/16-template-data-binding.md | [x] | [x] | [x] |
 | tasks/17-administration-workflow.md | [x] | [x] | [x] |
-| tasks/18-administration-runner.md | [x] | [x] | [ ] |
+| tasks/18-administration-runner.md | [x] | [x] | [x] |
 | tasks/19-document-management.md | [ ] | [ ] | [ ] |
 | tasks/20-rendering-engine.md | [ ] | [ ] | [ ] |
 | tasks/21-generated-menu.md | [ ] | [ ] | [ ] |
@@ -82,6 +82,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/15-template-composition-editor.md — Template Composition Editor — 2026-09-05 by /review — APPROVED
 - [x] tasks/16-template-data-binding.md — Template Data Binding — 2026-09-06 by /review — APPROVED
 - [x] tasks/17-administration-workflow.md — Administration Workflow — 2026-09-06 by /review — APPROVED
+- [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /review — APPROVED
 
 ## Belum Direview
 
@@ -93,7 +94,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/06-fix-logging-system.md
 - [ ] tasks/12-global-table-data.md
 
-- [ ] tasks/18-administration-runner.md
 - [ ] tasks/19-document-management.md
 - [ ] tasks/20-rendering-engine.md
 - [ ] tasks/21-generated-menu.md
@@ -176,9 +176,10 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 
 - Implemented: [x] 2026-09-06 by /implement — Administration Runner (entity administration_runs + db registration, runs.dto, pure run-helpers + 16 unit tests, runs.service with pin freeze/BR-003 readability filter/atomic complete + createDocumentsForRun hook, 6 API routes, Administration Run seeder permission, activity-logger mapping, shared types run.ts, Pinia store runs, useRunsData composable + 5 unit tests, RunsTable/RunStepForm/RunPreviewPane components, wizard + My Runs + start pages, Dokumen sidebar entry + Start-run button). Live-verified: start 200 with latest→v1 frozen pins, missing-required 422, revoked-row dropped with warning, complete 422→200 atomic {runId, documentIds:[]}, completed-run PATCH/cancel 422, draft-start 422, viewer scope=all 403. Unit 342/342, nuxt 10/10, vue-tsc clean, build OK. Test rows cleaned up (db.sqlite restored).
 - Verified: [x] 2026-09-06 by /verify — PASS: unit 342/342 (22 files; run-helpers 17 + useRunsData 5), nuxt 10/10, vue-tsc clean, build OK. Live re-verified 22/22 on dev server (fixtures + logs cleaned, db.sqlite restored): AC-001 start with frozen pins + step skeletons, AC-002 missing-required 422 (merge-save, no data loss), AC-003 atomic complete {runId, documentIds:[]} + read-only after, AC-004 archived 422 with explanation, AC-006 resume restores data, REQ-006 my-runs list + status filter, viewer scope=all 403, guest 401, draft-start 422. AC-005 revoked-row path unit-covered + code-reviewed (live table-permission fixture not built). Minor non-blocking: no FK runs→administrations (orphan runs possible, UI null-safe); status typed string not union; designer-default pre-checks start empty + post-complete lands on My Runs (both declared task assumptions); no Playwright spec (live smoke per Tasks 13–16 convention).
+- Reviewed: [x] 2026-09-06 by /review — APPROVED: clean helpers/service/routes split, pure testable validators, transactional complete with concurrency guard, merge-saves, BR-003 filter with warning, idempotent seeder, DataTable/.detail-view/NSteps conventions. 5 should-fix (wizard autosave self-trigger loop; activity-logger branch order mislabels nested start; row pickers not scoped to loop sources; no FK runs→administrations; 2 unused imports) + 7 consider. Fresh evidence: unit 342/342.
 
 ## Last Updated
 
 - Date: 2026-09-06
-- By: /implement
+- By: /review
 - Task: tasks/18-administration-runner.md
