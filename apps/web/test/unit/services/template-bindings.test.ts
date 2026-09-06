@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { isItemScopedRef, itemFieldOf, slotKeyOf } from '../../../server/utils/binding-refs'
 
 /**
  * Unit tests for Template Bindings service logic.
@@ -162,6 +163,50 @@ describe('System key whitelist (BR-004)', () => {
     const now = new Date()
     const dateStr = now.toISOString().split('T')[0]
     expect(dateStr).toMatch(/^\d{4}-\d{2}-\d{2}$/)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Loop-item scoping helpers (REQ-002)
+// ---------------------------------------------------------------------------
+
+describe('isItemScopedRef (REQ-002)', () => {
+  it('accepts item.<field> refs', () => {
+    expect(isItemScopedRef('item.nama')).toBe(true)
+    expect(isItemScopedRef('item.nip')).toBe(true)
+  })
+
+  it('accepts the whole-item ref', () => {
+    expect(isItemScopedRef('item')).toBe(true)
+  })
+
+  it('rejects outer-context refs', () => {
+    expect(isItemScopedRef('pegawai.nama')).toBe(false)
+    expect(isItemScopedRef('data.nama')).toBe(false)
+    expect(isItemScopedRef('')).toBe(false)
+    expect(isItemScopedRef(null)).toBe(false)
+    expect(isItemScopedRef(undefined)).toBe(false)
+  })
+
+  it('is strict about the item prefix (no "items." false positive)', () => {
+    expect(isItemScopedRef('items.nama')).toBe(false)
+  })
+})
+
+describe('itemFieldOf (REQ-002)', () => {
+  it('extracts the field after item.', () => {
+    expect(itemFieldOf('item.nama')).toBe('nama')
+  })
+
+  it('returns null for the whole-item ref', () => {
+    expect(itemFieldOf('item')).toBe(null)
+  })
+})
+
+describe('slotKeyOf (REQ-006)', () => {
+  it('builds placementId:lowercased-name keys', () => {
+    expect(slotKeyOf('n1', 'Nama')).toBe('n1:nama')
+    expect(slotKeyOf('abc-123', 'nip')).toBe('abc-123:nip')
   })
 })
 

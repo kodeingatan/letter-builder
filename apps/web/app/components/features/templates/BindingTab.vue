@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import {
-  NButton, NCard, NEmpty, NSelect, NInput, NInputNumber, NSpace,
-  NTag, NText, NAlert, NSpin, NDivider, NPopover,
+  NButton, NCard, NEmpty, NSelect, NInput, NSpace,
+  NTag, NText, NAlert, NSpin, NDivider,
 } from 'naive-ui'
-import { useTemplateBindings } from '~/composables/useTemplateBindings'
+import { useTemplateBindings, isBindingRowBound } from '~/composables/useTemplateBindings'
 import type { BindingPlacementGroup, BindingRow, PreviewSlot } from '~/composables/useTemplateBindings'
 
 const props = defineProps<{
@@ -16,10 +16,13 @@ const emit = defineEmits<{
 }>()
 
 const {
-  bindings, loading, saving, previewing, error,
+  loading, saving, previewing, error,
   previewSlots, totalUnbound, placementGroups,
   fetchBindings, saveBindings, removeBinding, previewBindings,
 } = useTemplateBindings(computed(() => props.templateId))
+
+// Share the unbound counter with the canvas tab (Task 15 publish guard badge).
+watch(totalUnbound, (count) => emit('update:unbound-count', count), { immediate: true })
 
 // --- Source options ---
 const SOURCE_OPTIONS = [
@@ -66,6 +69,49 @@ function initEditState() {
 watch(placementGroups, () => {
   initEditState()
 }, { immediate: true })
+
+// Rendered rows overlay local edits onto server state so source changes
+// reflect immediately (previously selects were bound to server rows and
+// visually snapped back on every change).
+const displayGroups = computed<BindingPlacementGroup[]>(() =>
+  placementGroups.value.map((group) => ({
+    ...group,
+    bindings: group.bindings.map(
+      (row) => editedBindings.value.get(slotKey(row.placementId, row.requirementName)) ?? row,
+    ),
+  })),
+)
+
+// --- REQ-004: loop placements default per-item bindings to item.* ---
+function defaultGroupToItem(group: BindingPlacementGroup) {
+  for (const row of group.bindings) {
+    const key = slotKey(row.placementId, row.requirementName)
+    const current = editedBindings.value.get(key) ?? { ...row }
+    if (current.status === 'stale') continue
+    editedBindings.value.set(key, {
+      ...current,
+      source: 'global_table',
+      sourceRef: `item.${current.requirementName}`,
+      literalValue: null,
+      expression: null,
+    })
+  }
+}
+
+// --- Unbind (slot returns to unbound) ---
+const unbindingId = ref<number | null>(null)
+
+async function handleUnbind(row: BindingRow) {
+  if (row.id == null) return
+  unbindingId.value = row.id
+  try {
+    await removeBinding(row.id)
+  } catch {
+    // error is set by composable
+  } finally {
+    unbindingId.value = null
+  }
+}
 
 // --- Source change handler ---
 function handleSourceChange(placementId: string, requirementName: string, newSource: string) {
@@ -114,10 +160,7 @@ function getStatusType(row: BindingRow): 'success' | 'warning' | 'error' | 'info
 }
 
 function isBound(row: BindingRow): boolean {
-  if (row.source === 'manual') return !!row.literalValue?.trim()
-  if (row.source === 'expression') return !!row.expression?.trim()
-  if (row.source === 'administration' || row.source === 'global_table' || row.source === 'system') return !!row.sourceRef?.trim()
-  return false
+  return isBindingRowBound(row)
 }
 
 function getStatusLabel(row: BindingRow): string {
@@ -197,22 +240,34 @@ defineExpose({ fetchBindings, totalUnbound })
       />
 
       <NEmpty
-        v-if="!loading && !placementGroups.length"
+        v-if="!loading && !displayGroups.length"
         description="No component placements found. Add components to the canvas first (Task 15)."
       />
 
-      <div v-for="group in placementGroups" :key="group.placementId" style="margin-bottom: 16px;">
+      <div v-for="group in displayGroups" :key="group.placementId" style="margin-bottom: 16px;">
         <NCard size="small">
           <template #header>
             <NSpace align="center" :size="8">
               <NText strong>{{ group.componentName }}</NText>
               <NText depth="3" style="font-size: 12px;">Placement #{{ group.placementId.slice(0, 8) }}</NText>
+              <NTag v-if="group.inLoop" size="small" :bordered="false" type="info">Loop item scope</NTag>
+              <NTag v-if="group.orphaned" size="small" :bordered="false" type="error">Orphaned placement</NTag>
             </NSpace>
           </template>
           <template #header-extra>
-            <NText depth="3" style="font-size: 12px;">
-              {{ group.bindings.filter(b => isBound(b)).length }}/{{ group.bindings.length }} bound
-            </NText>
+            <NSpace align="center" :size="8">
+              <NText depth="3" style="font-size: 12px;">
+                {{ group.bindings.filter(b => isBound(b)).length }}/{{ group.bindings.length }} bound
+              </NText>
+              <NButton
+                v-if="group.inLoop && !group.orphaned"
+                size="tiny"
+                secondary
+                @click="defaultGroupToItem(group)"
+              >
+                Use item.* defaults
+              </NButton>
+            </NSpace>
           </template>
 
           <!-- Binding rows -->
@@ -266,13 +321,13 @@ defineExpose({ fetchBindings, totalUnbound })
                   disabled
                 />
 
-                <!-- Global table source: table + column -->
+                <!-- Global table source: table + column (or item.* inside loops) -->
                 <template v-if="row.source === 'global_table'">
                   <NInput
                     :value="row.sourceRef ?? ''"
                     size="small"
                     style="flex: 1;"
-                    placeholder="tableName.columnName (e.g. pegawai.nama)"
+                    placeholder="tableName.columnName (e.g. pegawai.nama) or item.field in loops"
                     @update:value="(v) => handleSourceRefChange(row.placementId, row.requirementName, v)"
                   />
                 </template>
@@ -319,6 +374,19 @@ defineExpose({ fetchBindings, totalUnbound })
                 Preview:
                 <NText code>{{ findPreviewValue(row.placementId, row.requirementName) ?? '—' }}</NText>
               </NText>
+            </div>
+
+            <!-- Unbind action for persisted rows -->
+            <div v-if="row.id != null" style="margin-top: 6px;">
+              <NButton
+                size="tiny"
+                tertiary
+                type="error"
+                :loading="unbindingId === row.id"
+                @click="handleUnbind(row)"
+              >
+                Unbind
+              </NButton>
             </div>
           </div>
         </NCard>

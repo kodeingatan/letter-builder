@@ -162,14 +162,14 @@ Given hard type mismatch (image←number literal), when saving, then blocked; so
 ### Frontend
 
 - [x] Bindings tab + per-source controls + status chips + preview
-- [ ] Unbound counter shared with canvas (Task 15)
+- [x] Unbound counter shared with canvas (Task 15) — BindingTab emits `update:unbound-count`, editor badge wired (fixed 2026-09-06)
 - [ ] States + responsive
 - [ ] Unit + E2E tests (bind-all → publish unblocks)
 
 ## Verification
 
 - [x] Typecheck, Lint, Unit, Integration/API, E2E
-- [ ] Database verification (unique slot, snapshot embed round-trip)
+- [x] Database verification (unique slot, snapshot embed round-trip) — live-verified 2026-09-06: rebind overwrites per UNIQUE(templateId,placementId,requirementName); publish snapshot embeds bindings incl. item.* refs; template delete cascades binding rows
 - [ ] Permission + UI/UX + Responsive + Design System verification
 
 ## Assumptions

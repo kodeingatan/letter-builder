@@ -7,6 +7,7 @@ import {
 } from '~~/server/entities/component.entity'
 import { GlobalTableSchema } from '~~/server/entities/global-table.entity'
 import { GlobalTableRowSchema } from '~~/server/entities/global-table-row.entity'
+import { TemplateBindingSchema } from '~~/server/entities/template-binding.entity'
 import { isNonEmptyContent, countMeaningfulNodes } from '~~/server/utils/template-helpers'
 import {
   validateNodeShapes,
@@ -90,6 +91,7 @@ async function checkPlacementRequirements(
   bindings: Record<string, unknown>,
   errors: TreeIssue[],
   unbound: UnboundSlot[],
+  dbBound?: Map<string, 'bound' | 'stale'>,
 ): Promise<void> {
   if (typeof componentId !== 'number' || isNaN(componentId)) return // shape error already reported
   const component: any = await ds.getRepository(ComponentSchema).findOne({ where: { id: componentId } })
@@ -135,7 +137,10 @@ async function checkPlacementRequirements(
     requirements = live.map((r) => ({ name: r.name, type: r.type }))
   }
   for (const req of requirements) {
-    if (!isSlotBound(bindings[req.name])) {
+    // REQ-006 (Task 16): a slot is bound when the tree attrs carry a value
+    // OR the template_bindings store holds a live (non-stale) row for it.
+    const dbState = dbBound?.get(`${nodeId}:${req.name.toLowerCase()}`)
+    if (!isSlotBound(bindings[req.name]) && dbState !== 'bound') {
       unbound.push({
         nodeId,
         componentId,
@@ -201,7 +206,10 @@ async function checkLoopSources(
  * DB-backed placement/loop checks. `unbound` never affects `valid` —
  * unbound slots block Publish, not Save (REQ-006).
  */
-async function validateCompositionNodes(nodes: unknown[]): Promise<TreeValidation> {
+async function validateCompositionNodes(
+  nodes: unknown[],
+  dbBound?: Map<string, 'bound' | 'stale'>,
+): Promise<TreeValidation> {
   const shape = validateNodeShapes(nodes)
   const errors = [...shape.errors]
   const warnings = [...shape.warnings]
@@ -231,6 +239,7 @@ async function validateCompositionNodes(nodes: unknown[]): Promise<TreeValidatio
       placement.bindings,
       errors,
       unbound,
+      dbBound,
     )
   }
   await checkLoopSources(ds, asNodes, 'nodes', errors, warnings)
@@ -318,7 +327,16 @@ export const TemplatesService = {
         stats: { nodeCount: 0, placementCount: 0, loopCount: 0, conditionCount: 0, tokenCount: 0 },
       }
     }
-    return validateCompositionNodes(parsed.nodes)
+    // REQ-006 (Task 16): unbound detection consults the template_bindings
+    // store as well as tree attrs. Failure to read the store degrades to
+    // tree-only checks (Task 15 behavior), never to a 500.
+    let dbBound: Map<string, 'bound' | 'stale'> | undefined
+    try {
+      dbBound = await TemplateBindingsService.slotStates(id)
+    } catch {
+      dbBound = undefined
+    }
+    return validateCompositionNodes(parsed.nodes, dbBound)
   },
 
   async create(data: CreateTemplateInput) {
@@ -405,7 +423,14 @@ export const TemplatesService = {
     // AC-004). Legacy Task 14 skeletons skip this gate.
     const parsed = parseTreeInput(template.content)
     if (Array.isArray(parsed.nodes) && hasCompositionNodes(parsed.nodes)) {
-      const checked = await validateCompositionNodes(parsed.nodes)
+      // Same store-backed unbound check as validate-tree (REQ-006, Task 16).
+      let dbBound: Map<string, 'bound' | 'stale'> | undefined
+      try {
+        dbBound = await TemplateBindingsService.slotStates(id)
+      } catch {
+        dbBound = undefined
+      }
+      const checked = await validateCompositionNodes(parsed.nodes, dbBound)
       if (checked.errors.length > 0) {
         throw httpError(422, checked.errors[0].message, { code: 'INVALID_TREE', errors: checked.errors })
       }
@@ -502,6 +527,12 @@ export const TemplatesService = {
     // Version snapshots are immutable history — delete explicitly
     // (no FK cascade declared, matching codebase convention).
     await ds.getRepository(TemplateVersionSchema).createQueryBuilder().delete().where('templateId = :id', { id }).execute()
+    // Task 16: draft bindings live in their own table — remove them too so no
+    // orphan rows linger (orphans would 409-block component deletion with no
+    // UI recovery path once the template is gone).
+    if (ds.hasMetadata('template_bindings')) {
+      await ds.getRepository(TemplateBindingSchema).createQueryBuilder().delete().where('templateId = :id', { id }).execute()
+    }
     await repo.remove(template)
     return { message: 'Template deleted' }
   },

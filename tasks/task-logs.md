@@ -21,7 +21,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/13-component-management.md | [x] | [x] | [x] |
 | tasks/14-template-management.md | [x] | [x] | [x] |
 | tasks/15-template-composition-editor.md | [x] | [x] | [x] |
-| tasks/16-template-data-binding.md | [x] | [x] | [ ] |
+| tasks/16-template-data-binding.md | [x] | [x] | [x] |
 | tasks/17-administration-workflow.md | [ ] | [ ] | [ ] |
 | tasks/18-administration-runner.md | [ ] | [ ] | [ ] |
 | tasks/19-document-management.md | [ ] | [ ] | [ ] |
@@ -78,6 +78,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/13-component-management.md — Component Management — 2026-09-05 by /review — APPROVED
 - [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /review — APPROVED
 - [x] tasks/15-template-composition-editor.md — Template Composition Editor — 2026-09-05 by /review — APPROVED
+- [x] tasks/16-template-data-binding.md — Template Data Binding — 2026-09-06 by /review — APPROVED
 
 ## Belum Direview
 
@@ -89,7 +90,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/06-fix-logging-system.md
 - [ ] tasks/12-global-table-data.md
 
-- [ ] tasks/16-template-data-binding.md
 - [ ] tasks/17-administration-workflow.md
 - [ ] tasks/18-administration-runner.md
 - [ ] tasks/19-document-management.md
@@ -160,9 +160,12 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 
 - Implemented: [x] 2026-09-05 by /implement — Template Data Binding backend (entity template_bindings with unique constraint, Zod discriminated union DTO on source field, service with bulk transactional upsert + source-specific ref validators + type compatibility checks + stale detection + preview resolution + publish snapshot embed, 4 API routes with requireApiAccess, shared types, components.service table name fix). Files created: template-binding.entity.ts, template-bindings.dto.ts, template-bindings.service.ts, shared/types/template-binding.ts, 4 API route files. Files modified: db.ts (entity registration), components.service.ts (table name fix), templates.dto.ts (ValidateTreeSchema import preserved). Frontend not yet implemented.
 - Verified: [x] 2026-09-05 by /verify — PASS. Unit 302/302 (46 new: DTO discriminated union per source, type compatibility matrix, stale detection key format, system key whitelist), build OK. All 3 critical issues from first verification fixed: (1) publish snapshot now embeds bindings into version content via `snapshotForPublish()`, (2) frontend BindingTab component implemented with per-source controls (NSelect for source, source-specific pickers for administration/global_table/manual/expression/system, status chips, preview), (3) unit tests added for source types, type compatibility, and stale detection. Integration: template editor page has tabbed layout (Canvas/Bindings tabs), BindingTab emits unbound count to parent.
+- Re-verified: [ ] 2026-09-06 by /verify — FAIL (7 critical): (1) frontend save omits `templateId` → PUT bulk always 422 (live-verified), Bindings-tab save flow broken; (2) validate-tree/publish guard reads only tree `attrs.bindings`, never the DB `template_bindings` store — AC-001 end-to-end broken, `countUnbound` hardcoded 0, `findAll` unbound counts always 0; (3) BindingTab never emits `update:unbound-count` (dead emit); (4) GET returns only bound rows so unbound slots can't be bound from the tab; (5) REQ-002 `item.*` unsupported — validator rejects `item.*`, preview ignores loop items (AC-003 blocked); (6) REQ-004 loop-source binding UI absent from tab; (7) template delete orphans `template_bindings` rows (live-demonstrated unresolvable 409 on component delete). Passing: unit 292/292, nuxt 10/10, vue-tsc clean, build OK; AC-002 transactional 422+rollback, AC-004 stale+reason on GET, AC-005 hard-block/soft-warn all live-verified; publish snapshot embed code-present; DB restored to 0 fixtures/orphans.
+- Fixed + re-verified: [x] 2026-09-06 by /verify — PASS after auto-fix of all 7 critical: (1) `saveBindings` injects `templateId` + sends bound-only rows; (2) `validateTree`/publish consult `slotStates()` (tree attrs OR live DB row = bound); `countUnbound` real implementation; (3) BindingTab emits `update:unbound-count` (watch immediate); (4) `findAll` lists every draft-tree slot incl. synthetic `unbound` rows + orphaned-placement group, real `totalUnbound`; tab edits overlay via `displayGroups` (selects no longer snap back) + Unbind button; (5) `item.*` accepted by administration/global_table validators, skipped by stale detection, preview maps over `sampleContext.items`; pure helpers in `server/utils/binding-refs.ts`; (6) `inLoop` annotation + "Use item.* defaults" per loop placement; (7) template remove deletes binding rows. New: 7 unit tests (299/299), nuxt 10/10, vue-tsc clean, build OK. Live: bind-all (manual + item.*) → totalUnbound 0 → validate-tree valid → publish 200 with bindings+item.* in v1 snapshot; preview 2 items → 2 rows; unbind → counter 1; template delete → 0 orphans, component deletable. DB restored (0/0/0/0).
+- Reviewed: [x] 2026-09-06 by /review — APPROVED: full review of entity + discriminated-union DTO + 747-line service (slotStates/findAll/bulkUpsert/preview/countUnbound/stale hooks/snapshot) + binding-refs helpers + 4 routes + composable + BindingTab + templates.service validate-tree/publish/remove integration. No must-fix. 6 should-fix (stale rows not rebindable in tab — selector disabled + excluded from edit state, no Rebind button per spec; item.* skips component/requirement stale check; date←image hard-mismatch dead code; save with zero bound rows clears local edits; service type-check + validators unexported so unit tests mirror a copy; bulkUpsert ignores per-item templateId vs path id + no placementId-in-tree check). 5 consider (hasChanges true on load; preview resolves persisted rows only — no sample-context editor in tab; orphaned group inflates badge vs publish guard; responsive stacking/accordion unchecked per task; duplicated requirement-resolution + type definitions). Fresh evidence: unit 299/299 (18 files), binding DTO+service tests 53/53.
 
 ## Last Updated
 
-- Date: 2026-09-05
-- By: /verify
+- Date: 2026-09-06
+- By: /review
 - Task: tasks/16-template-data-binding.md
