@@ -22,7 +22,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/14-template-management.md | [x] | [x] | [x] |
 | tasks/15-template-composition-editor.md | [x] | [x] | [x] |
 | tasks/16-template-data-binding.md | [x] | [x] | [x] |
-| tasks/17-administration-workflow.md | [x] | [x] | [ ] |
+| tasks/17-administration-workflow.md | [x] | [x] | [x] |
 | tasks/18-administration-runner.md | [ ] | [ ] | [ ] |
 | tasks/19-document-management.md | [ ] | [ ] | [ ] |
 | tasks/20-rendering-engine.md | [ ] | [ ] | [ ] |
@@ -80,6 +80,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /review — APPROVED
 - [x] tasks/15-template-composition-editor.md — Template Composition Editor — 2026-09-05 by /review — APPROVED
 - [x] tasks/16-template-data-binding.md — Template Data Binding — 2026-09-06 by /review — APPROVED
+- [x] tasks/17-administration-workflow.md — Administration Workflow — 2026-09-06 by /review — APPROVED
 
 ## Belum Direview
 
@@ -91,7 +92,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/06-fix-logging-system.md
 - [ ] tasks/12-global-table-data.md
 
-- [ ] tasks/17-administration-workflow.md
 - [ ] tasks/18-administration-runner.md
 - [ ] tasks/19-document-management.md
 - [ ] tasks/20-rendering-engine.md
@@ -169,10 +169,10 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 
 - Implemented: [x] 2026-09-06 by /implement — Administration Workflow (entities administrations/administration_steps/administration_versions + db registration, self-contained Zod DTO incl. bulk steps, pure administration-helpers + 16 unit tests, service with two-phase transactional reorder, BR-004 pin validation, publish snapshot/archive/new-version/BR-006 delete guard, 10 API routes with requireApiAccess, Administration Management seeder permission, activity-logger mapping, shared types, Pinia store, useAdministrationsData composable + 5 unit tests, 5 components Table/FormModal/DetailDrawer/StepCard/WorkflowEditor + index, list + editor pages, Dokumen sidebar entry). Live-verified all 5 ACs + dup-name 409/unknown-version 422/bad-field 422/viewer GET 200 POST 403. Unit 320/320, vue-tsc clean, build OK. Test rows cleaned up (0/0/0, permission seeded, smoke logs removed).
 - Verified: [x] 2026-09-06 by /verify — PASS: unit 320/320 (20 files), nuxt 10/10, vue-tsc clean, build OK. Live re-verified on dev server (fixtures cleaned, db.sqlite restored): AC-001 multi-template publish v1 with resolved names, AC-002 422 naming empty step, AC-003 422 draft-template pin, AC-004 archive blocks edits + published-with-docs 409 path coded (stub until Task 19 documents table), AC-005 dense reorder persists, publish v2 with byte-frozen v1 snapshot, dup-name 409, unknown-version 422, bad-field 422, viewer GET 200/POST 403, pinned-template delete 409 + deletable after unpin. Minor (non-blocking): missing-template pin returns 404 not literal 422 (BR-004); resolvedTemplateVersion int-vs-string inconsistency; no Playwright spec (live smoke, as Tasks 13–16); up/down handles instead of drag (declared).
-- Reviewed: [ ] — pending /review.
+- Reviewed: [x] 2026-09-06 by /review — APPROVED. Full review of 3 entities + DTO + helpers + 455-line service + 10 routes + seeder/activity-logger/sidebar integration + store/composable/5 components/2 pages + 2 test files. No must-fix. 5 should-fix (publish count+1 outside transaction; N+1 in findAll/resolveTemplateInfo; resolvedTemplateVersion number-vs-string type mismatch; triplicated STEP_FIELD_TYPES/validators across DTO/helpers/shared/composable; no DB-level FK on steps/versions). 4 consider (delete guard covers documents only until Tasks 18/19; redundant docsCount+documentCount; entity status typed string not union; no Playwright spec — live smoke per Tasks 13–16 convention). Fresh evidence: unit 330/330 (22 files), vue-tsc clean.
 
 ## Last Updated
 
 - Date: 2026-09-06
-- By: /verify
+- By: /review
 - Task: tasks/17-administration-workflow.md
