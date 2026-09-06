@@ -22,7 +22,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/14-template-management.md | [x] | [x] | [x] |
 | tasks/15-template-composition-editor.md | [x] | [x] | [x] |
 | tasks/16-template-data-binding.md | [x] | [x] | [x] |
-| tasks/17-administration-workflow.md | [ ] | [ ] | [ ] |
+| tasks/17-administration-workflow.md | [x] | [ ] | [ ] |
 | tasks/18-administration-runner.md | [ ] | [ ] | [ ] |
 | tasks/19-document-management.md | [ ] | [ ] | [ ] |
 | tasks/20-rendering-engine.md | [ ] | [ ] | [ ] |
@@ -40,6 +40,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/14-template-management.md — Template Management — 2026-09-05 by /implement
 - [x] tasks/15-template-composition-editor.md — Template Composition Editor — 2026-09-05 by /implement
 - [x] tasks/16-template-data-binding.md — Template Data Binding — 2026-09-05 by /implement
+- [x] tasks/17-administration-workflow.md — Administration Workflow — 2026-09-06 by /implement
 
 ## Belum Implementasi
 
@@ -48,7 +49,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/17-administration-workflow.md
 - [ ] tasks/18-administration-runner.md
 - [ ] tasks/19-document-management.md
 - [ ] tasks/20-rendering-engine.md
@@ -164,8 +164,14 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Fixed + re-verified: [x] 2026-09-06 by /verify — PASS after auto-fix of all 7 critical: (1) `saveBindings` injects `templateId` + sends bound-only rows; (2) `validateTree`/publish consult `slotStates()` (tree attrs OR live DB row = bound); `countUnbound` real implementation; (3) BindingTab emits `update:unbound-count` (watch immediate); (4) `findAll` lists every draft-tree slot incl. synthetic `unbound` rows + orphaned-placement group, real `totalUnbound`; tab edits overlay via `displayGroups` (selects no longer snap back) + Unbind button; (5) `item.*` accepted by administration/global_table validators, skipped by stale detection, preview maps over `sampleContext.items`; pure helpers in `server/utils/binding-refs.ts`; (6) `inLoop` annotation + "Use item.* defaults" per loop placement; (7) template remove deletes binding rows. New: 7 unit tests (299/299), nuxt 10/10, vue-tsc clean, build OK. Live: bind-all (manual + item.*) → totalUnbound 0 → validate-tree valid → publish 200 with bindings+item.* in v1 snapshot; preview 2 items → 2 rows; unbind → counter 1; template delete → 0 orphans, component deletable. DB restored (0/0/0/0).
 - Reviewed: [x] 2026-09-06 by /review — APPROVED: full review of entity + discriminated-union DTO + 747-line service (slotStates/findAll/bulkUpsert/preview/countUnbound/stale hooks/snapshot) + binding-refs helpers + 4 routes + composable + BindingTab + templates.service validate-tree/publish/remove integration. No must-fix. 6 should-fix (stale rows not rebindable in tab — selector disabled + excluded from edit state, no Rebind button per spec; item.* skips component/requirement stale check; date←image hard-mismatch dead code; save with zero bound rows clears local edits; service type-check + validators unexported so unit tests mirror a copy; bulkUpsert ignores per-item templateId vs path id + no placementId-in-tree check). 5 consider (hasChanges true on load; preview resolves persisted rows only — no sample-context editor in tab; orphaned group inflates badge vs publish guard; responsive stacking/accordion unchecked per task; duplicated requirement-resolution + type definitions). Fresh evidence: unit 299/299 (18 files), binding DTO+service tests 53/53.
 
+### tasks/17-administration-workflow.md
+
+- Implemented: [x] 2026-09-06 by /implement — Administration Workflow (entities administrations/administration_steps/administration_versions + db registration, self-contained Zod DTO incl. bulk steps, pure administration-helpers + 16 unit tests, service with two-phase transactional reorder, BR-004 pin validation, publish snapshot/archive/new-version/BR-006 delete guard, 10 API routes with requireApiAccess, Administration Management seeder permission, activity-logger mapping, shared types, Pinia store, useAdministrationsData composable + 5 unit tests, 5 components Table/FormModal/DetailDrawer/StepCard/WorkflowEditor + index, list + editor pages, Dokumen sidebar entry). Live-verified all 5 ACs + dup-name 409/unknown-version 422/bad-field 422/viewer GET 200 POST 403. Unit 320/320, vue-tsc clean, build OK. Test rows cleaned up (0/0/0, permission seeded, smoke logs removed).
+- Verified: [ ] — pending /verify.
+- Reviewed: [ ] — pending /review.
+
 ## Last Updated
 
 - Date: 2026-09-06
-- By: /review
-- Task: tasks/16-template-data-binding.md
+- By: /implement
+- Task: tasks/17-administration-workflow.md

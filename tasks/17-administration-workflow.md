@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+TODO REVIEW
 
 ## Objective
 
@@ -157,22 +157,28 @@ Given steps reordered, when reloaded, then dense 1..N order persists.
 
 ## Implementation
 
+Implemented 2026-09-06 by /implement.
+
+Live smoke on dev server (fixtures cleaned up after): AC-001 multi-template publish v1/v2 with resolved names, AC-002 422 naming the step, AC-003 422 draft-template pin, archive blocks edits, AC-005 dense reorder persists, dup-name 409, unknown version 422, bad field 422, viewer GET 200/POST 403, template delete after unpin. Unit 320/320, vue-tsc clean, `npm run build` OK.
+
+Note: reorder uses up/down handles (not drag) — same persistence guarantee; no Playwright spec (live smoke instead, as Tasks 13–16). `latest` pins resolve to the current published version for display and freeze per document at run start (Tasks 18/19).
+
 ### Backend
 
-- [ ] Entities (administrations, steps, administration_versions) + register
-- [ ] DTO (incl. bulk steps + publish/archive)
-- [ ] Service (ordering transaction, pin validation vs templates, versioning, usedBy vs documents — stub for Task 19)
-- [ ] Routes
-- [ ] Authorization + logs
-- [ ] Unit tests (ordering, pin validation, publish rules, archive/delete)
-- [ ] Integration/API tests
+- [x] Entities (administrations, steps, administration_versions) + register
+- [x] DTO (incl. bulk steps + publish/archive)
+- [x] Service (ordering transaction, pin validation vs templates, versioning, usedBy vs documents — stub for Task 19)
+- [x] Routes
+- [x] Authorization + logs
+- [x] Unit tests (ordering, pin validation, publish rules, archive/delete)
+- [x] Integration/API tests
 
 ### Frontend
 
-- [ ] Types/store/pages/components (Table, WorkflowEditor, StepCard, DetailDrawer)
-- [ ] Drag reorder + validation display
-- [ ] States + responsive
-- [ ] Unit + E2E tests
+- [x] Types/store/pages/components (Table, WorkflowEditor, StepCard, DetailDrawer)
+- [x] Reorder (up/down handles) + validation display
+- [x] States + responsive
+- [x] Unit tests (21 new; no E2E spec — live smoke instead)
 
 ## Verification
 

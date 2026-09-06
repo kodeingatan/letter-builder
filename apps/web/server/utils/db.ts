@@ -21,6 +21,11 @@ import {
   TemplateVersionSchema,
 } from '~~/server/entities/template.entity'
 import { TemplateBindingSchema } from '~~/server/entities/template-binding.entity'
+import {
+  AdministrationSchema,
+  AdministrationStepSchema,
+  AdministrationVersionSchema,
+} from '~~/server/entities/administration.entity'
 
 let dataSource: DataSource | null = null
 
@@ -48,6 +53,9 @@ export async function getDataSource(): Promise<DataSource> {
         TemplateSchema,
         TemplateVersionSchema,
         TemplateBindingSchema,
+        AdministrationSchema,
+        AdministrationStepSchema,
+        AdministrationVersionSchema,
       ],
       synchronize: true,
     })

@@ -30,6 +30,7 @@ export default defineEventHandler(async (event) => {
   else if (path.includes('/api/global-tables')) { entity = 'GlobalTable'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/components')) { entity = 'Component'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/templates')) { entity = 'Template'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
+  else if (path.includes('/api/administrations')) { entity = 'Administration'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/settings')) entity = 'setting'
   else if (path.includes('/api/global-tables') && path.includes('/columns')) {
     entity = 'GlobalTableColumn'

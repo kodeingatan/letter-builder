@@ -27,6 +27,45 @@ export async function seedDatabase(ds: DataSource) {
   await seedGlobalTablePermission(ds)
   await seedComponentPermission(ds)
   await seedTemplatePermission(ds)
+  await seedAdministrationPermission(ds)
+}
+
+/**
+ * Idempotent seed for the Administration Management permission (Task 17).
+ * Runs on every startup so existing databases also receive the permission,
+ * and attaches it to the Admin / Super Admin roles when missing.
+ */
+async function seedAdministrationPermission(ds: DataSource) {
+  const permissionsRepo = ds.getRepository(PermissionSchema)
+  const permissionMethodsRepo = ds.getRepository(PermissionMethodSchema)
+  const permissionUrlsRepo = ds.getRepository(PermissionUrlSchema)
+  const rolesRepo = ds.getRepository(RoleSchema)
+
+  let permission = await permissionsRepo.findOne({ where: { permissionName: 'Administration Management' } })
+  if (!permission) {
+    permission = permissionsRepo.create({
+      permissionName: 'Administration Management',
+      description: 'Manage administration workflows (CRUD, steps, publish, archive)',
+    })
+    await permissionsRepo.save(permission)
+    await permissionMethodsRepo.save([
+      permissionMethodsRepo.create({ method: 'GET', permission }),
+      permissionMethodsRepo.create({ method: 'POST', permission }),
+      permissionMethodsRepo.create({ method: 'PUT', permission }),
+      permissionMethodsRepo.create({ method: 'DELETE', permission }),
+    ])
+    await permissionUrlsRepo.save(
+      permissionUrlsRepo.create({ url: '/api/administrations/*', permission }),
+    )
+  }
+
+  for (const roleName of ['Admin', 'Super Admin']) {
+    const role = await rolesRepo.findOne({ where: { roleName } })
+    if (role && !(role.permissions ?? []).some((p: any) => p.permissionName === 'Administration Management')) {
+      role.permissions = [...(role.permissions ?? []), permission]
+      await rolesRepo.save(role)
+    }
+  }
 }
 
 /**
