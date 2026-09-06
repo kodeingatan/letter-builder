@@ -24,7 +24,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/16-template-data-binding.md | [x] | [x] | [x] |
 | tasks/17-administration-workflow.md | [x] | [x] | [x] |
 | tasks/18-administration-runner.md | [x] | [x] | [x] |
-| tasks/19-document-management.md | [ ] | [ ] | [ ] |
+| tasks/19-document-management.md | [x] | [x] | [x] |
 | tasks/20-rendering-engine.md | [ ] | [ ] | [ ] |
 | tasks/21-generated-menu.md | [ ] | [ ] | [ ] |
 | tasks/22-dynamic-rbac-audit-production.md | [ ] | [ ] | [ ] |
@@ -42,6 +42,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/16-template-data-binding.md — Template Data Binding — 2026-09-05 by /implement
 - [x] tasks/17-administration-workflow.md — Administration Workflow — 2026-09-06 by /implement
 - [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /implement
+- [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /implement
 
 ## Belum Implementasi
 
@@ -50,7 +51,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/19-document-management.md
 - [ ] tasks/20-rendering-engine.md
 - [ ] tasks/21-generated-menu.md
 - [ ] tasks/22-dynamic-rbac-audit-production.md
@@ -69,6 +69,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/16-template-data-binding.md — Template Data Binding — 2026-09-05 by /verify — PASS: 302/302 unit, build OK
 - [x] tasks/17-administration-workflow.md — Administration Workflow — 2026-09-06 by /verify — PASS: 320/320 unit, 10/10 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified, DB restored
 - [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /verify — PASS: 342/342 unit (17 run-helpers + 5 useRunsData), 10/10 nuxt, vue-tsc clean, build OK, live 22/22 AC-001..AC-004+AC-006 verified, DB restored
+- [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /verify — PASS: 358/358 unit (16 document-helpers), 10/10 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified, DB restored
 
 ## Sudah Direview
 
@@ -83,6 +84,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/16-template-data-binding.md — Template Data Binding — 2026-09-06 by /review — APPROVED
 - [x] tasks/17-administration-workflow.md — Administration Workflow — 2026-09-06 by /review — APPROVED
 - [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /review — APPROVED
+- [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /review — APPROVED
 
 ## Belum Direview
 
@@ -94,7 +96,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/06-fix-logging-system.md
 - [ ] tasks/12-global-table-data.md
 
-- [ ] tasks/19-document-management.md
 - [ ] tasks/20-rendering-engine.md
 - [ ] tasks/21-generated-menu.md
 - [ ] tasks/22-dynamic-rbac-audit-production.md
@@ -178,8 +179,14 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Verified: [x] 2026-09-06 by /verify — PASS: unit 342/342 (22 files; run-helpers 17 + useRunsData 5), nuxt 10/10, vue-tsc clean, build OK. Live re-verified 22/22 on dev server (fixtures + logs cleaned, db.sqlite restored): AC-001 start with frozen pins + step skeletons, AC-002 missing-required 422 (merge-save, no data loss), AC-003 atomic complete {runId, documentIds:[]} + read-only after, AC-004 archived 422 with explanation, AC-006 resume restores data, REQ-006 my-runs list + status filter, viewer scope=all 403, guest 401, draft-start 422. AC-005 revoked-row path unit-covered + code-reviewed (live table-permission fixture not built). Minor non-blocking: no FK runs→administrations (orphan runs possible, UI null-safe); status typed string not union; designer-default pre-checks start empty + post-complete lands on My Runs (both declared task assumptions); no Playwright spec (live smoke per Tasks 13–16 convention).
 - Reviewed: [x] 2026-09-06 by /review — APPROVED: clean helpers/service/routes split, pure testable validators, transactional complete with concurrency guard, merge-saves, BR-003 filter with warning, idempotent seeder, DataTable/.detail-view/NSteps conventions. 5 should-fix (wizard autosave self-trigger loop; activity-logger branch order mislabels nested start; row pickers not scoped to loop sources; no FK runs→administrations; 2 unused imports) + 7 consider. Fresh evidence: unit 342/342.
 
+### tasks/19-document-management.md
+
+- Implemented: [x] 2026-09-06 by /implement — Document Management (entity documents + db registration, DTO query + snapshot schema, pure document-helpers + 16 unit tests, DocumentsService with findAll/findOne/getHtml/getPdf/reissue/purge/issueDocumentsForRun, 6 API routes with requireApiAccess + row-level own-vs-all scoping, storage documents allowlist, Document Management seeder permission, activity-logger Document mapping, templates.service title-column fix, runs.service createDocumentsForRun wired to real issuance, shared types, Pinia store, DocumentsTable + DocumentDriftBadge, global list + detail pages with sandboxed iframe preview + Bearer-blob downloads, per-administration Documents tab, Dokumen sidebar entry). Live-verified all 5 ACs: 2-template run → 2 docs sharing runId, v1 byte-stable + "template v1 (current v2)" drift after publish v2, viewer 0 docs vs admin 3 + viewer detail/reissue 403, reissue → new row replacesId, script stripped in HTML but preserved frozen in snapshot. Unit 358/358, vue-tsc clean, build OK. db.sqlite restored.
+- Verified: [x] 2026-09-06 by /verify — PASS: unit 358/358 (23 files; document-helpers 16), nuxt 10/10, vue-tsc clean, build OK. Live re-verified on dev server (fixtures cleaned, db.sqlite restored): AC-001 2-template run → 2 docs sharing runId ordered by step (complete returns {runId, documentIds:[1,2]}); AC-002 publish v2 → badge "template v1 (current v2)", html+snapshot byte-stable; AC-003 viewer list 0 vs admin N, viewer detail/html/reissue 403; AC-004 reissue → new row replacesId=1, original untouched, snapshot identical; AC-005 sanitize strips script/event-handlers (unit + live html clean), detail preview iframe sandbox="". REQ-001..006 + BR-001..005 all met; PDF_PENDING 404 interim per Assumptions; no PUT route (immutability 404); activity logs entity=Document; Document Management permission seeded; pages SSR 302 same as existing. Minor non-blocking: no Playwright/API-integration spec (live smoke per Tasks 13–18 convention, matches unchecked boxes); reissue/purge gated by Admin role rather than separate `Document Reissue` permission (spec-allowed "admin-gated"); pre-existing PUT /api/users partial-{roleIds} RangeError observed (users-service, out of scope).
+- Reviewed: [x] 2026-09-06 by /review — APPROVED: clean helpers/service/routes split, row-level own-vs-all scoping + admin-gated reissue/purge, sanitized HTML + sandboxed preview, drift badges, issuance wired into run-complete. 8 should-fix (dead Zod snapshot schema, heavy list payload, N+1 enrich, post-commit issuance without retry, reissue UI/server gate mismatch, detail-view class deviation, generic blob filenames, stale runs.service comment) + 6 consider. Fresh evidence: unit 358/358.
+
 ## Last Updated
 
 - Date: 2026-09-06
 - By: /review
-- Task: tasks/18-administration-runner.md
+- Task: tasks/19-document-management.md

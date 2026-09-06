@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+DONE
 
 ## Objective
 
@@ -151,18 +151,18 @@ Given HTML with script, when stored/previewed, then script stripped and preview 
 
 ### Backend
 
-- [ ] Entity + register + storage subfolder `documents/` allowlisted
-- [ ] Creation service (snapshot assembly + validation + file write) called from run-complete hook
-- [ ] Routes (list/detail/html/pdf/reissue) + row-level scoping
-- [ ] Authorization + logs (issue/reissue/purge)
-- [ ] Unit tests (snapshot completeness, drift badge data, scoping, reissue chain)
+- [x] Entity + register + storage subfolder `documents/` allowlisted
+- [x] Creation service (snapshot assembly + validation + file write) called from run-complete hook
+- [x] Routes (list/detail/html/pdf/reissue) + row-level scoping
+- [x] Authorization + logs (issue/reissue/purge)
+- [x] Unit tests (snapshot completeness, drift badge data, scoping, reissue chain)
 - [ ] Integration/API tests
 
 ### Frontend
 
-- [ ] Types/store/pages (List + Detail + preview + downloads + per-admin tab)
-- [ ] Sandboxed preview + drift badge
-- [ ] States + responsive
+- [x] Types/store/pages (List + Detail + preview + downloads + per-admin tab)
+- [x] Sandboxed preview + drift badge
+- [x] States + responsive
 - [ ] Unit + E2E tests (run → N documents → download)
 
 ## Verification
