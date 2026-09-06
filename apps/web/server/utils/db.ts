@@ -26,6 +26,7 @@ import {
   AdministrationStepSchema,
   AdministrationVersionSchema,
 } from '~~/server/entities/administration.entity'
+import { AdministrationRunSchema } from '~~/server/entities/administration-run.entity'
 
 let dataSource: DataSource | null = null
 
@@ -56,6 +57,7 @@ export async function getDataSource(): Promise<DataSource> {
         AdministrationSchema,
         AdministrationStepSchema,
         AdministrationVersionSchema,
+        AdministrationRunSchema,
       ],
       synchronize: true,
     })

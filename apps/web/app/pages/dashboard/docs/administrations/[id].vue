@@ -129,6 +129,7 @@ async function handleDelete() {
           <template #footer>
             <NSpace>
               <NButton type="primary" :disabled="readonly" :loading="acting" @click="handlePublish">Publish</NButton>
+              <NButton :disabled="detail.status !== 'published'" @click="navigateTo(`/dashboard/docs/run/${detail.id}`)">Start run</NButton>
               <NButton :disabled="detail.status !== 'published'" :loading="acting" @click="handleNewVersion">New version</NButton>
               <NButton :disabled="detail.status === 'archived'" :loading="acting" @click="handleArchive">Archive</NButton>
               <NPopconfirm @positive-click="handleDelete">

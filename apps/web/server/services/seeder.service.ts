@@ -28,6 +28,46 @@ export async function seedDatabase(ds: DataSource) {
   await seedComponentPermission(ds)
   await seedTemplatePermission(ds)
   await seedAdministrationPermission(ds)
+  await seedAdministrationRunPermission(ds)
+}
+
+/**
+ * Idempotent seed for the Administration Run permission (Task 18).
+ * Operators start/save/complete their own runs; designers (Administration
+ * Management) keep full workflow access. Covers the nested start route
+ * plus the /api/runs/* session routes.
+ */
+async function seedAdministrationRunPermission(ds: DataSource) {
+  const permissionsRepo = ds.getRepository(PermissionSchema)
+  const permissionMethodsRepo = ds.getRepository(PermissionMethodSchema)
+  const permissionUrlsRepo = ds.getRepository(PermissionUrlSchema)
+  const rolesRepo = ds.getRepository(RoleSchema)
+
+  let permission = await permissionsRepo.findOne({ where: { permissionName: 'Administration Run' } })
+  if (!permission) {
+    permission = permissionsRepo.create({
+      permissionName: 'Administration Run',
+      description: 'Run published administrations (start, save steps, complete own runs)',
+    })
+    await permissionsRepo.save(permission)
+    await permissionMethodsRepo.save([
+      permissionMethodsRepo.create({ method: 'GET', permission }),
+      permissionMethodsRepo.create({ method: 'POST', permission }),
+      permissionMethodsRepo.create({ method: 'PATCH', permission }),
+    ])
+    await permissionUrlsRepo.save([
+      permissionUrlsRepo.create({ url: '/api/runs/*', permission }),
+      permissionUrlsRepo.create({ url: '/api/administrations/*/runs', permission }),
+    ])
+  }
+
+  for (const roleName of ['Admin', 'Super Admin']) {
+    const role = await rolesRepo.findOne({ where: { roleName } })
+    if (role && !(role.permissions ?? []).some((p: any) => p.permissionName === 'Administration Run')) {
+      role.permissions = [...(role.permissions ?? []), permission]
+      await rolesRepo.save(role)
+    }
+  }
 }
 
 /**

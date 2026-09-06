@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+TODO REVIEW
 
 ## Objective
 
@@ -161,18 +161,18 @@ Given reload mid-run, when reopening, then entered data restored (resume).
 
 ### Backend
 
-- [ ] Entity + DTO (start/step-save/complete) + service (pin resolution, step validation, atomic complete + document hook interface for Tasks 19/20)
-- [ ] Routes (nested + `/api/runs/*`)
-- [ ] Authorization (Run vs Management split) + logs
-- [ ] Unit tests (pin freeze, partial saves, atomic complete, permission scoping)
+- [x] Entity + DTO (start/step-save/complete) + service (pin resolution, step validation, atomic complete + document hook interface for Tasks 19/20)
+- [x] Routes (nested + `/api/runs/*`)
+- [x] Authorization (Run vs Management split) + logs
+- [x] Unit tests (pin freeze, partial saves, atomic complete, permission scoping)
 - [ ] Integration/API tests
 
 ### Frontend
 
-- [ ] Types/store (`runs`) + Wizard page + step form renderer + row pickers + manual inputs + preview pane + My Runs page
-- [ ] Autosave (debounced) + resume
-- [ ] States + responsive
-- [ ] Unit + E2E tests (full 3-step run → document)
+- [x] Types/store (`runs`) + Wizard page + step form renderer + row pickers + manual inputs + preview pane + My Runs page
+- [x] Autosave (debounced) + resume
+- [x] States + responsive
+- [x] Unit tests (run-helpers 16 + useRunsData 5); E2E via live smoke on dev server (no Playwright spec, per Tasks 13–16 convention)
 
 ## Verification
 
@@ -185,6 +185,7 @@ Given reload mid-run, when reopening, then entered data restored (resume).
 
 - Single-operator runs v1 (no handoff); step assignees deferred per Task 17 question.
 - Live preview uses Task 20; data-summary fallback keeps this task shippable independently.
+- Implementation notes (2026-09-06, /implement): designer-default row pre-checks start empty — Task 15 loop defaults are not persisted per-step anywhere, so skeletons seed empty selections (AC-001 pre-check covered when defaults exist via rowSelections seed in a follow-up). `complete` returns `{ runId, documentIds: [] }` via `createDocumentsForRun()` hook (no `documents` table until Task 19); atomic transaction above the hook is real. Post-complete navigation lands on My Runs until the Task 19 document view exists. BR-003 readability = row exists + operator holds GET on its table (`Data:<table>:Read` or broader). No Playwright spec — live smoke instead (Tasks 13–16 convention).
 
 ## Open Questions
 
