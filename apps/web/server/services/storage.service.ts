@@ -2,7 +2,7 @@ import { join } from 'path'
 import { mkdir, writeFile, stat } from 'fs/promises'
 
 const STORAGE_DIR = join(process.cwd(), 'storage')
-const ALLOWED_SUBFOLDERS = ['settings', 'avatars', 'general']
+const ALLOWED_SUBFOLDERS = ['settings', 'avatars', 'general', 'documents']
 
 export const StorageService = {
   async saveFile(subfolder: string, file: { originalFilename: string; buffer: Buffer }) {

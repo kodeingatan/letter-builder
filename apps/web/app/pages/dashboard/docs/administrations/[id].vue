@@ -5,6 +5,7 @@ import {
   NPopconfirm, NTimeline, NTimelineItem, useMessage,
 } from 'naive-ui'
 import { AdministrationWorkflowEditor } from '~/components/features/administrations'
+import { DocumentsTable } from '~/components/features/documents'
 import { useAuthorization } from '~/composables/useAuthorization'
 import { useAdministrationsStore } from '~/stores/administrations'
 import { getErrorMessage } from '~/utils/error'
@@ -99,6 +100,10 @@ async function handleDelete() {
     acting.value = false
   }
 }
+
+function handleOpenDocument(doc: { id: number }) {
+  navigateTo(`/dashboard/docs/documents/${doc.id}`)
+}
 </script>
 
 <template>
@@ -159,13 +164,17 @@ async function handleDelete() {
           />
         </NCard>
 
-        <NCard title="Version history" size="small">
+        <NCard title="Version history" size="small" style="margin-bottom: 16px;">
           <NTimeline v-if="(detail.versions ?? []).length > 0">
             <NTimelineItem v-for="v in detail.versions" :key="v.id" :title="`v${v.version}`" :time="String(v.createdAt)">
               <NText depth="3" class="text-xs">Frozen workflow snapshot</NText>
             </NTimelineItem>
           </NTimeline>
           <NText v-else depth="3">Not published yet — no versions</NText>
+        </NCard>
+
+        <NCard title="Documents" size="small">
+          <DocumentsTable :administration-id="id" @view="handleOpenDocument" />
         </NCard>
       </div>
     </NSpin>

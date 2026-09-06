@@ -29,6 +29,46 @@ export async function seedDatabase(ds: DataSource) {
   await seedTemplatePermission(ds)
   await seedAdministrationPermission(ds)
   await seedAdministrationRunPermission(ds)
+  await seedDocumentPermission(ds)
+}
+
+/**
+ * Idempotent seed for the Document Management permission (Task 19).
+ * Covers browse/detail/preview/download plus the admin-gated reissue
+ * and purge routes. Row-level own-vs-all scoping lives in
+ * DocumentsService; non-admin readers pass via their existing GET grants
+ * (e.g. Read Only on /*).
+ */
+async function seedDocumentPermission(ds: DataSource) {
+  const permissionsRepo = ds.getRepository(PermissionSchema)
+  const permissionMethodsRepo = ds.getRepository(PermissionMethodSchema)
+  const permissionUrlsRepo = ds.getRepository(PermissionUrlSchema)
+  const rolesRepo = ds.getRepository(RoleSchema)
+
+  let permission = await permissionsRepo.findOne({ where: { permissionName: 'Document Management' } })
+  if (!permission) {
+    permission = permissionsRepo.create({
+      permissionName: 'Document Management',
+      description: 'Browse issued documents (read, preview, download, admin reissue/purge)',
+    })
+    await permissionsRepo.save(permission)
+    await permissionMethodsRepo.save([
+      permissionMethodsRepo.create({ method: 'GET', permission }),
+      permissionMethodsRepo.create({ method: 'POST', permission }),
+      permissionMethodsRepo.create({ method: 'DELETE', permission }),
+    ])
+    await permissionUrlsRepo.save([
+      permissionUrlsRepo.create({ url: '/api/documents/*', permission }),
+    ])
+  }
+
+  for (const roleName of ['Admin', 'Super Admin']) {
+    const role = await rolesRepo.findOne({ where: { roleName } })
+    if (role && !(role.permissions ?? []).some((p: any) => p.permissionName === 'Document Management')) {
+      role.permissions = [...(role.permissions ?? []), permission]
+      await rolesRepo.save(role)
+    }
+  }
 }
 
 /**

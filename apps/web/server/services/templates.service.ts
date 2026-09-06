@@ -64,11 +64,11 @@ async function findUsages(templateId: number): Promise<TemplateUsage> {
 
   if (ds.hasMetadata('documents')) {
     try {
-      const rows: Array<{ id: number; name: string }> = await ds.query(
-        'SELECT id, title AS name FROM documents WHERE "templateId" = ?',
+      const rows: Array<{ id: number }> = await ds.query(
+        'SELECT id FROM documents WHERE "templateId" = ?',
         [templateId],
       )
-      for (const r of rows) documents.push({ id: r.id, name: r.name ?? `#${r.id}` })
+      for (const r of rows) documents.push({ id: r.id, name: `#${r.id}` })
     } catch {}
   }
 

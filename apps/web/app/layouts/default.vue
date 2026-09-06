@@ -115,6 +115,11 @@ const menuOptions = computed<MenuOption[]>(() => {
           key: 'runs',
           icon: renderIcon(Document),
         },
+        {
+          label: renderMenuLabel('Documents', '/dashboard/docs/documents'),
+          key: 'documents',
+          icon: renderIcon(Document),
+        },
       ],
     })
 
@@ -180,6 +185,7 @@ const routeKeyMap: Record<string, string> = {
   '/dashboard/docs/templates': 'templates',
   '/dashboard/docs/administrations': 'administrations',
   '/dashboard/docs/runs': 'runs',
+  '/dashboard/docs/documents': 'documents',
   '/dashboard/users': 'users',
   '/dashboard/guards': 'guards',
   '/dashboard/roles': 'roles',

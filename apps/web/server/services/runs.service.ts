@@ -430,13 +430,14 @@ export const RunsService = {
 }
 
 /**
- * Document-generation hook for Tasks 19/20: derives snapshots from the
- * frozen run input (`resolvedPins` + `stepData`). No `documents` table
- * exists yet (Task 19), so v1 is a no-op returning []. Task 19 replaces
- * this body with real generation; the atomic complete above is unchanged.
+ * Document-generation hook (Tasks 19/20): derives immutable snapshots from
+ * the frozen run input (`resolvedPins` + `stepData`). Delegates to
+ * DocumentsService via dynamic import (avoids a static service cycle);
+ * Task 20 extends the stored bytes with real PDF output.
  */
 export async function createDocumentsForRun(runId: number): Promise<number[]> {
   const ds = await getDataSource()
   if (!ds.hasMetadata('documents')) return []
-  return []
+  const { DocumentsService } = await import('~~/server/services/documents.service')
+  return DocumentsService.issueDocumentsForRun(runId)
 }
