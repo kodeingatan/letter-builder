@@ -26,7 +26,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/18-administration-runner.md | [x] | [x] | [x] |
 | tasks/19-document-management.md | [x] | [x] | [x] |
 | tasks/20-rendering-engine.md | [x] | [x] | [x] |
-| tasks/21-generated-menu.md | [x] | [ ] | [ ] |
+| tasks/21-generated-menu.md | [x] | [x] | [x] |
 | tasks/22-dynamic-rbac-audit-production.md | [ ] | [ ] | [ ] |
 
 ## Sudah Implementasi
@@ -71,6 +71,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /verify — PASS: 342/342 unit (17 run-helpers + 5 useRunsData), 10/10 nuxt, vue-tsc clean, build OK, live 22/22 AC-001..AC-004+AC-006 verified, DB restored
 - [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /verify — PASS: 358/358 unit (16 document-helpers), 10/10 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified, DB restored
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /verify — PASS: 389/389 unit (27 pipeline/guard/pdf/DTO), 15/15 nuxt (5 DocumentPreview), vue-tsc clean, build OK, live AC-001..AC-006 verified + AC-007 unit-covered, DB restored
+- [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /verify — PASS: 410/410 unit (21 navigation), 15/15 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified + AC-006 code-level, DB restored
 
 ## Sudah Direview
 
@@ -87,6 +88,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /review — APPROVED
 - [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /review — APPROVED
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /review — APPROVED
+- [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /review — APPROVED
 
 ## Belum Direview
 
@@ -97,8 +99,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
 - [ ] tasks/12-global-table-data.md
-
-- [ ] tasks/21-generated-menu.md
 - [ ] tasks/22-dynamic-rbac-audit-production.md
 
 ## Detail per Task
@@ -195,11 +195,11 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 ### tasks/21-generated-menu.md
 
 - Implemented: [x] 2026-09-07 by /implement — Generated Menu & Navigation (entity menuOrder/menuIcon on global_tables + administrations, navigation.dto allowlist + MenuUpdateSchema, navigation.service projection + permission filter + sortMenuItems + 30s per-user cache + invalidation hooks in table/admin/column services, GET /api/navigation auth-only, 2 menu PUTs Designer-gated, activity-logger via existing branches, navigation store + icon map, sidebar Data/Persuratan generated groups + refresh + hints, order/icon controls in both lists, NResult dead-link 404 pages, shared type updates, store updateMenu actions). Verified live: AC-001..AC-005 pass, viewer/guest filtering + 403s, validation 400/404/401, rename propagation, menu reorder logged. vue-tsc clean, unit 410/410 (21 new), nuxt 15/15, build OK. Test fixtures cleaned up (db.sqlite restored).
-- Verified: [ ] 
-- Reviewed: [ ]
+- Verified: [x] 2026-09-07 by /verify — PASS: unit 410/410 (21 navigation: ordering/icon/filtering/cache + 6 DTO), nuxt 15/15, vue-tsc clean, build OK. Live on dev server (fixtures cleaned, db.sqlite restored): AC-001 table appears after column added, AC-002 draft absent → published present → archived absent, AC-003 noperm nav empty + direct 403 (viewer read 200, menu PUT 403), AC-004 deleted table drops from nav + direct 404 with NResult contextual page, AC-005 order/icons persist across refetch, AC-006 anchor `<a href>`+push via shared renderMenuLabel (code-level). Validation: bad icon/negative order 400, unknown ids 404, guest nav/PUT 401. BR-001/002/003 (rename propagates)/004 all met. Minor non-blocking: no Playwright/API-integration spec (live smoke per Tasks 13–20 convention); e2e_table_* row pre-exists in DB (not from this task).
+- Reviewed: [x] 2026-09-07 by /review — APPROVED: clean DTO/service/route/store split, permission-filtered projection + 30s cache + invalidation, sidebar generated groups + anchor pattern, NResult dead-link pages, order/icon controls. 21/21 navigation unit tests re-run green. No must-fix. 7 should-fix (activity-logger formatting + unreachable column branch, 'Read Write' named run-grant breadth, generic menu-PUT gating, duplicated Navigation types, isAdmin-only management link, missing fetch-error warning, duplicated icon allowlist) + 4 consider. Task status set to DONE.
 
 ## Last Updated
 
 - Date: 2026-09-07
-- By: /implement
+- By: /review
 - Task: tasks/21-generated-menu.md
