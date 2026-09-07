@@ -119,6 +119,25 @@ export const useGlobalTablesStore = defineStore('globalTables', () => {
     }
   }
 
+  async function updateMenu(id: number, data: { menuOrder?: number | null; menuIcon?: string | null }) {
+    loading.value = true
+    error.value = null
+    try {
+      const response = await $fetch<GlobalTable>(`/api/global-tables/${id}/menu`, {
+        method: 'PUT',
+        body: data,
+        headers: { Authorization: `Bearer ${useAuthStore().token}` },
+      })
+      await fetchAll()
+      return response
+    } catch (e: any) {
+      error.value = e.data?.message || 'Failed to update menu entry'
+      throw e
+    } finally {
+      loading.value = false
+    }
+  }
+
   function setPage(p: number) { page.value = p }
   function setLimit(l: number) { limit.value = l; page.value = 1 }
   function setSearch(s: string) { search.value = s; page.value = 1 }
@@ -145,7 +164,7 @@ export const useGlobalTablesStore = defineStore('globalTables', () => {
 
   return {
     tables, total, page, limit, search, sortBy, sortOrder, loading, error,
-    fetchAll, fetchOne, create, update, remove,
+    fetchAll, fetchOne, create, update, updateMenu, remove,
     setPage, setLimit, setSearch, setSort, resetFilters,
     tableOptions,
   }

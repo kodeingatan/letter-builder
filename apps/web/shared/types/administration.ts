@@ -49,6 +49,8 @@ export interface Administration {
   description: string | null
   status: AdministrationStatus
   version: number
+  menuOrder: number | null
+  menuIcon: string | null
   createdAt: string
   updatedAt: string
 }

@@ -26,7 +26,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/18-administration-runner.md | [x] | [x] | [x] |
 | tasks/19-document-management.md | [x] | [x] | [x] |
 | tasks/20-rendering-engine.md | [x] | [x] | [x] |
-| tasks/21-generated-menu.md | [ ] | [ ] | [ ] |
+| tasks/21-generated-menu.md | [x] | [ ] | [ ] |
 | tasks/22-dynamic-rbac-audit-production.md | [ ] | [ ] | [ ] |
 
 ## Sudah Implementasi
@@ -44,6 +44,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/18-administration-runner.md — Administration Runner — 2026-09-06 by /implement
 - [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /implement
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /implement
+- [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /implement
 
 ## Belum Implementasi
 
@@ -52,7 +53,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/21-generated-menu.md
 - [ ] tasks/22-dynamic-rbac-audit-production.md
 
 ## Sudah Diverifikasi
@@ -192,8 +192,14 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Verified: [x] 2026-09-06 by /verify — PASS: unit 389/389 (27 files), nuxt 15/15 (3 files), vue-tsc clean, build OK. Live re-verified on dev server (fixtures + 22 trace activity-logs cleaned, db.sqlite restored to identical id set): AC-001 3-block loop (NIP/jabatan), AC-002 false-condition excluded warning-free, AC-003 MISSING_DATA + empty string, AC-004 byte-identical HTML (sha256 equal), AC-005 500 blocks + LOOP_TRUNCATED + truncation marker, AC-006 script/onerror stripped, AC-007 semaphore 503+Retry-After unit-covered (render-guard.test.ts), preview-by-templateId branch 200 + fixture deleted, unknown kind → UNKNOWN_NODE warning (no crash), viewer POST 403 / guest 401 / empty payload 422. Minor non-blocking: pure-TS PDF writer instead of Chromium (declared assumption, upgrade boundary htmlToPdf kept); no renderWarnings column (warnings logged + reproducible from frozen dataSnapshot, declared); Rendering Preview seeded to Admin/Super Admin only (no Designer/Operator roles exist); no Playwright spec (live smoke per Tasks 13–19 convention).
 - Reviewed: [x] 2026-09-06 by /review — APPROVED. Full review of pure pipeline (types/context/pipeline/sanitizer/print-css/pdf) + render-guard + DTO + preview route + rendering.service + documents.service issuance wiring + DocumentPreview/useRenderPreview/shared types + 5 test files. No must-fix. 6 should-fix (image allowlist wider than spec; issuance bypasses semaphore; renderForDocument ignores parseTreeInput error; missingImageBox incomplete escaping; N+1 sequential snapshot queries; dead assembleIssueHtml/pdf allObjects code) + 7 consider. Fresh evidence: rendering-focused unit 31/31 green.
 
+### tasks/21-generated-menu.md
+
+- Implemented: [x] 2026-09-07 by /implement — Generated Menu & Navigation (entity menuOrder/menuIcon on global_tables + administrations, navigation.dto allowlist + MenuUpdateSchema, navigation.service projection + permission filter + sortMenuItems + 30s per-user cache + invalidation hooks in table/admin/column services, GET /api/navigation auth-only, 2 menu PUTs Designer-gated, activity-logger via existing branches, navigation store + icon map, sidebar Data/Persuratan generated groups + refresh + hints, order/icon controls in both lists, NResult dead-link 404 pages, shared type updates, store updateMenu actions). Verified live: AC-001..AC-005 pass, viewer/guest filtering + 403s, validation 400/404/401, rename propagation, menu reorder logged. vue-tsc clean, unit 410/410 (21 new), nuxt 15/15, build OK. Test fixtures cleaned up (db.sqlite restored).
+- Verified: [ ] 
+- Reviewed: [ ]
+
 ## Last Updated
 
-- Date: 2026-09-06
-- By: /review
-- Task: tasks/20-rendering-engine.md
+- Date: 2026-09-07
+- By: /implement
+- Task: tasks/21-generated-menu.md

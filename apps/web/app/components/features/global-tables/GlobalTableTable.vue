@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { h, onMounted, computed } from 'vue'
-import { NText, NButton, NSpace, NPopconfirm, NIcon, useMessage } from 'naive-ui'
-import { Add, TrashCan, Edit, View } from '@vicons/carbon'
+import { NText, NButton, NSpace, NPopconfirm, NIcon, NSelect, useMessage } from 'naive-ui'
+import { Add, TrashCan, Edit, View, ChevronUp, ChevronDown } from '@vicons/carbon'
 import DataTable from '~/components/common/DataTable/DataTable.vue'
 import { useGlobalTablesStore } from '~/stores/globalTables'
+import { useNavigationStore } from '~/stores/navigation'
+import { NAVIGATION_ICON_OPTIONS } from '~/utils/navigation-icons'
 import { getErrorMessage } from '~/utils/error'
 import type { GlobalTable } from '~/shared/types/global-table'
 
@@ -14,7 +16,26 @@ const emit = defineEmits<{
 }>()
 
 const store = useGlobalTablesStore()
+const navigationStore = useNavigationStore()
 const message = import.meta.client ? useMessage() : null
+
+async function handleMenuUpdate(table: GlobalTable, patch: { menuOrder?: number | null; menuIcon?: string | null }) {
+  try {
+    await store.updateMenu(table.id, patch)
+    navigationStore.refresh().catch(() => {})
+    message?.success('Menu entry updated')
+  } catch (e: any) {
+    message?.error(getErrorMessage(e, 'Failed to update menu entry'))
+  }
+}
+
+function moveOrder(table: GlobalTable, delta: number) {
+  const next = Math.max(0, (table.menuOrder ?? 0) + delta)
+  if (next === table.menuOrder) return
+  handleMenuUpdate(table, { menuOrder: next })
+}
+
+const iconOptions = NAVIGATION_ICON_OPTIONS.map((icon) => ({ label: icon, value: icon }))
 
 const columns = computed(() => [
   { key: 'id', title: 'ID', sortable: true, width: 60 },
@@ -28,6 +49,41 @@ const columns = computed(() => [
     },
   },
   { key: 'displayName', title: 'Display Name', sortable: true, searchable: true },
+  {
+    key: 'menuOrder',
+    title: 'Order',
+    width: 130,
+    render(row: GlobalTable) {
+      return h(NSpace, { size: 2, align: 'center', wrap: false }, () => [
+        h(NButton, {
+          size: 'tiny', quaternary: true,
+          title: 'Move up',
+          onClick: () => moveOrder(row, -1),
+        }, { default: () => h(NIcon, null, { default: () => h(ChevronUp) }) }),
+        h(NText, { code: true }, () => row.menuOrder ?? '—'),
+        h(NButton, {
+          size: 'tiny', quaternary: true,
+          title: 'Move down',
+          onClick: () => moveOrder(row, 1),
+        }, { default: () => h(NIcon, null, { default: () => h(ChevronDown) }) }),
+      ])
+    },
+  },
+  {
+    key: 'menuIcon',
+    title: 'Icon',
+    width: 150,
+    render(row: GlobalTable) {
+      return h(NSelect, {
+        value: row.menuIcon ?? null,
+        clearable: true,
+        size: 'small',
+        placeholder: 'Default',
+        options: iconOptions,
+        'onUpdate:value': (v: string | null) => handleMenuUpdate(row, { menuIcon: v }),
+      })
+    },
+  },
   {
     key: 'actions',
     title: 'Actions',

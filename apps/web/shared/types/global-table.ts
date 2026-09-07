@@ -18,6 +18,8 @@ export interface GlobalTable {
   id: number
   name: string
   displayName: string
+  menuOrder: number | null
+  menuIcon: string | null
   createdAt: string
   updatedAt: string
 }

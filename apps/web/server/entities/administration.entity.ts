@@ -6,6 +6,8 @@ export interface Administration {
   description: string | null
   status: string
   version: number
+  menuOrder: number | null
+  menuIcon: string | null
   createdAt: Date
   updatedAt: Date
 }
@@ -37,6 +39,8 @@ export const AdministrationSchema = new EntitySchema<Administration>({
     description: { type: 'text', nullable: true },
     status: { type: String, length: 16, default: 'draft' },
     version: { type: Number, default: 0 },
+    menuOrder: { type: Number, nullable: true },
+    menuIcon: { type: String, length: 32, nullable: true },
     createdAt: { type: 'datetime', createDate: true },
     updatedAt: { type: 'datetime', updateDate: true },
   },

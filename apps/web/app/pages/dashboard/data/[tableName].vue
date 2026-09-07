@@ -2,7 +2,7 @@
 import { h, ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import {
-  NAlert, NButton, NEmpty, NIcon, NPopconfirm, NSpace, NText, useMessage,
+  NAlert, NButton, NEmpty, NIcon, NPopconfirm, NResult, NSpace, NText, useMessage,
 } from 'naive-ui'
 import { Add, Download, Upload, Edit, View, TrashCan } from '@vicons/carbon'
 import DataTable from '~/components/common/DataTable/DataTable.vue'
@@ -38,6 +38,8 @@ const detailRowId = ref<number | null>(null)
 const showImport = ref(false)
 const loadError = ref('')
 const forbidden = ref(false)
+// Task 21 REQ-005: bookmarked deleted-table URLs land here, not a blank crash.
+const notFound = ref(false)
 
 const tableColumns = computed(() =>
   store.columns.map((col) => ({
@@ -85,13 +87,14 @@ async function load() {
   if (!tableName.value) return
   loadError.value = ''
   forbidden.value = false
+  notFound.value = false
   store.resetFilters()
   try {
     await store.fetchAll(tableName.value)
   } catch (e: any) {
     const status = e.statusCode ?? e.response?.status
     if (status === 403) forbidden.value = true
-    else if (status === 404) loadError.value = `Unknown table "${tableName.value}"`
+    else if (status === 404) notFound.value = true
     else loadError.value = getErrorMessage(e, 'Failed to load rows')
   }
 }
@@ -146,6 +149,26 @@ onMounted(() => load())
     <NAlert v-if="forbidden" type="error" title="Access Denied" style="margin-bottom: 16px;">
       You do not have permission to view this table.
     </NAlert>
+    <NResult
+      v-else-if="notFound"
+      status="404"
+      :title="`“${tableName}” no longer exists`"
+      description="The table was deleted or you bookmarked a dead link. Pick another table from the Data menu."
+      style="margin: 48px 0;"
+    >
+      <template #footer>
+        <NSpace justify="center">
+          <NButton @click="navigateTo('/dashboard')">Back to Dashboard</NButton>
+          <NButton
+            v-if="hasAnyRole(['Admin', 'Super Admin'])"
+            type="primary"
+            @click="navigateTo('/dashboard/data/global-tables')"
+          >
+            Manage Global Tables
+          </NButton>
+        </NSpace>
+      </template>
+    </NResult>
     <NAlert v-else-if="loadError" type="error" :title="loadError" style="margin-bottom: 16px;" />
     <template v-else>
       <div class="flex items-center justify-between mb-4">

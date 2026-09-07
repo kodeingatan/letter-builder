@@ -27,7 +27,9 @@ export default defineEventHandler(async (event) => {
   else if (path.includes('/api/roles')) { entity = 'role'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/permissions')) { entity = 'permission'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/guards')) { entity = 'guard'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
-  else if (path.includes('/api/global-tables')) { entity = 'GlobalTable'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
+  else   // Task 21: PUT .../menu reorder routes fall into the GlobalTable /
+  // Administration branches above, so menu reorder is audit-logged.
+  if (path.includes('/api/global-tables')) { entity = 'GlobalTable'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/components')) { entity = 'Component'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/templates')) { entity = 'Template'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }
   else if (path.includes('/api/administrations')) { entity = 'Administration'; const m = path.match(/\/(\d+)/); if (m) entityId = Number(m[1]) }

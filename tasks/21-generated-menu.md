@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+TODO REVIEW
 
 ## Objective
 
@@ -140,30 +140,34 @@ Given right-click on a generated entry, when opened in new tab, then SPA route l
 
 ### Backend
 
-- [ ] Entity column additions + register
-- [ ] Projection service (metadata scan + permission filter + ordering + 30s cache + invalidation hooks in table/admin services)
-- [ ] Routes (`navigation.get`, two menu PUTs)
-- [ ] Authorization + logs (menu reorder logged)
-- [ ] Unit tests (filtering matrix, ordering fallback, cache invalidation, draft exclusion)
-- [ ] Integration/API tests
+- [x] Entity column additions + register (`menuOrder`/`menuIcon` on `global_tables` + `administrations`; `synchronize: true` covers registration, no `db.ts` change needed)
+- [x] Projection service (`server/services/navigation.service.ts`: metadata scan + permission filter + ordering + 30s per-user cache + `invalidateNavigationCache()` hooks in table/admin/column services)
+- [x] Routes (`GET /api/navigation` auth-only; `PUT /api/global-tables/:id/menu`, `PUT /api/administrations/:id/menu` via `requireApiAccess`)
+- [x] Authorization + logs (menu reorder audit-logged via existing GlobalTable/Administration activity-logger branches)
+- [x] Unit tests (`test/unit/services/navigation.test.ts` 15 tests: ordering fallback, icon normalize, read/run filtering matrix, cache; `test/unit/dto/navigation-menu.test.ts` 6 tests: allowlist + schema) — full suite 410/410, nuxt 15/15
+- [ ] Integration/API tests (live smoke instead, per Tasks 13–20 convention)
 
 ### Frontend
 
-- [ ] Navigation store (`useNavigation`: fetch, cache, refresh) + sidebar integration (Data/Persuratan groups) + dead-link 404 page
-- [ ] Order/icon controls in the two lists
-- [ ] States + responsive + anchor pattern
-- [ ] Unit + E2E tests (create → appears; revoke → disappears; bookmark-dead → 404)
+- [x] Navigation store (`app/stores/navigation.ts`: fetch, last-good cache, refresh) + sidebar integration (Data/Persuratan generated groups, refresh button, skeleton/hint states) + dead-link 404 pages (`NResult` in `data/[tableName].vue`, `docs/run/[adminId].vue`)
+- [x] Order/icon controls in the two lists (up/down + `NSelect` allowlist in `GlobalTableTable` + `AdministrationTable`, wired to `updateMenu` store actions)
+- [x] States + responsive + anchor pattern (existing `renderMenuLabel` `<a href>` helper reused; collapse/tooltip inherited)
+- [ ] Unit + E2E tests (live AC verification instead: AC-001..AC-005 all pass, AC-006 code-level via shared anchor helper)
 
-## Verification
+## Verification (by /implement, live on dev server 2026-09-07)
 
-- [ ] Typecheck, Lint, Unit, Integration/API, E2E
-- [ ] Permission verification (inclusion matrix mirrors Tasks 12/17/18)
-- [ ] UI/UX + Responsive + Design System verification (sidebar dimensions, icons, anchor behavior)
+- [x] Typecheck (`vue-tsc` clean), Unit (410/410), nuxt (15/15), Build OK
+- [x] Permission verification (guest empty + 403, viewer data-only, menu PUTs Designer-gated 403)
+- [x] Live AC-001..AC-005 verified; AC-006 anchor pattern reused (code-level)
+- [ ] Full Integration/API + E2E + UI/UX review (belongs to `/verify`)
 
 ## Assumptions
 
 - Poll-on-route-change freshness is enough v1 (no realtime sockets).
 - Single-level groups (no nested submenus under a table) suffice.
+- `GET /api/navigation` uses `requireAuth` only (no `Navigation` permission seeded): per-item inclusion IS the authorization, so Viewer/Guest/Operator roles can all call it — entries are filtered server-side. Menu PUTs stay Designer-gated via existing Management permissions.
+- `File` allowlist key maps to Carbon `DocumentBlank` (no `File` export in `@vicons/carbon`).
+- Order controls are compact up/down steppers (±1, best-effort per BR-004), not drag — matches Task 17's declared up/down pattern.
 
 ## Open Questions
 

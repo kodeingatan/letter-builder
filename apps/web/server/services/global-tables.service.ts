@@ -1,6 +1,7 @@
 import { getDataSource } from '~~/server/utils/db'
 import { GlobalTableSchema } from '~~/server/entities/global-table.entity'
 import { isReservedGlobalTableName } from '~~/server/dto/global-tables.dto'
+import { invalidateNavigationCache } from '~~/server/services/navigation.service'
 import type { GlobalTableQueryInput } from '~~/server/dto/global-tables.dto'
 import type {
   CreateGlobalTableInput,
@@ -117,6 +118,7 @@ export const GlobalTablesService = {
 
     const table = repo.create({ name: data.name, displayName: data.displayName })
     const saved = await repo.save(table)
+    invalidateNavigationCache()
 
     // Task 12: auto-provision per-table Data:{name}:Read/Write permissions (lazy, best-effort)
     try {
@@ -137,7 +139,9 @@ export const GlobalTablesService = {
     if (!table) throw httpError(404, 'Global table not found')
 
     if (data.displayName !== undefined) (table as any).displayName = data.displayName
-    return repo.save(table)
+    const savedUpdate = await repo.save(table)
+    invalidateNavigationCache()
+    return savedUpdate
   },
 
   async remove(id: number) {
@@ -152,6 +156,7 @@ export const GlobalTablesService = {
     }
 
     await repo.remove(table)
+    invalidateNavigationCache()
     return { message: 'Global table deleted' }
   },
 }

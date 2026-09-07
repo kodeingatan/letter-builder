@@ -195,6 +195,25 @@ export const useAdministrationsStore = defineStore('administrations', () => {
     }
   }
 
+  async function updateMenu(id: number, data: { menuOrder?: number | null; menuIcon?: string | null }) {
+    loading.value = true
+    error.value = null
+    try {
+      const response = await $fetch<Administration>(`/api/administrations/${id}/menu`, {
+        method: 'PUT',
+        body: data,
+        headers: authHeaders(),
+      })
+      await fetchAll()
+      return response
+    } catch (e: any) {
+      error.value = e.data?.message || 'Failed to update menu entry'
+      throw e
+    } finally {
+      loading.value = false
+    }
+  }
+
   function setPage(p: number) { page.value = p }
   function setLimit(l: number) { limit.value = l; page.value = 1 }
   function setSearch(s: string) { search.value = s; page.value = 1 }
@@ -218,7 +237,7 @@ export const useAdministrationsStore = defineStore('administrations', () => {
 
   return {
     administrations, total, page, limit, search, searchField, sortBy, sortOrder, loading, error,
-    fetchAll, fetchOne, create, update, saveSteps, publish, archive, newVersion, remove,
+    fetchAll, fetchOne, create, update, updateMenu, saveSteps, publish, archive, newVersion, remove,
     setPage, setLimit, setSearch, setSearchField, setSort, resetFilters,
   }
 })

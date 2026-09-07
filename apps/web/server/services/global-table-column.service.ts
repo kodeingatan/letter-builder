@@ -5,6 +5,7 @@ import { isGlobalTableColumnType, GLOBAL_TABLE_COLUMN_TYPES, isRelationalType } 
 import type { CreateGlobalTableColumnInput, UpdateGlobalTableColumnInput, ReorderGlobalTableColumnsInput } from '~~/server/dto/global-table-columns.dto'
 import { validateComputedColumn, detectCycle, saveComputedDependencies, getComputedColumnsForTable } from '~~/server/services/computed-field.service'
 import { validateRelationConfig, parseRelationConfig } from '~~/server/services/relation.service'
+import { invalidateNavigationCache } from '~~/server/services/navigation.service'
 
 function httpError(statusCode: number, message: string, data?: unknown): Error {
   return Object.assign(new Error(message), { statusCode, data })
@@ -154,6 +155,7 @@ export const GlobalTableColumnService = {
       await saveComputedDependencies(saved.id, deps)
     }
 
+    invalidateNavigationCache()
     return saved
   },
 
@@ -255,6 +257,7 @@ export const GlobalTableColumnService = {
 
     const repo = ds.getRepository(GlobalTableColumnSchema)
     await repo.remove(column)
+    invalidateNavigationCache()
     return { message: 'Global table column deleted' }
   },
 

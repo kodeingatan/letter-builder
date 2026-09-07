@@ -1,4 +1,5 @@
 import { getDataSource } from '~~/server/utils/db'
+import { invalidateNavigationCache } from '~~/server/services/navigation.service'
 import {
   AdministrationSchema,
   AdministrationStepSchema,
@@ -196,6 +197,7 @@ export const AdministrationsService = {
         version: 0,
       }),
     )
+    invalidateNavigationCache()
     return findOneWithRelations(saved.id)
   },
 
@@ -228,6 +230,7 @@ export const AdministrationsService = {
     if (data.description !== undefined) administration.description = data.description
 
     await repo.save(administration)
+    invalidateNavigationCache()
     return findOneWithRelations(id)
   },
 
@@ -323,6 +326,7 @@ export const AdministrationsService = {
       }
     })
 
+    invalidateNavigationCache()
     return findOneWithRelations(id)
   },
 
@@ -383,6 +387,7 @@ export const AdministrationsService = {
     administration.version = newVersion
     administration.status = 'published'
     await repo.save(administration)
+    invalidateNavigationCache()
     return findOneWithRelations(id)
   },
 
@@ -397,6 +402,7 @@ export const AdministrationsService = {
     }
     administration.status = 'archived'
     await repo.save(administration)
+    invalidateNavigationCache()
     return findOneWithRelations(id)
   },
 
@@ -417,6 +423,7 @@ export const AdministrationsService = {
     }
     administration.status = 'draft'
     await repo.save(administration)
+    invalidateNavigationCache()
     return findOneWithRelations(id)
   },
 
@@ -450,6 +457,7 @@ export const AdministrationsService = {
     await ds.getRepository(AdministrationStepSchema).createQueryBuilder().delete().where('administrationId = :id', { id }).execute()
     await ds.getRepository(AdministrationVersionSchema).createQueryBuilder().delete().where('administrationId = :id', { id }).execute()
     await repo.remove(administration)
+    invalidateNavigationCache()
     return { message: 'Administration deleted' }
   },
 }
