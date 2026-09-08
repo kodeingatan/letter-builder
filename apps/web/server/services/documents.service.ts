@@ -13,6 +13,7 @@ import {
 } from '~~/server/entities/component.entity'
 import { TemplateBindingSchema } from '~~/server/entities/template-binding.entity'
 import { UserSchema } from '~~/server/entities/user.entity'
+import { ActivityLogsService } from '~~/server/services/activity-logs.service'
 import { RenderingService } from '~~/server/services/rendering.service'
 import { parseResolvedPins, parseStepDataMap } from '~~/server/utils/run-helpers'
 import { collectPlacements, parseTreeInput } from '~~/server/utils/composition-tree'
@@ -407,6 +408,20 @@ export const DocumentsService = {
         }),
       )
       ids.push(saved.id)
+      // Task 22 (REQ-002/AC-002): issuance runs inside the run-complete
+      // hook with no HTTP mutation of its own, so the activity-logger
+      // middleware never sees it — log explicitly or the coverage report
+      // misses entity=Document. (Reissue/purge keep their middleware logs;
+      // no explicit call there to avoid double-logging.)
+      try {
+        await ActivityLogsService.log({
+          userId: run.startedBy ?? undefined,
+          action: 'create',
+          entity: 'Document',
+          entityId: saved.id,
+          description: `Issued document #${saved.id} for run #${run.id} (template "${template?.name ?? step.templateId}" v${pinVersion})`,
+        })
+      } catch {}
     }
     return ids
   },

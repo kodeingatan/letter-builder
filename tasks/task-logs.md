@@ -27,7 +27,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/19-document-management.md | [x] | [x] | [x] |
 | tasks/20-rendering-engine.md | [x] | [x] | [x] |
 | tasks/21-generated-menu.md | [x] | [x] | [x] |
-| tasks/22-dynamic-rbac-audit-production.md | [x] | [ ] | [ ] |
+| tasks/22-dynamic-rbac-audit-production.md | [x] | [x] | [ ] |
 
 ## Sudah Implementasi
 
@@ -72,6 +72,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /verify — PASS: 358/358 unit (16 document-helpers), 10/10 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified, DB restored
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /verify — PASS: 389/389 unit (27 pipeline/guard/pdf/DTO), 15/15 nuxt (5 DocumentPreview), vue-tsc clean, build OK, live AC-001..AC-006 verified + AC-007 unit-covered, DB restored
 - [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /verify — PASS: 410/410 unit (21 navigation), 15/15 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified + AC-006 code-level, DB restored
+- [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /verify — PASS: 427/427 unit, 15/15 nuxt, vue-tsc clean, build OK, live AC-001..AC-006 verified (golden path table→component→template→admin→run→doc+PDF, coverage 10/10 after 1 user-approved audit fix), DB restored
 
 ## Sudah Direview
 
@@ -201,11 +202,10 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 ### tasks/22-dynamic-rbac-audit-production.md
 
 - Implemented: [x] 2026-09-08 by /implement — Dynamic RBAC/Audit/Production (permission-matrix catalog + Designer/Operator roles + additive seed; activity-logger TemplateBinding/Expression branches + column-branch fix + nested-runs entity; redacted row metadata; health + coverage endpoints; synchronize env switch + startup self-check; storage allowlist+5MB; expression 60/min + Retry-After; CSV formula neutralization in export; log filter extensions + PII notice + settings production card; docs/production-runbook.md; 17 new unit tests). Verified: unit 427/427, nuxt 15/15, vue-tsc clean, build OK. Live: health healthy, coverage endpoint, Designer/Operator grants match matrix, export neutralizes `=CMD`, metadata redacts email, expression 429 after 60. Fixtures cleaned, seed additions persist.
-- Verified: [ ]
-- Reviewed: [ ]
+- Verified: [x] 2026-09-08 by /verify — PASS: unit 427/427 (33 files), nuxt 15/15, vue-tsc clean, build OK. Live golden path on dev server (all fixtures cleaned, db.sqlite restored to 26 perms / integrity ok): AC-001 Designer 11 + Operator 6 grants exact matrix match; AC-002 coverage 10/10 after 1 user-approved fix (DocumentsService.issueDocumentsForRun now logs entity=Document — issuance is internal to run-complete so middleware never saw it; was 9/10); AC-003 /api/health public healthy + DB_SYNCHRONIZE switch code-verified; AC-004 backup (file copy) + integrity_check ok + restore verified; AC-005 code-level owner-or-admin scoping + viewer list 0 docs (inherited live proof tasks 18/19); AC-006 CSV export neutralizes `=CMD`→`'=CMD` live + PII metadata redacts email live. Minor non-blocking: no checked-in migration files (task-blessed DBA deferral), no coverage thresholds in vitest.config (no CI in repo), no Playwright golden-path spec (live smoke per Tasks 13–21 convention).
 
 ## Last Updated
 
 - Date: 2026-09-08
-- By: /implement
+- By: /verify
 - Task: tasks/22-dynamic-rbac-audit-production.md
