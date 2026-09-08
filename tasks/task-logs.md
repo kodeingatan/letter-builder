@@ -27,7 +27,8 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/19-document-management.md | [x] | [x] | [x] |
 | tasks/20-rendering-engine.md | [x] | [x] | [x] |
 | tasks/21-generated-menu.md | [x] | [x] | [x] |
-| tasks/22-dynamic-rbac-audit-production.md | [x] | [x] | [ ] |
+| tasks/22-dynamic-rbac-audit-production.md | [x] | [x] | [x] |
+| tasks/23-production-migration-baseline.md | [ ] | [ ] | [ ] |
 
 ## Sudah Implementasi
 
@@ -46,6 +47,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /implement
 - [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /implement
 - [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /implement
+- [ ] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check
 
 ## Belum Implementasi
 
@@ -90,6 +92,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /review — APPROVED
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /review — APPROVED
 - [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /review — APPROVED
+- [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /review — APPROVED
 
 ## Belum Direview
 
@@ -100,7 +103,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
 - [ ] tasks/12-global-table-data.md
-- [ ] tasks/22-dynamic-rbac-audit-production.md
+- [ ] tasks/23-production-migration-baseline.md
 
 ## Detail per Task
 
@@ -203,9 +206,16 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 
 - Implemented: [x] 2026-09-08 by /implement — Dynamic RBAC/Audit/Production (permission-matrix catalog + Designer/Operator roles + additive seed; activity-logger TemplateBinding/Expression branches + column-branch fix + nested-runs entity; redacted row metadata; health + coverage endpoints; synchronize env switch + startup self-check; storage allowlist+5MB; expression 60/min + Retry-After; CSV formula neutralization in export; log filter extensions + PII notice + settings production card; docs/production-runbook.md; 17 new unit tests). Verified: unit 427/427, nuxt 15/15, vue-tsc clean, build OK. Live: health healthy, coverage endpoint, Designer/Operator grants match matrix, export neutralizes `=CMD`, metadata redacts email, expression 429 after 60. Fixtures cleaned, seed additions persist.
 - Verified: [x] 2026-09-08 by /verify — PASS: unit 427/427 (33 files), nuxt 15/15, vue-tsc clean, build OK. Live golden path on dev server (all fixtures cleaned, db.sqlite restored to 26 perms / integrity ok): AC-001 Designer 11 + Operator 6 grants exact matrix match; AC-002 coverage 10/10 after 1 user-approved fix (DocumentsService.issueDocumentsForRun now logs entity=Document — issuance is internal to run-complete so middleware never saw it; was 9/10); AC-003 /api/health public healthy + DB_SYNCHRONIZE switch code-verified; AC-004 backup (file copy) + integrity_check ok + restore verified; AC-005 code-level owner-or-admin scoping + viewer list 0 docs (inherited live proof tasks 18/19); AC-006 CSV export neutralizes `=CMD`→`'=CMD` live + PII metadata redacts email live. Minor non-blocking: no checked-in migration files (task-blessed DBA deferral), no coverage thresholds in vitest.config (no CI in repo), no Playwright golden-path spec (live smoke per Tasks 13–21 convention).
+- Reviewed: [x] 2026-09-08 by /review — APPROVED: full review of permission-matrix catalog + seedTask22Catalog additive seed, activity-logger branch fixes, explicit Document issuance log, redacted row metadata, health + coverage endpoints, synchronize env switch + startup self-check, upload/rate-limit/CSV enforcement, settings production card + log filter extensions, production runbook. No must-fix. 7 should-fix (Document Mgmt superset drift, Global Table extras drift, hardcoded migrationInSync, stale 2MB hint vs 5MB enforcement, BR-001 comment vs register assigns nothing, rate-limit map pruning, over-broad 'hp' PII pattern) + 5 consider. Fresh evidence: unit 427/427 re-ran green (33 files).
+
+### tasks/23-production-migration-baseline.md
+
+- Implemented: [ ] pending — charter: check in TypeORM baseline migration (23 entities), wire migrations into prod boot, replace hardcoded `migrationInSync: true` with a real drift check (spawned from Task 22 review should-fix #3).
+- Verified: [ ] pending.
+- Reviewed: [ ] pending.
 
 ## Last Updated
 
 - Date: 2026-09-08
-- By: /verify
-- Task: tasks/22-dynamic-rbac-audit-production.md
+- By: /task
+- Task: tasks/23-production-migration-baseline.md
