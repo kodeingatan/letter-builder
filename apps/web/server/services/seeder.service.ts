@@ -31,6 +31,90 @@ export async function seedDatabase(ds: DataSource) {
   await seedAdministrationRunPermission(ds)
   await seedDocumentPermission(ds)
   await seedRenderPermission(ds)
+  await seedTask22Catalog(ds)
+}
+
+/**
+ * Task 22 (REQ-001): least-privilege catalog for all dynamic modules.
+ * Additive only (BR-002 — permission names immutable once seeded):
+ * creates missing permissions from the catalog, backfills missing
+ * method/URL rows on existing ones, creates Designer/Operator roles when
+ * absent, and attaches missing grants to Designer/Operator/Admin roles.
+ * Safe to re-run (REQ-004 idempotent seed).
+ */
+async function seedTask22Catalog(ds: DataSource) {
+  const { PERMISSION_CATALOG, ROLE_MATRIX } = await import('~~/server/utils/permission-matrix')
+  const permissionsRepo = ds.getRepository(PermissionSchema)
+  const permissionMethodsRepo = ds.getRepository(PermissionMethodSchema)
+  const permissionUrlsRepo = ds.getRepository(PermissionUrlSchema)
+  const rolesRepo = ds.getRepository(RoleSchema)
+  const guardsRepo = ds.getRepository(GuardSchema)
+
+  const byName = new Map<string, any>()
+  for (const entry of PERMISSION_CATALOG) {
+    let permission = await permissionsRepo.findOne({ where: { permissionName: entry.permissionName } })
+    if (!permission) {
+      permission = permissionsRepo.create({
+        permissionName: entry.permissionName,
+        description: entry.description,
+      })
+      await permissionsRepo.save(permission)
+    }
+    byName.set(entry.permissionName, permission)
+
+    const methods: any[] = (permission as any).methods ?? []
+    const haveMethods = new Set(methods.map((m) => m.method))
+    const missingMethods = entry.methods.filter((m) => !haveMethods.has(m))
+    if (missingMethods.length) {
+      await permissionMethodsRepo.save(
+        missingMethods.map((m) => permissionMethodsRepo.create({ method: m, permission })),
+      )
+    }
+
+    const urls: any[] = (permission as any).urls ?? []
+    const haveUrls = new Set(urls.map((u) => u.url))
+    const missingUrls = entry.urls.filter((u) => !haveUrls.has(u))
+    if (missingUrls.length) {
+      await permissionUrlsRepo.save(
+        missingUrls.map((u) => permissionUrlsRepo.create({ url: u, permission })),
+      )
+    }
+  }
+
+  // Designer / Operator roles (BR-001: new users get Operator or nothing).
+  const roleDefs: Array<{ roleName: string; description: string }> = [
+    { roleName: 'Designer', description: 'Define tables, components, templates, administrations + run' },
+    { roleName: 'Operator', description: 'Run administrations + write table rows (least privilege default)' },
+  ]
+  for (const def of roleDefs) {
+    const exists = await rolesRepo.findOne({ where: { roleName: def.roleName } })
+    if (!exists) {
+      const apiOnly = await guardsRepo.findOne({ where: { guardName: 'API Only' } })
+      await rolesRepo.save(rolesRepo.create({
+        roleName: def.roleName,
+        description: def.description,
+        guards: apiOnly ? [apiOnly] : [],
+        permissions: [],
+      }))
+    }
+  }
+
+  const grants: Record<string, string[]> = {
+    Designer: ROLE_MATRIX.Designer,
+    Operator: ROLE_MATRIX.Operator,
+    Admin: ROLE_MATRIX.Admin,
+    'Super Admin': ROLE_MATRIX.Admin,
+  }
+  for (const [roleName, permNames] of Object.entries(grants)) {
+    const role = await rolesRepo.findOne({ where: { roleName } })
+    if (!role) continue
+    const have = new Set(((role as any).permissions ?? []).map((p: any) => p.permissionName))
+    const missing = permNames.filter((n) => !have.has(n)).map((n) => byName.get(n)).filter(Boolean)
+    if (missing.length) {
+      ;(role as any).permissions = [...((role as any).permissions ?? []), ...missing]
+      await rolesRepo.save(role)
+    }
+  }
 }
 
 /**

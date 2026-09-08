@@ -1,5 +1,8 @@
 <template>
   <div>
+    <n-alert type="info" style="margin-bottom: 12px">
+      Nilai PII (email, telepon, alamat, NIK, dsb.) disensor pada metadata audit — hanya nama kolom + ID yang tersimpan.
+    </n-alert>
     <n-card title="Activity Logs">
       <template #header-extra>
         <n-space>
@@ -126,7 +129,7 @@
 
 <script setup lang="ts">
 import { ref, h, onMounted } from 'vue';
-import { NTag, NSpace, NSelect, NCard, NDrawer, NDrawerContent } from 'naive-ui';
+import { NTag, NSpace, NSelect, NCard, NDrawer, NDrawerContent, NAlert } from 'naive-ui';
 import type { ActivityLog } from '~/shared/types/activity-log';
 
 definePageMeta({ layout: 'default', middleware: 'auth', requiresAuth: true })
@@ -170,6 +173,16 @@ const entityOptions = [
   { label: 'Permission', value: 'Permission' },
   { label: 'Guard', value: 'Guard' },
   { label: 'Auth', value: 'Auth' },
+  { label: 'GlobalTable', value: 'GlobalTable' },
+  { label: 'GlobalTableColumn', value: 'GlobalTableColumn' },
+  { label: 'Component', value: 'Component' },
+  { label: 'Template', value: 'Template' },
+  { label: 'TemplateBinding', value: 'TemplateBinding' },
+  { label: 'Administration', value: 'Administration' },
+  { label: 'AdministrationRun', value: 'AdministrationRun' },
+  { label: 'Document', value: 'Document' },
+  { label: 'Render', value: 'Render' },
+  { label: 'Expression', value: 'Expression' },
 ];
 
 const levelOptions = [

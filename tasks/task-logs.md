@@ -27,7 +27,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/19-document-management.md | [x] | [x] | [x] |
 | tasks/20-rendering-engine.md | [x] | [x] | [x] |
 | tasks/21-generated-menu.md | [x] | [x] | [x] |
-| tasks/22-dynamic-rbac-audit-production.md | [ ] | [ ] | [ ] |
+| tasks/22-dynamic-rbac-audit-production.md | [x] | [ ] | [ ] |
 
 ## Sudah Implementasi
 
@@ -45,6 +45,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/19-document-management.md — Document Management — 2026-09-06 by /implement
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /implement
 - [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /implement
+- [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /implement
 
 ## Belum Implementasi
 
@@ -53,7 +54,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/22-dynamic-rbac-audit-production.md
 
 ## Sudah Diverifikasi
 
@@ -198,8 +198,14 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Verified: [x] 2026-09-07 by /verify — PASS: unit 410/410 (21 navigation: ordering/icon/filtering/cache + 6 DTO), nuxt 15/15, vue-tsc clean, build OK. Live on dev server (fixtures cleaned, db.sqlite restored): AC-001 table appears after column added, AC-002 draft absent → published present → archived absent, AC-003 noperm nav empty + direct 403 (viewer read 200, menu PUT 403), AC-004 deleted table drops from nav + direct 404 with NResult contextual page, AC-005 order/icons persist across refetch, AC-006 anchor `<a href>`+push via shared renderMenuLabel (code-level). Validation: bad icon/negative order 400, unknown ids 404, guest nav/PUT 401. BR-001/002/003 (rename propagates)/004 all met. Minor non-blocking: no Playwright/API-integration spec (live smoke per Tasks 13–20 convention); e2e_table_* row pre-exists in DB (not from this task).
 - Reviewed: [x] 2026-09-07 by /review — APPROVED: clean DTO/service/route/store split, permission-filtered projection + 30s cache + invalidation, sidebar generated groups + anchor pattern, NResult dead-link pages, order/icon controls. 21/21 navigation unit tests re-run green. No must-fix. 7 should-fix (activity-logger formatting + unreachable column branch, 'Read Write' named run-grant breadth, generic menu-PUT gating, duplicated Navigation types, isAdmin-only management link, missing fetch-error warning, duplicated icon allowlist) + 4 consider. Task status set to DONE.
 
+### tasks/22-dynamic-rbac-audit-production.md
+
+- Implemented: [x] 2026-09-08 by /implement — Dynamic RBAC/Audit/Production (permission-matrix catalog + Designer/Operator roles + additive seed; activity-logger TemplateBinding/Expression branches + column-branch fix + nested-runs entity; redacted row metadata; health + coverage endpoints; synchronize env switch + startup self-check; storage allowlist+5MB; expression 60/min + Retry-After; CSV formula neutralization in export; log filter extensions + PII notice + settings production card; docs/production-runbook.md; 17 new unit tests). Verified: unit 427/427, nuxt 15/15, vue-tsc clean, build OK. Live: health healthy, coverage endpoint, Designer/Operator grants match matrix, export neutralizes `=CMD`, metadata redacts email, expression 429 after 60. Fixtures cleaned, seed additions persist.
+- Verified: [ ]
+- Reviewed: [ ]
+
 ## Last Updated
 
-- Date: 2026-09-07
-- By: /review
-- Task: tasks/21-generated-menu.md
+- Date: 2026-09-08
+- By: /implement
+- Task: tasks/22-dynamic-rbac-audit-production.md

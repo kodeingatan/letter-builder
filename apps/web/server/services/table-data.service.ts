@@ -10,6 +10,8 @@ import { ActivityLogsService } from '~~/server/services/activity-logs.service'
 import { getComputedColumnsForTable, recomputeRow } from '~~/server/services/computed-field.service'
 import { parseRelationConfig } from '~~/server/services/relation.service'
 import { validateRowValues, coerceCsvCell } from '~~/server/utils/dynamic-schema'
+import { neutralizeFormulaCell } from '~~/server/utils/csv-safety'
+import { toAuditMetadata } from '~~/server/utils/audit-redaction'
 import type { TableDataQueryInput } from '~~/server/dto/table-data.dto'
 
 function httpError(statusCode: number, message: string, data?: unknown): Error {
@@ -233,6 +235,9 @@ export const TableDataService = {
       await ActivityLogsService.log({
         userId, action: 'create', entity: (table as any).displayName ?? table.name,
         entityId: saved.id, description: `POST /api/data/${tableName}`,
+        // Task 22 (BR-003): audit metadata keeps column names + ids only;
+        // PII column values are redacted, never raw row VALUES.
+        metadata: toAuditMetadata(columns, values),
       })
     } catch {}
 
@@ -265,6 +270,8 @@ export const TableDataService = {
       await ActivityLogsService.log({
         userId, action: 'update', entity: (table as any).displayName ?? table.name,
         entityId: saved.id, description: `PUT /api/data/${tableName}/${rowId}`,
+        // Task 22 (BR-003): redacted metadata, no raw PII values.
+        metadata: toAuditMetadata(columns, values),
       })
     } catch {}
 
@@ -324,8 +331,13 @@ export const TableDataService = {
   },
 
   escapeCsvCell(value: unknown): string {
-    if (value === null || value === undefined) return ''
-    const s = Array.isArray(value) ? value.join(';') : String(value)
+    // Task 22 (AC-006): neutralize formula cells before quoting so
+    // spreadsheet apps treat `=CMD`-style values as plain text.
+    const safe = neutralizeFormulaCell(
+      Array.isArray(value) ? value.map((v) => neutralizeFormulaCell(v)).join(';') : value,
+    )
+    if (safe === null || safe === undefined) return ''
+    const s = String(safe)
     return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
   },
 

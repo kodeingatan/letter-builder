@@ -27,6 +27,8 @@ vi.mock('~~/server/entities/permission-url.entity', () => ({ PermissionUrlSchema
 vi.mock('~~/server/entities/role.entity', () => ({ RoleSchema: {} }))
 vi.mock('~~/server/dto/table-data.dto', async () => await import('../../../server/dto/table-data.dto'))
 vi.mock('~~/server/utils/dynamic-schema', async () => await import('../../../server/utils/dynamic-schema'))
+vi.mock('~~/server/utils/csv-safety', async () => await import('../../../server/utils/csv-safety'))
+vi.mock('~~/server/utils/audit-redaction', async () => await import('../../../server/utils/audit-redaction'))
 
 vi.mock('~~/server/services/activity-logs.service', () => ({
   ActivityLogsService: { log: vi.fn().mockResolvedValue({}) },

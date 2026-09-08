@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import {
-  NCard, NInput, NButton, NIcon, NSpin, NUpload,
+  NCard, NInput, NButton, NIcon, NSpin, NUpload, NTag, NAlert,
   useMessage,
 } from 'naive-ui'
 import type { UploadCustomRequestOptions } from 'naive-ui'
@@ -22,6 +22,24 @@ const loaded = ref(false)
 const uploadingFavicon = ref(false)
 const uploadingBg = ref(false)
 
+// Task 22: production checklist card (admin-only, public health probe).
+const { hasAnyRole } = useAuthorization()
+const isProdAdmin = computed(() => hasAnyRole(['Admin', 'Super Admin']))
+const health = ref<{ status: string; db: string; storage: string; renderer: string; version: string } | null>(null)
+const healthLoading = ref(false)
+
+async function fetchHealth() {
+  if (!isProdAdmin.value) return
+  healthLoading.value = true
+  try {
+    health.value = await $fetch('/api/health')
+  } catch {
+    health.value = null
+  } finally {
+    healthLoading.value = false
+  }
+}
+
 onMounted(async () => {
   const data = await settingsStore.fetchSettings()
   if (data) {
@@ -32,6 +50,7 @@ onMounted(async () => {
     appDescription.value = settingsStore.appDescription
   }
   loaded.value = true
+  await fetchHealth()
 })
 
 async function handleUploadFavicon(options: UploadCustomRequestOptions) {
@@ -214,6 +233,44 @@ async function handleSave() {
           </div>
         </NCard>
       </div>
+
+      <!-- Production checklist (Task 22, admin-only) -->
+      <NCard v-if="isProdAdmin" class="settings-card settings-card--full" style="margin-top: 20px">
+        <template #header>
+          <div class="card-header">
+            <NIcon :size="20" class="text-indigo-500"><Document /></NIcon>
+            <span>Status Produksi</span>
+          </div>
+        </template>
+        <div v-if="healthLoading">Memeriksa kesehatan sistem…</div>
+        <div v-else-if="health">
+          <NTag :type="health.status === 'healthy' ? 'success' : 'warning'" size="small" round>
+            {{ health.status === 'healthy' ? 'HEALTHY' : 'DEGRADED' }}
+          </NTag>
+          <div class="detail-view" style="margin-top: 12px">
+            <div class="detail-field">
+              <span class="detail-label">Database</span>
+              <span class="detail-value">{{ health.db }}</span>
+            </div>
+            <div class="detail-field">
+              <span class="detail-label">Storage</span>
+              <span class="detail-value">{{ health.storage }}</span>
+            </div>
+            <div class="detail-field">
+              <span class="detail-label">Renderer</span>
+              <span class="detail-value">{{ health.renderer }}</span>
+            </div>
+            <div class="detail-field">
+              <span class="detail-label">Versi</span>
+              <span class="detail-value detail-value--mono">{{ health.version }}</span>
+            </div>
+          </div>
+          <p class="settings-hint">Backup/restore: lihat runbook di <span class="detail-value--mono">docs/production-runbook.md</span>.</p>
+        </div>
+        <div v-else>
+          <NAlert type="warning">Health endpoint tidak dapat dijangkau.</NAlert>
+        </div>
+      </NCard>
 
       <div class="settings-footer">
         <NButton type="primary" size="large" :loading="saving" @click="handleSave">

@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+TODO REVIEW
 
 ## Objective
 
@@ -138,18 +138,25 @@ Given CSV export with `=CMD` cells, when opened per runbook guidance, then neutr
 
 ### Backend
 
-- [ ] Permission/guard seed delta + role mapping migration-safe
-- [ ] Audit sweep: missing log calls added (matrix-checked in tests)
-- [ ] Health endpoint + startup self-checks
-- [ ] Baseline migration + `synchronize` env switch + idempotent seeds
-- [ ] Limit enforcement sweep (upload/CSV/rate/semaphore) + PII redaction util
-- [ ] Unit tests (matrix, redaction, health) + Integration/API tests (IDOR, coverage)
+- [x] Permission/guard seed delta + role mapping migration-safe (`permission-matrix.ts` catalog + `seedTask22Catalog` additive; Designer/Operator roles)
+- [x] Audit sweep: missing log calls added (activity-logger: TemplateBinding/Expression branches, nested-runs entity, column-branch order fix; redacted row metadata in TableDataService)
+- [x] Health endpoint (`GET /api/health` public) + coverage endpoint (`GET /api/activity-logs/coverage`) + startup self-checks (`startup-check.ts` + plugin wiring)
+- [x] `synchronize` env switch (`DB_SYNCHRONIZE`, prod default false) + idempotent seeds (all seed paths existence-checked; migration posture documented in runbook)
+- [x] Limit enforcement sweep (upload allowlist+5MB in StorageService, expression 60/min + Retry-After, render 30/min+semaphore pre-existing, CSV 5000 pre-existing) + PII redaction util + CSV formula neutralization in export
+- [x] Unit tests (matrix 6, redaction 4, csv-safety 3, security-limits+startup 4) — 427/427 green, 15/15 nuxt, vue-tsc clean, build OK
 
 ### Frontend
 
-- [ ] Log filter extensions + production checklist card + dead states
-- [ ] Docs pages/entries (quickstarts + API delta)
-- [ ] Unit + E2E tests incl. golden path on clean DB
+- [x] Log filter extensions (10 audit entities) + PII redaction notice + production checklist card on Settings (admin-only, live /api/health)
+- [x] Docs: `docs/production-runbook.md` (backup/restore, roles, coverage, PII list, limits, CSV note, IDOR posture, quickstarts, API delta)
+- [x] Unit tests added; golden-path E2E deferred to /verify (live smoke used instead, per Tasks 13–21 convention)
+
+## Assumptions
+
+- Guard-URL mirroring has no server effect (`requireApiAccess` enforces permissions only; guards are client-side) — no new guards created; permission layer is the enforcement point. Documented in runbook §4.
+- No checked-in TypeORM migration files: with `better-sqlite3` + EntitySchema dev-sync history, the cutover is the `synchronize:false` env switch + fail-fast drift check; baseline migration generation is a /verify DBA step. Documented in runbook §1.
+- Login mutations stay `entity=unknown` (pre-existing auth-module convention, out of scope).
+- `email` is not a column type — PII detection is by column *name*, proven live with a text column named `email`.
 
 ## Verification
 

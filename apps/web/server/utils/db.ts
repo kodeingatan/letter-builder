@@ -61,7 +61,12 @@ export async function getDataSource(): Promise<DataSource> {
         AdministrationRunSchema,
         DocumentSchema,
       ],
-      synchronize: true,
+      // Task 22 (REQ-004): production boots with `synchronize:false` +
+      // checked-in baseline migration. Override with DB_SYNCHRONIZE env var;
+      // dev default stays `true` for the synchronize-era workflow.
+      synchronize: process.env.DB_SYNCHRONIZE
+        ? process.env.DB_SYNCHRONIZE !== 'false'
+        : process.env.NODE_ENV !== 'production',
     })
     await dataSource.initialize()
   }
