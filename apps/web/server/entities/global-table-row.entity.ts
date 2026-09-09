@@ -17,5 +17,13 @@ export const GlobalTableRowSchema = new EntitySchema<GlobalTableRow>({
     createdAt: { type: 'datetime', createDate: true },
     updatedAt: { type: 'datetime', updateDate: true },
   },
-  indices: [{ name: 'IDX_GLOBAL_TABLE_ROWS_TABLE_ID', columns: ['globalTableId'] }],
+  relations: {
+    table: {
+      type: 'many-to-one',
+      target: 'global_tables',
+      joinColumn: { name: 'globalTableId' },
+      onDelete: 'CASCADE',
+    },
+  },
+  indices: [{ name: 'IDX_GLOBAL_TABLE_ROWS_TABLE_ID', columns: ['globalTableId', 'id'] }],
 })

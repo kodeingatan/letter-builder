@@ -147,6 +147,13 @@ describe('dynamic-schema', () => {
       expect(validateRowValues(columns as any, { tags: [1, 2] }).valid).toBe(true)
       expect(validateRowValues(columns as any, { tags: 'nope' }).valid).toBe(false)
     })
+
+    it('applies column defaultValue when the key is absent', () => {
+      const columns = [col({ name: 'gelar', defaultValue: 'Staff' })]
+      const result = validateRowValues(columns as any, {})
+      expect(result.valid).toBe(true)
+      expect(result.values.gelar).toBe('Staff')
+    })
   })
 
   describe('coerceCsvCell', () => {
@@ -245,6 +252,57 @@ describe('table-data.service findAll scoping', () => {
     await expect(
       TableDataService.findAll('nope', { page: 1, limit: 20, sortBy: 'id', sortOrder: 'DESC' }),
     ).rejects.toMatchObject({ statusCode: 404 })
+  })
+
+  it('returns 422 NOT_SEARCHABLE for field search on a non-searchable column', async () => {
+    mockDb(
+      [col({ name: 'nama', searchable: true }), col({ name: 'nik', searchable: false })],
+      [],
+    )
+    const err = await TableDataService.findAll(
+      'pegawai',
+      { page: 1, limit: 20, search: 'x', searchField: 'nik', sortBy: 'id', sortOrder: 'DESC' },
+    ).catch((e) => e)
+    expect(err.statusCode).toBe(422)
+    expect(err.data?.code).toBe('NOT_SEARCHABLE')
+  })
+
+  it('treats searchField without search text as a no-op', async () => {
+    const columns = [col({ name: 'nama', searchable: false })]
+    const rows = [
+      { id: 1, globalTableId: 1, values: JSON.stringify({ nama: 'Budi' }) },
+    ]
+    mockDb(columns, rows)
+    const result = await TableDataService.findAll(
+      'pegawai',
+      { page: 1, limit: 20, searchField: 'nama', sortBy: 'id', sortOrder: 'DESC' },
+    )
+    expect(result.total).toBe(1)
+  })
+
+  it('exposes defaultValue in the browse column payload', async () => {
+    mockDb([col({ name: 'gelar', defaultValue: 'Staff' })], [])
+    const result = await TableDataService.findAll(
+      'pegawai',
+      { page: 1, limit: 20, sortBy: 'id', sortOrder: 'DESC' },
+    )
+    expect(result.columns[0]).toMatchObject({ name: 'gelar', defaultValue: 'Staff' })
+  })
+})
+
+describe('global_table_rows schema (Task 12 Data Model: FK + composite index)', () => {
+  it('declares FK to global_tables with ON DELETE CASCADE', () => {
+    const relations: any = (GlobalTableRowSchema as any).options.relations
+    expect(relations?.table?.target).toBe('global_tables')
+    expect(relations?.table?.type).toBe('many-to-one')
+    expect(relations?.table?.onDelete).toBe('CASCADE')
+  })
+
+  it('has composite INDEX(globalTableId, id)', () => {
+    const indices: any[] = (GlobalTableRowSchema as any).options.indices ?? []
+    expect(
+      indices.some((ix) => JSON.stringify(ix.columns) === JSON.stringify(['globalTableId', 'id'])),
+    ).toBe(true)
   })
 })
 

@@ -3,6 +3,7 @@ export interface TableDataColumn {
   name: string
   displayName: string
   type: string
+  defaultValue: string | null
   required: boolean
   searchable: boolean
   orderable: boolean

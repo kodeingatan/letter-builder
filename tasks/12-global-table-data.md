@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO REVIEW
+DONE
 
 ## Objective
 
@@ -187,6 +187,7 @@ Given Read-only user, when opening page, then browse works but Create/Edit/Delet
 
 - JSON-per-row scales to small/medium instansi (per PRD constraints); full-text search via LIKE on JSON extract is acceptable v1.
 - CSV (not XLSX) suffices for v1 import/export.
+- Richtext v1 deferral (REQ-002 mapping, recorded 2026-09-08): `DynamicForm` renders richtext as `NInput type="textarea"` (plain text, safely escaped on display via `NText`). A true HTML editor (contenteditable + sanitized `v-html` display) is deferred until a shared sanitizer/display component exists — plain-text storage round-trips losslessly, so no migration is needed when the editor lands.
 - Implementation notes (2026-09-05 by /implement):
   - `relation.service.ts` (`lookupRelationRows`, `isRowReferenced`) assumed per-table physical tables `global_table_data_*` which never existed; rewritten to the JSON-per-row `global_table_rows` store (Task 12 spec). Existing `relation.test.ts` cases for `isRowReferenced` updated to the new store contract.
   - Fixed pre-existing Nitro route conflict: `server/api/global-tables/[id].*.ts` files coexisted with a `[tableId]/` directory at the same level, so `/api/global-tables/:id/columns` and `/rows/lookup` 404'd. Renamed `[tableId]/` → `[id]/` (4 files now read param `'id'`); URL shapes unchanged.
@@ -195,6 +196,12 @@ Given Read-only user, when opening page, then browse works but Create/Edit/Delet
   - `~/shared/*` only resolves type-only imports at Vite build (`~` → `app/`); runtime helper `formatCellValue` therefore lives in `app/utils/table-data-format.ts`, types stay in `shared/types/table-data.ts`.
   - `RelationSelector.vue`: fixed undefined `required` reference in `:clearable` binding.
   - E2E coverage provided via live API smoke test (dev server): Pegawai fixture full CRUD + computed + relation + CSV import/export + permission matrix; no new Playwright spec added.
+- Fix notes (2026-09-08, review follow-up — 1 must-fix + 4 should-fix):
+  - Must-fix: `GlobalTableRowSchema` now declares `table` many-to-one → `global_tables` with `onDelete: 'CASCADE'` plus composite `INDEX(globalTableId, id)` (spec Data Model). Load-bearing part is explicit cleanup in `GlobalTablesService.remove` (child rows + column definitions deleted before the table, guarded by `hasMetadata`) because better-sqlite3 leaves FK enforcement off by default. Live-verified: table DELETE → 204, columns total 0, browse 404, sqlite 0/0/0.
+  - `defaultValue` now included in browse column projection + `TableDataColumn` type; `TableRowFormModal` prefills it (numeric coercion for number/currency); server-side default on absent keys already existed in `dynamic-schema.ts`.
+  - Field-specific search on an existing but non-searchable column now 422 `NOT_SEARCHABLE` (mirrors `NOT_ORDERABLE`); unknown field names keep global-search fallback, searchField-without-search stays no-op.
+  - Playwright spec `test/e2e/table-data.spec.ts` added (Pegawai fixture: CRUD + validation + search/sort scoping + CSV import/export + UI browse + cascade cleanup, self-cleaning via try/finally) — the "Unit + E2E tests" checkbox is now literally true. Verified: unit 436/436, nuxt 15/15, vue-tsc clean, e2e 1/1 green, DB restored (0 orphans).
+  - Richtext editor recorded as v1 deferral in Assumptions (see above), not silently dropped.
 
 ## Open Questions
 

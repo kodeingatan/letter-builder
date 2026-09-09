@@ -1,5 +1,7 @@
 import { getDataSource } from '~~/server/utils/db'
 import { GlobalTableSchema } from '~~/server/entities/global-table.entity'
+import { GlobalTableColumnSchema } from '~~/server/entities/global-table-column.entity'
+import { GlobalTableRowSchema } from '~~/server/entities/global-table-row.entity'
 import { isReservedGlobalTableName } from '~~/server/dto/global-tables.dto'
 import { invalidateNavigationCache } from '~~/server/services/navigation.service'
 import type { GlobalTableQueryInput } from '~~/server/dto/global-tables.dto'
@@ -153,6 +155,19 @@ export const GlobalTablesService = {
     const referencedBy = await this.checkReferences(id)
     if (referencedBy.relations.length || referencedBy.bindings.length) {
       throw httpError(409, 'Global table is referenced and cannot be deleted', { referencedBy })
+    }
+
+    // Task 12 must-fix (spec Data Model): no orphan rows/columns.
+    // The FK ON DELETE CASCADE on global_table_rows only fires where the
+    // driver enforces foreign keys (better-sqlite3 leaves them off by
+    // default), so delete child rows + column definitions explicitly first.
+    // Relation-target references from other tables are already blocked by
+    // checkReferences above, so no dangling relationTableId can remain.
+    if (ds.hasMetadata('global_table_rows')) {
+      await ds.getRepository(GlobalTableRowSchema).delete({ globalTableId: id })
+    }
+    if (ds.hasMetadata('global_table_columns')) {
+      await ds.getRepository(GlobalTableColumnSchema).delete({ globalTableId: id })
     }
 
     await repo.remove(table)

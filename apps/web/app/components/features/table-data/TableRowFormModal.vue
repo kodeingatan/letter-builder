@@ -35,6 +35,12 @@ watch(() => [props.visible, props.row] as const, ([visible]) => {
     const defaults: Record<string, any> = {}
     for (const col of store.columns) {
       if (col.type === 'select-table-relation-multiple') defaults[col.name] = []
+      // defaultValue is stored as string; coerce for numeric inputs so
+      // NInputNumber receives a number (server coerces again on write).
+      else if ((col.type === 'number' || col.type === 'currency') && col.defaultValue !== null && col.defaultValue !== undefined && col.defaultValue !== '') {
+        const n = Number(col.defaultValue)
+        defaults[col.name] = Number.isFinite(n) ? n : null
+      }
       else defaults[col.name] = col.defaultValue ?? null
     }
     form.value = defaults

@@ -139,9 +139,17 @@ export const TableDataService = {
     let rows = entities.map(toRowObject)
 
     const searchable = columns.filter((c) => c.searchable)
+    // BR-002: field-specific search on a column that exists but is not
+    // searchable is rejected (mirrors NOT_ORDERABLE for sort). Unknown
+    // field names keep the legacy global-search fallback; a searchField
+    // without search text stays a no-op.
+    const requestedField = query.searchField ? columns.find((c) => c.name === query.searchField) : undefined
+    if (query.search && query.searchField && requestedField && !requestedField.searchable) {
+      throw httpError(422, `Column "${query.searchField}" is not searchable`, { code: 'NOT_SEARCHABLE' })
+    }
     if (query.search) {
       const needle = query.search.toLowerCase()
-      const fieldCol = query.searchField ? columns.find((c) => c.name === query.searchField) : undefined
+      const fieldCol = requestedField
       if (fieldCol && fieldCol.searchable) {
         rows = rows.filter((r) => String((r as Record<string, any>)[fieldCol.name] ?? '').toLowerCase().includes(needle))
       } else {
@@ -193,6 +201,7 @@ export const TableDataService = {
       table: { id: table.id, name: table.name, displayName: (table as any).displayName },
       columns: columns.map((c: any) => ({
         id: c.id, name: c.name, displayName: c.displayName, type: c.type,
+        defaultValue: c.defaultValue ?? null,
         required: c.required, searchable: c.searchable, orderable: c.orderable,
         position: c.position, options: c.options, format: c.format,
         expression: c.expression, relationTableId: c.relationTableId,

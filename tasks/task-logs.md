@@ -17,7 +17,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/09-expression-engine.md | [x] | [x] | [x] |
 | tasks/10-computed-fields.md | [x] | [x] | [x] |
 | tasks/11-global-table-relations.md | [x] | [x] | [x] |
-| tasks/12-global-table-data.md | [x] | [x] | [ ] |
+| tasks/12-global-table-data.md | [x] | [x] | [x] |
 | tasks/13-component-management.md | [x] | [x] | [x] |
 | tasks/14-template-management.md | [x] | [x] | [x] |
 | tasks/15-template-composition-editor.md | [x] | [x] | [x] |
@@ -93,6 +93,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /review — APPROVED
 - [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /review — APPROVED
 - [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /review — APPROVED
+- [x] tasks/12-global-table-data.md — Global Table Data & Generated CRUD — 2026-09-09 by /review — APPROVED
 
 ## Belum Direview
 
@@ -102,7 +103,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/12-global-table-data.md
 - [ ] tasks/23-production-migration-baseline.md
 
 ## Detail per Task
@@ -139,9 +139,9 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - Reviewed: [x] 2026-09-05 by /review — APPROVED. Backend implementation complete with proper EntitySchema, Zod validation, relation.service.ts (7 functions), lookup API route, and column service integration. Frontend GlobalTableColumnFormModal.vue has relation section with target NSelect, display columns NCheckbox list, separator NInput, onTargetDelete NRadio, and RelationSelector.vue component. Security: auth via requireApiAccess, Zod validation, parameterized queries. Task compliance: REQ-001 through REQ-006 MET. Must-fix: authorization gaps, missing activity logs, FK constraints, component type safety. Should-fix: complete unit tests, RelationSelector integration, DB indexes.
 ### tasks/12-global-table-data.md
 
-- Implemented: [x] 2026-09-05 by /implement — Global Table Data & Generated CRUD on JSON-per-row store (entity global-table-row + db registration, table-data.dto, dynamic-schema.ts validation incl. BR-003/BR-004, table-data.service.ts CRUD/search-sort scope/recompute/relations restrict-detach/CSV import-export/audit/per-table permission auto-provision, 7 routes /api/data/:tableName, relation.service rewritten to row store, activity-logger skip for /api/data, seeder /api/data/* coverage, shared types table-data.ts, Pinia store tableData, DynamicForm + TableRowFormModal + TableRowDetailDrawer + TableDataImportModal + page dashboard/data/[tableName], DataTable storageKey/emptyDescription props). Verified live: 201/404/409/422(NOT_ORDERABLE)/200/403/401, computed recompute + tamper-ignore, relation _display labels, CSV partial import with row errors, viewer GET 200/POST 403. vue-tsc clean, build OK, unit 172/172 (19 new), nuxt 10/10. Also repaired (dependency, required for AC-001): [tableId]/→[id]/ route conflict (columns + lookup 404), TypeORM 1.1 string-array select (3 sites), RelationSelector clearable binding. Test rows cleaned up (db.sqlite restored).
+- Implemented: [x] 2026-09-05 by /implement — Global Table Data & Generated CRUD on JSON-per-row store (entity global-table-row + db registration, table-data.dto, dynamic-schema.ts validation incl. BR-003/BR-004, table-data.service.ts CRUD/search-sort scope/recompute/relations restrict-detach/CSV import-export/audit/per-table permission auto-provision, 7 routes /api/data/:tableName, relation.service rewritten to row store, activity-logger skip for /api/data, seeder /api/data/* coverage, shared types table-data.ts, Pinia store tableData, DynamicForm + TableRowFormModal + TableRowDetailDrawer + TableDataImportModal + page dashboard/data/[tableName], DataTable storageKey/emptyDescription props). Verified live: 201/404/409/422(NOT_ORDERABLE)/200/403/401, computed recompute + tamper-ignore, relation _display labels, CSV partial import with row errors, viewer GET 200/POST 403. vue-tsc clean, build OK, unit 172/172 (19 new), nuxt 10/10. Also repaired (dependency, required for AC-001): [tableId]/→[id]/ route conflict (columns + lookup 404), TypeORM 1.1 string-array select (3 sites), RelationSelector clearable binding. Test rows cleaned up (db.sqlite restored). Fixed 2026-09-08 (review follow-up, all 5 items): FK CASCADE + composite INDEX(globalTableId,id) on global_table_rows + explicit orphan cleanup in GlobalTablesService.remove (live-verified 204/0/404, sqlite 0/0/0); defaultValue in browse projection + shared type + modal prefill; 422 NOT_SEARCHABLE for non-searchable searchField; richtext v1 deferral recorded in task Assumptions; new test/e2e/table-data.spec.ts (Pegawai CRUD + CSV + UI + cascade, 1/1 green, self-cleaning). Unit 436/436 (34 files), nuxt 15/15, vue-tsc clean, DB restored (0 orphans).
 - Verified: [x] 2026-09-05 by /verify — PASS. Unit 172/172, nuxt 10/10, vue-tsc clean, build OK. Live re-verified all 6 ACs on dev server (v12_dept/v12_pegawai fixtures, cleaned up after): generic CRUD 201 + PUT recompute, required/type/relation-target 422s, computed tamper-ignore (total 2000 not 99999), _display labels, partial CSV import 8 ok/2 failed with row numbers, unknown-header 422, NOT_ORDERABLE 422, unknown-table 404, empty-schema browse 200 cols:0, viewer GET 200/POST+DELETE 403, guest 401, audit logs with displayName entity, Data:*:Read/Write auto-provision, [id]/ columns+lookup routes 200. Minor (non-blocking): DELETE returns 200 not 204; GlobalTableRowSchema has no FK ON DELETE CASCADE (spec Data Model) and table delete leaves orphan columns/rows (also Task 07/08 scope — orphan blocked v12_dept delete with stale 409 until sqlite cleanup); no Playwright spec (live smoke instead, as noted by /implement). DB restored (0 orphans, 0 v12 logs/perms).
-- Reviewed: [ ] 2026-09-05 by /review — CHANGES REQUESTED (fresh full review): 1 must-fix (GlobalTableRowSchema missing FK ON DELETE CASCADE + composite INDEX(globalTableId,id) — spec Data Model; orphans demonstrated), 5 should-fix (defaultValue omitted from column payload/type; `~/shared` alias unresolvable in 7 new files + strict-null errors; searchField non-searchable silent fallback; E2E checklist claims Playwright spec that was never added; richtext rendered as textarea vs spec editor). Unit re-ran 172/172 green, nuxt 10/10 green. Prior must-fix #2 (role re-save without relations) re-evaluated: NOT an issue — Role.permissions is eager:true, pattern matches seeder convention.
+- Reviewed: [x] 2026-09-09 by /review — APPROVED: all 5 prior items fixed and verified — FK CASCADE + composite INDEX(globalTableId,id) on global_table_rows with explicit orphan cleanup in GlobalTablesService.remove (live-verified 204/cols-0/browse-404); defaultValue plumbed end-to-end (projection + type + modal prefill); 422 NOT_SEARCHABLE for non-searchable searchField; richtext v1 deferral recorded in Assumptions; new table-data.spec.ts Playwright E2E (Pegawai CRUD + CSV + UI + cascade, 1/1 green, self-cleaning). Fresh evidence: unit 436/436 (34 files), nuxt 15/15, vue-tsc clean, build OK, DB restored (26 perms, 0 orphans, 0 fixture logs). No must-fix; 3 consider-level nits (spec semicolon style, double .json() call, DELETE-200-vs-204 convention).
 
 ### tasks/13-component-management.md
 
@@ -216,6 +216,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 
 ## Last Updated
 
-- Date: 2026-09-08
-- By: /task
-- Task: tasks/23-production-migration-baseline.md
+- Date: 2026-09-09
+- By: /review
+- Task: tasks/12-global-table-data.md
