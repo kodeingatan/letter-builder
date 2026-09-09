@@ -8,11 +8,11 @@ Single Nuxt 4 package:
 
 ---
 
-## Dynamic Administration Layers (PLANNED)
+## Dynamic Administration Layers (IMPLEMENTED)
 
-> Per `docs/PRD.md`, platform saat ini mengimplementasikan fondasi **RBAC**. Modul Dynamic Administration (Global Table, Component, Template, Administration, Expression Engine, Rendering Engine) adalah **arah pengembangan masa depan** dan BELUM ada di kode.
+> Platform mengimplementasikan fondasi **RBAC** dan seluruh modul Dynamic Administration (Global Table, Component, Template, Administration, Expression Engine, Rendering Engine) — tasks 07–22. Desain layer di bawah ini adalah arsitektur yang berjalan di kode, bukan rencana.
 
-### Layer Stack (Intended)
+### Layer Stack (Implemented)
 
 ```text
 ┌──────────────────────────────────────────────────────┐
@@ -41,7 +41,7 @@ Single Nuxt 4 package:
 └──────────────────────────────────────────────────────┘
 ```
 
-### Architecture Rules (Intended)
+### Architecture Rules (Enforced)
 
 1. **Metadata-driven** — data & UI didefinisikan lewat metadata, bukan hard-code
 2. **Component-driven** — bagian dokumen reusable dijadikan component
@@ -53,7 +53,7 @@ Single Nuxt 4 package:
 8. **Unified data language** — satu bahasa reference & ekspresi (`{{data.*}}`) lintas modul
 9. **RBAC sebagai penjaga** — semua operasi metadata & rendering wajib dilindungi otorisasi
 
-### Module Boundaries (Intended)
+### Module Boundaries (Implemented)
 
 | Concern | Responsibility | Example |
 |---------|---------------|---------|
@@ -250,11 +250,11 @@ Single Nuxt 4 package:
 ### Backend (Nitro Server Routes)
 - TypeORM with `better-sqlite3` driver
 - Route prefix: `/api` (file structure in `server/api/`)
-- Validation: manual validation in route handlers (NestJS class-validator ported to utility functions)
+- Validation: Zod schemas in `server/dto/` (single source of truth, validated in route handlers)
 - CORS origin: `http://localhost:3000` (Nuxt dev server)
 - RBAC: Middleware-based guards using `defineEventHandler` + `getRouterParams`
-- Entity definitions: `server/utils/db.ts` (TypeORM entities)
-- Auth: JWT sign/verify in `server/utils/auth.ts`
+- Entity definitions: `server/entities/` (TypeORM `EntitySchema`); DataSource singleton in `server/utils/db.ts`
+- Auth: JWT sign/verify in `server/utils/jwt.ts`, password hashing in `server/utils/password.ts`
 
 ---
 
@@ -515,7 +515,7 @@ Sistem (group)
 
 **Response**: Binary file with correct `Content-Type` header
 
-**Note**: Files are stored in `server/storage/{subfolder}/`. The directory is gitignored.
+**Note**: Files are stored in `apps/web/storage/{subfolder}/` (`STORAGE_DIR`, see `server/services/storage.service.ts`). The directory is currently NOT gitignored — runtime uploads will show as untracked files; consider adding `storage/` to `apps/web/.gitignore`.
 
 **Query Parameters** (GET `/api/system-logs/files/:filename`):
 - `level` (string) — filter by log level: INFO, WARN, ERROR, DEBUG, TRACE
@@ -531,6 +531,25 @@ Sistem (group)
 [2026-08-15T10:31:00.000Z] [ERROR] [UsersService] Failed to create user
 ```
 
+### Dynamic Administration
+
+All routes require Bearer auth + matching permission (`requireApiAccess`), unless noted.
+
+| Module | Prefix | Key endpoints |
+|--------|--------|---------------|
+| Global Tables | `/api/global-tables` | CRUD + `PUT /:id/menu`, `/:id/columns/*` (CRUD + reorder), `/:id/rows/lookup` |
+| Table Data | `/api/data/:tableName` | Row CRUD + `/export?format=csv` + `/import` (multipart CSV) |
+| Expressions | `/api/expressions` | `POST /validate`, `POST /evaluate` |
+| Components | `/api/components` | CRUD + `/:id/preview`, `/:id/publish`, `/versions/:version` |
+| Templates | `/api/templates` | CRUD + `/:id/publish`, `/rollback/:version`, `/validate-tree`, `/versions/:version`, `/bindings/*` |
+| Administrations | `/api/administrations` | CRUD + `/:id/publish`, `/archive`, `/new-version`, `/steps`, `/versions/:version`, `/:id/runs` |
+| Runs | `/api/runs` | `GET /mine`, `/:runId` detail, `/steps/:stepId` patch, `/complete`, `/cancel` |
+| Documents | `/api/documents` | List/detail + `/:id/html`, `/:id/pdf`, `/:id/reissue` |
+| Rendering | `/api/render` | `POST /preview` |
+| Navigation | `/api/navigation` | `GET /` (auth-only, permission-filtered menu projection) |
+| Health | `/api/health` | `GET /` (public) |
+| Activity-log coverage | `/api/activity-logs/coverage` | RBAC/audit coverage matrix (Task 22) |
+
 ---
 
 ## RBAC System
@@ -539,51 +558,39 @@ Sistem (group)
 
 RBAC is enforced via Nitro route middleware and utility functions:
 
-1. **JWT Validation** — `server/utils/auth.ts` validates token for all `/api/*` routes
-2. **RbacGuard** — `server/utils/rbac.ts` checks role, guard, and permission access
+1. **JWT Validation** — `server/utils/jwt.ts` validates token for all `/api/*` routes
+2. **Route guard** — `server/utils/route-guard.ts` (`requireAuth` / `requireApiAccess`) checks permission method+URL rules
 
 ### Server Utilities
 
 | Utility | File | Usage |
 |---------|------|-------|
-| `verifyToken()` | `server/utils/auth.ts` | Validate JWT token |
-| `hashPassword()` | `server/utils/auth.ts` | Hash password with bcrypt |
-| `checkRbac()` | `server/utils/rbac.ts` | Check roles, permissions, guard URL rules |
-| `defineAuthHandler()` | `server/utils/auth.ts` | H3 event handler wrapper with auth |
+| `verifyToken()` / `signToken()` | `server/utils/jwt.ts` | Validate/sign JWT token |
+| `hashPassword()` | `server/utils/password.ts` | Hash password with bcrypt |
+| `requireAuth()` / `requireApiAccess()` | `server/utils/route-guard.ts` | Bearer check + permission method+URL enforcement |
 
-### RBAC Guard Logic (`server/utils/rbac.ts`)
+### RBAC Guard Logic (`server/utils/route-guard.ts`)
 
-1. Loads user with full relations (roles → guards.urls, roles → permissions.methods, permissions.urls)
-2. Checks `@Roles()` — if defined, user must have at least one matching role name
-3. Checks `@Permissions()` — if defined, user must have at least one matching permission name
-4. **Guard URL enforcement** — For each role's guards:
-   - Collect all `deny` URLs → if request URL matches any, deny access
-   - Collect all `allow` URLs → if request URL matches any, grant access
-5. **Permission method+URL enforcement** — For each role's permissions:
+1. `requireAuth` — Bearer token must be present and verify via `verifyToken()` → returns `userId`, else 401.
+2. `requireApiAccess` — loads the user with the full RBAC chain (roles → permissions → methods/urls, all eager) and grants access when at least one permission matches **both** the request method and the request URL pattern (via shared `matchUrlPattern`), else 403.
+3. **Permission method+URL enforcement** — for each role's permissions:
    - Check if HTTP method matches permission's `methods` (or `*` wildcard)
    - Check if request URL matches permission's `urls` patterns
+4. Guard allow/deny URL lists are evaluated client-side (`useAuthorization().canAccessUrl`) for menu/UX gating; server-side enforcement is permission method+URL based.
 
 ### Access Control Flow
 
 ```
-Request → Nitro Middleware → RBAC Check
+Request → Nitro route handler → requireAuth → requireApiAccess
   │
-  ├─ /api/auth/*? → Public (skip auth)
+  ├─ /api/auth/*, /api/health, GET /api/settings, /api/storage/* → Public (no auth)
   │
-  ├─ @Public()? → Allow (skip all checks)
+  ├─ Bearer token missing/invalid or user not found → 401
   │
-  ├─ @Roles() set? → Check user has matching role → Fail: 403
-  │
-  ├─ @Permissions() set? → Check user has matching permission → Fail: 403
-  │
-  ├─ Neither @Roles nor @Permissions? → Allow (any authenticated user)
-  │
-  └─ Guard-Based Enforcement:
+  └─ Permission-Based Enforcement:
        For each role → For each permission:
-         Method matches? → URL matches permission urls?
-           → For each guard on role:
-             Deny URLs match? → DENY
-             Allow URLs match? → ALLOW
+         Method matches (or *)? → URL matches permission urls (matchUrlPattern)?
+           → ALLOW
        → Fail: 403 "Access denied"
 ```
 
@@ -652,7 +659,7 @@ users ──────< users_roles >────── roles
 - TypeORM 1.1
 - better-sqlite3
 - bcrypt
-- class-validator (for DTO validation utilities)
+- Zod (DTO validation in `server/dto/`; `class-validator` remains an installed but unused dependency)
 
 ---
 

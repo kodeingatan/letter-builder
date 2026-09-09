@@ -3,9 +3,9 @@
 ## Overview
 
 - **Database Engine**: SQLite (via `better-sqlite3`)
-- **ORM**: TypeORM
-- **Database File**: `server/db.sqlite`
-- **Migrations**: Auto-sync via `synchronize: true` (development)
+- **ORM**: TypeORM 1.1 (`EntitySchema` pattern, 18 entity files in `server/entities/`)
+- **Database File**: `apps/web/db.sqlite`
+- **Migrations**: `synchronize: true` in development (default; override with `DB_SYNCHRONIZE` env var, `false` in production). Checked-in production baseline migration is pending (task 23).
 
 ---
 
@@ -13,8 +13,8 @@
 
 Dokumen ini membedakan dua kondisi:
 
-- **CURRENT DATABASE** — tabel yang benar-benar ada di kode (RBAC foundation): `users`, `roles`, `permissions`, `guards`, `guard_urls`, `permission_methods`, `permission_urls`, `activity_logs`, `settings`.
-- **PLANNED DATABASE** — entitas yang dirancang untuk modul Dynamic Administration (Global Table, Component, Template, Administration, Document, Expression Engine). Belum diimplementasikan; merupakan desain target `docs/dynamic-administration/`.
+- **CURRENT DATABASE** — 23 tabel dalam kode: RBAC foundation (`users`, `roles`, `permissions`, `guards`, `guard_urls`, `permission_methods`, `permission_urls`, `activity_logs`, `settings`) **plus** Dynamic Administration (`global_tables`, `global_table_columns`, `global_table_rows`, `components`, `component_data_requirements`, `component_versions`, `templates`, `template_versions`, `template_bindings`, `administrations`, `administration_steps`, `administration_versions`, `administration_runs`, `documents`).
+- **PLANNED DATABASE** — hanya baseline migrasi produksi (task 23): tidak ada tabel baru yang dirancang; yang belum ada adalah file migrasi TypeORM yang checked-in dan drift check saat boot produksi.
 
 ---
 
@@ -334,6 +334,8 @@ Tabel untuk menyimpan URL patterns yang diizinkan oleh permission.
 | 2 | /* |
 | 3 | /* |
 
+> Note (Task 22): seeder additionally provisions `Designer` and `Operator` roles plus a permission-matrix catalog (module Read/Write permissions, `Data:{table}:Read/Write` auto-provisioned per Global Table). See `server/utils/permission-matrix.ts` and `server/services/seeder.service.ts` for the authoritative grant matrix (26 permissions at baseline).
+
 ---
 
 ## Relationships Summary
@@ -423,157 +425,56 @@ Tabel untuk menyimpan pengaturan aplikasi (key-value store).
 
 ---
 
-# PLANNED DATABASE — Dynamic Administration
+# DYNAMIC ADMINISTRATION TABLES (IMPLEMENTED)
 
-> Belum diimplementasikan. Desain target berdasarkan `docs/dynamic-administration/`. Tabel-tabel berikut akan menambah/menyempurnakan schema saat modul Dynamic Administration dibangun.
+> Diimplementasikan tasks 07–22. Desain awal berasal dari `docs/dynamic-administration/`; tabel di bawah ini adalah schema yang berjalan di kode (`server/entities/`, pola TypeORM `EntitySchema`).
 
-## 1. global_tables
+## Table Overview
 
-Metadata definisi struktur data dinamis.
+| Table | Purpose | Key constraints / indexes |
+|-------|---------|---------------------------|
+| `global_tables` | Metadata definisi struktur data dinamis (`name` snake_case immutable, `displayName`, `menuOrder`, `menuIcon`) | UNIQUE(`name`) |
+| `global_table_columns` | Definisi kolom schema-driven (`type`, `defaultValue`, `required`, `searchable`, `orderable`, `position`, `options` JSON, `format`, `expression` + `dependencies`, `relationTableId` + `relationConfig` JSON) | UNIQUE(`globalTableId`,`name`), INDEX(`globalTableId`,`position`), INDEX(`relationTableId`) |
+| `global_table_rows` | Generic row store: `values` TEXT berisi JSON `{ columnName: value }` (relation single=id, multi=id[], image=url, date=ISO) | FK → `global_tables.id` ON DELETE CASCADE, composite INDEX(`globalTableId`,`id`) |
+| `components` | Reusable document block (`content`, `looping`, `status` draft/published) | UNIQUE(`name`) |
+| `component_data_requirements` | Data-requirement contract per component (`name`, `type`) | UNIQUE(`componentId`,`name`) |
+| `component_versions` | Immutable version history (byte-frozen content) | UNIQUE(`componentId`,`version`) |
+| `templates` | Blueprint dokumen: composition tree (`content` JSON), `status` draft/published/archived | UNIQUE(`name`) |
+| `template_versions` | Immutable version history (byte-frozen snapshot incl. bindings) | UNIQUE(`templateId`,`version`) |
+| `template_bindings` | Binding per tree placement (`placementId`, `requirementName`, `source`: administration/global_table/manual/expression/system, `sourceRef`, `expression`; mendukung `item.*` untuk loop) | UNIQUE(`templateId`,`placementId`,`requirementName`) |
+| `administrations` | Workflow pengumpulan data (`status` draft/published/archived, pinned template versions) | UNIQUE(`name`) |
+| `administration_steps` | Step per administration (`order` dense, `templateId`, step fields) | UNIQUE(`administrationId`,`order`) |
+| `administration_versions` | Immutable publish snapshot | UNIQUE(`administrationId`,`version`) |
+| `administration_runs` | Eksekusi workflow (`status`, `startedBy`, frozen pins, merged step data) | INDEX(`administrationId`,`status`) |
+| `documents` | Hasil akhir: `dataSnapshot` JSON (frozen) + `templateVersion` + rendered HTML snapshot + PDF di `storage/documents/`; reissue membuat baris baru (`replacesId`) | INDEX(`administrationId`,`createdAt`), INDEX(`runId`) |
 
-| Column | Type | Constraint | Description |
-|--------|------|-----------|-------------|
-| `id` | INTEGER | PK, AUTO_INCREMENT | ID unik |
-| `name` | VARCHAR | NOT NULL, UNIQUE | Nama teknis tabel (e.g. `pegawai`) |
-| `displayName` | VARCHAR | NOT NULL | Nama tampilan (e.g. `Pegawai`) |
-| `createdAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu pembuatan |
-| `updatedAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu update |
-
-## 2. global_table_columns
-
-Definisi kolom Global Table (schema-driven).
-
-| Column | Type | Constraint | Description |
-|--------|------|-----------|-------------|
-| `id` | INTEGER | PK, AUTO_INCREMENT | ID unik |
-| `globalTableId` | INTEGER | FK → global_tables.id | Global Table pemilik |
-| `name` | VARCHAR | NOT NULL | Nama teknis kolom |
-| `displayName` | VARCHAR | NOT NULL | Nama tampilan kolom |
-| `type` | VARCHAR | NOT NULL | Column type: text, richtext, date, select, number, currency, select-table-relation, hidden-operation-text, readonly-operation-text, image, dll. |
-| `defaultValue` | TEXT | NULLABLE | Nilai default |
-| `required` | BOOLEAN | DEFAULT 0 | Apakah wajib |
-| `searchable` | BOOLEAN | DEFAULT 0 | Apakah dapat dicari |
-| `orderable` | BOOLEAN | DEFAULT 0 | Apakah dapat diurutkan |
-| `options` | TEXT | NULLABLE | JSON options untuk type select |
-| `format` | VARCHAR | NULLABLE | Format display (e.g. `m-d-Y` untuk date) |
-| `expression` | TEXT | NULLABLE | Ekspresi untuk computed field |
-| `relationTableId` | INTEGER | NULLABLE, FK → global_tables.id | Target relasi (select-table-relation) |
-| `createdAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu pembuatan |
-| `updatedAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu update |
-
-## 3. components
-
-Blok dokumen reusable dengan data requirement.
-
-| Column | Type | Constraint | Description |
-|--------|------|-----------|-------------|
-| `id` | INTEGER | PK, AUTO_INCREMENT | ID unik |
-| `name` | VARCHAR | NOT NULL, UNIQUE | Nama component |
-| `content` | TEXT | NULLABLE | Konten component |
-| `looping` | BOOLEAN | DEFAULT 0 | Mode single vs collection |
-| `preview` | TEXT | NULLABLE | Preview component |
-| `version` | INTEGER | DEFAULT 1 | Versi component |
-| `createdAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu pembuatan |
-| `updatedAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu update |
-
-## 4. component_data_requirements
-
-Contract data yang dibutuhkan component.
-
-| Column | Type | Constraint | Description |
-|--------|------|-----------|-------------|
-| `id` | INTEGER | PK, AUTO_INCREMENT | ID unik |
-| `componentId` | INTEGER | FK → components.id | Component pemilik |
-| `name` | VARCHAR | NOT NULL | Nama field (e.g. `nama`, `nip`) |
-| `type` | VARCHAR | NOT NULL | Tipe data field (text, date, image, dll.) |
-
-## 5. templates
-
-Blueprint dokumen (versi, struktur).
-
-| Column | Type | Constraint | Description |
-|--------|------|-----------|-------------|
-| `id` | INTEGER | PK, AUTO_INCREMENT | ID unik |
-| `name` | VARCHAR | NOT NULL | Nama template |
-| `content` | TEXT | NULLABLE | Rich text content template |
-| `version` | INTEGER | DEFAULT 1 | Versi template |
-| `createdAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu pembuatan |
-| `updatedAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu update |
-
-## 6. template_bindings
-
-Data binding untuk data requirement component dalam template.
-
-| Column | Type | Constraint | Description |
-|--------|------|-----------|-------------|
-| `id` | INTEGER | PK, AUTO_INCREMENT | ID unik |
-| `templateId` | INTEGER | FK → templates.id | Template pemilik |
-| `componentId` | INTEGER | FK → components.id | Component target |
-| `requirementName` | VARCHAR | NOT NULL | Field requirement yang di-bind |
-| `source` | VARCHAR | NOT NULL | Sumber data: administration, global_table, manual, expression, system |
-| `sourceRef` | VARCHAR | NULLABLE | Reference (e.g. `data.pegawai.nip`) |
-| `expression` | TEXT | NULLABLE | Ekspresi jika source=expression |
-
-## 7. administrations
-
-Workflow pengumpulan data.
-
-| Column | Type | Constraint | Description |
-|--------|------|-----------|-------------|
-| `id` | INTEGER | PK, AUTO_INCREMENT | ID unik |
-| `name` | VARCHAR | NOT NULL | Nama administration |
-| `description` | TEXT | NULLABLE | Deskripsi |
-| `createdAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu pembuatan |
-| `updatedAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu update |
-
-## 8. administration_steps
-
-Tahap pengumpulan data; setiap step dapat memakai template.
-
-| Column | Type | Constraint | Description |
-|--------|------|-----------|-------------|
-| `id` | INTEGER | PK, AUTO_INCREMENT | ID unik |
-| `administrationId` | INTEGER | FK → administrations.id | Administration pemilik |
-| `order` | INTEGER | NOT NULL | Urutan step |
-| `name` | VARCHAR | NOT NULL | Nama step |
-| `templateId` | INTEGER | NULLABLE, FK → templates.id | Template pada step ini |
-
-## 9. documents
-
-Hasil akhir: snapshot data + versi template + output ter-render.
-
-| Column | Type | Constraint | Description |
-|--------|------|-----------|-------------|
-| `id` | INTEGER | PK, AUTO_INCREMENT | ID unik |
-| `administrationId` | INTEGER | FK → administrations.id | Administration sumber |
-| `templateVersion` | INTEGER | NOT NULL | Versi template saat dibuat |
-| `dataSnapshot` | TEXT | NULLABLE | JSON snapshot data |
-| `outputHtml` | TEXT | NULLABLE | Output ter-render (HTML) |
-| `outputFilePath` | VARCHAR | NULLABLE | Path file PDF/HTML yang dihasilkan |
-| `createdAt` | DATETIME | DEFAULT CURRENT_TIMESTAMP | Waktu pembuatan |
-
-## Relationships (Planned)
+## Relationships (Implemented)
 
 ```
 global_tables ─< global_table_columns
+global_tables ─< global_table_rows (FK CASCADE)
+global_tables <── global_table_columns.relationTableId (relation target, enforced in service)
 components ─< component_data_requirements
+components ─< component_versions
+templates ─< template_versions
 templates ─< template_bindings >── components (via componentId)
 administrations ─< administration_steps >── templates (via templateId)
+administrations ─< administration_versions
+administrations ─< administration_runs ─< documents
 administrations ─< documents
 ```
 
-| Relationship | Type | Description |
+| Relationship | Type | Enforcement |
 |-------------|------|-------------|
-| Global Table → Column | One-to-Many | Satu tabel punya banyak definisi kolom |
-| Component → Data Requirement | One-to-Many | Satu component punya banyak kebutuhan data |
-| Template → Template Binding | One-to-Many | Satu template punya banyak binding |
-| Template Binding → Component | Many-to-One | Binding menunjuk ke component |
-| Administration → Step | One-to-Many | Satu administration punya banyak step |
-| Step → Template | Many-to-One | Step memakai satu template |
-| Administration → Document | One-to-Many | Satu administration menghasilkan banyak dokumen |
+| Global Table → Column / Row | One-to-Many | Service deletes explicitly on table drop; rows additionally FK CASCADE |
+| Relation column → target table/row | Logical | `restrict` blocks with 409, `detach` nulls silently (service-level) |
+| Component/Template/Administration → Versions | One-to-Many | Immutable history rows; never updated |
+| Run → Documents | One-to-Many | Issued atomically on run complete |
 
-## Perancatatan Desain
+## Perancatatan Desain (Keputusan Final)
 
-- **Data Global Table** — Karena SQLite + TypeORM dan struktur dinamis, data baris Global Table akan disimpan secara fleksibel (mis. sebagai JSON atau tabel generik key-value), bukan sebagai tabel fisik per definisi. Detail teknis perlu ditentukan saat implementasi.
-- **Computed Field** — disimpan sebagai kolom `expression`; nilai hasil dapat disimpan (hidden) atau dihitung saat tampil (readonly).
-- **Versioned** — Template & Component menyimpan `version`; Document menyimpan `templateVersion` agar output lama tetap valid.
+- **Data Global Table** — JSON-per-row di `global_table_rows` (bukan tabel fisik per definisi, bukan key-value). Skala target: instansi kecil–menengah; search/sort dilakukan service-level. FTS per-tabel adalah batas upgrade yang diketahui.
+- **Computed Field** — definisi (`expression` + `dependencies`) di kolom; nilai dihitung ulang server-side pada setiap write; nilai kiriman klien untuk kolom computed diabaikan.
+- **Versioned** — Component/Template/Administration memakai tabel history terpisah (immutable); Document menyimpan snapshot data + versi template agar output lama tetap valid.
+- **FK posture** — Hanya relasi yang dideklarasikan di `EntitySchema` yang menjadi FK DB (`global_table_rows` CASCADE, `permission_*`/`guard_urls` CASCADE, `activity_logs` → users SET NULL). better-sqlite3 tidak menegakkan FK secara default, sehingga penghapusan bertingkat yang load-bearing diimplementasikan eksplisit di service (konvensi codebase).
+- **Column types** — `text`, `richtext`, `date`, `select`, `number`, `currency`, `image`, `hidden-computed`, `readonly-computed`, `select-table-relation`, `select-table-relation-multiple` (lihat `server/dto/global-table-columns.dto.ts`).

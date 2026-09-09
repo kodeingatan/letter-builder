@@ -765,9 +765,9 @@ meta: {
 
 ---
 
-## Dynamic Administration UI Patterns (INTENDED DIRECTION)
+## Dynamic Administration UI Patterns (IMPLEMENTED)
 
-> Modul Dynamic Administration (Global Table, Component, Template, Administration) merupakan arah pengembangan masa depan. Bagian ini mendokumentasikan arah UI yang diinginkan, BELUM sepenuhnya diimplementasikan. Prinsip desain mengikuti spesifikasi Naive UI + Tailwind yang sudah ada.
+> Modul Dynamic Administration (Global Table, Component, Template, Administration) sudah diimplementasikan (tasks 07–22). Bagian ini mendokumentasikan pola UI yang berjalan di kode. Prinsip desain mengikuti spesifikasi Naive UI + Tailwind yang sudah ada.
 
 ### Metadata-driven / Schema-driven UI
 
@@ -779,34 +779,35 @@ meta: {
   Column Definition → Form Renderer → Input Component
   ```
 
-### Column Type → Input/Display Component Mapping (Intended)
+### Column Type → Input/Display Component Mapping (Implemented)
 
 | Column Type | Input Component | Display |
 |-------------|----------------|---------|
 | text | `NInput` | Teks |
-| richtext | Rich text editor (contenteditable) | HTML |
+| richtext | `NInput` textarea v1 (HTML editor didefer; display di-escape) | Teks |
 | date | `NDatePicker` | Format display (`m-d-Y`) |
 | select | `NSelect` (options) | Tag/label |
 | number / currency | `NInputNumber` | Format number/currency |
-| select-table-relation | Relation selector (dari Global Table) | Referensi data |
-| image | Upload input | `NImage` |
-| hidden-operation-text | (no input — computed) | hidden / readonly |
+| select-table-relation (+ `-multiple`) | `RelationSelector` (dari Global Table) | Label referensi (`_display`) |
+| image | Upload input + preview | `NImage` |
+| hidden-computed | (no input — server recompute) | hidden |
+| readonly-computed | readonly `NInput` | Teks |
 
-### CRUD Generated Table (Intended)
+### CRUD Generated Table (Implemented)
 
 Secara otomatis menghasilkan Browse/Create/Edit/Delete dengan:
 - Browse: global search, column visibility, sorting, pagination → menggunakan komponen `DataTable` yang sudah ada
 - Create/Edit: form yang di-generate dari column definition
 - Delete: konfirmasi
 
-### Template Rich Text Editor (Intended)
+### Template Rich Text Editor (Implemented)
 
-- Rich text editor untuk menyusun blueprint dokumen
-- Context menu untuk insert dynamic component
+- Composition canvas (`CompositionCanvas` + `CompositionNodeView`) untuk menyusun blueprint dokumen
+- `ComponentPickerModal` untuk insert component, `NodeInspector` untuk konfigurasi node
 - Data binding/placeholder menggunakan unified data language, contoh: `{{data.pegawai.nip}}`
 - Mendukung loop & condition pada bagian template
 
-### Administration Workflow UI (Intended)
+### Administration Workflow UI (Implemented)
 
 - Multi-step wizard (mengikuti `NSteps` / `NStep`) — satu step = satu tahap pengumpulan data
 - Step dapat memakai template (blueprint)
