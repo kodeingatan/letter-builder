@@ -14,7 +14,10 @@
     "test:unit": "vitest --project unit",
     "test:nuxt": "vitest --project nuxt",
     "test:e2e": "playwright test",
-    "test:e2e:debug": "playwright test --debug"
+    "test:e2e:debug": "playwright test --debug",
+    "migration:generate": "jiti ./server/utils/migration-cli.ts generate",
+    "migration:run": "jiti ./server/utils/migration-cli.ts run",
+    "migration:revert": "jiti ./server/utils/migration-cli.ts revert"
   },
   "dependencies": {
     "@pinia/nuxt": "^1.0.2",

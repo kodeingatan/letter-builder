@@ -5,7 +5,7 @@
 - **Database Engine**: SQLite (via `better-sqlite3`)
 - **ORM**: TypeORM 1.1 (`EntitySchema` pattern, 18 entity files in `server/entities/`)
 - **Database File**: `apps/web/db.sqlite`
-- **Migrations**: `synchronize: true` in development (default; override with `DB_SYNCHRONIZE` env var, `false` in production). Checked-in production baseline migration is pending (task 23).
+- **Migrations**: `synchronize: true` in development (default; override with `DB_SYNCHRONIZE` env var, `false` in production). Production boots apply the checked-in baseline `server/migrations/1788914913928-Baseline.ts` (all 23 entities / 26 tables) automatically (`migrationsRun` in `getDataSource()`); drift refuses boot with `MIGRATION_DRIFT` (real check in `server/utils/migration-status.ts`). CLI-loadable config: `server/utils/orm-data-source.ts`. Workflow: `npm run migration:generate -- <Name>` / `migration:run` / `migration:revert` (see `docs/production-runbook.md` §1). BR-001: never edit an applied migration.
 
 ---
 
@@ -14,7 +14,7 @@
 Dokumen ini membedakan dua kondisi:
 
 - **CURRENT DATABASE** — 23 tabel dalam kode: RBAC foundation (`users`, `roles`, `permissions`, `guards`, `guard_urls`, `permission_methods`, `permission_urls`, `activity_logs`, `settings`) **plus** Dynamic Administration (`global_tables`, `global_table_columns`, `global_table_rows`, `components`, `component_data_requirements`, `component_versions`, `templates`, `template_versions`, `template_bindings`, `administrations`, `administration_steps`, `administration_versions`, `administration_runs`, `documents`).
-- **PLANNED DATABASE** — hanya baseline migrasi produksi (task 23): tidak ada tabel baru yang dirancang; yang belum ada adalah file migrasi TypeORM yang checked-in dan drift check saat boot produksi.
+- **PLANNED DATABASE** — no new tables; future schema changes ship as new (additive) migration files after the Task 23 baseline.
 
 ---
 

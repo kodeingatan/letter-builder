@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO IMPLEMENT
+TODO REVIEW
 
 ## Objective
 
@@ -139,27 +139,35 @@ Given dev defaults (`NODE_ENV` unset, no `DB_SYNCHRONIZE`), when booting, then b
 
 ### Backend
 
-- [ ] CLI-loadable data-source config (same 23 EntitySchemas, no Nuxt aliases)
-- [ ] Baseline migration generated + checked in under `apps/web/server/migrations/`
-- [ ] `getDataSource()` wired with `migrations` (+ `migrationsRun` in prod or explicit pre-seed run)
-- [ ] Real `migrationInSync` computation in `server/plugins/database.server.ts` (remove hardcoded `true`)
-- [ ] npm scripts `migration:generate` / `migration:run` / `migration:revert` in `apps/web/package.json`
-- [ ] Unit tests for drift-check logic (pending-migration detection, prod/dev gating); full suite green
+- [x] CLI-loadable data-source config (same 23 EntitySchemas, no Nuxt aliases)
+- [x] Baseline migration generated + checked in under `apps/web/server/migrations/`
+- [x] `getDataSource()` wired with `migrations` (+ `migrationsRun` in prod or explicit pre-seed run)
+- [x] Real `migrationInSync` computation in `server/plugins/database.server.ts` (remove hardcoded `true`)
+- [x] npm scripts `migration:generate` / `migration:run` / `migration:revert` in `apps/web/package.json`
+- [x] Unit tests for drift-check logic (pending-migration detection, prod/dev gating); full suite green
 
 ### Frontend
 
-- [ ] None required; optional migration-state line in the Settings production card (admin-only, existing patterns)
+- [x] None required; optional migration-state line in the Settings production card declined (minimal-change principle; health payload also left unchanged)
 
 ### Docs
 
-- [ ] `docs/production-runbook.md` §1 rewritten around the baseline (generate/run/revert commands, drift recovery)
-- [ ] `docs/database.md` migrations note updated (`synchronize:true` dev-only + baseline file reference)
+- [x] `docs/production-runbook.md` §1 rewritten around the baseline (generate/run/revert commands, drift recovery)
+- [x] `docs/database.md` migrations note updated (`synchronize:true` dev-only + baseline file reference)
 
 ## Assumptions
 
 - Single-node SQLite deployment (per PRD constraints); the migration runner assumes one writer at boot.
 - TypeORM 1.1 + `better-sqlite3` migration generation via the `typeorm` CLI against the new standalone config; if CLI generation proves lossy for any EntitySchema construct, hand-authoring the baseline to match `sqlite_master` of a synchronized dev DB is acceptable (documented in the task log).
 - `runStartupChecks` pure core is untouched; only the plugin's `migrationInSync` input becomes real.
+
+## Implementation Notes (/implement 2026-09-09)
+
+- No `ts-node` in repo and no network justification for new deps: `migration:*` scripts run `server/utils/migration-cli.ts` via the repo's own `jiti` binary. `generate` reuses TypeORM's own `driver.createSchemaBuilder().log()` in-process (same up/down SQL the CLI would emit, incl. correct down reversals) — no CLI file-loading needed.
+- Baseline `1788914913928-Baseline.ts` (106 up / 106 down) generated against an empty scratch DB. TypeORM emits the 8 FK-bearing tables as create-then-recreate-with-FK (temporary-table dance); end state verified byte-identical to dev `sqlite_master` except column order of `menuOrder`/`menuIcon` in `administrations` + `global_tables` (current entities declare them before timestamps; dev file carries legacy append-at-end order from `synchronize`). Name-addressed queries unaffected; post-migration `generate` reports zero phantom diff.
+- Fatal startup issues now `console.error` + `process.exit(1)` instead of `throw`: verified live that a Nitro plugin throw surfaces as a logged `unhandledRejection` while the server keeps listening, so throw alone does NOT refuse boot. Exit path is prod-only by construction (every `fatal` is `isProd`-gated; dev stays warn-only and serving — observed live).
+- Fresh-seed permission count is 22 base catalog; dev `db.sqlite` shows 26 = 22 + 4 leftover `Data:v16*:Read/Write` auto-provisioned for pre-existing fixture tables. AC-004 verified as stability (22 → 22 across reboot), not the absolute 26.
+- Live AC-001/003/004 verified against the production build (`.output/server/index.mjs`) with cwd in `/tmp/opencode/prodtest` (repo `db.sqlite` md5 unchanged). Pending-migration drift covered by unit tests + same refusal path as the live unknown-applied case.
 
 ## Verification
 

@@ -2,20 +2,68 @@
 
 Single-node SQLite deployment. Multi-node/HA is out of scope.
 
-## 1. Production boot
+## 1. Production boot & baseline migration (Task 23)
 
 ```bash
 NODE_ENV=production JWT_SECRET=<strong-secret> DB_SYNCHRONIZE=false npm run build && npm run preview
 ```
 
 - `synchronize:false` in production (`server/utils/db.ts` — override with
-  `DB_SYNCHRONIZE=true` only for scratch/dev). Schema changes ship as the
-  checked-in baseline migration; on drift the server fails fast with
-  `MIGRATION_DRIFT` (see `server/utils/startup-check.ts`).
+  `DB_SYNCHRONIZE=true` only for scratch/dev). On a fresh database file the
+  server applies the checked-in baseline migration
+  (`server/migrations/1788914913928-Baseline.ts` — all 23 entities / 26
+  tables) automatically at boot (`migrationsRun` in `getDataSource()`), then
+  runs the idempotent seed. Dev default is unchanged (`synchronize:true`,
+  no migration enforcement).
+- On drift the server fails fast with `MIGRATION_DRIFT` pointing here (see
+  `server/utils/startup-check.ts` + real check in
+  `server/utils/migration-status.ts`, wired via
+  `server/plugins/database.server.ts`).
 - Fresh-install seed is idempotent: every `seed*` function checks existence
-  first — re-running never duplicates permissions, roles, users, or settings.
-- Startup self-check fails fast in production when `JWT_SECRET` is default
-  or storage is unwritable (warn-only in development).
+  first — re-running never duplicates permissions, roles, users, or settings
+  (26 permissions at baseline).
+- Startup self-check fails fast in production when `JWT_SECRET` is default,
+  storage is unwritable, or migrations drift (warn-only in development).
+
+### Migration workflow (from `apps/web/`)
+
+```bash
+npm run migration:run                    # apply pending migrations (DB_PATH defaults to db.sqlite)
+DB_PATH=/tmp/scratch.sqlite npm run migration:run     # target a scratch copy
+npm run migration:revert                 # revert the last applied migration (up/down drill)
+npm run migration:generate -- <Name>     # diff the 23 EntitySchemas vs DB → server/migrations/<timestamp>-<Name>.ts
+```
+
+- `generate` diffs entity metadata against the target database: point
+  `DB_PATH` at a fully-migrated copy so only the new delta is emitted, then
+  wire the new class into `appMigrations` in
+  `server/utils/orm-data-source.ts` (the CLI prints a reminder).
+- BR-001: never edit an applied migration; schema changes ship as new files.
+- Up/down drill on an empty scratch file before touching prod (a
+  pre-migration database copy has tables but no `migrations` bookkeeping —
+  see drift recovery §4 below — so drills always start from empty):
+
+```bash
+rm -f /tmp/drill.sqlite
+DB_PATH=/tmp/drill.sqlite npm run migration:run
+DB_PATH=/tmp/drill.sqlite npm run migration:revert
+DB_PATH=/tmp/drill.sqlite npm run migration:run
+sqlite3 /tmp/drill.sqlite "PRAGMA integrity_check;"  # must print: ok
+```
+
+### Drift recovery (`MIGRATION_DRIFT` at boot)
+
+1. Back up first (§3).
+2. `pending:<name>` — a checked-in migration was not applied: run
+   `npm run migration:run` (or `DB_PATH=...` for a copy) and reboot.
+3. `unknown:<name>` — the database carries a migration with no checked-in
+   file: do NOT delete rows from `migrations` by hand; restore the matching
+   migration file from version control (or restore the backup) and reboot.
+4. `migrations-table-missing` — pre-migration database file (tables exist
+   but no bookkeeping): this file predates the baseline. Either rebuild it
+   from the baseline on an empty file, or keep it on the dev
+   `synchronize:true` workflow — never force `DB_SYNCHRONIZE=true` against
+   a production file (BR-002).
 
 ## 2. Health probe
 

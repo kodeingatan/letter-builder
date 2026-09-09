@@ -28,7 +28,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/20-rendering-engine.md | [x] | [x] | [x] |
 | tasks/21-generated-menu.md | [x] | [x] | [x] |
 | tasks/22-dynamic-rbac-audit-production.md | [x] | [x] | [x] |
-| tasks/23-production-migration-baseline.md | [ ] | [ ] | [ ] |
+| tasks/23-production-migration-baseline.md | [x] | [ ] | [ ] |
 
 ## Sudah Implementasi
 
@@ -47,7 +47,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /implement
 - [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /implement
 - [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /implement
-- [ ] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check
+- [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-09 by /implement
 
 ## Belum Implementasi
 
@@ -210,12 +210,12 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 
 ### tasks/23-production-migration-baseline.md
 
-- Implemented: [ ] pending — charter: check in TypeORM baseline migration (23 entities), wire migrations into prod boot, replace hardcoded `migrationInSync: true` with a real drift check (spawned from Task 22 review should-fix #3).
+- Implemented: [x] 2026-09-09 by /implement — Baseline migration + drift check (server/utils/orm-data-source.ts CLI-loadable 23-entity config; server/migrations/1788914913928-Baseline.ts 106up/106down generated via in-process schemaBuilder.log; server/utils/migration-status.ts pure computeMigrationSync + checkMigrationStatus; server/utils/migration-cli.ts generate/run/revert via jiti; db.ts migrations + prod-only migrationsRun; database.server.ts real migrationInSync + fatal→console.error/process.exit(1) after live proof that Nitro plugin throw keeps serving; npm scripts migration:*; test/unit/utils/migration-status.test.ts 9 tests; docs production-runbook §1 + database.md). Verified: unit 445/445 (35 files), nuxt 15/15, vue-tsc clean, build OK. Live on prod build w/ scratch cwd: AC-001 fresh prod boot → 27 tables + seed + /api/health healthy; AC-002 npm run/revert/run + integrity_check ok; AC-003 unknown-applied row → MIGRATION_DRIFT + exit(1) + conn refused; AC-004 reboot perms stable 22 (fresh-seed base; dev 26 = 22 + 4 leftover Data:v16* fixtures); AC-005 dev defaults warn-only + serving. Repo db.sqlite md5 unchanged. Notes: migrated sqlite_master identical to dev except menuOrder/menuIcon column order in administrations/global_tables (entity-declared vs legacy appended); zero phantom generate-diff post-migration.
 - Verified: [ ] pending.
 - Reviewed: [ ] pending.
 
 ## Last Updated
 
 - Date: 2026-09-09
-- By: /review
-- Task: tasks/12-global-table-data.md
+- By: /implement
+- Task: tasks/23-production-migration-baseline.md
