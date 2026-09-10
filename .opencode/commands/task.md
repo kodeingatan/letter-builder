@@ -12,6 +12,8 @@ Treat `$ARGUMENTS` as the complete task/feature context.
 
 Follow this workflow strictly.
 
+**Prinsip UI-First**: Pekerjaan yang dikerjakan TERLEBIH DAHULU harus berupa design wireframe UI/UX, mockup, prototype interaktif (file tasks tersendiri — FASE 1). Pekerjaan selanjutnya (FASE 2) BARU mengimplementasikan user flow + requirements + domain + API + code yang mengacu pada UI yang telah dibuat sebelumnya.
+
 # 1. Read Project Knowledge
 
 Before generating the task, inspect and understand:
@@ -37,18 +39,58 @@ Determine:
 
 * latest task number
 * existing task naming convention
-* whether the requested feature already exists
-* whether the request is a new feature
-* whether it is an enhancement to an existing task
-* whether an existing task should be updated instead of creating a duplicate
+* apakah feature yang diminta bereits memiliki task `*-ui-design.md` (FASE 1)
+* apakah feature yang diminta bereits memiliki task implementation (FASE 2)
+* apakah request adalah feature baru, enhancement, atau design-only / implementation-only
+* apakah harus membuat FASE 1 terlebih dahulu atau langsung FASE 2
 
 Never create duplicate tasks.
 
-If an existing task represents the same feature, update that task instead of creating another task.
+If an existing task represents the same feature **and same FASE**, update that task instead of creating another.
+
+Jika ditemukan task implementation tanpa pasangan `*-ui-design.md` padahal memiliki UI, jangan duplikat implementation — buatlah task UI-design baru terlebih dahulu dan catat di `## Dependencies` task implementation untuk mereferensikannya.
 
 ---
 
-# 3. Determine Task Identity
+# 3. Determine Task Identity & Fase
+
+Tentukan FASE berdasarkan konteks:
+
+### FASE 1 — UI/UX Design (Wireframe / Mockup / Prototype)
+
+Dibuat jika:
+- Feature memiliki antarmuka pengguna DAN belum memiliki `NN-feature-ui-design.md`, atau
+- User secara eksplisit meminta `design`, `wireframe`, `mockup`, `prototype`, `UI` terlebih dahulu.
+
+Filename:
+
+```text
+NN-feature-ui-design.md
+```
+
+Contoh: `05-global-table-ui-design.md`, `07-component-ui-design.md`
+
+Suffix yang diizinkan: `-ui-design` (preferred), `-design`, `-wireframe`. Untuk task baru gunakan `-ui-design`.
+
+### FASE 2 — Implementation (User Flow + Requirements + Domain + API + Code)
+
+Dibuat jika:
+- Feature sudah memiliki pasangan `NN-feature-ui-design.md` (FASE 1 DONE atau minimal TODO), atau
+- Feature murni backend tanpa UI (`UI: N/A`), atau
+- User meminta implementasi dan design sudah ada.
+
+Filename:
+
+```text
+NN-feature.md
+```
+
+Contoh: `06-global-table.md` (depends on `05-global-table-ui-design.md`)
+
+**Aturan penomoran**:
+- FASE 1 dan FASE 2 yang berpasangan harus bernomor berurutan, FASE 1 terlebih dahulu.
+- Jika task implementation diminta tetapi FASE 1 belum ada, buat FASE 1 terlebih dahulu (atau buat keduanya berurutan dan jelaskan di Final Response).
+- Jangan membuat task implementation yang memiliki UI tanpa mereferensikan FASE 1 di `## Dependencies` dan `## UI > Referensi Design`.
 
 If creating a new task:
 
@@ -58,33 +100,23 @@ Example:
 
 ```text
 tasks/
-├── 01-authentication.md
-├── 02-user-management.md
-└── 03-global-table.md
+├── 01-auth-ui-design.md
+├── 02-authentication.md
+└── 03-users-ui-design.md
 ```
 
-New task:
+New task (implementation with UI reference):
 
 ```text
-tasks/04-component.md
+tasks/04-user-management.md   # Depends on 03-users-ui-design.md
 ```
 
 Use:
 
 ```text
-NN-kebab-case-name.md
+NN-kebab-case-name.md              # implementation
+NN-kebab-case-name-ui-design.md    # UI design
 ```
-
-Examples:
-
-```text
-04-component.md
-05-template.md
-06-role-permission.md
-07-dashboard.md
-```
-
-The task filename must be concise and domain-oriented.
 
 ---
 
@@ -92,23 +124,29 @@ The task filename must be concise and domain-oriented.
 
 Analyze the request and determine:
 
+* FASE (1 = design, 2 = implementation)
 * objective & tujuan feature
-* actors / users
-* use cases
-* functional requirements
-* business rules & edge cases
-* domain entities, relationships, states, domain rules, invariants
-* API requirements (route, method, request, response, validation, error, authentication, authorization)
-* database impact
-* UI/UX impact (halaman, layout, component, interaction, responsive, loading/empty/error/success, accessibility)
-* frontend & backend requirements
-* acceptance criteria (Given/When/Then)
-* tasks / implementation checklist
-* testing & verification requirements
+* user flow (diagram, steps, alternate/error flows) — MANDATORY untuk kedua FASE, dan harus konsisten FASE 1 ↔ FASE 2
+* untuk FASE 1: UI deliverables (wireframe, mockup, prototype) dengan 10 sub-bagian (halaman, layout, component, interaction, responsive, loading, empty, error, success, accessibility)
+* untuk FASE 2:
+  * actors / users
+  * use cases (mapping ke User Flow steps)
+  * functional requirements
+  * business rules & edge cases
+  * domain entities, relationships, states, domain rules, invariants
+  * API requirements (route, method, request, response, validation, error, authentication, authorization) — mapping ke User Flow & UI FASE 1
+  * database impact
+  * UI/UX implementation yang MEREFERENSIKAN FASE 1 (bukan desain ulang)
+  * frontend & backend requirements
+  * acceptance criteria (Given/When/Then — mapping ke User Flow)
+  * tasks / implementation checklist (mengacu design FASE 1)
+  * testing & verification requirements
 
-Do not invent requirements that contradict the Permanent Knowledge.
+Do not invent requirements that contradict the Permanent Knowledge atau bertentangan dengan prototype FASE 1.
 
 If information is missing, make the smallest reasonable assumption and explicitly document it under `Assumptions`.
+
+Jika FASE 2 butuh UI tetapi FASE 1 belum ada, catat di `Assumptions` dan `Open Questions` bahwa design perlu dibuat terlebih dahulu atau buat FASE 1 bersamaan.
 
 ---
 
@@ -118,7 +156,233 @@ Every task MUST be a complete mini-specification.
 
 Do not create simple TODO documents.
 
-Gunakan template kanonik berikut. Semua header bertanda **MANDATORY** wajib ada — jangan dihapus, jangan diganti nama, jangan digabung. Jika tidak relevan, isi `N/A` dengan alasan di `Assumptions`.
+Terdapat **DUA JENIS TEMPLATE** — pilih sesuai FASE. Semua header bertanda **MANDATORY** wajib ada — jangan dihapus, jangan diganti nama, jangan digabung. Jika tidak relevan, isi `N/A` dengan alasan di `Assumptions`.
+
+## 5.A Template FASE 1 — UI/UX Design Task (Wireframe / Mockup / Prototype)
+
+Gunakan untuk `NN-feature-ui-design.md`.
+
+````md
+# Task NN — {Feature} UI Design (Wireframe / Mockup / Prototype)
+
+## Status
+
+TODO
+
+## Objective
+
+{Menghasilkan wireframe, mockup hi-fi, dan prototype interaktif untuk feature {Feature} sebagai acuan implementation FASE 2}
+
+## Context
+
+{Mengapa design ini dibutuhkan terlebih dahulu, posisinya sebagai prasyarat untuk task implementation, ketergantungan terhadap design system / PRD}
+
+## Scope
+
+### In Scope
+
+- Wireframe low-fi untuk semua halaman/state
+- Mockup hi-fi (Naive UI + Tailwind, token `docs/design-system.md`)
+- Prototype interaktif (klik, navigasi, validasi, transisi)
+
+### Out of Scope
+
+- Implementasi API / domain / database
+- ...
+
+## Dependencies
+
+- `docs/design-system.md`
+- `docs/PRD.md`
+- ...
+
+## User Flow
+
+> MANDATORY — diagram + langkah + mapping ke halaman. Flow ini menjadi ACUAN untuk task FASE 2.
+
+### Diagram
+
+```text
+[Entry] → {Halaman A} --(primary action)--> {Halaman B} --(success)--> {Halaman C}
+                │                                 │
+                └--(error/empty)--> {State handling}
+```
+
+### Steps
+
+| Step | Actor | Aksi | Halaman / Component | Hasil |
+|------|-------|------|---------------------|-------|
+| 1 | {Administrator} | Buka menu {Feature} | `/feature` | List tampil |
+| 2 | {Administrator} | Klik "Create" | `/feature/create` | Form kosong tampil |
+| 3 | ... | ... | ... | ... |
+
+### Alternate & Error Flows
+
+| ID | Skenario | Jalur | Penanganan UI |
+|----|----------|-------|---------------|
+| ALT-01 | Data kosong | List → Empty state | `NEmpty` + CTA |
+| ERR-01 | Validasi gagal | Form → Inline error | `NFormItem` feedback |
+| ERR-02 | 403 Forbidden | Any → Permission denied | `NAlert` + `rbac-denied` |
+
+## UI
+
+> MANDATORY — 10 sub-bagian wajib + deliverables.
+
+### Halaman
+
+| Route | Halaman | Akses | Deskripsi | Wireframe Ref |
+|-------|---------|-------|-----------|---------------|
+| `/feature` | List | Admin | Daftar + search + pagination | `wireframe/list.png` |
+| `/feature/create` | Create | Admin | Form | `wireframe/create.png` |
+| `/feature/:id` | Detail | Admin | Read-only + actions | `wireframe/detail.png` |
+
+### Layout
+
+- Navigasi: {sidebar / workspace / breadcrumb}
+- Struktur halaman: {header + filter bar + data table + pagination}
+- Penempatan: {di bawah menu "Master Data" → "Feature"}
+- Grid & spacing: ikuti token `docs/design-system.md`
+
+### Components
+
+| Component | Lokasi (rencana) | Deskripsi | State Variant |
+|-----------|-------------------|-----------|---------------|
+| `FeatureDataTable.vue` | `app/components/features/feature/` | Tabel + search/sort/visibility | loading, empty, error |
+| `FeatureForm.vue` | `app/components/features/feature/` | Form Naive UI | default, validation, disabled |
+| `FeatureDetail.vue` | `app/components/features/feature/` | Detail `.detail-view` | loading, error |
+
+### Interaction
+
+- Trigger: {klik "Create" → buka editor}
+- Flow: {validate → submit → toast → redirect}
+- Konfirmasi: {hapus → NPopconfirm / NDialog}
+- Transisi/animasi: {Anime.js fadeInUp, hormati prefers-reduced-motion}
+- Prototype link: {Figma / HTML prototype URL}
+
+### Responsive Behavior
+
+| Breakpoint | Perilaku | Wireframe Ref |
+|------------|----------|---------------|
+| Desktop (≥1024px) | Tabel penuh + sidebar terbuka | `wireframe/desktop.png` |
+| Tablet (768–1023px) | Kolom disembunyikan via visibility toggle | `wireframe/tablet.png` |
+| Mobile (<768px) | Card list / drawer, form full-width | `wireframe/mobile.png` |
+
+### States
+
+| State | Tampilan | Komponen Naive UI | Mockup Ref |
+|-------|----------|-------------------|------------|
+| Loading | Skeleton / NSpin | `NSpin`, `NSkeleton` | `mockup/loading.png` |
+| Empty | Illustration + CTA | `NEmpty` | `mockup/empty.png` |
+| Error | NAlert + retry | `NAlert` | `mockup/error.png` |
+| Success | NMessage / NNotification | `useMessage()` | `mockup/success.png` |
+| Validation | Inline error di field | `NFormItem` feedback | `mockup/validation.png` |
+| Permission Denied | NAlert 403 + event `rbac-denied` | `NAlert` | `mockup/403.png` |
+
+### Accessibility
+
+- Keyboard: semua aksi via keyboard, focus trap di modal, tab order
+- ARIA: `aria-label` untuk icon-only button
+- Kontras & font: ikuti `docs/design-system.md` (primary #3B82F6, Inter, radius 6/4/8)
+- Reduced motion: hormati `prefers-reduced-motion`
+- Screen reader: label & live region untuk feedback
+
+### Wireframe & Mockup Deliverables
+
+| Deliverable | Format | Lokasi | Status |
+|-------------|--------|--------|--------|
+| Wireframe low-fi | Figma / PNG | `docs/wireframes/{feature}/` | TODO |
+| Mockup hi-fi | Figma / PNG | `docs/mockups/{feature}/` | TODO |
+| Prototype interaktif | Figma prototype / HTML | `docs/prototypes/{feature}/` atau Storybook | TODO |
+
+### Design Tokens Check
+
+- [ ] Warna mengikuti `naiveui-theme.ts`
+- [ ] Typography Inter
+- [ ] Radius 6/4/8
+- [ ] Spacing Tailwind
+- [ ] Icon `@vicons/carbon` dengan `h(NIcon, null, { default: () => h(IconName) })`
+
+## Acceptance Criteria (Design)
+
+> MANDATORY — Given/When/Then untuk validasi design.
+
+### AC-D01 — {Judul}
+
+Given {reviewer membuka prototype}
+
+When {mengklik alur utama}
+
+Then {navigasi sesuai User Flow tanpa dead-end}
+
+### AC-D02 — ...
+
+## Tasks (Design)
+
+> MANDATORY — checklist design.
+
+### Discovery
+
+- [ ] Audit halaman & states existing
+- [ ] Mapping User Flow → halaman
+
+### Wireframe
+
+- [ ] Low-fi untuk semua halaman (desktop)
+- [ ] Low-fi untuk tablet & mobile
+- [ ] Wireframe untuk semua states (loading/empty/error/success/validation/permission)
+
+### Mockup
+
+- [ ] Hi-fi mockup dengan Naive UI + Tailwind + design tokens
+- [ ] Mockup untuk semua breakpoint
+- [ ] Mockup untuk semua states
+
+### Prototype
+
+- [ ] Prototype interaktif (klik, navigasi, transisi)
+- [ ] Validasi alur dengan User Flow
+- [ ] Review internal + iterasi
+
+### Handoff
+
+- [ ] Export assets & spec
+- [ ] Dokumentasi komponen & interaction
+- [ ] Tandai `Status: DONE` sebelum FASE 2 dimulai
+
+## Verification (Design)
+
+- [ ] Design System verification
+- [ ] Responsive verification (desktop/tablet/mobile mockup)
+- [ ] Accessibility verification
+- [ ] User Flow coverage (semua step ada di prototype)
+- [ ] Stakeholder / peer review
+
+## Assumptions
+
+- ...
+
+## Open Questions
+
+- ...
+
+## Related Knowledge
+
+- `docs/PRD.md`
+- `docs/design-system.md`
+
+## Change Log
+
+### Initial
+
+- UI design task created (FASE 1 — UI-First).
+
+````
+
+---
+
+## 5.B Template FASE 2 — Implementation Task (User Flow + Requirements + Domain + API + Code)
+
+Gunakan untuk `NN-feature.md` yang mengacu pada FASE 1.
 
 ````md
 # Task NN — {Task Name}
@@ -133,7 +397,7 @@ TODO
 
 ## Context
 
-{Mengapa feature ini ada dan bagaimana posisinya dalam produk / roadmap}
+{Mengapa feature ini ada dan bagaimana posisinya dalam produk / roadmap — sebutkan task UI-design prasyarat}
 
 ## Scope
 
@@ -145,13 +409,59 @@ TODO
 
 - ...
 
+## Dependencies
+
+- `tasks/NN-1-feature-ui-design.md` — Wireframe/Mockup/Prototype (WAJIB untuk feature dengan UI)
+- ...
+
+## User Flow
+
+> MANDATORY — WAJIB ada bahkan untuk backend-only. Harus KONSISTEN dengan task UI-design FASE 1.
+
+### Diagram
+
+```text
+[Entry] → {Halaman A} --(aksi)--> {Halaman B} --(success/error)--> {Hasil}
+```
+
+### Steps
+
+| Step | Actor | Aksi | Halaman / API | Hasil |
+|------|-------|------|---------------|-------|
+| 1 | {Administrator} | Buka list | `/feature` → `GET /api/feature` | Data tampil |
+| 2 | {Administrator} | Klik Create | `/feature/create` | Form tampil |
+| 3 | {Administrator} | Submit valid | `POST /api/feature` | 201 + redirect + toast |
+| 4 | ... | ... | ... | ... |
+
+### Alternate & Error Flows
+
+| ID | Skenario | Jalur | Penanganan |
+|----|----------|-------|------------|
+| ALT-01 | Data kosong | List → Empty | `NEmpty` + CTA |
+| ERR-01 | Validasi gagal | Submit → 400 | Inline error |
+| ERR-02 | Forbidden | Any → 403 | `NAlert` + `rbac-denied` |
+
+### Flow → UI Mapping
+
+| Flow Step | Halaman (dari UI-design) | Component | State |
+|-----------|--------------------------|-----------|-------|
+| Step 1 | `/feature` | `FeatureDataTable.vue` | loading → empty/error/success |
+| Step 2 | `/feature/create` | `FeatureForm.vue` | validation |
+
+### Flow → API Mapping
+
+| Flow Step | HTTP Method | Server Route | Validasi |
+|-----------|-------------|--------------|----------|
+| Step 1 | GET | `/api/feature` | QuerySchema |
+| Step 3 | POST | `/api/feature` | CreateSchema |
+
 ## Requirements
 
-> MANDATORY — tidak boleh kosong.
+> MANDATORY — tidak boleh kosong. Harus mengacu pada User Flow di atas dan UI design FASE 1.
 
 ### Tujuan Fitur
 
-- REQ-G01: {tujuan utama — business goal yang ingin dicapai}
+- REQ-G01: {tujuan utama — business goal}
 
 ### Users / Actors
 
@@ -162,14 +472,14 @@ TODO
 
 ### Use Cases
 
-| ID | Actor | Skenario | Hasil |
-|----|-------|----------|-------|
-| UC-01 | {Administrator} | {membuat Global Table baru} | {tabel tersimpan & dapat digunakan} |
-| UC-02 | ... | ... | ... |
+| ID | Actor | Skenario | Hasil | Flow Step |
+|----|-------|----------|-------|-----------|
+| UC-01 | {Administrator} | {membuat Global Table baru} | {tabel tersimpan} | Step 3 |
+| UC-02 | ... | ... | ... | ... |
 
 ### Functional Requirements
 
-- FR-001: {sistem harus ...}
+- FR-001: {sistem harus ...} — mengcover Step X
 - FR-002: ...
 - FR-003: ...
 
@@ -180,10 +490,10 @@ TODO
 
 ### Edge Cases
 
-| ID | Kondisi | Penanganan |
-|----|---------|------------|
-| EC-01 | {input duplikat / kosong / network failure} | {validasi / 409 / retry} |
-| EC-02 | ... | ... |
+| ID | Kondisi | Penanganan | Flow ID |
+|----|---------|------------|---------|
+| EC-01 | {input duplikat / kosong / network failure} | {validasi / 409 / retry} | ERR-01 |
+| EC-02 | ... | ... | ... |
 
 ## Domain
 
@@ -238,17 +548,17 @@ Jika stateless CRUD, tulis `N/A — stateless CRUD` dan jelaskan.
 
 ## API
 
-> MANDATORY. Jika murni tanpa backend, tulis `N/A — No API` + alasan di Assumptions.
+> MANDATORY. Jika murni tanpa backend, tulis `N/A — No API` + alasan. Jika ada API, harus SESUAI dengan User Flow dan UI FASE 1.
 
 ### Endpoint Overview
 
-| # | Server Route | HTTP Method | Auth | Permission | Deskripsi |
-|---|--------------|-------------|------|------------|-----------|
-| 1 | `/api/global-tables` | GET | JWT | `global-table:list` | List + pagination |
-| 2 | `/api/global-tables` | POST | JWT | `global-table:create` | Create |
-| 3 | `/api/global-tables/:id` | GET | JWT | `global-table:read` | Detail |
-| 4 | `/api/global-tables/:id` | PATCH | JWT | `global-table:update` | Update |
-| 5 | `/api/global-tables/:id` | DELETE | JWT | `global-table:delete` | Delete |
+| # | Server Route | HTTP Method | Auth | Permission | Deskripsi | Flow Step |
+|---|--------------|-------------|------|------------|-----------|-----------|
+| 1 | `/api/global-tables` | GET | JWT | `global-table:list` | List + pagination | Step 1 |
+| 2 | `/api/global-tables` | POST | JWT | `global-table:create` | Create | Step 3 |
+| 3 | `/api/global-tables/:id` | GET | JWT | `global-table:read` | Detail | Step 4 |
+| 4 | `/api/global-tables/:id` | PATCH | JWT | `global-table:update` | Update | Step 5 |
+| 5 | `/api/global-tables/:id` | DELETE | JWT | `global-table:delete` | Delete | Step 6 |
 
 ### Detail per Endpoint
 
@@ -277,66 +587,75 @@ _(Ulangi blok ini untuk Create / Detail / Update / Delete sesuai kebutuhan)_
 
 ## UI
 
-> MANDATORY untuk feature dengan antarmuka. Jika murni backend, tulis `N/A — No UI` + alasan.
+> MANDATORY. Untuk task implementation, WAJIB mereferensikan hasil FASE 1. Jangan mendesain ulang dari nol.
+
+### Referensi Design
+
+- Design task: `tasks/NN-feature-ui-design.md`
+- Wireframe: `docs/wireframes/{feature}/`
+- Mockup: `docs/mockups/{feature}/`
+- Prototype: `docs/prototypes/{feature}/` / Storybook
 
 ### Halaman
 
-| Route | Halaman | Akses | Deskripsi |
-|-------|---------|-------|-----------|
-| `/global-tables` | Global Table List | Admin | Daftar + search + pagination |
-| `/global-tables/create` | Global Table Create | Admin | Form pembuatan |
-| `/global-tables/:id` | Global Table Detail | Admin | Read-only + actions |
+| Route | Halaman | Akses | Deskripsi | Status Design |
+|-------|---------|-------|-----------|---------------|
+| `/global-tables` | Global Table List | Admin | Daftar + search + pagination | Approved (task 01) |
+| `/global-tables/create` | Global Table Create | Admin | Form pembuatan | Approved (task 01) |
+| `/global-tables/:id` | Global Table Detail | Admin | Read-only + actions | Approved (task 01) |
 
 ### Layout
 
-- Navigasi: {sidebar / workspace / breadcrumb}
+- Navigasi: {sesuai design task 01 — sidebar / workspace / breadcrumb}
 - Struktur halaman: {header + filter bar + data table + pagination}
 - Penempatan: {di bawah menu "Master Data" → "Global Table"}
+- Penyesuaian dari design: {catat jika ada deviasi + alasan}
 
 ### Components
 
-| Component | Lokasi | Deskripsi |
-|-----------|--------|-----------|
-| `GlobalTableDataTable.vue` | `app/components/features/global-table/` | Tabel dengan search, sort, visibility |
-| `GlobalTableForm.vue` | `app/components/features/global-table/` | Form create/edit Naive UI |
-| `GlobalTableDetail.vue` | `app/components/features/global-table/` | Detail `.detail-view` pattern |
+| Component | Lokasi | Deskripsi | Mengacu Mockup |
+|-----------|--------|-----------|----------------|
+| `GlobalTableDataTable.vue` | `app/components/features/global-table/` | Tabel dengan search, sort, visibility | `mockup/list.png` |
+| `GlobalTableForm.vue` | `app/components/features/global-table/` | Form create/edit dengan Naive UI | `mockup/form.png` |
+| `GlobalTableDetail.vue` | `app/components/features/global-table/` | Detail view `.detail-view` pattern | `mockup/detail.png` |
 
 ### Interaction
 
-- Trigger: {klik "Create" → buka editor}
+- Trigger: {klik "Create" → buka editor — sesuai prototype task 01}
 - Flow: {validate → submit → toast → redirect}
 - Konfirmasi: {hapus → NPopconfirm / NDialog}
 - Navigasi balik: {breadcrumbs / back button}
+- Deviasi dari prototype: {jika ada, jelaskan}
 
 ### Responsive Behavior
 
-| Breakpoint | Perilaku |
-|------------|----------|
-| Desktop (≥1024px) | Tabel penuh + sidebar terbuka |
-| Tablet (768–1023px) | Kolom disembunyikan via visibility toggle |
-| Mobile (<768px) | Card list / drawer, form full-width |
+| Breakpoint | Perilaku | Mengacu Wireframe |
+|------------|----------|-------------------|
+| Desktop (≥1024px) | Tabel penuh + sidebar terbuka | `wireframe/desktop.png` (task 01) |
+| Tablet (768–1023px) | Kolom disembunyikan via visibility toggle | `wireframe/tablet.png` (task 01) |
+| Mobile (<768px) | Card list / drawer, form full-width | `wireframe/mobile.png` (task 01) |
 
 ### States
 
-| State | Tampilan | Komponen Naive UI |
-|-------|----------|-------------------|
-| Loading | Skeleton / NSpin | `NSpin`, `NSkeleton` |
-| Empty | Illustration + CTA | `NEmpty` |
-| Error | NAlert + retry | `NAlert` |
-| Success | NMessage / NNotification | `useMessage()` |
-| Validation | Inline error di field | `NFormItem` feedback |
-| Permission Denied | NAlert 403 + event `rbac-denied` | `NAlert` |
+| State | Tampilan | Komponen Naive UI | Mengacu Mockup |
+|-------|----------|-------------------|----------------|
+| Loading | Skeleton / NSpin | `NSpin`, `NSkeleton` | `mockup/loading.png` (task 01) |
+| Empty | Illustration + CTA "Create pertama" | `NEmpty` | `mockup/empty.png` (task 01) |
+| Error | NAlert + retry | `NAlert` | `mockup/error.png` (task 01) |
+| Success | NMessage / NNotification | `useMessage()` | `mockup/success.png` (task 01) |
+| Validation | Inline error di field | `NFormItem` feedback | `mockup/validation.png` (task 01) |
+| Permission Denied | NAlert 403 + event `rbac-denied` | `NAlert` | `mockup/403.png` (task 01) |
 
 ### Accessibility
 
-- Keyboard: semua aksi via keyboard, focus trap di modal
+- Keyboard: semua aksi via keyboard, focus trap di modal — sesuai design task 01
 - ARIA: `aria-label` untuk icon-only button
 - Kontras & font: ikuti `docs/design-system.md` (primary #3B82F6, Inter)
-- Reduced motion: hormati `prefers-reduced-motion` untuk Anime.js
+- Reduced motion: hormati `prefers-reduced-motion`
 
 ## Acceptance Criteria
 
-> MANDATORY — minimal cover happy path + validation + business rules + error + empty + permission + edge case. Format Given / When / Then.
+> MANDATORY — minimal cover happy path + validation + business rules + error + empty + permission + edge case. Format Given / When / Then. Setiap AC harus mapping ke User Flow step.
 
 ### AC-001 — {Judul kriteria}
 
@@ -356,7 +675,7 @@ Then ...
 
 ## Tasks
 
-> MANDATORY — daftar pekerjaan implementasi dengan checkbox. Dipakai oleh `/plan`, `/implement`, `/verify`, `/review`.
+> MANDATORY — daftar pekerjaan implementasi dengan checkbox. Harus mengacu pada design FASE 1.
 
 ### Backend
 
@@ -375,18 +694,19 @@ Then ...
 - [ ] Shared Types — `shared/types/{name}.ts`
 - [ ] API Service / Composable — `app/composables/use{Name}Data.ts`
 - [ ] Store (jika perlu) — `app/stores/{name}.ts`
-- [ ] Pages — `app/pages/{route}/index.vue`, `create.vue`, `[id].vue`
-- [ ] Components — `DataTable.vue`, `Form.vue`, `Detail.vue`
+- [ ] Pages — `app/pages/{route}/index.vue`, `create.vue`, `[id].vue` (sesuai mockup FASE 1)
+- [ ] Components — `DataTable.vue`, `Form.vue`, `Detail.vue` (sesuai mockup FASE 1)
 - [ ] Validation — Naive UI `NForm` + rules sinkron dengan Zod
-- [ ] States — loading / empty / error / success / permission
-- [ ] Responsive & Accessibility — breakpoint + ARIA + keyboard
+- [ ] States — loading / empty / error / success / permission (sesuai design FASE 1)
+- [ ] Responsive & Accessibility — breakpoint + ARIA + keyboard (sesuai wireframe FASE 1)
 - [ ] Unit tests — `vitest` (`test:unit` / `test:nuxt`)
-- [ ] E2E tests — Playwright (`test:e2e`)
+- [ ] E2E tests — Playwright (`test:e2e`) — mengacu User Flow
 
 ### Cross-Cutting
 
 - [ ] RBAC matrix diperbarui
 - [ ] ActivityLog / Audit jika diperlukan
+- [ ] Verifikasi konsistensi dengan `tasks/NN-feature-ui-design.md` — tidak ada deviasi tanpa catatan
 
 ## Verification
 
@@ -394,13 +714,14 @@ Then ...
 - [ ] Unit test (`npm run test:unit`)
 - [ ] Component test (`npm run test:nuxt`)
 - [ ] API test / Integration test
-- [ ] E2E test (`npm run test:e2e`)
+- [ ] E2E test (`npm run test:e2e`) — semua User Flow steps
 - [ ] Database verification (entity, constraint, migration)
 - [ ] Permission verification (401/403 matrix)
-- [ ] UI/UX verification (Naive UI + Tailwind, no `NDescriptions`)
-- [ ] Responsive verification (desktop/tablet/mobile)
+- [ ] UI/UX verification — pixel-perfect terhadap mockup `tasks/NN-feature-ui-design.md`
+- [ ] Responsive verification (desktop/tablet/mobile — sesuai wireframe)
 - [ ] Design System verification (`naiveui-theme.ts`, token)
-- [ ] Accessibility verification (keyboard + ARIA + contrast)
+- [ ] Accessibility verification (keyboard + ARIA + contrast — sesuai design)
+- [ ] User Flow verification — semua AC Given/When/Then lolos
 
 ## Assumptions
 
@@ -416,6 +737,7 @@ Then ...
 - `docs/architecture.md`
 - `docs/database.md`
 - `docs/design-system.md`
+- `tasks/NN-feature-ui-design.md` — Design referensi (WAJIB untuk feature dengan UI)
 
 ## Change Log
 
@@ -425,21 +747,55 @@ Then ...
 
 ````
 
-7 bagian berikut MANDATORY dan tidak boleh dihapus (jika tidak relevan isi `N/A` + alasan di `Assumptions`):
+Untuk **FASE 1 (UI Design)**, bagian MANDATORY:
 
 ```text
-Requirements   (tujuan, users, use cases, functional, business rules, edge cases)
-Domain         (entity, relationship, state, domain rules, invariant + data model)
-API            (server route, HTTP method, request, response, validation, error, authentication, authorization)
-UI             (halaman, layout, component, interaction, responsive, loading/empty/error/success, accessibility)
-Acceptance     (Given / When / Then — kapan feature dianggap benar)
-Tasks          (daftar pekerjaan implementasi — checkbox)
-Verification   (checklist verifikasi kualitas)
+User Flow   (diagram, steps, alternate/error flows)
+UI          (halaman, layout, component, interaction, responsive, loading/empty/error/success, accessibility + wireframe/mockup/prototype deliverables)
+Acceptance  (Given/When/Then — validasi design)
+Tasks       (checklist wireframe → mockup → prototype → handoff)
+Verification (design system, responsive, accessibility, user flow coverage)
 ```
+
+Untuk **FASE 2 (Implementation)**, bagian MANDATORY:
+
+```text
+User Flow    (diagram, steps, alternate/error, flow→UI mapping, flow→API mapping — KONSISTEN dengan FASE 1)
+Requirements (tujuan, users, use cases, functional, business rules, edge cases — mengacu User Flow)
+Domain       (entity, relationship, state, domain rules, invariant + data model)
+API          (server route, HTTP method, request, response, validation, error, authentication, authorization — sesuai User Flow & UI FASE 1)
+UI           (halaman, layout, component, interaction, responsive, loading/empty/error/success, accessibility — MEREFERENSIKAN FASE 1)
+Acceptance   (Given / When / Then — kapan feature dianggap benar — mapping ke User Flow)
+Tasks        (daftar pekerjaan implementasi — checkbox — mengacu design FASE 1)
+Verification (checklist verifikasi — termasuk pixel-perfect terhadap mockup FASE 1)
+```
+
+Jika tidak relevan, isi `N/A` + alasan di `Assumptions` — jangan hapus headernya.
+
+**Aturan KONSISTENSI**: Task FASE 2 TIDAK BOLEH mendesain ulang UI dari nol. Deviasi harus dicatat di `## UI > Penyesuaian dari design` dan `## Open Questions`.
 
 ---
 
-# 6. Acceptance Criteria
+# 6. User Flow
+
+User Flow MANDATORY di **kedua FASE** dan harus KONSISTEN.
+
+* **FASE 1**: Menggambarkan alur interaksi di prototype (klik, navigasi, state).
+* **FASE 2**: Menggambarkan alur yang sama + mapping ke API & implementasi. Tidak boleh mengubah alur UI tanpa catatan.
+
+Gunakan struktur:
+
+```text
+Diagram → Steps → Alternate & Error Flows → (FASE 2: Flow→UI mapping + Flow→API mapping)
+```
+
+Setiap `Requirements > Use Cases` dan `Acceptance Criteria` di FASE 2 harus dapat ditelusuri ke `User Flow > Steps`.
+
+Jika flow tidak dapat ditentukan, buat asumsi terkecil dan catat di `Assumptions` + `Open Questions`.
+
+---
+
+# 7. Acceptance Criteria
 
 Acceptance Criteria MUST be testable dan berada di `## Acceptance Criteria`.
 
@@ -482,23 +838,32 @@ Create enough acceptance criteria to cover:
 * destructive actions
 * edge cases
 
-Setiap AC harus dapat dipetakan ke minimal satu item di `## Tasks`.
+Setiap AC harus dapat dipetakan ke `User Flow > Steps` dan minimal satu item di `## Tasks`.
+
+Untuk FASE 1, AC memvalidasi design/prototype. Untuk FASE 2, AC memvalidasi implementasi terhadap flow + mockup FASE 1.
 
 ---
 
-# 7. UI Specification
+# 8. UI Specification
 
-UI/UX adalah bagian dari task specification, bukan afterthought. Isi `## UI` dengan 7 sub-bagian wajib:
+UI/UX adalah bagian dari task specification, bukan afterthought.
 
+**FASE 1**: Isi `## UI` dengan 10 sub-bagian wajib + deliverables wireframe/mockup/prototype:
 * halaman — route & daftar halaman
 * layout — navigasi & struktur halaman
-* component — daftar component Vue + lokasi file
-* interaction — trigger, flow, konfirmasi, navigasi balik
-* responsive behavior — desktop/tablet/mobile
+* component — daftar component Vue + lokasi file (rencana)
+* interaction — trigger, flow, konfirmasi, navigasi balik, transisi, prototype link
+* responsive behavior — desktop/tablet/mobile (dengan wireframe ref)
 * states — loading / empty / error / success / validation / permission denied
 * accessibility — keyboard, ARIA, kontras, reduced-motion
+* wireframe & mockup deliverables — tabel format/lokasi/status
+* design tokens check
 
-Jika feature murni backend, tulis:
+**FASE 2**: `## UI` WAJIB mereferensikan FASE 1 di `Referensi Design` dan tidak mendesain ulang:
+* halaman/layout/component/interaction/responsive/states/accessibility harus menunjuk ke mockup/wireframe FASE 1
+* catat penyesuaian di `Penyesuaian dari design` jika ada deviasi
+
+Jika feature murni backend (kedua FASE), tulis:
 
 ```md
 ## UI
@@ -506,15 +871,13 @@ Jika feature murni backend, tulis:
 N/A — No UI (backend only). Alasan: ...
 ```
 
-dan jelaskan di `## Assumptions`.
+dan jelaskan di `## Assumptions`. Dalam kasus ini FASE 1 tidak perlu dibuat.
 
 The UI must follow the project's existing Design System (`docs/design-system.md`).
 
-The application should not regress into a generic admin dashboard if the project's design direction specifies a modern desktop/workspace-oriented experience.
-
 ---
 
-# 8. Cross-Document Consistency
+# 9. Cross-Document Consistency
 
 After generating the task, verify consistency against:
 
@@ -524,6 +887,7 @@ Architecture
 Database
 Design System
 Existing Tasks
+Pasangan FASE 1 ↔ FASE 2 (User Flow & UI)
 ```
 
 Check for:
@@ -533,14 +897,17 @@ Check for:
 * conflicting API conventions
 * conflicting database rules
 * conflicting UI patterns
+* User Flow konsistensi (FASE 2 tidak bertentangan dengan FASE 1)
+* UI konsistensi (FASE 2 mereferensikan mockup/wireframe FASE 1)
+* API konsistensi (endpoint mapping ke User Flow)
 * duplicated functionality
-* dependency problems
+* dependency problems (FASE 1 → FASE 2)
 * missing requirements
-* kelengkapan 7 bagian mandatory (Requirements, Domain, API, UI, Acceptance, Tasks, Verification)
+* kelengkapan bagian mandatory per FASE
 
 If a conflict is found:
 
-DO NOT silently overwrite Permanent Knowledge.
+DO NOT silently overwrite Permanent Knowledge atau prototype FASE 1.
 
 Document it under:
 
@@ -548,13 +915,13 @@ Document it under:
 ## Open Questions
 ```
 
-and explain the conflict.
+Serta catat di `## UI > Penyesuaian dari design` (FASE 2) jika ada deviasi.
 
 ---
 
-# 9. Do Not Implement
+# 10. Do Not Implement
 
-This command ONLY generates or updates the task specification plus `tasks/task-logs.md` (see #11).
+This command ONLY generates or updates the task specification plus `tasks/task-logs.md` (see #12).
 
 Do NOT:
 
@@ -571,7 +938,7 @@ The output of this command is the SDD task specification + `tasks/task-logs.md` 
 
 ---
 
-# 10. Final Response
+# 11. Final Response
 
 After generating/updating the task, report:
 
@@ -579,12 +946,24 @@ After generating/updating the task, report:
 Task: tasks/NN-task-name.md
 
 Action:
-- CREATED
+- CREATED (FASE 1 — UI Design)
+or
+- CREATED (FASE 2 — Implementation, depends on NN-1-ui-design)
 or
 - UPDATED
 
+Fase:
+- FASE 1 — UI Design (Wireframe/Mockup/Prototype)
+or
+- FASE 2 — Implementation
+
 Objective:
 ...
+
+User Flow:
+- Diagram: ...
+- Steps: N steps
+- Konsistensi dengan FASE 1: OK/CONFLICT/N/A
 
 Affected Areas:
 - Backend
@@ -593,59 +972,73 @@ Affected Areas:
 - UI/UX
 
 Dependencies:
-...
+- FASE 1: tasks/NN-feature-ui-design.md (jika FASE 2)
+- ...
 
 Consistency:
 - PRD: OK/CONFLICT
 - Architecture: OK/CONFLICT
 - Database: OK/CONFLICT
 - Design System: OK/CONFLICT
+- FASE 1 ↔ FASE 2 User Flow: OK/CONFLICT/N/A
+- FASE 1 ↔ FASE 2 UI: OK/CONFLICT/N/A
 
 Mandatory Sections:
+FASE 1:
+- User Flow: OK
+- UI (10 sub-bagian): OK
+- Acceptance (Given/When/Then): OK
+- Tasks (design checklist): OK
+- Verification (design): OK
+
+FASE 2:
+- User Flow: OK
 - Requirements (tujuan/users/use cases/functional/business rules/edge cases): OK
 - Domain (entity/relationship/state/domain rules/invariant): OK
 - API (route/method/request/response/validation/error/auth/authz): OK
-- UI (halaman/layout/component/interaction/responsive/loading/empty/error/success/accessibility): OK
+- UI (referensi FASE 1): OK
 - Acceptance (Given/When/Then): OK
 - Tasks (daftar implementasi): OK
 - Verification: OK
 
 Task Logs:
-- tasks/task-logs.md created/updated (see #11)
+- tasks/task-logs.md created/updated (see #12)
 
 Next recommended step:
-
-/plan tasks/NN-task-name.md
+- Jika FASE 1 baru dibuat: /task {feature} (untuk FASE 2) atau /plan tasks/NN-ui-design.md
+- Jika FASE 2: /plan tasks/NN-task-name.md
 ```
 
 Do not provide implementation code unless explicitly requested.
 
 ---
 
-# 11. Task Logs (Mandatory Final Step)
+# 12. Task Logs (Mandatory Final Step)
 
 After the task specification is generated/updated, you MUST create or update `tasks/task-logs.md` to record what has NOT yet been implemented, verified, and reviewed.
 
 This step is mandatory and is part of `/task` execution — do NOT skip it.
 
-### 11.1 Rules
+### 12.1 Rules
 
-1. If `tasks/task-logs.md` does not exist → CREATE it using the same template as `/gen-tasks` #23.2, listing all `tasks/NN-*.md` (excluding `task-logs.md` itself).
+1. If `tasks/task-logs.md` does not exist → CREATE it using the same template as `/gen-tasks` #24.2, listing all `tasks/NN-*.md` (excluding `task-logs.md` itself) dengan kolom Fase.
 2. If it already exists → UPDATE it:
-   - add the current task (`tasks/NN-task-name.md`) if not yet listed,
+   - add the current task (`tasks/NN-task-name.md`) if not yet listed dengan Fase yang benar,
    - preserve existing `[x]` states for already implemented/verified/reviewed items — never reset `[x]` to `[ ]`,
    - update `Last Updated` (`Date`, `By: /task`, `Source: $ARGUMENTS` summary),
-   - update the `Overview` row and `Detail per Task` section for the current task,
+   - update the `Overview` row and `Detail per Task` section for the current task (termasuk Depends on),
    - ensure the current task appears under `Belum Implementasi` / `Belum Diverifikasi` / `Belum Direview` with `[ ]` unless it was already marked `[x]` by `/implement`, `/verify`, `/review`.
 3. A newly created task via `/task` defaults to `[ ]` (belum) for Implemented, Verified, and Reviewed.
 4. An updated task via `/task` (existing file edited) MUST NOT reset its existing `[x]` states.
-5. Do NOT modify application source code in this step — only `tasks/task-logs.md`.
+5. Pisahkan FASE 1 dan FASE 2 di Overview jika memungkinkan untuk keterbacaan.
+6. Do NOT modify application source code in this step — only `tasks/task-logs.md`.
 
-### 11.2 Verification
+### 12.2 Verification
 
 Before finishing `/task`, ensure:
 
 - [ ] `tasks/task-logs.md` exists
-- [ ] Current task is listed in Overview and Detail per Task
+- [ ] Current task is listed in Overview and Detail per Task dengan Fase
+- [ ] For FASE 2: `Depends on` menunjuk ke task FASE 1 yang benar
 - [ ] Current task status in `tasks/task-logs.md` matches its `## Status` in `tasks/NN-*.md`
 - [ ] No existing `[x]` was reset
