@@ -10,8 +10,8 @@
       "karpathy-wiki"
     ],
     "description": "Knowledge graph for BMS Core Concepts Wiki",
-    "analyzedAt": "2026-09-04T07:24:32.738244+00:00",
-    "gitCommitHash": "b96249b87a45d583aa4d39e7f67f3f7f8b842cfe"
+    "analyzedAt": "2026-09-10T23:00:37.697992+00:00",
+    "gitCommitHash": "0dd12a61081434aa68393100fddc8a41191d4f8d"
   },
   "nodes": [
     {
@@ -860,6 +860,18 @@
       "complexity": "simple"
     },
     {
+      "id": "source:api",
+      "type": "source",
+      "name": "api.md",
+      "filePath": "raw/api.md",
+      "summary": "Raw source (.md, 17 KB)",
+      "tags": [
+        "raw",
+        "md"
+      ],
+      "complexity": "simple"
+    },
+    {
       "id": "source:core-conpect",
       "type": "source",
       "name": "core-conpect.md",
@@ -872,623 +884,344 @@
       "complexity": "simple"
     },
     {
-      "id": "entity:versioning",
-      "type": "entity",
-      "name": "Versioning",
-      "summary": "Architectural principle that templates and components should maintain version history, so old documents render with the version that existed when they were created.",
+      "id": "source:domain",
+      "type": "source",
+      "name": "domain.md",
+      "filePath": "raw/domain.md",
+      "summary": "Raw source (.md, 18 KB)",
       "tags": [
-        "architecture",
-        "template",
-        "component",
-        "version"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "entity:data-snapshot",
-      "type": "entity",
-      "name": "Data Snapshot",
-      "summary": "A frozen copy of input data captured at the time a document is generated, ensuring the document remains consistent with the data state at creation time.",
-      "tags": [
-        "document",
-        "data",
-        "persistence"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "entity:template-version",
-      "type": "entity",
-      "name": "Template Version",
-      "summary": "A specific versioned revision of a template that a document references, enabling old documents to keep using the template structure they were created with.",
-      "tags": [
-        "template",
-        "version",
-        "document"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "entity:validation",
-      "type": "entity",
-      "name": "Validation Behavior",
-      "summary": "The validation rules automatically derived from column type definitions, determining what inputs are acceptable for each field.",
-      "tags": [
-        "column",
-        "data",
-        "integrity"
+        "raw",
+        "md"
       ],
       "complexity": "simple"
     },
     {
-      "id": "entity:row-selection",
-      "type": "entity",
-      "name": "Row Selection",
-      "summary": "The process where a template chooses specific rows from a global table to populate a collection component, producing filtered output items.",
+      "id": "source:rekomendasi-library",
+      "type": "source",
+      "name": "rekomendasi-library.md",
+      "filePath": "raw/rekomendasi-library.md",
+      "summary": "Raw source (.md, 27 KB)",
       "tags": [
-        "component",
-        "template",
-        "data",
+        "raw",
+        "md"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "source:requirements",
+      "type": "source",
+      "name": "requirements.md",
+      "filePath": "raw/requirements.md",
+      "summary": "Raw source (.md, 20 KB)",
+      "tags": [
+        "raw",
+        "md"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "source:ui",
+      "type": "source",
+      "name": "ui.md",
+      "filePath": "raw/ui.md",
+      "summary": "Raw source (.md, 19 KB)",
+      "tags": [
+        "raw",
+        "md"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "complexity": "moderate",
+      "id": "entity:no-code-table-builder",
+      "name": "No-Code Table Builder",
+      "summary": "Users create Pegawai-like tables with columns without developer migrations; system auto-provides CRUD from the definition.",
+      "tags": [
+        "data-layer",
+        "metadata-driven",
+        "global-table"
+      ],
+      "type": "entity"
+    },
+    {
+      "complexity": "moderate",
+      "id": "entity:column-behavior-contract",
+      "name": "Column Behavior Contract",
+      "summary": "A column type is a contract controlling storage, input widget, display format, validation, and search/sort behavior.",
+      "tags": [
+        "data-layer",
+        "column-type",
+        "schema-driven"
+      ],
+      "type": "entity"
+    },
+    {
+      "complexity": "moderate",
+      "id": "entity:schema-driven-crud",
+      "name": "Schema-Driven CRUD",
+      "summary": "Browse, search, sort, pagination, and create/edit forms are generated from Column Definition flags like required, searchable, and orderable.",
+      "tags": [
+        "data-layer",
+        "crud",
+        "ui-generation"
+      ],
+      "type": "entity"
+    },
+    {
+      "complexity": "moderate",
+      "id": "entity:document-snapshot",
+      "name": "Document Snapshot",
+      "summary": "A generated document is an immutable record of data snapshot plus template version plus rendered HTML/PDF output.",
+      "tags": [
+        "rendering",
+        "document",
+        "immutability"
+      ],
+      "type": "entity"
+    },
+    {
+      "complexity": "simple",
+      "id": "entity:generic-render-pipeline",
+      "name": "Generic Render Pipeline",
+      "summary": "One generic renderer converts any template to HTML/PDF instead of per-template PDF code.",
+      "tags": [
+        "rendering",
+        "renderer-driven",
+        "template"
+      ],
+      "type": "entity"
+    },
+    {
+      "complexity": "simple",
+      "id": "claim:global-table:metadata-defines-everything",
+      "name": "Metadata Defines Structure, Behavior, and UI",
+      "summary": "A Global Table is metadata defining a data table's structure, behavior, and UI, not just a database table.",
+      "tags": [
+        "data-layer",
+        "metadata-driven"
+      ],
+      "type": "claim"
+    },
+    {
+      "complexity": "simple",
+      "id": "claim:architecture-principles:no-hardcoded-documents",
+      "name": "No Hardcoded Document Types",
+      "summary": "Document kinds like Surat Tugas must be defined via metadata, never hardcoded in application code.",
+      "tags": [
+        "architecture",
+        "metadata-driven"
+      ],
+      "type": "claim"
+    },
+    {
+      "complexity": "moderate",
+      "id": "claim:computed-field:hidden-vs-readonly",
+      "name": "Hidden vs Readonly Computed Fields",
+      "summary": "Hidden computed fields calculate and store without display; readonly computed fields display results users cannot edit.",
+      "tags": [
+        "data-layer",
+        "computed-field",
+        "expression-engine"
+      ],
+      "type": "claim"
+    },
+    {
+      "complexity": "simple",
+      "id": "claim:relation-data-provider:display-value-separation",
+      "name": "Display/Value Separation in Relations",
+      "summary": "A relation selector shows composed display fields (e.g. code + name) while storing only the related id as value.",
+      "tags": [
+        "data-layer",
+        "relation"
+      ],
+      "type": "claim"
+    },
+    {
+      "complexity": "simple",
+      "id": "claim:multi-relation:collection-semantics",
+      "name": "Multi Relation Yields Collection",
+      "summary": "A multiple relation returns a departments[] collection, not a single relation, enabling looping over selections.",
+      "tags": [
+        "data-layer",
+        "relation",
         "collection"
       ],
-      "complexity": "moderate"
+      "type": "claim"
     },
     {
-      "id": "entity:document-output",
-      "type": "entity",
-      "name": "Document Output",
-      "summary": "The final rendered result of a document, produced by combining a template version, a data snapshot, and the rendering engine.",
+      "complexity": "moderate",
+      "id": "claim:expression-engine:single-engine-consistency",
+      "name": "Single Expression Engine Everywhere",
+      "summary": "One expression engine (+ - * / ++, future IF/SUM/COUNT) serves computed fields, components, templates, conditionals, and documents.",
       "tags": [
-        "document",
-        "rendering",
-        "output"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:template-defines-form-administration-defines-process",
-      "type": "claim",
-      "name": "Template vs Administration distinction",
-      "summary": "Template defines document form/structure while Administration defines the data collection process that produces documents.",
-      "sourceArticle": "article:administration",
-      "tags": [
-        "claim",
-        "definition"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:column-type-governs-full-data-lifecycle",
-      "type": "claim",
-      "name": "Column type governs full data lifecycle",
-      "summary": "A column type determines how data is stored, input, displayed, validated, formatted, searched, and ordered \u2014 it is the single source of truth for field behavior.",
-      "sourceArticle": "article:column-type",
-      "tags": [
-        "claim",
-        "data-behavior"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:component-is-not-data",
-      "type": "claim",
-      "name": "Components do not hold final data",
-      "summary": "Components declare data requirements but never hold final data themselves; templates supply the data that fulfills component requirements.",
-      "sourceArticle": "article:component",
-      "tags": [
-        "claim",
-        "architecture",
-        "principle"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:component-has-single-or-collection-mode",
-      "type": "claim",
-      "name": "Component looping is single vs collection mode",
-      "summary": "Components operate in either single mode (1 data \u2192 1 output) or collection mode (many rows \u2192 many outputs), and collection mode uses row selection from a data source.",
-      "sourceArticle": "article:component-looping",
-      "tags": [
-        "claim",
-        "component-behavior"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:architecture-is-metadata-and-schema-driven",
-      "type": "claim",
-      "name": "System is metadata and schema driven",
-      "summary": "The platform architecture avoids hardcoding by being metadata-driven, component-driven, template-driven, data-driven, schema-driven, and renderer-driven.",
-      "sourceArticle": "article:architecture-principles",
-      "tags": [
-        "claim",
-        "architecture",
-        "principle"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:old-documents-use-version-at-creation-time",
-      "type": "claim",
-      "name": "Old documents preserve creation-time versions",
-      "summary": "When a template or component is versioned, previously generated documents continue to use the version that existed at the time they were created.",
-      "sourceArticle": "article:architecture-principles",
-      "tags": [
-        "claim",
-        "versioning",
-        "architecture"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "claim:computed-field-expression-evaluated-by-engine",
-      "type": "claim",
-      "name": "Computed fields use expression engine",
-      "summary": "Computed fields evaluate expressions (e.g. harga \u00d7 jumlah) via the expression engine, with hidden computed storing results and readonly computed displaying them.",
-      "sourceArticle": "article:computed-field",
-      "tags": [
-        "claim",
-        "expression",
-        "data"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:crud-is-derived-from-column-metadata",
-      "type": "claim",
-      "name": "CRUD UI is derived from column metadata",
-      "summary": "Global tables automatically generate browse, create, edit, and delete behaviors \u2014 the UI form is produced directly from column definitions.",
-      "sourceArticle": "article:crud-generated-table",
-      "tags": [
-        "claim",
-        "ui-generation",
-        "data"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:context-menu-reads-component-requirements",
-      "type": "claim",
-      "name": "Context menu reads component requirements on insert",
-      "summary": "When a user inserts a component via the context menu, the system reads the component's data requirements and prompts the user to specify data sources.",
-      "sourceArticle": "article:context-menu",
-      "tags": [
-        "claim",
-        "template-editor",
-        "interaction"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:document-snapshot-template-version-rendered-output",
-      "type": "claim",
-      "name": "Document is composed of snapshot, version, and output",
-      "summary": "A document consists of three parts: a data snapshot (input data at creation time), a template version (template revision used), and rendered output (final result).",
-      "sourceArticle": "article:core-object-model",
-      "tags": [
-        "claim",
-        "document-model",
-        "architecture"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "claim:schema-driven-form-from-column-definition",
-      "type": "claim",
-      "name": "Forms are generated from column definitions",
-      "summary": "UI forms are produced by a form renderer that consumes column definitions as schema \u2014 column definition flows into form renderer, which produces the input interface.",
-      "sourceArticle": "article:architecture-principles",
-      "tags": [
-        "claim",
-        "ui-generation",
-        "schema"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:generic-renderer-replaces-per-template-pdfs",
-      "type": "claim",
-      "name": "Generic renderer replaces per-template PDF generation",
-      "summary": "Instead of creating individual PDF generation logic for each template, a single generic renderer consumes any template and produces the document output.",
-      "sourceArticle": "article:architecture-principles",
-      "tags": [
-        "claim",
-        "rendering",
-        "architecture"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "entity:system-data",
-      "type": "entity",
-      "name": "System Data",
-      "summary": "Automatically provided data values (current_date, user.name, etc.) that serve as one of five binding source types for data binding.",
-      "tags": [
-        "data-source",
-        "binding",
-        "system"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "entity:conditional-rendering",
-      "type": "entity",
-      "name": "Conditional Rendering",
-      "summary": "Runtime logic that shows or hides UI elements based on expression evaluation. Planned as a future consumer of the expression engine alongside components, templates, and computed fields.",
-      "tags": [
-        "expression",
-        "ui-generation",
-        "rendering"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "entity:data-completion-tracker",
-      "type": "entity",
-      "name": "Data Completion Tracker",
-      "summary": "Mechanism within Administration that tracks whether all required data across steps and templates has been provided before a step or document can proceed.",
-      "tags": [
-        "administration",
-        "workflow",
-        "validation"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "claim:five-binding-source-types",
-      "type": "claim",
-      "name": "Five data binding source types",
-      "summary": "Data binding has exactly five source types: (1) Administration Data, (2) Global Table, (3) Manual Input, (4) Expression, (5) System Data.",
-      "sourceArticle": "article:data-binding",
-      "tags": [
-        "binding",
-        "architecture"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:data-requirement-as-contract",
-      "type": "claim",
-      "name": "Data requirement is a contract",
-      "summary": "Data requirement functions as a contract between Component and Template: the Component declares what data it needs, and the Template must provide bindings for all of them.",
-      "sourceArticle": "article:data-requirement",
-      "tags": [
-        "component",
-        "template",
-        "contract"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:expression-engine-cross-module-reuse",
-      "type": "claim",
-      "name": "Expression engine is designed for cross-module reuse",
-      "summary": "The expression engine is explicitly designed to be shared across Component, Template, Conditional rendering, Computed field, and Document generation \u2014 making the system more consistent than having per-module expression logic.",
-      "sourceArticle": "article:expression-engine",
-      "tags": [
-        "expression",
-        "architecture",
-        "reuse"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "claim:document-as-data-snapshot",
-      "type": "claim",
-      "name": "Documents are immutable data snapshots",
-      "summary": "Generated documents contain a Data Snapshot, meaning the document's data is frozen at generation time and does not change when source data changes.",
-      "sourceArticle": "article:final-concept",
-      "tags": [
-        "document",
-        "immutability",
-        "architecture"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "claim:menu-is-metadata-projection",
-      "type": "claim",
-      "name": "Menu is a projection of metadata",
-      "summary": "Navigation menus are not hard-coded; they are automatically generated as projections of user-created metadata (Global Tables and Administrations).",
-      "sourceArticle": "article:generated-menu",
-      "tags": [
-        "ui-generation",
-        "metadata"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:global-table-is-metadata-not-table",
-      "type": "claim",
-      "name": "Global Table is metadata, not a database table",
-      "summary": "Global Table is metadata that defines the structure, behavior, and UI of a data table \u2014 it is not simply a database table but a complete definition layer.",
-      "sourceArticle": "article:global-table",
-      "tags": [
-        "data-layer",
-        "metadata"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "claim:platform-core-pipeline",
-      "type": "claim",
-      "name": "Platform core pipeline",
-      "summary": "The entire platform follows a linear pipeline: Data (Global Table) \u2192 Component \u2192 Template \u2192 Administration \u2192 Document \u2192 PDF.",
-      "sourceArticle": "article:konsep-utama",
-      "tags": [
-        "architecture",
-        "pipeline"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "claim:admin-is-workflow-template-is-blueprint",
-      "type": "claim",
-      "name": "Administration is workflow, Template is blueprint",
-      "summary": "Administration represents a document workflow (process), while Template represents a document blueprint at a specific step (artifact). One Administration can contain multiple Templates across multiple steps.",
-      "sourceArticle": "article:multi-template-administration",
-      "tags": [
-        "administration",
-        "template",
-        "workflow"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "claim:multi-relation-stores-collections",
-      "type": "claim",
-      "name": "Multi-relation stores relationship collections",
-      "summary": "Multi-relation does not produce a single reference (e.g., pegawai \u2192 department) but instead stores a collection of relationships (pegawai \u2192 departments[]).",
-      "sourceArticle": "article:multi-relation",
-      "tags": [
-        "data-layer",
-        "relation"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:column-attributes-drive-ui-behavior",
-      "type": "claim",
-      "name": "Column attributes drive UI behavior",
-      "summary": "Global Table column attributes like Searchable and Orderable directly determine how the generated CRUD UI behaves \u2014 the UI is a reflection of column metadata.",
-      "sourceArticle": "article:global-table",
-      "tags": [
-        "data-layer",
-        "ui-generation",
-        "metadata"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "entity:data-context",
-      "type": "entity",
-      "name": "Data Context",
-      "summary": "Intermediate layer between global table and expression engine. Raw data from global tables is loaded into a structured context object (e.g. {{data.pegawai.nama}}) that the expression engine evaluates. Bridges storage and computation.",
-      "tags": [
-        "data-layer",
         "expression-engine",
-        "architecture"
+        "consistency"
       ],
-      "complexity": "moderate"
+      "type": "claim"
     },
     {
-      "id": "entity:resolve-tree",
-      "type": "entity",
-      "name": "Resolve Tree",
-      "summary": "Intermediate processing stage in the rendering engine where all references (binding, loop, condition) are resolved into a concrete document tree before producing HTML DOM or PDF output.",
-      "tags": [
-        "rendering",
-        "pipeline",
-        "architecture"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "entity:display-value-pattern",
-      "type": "entity",
-      "name": "Display-Value Separation Pattern",
-      "summary": "Pattern used in relation data providers where user-configurable display fields (shown in UI) are separated from value fields (the actual ID/reference stored). Enables human-readable selection backed by foreign keys.",
-      "tags": [
-        "data-layer",
-        "ui-pattern",
-        "relation"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "entity:sequential-pipeline",
-      "type": "entity",
-      "name": "Sequential Pipeline Architecture",
-      "summary": "Architectural pattern used throughout the system where processing occurs in a strict ordered sequence. Seen in the overall flow (global-table \u2192 component \u2192 template \u2192 administration \u2192 steps \u2192 render) and in the rendering engine (data \u2192 component \u2192 binding \u2192 loop \u2192 condition \u2192 HTML \u2192 PDF).",
-      "tags": [
-        "architecture",
-        "pipeline",
-        "system-design"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "entity:page-break",
-      "type": "entity",
-      "name": "Page Break",
-      "summary": "A rendering concern handled by the rendering engine to control document pagination. Supported as a first-class element alongside text, image, table, and other content types in both templates and the composition canvas.",
-      "tags": [
-        "rendering",
-        "template",
-        "pagination"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "entity:collection-rendering",
-      "type": "entity",
-      "name": "Collection Rendering Pattern",
-      "summary": "Pattern where a component marked as is_looping=true iterates over selected rows from a global table source, rendering the component template once per item. Produces numbered/sequential output (e.g. 1. Afdal, 2. Budi, 3. Citra).",
-      "tags": [
-        "template",
-        "component",
-        "loop",
-        "rendering"
-      ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "entity:unified-data-reference-syntax",
-      "type": "entity",
-      "name": "Unified Data Reference Syntax",
-      "summary": "Single dot-notation syntax ({{data.field}}, {{data.relation.field}}, {{component.name}}) used across the entire system for referencing data. Applies to expressions, bindings, loops, and component data, ensuring one consistent language from global table to rendered output.",
+      "complexity": "moderate",
+      "id": "claim:unified-data-language:one-reference-syntax",
+      "name": "One Data Reference Syntax",
+      "summary": "The {{data.*}} and {{component.*}} syntax is the single reference language from Global Table through renderer.",
       "tags": [
         "expression-engine",
         "data-binding",
-        "convention"
+        "unified-language"
       ],
-      "complexity": "simple"
+      "type": "claim"
     },
     {
-      "id": "entity:static-content",
-      "type": "entity",
-      "name": "Static Content",
-      "summary": "Non-dynamic text, images, and formatting that form the fixed skeleton of a template. Unlike components, data bindings, conditions, and loops, static content does not change between document instances.",
+      "complexity": "simple",
+      "id": "claim:final-concept:versioned-immutability",
+      "name": "Versioned Template Immutability",
+      "summary": "Templates and components are versioned (v1/v2/v3) and old documents stay pinned to the version used at creation.",
       "tags": [
-        "template",
+        "architecture",
+        "versioning",
+        "document"
+      ],
+      "type": "claim"
+    },
+    {
+      "complexity": "moderate",
+      "id": "entity:requirement-contract",
+      "name": "Requirement Contract",
+      "summary": "Typed data needs declared by a Component that a Template must satisfy via administration, global table, manual input, or expression.",
+      "tags": [
+        "component-system",
+        "contract",
+        "data-requirement"
+      ],
+      "type": "entity"
+    },
+    {
+      "complexity": "moderate",
+      "id": "entity:collection-component",
+      "name": "Collection Component",
+      "summary": "Component with Single vs Collection mode; collection renders once per selected row such as a staff list.",
+      "tags": [
+        "component-system",
+        "looping",
+        "collection"
+      ],
+      "type": "entity"
+    },
+    {
+      "complexity": "moderate",
+      "id": "entity:document-composition-canvas",
+      "name": "Document Composition Canvas",
+      "summary": "Template editor treated as a composition canvas mixing text, images, tables, components, loops, conditions, and page breaks.",
+      "tags": [
+        "template-system",
+        "editor",
         "composition"
       ],
-      "complexity": "simple"
+      "type": "entity"
     },
     {
-      "id": "entity:document-composition-canvas",
-      "type": "entity",
-      "name": "Document Composition Canvas",
-      "summary": "The conceptual model of the template editor as more than a rich text editor \u2014 it is a canvas where users compose documents by inserting static text, images, tables, components, dynamic data, loops, conditions, and page breaks into a structured layout.",
+      "complexity": "moderate",
+      "id": "entity:binding-source-catalog",
+      "name": "Binding Source Catalog",
+      "summary": "Five binding sources for every component need: administration data, global table, manual input, expression, and system data.",
       "tags": [
-        "template",
-        "editor",
-        "ui-pattern"
+        "template-system",
+        "data-binding",
+        "sources"
       ],
-      "complexity": "moderate"
+      "type": "entity"
     },
     {
-      "id": "claim:single-engine-dual-output",
-      "type": "claim",
-      "name": "Single engine produces both HTML and PDF",
-      "summary": "All documents are processed by a single rendering engine that produces both HTML DOM and PDF as output formats.",
-      "sourceArticle": "article:rendering-engine",
+      "complexity": "complex",
+      "id": "entity:document-workflow",
+      "name": "Document Workflow",
+      "summary": "Administration as a multi-step data-collection workflow where each step can use a different template blueprint.",
       "tags": [
-        "claim",
-        "rendering"
+        "administration-system",
+        "workflow",
+        "multi-template"
       ],
-      "complexity": "simple"
+      "type": "entity"
     },
     {
-      "id": "claim:relation-separates-display-value",
-      "type": "claim",
-      "name": "Relations separate display from value fields",
-      "summary": "Relation selectors allow users to configure which fields are shown in the UI (display) versus which field is stored as the actual reference value, enabling human-readable selection backed by foreign keys.",
-      "sourceArticle": "article:relation-data-provider",
+      "complexity": "complex",
+      "id": "entity:resolve-tree",
+      "name": "Resolve Tree",
+      "summary": "Intermediate resolution stage that applies binding, loop, and condition resolution before producing HTML DOM then PDF.",
       "tags": [
-        "claim",
-        "data-layer"
+        "rendering",
+        "resolve-tree",
+        "pipeline"
       ],
-      "complexity": "simple"
+      "type": "entity"
     },
     {
-      "id": "claim:editor-is-composition-canvas",
-      "type": "claim",
-      "name": "Template editor is a composition canvas, not just a rich text editor",
-      "summary": "The template editor supports inserting text, images, tables, components, dynamic data, loops, conditions, and page breaks \u2014 making it a Document Composition Canvas rather than a simple WYSIWYG editor.",
-      "sourceArticle": "article:rich-text-template",
+      "complexity": "simple",
+      "id": "entity:projected-menu",
+      "name": "Projected Menu",
+      "summary": "UI menu generated as a projection of existing metadata rather than manually hard-coded entries.",
       "tags": [
-        "claim",
-        "template"
+        "ui-generation",
+        "menu",
+        "metadata-projection"
       ],
-      "complexity": "simple"
+      "type": "entity"
     },
     {
-      "id": "claim:unified-data-syntax-across-system",
-      "type": "claim",
-      "name": "System uses one data reference syntax everywhere",
-      "summary": "The entire system uses a single dot-notation syntax ({{data.field}}, {{data.relation.field}}, {{component.name}}) from global table through expression engine, components, templates, and final rendering.",
-      "sourceArticle": "article:unified-data-language",
+      "complexity": "simple",
+      "id": "claim:component:declares-needs-not-data",
+      "name": "Component declares needs, Template supplies sources",
+      "summary": "Components hold no final data and only declare requirements; templates supply the data source so blocks stay reusable.",
       "tags": [
-        "claim",
-        "convention"
+        "component-system",
+        "separation-of-concerns"
       ],
-      "complexity": "simple"
+      "type": "claim"
     },
     {
-      "id": "claim:steps-are-sequential-data-gathering",
-      "type": "claim",
-      "name": "Steps are sequential data gathering sessions",
-      "summary": "Each step in an administration represents one phase of data collection (e.g. letter info, employee info, decision info), and steps are executed sequentially until data completion.",
-      "sourceArticle": "article:step",
+      "complexity": "simple",
+      "id": "claim:template:blueprint-not-storage",
+      "name": "Template is blueprint, not per-letter storage",
+      "summary": "Templates define document structure via static content, components, bindings, conditions, and looping without storing instance data.",
       "tags": [
-        "claim",
-        "administration"
+        "template-system",
+        "blueprint"
       ],
-      "complexity": "simple"
+      "type": "claim"
     },
     {
-      "id": "claim:template-component-loop-is-core",
-      "type": "claim",
-      "name": "Template+Component+Loop is the most important combination",
-      "summary": "The combination of template, component, and looping is the most important pattern in the system. It enables dynamic document generation by iterating over global table data and rendering components per item.",
-      "sourceArticle": "article:template-component-loop",
+      "complexity": "moderate",
+      "id": "claim:multi-template-administration:workflow-per-step-blueprint",
+      "name": "Administration is workflow, Template is per-step blueprint",
+      "summary": "One administration can span multiple templates across steps, e.g. assignment letter plus travel order plus cost detail.",
       "tags": [
-        "claim",
-        "template",
-        "architecture"
+        "administration-system",
+        "multi-template"
       ],
-      "complexity": "simple"
+      "type": "claim"
     },
     {
-      "id": "claim:template-is-data-agnostic",
-      "type": "claim",
-      "name": "Templates are data-agnostic blueprints",
-      "summary": "Templates define document structure (static content, components, bindings, conditions, looping) but do not store any specific letter or document data. They are reusable blueprints.",
-      "sourceArticle": "article:template",
+      "complexity": "moderate",
+      "id": "claim:rendering-engine:single-pipeline-html-then-pdf",
+      "name": "Single renderer produces HTML then PDF",
+      "summary": "One engine merges data, component, and template through binding, loop, and condition resolution into HTML DOM then PDF.",
       "tags": [
-        "claim",
-        "template"
-      ],
-      "complexity": "simple"
-    },
-    {
-      "id": "claim:resolution-pipeline-is-ordered",
-      "type": "claim",
-      "name": "Data resolution follows a strict ordered pipeline",
-      "summary": "After step completion, data is resolved in a specific order: Resolve Data \u2192 Resolve Component \u2192 Resolve Binding \u2192 Resolve Loop \u2192 Resolve Condition \u2192 Render Document \u2192 PDF.",
-      "sourceArticle": "article:runtime-flow",
-      "tags": [
-        "claim",
         "rendering",
         "pipeline"
       ],
-      "complexity": "simple"
+      "type": "claim"
     },
     {
-      "id": "claim:data-context-bridges-storage-computation",
-      "type": "claim",
-      "name": "Data context bridges global table storage and expression engine computation",
-      "summary": "Global table data is loaded into a data context object that the expression engine evaluates, providing a single structured interface between raw storage and computed expressions.",
-      "sourceArticle": "article:unified-data-language",
+      "complexity": "moderate",
+      "id": "claim:runtime-flow:ordered-resolve-then-render",
+      "name": "Ordered resolve data, component, binding, loop, condition",
+      "summary": "Runtime completes step data collection first, then resolves in fixed order before rendering the final document.",
       "tags": [
-        "claim",
-        "data-layer",
-        "expression-engine"
+        "rendering",
+        "runtime-flow",
+        "ordering"
       ],
-      "complexity": "moderate"
-    },
-    {
-      "id": "claim:engine-handles-nine-element-types",
-      "type": "claim",
-      "name": "Rendering engine handles nine element types",
-      "summary": "The rendering engine must handle Text, Image, RichText, Component, Loop, Condition, Table, Page Break, and Data Binding/Expression as first-class element types.",
-      "sourceArticle": "article:rendering-engine",
-      "tags": [
-        "claim",
-        "rendering"
-      ],
-      "complexity": "simple"
+      "type": "claim"
     }
   ],
   "edges": [
@@ -2564,291 +2297,270 @@
       "weight": 0.6
     },
     {
-      "source": "article:administration",
-      "target": "article:core-object-model",
-      "type": "related",
-      "description": "Administration steps are a sub-structure of the Core Object Model; administration is how data flows into documents through steps, templates, and data sources.",
-      "weight": 0.6,
-      "direction": "forward"
+      "direction": "forward",
+      "source": "entity:no-code-table-builder",
+      "target": "article:global-table",
+      "type": "exemplifies",
+      "weight": 0.5
     },
     {
-      "source": "article:architecture-principles",
+      "direction": "forward",
+      "source": "claim:global-table:metadata-defines-everything",
+      "target": "article:global-table",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:column-behavior-contract",
       "target": "article:column-type",
-      "type": "related",
-      "description": "Schema-driven architecture principle means column definitions implicitly define form rendering \u2014 column-type determines the UI component used in generated forms.",
-      "weight": 0.7,
-      "direction": "forward"
+      "type": "exemplifies",
+      "weight": 0.5
     },
     {
-      "source": "article:component-looping",
+      "direction": "forward",
+      "source": "entity:column-behavior-contract",
       "target": "article:global-table",
-      "type": "related",
-      "description": "Collection mode requires selecting rows from a global table; the template acts as the bridge between component data requirements and global table data.",
-      "weight": 0.6,
-      "direction": "forward"
+      "type": "builds_on",
+      "weight": 0.5
     },
     {
-      "source": "article:computed-field",
+      "direction": "forward",
+      "source": "entity:schema-driven-crud",
       "target": "article:crud-generated-table",
-      "type": "related",
-      "description": "Computed fields exist as column definitions within global tables, so they also appear in auto-generated CRUD forms with their expression behavior.",
-      "weight": 0.5,
-      "direction": "forward"
+      "type": "exemplifies",
+      "weight": 0.5
     },
     {
-      "source": "article:context-menu",
-      "target": "article:core-object-model",
-      "type": "related",
-      "description": "Context menu is the UI mechanism for editing template content in the Core Object Model \u2014 it reads component requirements and triggers data binding.",
-      "weight": 0.5,
-      "direction": "forward"
+      "direction": "forward",
+      "source": "entity:schema-driven-crud",
+      "target": "entity:column-behavior-contract",
+      "type": "depends_on",
+      "weight": 0.5
     },
     {
-      "source": "article:component",
-      "target": "article:global-table",
-      "type": "related",
-      "description": "Components declare data requirements but rely on global tables as the actual data source that fulfills those requirements.",
-      "weight": 0.6,
-      "direction": "forward"
+      "direction": "forward",
+      "source": "claim:computed-field:hidden-vs-readonly",
+      "target": "article:computed-field",
+      "type": "documents",
+      "weight": 0.5
     },
     {
-      "source": "article:template",
-      "target": "article:global-table",
-      "type": "related",
-      "description": "Templates bind to global tables as their data provider, connecting document structure to the underlying data engine.",
-      "weight": 0.6,
-      "direction": "forward"
-    },
-    {
-      "source": "article:data-binding",
-      "target": "article:administration",
-      "type": "related",
-      "description": "Data binding lists 'Administration Data' as one of five binding sources and uses examples like 'Administrasi.nama', but does not wikilink to the administration article.",
-      "weight": 0.8,
-      "direction": "forward"
-    },
-    {
-      "source": "article:data-requirement",
-      "target": "article:global-table",
-      "type": "related",
-      "description": "Data requirement examples show bindings to Global Table fields (e.g., Pegawai.nip), but the article does not wikilink to global-table as a data source.",
-      "weight": 0.7,
-      "direction": "forward"
-    },
-    {
-      "source": "article:data-requirement",
-      "target": "article:administration",
-      "type": "related",
-      "description": "Data requirement examples reference administration data paths (Administrasi.nama), but do not wikilink to administration.",
-      "weight": 0.6,
-      "direction": "forward"
-    },
-    {
-      "source": "article:expression-engine",
-      "target": "article:component",
-      "type": "related",
-      "description": "Expression engine explicitly states it will be used by Components, but does not wikilink to the component article.",
-      "weight": 0.7,
-      "direction": "forward"
-    },
-    {
-      "source": "article:expression-engine",
-      "target": "article:rendering-engine",
-      "type": "related",
-      "description": "Expression engine lists 'Document generation' as a future consumer, which overlaps with rendering-engine's responsibility for PDF output.",
-      "weight": 0.5,
-      "direction": "forward"
-    },
-    {
-      "source": "article:final-concept",
-      "target": "article:rich-text-template",
-      "type": "related",
-      "description": "The final-concept diagram lists 'RichText' as a Template attribute, which directly corresponds to the rich-text-template article, but does not wikilink it.",
-      "weight": 0.7,
-      "direction": "forward"
-    },
-    {
-      "source": "article:konsep-utama",
-      "target": "article:rendering-engine",
-      "type": "related",
-      "description": "The konsep-utama pipeline ends with 'Generated Document \u2192 PDF', which is rendering-engine's domain, but does not wikilink to rendering-engine.",
-      "weight": 0.6,
-      "direction": "forward"
-    },
-    {
-      "source": "article:global-table",
-      "target": "article:data-binding",
-      "type": "related",
-      "description": "Global Table data serves as one of five binding sources in data-binding, but global-table does not wikilink to data-binding.",
-      "weight": 0.7,
-      "direction": "forward"
-    },
-    {
-      "source": "article:multi-relation",
-      "target": "article:component",
-      "type": "related",
-      "description": "Multi-relation data (relationship collections) is consumed by components via data requirements, but multi-relation does not wikilink to component.",
-      "weight": 0.6,
-      "direction": "forward"
-    },
-    {
-      "source": "article:generated-menu",
-      "target": "article:component",
-      "type": "related",
-      "description": "Generated menu derives from global-table and administration metadata, both of which contain components, but generated-menu does not account for the component layer that feeds into administration.",
-      "weight": 0.4,
-      "direction": "forward"
-    },
-    {
-      "source": "article:overall-flow",
-      "target": "entity:data-context",
-      "type": "related",
-      "description": "The DATA AVAILABLE stage in the overall flow implies creation of a data context from global table data before it reaches components.",
-      "weight": 0.8,
-      "direction": "forward"
-    },
-    {
-      "source": "article:rendering-engine",
-      "target": "entity:resolve-tree",
-      "type": "related",
-      "description": "The rendering engine diagram explicitly shows a Resolve Tree stage between input resolution and final output generation.",
-      "weight": 0.9,
-      "direction": "forward"
-    },
-    {
-      "source": "article:relation-data-provider",
-      "target": "entity:display-value-pattern",
-      "type": "related",
-      "description": "The article demonstrates separating display fields (code, name) from value fields (id) in relation selectors \u2014 an implicit design pattern.",
-      "weight": 0.85,
-      "direction": "forward"
-    },
-    {
-      "source": "article:overall-flow",
-      "target": "entity:sequential-pipeline",
-      "type": "related",
-      "description": "The overall flow diagram reveals a strict sequential pipeline architecture that governs the entire document generation process.",
-      "weight": 0.75,
-      "direction": "forward"
-    },
-    {
-      "source": "article:rendering-engine",
-      "target": "entity:page-break",
-      "type": "related",
-      "description": "Page Break is listed as one of the element types the engine must handle, but has no dedicated article.",
-      "weight": 0.6,
-      "direction": "forward"
-    },
-    {
-      "source": "article:template-component-loop",
-      "target": "entity:collection-rendering",
-      "type": "related",
-      "description": "The article demonstrates the collection rendering pattern: loop through selected global table rows, render component per item.",
-      "weight": 0.9,
-      "direction": "forward"
-    },
-    {
-      "source": "article:unified-data-language",
-      "target": "entity:unified-data-reference-syntax",
-      "type": "related",
-      "description": "The article defines the {{data.field}} dot-notation syntax as the single data reference language across the system.",
-      "weight": 0.9,
-      "direction": "forward"
-    },
-    {
-      "source": "article:template",
-      "target": "entity:static-content",
-      "type": "related",
-      "description": "Template structure explicitly lists Static Content as the first component type, alongside components, bindings, conditions, and loops.",
-      "weight": 0.7,
-      "direction": "forward"
-    },
-    {
-      "source": "article:rich-text-template",
-      "target": "entity:document-composition-canvas",
-      "type": "related",
-      "description": "The article redefines the template editor as a Document Composition Canvas rather than a simple rich text editor.",
-      "weight": 0.85,
-      "direction": "forward"
-    },
-    {
-      "source": "article:rendering-engine",
-      "target": "article:global-table",
-      "type": "related",
-      "description": "The rendering engine's input stage requires data from global tables, but no wikilink connects them directly.",
-      "weight": 0.7,
-      "direction": "forward"
-    },
-    {
-      "source": "article:rendering-engine",
-      "target": "article:step",
-      "type": "related",
-      "description": "The runtime flow shows that step completion triggers the rendering engine, but rendering-engine does not link to step.",
-      "weight": 0.65,
-      "direction": "forward"
-    },
-    {
-      "source": "article:rich-text-template",
-      "target": "article:step",
-      "type": "related",
-      "description": "Template editing (composition canvas) occurs within a step's data gathering session, but these articles don't cross-link.",
-      "weight": 0.6,
-      "direction": "forward"
-    },
-    {
-      "source": "article:step",
-      "target": "article:data-binding",
-      "type": "related",
-      "description": "Steps collect data that subsequently feeds into data binding during rendering, but step does not link to data-binding.",
-      "weight": 0.55,
-      "direction": "forward"
-    },
-    {
-      "source": "article:step",
-      "target": "article:rendering-engine",
-      "type": "related",
-      "description": "Step completion triggers the rendering pipeline, but step only links to administration, template, and multi-template-administration.",
-      "weight": 0.65,
-      "direction": "forward"
-    },
-    {
-      "source": "article:runtime-flow",
-      "target": "article:global-table",
-      "type": "related",
-      "description": "The 'Resolve Data' phase in runtime flow pulls from global tables, but runtime-flow doesn't link to global-table.",
-      "weight": 0.6,
-      "direction": "forward"
-    },
-    {
-      "source": "article:template-component-loop",
-      "target": "article:administration",
-      "type": "related",
-      "description": "The most important combination (template+component+loop) is orchestrated by administrations, but template-component-loop doesn't link to administration.",
-      "weight": 0.55,
-      "direction": "forward"
-    },
-    {
-      "source": "article:unified-data-language",
-      "target": "article:rendering-engine",
-      "type": "related",
-      "description": "The renderer consumes the unified data reference syntax to produce output, but unified-data-language doesn't link to rendering-engine.",
-      "weight": 0.65,
-      "direction": "forward"
-    },
-    {
-      "source": "article:relation-data-provider",
+      "direction": "forward",
+      "source": "claim:computed-field:hidden-vs-readonly",
       "target": "article:expression-engine",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:relation-data-provider:display-value-separation",
+      "target": "article:relation-data-provider",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:multi-relation:collection-semantics",
+      "target": "article:multi-relation",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:multi-relation:collection-semantics",
+      "target": "article:relation-data-provider",
+      "type": "builds_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:expression-engine:single-engine-consistency",
+      "target": "article:expression-engine",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:unified-data-language:one-reference-syntax",
+      "target": "article:unified-data-language",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:unified-data-language:one-reference-syntax",
+      "target": "article:expression-engine",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:document-snapshot",
+      "target": "article:final-concept",
+      "type": "exemplifies",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:generic-render-pipeline",
+      "target": "article:rendering-engine",
+      "type": "exemplifies",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:architecture-principles:no-hardcoded-documents",
+      "target": "article:architecture-principles",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:final-concept:versioned-immutability",
+      "target": "article:final-concept",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:requirement-contract",
+      "target": "article:data-requirement",
+      "type": "builds_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:requirement-contract",
+      "target": "article:component",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:component:declares-needs-not-data",
+      "target": "article:component",
+      "type": "exemplifies",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:component:declares-needs-not-data",
+      "target": "entity:requirement-contract",
       "type": "related",
-      "description": "Relation data accessed via {{data.relation.field}} syntax flows through the expression engine, but relation-data-provider doesn't link to expression-engine.",
-      "weight": 0.55,
-      "direction": "forward"
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:collection-component",
+      "target": "article:component-looping",
+      "type": "builds_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:collection-component",
+      "target": "article:template-component-loop",
+      "type": "related",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:template:blueprint-not-storage",
+      "target": "article:template",
+      "type": "exemplifies",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:document-composition-canvas",
+      "target": "article:rich-text-template",
+      "type": "builds_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:document-composition-canvas",
+      "target": "article:context-menu",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:binding-source-catalog",
+      "target": "article:data-binding",
+      "type": "builds_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:binding-source-catalog",
+      "target": "entity:requirement-contract",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:document-workflow",
+      "target": "article:administration",
+      "type": "builds_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:multi-template-administration:workflow-per-step-blueprint",
+      "target": "article:multi-template-administration",
+      "type": "exemplifies",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:multi-template-administration:workflow-per-step-blueprint",
+      "target": "entity:document-workflow",
+      "type": "related",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:resolve-tree",
+      "target": "article:rendering-engine",
+      "type": "builds_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:rendering-engine:single-pipeline-html-then-pdf",
+      "target": "article:rendering-engine",
+      "type": "exemplifies",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:runtime-flow:ordered-resolve-then-render",
+      "target": "article:runtime-flow",
+      "type": "exemplifies",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "claim:runtime-flow:ordered-resolve-then-render",
+      "target": "entity:resolve-tree",
+      "type": "depends_on",
+      "weight": 0.5
+    },
+    {
+      "direction": "forward",
+      "source": "entity:projected-menu",
+      "target": "article:generated-menu",
+      "type": "builds_on",
+      "weight": 0.5
     }
   ],
   "layers": [
     {
       "id": "layer:platform-architecture",
       "name": "Platform Architecture",
-      "description": "Platform Architecture (10 nodes)",
+      "description": "Platform Architecture (9 nodes)",
       "nodeIds": [
         "article:konsep-utama",
         "article:overall-flow",
@@ -2856,16 +2568,15 @@
         "article:final-concept",
         "article:architecture-principles",
         "topic:platform-architecture",
-        "entity:data-context",
-        "entity:sequential-pipeline",
-        "entity:data-snapshot",
-        "entity:system-data"
+        "entity:document-snapshot",
+        "claim:architecture-principles:no-hardcoded-documents",
+        "claim:final-concept:versioned-immutability"
       ]
     },
     {
       "id": "layer:data-layer",
       "name": "Data Layer",
-      "description": "Data Layer (12 nodes)",
+      "description": "Data Layer (14 nodes)",
       "nodeIds": [
         "article:global-table",
         "article:column-type",
@@ -2874,46 +2585,45 @@
         "article:relation-data-provider",
         "article:multi-relation",
         "topic:data-layer",
-        "entity:display-value-pattern",
-        "claim:column-type-governs-full-data-lifecycle",
-        "claim:computed-field-expression-evaluated-by-engine",
-        "claim:global-table-is-metadata-not-table",
-        "claim:multi-relation-stores-collections"
+        "entity:no-code-table-builder",
+        "claim:global-table:metadata-defines-everything",
+        "entity:column-behavior-contract",
+        "entity:schema-driven-crud",
+        "claim:computed-field:hidden-vs-readonly",
+        "claim:relation-data-provider:display-value-separation",
+        "claim:multi-relation:collection-semantics"
       ]
     },
     {
       "id": "layer:expression-engine",
       "name": "Expression Engine",
-      "description": "Expression Engine (6 nodes)",
+      "description": "Expression Engine (5 nodes)",
       "nodeIds": [
         "article:expression-engine",
         "article:unified-data-language",
         "topic:expression-engine",
-        "entity:unified-data-reference-syntax",
-        "entity:conditional-rendering",
-        "claim:expression-engine-cross-module-reuse"
+        "claim:expression-engine:single-engine-consistency",
+        "claim:unified-data-language:one-reference-syntax"
       ]
     },
     {
       "id": "layer:component-system",
       "name": "Component System",
-      "description": "Component System (9 nodes)",
+      "description": "Component System (7 nodes)",
       "nodeIds": [
         "article:component",
         "article:data-requirement",
         "article:component-looping",
         "topic:component-system",
-        "claim:component-is-not-data",
-        "claim:component-has-single-or-collection-mode",
-        "claim:context-menu-reads-component-requirements",
-        "claim:data-requirement-as-contract",
-        "claim:template-component-loop-is-core"
+        "entity:requirement-contract",
+        "claim:component:declares-needs-not-data",
+        "entity:collection-component"
       ]
     },
     {
       "id": "layer:template-system",
       "name": "Template System",
-      "description": "Template System (14 nodes)",
+      "description": "Template System (9 nodes)",
       "nodeIds": [
         "article:template",
         "article:rich-text-template",
@@ -2921,14 +2631,9 @@
         "article:data-binding",
         "article:template-component-loop",
         "topic:template-system",
-        "entity:collection-rendering",
-        "entity:static-content",
+        "claim:template:blueprint-not-storage",
         "entity:document-composition-canvas",
-        "entity:template-version",
-        "claim:document-snapshot-template-version-rendered-output",
-        "claim:generic-renderer-replaces-per-template-pdfs",
-        "claim:admin-is-workflow-template-is-blueprint",
-        "claim:template-is-data-agnostic"
+        "entity:binding-source-catalog"
       ]
     },
     {
@@ -2940,58 +2645,45 @@
         "article:step",
         "article:multi-template-administration",
         "topic:administration-system",
-        "claim:template-defines-form-administration-defines-process",
-        "claim:steps-are-sequential-data-gathering"
+        "entity:document-workflow",
+        "claim:multi-template-administration:workflow-per-step-blueprint"
       ]
     },
     {
       "id": "layer:rendering",
       "name": "Rendering",
-      "description": "Rendering (5 nodes)",
+      "description": "Rendering (7 nodes)",
       "nodeIds": [
         "article:rendering-engine",
         "article:runtime-flow",
         "topic:rendering",
+        "entity:generic-render-pipeline",
         "entity:resolve-tree",
-        "entity:page-break"
+        "claim:rendering-engine:single-pipeline-html-then-pdf",
+        "claim:runtime-flow:ordered-resolve-then-render"
       ]
     },
     {
       "id": "layer:ui-generation",
       "name": "UI Generation",
-      "description": "UI Generation (2 nodes)",
+      "description": "UI Generation (3 nodes)",
       "nodeIds": [
         "article:generated-menu",
-        "topic:ui-generation"
+        "topic:ui-generation",
+        "entity:projected-menu"
       ]
     },
     {
       "id": "layer:other",
       "name": "Other",
-      "description": "Uncategorized nodes (22)",
+      "description": "Uncategorized nodes (6)",
       "nodeIds": [
+        "source:api",
         "source:core-conpect",
-        "entity:versioning",
-        "entity:validation",
-        "entity:row-selection",
-        "entity:document-output",
-        "claim:architecture-is-metadata-and-schema-driven",
-        "claim:old-documents-use-version-at-creation-time",
-        "claim:crud-is-derived-from-column-metadata",
-        "claim:schema-driven-form-from-column-definition",
-        "entity:data-completion-tracker",
-        "claim:five-binding-source-types",
-        "claim:document-as-data-snapshot",
-        "claim:menu-is-metadata-projection",
-        "claim:platform-core-pipeline",
-        "claim:column-attributes-drive-ui-behavior",
-        "claim:single-engine-dual-output",
-        "claim:relation-separates-display-value",
-        "claim:editor-is-composition-canvas",
-        "claim:unified-data-syntax-across-system",
-        "claim:resolution-pipeline-is-ordered",
-        "claim:data-context-bridges-storage-computation",
-        "claim:engine-handles-nine-element-types"
+        "source:domain",
+        "source:rekomendasi-library",
+        "source:requirements",
+        "source:ui"
       ]
     }
   ],
