@@ -28,7 +28,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/20-rendering-engine.md | [x] | [x] | [x] |
 | tasks/21-generated-menu.md | [x] | [x] | [x] |
 | tasks/22-dynamic-rbac-audit-production.md | [x] | [x] | [x] |
-| tasks/23-production-migration-baseline.md | [x] | [ ] | [ ] |
+| tasks/23-production-migration-baseline.md | [x] | [x] | [x] |
 
 ## Sudah Implementasi
 
@@ -75,6 +75,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/20-rendering-engine.md — Rendering Engine — 2026-09-06 by /verify — PASS: 389/389 unit (27 pipeline/guard/pdf/DTO), 15/15 nuxt (5 DocumentPreview), vue-tsc clean, build OK, live AC-001..AC-006 verified + AC-007 unit-covered, DB restored
 - [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /verify — PASS: 410/410 unit (21 navigation), 15/15 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified + AC-006 code-level, DB restored
 - [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /verify — PASS: 427/427 unit, 15/15 nuxt, vue-tsc clean, build OK, live AC-001..AC-006 verified (golden path table→component→template→admin→run→doc+PDF, coverage 10/10 after 1 user-approved audit fix), DB restored
+- [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-10 by /verify — PASS: 445/445 unit, 15/15 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified, DB restored
 
 ## Sudah Direview
 
@@ -94,6 +95,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/21-generated-menu.md — Generated Menu & Navigation — 2026-09-07 by /review — APPROVED
 - [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /review — APPROVED
 - [x] tasks/12-global-table-data.md — Global Table Data & Generated CRUD — 2026-09-09 by /review — APPROVED
+- [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-10 by /review — APPROVED
 
 ## Belum Direview
 
@@ -103,7 +105,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/23-production-migration-baseline.md
 
 ## Detail per Task
 
@@ -211,11 +212,11 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 ### tasks/23-production-migration-baseline.md
 
 - Implemented: [x] 2026-09-09 by /implement — Baseline migration + drift check (server/utils/orm-data-source.ts CLI-loadable 23-entity config; server/migrations/1788914913928-Baseline.ts 106up/106down generated via in-process schemaBuilder.log; server/utils/migration-status.ts pure computeMigrationSync + checkMigrationStatus; server/utils/migration-cli.ts generate/run/revert via jiti; db.ts migrations + prod-only migrationsRun; database.server.ts real migrationInSync + fatal→console.error/process.exit(1) after live proof that Nitro plugin throw keeps serving; npm scripts migration:*; test/unit/utils/migration-status.test.ts 9 tests; docs production-runbook §1 + database.md). Verified: unit 445/445 (35 files), nuxt 15/15, vue-tsc clean, build OK. Live on prod build w/ scratch cwd: AC-001 fresh prod boot → 27 tables + seed + /api/health healthy; AC-002 npm run/revert/run + integrity_check ok; AC-003 unknown-applied row → MIGRATION_DRIFT + exit(1) + conn refused; AC-004 reboot perms stable 22 (fresh-seed base; dev 26 = 22 + 4 leftover Data:v16* fixtures); AC-005 dev defaults warn-only + serving. Repo db.sqlite md5 unchanged. Notes: migrated sqlite_master identical to dev except menuOrder/menuIcon column order in administrations/global_tables (entity-declared vs legacy appended); zero phantom generate-diff post-migration.
-- Verified: [ ] pending.
-- Reviewed: [ ] pending.
+- Verified: [x] 2026-09-10 by /verify — PASS: unit 445/445 (35 files, incl. 9 migration-status), nuxt 15/15, vue-tsc clean, build OK. Live on prod build w/ scratch cwd: AC-001 fresh prod boot → 27 tables + seed (22 perms/9 roles/5 users/4 settings) + /api/health healthy; AC-002 revert→1 table/run→27 + integrity_check ok; AC-003 rogue applied row → MIGRATION_DRIFT + exit(1) + runbook pointer; AC-004 reboot counts stable 22/9/5/4; AC-005 nuxt-dev boot healthy with warn-only drift (migrations-table-missing) + JWT warn, no refusal. Migrated sqlite_master identical to dev except documented menuOrder/menuIcon column order; post-migration generate reports zero diff. Repo db.sqlite md5 unchanged. E2E (2026-09-10 follow-up): 15/17 green on cold dev boot; the 2 failures (auth first-test + crud first-test, `input` selector timeout on /login) are a pre-existing cold Vite-compile flake — both pass on the warm server (4.6s / 12.9s), and Task 23 touches no frontend/auth code. Effective E2E: 17/17. Minor (non-blocking): runbook §1 + database.md say "(26 permissions at baseline)" but fresh seed yields 22 (26 = dev DB incl. 4 leftover Data:v16* auto-provisioned perms).
+- Reviewed: [x] 2026-09-10 by /review — APPROVED: real drift check + baseline close the Task 22 REQ-004 gap; no must-fix (3 should-fix, 4 consider). Full suite green re-verified (migration-status 9/9).
 
 ## Last Updated
 
-- Date: 2026-09-09
-- By: /implement
+- Date: 2026-09-10
+- By: /review
 - Task: tasks/23-production-migration-baseline.md
