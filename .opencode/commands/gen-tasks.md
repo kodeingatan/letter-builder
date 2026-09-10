@@ -123,7 +123,7 @@ $ARGUMENTS
 Example:
 
 ```text
-/tasks "Platform aplikasi bisnis dinamis dengan Core Concept Global Table → Component → Template → Administration. Administrator dapat mendefinisikan struktur data, membangun component, menyusun template, dan mengelola aplikasi secara dinamis."
+/gen-tasks "Platform aplikasi bisnis dinamis dengan Core Concept Global Table → Component → Template → Administration. Administrator dapat mendefinisikan struktur data, membangun component, menyusun template, dan mengelola aplikasi secara dinamis."
 ```
 
 The input may contain:
@@ -369,22 +369,22 @@ Do not rename existing task files merely for cosmetic consistency.
 
 Every generated task MUST be a mini-specification.
 
-Use:
+Gunakan template kanonik berikut. Semua header bertanda **MANDATORY** wajib ada — jangan dihapus, jangan diganti nama, jangan digabung. Jika tidak relevan, isi dengan `N/A` dan jelaskan alasan di `Assumptions`.
 
 ````md
 # Task NN — {Task Name}
 
 ## Status
 
-TODO
+TODO | IN_PROGRESS | DONE
 
 ## Objective
 
-{What this feature accomplishes}
+{Jelaskan tujuan feature secara ringkas — apa yang diselesaikan task ini dalam konteks Core Concept}
 
 ## Context
 
-{Why this feature exists}
+{Mengapa feature ini ada, bagaimana posisinya dalam roadmap, dan ketergantungan terhadap task lain}
 
 ## Scope
 
@@ -396,113 +396,209 @@ TODO
 
 - ...
 
-## Actors
-
-- ...
-
-## Dependencies
-
-- ...
-
 ## Requirements
 
-- REQ-001 ...
-- REQ-002 ...
+> Bagian ini MANDATORY. Tidak boleh kosong.
 
-## Business Rules
+### Tujuan Fitur
 
-- BR-001 ...
-- BR-002 ...
+- REQ-G01: {tujuan utama feature — business goal yang ingin dicapai}
+
+### Users / Actors
+
+| Actor | Deskripsi | Hak Akses |
+|-------|-----------|-----------|
+| {Contoh: Administrator} | {dapat mengelola ...} | {role/permission} |
+| {End User} | {mengisi ...} | ... |
+
+### Use Cases
+
+| ID | Actor | Skenario | Hasil |
+|----|-------|----------|-------|
+| UC-01 | {Administrator} | {membuat Global Table baru} | {tabel tersimpan & dapat digunakan di Component} |
+| UC-02 | ... | ... | ... |
+
+### Functional Requirements
+
+- FR-001: {sistem harus ...}
+- FR-002: {sistem harus ...}
+- FR-003: ...
+
+### Business Rules
+
+- BR-001: {aturan bisnis eksplisit — contoh: Nama tabel harus unik}
+- BR-002: ...
+- BR-003: ...
+
+### Edge Cases
+
+| ID | Kondisi | Penanganan |
+|----|---------|------------|
+| EC-01 | {input kosong / duplikat / network failure} | {validasi / error message / retry} |
+| EC-02 | ... | ... |
 
 ## Domain
 
+> Bagian ini MANDATORY.
+
+### Entities
+
+| Entity | Deskripsi | Atribut Kunci |
+|--------|-----------|---------------|
+| {GlobalTable} | {struktur data dinamis} | id, name, slug, ... |
+| ... | ... | ... |
+
+### Relationships
+
 ```text
-{domain relationship}
-````
+{EntityA} ──1:N── {EntityB}  (contoh: GlobalTable 1:N GlobalTableColumn)
+{EntityB} ──N:1── {EntityC}
+```
 
-## Data Model
-
-### {Entity}
-
-| Field | Type | Required | Description |
-| ----- | ---- | -------- | ----------- |
-| ...   | ...  | ...      | ...         |
-
-## API
-
-### List
-
-GET /...
-
-### Create
-
-POST /...
-
-### Detail
-
-GET /.../:id
-
-### Update
-
-PATCH /.../:id
-
-### Delete
-
-DELETE /.../:id
-
-Include request/response contracts where important.
-
-## UI/UX
-
-### Information Architecture
-
-...
-
-### User Flow
-
-...
-
-### List
-
-...
-
-### Editor
-
-...
-
-### Detail
-
-...
-
-### Interaction
-
-...
+- REL-01: {penjelasan kardinalitas & cascade rule}
+- REL-02: ...
 
 ### States
 
-* loading
-* empty
-* error
-* success
-* validation
-* disabled
-* permission denied
+| State | Deskripsi | Transisi Diizinkan |
+|-------|-----------|--------------------|
+| {DRAFT} | {belum dipublish} | DRAFT → PUBLISHED |
+| {PUBLISHED} | ... | PUBLISHED → ARCHIVED |
+
+Jika tidak ada state machine, tulis `N/A — stateless CRUD` dan jelaskan.
+
+### Domain Rules
+
+- DR-01: {aturan domain — contoh: Component tidak dapat dihapus jika masih dipakai Template}
+- DR-02: ...
+
+### Invariants
+
+- INV-01: {kondisi yang harus selalu benar — contoh: Setiap GlobalTable minimal memiliki 1 kolom}
+- INV-02: ...
+
+### Data Model
+
+#### {Entity}
+
+| Field | Type | Required | Unique | Default | Description |
+| ----- | ---- | -------- | ------ | ------- | ----------- |
+| id | number | Y | Y | auto | PK |
+| ... | ... | ... | ... | ... | ... |
+
+- Index: ...
+- Constraint: ...
+
+## API
+
+> Bagian ini MANDATORY. Jika feature tanpa backend, tulis `N/A — No API` dan jelaskan di Assumptions.
+
+### Endpoint Overview
+
+| # | Server Route | HTTP Method | Auth | Permission | Deskripsi |
+|---|--------------|-------------|------|------------|-----------|
+| 1 | `/api/global-tables` | GET | JWT | `global-table:list` | List dengan pagination |
+| 2 | `/api/global-tables` | POST | JWT | `global-table:create` | Create baru |
+| 3 | `/api/global-tables/:id` | GET | JWT | `global-table:read` | Detail |
+| 4 | `/api/global-tables/:id` | PATCH | JWT | `global-table:update` | Update |
+| 5 | `/api/global-tables/:id` | DELETE | JWT | `global-table:delete` | Delete |
+
+### Detail per Endpoint
+
+#### List — GET /api/...
+
+- **Request**
+  - Query: `page`, `limit`, `search`, `searchField`, `sortBy`, `sortOrder` (ikuti konvensi AGENTS.md)
+  - Headers: `Authorization: Bearer <JWT>`
+- **Response**
+  ```json
+  { "data": [...], "total": 100, "page": 1, "limit": 20, "totalPages": 5 }
+  ```
+- **Validation (Zod)**
+  - `QuerySchema`: page min 1, limit 1–100, sortBy whitelist, ...
+- **Error**
+  | Status | Kondisi | Body |
+  |--------|---------|------|
+  | 400 | query tidak valid | `{ "message": "Validation failed", "errors": [...] }` |
+  | 401 | tanpa token | `{ "message": "Unauthorized" }` |
+  | 403 | permission tidak cukup | `{ "message": "Forbidden" }` |
+- **Authentication**: JWT via cookie/header, `auth` middleware
+- **Authorization**: Guard + Permission check (`method + URL pattern`)
+
+_(Ulangi blok ini untuk Create / Detail / Update / Delete)_
+
+## UI
+
+> Bagian ini MANDATORY untuk setiap feature yang memiliki antarmuka. Jika murni backend, tulis `N/A — No UI` dan jelaskan.
+
+### Halaman
+
+| Route | Halaman | Akses | Deskripsi |
+|-------|---------|-------|-----------|
+| `/global-tables` | Global Table List | Admin | Daftar + search + pagination |
+| `/global-tables/create` | Global Table Create | Admin | Form pembuatan |
+| `/global-tables/:id` | Global Table Detail | Admin | Read-only + actions |
+
+### Layout
+
+- Navigasi: {sidebar / workspace / breadcrumb}
+- Struktur halaman: {header + filter bar + data table + pagination}
+- Penempatan: {di bawah menu "Master Data" → "Global Table"}
+
+### Components
+
+| Component | Lokasi | Deskripsi |
+|-----------|--------|-----------|
+| `GlobalTableDataTable.vue` | `app/components/features/global-table/` | Tabel dengan search, sort, visibility |
+| `GlobalTableForm.vue` | `app/components/features/global-table/` | Form create/edit dengan Naive UI |
+| `GlobalTableDetail.vue` | `app/components/features/global-table/` | Detail view `.detail-view` pattern |
+
+### Interaction
+
+- Trigger: {klik "Create" → buka editor}
+- Flow: {validate → submit → optimistic / redirect → toast}
+- Konfirmasi: {hapus → NPopconfirm / NDialog}
+- Navigasi balik: {breadcrumbs / back button}
 
 ### Responsive Behavior
 
-...
+| Breakpoint | Perilaku |
+|------------|----------|
+| Desktop (≥1024px) | Tabel penuh + sidebar terbuka |
+| Tablet (768–1023px) | Kolom disembunyikan via visibility toggle |
+| Mobile (<768px) | Card list / drawer, form full-width |
 
-## Validation
+### States
 
-...
+| State | Tampilan | Komponen Naive UI |
+|-------|----------|-------------------|
+| Loading | Skeleton / NSpin | `NSpin`, `NSkeleton` |
+| Empty | Illustration + CTA "Create pertama" | `NEmpty` |
+| Error | NAlert + retry button | `NAlert` |
+| Success | NMessage / NNotification | `useMessage()` |
+| Validation | Inline error di field | `NFormItem` feedback |
+| Permission Denied | NAlert 403 + event `rbac-denied` | `NAlert` |
 
-## Security & Permission
+### Accessibility
 
-...
+- Keyboard: semua aksi via keyboard, focus trap di modal
+- ARIA: `aria-label` untuk icon-only button
+- Kontras & font: ikuti `docs/design-system.md` (primary #3B82F6, Inter, radius 6/4/8)
+- Reduced motion: hormati `prefers-reduced-motion` untuk animasi Anime.js
 
 ## Acceptance Criteria
 
-### AC-001
+> MANDATORY. Minimal cover happy path + validation + business rules + error + empty + permission + edge case. Gunakan format Given / When / Then.
+
+### AC-001 — {Judul kriteria}
+
+Given {konteks / pre-condition}
+
+When {aksi user / sistem}
+
+Then {hasil yang dapat diverifikasi}
+
+### AC-002 — {Judul kriteria}
 
 Given ...
 
@@ -510,132 +606,121 @@ When ...
 
 Then ...
 
-### AC-002
+_(tambahkan AC-003 dst. sesuai kebutuhan)_
 
-Given ...
+## Tasks
 
-When ...
-
-Then ...
-
-## Implementation
+> MANDATORY. Daftar pekerjaan implementasi yang dapat di-CENTANG (checkbox). Dipakai oleh `/plan`, `/implement`, `/verify`, `/review`.
 
 ### Backend
 
-* [ ] Entity
-* [ ] Migration
-* [ ] DTO
-* [ ] Validation
-* [ ] Repository
-* [ ] Service
-* [ ] Controller
-* [ ] Authorization
-* [ ] Unit tests
-* [ ] Integration/API tests
+- [ ] Entity — `server/entities/{name}.entity.ts` + registrasi di `server/utils/orm-data-source.ts`
+- [ ] DTO — `server/dto/{name}.dto.ts` (Zod: Create/Update/Query)
+- [ ] Service — `server/services/{name}.service.ts` (plain object, bukan class)
+- [ ] API Routes — `server/api/{name}/index.get.ts`, `index.post.ts`, `[id].get.ts`, `[id].patch.ts`, `[id].delete.ts`
+- [ ] Auth & Authorization — middleware + guard/permission check
+- [ ] Validation & Error handling — Zod parse + `createError` h3
+- [ ] Migration/Seed — jika `synchronize: false` / data awal
+- [ ] Unit tests — service & DTO
+- [ ] Integration/API tests — endpoint + RBAC
 
 ### Frontend
 
-* [ ] Types
-* [ ] API service
-* [ ] Store/composable
-* [ ] Page
-* [ ] Components
-* [ ] Form
-* [ ] Validation
-* [ ] Loading state
-* [ ] Empty state
-* [ ] Error state
-* [ ] Success state
-* [ ] Responsive behavior
-* [ ] Unit tests
-* [ ] E2E tests
+- [ ] Shared Types — `shared/types/{name}.ts`
+- [ ] API Service / Composable — `app/composables/use{Name}Data.ts`
+- [ ] Store (jika perlu) — `app/stores/{name}.ts`
+- [ ] Pages — `app/pages/{route}/index.vue`, `create.vue`, `[id].vue`
+- [ ] Components — `DataTable.vue`, `Form.vue`, `Detail.vue`
+- [ ] Validation — Naive UI `NForm` + rules sinkron dengan Zod
+- [ ] States — loading / empty / error / success / permission
+- [ ] Responsive & Accessibility — breakpoint + ARIA + keyboard
+- [ ] Unit tests — `vitest` (`test:unit` / `test:nuxt`)
+- [ ] E2E tests — Playwright (`test:e2e`)
+
+### Cross-Cutting
+
+- [ ] RBAC matrix diperbarui (Role/Permission/Guard)
+- [ ] ActivityLog / Audit jika diperlukan
+- [ ] Dokumentasi singkat (`docs/` atau inline)
 
 ## Verification
 
-* [ ] Typecheck
-* [ ] Lint
-* [ ] Unit test
-* [ ] Integration test
-* [ ] API test
-* [ ] E2E test
-* [ ] Database verification
-* [ ] Permission verification
-* [ ] UI/UX verification
-* [ ] Responsive verification
-* [ ] Design System verification
+- [ ] Typecheck (`vue-tsc` / `nuxt typecheck`)
+- [ ] Unit test (`npm run test:unit`)
+- [ ] Component test (`npm run test:nuxt`)
+- [ ] API test / Integration test
+- [ ] E2E test (`npm run test:e2e`)
+- [ ] Database verification (entity, constraint, migration)
+- [ ] Permission verification (401/403 matrix)
+- [ ] UI/UX verification (Naive UI + Tailwind, no `NDescriptions`)
+- [ ] Responsive verification (desktop/tablet/mobile)
+- [ ] Design System verification (`naiveui-theme.ts`, token)
+- [ ] Accessibility verification (keyboard + ARIA + contrast)
 
 ## Assumptions
 
-* ...
+- ...
 
 ## Open Questions
 
-* ...
+- ...
 
 ## Related Knowledge
 
-* `docs/PRD.md`
-* `docs/architecture.md`
-* `docs/database.md`
-* `docs/design-system.md`
+- `docs/PRD.md`
+- `docs/architecture.md`
+- `docs/database.md`
+- `docs/design-system.md`
+- `.ua/` (jika ada)
 
 ## Change Log
 
 ### Initial
 
-* Task generated from Core Concept.
+- Task generated from Core Concept.
 
 ````
 
-Only include sections that are relevant, but these are mandatory:
+Hanya sertakan bagian opsional tambahan jika benar-benar relevan. Namun **7 bagian berikut MANDATORY dan tidak boleh dihapus**:
 
 ```text
-Status
-Objective
-Requirements
-Business Rules
-Domain
-UI/UX
-Acceptance Criteria
-Implementation
-Verification
-````
+Requirements   (tujuan, users, use cases, functional, business rules, edge cases)
+Domain         (entity, relationship, state, domain rules, invariant + data model)
+API            (server route, HTTP method, request, response, validation, error, authentication, authorization)
+UI             (halaman, layout, component, interaction, responsive, loading/empty/error/success, accessibility)
+Acceptance     (Given / When / Then — kapan feature dianggap benar)
+Tasks          (daftar pekerjaan implementasi — checkbox)
+Verification   (checklist verifikasi kualitas)
+```
+
+Jika salah satu tidak relevan, isi `N/A` dengan alasan di `Assumptions` — jangan hapus headernya.
 
 ---
 
-# 12. UI/UX Requirements
+# 12. UI Requirements
 
-Every user-facing task MUST contain UI/UX requirements.
+Every user-facing task MUST contain UI requirements dengan granularitas sesuai template di atas (halaman, layout, component, interaction, responsive, states, accessibility).
 
 Do not leave:
 
 ```text
-## UI/UX
+## UI
 
 TBD
 ```
 
-unless the feature genuinely has no user interface.
+unless the feature genuinely has no user interface — dalam kasus ini tulis `N/A — No UI` + alasan di `Assumptions`.
 
 Consider:
 
 * information architecture
-* navigation
-* workspace
-* list
-* detail
-* editor
-* form
-* actions
-* dialogs
-* confirmation
-* feedback
-* loading
-* empty
-* error
-* validation
-* permissions
-* responsive behavior
+* navigation / workspace
+* list / detail / editor / form
+* actions / dialogs / confirmation
+* feedback / toast
+* loading / empty / error / validation / permission denied / success
+* responsive behavior (desktop/tablet/mobile)
+* accessibility (keyboard, ARIA, contrast, reduced-motion)
 
 Follow:
 
@@ -651,17 +736,24 @@ Do not create a generic admin dashboard if the project's design language specifi
 
 # 13. Business Rules
 
-Business rules must be explicit.
+Business rules must be explicit dan berada di `## Requirements > ### Business Rules` serta dilengkapi `Edge Cases`.
 
 Example:
 
 ```md
-## Business Rules
+### Business Rules
 
 - BR-001: Table name must be unique.
 - BR-002: Column name must be unique within a table.
 - BR-003: A table must contain at least one column.
 - BR-004: A table already referenced by another resource cannot be deleted.
+
+### Edge Cases
+
+| ID | Kondisi | Penanganan |
+|----|---------|------------|
+| EC-01 | Nama tabel duplikat | Tolak dengan 409 + pesan "Nama sudah digunakan" |
+| EC-02 | Hapus tabel yang masih dipakai Component | Tolak dengan 409 + daftar referensi |
 ```
 
 Do not invent business rules without evidence.
@@ -676,9 +768,9 @@ When a rule cannot be determined, put it under:
 
 # 14. Acceptance Criteria
 
-Acceptance Criteria MUST be testable.
+Acceptance Criteria MUST be testable dan berada di `## Acceptance Criteria`.
 
-Use:
+Gunakan format:
 
 ```text
 Given
@@ -699,7 +791,7 @@ Cover:
 Example:
 
 ```md
-### AC-001
+### AC-001 — Menampilkan editor Global Table
 
 Given the administrator is on the Global Table page
 
@@ -708,13 +800,17 @@ When the administrator clicks Create
 Then the Global Table editor is displayed.
 ```
 
+Setiap AC harus dapat dipetakan ke setidaknya satu item di `## Tasks`.
+
 ---
 
 # 15. API Specification
 
-Define API requirements only when the feature requires backend interaction.
+Define API requirements di `## API` dengan ke-8 kolom/field wajib:
 
-Follow existing project API conventions.
+`server route`, `HTTP method`, `request`, `response`, `validation`, `error`, `authentication`, `authorization`.
+
+Follow existing project API conventions (`AGENTS.md` — Service pattern, Nitro route, Zod DTO, `createError` dari `h3`, pagination `page/limit/search/sortBy/sortOrder`).
 
 Do not invent API patterns that conflict with:
 
@@ -724,11 +820,13 @@ docs/architecture.md
 
 or existing implementation.
 
+Jika endpoint tidak butuh auth, jelaskan eksplisit `Auth: Public` + alasan.
+
 ---
 
 # 16. Database Specification
 
-Define database impact only when required.
+Define database impact di `## Domain` (Entities, Relationships, States, Domain Rules, Invariants + Data Model).
 
 Use:
 
@@ -742,11 +840,10 @@ Identify:
 
 * new entities
 * modified entities
-* relationships
-* indexes
-* unique constraints
-* migrations
-* lifecycle rules
+* relationships (1:1, 1:N, N:M) + cascade
+* indexes / unique constraints
+* migrations / seed
+* lifecycle / state machine + invariants
 
 Do not redesign the entire database for one task.
 
@@ -814,36 +911,37 @@ The dependency map is used to validate task ordering.
 
 # 19. Completeness Check
 
-Before finishing, verify that the roadmap covers:
+Before finishing, verify that setiap task mencakup 7 bagian mandatory dan roadmap secara keseluruhan mencakup:
 
 ### Product
 
-* [ ] Core Concept
-* [ ] Main user workflows
-* [ ] Main entities
-* [ ] Core business rules
+* [ ] Core Concept terpetakan ke Requirements.tujuan & use cases
+* [ ] Main user workflows → Requirements.use cases + UI.interaction
+* [ ] Main entities → Domain.entities
+* [ ] Core business rules → Requirements.business rules + Domain.domain rules/invariants
 
 ### Backend
 
-* [ ] API
-* [ ] Domain
-* [ ] Database
-* [ ] Validation
-* [ ] Authorization
-* [ ] Error handling
+* [ ] API (route, method, request, response, validation, error, authentication, authorization)
+* [ ] Domain (entity, relationship, state, domain rules, invariant)
+* [ ] Database (Data Model + migration)
+* [ ] Validation (Zod)
+* [ ] Authorization (Guard/Permission)
+* [ ] Error handling (`createError`)
 
 ### Frontend
 
-* [ ] Navigation
-* [ ] Pages
+* [ ] Halaman + Layout
 * [ ] Components
-* [ ] Forms
-* [ ] States
+* [ ] Interaction
+* [ ] States (loading/empty/error/success/permission/validation)
 * [ ] Responsive behavior
-* [ ] Accessibility where relevant
+* [ ] Accessibility
 
 ### Quality
 
+* [ ] Acceptance (Given/When/Then — kapan feature dianggap benar)
+* [ ] Tasks (daftar pekerjaan implementasi)
 * [ ] Unit tests
 * [ ] Integration/API tests
 * [ ] E2E tests
@@ -887,6 +985,7 @@ Check:
 * UI/UX conventions
 * task duplication
 * task ordering
+* kelengkapan 7 bagian mandatory (Requirements, Domain, API, UI, Acceptance, Tasks, Verification)
 
 If a contradiction exists, do not silently invent a solution.
 
@@ -967,6 +1066,15 @@ Coverage:
 - UI/UX: ...
 - Testing: ...
 - Production: ...
+
+Mandatory Sections Check:
+- Requirements (tujuan/users/use cases/functional/business rules/edge cases): OK
+- Domain (entity/relationship/state/domain rules/invariant): OK
+- API (route/method/request/response/validation/error/auth/authz): OK
+- UI (halaman/layout/component/interaction/responsive/loading/empty/error/success/accessibility): OK
+- Acceptance (Given/When/Then): OK
+- Tasks (daftar implementasi): OK
+- Verification: OK
 
 Detected Conflicts:
 - ...
