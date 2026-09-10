@@ -14,13 +14,13 @@ Treat `$ARGUMENTS` as the task file path or task name.
 
 # 1. Objective
 
-Perform a thorough code review of the implementation.
+Perform a thorough code review of the implementation — **bertindak sebagai QA engineer / tester senior + code reviewer**.
 
 The goal is to answer:
 
-> "Is the implementation high quality? Does it follow best practices? Are there improvements needed?"
+> "Is the implementation high quality? Does it follow best practices? Are ALL user flows berjalan benar dan semua logika benar? Are tests (unit/nuxt/e2e) ada, berkualitas, dan traceable ke User Flow + AC Given/When/Then? Are there improvements needed?"
 
-The output is a review report with actionable feedback.
+The output is a review report with actionable feedback, termasuk **penilaian kualitas test (UT/NT/E2E) dan traceability User Flow ↔ AC ↔ Test**. Hasil review menentukan apakah task dapat `APPROVED` (DONE) atau perlu `CHANGES REQUESTED` / `REVISION NEEDED`.
 
 ---
 
@@ -66,19 +66,20 @@ If `.ua/` exists, use it to verify:
 
 ---
 
-# 5. Review Criteria
+# 5. Review Criteria — QA Engineer Lens
 
-Review the implementation against these criteria:
+Review the implementation against these criteria, dengan penekanan pada **User Flow benar + logika benar + test traceability**. Selalu bertindak sebagai QA engineer yang akan menyetujui/rilis feature.
 
-### 5.1 Architecture
+### 5.1 Architecture & User Flow
 
-| Criterion | Check |
-|-----------|-------|
-| Separation of concerns | Is logic properly separated? |
-| Dependency direction | Are dependencies pointing the right way? |
-| Module boundaries | Are module boundaries respected? |
-| API design | Is the API consistent with existing endpoints? |
-| Data flow | Is the data flow clear and correct? |
+| Criterion | Check | QA |
+|-----------|-------|-----|
+| Separation of concerns | Is logic properly separated? | — |
+| Dependency direction | Are dependencies pointing the right way? (FASE 1 → FASE 2) | FASE consistency |
+| Module boundaries | Are module boundaries respected? | — |
+| API design | Is the API consistent with existing endpoints + 8 field (route/method/request/response/validation/error/auth/authz)? | Mapping ke Flow→API |
+| Data flow | Is the data flow clear and correct? + User Flow konsisten FASE 1↔FASE 2 | User Flow |
+| User Flow | Apakah diagram/steps/alternate-error di task file benar-benar diimplementasikan tanpa deviasi dari mockup FASE 1? | QA Core |
 
 ### 5.2 Code Quality
 
@@ -90,105 +91,155 @@ Review the implementation against these criteria:
 | Types | Are TypeScript types correct and complete? |
 | Comments | Are complex parts documented? |
 
-### 5.3 Security
+### 5.3 Security (QA Gate)
 
-| Criterion | Check |
-|-----------|-------|
-| Authentication | Is auth properly checked? |
-| Authorization | Is RBAC properly enforced? |
-| Input validation | Is all input validated? |
-| SQL injection | Are queries safe? |
-| XSS | Is output properly escaped? |
-| Secrets | Are secrets not hardcoded? |
+| Criterion | Check | Traceability |
+|-----------|-------|--------------|
+| Authentication | Is auth properly checked? (JWT) | API > auth |
+| Authorization | Is RBAC properly enforced? (Guard + Permission) | API > authz, AC permission |
+| Input validation | Is all input validated? (Zod DTO sync FR/BR/EC) | BR/EC → UT |
+| SQL injection | Are queries safe? (TypeORM, no raw) | — |
+| XSS | Is output properly escaped? (Vue, Naive UI) | — |
+| Secrets | Are secrets not hardcoded? | — |
+| Permission matrix | 401/403 ter-test E2E? | E2E-02 |
 
 ### 5.4 Performance
 
 | Criterion | Check |
 |-----------|-------|
 | N+1 queries | Are queries optimized? |
-| Pagination | Is pagination implemented? |
+| Pagination | Is pagination implemented? (`page/limit/search/sortBy/sortOrder`) |
 | Caching | Is caching considered? |
-| Bundle size | Are imports optimized? |
+| Bundle size | Are imports optimized? (Naive UI direct import) |
 
-### 5.5 Maintainability
+### 5.5 Maintainability & Testability (QA Core)
 
-| Criterion | Check |
-|-----------|-------|
-| Testability | Is the code testable? |
-| Error handling | Are errors handled properly? |
-| Logging | Is logging appropriate? |
-| Documentation | Is the code self-documenting? |
+| Criterion | Check | QA |
+|-----------|-------|-----|
+| Testability | Is the code testable? Unit/nuxt/e2e mudah ditulis? | — |
+| Tests exist | Apakah `## Tasks > Test Plan` (UT/NT/E2E) benar-benar ada sebagai file runnable? | Must |
+| Tests quality | Apakah test assert Given/When/Then benar-benar memverifikasi AC? Bukan test dummy? | Must |
+| Traceability | Apakah setiap User Flow step + AC ↔ Test ID terdokumentasi dan valid? | Must |
+| Coverage | User Flow 100%, AC 100%, BR/EC 100%, UI States 100%? | Must |
+| Error handling | Are errors handled properly? (`createError`, NAlert) | Logic |
+| Logging | Is logging appropriate? | — |
+| Documentation | Is the code self-documenting? + `## UI > Penyesuaian dari design` jika deviasi | FASE 1↔FASE 2 |
 
 ### 5.6 Consistency
 
 | Criterion | Check |
 |-----------|-------|
-| Pattern consistency | Does it follow existing patterns? |
+| Pattern consistency | Does it follow existing patterns? (EntitySchema, plain object Service, Nitro route) |
 | Naming consistency | Does it use existing naming conventions? |
-| Structure consistency | Does it follow existing file structure? |
-| Import consistency | Does it use correct import aliases? |
+| Structure consistency | Does it follow existing file structure? (`server/`, `app/`, `shared/`, `tests/`) |
+| Import consistency | Does it use correct import aliases `~/`, `@/`, `~~/`? |
+| UI consistency | Pixel-perfect vs mockup `tasks/NN-ui-design.md`? (FASE 2) |
+| Test consistency | Test file naming & location konsisten (`tests/unit/`, `tests/nuxt/`, `tests/e2e/`)? |
+
+### 5.7 QA — User Flow & Logic Correctness (BERTINDAK SEBAGAI QA TESTER)
+
+> Bagian ini WAJIB untuk APPROVED — reviewer harus menjadi QA tester yang memverifikasi flow dan logika benar, bukan hanya style.
+
+| Criterion | Check | Bukti |
+|-----------|-------|-------|
+| Happy path | Semua User Flow steps happy berjalan end-to-end (E2E-01 PASS)? | E2E playback |
+| Alternate/error | Empty, validation 400, 403, edge cases EC-XXX berjalan (E2E-02 PASS)? | E2E playback |
+| Business rules | Setiap BR-XXX ditegakkan dan ada UT PASS? | `tests/unit/*.test.ts` |
+| Domain rules/invariants | Setiap DR/INV ada UT dan PASS? | `tests/unit/*.test.ts` |
+| Functional requirements | Setiap FR ada test dan PASS? | UT/NT/E2E |
+| UI States | Loading/empty/error/success/validation/permission ter-render dan ada NT + E2E PASS? | NT + E2E |
+| Acceptance | Setiap AC Given/When/Then ada test dan PASS (traceability AC ↔ Test ID)? | Matrix |
+| Regression | `npm run test` — semua test lama PASS? | CI |
+
+Jika salah satu baris di atas FAIL atau Test ID kosong / test dummy / tidak runnable → review tidak boleh APPROVED.
 
 ---
 
-# 6. Review Process
+# 6. Review Process — QA Tester Workflow
 
-### 6.1 Read All Changed Files
+### 6.1 Identify Fase
 
-Read every file that was created or modified.
+- Baca `## Status` dan filename: `*-ui-design.md` = FASE 1 (design), `*.md` lainnya = FASE 2 (implementation).
+- Untuk FASE 1: fokus review adalah design deliverables (wireframe/mockup/prototype) + User Flow + UI 10 sub-bagian — bukan code UT/NT/E2E (tetapi tetap cek traceability User Flow ↔ AC design).
 
-### 6.2 Compare with Existing Code
+### 6.2 Read All Changed Files (Termasuk Test Files)
 
-Compare the new code with existing similar code:
+Read every file that was created or modified — **termasuk file test** (`tests/unit/**/*.test.ts`, `tests/nuxt/**/*.test.ts`, `tests/e2e/**/*.spec.ts`):
+
+- Apakah file test ada, runnable, dan bukan dummy?
+- Apakah test benar-benar meng-assert Given/When/Then dari AC?
+- Apakah E2E benar-benar menjalankan User Flow steps (bukan hanya visit tanpa assertion)?
+
+### 6.3 Compare with Existing Code & Design FASE 1
+
+Compare the new code with existing similar code + mockup FASE 1:
 
 - Are patterns consistent?
 - Are conventions followed?
 - Is the quality comparable?
+- Untuk FASE 2: apakah pixel-perfect vs mockup `tasks/NN-ui-design.md`? Jika deviasi, apakah ada catatan di `## UI > Penyesuaian dari design`?
 
-### 6.3 Check Task Compliance
+### 6.4 Check Task Compliance — Traceability QA
 
-Verify the implementation satisfies all task requirements:
+Verify the implementation satisfies all task requirements dengan **traceability matrix**:
 
-- All acceptance criteria met
-- All business rules implemented
-- All UI/UX requirements satisfied
-- All security requirements met
+- [ ] Semua `## User Flow > Steps` diimplementasikan dan ada E2E
+- [ ] Semua `Acceptance Criteria Given/When/Then` MET dan ada test (UT/NT/E2E) yang PASS
+- [ ] Semua `Business Rules BR-XXX` + `Domain Rules DR-XXX` + `Invariants INV-XXX` ditegakkan dan ada UT
+- [ ] Semua `Functional Requirements FR-XXX` ada implementasi + test
+- [ ] Semua `Edge Cases EC-XXX` ada handling + test
+- [ ] Semua `API > Endpoint Overview` 8 field (route/method/request/response/validation/error/auth/authz) terimplementasi + ter-test
+- [ ] Semua `UI > States` (loading/empty/error/success/validation/permission) ter-render + ada NT/E2E
+- [ ] Semua `UI Requirements` 10 sub-bagian (halaman/layout/component/interaction/responsive + states + accessibility) terpenuhi (FASE 1: di mockup, FASE 2: di code + test)
+- [ ] Semua `UI` di FASE 2 mereferensikan mockup FASE 1 (tidak desain ulang tanpa catatan)
+- [ ] Security (auth, RBAC, validation) ter-test (401/403 E2E)
 
-### 6.4 Identify Improvements
+Gunakan tabel `## Tasks > Test Plan` di task file sebagai checklist — setiap baris harus PASS.
+
+### 6.5 Identify Improvements — Sebagai QA
 
 Identify:
 
 - code smells
-- potential bugs
+- potential bugs — terutama logic yang tidak ter-cover test (FR/BR/DR/INV tanpa UT)
+- user flow gaps — step tanpa E2E, alternate/error tanpa handling
 - performance issues
 - security concerns
 - architecture violations
-- missing error handling
-- missing validation
-- missing tests
+- missing error handling / validation
+- missing tests — khususnya User Flow step tanpa E2E, AC tanpa Test ID, BR/EC tanpa UT
+- dummy tests — test yang selalu PASS tanpa assertion bermakna
+- mockup drift — code menyimpang dari `tasks/NN-ui-design.md` tanpa catatan
 
 ---
 
-# 7. Review Report
+# 7. Review Report — QA Tester Mode
 
-Generate a review report:
+Generate a review report **sebagai QA tester + code reviewer** — harus menilai user flow & logika benar + kualitas test:
 
 ````md
-# Review Report — Task NN: {Task Name}
+# Review Report — Task NN: {Task Name} (FASE X)
 
 ## Summary
 
 - **Status**: APPROVED / CHANGES REQUESTED / REVISION NEEDED
+- **Fase**: FASE 1 — UI Design / FASE 2 — Implementation
 - **Date**: {date}
-- **Reviewer**: /review command
+- **Reviewer**: /review (QA engineer mode)
+- **User Flow coverage**: {X/Y steps ter-cover E2E}
+- **Acceptance coverage**: {X/Y AC ter-cover test}
+- **Test quality**: PASS / FAIL (dummy? traceable?)
 
-## Architecture Review
+## Architecture & User Flow Review
 
 | Criterion | Rating | Notes |
 |-----------|--------|-------|
 | Separation of concerns | OK/ISSUE | {notes} |
-| Dependency direction | OK/ISSUE | {notes} |
+| Dependency direction (FASE 1→FASE 2) | OK/ISSUE | {notes} |
 | Module boundaries | OK/ISSUE | {notes} |
-| API consistency | OK/ISSUE | {notes} |
+| API consistency (8 field) | OK/ISSUE | {notes} |
+| User Flow FASE 1↔FASE 2 konsisten | OK/ISSUE | {notes} |
+| UI pixel-perfect vs mockup FASE 1 | OK/ISSUE | {notes} |
 
 ## Code Quality Review
 
@@ -200,15 +251,16 @@ Generate a review report:
 | Type safety | OK/ISSUE | {notes} |
 | Documentation | OK/ISSUE | {notes} |
 
-## Security Review
+## Security Review (QA Gate)
 
 | Criterion | Rating | Notes |
 |-----------|--------|-------|
-| Authentication | OK/ISSUE | {notes} |
-| Authorization | OK/ISSUE | {notes} |
-| Input validation | OK/ISSUE | {notes} |
-| SQL injection | OK/ISSUE | {notes} |
+| Authentication (JWT) | OK/ISSUE | {notes} |
+| Authorization (Guard+Permission) | OK/ISSUE | {notes} |
+| Input validation (Zod, sync BR/EC) | OK/ISSUE | {notes} |
+| SQL injection (TypeORM) | OK/ISSUE | {notes} |
 | Secrets | OK/ISSUE | {notes} |
+| Permission E2E (401/403) | OK/ISSUE | {notes} |
 
 ## Performance Review
 
@@ -218,51 +270,71 @@ Generate a review report:
 | Pagination | OK/ISSUE | {notes} |
 | Import optimization | OK/ISSUE | {notes} |
 
-## Task Compliance
+## QA — Tests & Traceability (WAJIB untuk APPROVED)
 
-| Requirement | Status | Notes |
-|-------------|--------|-------|
-| {requirement 1} | MET/NOT MET | {notes} |
-| {requirement 2} | MET/NOT MET | {notes} |
+| Criterion | Rating | Notes |
+|-----------|--------|-------|
+| Unit tests exist & runnable (UT-01/UT-02) | OK/ISSUE | {file, pass/total, FR/BR/DR/INV coverage} |
+| Nuxt tests exist & runnable (NT-01/NT-02) | OK/ISSUE | {file, semua state loading/empty/error/success/validation/permission} |
+| E2E happy path (E2E-01) | OK/ISSUE | {User Flow steps ter-cover, assertions bermakna?} |
+| E2E alternate/error/edge (E2E-02) | OK/ISSUE | {ALT/ERR/EC + permission 401/403} |
+| Tests bukan dummy | OK/ISSUE | {assertion bermakna atau hanya `expect(true).toBe(true)`?} |
+| Traceability User Flow ↔ AC ↔ Test ID | OK/ISSUE | {setiap AC memiliki Test ID dan PASS?} |
+| Coverage 100% User Flow / AC / BR / EC | OK/ISSUE | {X/Y} |
+| Existing regression PASS (`npm run test`) | OK/ISSUE | {pass/total} |
+| Build & typecheck PASS | OK/ISSUE | {notes} |
+
+## Task Compliance — Traceability Matrix (QA)
+
+| Requirement | Status | Test ID | Notes |
+|-------------|--------|---------|-------|
+| User Flow Step 1: Buka list | MET/NOT MET | E2E-01 | {notes} |
+| AC-001 Given/When/Then | MET/NOT MET | E2E-01 | {notes} |
+| BR-001 Table name unique | MET/NOT MET | UT-01 | {notes} |
+| EC-01 Nama duplikat | MET/NOT MET | UT-01, E2E-02 | {notes} |
+| UI State empty | MET/NOT MET | NT-01, E2E-02 | {notes} |
+| API POST /api/xxx — validation+auth | MET/NOT MET | UT-01, E2E-01 | {notes} |
+
+> Jika ada baris NOT MET, test missing, atau test dummy → tidak boleh APPROVED.
 
 ## Issues
 
-### Must Fix (Before Approval)
+### Must Fix (Before Approval — QA Blocker)
 
-1. **{issue title}**
-   - File: `{file path}`
-   - Line: {line number}
-   - Problem: {what is wrong}
-   - Solution: {how to fix}
+1. **{issue title} — QA Blocker**
+    - File: `{file path}`
+    - Line: {line number}
+    - Problem: {what is wrong — contoh: User Flow step tanpa E2E, AC tanpa test, BR-001 tidak ada UT, test dummy}
+    - Solution: {how to fix — buat file `tests/e2e/...` dengan Given/When/Then, dll.}
 
 ### Should Fix (Recommended)
 
 1. **{issue title}**
-   - File: `{file path}`
-   - Problem: {what is wrong}
-   - Solution: {how to fix}
+    - File: `{file path}`
+    - Problem: {what is wrong}
+    - Solution: {how to fix}
 
 ### Consider (Optional)
 
 1. **{improvement title}**
-   - {description}
+    - {description}
 
 ## Positive Notes
 
-- {what was done well}
+- {what was done well — termasuk test quality, traceability}
 - {good patterns used}
 - {clean code examples}
 
-## Conclusion
+## Conclusion (QA Verdict)
 
-{overall assessment}
+{overall assessment — apakah semua User Flow berjalan benar? Semua logika benar? Semua Given/When/Then PASS? Apakah test traceable dan bermakna? Apakah siap rilis?}
 
 ## Recommended Action
 
-- [ ] Fix must-fix issues
+- [ ] Fix must-fix QA blockers (User Flow tanpa E2E, AC tanpa test, logic tanpa UT, dummy test, mockup drift)
 - [ ] Consider should-fix issues
-- [ ] Approve implementation
-- [ ] Request re-review after fixes
+- [ ] Approve implementation (hanya jika QA verdict PASS — semua flow + logika + test traceable)
+- [ ] Request re-review after fixes (jalankan `/verify` lagi sebelum `/review` ulang)
 ````
 
 ---
@@ -335,17 +407,23 @@ Optional improvements:
 
 ---
 
-# 10. Approval Criteria
+# 10. Approval Criteria — QA Gate (Bertindak sebagai QA)
 
-The implementation can be approved when:
+The implementation can be APPROVED when (QA verdict — semua harus terpenuhi):
 
-- [ ] All must-fix issues resolved
-- [ ] All task requirements met
-- [ ] No security vulnerabilities
-- [ ] No breaking changes to existing functionality
-- [ ] Code follows project conventions
-- [ ] Tests pass
-- [ ] Build succeeds
+- [ ] All must-fix issues resolved — termasuk QA blockers (User Flow tanpa E2E, AC tanpa test, BR/EC tanpa UT)
+- [ ] All task requirements met — termasuk User Flow + Requirements/Domain/API/UI + Acceptance Given/When/Then
+- [ ] Semua User Flow steps (happy + alternate + error + edge) berjalan benar — ada E2E dan PASS
+- [ ] Semua logika benar — FR/BR/DR/INV/EC ada UT dan PASS, validation + error + auth/authz benar
+- [ ] Semua AC Given/When/Then PASS dan traceable ke Test ID (UT/NT/E2E) di `## Tasks > Test Plan`
+- [ ] Semua UI States (loading/empty/error/success/validation/permission) ter-render + ada NT/E2E PASS
+- [ ] Pixel-perfect vs mockup `tasks/NN-ui-design.md` (untuk FASE 2) atau mockup approved (untuk FASE 1)
+- [ ] Tests bukan dummy — assertion bermakna, runnable via `npm run test:unit`, `npm run test:nuxt`, `npm run test:e2e`, coverage User Flow/AC/BR/EC 100%
+- [ ] No security vulnerabilities — 401/403 E2E PASS, validation Zod sync
+- [ ] No breaking changes — `npm run test` regression PASS
+- [ ] Code follows project conventions (AGENTS.md) + Design System
+- [ ] `npm run build` + `vue-tsc` PASS
+- [ ] Untuk FASE 1: wireframe/mockup/prototype lengkap untuk semua halaman/state/breakpoint + User Flow coverage + peer review
 
 ---
 

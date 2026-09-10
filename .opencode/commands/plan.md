@@ -89,6 +89,17 @@ Permanent Knowledge
 
 From the task specification, extract:
 
+### Fase
+
+- Apakah FASE 1 — UI Design (wireframe/mockup/prototype) atau FASE 2 — Implementation
+- Jika FASE 2, identifikasi `Dependencies: tasks/NN-ui-design.md` dan `## UI > Referensi Design` — plan TIDAK BOLEH mendesain ulang UI
+
+### User Flow
+
+- Diagram, steps, alternate/error flows
+- Flow → UI mapping dan Flow → API mapping (FASE 2)
+- Pastikan setiap AC Given/When/Then dapat ditelusuri ke User Flow step
+
 ### Scope
 
 - What is included
@@ -96,7 +107,7 @@ From the task specification, extract:
 
 ### Dependencies
 
-- Which tasks must be completed first
+- Which tasks must be completed first (FASE 1 → FASE 2)
 - Which entities/modules are affected
 
 ### Affected Areas
@@ -106,6 +117,7 @@ From the task specification, extract:
 - Database changes
 - Configuration changes
 - Documentation changes
+- Test files to create (`tests/unit`, `tests/nuxt`, `tests/e2e`) — bertindak sebagai QA
 
 ### Patterns to Follow
 
@@ -114,6 +126,7 @@ From the task specification, extract:
 - Existing API route patterns
 - Existing DTO patterns
 - Existing entity patterns
+- Existing test patterns (`apps/web/tests/` — unit, nuxt, e2e, Playwright)
 
 ---
 
@@ -148,36 +161,54 @@ Identify what already exists and what needs to be created.
 
 # 7. Generate Implementation Plan
 
+> Catatan: File `tasks/NN-*.md` hasil `/gen-tasks` dan `/task` SUDAH mencantumkan plan terperinci di `## Tasks` (+ `## Test Plan` QA + `## Verification`). Command `/plan` bersifat **optional/refinement**: jika Tasks di task file sudah lengkap, plan hanya memperinci langkah eksekusi file-by-file. Jika belum lengkap, plan melengkapinya. Selalu konsisten dengan User Flow + UI FASE 1 + QA perspective.
+
 Create a detailed plan with these sections:
 
 ````md
-# Implementation Plan — Task NN: {Task Name}
+# Implementation Plan — Task NN: {Task Name} (FASE X)
 
 ## Overview
 
-{Brief summary of what will be implemented}
+{Brief summary — sebutkan Fase, apakah UI design atau implementation, dan referensi ke FASE 1 jika ada}
+
+## Fase & Dependencies
+
+- Fase: FASE 1 — UI Design / FASE 2 — Implementation
+- Depends on: `tasks/NN-ui-design.md` (jika FASE 2)
+- User Flow: {ringkasan diagram + jumlah steps}
+- Referensi Design: {tasks/NN-ui-design.md → wireframe/mockup/prototype} (jika FASE 2)
 
 ## Prerequisites
 
-- [ ] Task XX completed (if any)
+- [ ] Task `NN-ui-design.md` DONE (jika FASE 2)
 - [ ] Dependencies installed
 - [ ] Database ready
+- [ ] Design tokens & mockup tersedia (jika FASE 2)
 
 ## Implementation Steps
 
-### Step 1: {Step Name}
+> Untuk FASE 1: langkah adalah Discovery → Wireframe → Mockup → Prototype → Handoff.
+> Untuk FASE 2: langkah mengikuti `## Tasks` di task file (Backend → Frontend → Test Plan QA), selalu mengacu mockup FASE 1 dan User Flow.
+
+### Step 1: {Step Name} — {User Flow Step / AC mapping}
 
 **Priority**: HIGH/MEDIUM/LOW
+
+**Fase**: FASE 1 / FASE 2
 
 **Files to create/modify**:
 - `path/to/file1.ts` — {what changes}
 - `path/to/file2.ts` — {what changes}
 
 **Details**:
-{exact code changes, function signatures, type definitions}
+{exact code changes, function signatures, type definitions — untuk FASE 2, sebutkan referensi mockup/wireframe FASE 1}
+
+**User Flow / AC mapping**:
+- Covers: `User Flow Step X`, `AC-XXX`, `FR/BR/DR/INV-XXX`
 
 **Verification**:
-- [ ] {how to verify this step}
+- [ ] {how to verify this step — kaitkan ke test ID UT-XXX/NT-XXX/E2E-XXX}
 
 ### Step 2: {Step Name}
 
@@ -185,43 +216,66 @@ Create a detailed plan with these sections:
 
 ## File Change Summary
 
-| Action | File | Description |
-|--------|------|-------------|
-| CREATE | `server/entities/xxx.entity.ts` | New entity |
-| MODIFY | `server/services/xxx.service.ts` | Add new method |
-| CREATE | `app/components/xxx/XXX.vue` | New component |
+| Action | File | Description | Fase | User Flow / AC |
+|--------|------|-------------|------|----------------|
+| CREATE | `server/entities/xxx.entity.ts` | New entity | FASE 2 | DR-01, Step 3 |
+| CREATE | `app/components/xxx/XXX.vue` | New component (sesuai mockup task 01) | FASE 2 | Step 2, AC-002 |
+| CREATE | `tests/e2e/xxx.spec.ts` | E2E happy path (QA) | FASE 2 | User Flow Steps 1→3 |
+| CREATE | `docs/wireframes/xxx/list.png` | Wireframe | FASE 1 | Step 1 |
 
-## Verification Plan
+## Test Plan (QA — Bertindak sebagai QA Engineer)
 
-### Unit Tests
-- [ ] {test file and what it tests}
+> Diisi seolah QA tester. Setiap User Flow step + AC + BR/EC HARUS memiliki test. Rencana ini akan dipakai `/verify` dan `/review`.
 
-### Component Tests
-- [ ] {test file and what it tests}
+| Test ID | Jenis | File | Mengcover (User Flow / AC / BR) | Ekspektasi Given/When/Then |
+|---------|-------|------|----------------------------------|-----------------------------|
+| UT-01 | unit | `tests/unit/{feature}.service.test.ts` | FR-001, BR-001, INV-01 | Given valid input When create Then 201 + invariant hold |
+| NT-01 | nuxt | `tests/nuxt/{feature}.form.test.ts` | Step 2, States validation | Given empty When submit Then inline error |
+| E2E-01 | e2e | `tests/e2e/{feature}.spec.ts` | Steps 1→3 happy path, AC-001..003 | Given logged in When flow Then success |
+| E2E-02 | e2e | `tests/e2e/{feature}.alt.spec.ts` | ALT-01, ERR-01, EC-01, permission | Given ... When ... Then ... |
 
-### E2E Tests
-- [ ] {test file and what it tests}
+- Unit: `npm run test:unit` — semua UT PASS
+- Nuxt: `npm run test:nuxt` — semua NT PASS (semua state loading/empty/error/success/validation/permission)
+- E2E: `npm run test:e2e` — semua E2E PASS (happy + alternate/error + edge + permission)
+- Coverage: User Flow 100%, AC 100%, BR 100%, EC 100%
 
-### Manual Verification
-- [ ] {manual check}
+## Verification Plan (QA)
+
+### Automated (wajib lolos)
+
+- [ ] Typecheck (`vue-tsc`)
+- [ ] Unit (`npm run test:unit`) — traceability ke FR/BR/DR/INV
+- [ ] Nuxt (`npm run test:nuxt`) — traceability ke UI States
+- [ ] E2E (`npm run test:e2e`) — traceability ke User Flow Steps + AC
+- [ ] Build (`npm run build`)
+
+### Manual / QA Checklist
+
+- [ ] User Flow steps ter-cover E2E
+- [ ] AC Given/When/Then PASS
+- [ ] Business Rules & Edge Cases PASS
+- [ ] States loading/empty/error/success/validation/permission ter-render
+- [ ] Permission 401/403 matrix
+- [ ] Pixel-perfect vs mockup FASE 1 (jika FASE 2)
+- [ ] Responsive + Accessibility
 
 ## Risk Assessment
 
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| {risk} | {impact} | {mitigation} |
+| Risk | Impact | Mitigation | Related User Flow / AC |
+|------|--------|------------|------------------------|
+| {risk} | {impact} | {mitigation} | Step X, AC-XXX |
 
 ## Estimated Effort
 
-- Files to create: N
+- Files to create: N (termasuk test files UT/NT/E2E)
 - Files to modify: N
 - Estimated time: X hours
+- Fase: FASE 1 / FASE 2 / kedua
 
 ## Execution Order
 
-1. {step 1}
-2. {step 2}
-3. {step 3}
+1. {FASE 1: wireframe → mockup → prototype → handoff}
+2. {FASE 2: entity → DTO → service → API → frontend (sesuai mockup) → tests QA → verification}
 ````
 
 ---

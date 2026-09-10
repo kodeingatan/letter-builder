@@ -90,11 +90,13 @@ Always verify against actual source code.
 
 Before writing any code:
 
-- [ ] Task specification fully understood
-- [ ] Implementation plan reviewed
-- [ ] Existing code patterns identified
-- [ ] Dependencies verified
-- [ ] No conflicts with existing code detected
+- [ ] Task specification fully understood — termasuk Fase (1=design / 2=implementation), User Flow, dan referensi `tasks/NN-ui-design.md` jika FASE 2
+- [ ] User Flow steps + Alternate/Error flows + Flow→UI/API mapping dipahami dan KONSISTEN dengan FASE 1
+- [ ] Implementation plan reviewed (jika ada — note: `tasks/NN-*.md` sudah berisi plan di `## Tasks`; `/plan` bersifat optional refinement)
+- [ ] Existing code patterns identified (termasuk test patterns `tests/unit`, `tests/nuxt`, `tests/e2e`)
+- [ ] Dependencies verified — untuk FASE 2: pastikan `tasks/NN-ui-design.md` sudah DONE atau minimal tersedia sebagai acuan
+- [ ] Test Plan QA dipahami — setiap User Flow step / AC / BR/EC harus memiliki UT/NT/E2E (bertindak sebagai QA engineer)
+- [ ] No conflicts with existing code atau dengan prototype FASE 1 detected
 
 ---
 
@@ -144,7 +146,9 @@ After each step:
 
 ---
 
-# 7. Backend Implementation
+# 7. Backend Implementation (FASE 2 — mengacu User Flow + Domain + API di task file)
+
+> Untuk FASE 1 (UI Design): lewati bagian ini — fokus ke Frontend Design di #8 dan deliverables wireframe/mockup/prototype.
 
 ### Entity Pattern
 
@@ -156,13 +160,14 @@ export const {Name}Schema = new EntitySchema({
   name: '{name}',
   columns: {
     id: { primary: true, type: 'int', generated: true },
-    // ... columns
+    // ... columns — sesuai ## Domain > Data Model
   },
   relations: {
-    // ... relations
+    // ... relations — sesuai ## Domain > Relationships, perhatikan cascade
   },
 })
 ```
+> Daftar invariants / domain rules dari `## Domain > Invariants / Domain Rules` harus ditegakkan di entity/service.
 
 ### Service Pattern
 
@@ -179,6 +184,7 @@ export const {Name}Service = {
   async remove(id: number) { /* ... */ },
 }
 ```
+> Setiap FR/BR/DR harus memiliki branch di service dan akan di-cover oleh unit test UT-XXX (QA perspective).
 
 ### API Route Pattern
 
@@ -193,6 +199,7 @@ export default defineEventHandler(async (event) => {
   return {Name}Service.findAll(query)
 })
 ```
+> Setiap endpoint harus sesuai `## API > Endpoint Overview` (route, method, request, response, validation Zod, error, authentication JWT, authorization Guard/Permission) dan mapping ke `User Flow > Flow → API Mapping`.
 
 ### DTO Pattern
 
@@ -206,45 +213,49 @@ export type CreateInput = z.infer<typeof CreateSchema>
 export const QuerySchema = z.object({ /* ... */ })
 export type QueryInput = z.infer<typeof QuerySchema>
 ```
+> Validation harus sinkron dengan FR/BR/EC dan akan di-test via unit + API tests.
 
 ---
 
 # 8. Frontend Implementation
 
+> **FASE 1 — UI Design**: Buat deliverables design dulu: wireframe low-fi, mockup hi-fi (Naive UI + Tailwind, token `naiveui-theme.ts`), prototype interaktif (Figma / HTML / Storybook) — sesuai `## UI` dan `## User Flow` di task FASE 1. Simpan di `docs/wireframes/{feature}/`, `docs/mockups/{feature}/`, `docs/prototypes/{feature}/`. Checklist ada di `## Tasks (Design)` di task file.
+
+> **FASE 2 — Implementation**: Implementasi frontend HARUS pixel-perfect terhadap mockup FASE 1 (`tasks/NN-ui-design.md`). Jangan desain ulang. Jika ada deviasi, catat di `## UI > Penyesuaian dari design`.
+
 ### Page Pattern
 
 ```vue
-<!-- app/pages/dashboard/{name}.vue -->
+<!-- app/pages/{route}/index.vue — sesuai ## UI > Halaman di task FASE 1/2 -->
 <script setup lang="ts">
 definePageMeta({ layout: 'default', middleware: 'auth' })
-
-// ... logic
+// logic — mapping ke User Flow Step
 </script>
 
 <template>
-  <!-- ... template -->
+  <!-- template — Naive UI first, Tailwind utility, no NDescriptions -->
 </template>
 ```
 
 ### Component Pattern
 
 ```vue
-<!-- app/components/features/{name}/{Name}.vue -->
+<!-- app/components/features/{name}/{Name}.vue — sesuai ## UI > Components -->
 <script setup lang="ts">
-// ... props, emits, logic
+// ... props, emits, logic — sesuai mockup FASE 1
 </script>
 
 <template>
-  <!-- ... template -->
+  <!-- ... template — states: loading/empty/error/success/validation/permission -->
 </template>
 ```
 
 ### Composable Pattern
 
 ```typescript
-// app/composables/use{Name}.ts
-export function use{Name}() {
-  // ... logic
+// app/composables/use{Name}Data.ts — sesuai task file Frontend checklist
+export function use{Name}Data() {
+  // ... logic — wrap useApi() dengan auth interceptor
   return { /* ... */ }
 }
 ```
@@ -260,23 +271,74 @@ export const use{Name}Store = defineStore('{name}', () => {
 })
 ```
 
+### States (WAJIB — sesuai ## UI > States di task)
+
+- Implementasikan semua state: loading (NSpin/NSkeleton), empty (NEmpty + CTA), error (NAlert + retry), success (useMessage), validation (NFormItem), permission denied (NAlert 403 + `rbac-denied`)
+- Setiap state HARUS memiliki test NT-XXX (nuxt) + E2E-XXX — sebagai QA, pastikan ada.
+
 ---
 
-# 9. During Implementation
+# 9. During Implementation — QA Test Creation (Bertindak sebagai QA Engineer)
+
+> Selain code feature, ANDA BERTINDAK SEBAGAI QA ENGINEER: buat file test `unit`, `nuxt`, `e2e` yang memverifikasi semua User Flow berjalan benar dan semua logika benar. Test ini adalah bagian dari `## Tasks > Test Plan` di task file dan akan dipakai `/verify` + `/review`.
+
+### Test Creation (WAJIB — FASE 2)
+
+Ikuti `## Tasks > Test Plan` di task file (UT/NT/E2E mapping ke User Flow/AC/BR/EC):
+
+**Unit tests** (`tests/unit/` atau `server/**/*.test.ts`):
+
+```typescript
+// tests/unit/{feature}.service.test.ts
+// - 1 test per FR/BR/DR/INV
+// - DTO validation (Zod) — valid/invalid/edge
+// - Service logic — happy + error + edge + permission
+```
+
+**Nuxt tests** (`tests/nuxt/` atau `app/components/**/ *.test.ts`):
+
+```typescript
+// tests/nuxt/{feature}.form.test.ts
+// - Render semua state: loading/empty/error/success/validation/permission
+// - Interaction: klik, submit, validation, navigation — sesuai User Flow
+// - Responsive & accessibility — desktop/tablet/mobile, keyboard, ARIA
+```
+
+**E2E tests** (`tests/e2e/{feature}.spec.ts` — Playwright):
+
+```typescript
+// tests/e2e/{feature}.spec.ts
+// - Happy path: semua User Flow steps end-to-end — Given/When/Then dari AC-XXX
+// - Alternate/Error: empty, validation 400, 401/403 permission, edge cases EC-XXX
+// - Setup: reuseExistingServer, headed default, SLOWMO_MS=100
+```
+
+Aturan:
+- Setiap User Flow step → minimal 1 E2E case. Setiap AC → minimal 1 test (unit/nuxt/e2e). Setiap BR/EC → test. Setiap UI State → nuxt + e2e.
+- Tulis file test eksplisit, jangan placeholder generik. File harus runnable via `npm run test:unit`, `npm run test:nuxt`, `npm run test:e2e`.
+- Untuk FASE 1 (design task), tidak ada code test — verifikasi adalah design review (lihat `## Verification (Design)`), bukan vitest/playwright.
 
 ### Track Progress
 
-Update the task file's Implementation section:
+Update the task file's `## Tasks` checklist (centang `[x]` per item) dan sesuaikan dengan `## Test Plan`:
 
 ```markdown
-## Implementation
+## Tasks
 
 ### Backend
-
 * [x] Entity
 * [x] Service
-* [ ] API routes
-* [ ] DTO
+* [x] Unit tests — UT-01/UT-02
+
+### Frontend
+* [x] Pages (sesuai mockup FASE 1)
+* [x] Components — semua states
+* [x] Nuxt tests — NT-01/NT-02
+
+### Test Plan (QA)
+* [x] UT-01 — ...
+* [x] NT-01 — ...
+* [x] E2E-01 — ...
 ```
 
 ### Handle Errors
@@ -287,6 +349,7 @@ If you encounter an error:
 2. Check if the pattern exists in the codebase
 3. Follow existing error handling patterns
 4. Do not introduce new error handling patterns
+5. Jika error terkait User Flow / UI mismatch dengan FASE 1, catat di `## UI > Penyesuaian dari design` dan `## Open Questions`
 
 ### Document Decisions
 
@@ -295,12 +358,13 @@ If you make a decision not covered by the task or plan:
 1. Document it in the task file under `Assumptions`
 2. Keep it minimal
 3. Follow existing patterns
+4. Untuk deviasi dari mockup FASE 1, wajib catat alasan
 
 ---
 
-# 10. Post-Implementation
+# 10. Post-Implementation — QA Smoke (Bertindak sebagai QA)
 
-After implementing all steps:
+After implementing all steps — jalankan smoke check sebagai QA sebelum `/verify`:
 
 ### Verify Code Quality
 
@@ -308,15 +372,29 @@ After implementing all steps:
 2. Check TypeScript types are correct
 3. Check no `any` types were introduced unnecessarily
 4. Check naming conventions are followed
+5. Untuk FASE 2: pastikan tidak ada deviasi dari mockup FASE 1 tanpa catatan
 
-### Run Verification
+### Run Verification (QA Smoke — harus lolos sebelum claim DONE)
 
 ```bash
 # From apps/web/
-npm run dev          # Check server starts
-npm run build        # Check production build
-npm run test         # Run tests
+npm run test:unit     # Unit — UT-01/UT-02 harus PASS, cover FR/BR/DR/INV
+npm run test:nuxt     # Nuxt — NT-01/NT-02 harus PASS, semua state ter-render
+npm run test:e2e      # E2E — E2E-01/E2E-02 harus PASS, semua User Flow steps
+npm run build         # Production build — 0 error
+# npm run dev         # Opsional: cek server starts, API endpoints, pages render
 ```
+
+Checklist QA smoke (mapping ke task file):
+
+- [ ] Semua User Flow steps ada E2E dan PASS
+- [ ] Semua AC Given/When/Then ada test dan PASS
+- [ ] Semua BR/EC ada test dan PASS
+- [ ] Semua UI States (loading/empty/error/success/validation/permission) ter-cover NT + E2E
+- [ ] Permission matrix 401/403 ter-test
+- [ ] Pixel-perfect vs mockup FASE 1 (FASE 2) — manual check atau visual test
+
+Jika salah satu gagal, perbaiki sebelum `/verify` — jangan claim implemented dengan test gagal.
 
 ### Update Task Status
 
@@ -325,8 +403,14 @@ Update the task file:
 ```markdown
 ## Status
 
-IN PROGRESS → TODO REVIEW
+TODO → IN_PROGRESS → DONE (FASE 1: design selesai) atau TODO REVIEW (FASE 2: siap verifikasi)
+
+## Tasks
+
+- Centang semua checklist Backend/Frontend/Test Plan yang sudah selesai
 ```
+
+Untuk FASE 1 (design task), status akhir adalah `DONE` (tidak perlu `/verify` code, tetapi bisa `/review` design). Untuk FASE 2, status `TODO REVIEW` / `DONE` setelah smoke QA lolos, siap `/verify`.
 
 ---
 

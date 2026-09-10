@@ -962,20 +962,50 @@ _(tambahkan AC-003 dst. sesuai kebutuhan)_
 - [ ] Dokumentasi singkat (`docs/` atau inline)
 - [ ] Verifikasi konsistensi dengan `tasks/NN-feature-ui-design.md` — tidak ada deviasi tanpa catatan
 
-## Verification
+### Test Plan (QA — Bertindak sebagai QA Engineer)
 
-- [ ] Typecheck (`vue-tsc` / `nuxt typecheck`)
-- [ ] Unit test (`npm run test:unit`)
-- [ ] Component test (`npm run test:nuxt`)
-- [ ] API test / Integration test
-- [ ] E2E test (`npm run test:e2e`) — semua User Flow steps
-- [ ] Database verification (entity, constraint, migration)
-- [ ] Permission verification (401/403 matrix)
+> MANDATORY untuk FASE 2. Setiap User Flow step, Alternate/Error flow, dan Business Rule HARUS memiliki pasangan test. Test ini nanti dieksekusi oleh `/verify` dan dinilai oleh `/review`.
+
+| ID | Jenis Test | File (rencana) | Mengcover | User Flow Step / AC |
+|----|------------|----------------|-----------|---------------------|
+| UT-01 | Unit — Service/DTO | `tests/unit/{feature}.service.test.ts` | Logic, validation, domain rules, invariants | FR-001, BR-001, INV-01 |
+| UT-02 | Unit — Domain | `tests/unit/{feature}.entity.test.ts` | Entity, relationship, state transition | DR-01, State DRAFT→PUBLISHED |
+| NT-01 | Nuxt — Component | `tests/nuxt/{feature}.form.test.ts` / `app/components/.../*.test.ts` | Component render, interaction, validation, states (loading/empty/error/success) | Step 2, AC-002 |
+| NT-02 | Nuxt — Page | `tests/nuxt/{feature}.page.test.ts` | Layout, responsive, accessibility, permission | Step 1, AC-001 |
+| E2E-01 | E2E — Happy path | `tests/e2e/{feature}.spec.ts` | Full User Flow end-to-end | Step 1→3→success |
+| E2E-02 | E2E — Alternate | `tests/e2e/{feature}.alt.spec.ts` | Empty, error, permission, edge cases | ALT-01, ERR-01, EC-01 |
+
+- [ ] Unit tests — semua service method, DTO validation (Zod), domain rule, invariant — 1 test per FR/BR/DR/INV minimal
+- [ ] Nuxt component tests — render semua state (loading/empty/error/success/validation/permission) dari `## UI > States`
+- [ ] Nuxt page tests — layout, navigation, interaction, responsive, accessibility
+- [ ] E2E tests — skenario happy path + alternate/error + edge cases + permission (401/403) — MAPPING 1:1 ke `User Flow` + `Acceptance Criteria`
+- [ ] Coverage target: User Flow steps 100%, AC 100%, Business Rules 100%, Edge Cases 100%
+
+## Verification (QA — Bertindak sebagai QA Engineer)
+
+> Verifikasi dilakukan seolah-olah QA tester independen. Pastikan semua User Flow berjalan benar dan semua logika benar. Hasilnya dipakai oleh `/verify` dan `/review`.
+
+### Automated (wajib lolos sebelum DONE)
+
+- [ ] Typecheck (`vue-tsc` / `nuxt typecheck`) — 0 error
+- [ ] Unit tests (`npm run test:unit`) — semua UT-01/UT-02 PASS, coverage ≥80% untuk logic baru
+- [ ] Nuxt tests (`npm run test:nuxt`) — semua NT-01/NT-02 PASS, semua state ter-render
+- [ ] API/Integration tests — semua endpoint PASS, validation + error + auth/authz PASS
+- [ ] E2E tests (`npm run test:e2e`) — semua E2E-01/E2E-02 PASS, semua User Flow steps + Alternate/Error flows
+- [ ] Build (`npm run build`) — sukses tanpa error
+
+### Manual / QA Checklist (mapping ke User Flow & AC)
+
+- [ ] Database verification — entity, relationship, constraint, migration, invariant (DR/INV)
+- [ ] Permission verification — 401/403 matrix untuk setiap Permission di `## API > Endpoint Overview`
+- [ ] Business Rules verification — setiap BR-XXX memiliki test dan PASS
+- [ ] Edge Cases verification — setiap EC-XXX memiliki test dan PASS
+- [ ] States verification — loading/empty/error/success/validation/permission (sesuai `## UI > States`) ter-render dan ada test
+- [ ] Responsive verification — desktop/tablet/mobile sesuai wireframe FASE 1
+- [ ] Accessibility verification — keyboard, ARIA, contrast, reduced-motion (sesuai design FASE 1)
 - [ ] UI/UX verification — pixel-perfect terhadap mockup `tasks/NN-feature-ui-design.md` (Naive UI + Tailwind, no `NDescriptions`)
-- [ ] Responsive verification (desktop/tablet/mobile — sesuai wireframe)
-- [ ] Design System verification (`naiveui-theme.ts`, token)
-- [ ] Accessibility verification (keyboard + ARIA + contrast — sesuai design)
-- [ ] User Flow verification — semua AC Given/When/Then lolos
+- [ ] User Flow verification — setiap `## User Flow > Steps` + `Alternate & Error Flows` + `Flow→UI/API Mapping` ada AC dan ada E2E yang PASS
+- [ ] Acceptance verification — setiap AC Given/When/Then PASS (traceability AC ↔ User Flow step ↔ Test ID)
 
 ## Assumptions
 
@@ -1021,8 +1051,8 @@ Domain       (entity, relationship, state, domain rules, invariant + data model)
 API          (server route, HTTP method, request, response, validation, error, authentication, authorization — sesuai User Flow & UI)
 UI           (halaman, layout, component, interaction, responsive, loading/empty/error/success, accessibility — MEREFERENSIKAN FASE 1, bukan desain ulang)
 Acceptance   (Given / When / Then — kapan feature dianggap benar — mapping ke User Flow)
-Tasks        (daftar pekerjaan implementasi — checkbox — mengacu design FASE 1)
-Verification (checklist verifikasi kualitas — termasuk pixel-perfect terhadap mockup FASE 1)
+Tasks        (daftar pekerjaan implementasi — checkbox — mengacu design FASE 1) + Test Plan (QA: unit/nuxt/e2e mapping ke User Flow & AC)
+Verification (QA — bertindak sebagai QA engineer: unit/nuxt/e2e + states/permission/BR/EC/User Flow/AC traceability — termasuk pixel-perfect terhadap mockup FASE 1)
 ```
 
 Jika salah satu tidak relevan, isi `N/A` dengan alasan di `Assumptions` — jangan hapus headernya.
@@ -1240,6 +1270,35 @@ Do not generate irrelevant tasks. Untuk production tasks yang memiliki UI (mis. 
 
 ---
 
+# 18A. QA Perspective — Bertindak sebagai QA Engineer / Tester
+
+> Saat mengisi `## Tasks > Test Plan` dan `## Verification`, bertindak SEOLAH-OLAH sebagai QA engineer independen yang akan membuat file test `unit`, `nuxt`, `e2e` dan memastikan semua User Flow berjalan benar + semua logika benar. Test ini dipakai oleh `/verify` dan `/review`.
+
+Aturan WAJIB:
+
+- Setiap **User Flow step** (happy + alternate + error) HARUS memiliki minimal 1 test E2E. Mapping: `User Flow Step → E2E test case`.
+- Setiap **Acceptance Criteria Given/When/Then** HARUS memiliki test (unit/nuxt/e2e). Mapping: `AC-XXX → Test ID`.
+- Setiap **Functional Requirement / Business Rule / Domain Rule / Invariant** HARUS memiliki unit test. Mapping: `FR/BR/DR/INV → UT-XXX`.
+- Setiap **UI State** (loading/empty/error/success/validation/permission) HARUS memiliki nuxt/component test + E2E. Mapping: `State → NT-XXX + E2E-XXX`.
+- Setiap **API endpoint** HARUS memiliki unit/DTO test + integration test untuk request/response/validation/error/auth/authz. Mapping: `Endpoint → UT + Integration`.
+- Setiap **Edge Case** HARUS memiliki test (unit atau e2e).
+- Tulis rencana file test eksplisit: `tests/unit/{feature}/*.test.ts`, `tests/nuxt/{feature}/*.test.ts` atau `app/components/**/ *.test.ts`, `tests/e2e/{feature}.spec.ts`. Jangan tulis "tulis test" generik.
+- Definisikan ekspektasi GIVEN/WHEN/THEN untuk setiap test case di `## Tasks > Test Plan` — agar `/verify` dapat menjalankan `npm run test:unit`, `npm run test:nuxt`, `npm run test:e2e` dan memverifikasi 1:1 dengan User Flow.
+- Jika task tidak memiliki UI, tetap butuh unit + API tests untuk logic.
+
+Contoh mapping QA (untuk `## Tasks > Test Plan`):
+
+| User Flow Step | AC | BR/BR/FR | Test ID | Jenis | Ekspektasi |
+|---|---|---|---|---|---|
+| Step 1: Buka list | AC-001 | FR-001 | E2E-01 | e2e | List render, pagination, search work |
+| Step 3: Submit valid | AC-003 | BR-001, FR-002 | E2E-01, UT-01 | e2e + unit | 201 created, validasi lolos |
+| Step ERR-01: Validasi gagal | AC-004 | BR-002 | E2E-02, UT-01 | e2e + unit | 400 + inline error |
+| State empty | AC-005 | — | NT-01, E2E-02 | nuxt + e2e | NEmpty + CTA muncul |
+
+`/verify` akan berperan sebagai QA yang menjalankan ketiga suite dan memverifikasi traceability `User Flow ↔ AC ↔ Test`. `/review` akan menilai kualitas dan coverage test.
+
+---
+
 # 19. Task Dependency Map
 
 After generating the task list, create a dependency map yang menunjukkan FASE 1 → FASE 2 per feature.
@@ -1330,16 +1389,18 @@ Before finishing, verify bahwa:
 * [ ] Responsive behavior (sesuai wireframe FASE 1)
 * [ ] Accessibility (sesuai design FASE 1)
 
-### Quality
+### Quality (QA Perspective)
 
-* [ ] User Flow di setiap task (FASE 1 & 2)
-* [ ] Acceptance (Given/When/Then — kapan feature dianggap benar — mapping ke User Flow)
-* [ ] Tasks (daftar pekerjaan implementasi — FASE 1: design, FASE 2: code)
-* [ ] Unit tests
-* [ ] Integration/API tests
-* [ ] E2E tests
+* [ ] User Flow di setiap task (FASE 1 & 2) — semua steps ada di `## User Flow`
+* [ ] Acceptance (Given/When/Then — kapan feature dianggap benar — mapping ke User Flow & Test)
+* [ ] Tasks (daftar pekerjaan implementasi — FASE 1: design, FASE 2: code) + Test Plan QA (UT/NT/E2E mapping)
+* [ ] Unit tests (`tests/unit/` — service, DTO, entity, domain rules, invariants) — 1 test per FR/BR/DR/INV
+* [ ] Nuxt tests (`tests/nuxt/` / `app/components/**/ *.test.ts` — render semua state, interaction, responsive, accessibility)
+* [ ] Integration/API tests (endpoint + validation + error + auth/authz)
+* [ ] E2E tests (`tests/e2e/` — happy + alternate/error + edge + permission — 100% User Flow steps, 100% AC)
+* [ ] Traceability: setiap User Flow step ↔ AC ↔ Test ID terdokumentasi di `## Tasks > Test Plan`
 * [ ] UI/UX verification (pixel-perfect terhadap mockup FASE 1)
-* [ ] Security
+* [ ] Security (auth, RBAC, validation, secrets)
 * [ ] Performance where relevant
 
 ### Production
