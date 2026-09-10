@@ -15,8 +15,9 @@ import {
   collectPlacements,
   isCompositionNode,
   isSlotBound,
-  type CompositionNode,
 } from '~~/server/utils/composition-tree'
+// Canonical composition type (Task 24 single source of truth).
+import type { CompositionNode } from '../../shared/types/template'
 import { isItemScopedRef, itemFieldOf, slotKeyOf } from '~~/server/utils/binding-refs'
 
 export { isItemScopedRef, itemFieldOf, slotKeyOf }

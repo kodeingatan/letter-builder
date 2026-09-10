@@ -23,7 +23,10 @@ NODE_ENV=production JWT_SECRET=<strong-secret> DB_SYNCHRONIZE=false npm run buil
   first — re-running never duplicates permissions, roles, users, or settings
   (26 permissions at baseline).
 - Startup self-check fails fast in production when `JWT_SECRET` is default,
-  storage is unwritable, or migrations drift (warn-only in development).
+  storage is unwritable, or migrations drift. Dev boots
+  (`synchronize:true`, the default outside production) are startup-warn-free
+  by design (Task 24): a missing `migrations` bookkeeping table and the
+  default dev secret emit no warns; storage problems still warn.
 
 ### Migration workflow (from `apps/web/`)
 

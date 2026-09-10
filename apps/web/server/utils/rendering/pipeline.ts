@@ -17,7 +17,10 @@
 
 import { evaluate } from '../expressions'
 import { isItemScopedRef, itemFieldOf, slotKeyOf } from '../binding-refs'
-import { COMPOSITION_KINDS, isCompositionNode, unwrapTokenExpression, type CompositionNode } from '../composition-tree'
+import { isCompositionNode, unwrapTokenExpression } from '../composition-tree'
+// Canonical composition + warning types (Task 24 single source of truth).
+import { COMPOSITION_KINDS, type CompositionNode } from '../../../shared/types/template'
+import type { RenderWarning } from '../../../shared/types/render'
 import { buildEvalContext, getPath, isPresent } from './context'
 import { isAllowedImageSrc, missingImageBox, sanitizeOutputHtml } from './sanitizer'
 import { wrapDocument } from './print-css'
@@ -29,7 +32,6 @@ import {
   type RenderOptions,
   type RenderResult,
   type RenderTimings,
-  type RenderWarning,
 } from './types'
 
 export class RenderTimeoutError extends Error {

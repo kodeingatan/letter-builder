@@ -1,12 +1,9 @@
 import { STEP_FIELD_TYPES, isStepFieldType } from '../dto/administrations.dto'
 
-export interface StepField {
-  name: string
-  label: string
-  type: string
-  required?: boolean
-  options?: string[]
-}
+// Canonical step contracts live in `shared/types/administration.ts`
+// (Task 24 single source of truth — imported here for local use, NOT
+// re-exported, so Nuxt auto-import registers each name exactly once).
+import type { StepField, StepIssue } from '../../shared/types/administration'
 
 export interface StepDraft {
   id?: number
@@ -14,12 +11,6 @@ export interface StepDraft {
   templateId?: number | null
   templateVersion?: string | null
   fields?: StepField[]
-}
-
-export interface StepIssue {
-  index: number
-  stepName: string
-  message: string
 }
 
 const SNAKE_CASE_PATTERN = /^[a-z][a-z0-9_]*$/

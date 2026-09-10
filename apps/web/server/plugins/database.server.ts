@@ -2,17 +2,22 @@ import { access, constants } from 'node:fs/promises'
 import { join } from 'node:path'
 import { getDataSource } from '~~/server/utils/db'
 import { seedDatabase } from '~~/server/services/seeder.service'
-import { runStartupChecks } from '~~/server/utils/startup-check'
+import { isSynchronizeEnabled, runStartupChecks, shouldEmitStartupWarn } from '~~/server/utils/startup-check'
 import { checkMigrationStatus } from '~~/server/utils/migration-status'
 
 export default defineNitroPlugin(async () => {
+  const nodeEnv = process.env.NODE_ENV ?? 'development'
+  const synchronize = isSynchronizeEnabled()
   const ds = await getDataSource()
 
   // Task 23: real drift detection — compare the `migrations` bookkeeping
   // table against the checked-in migration classes. `runStartupChecks`
   // itself stays pure; only this input becomes real (was hardcoded `true`).
   const migrationStatus = await checkMigrationStatus(ds)
-  if (!migrationStatus.inSync) {
+  // Task 24: dev boots with `synchronize:true` intentionally carry no
+  // `migrations` bookkeeping — silence the warn there, keep it everywhere
+  // else (prod drift still warn-then-fatal via `runStartupChecks` below).
+  if (!migrationStatus.inSync && shouldEmitStartupWarn('MIGRATION_DRIFT', nodeEnv, synchronize)) {
     const detail = [
       ...migrationStatus.pending.map((name) => `pending:${name}`),
       ...migrationStatus.unknown.map((name) => `unknown:${name}`),
@@ -38,7 +43,7 @@ export default defineNitroPlugin(async () => {
   }
   const issues = runStartupChecks({
     jwtSecret: process.env.JWT_SECRET ?? 'default-secret-change-me',
-    nodeEnv: process.env.NODE_ENV ?? 'development',
+    nodeEnv,
     storageWritable,
     migrationInSync: migrationStatus.inSync,
   })
@@ -52,6 +57,10 @@ export default defineNitroPlugin(async () => {
       console.error(`[startup] ${issue.code}: ${issue.message}`)
       process.exit(1)
     }
+    // Task 24: dev/`synchronize:true` boots skip the known-noise warns
+    // (default JWT secret, missing migrations bookkeeping) — prod matrix
+    // unchanged, storage warns still emit everywhere.
+    if (!shouldEmitStartupWarn(issue.code, nodeEnv, synchronize)) continue
     // eslint-disable-next-line no-console
     console.warn(`[startup] ${issue.code}: ${issue.message}`)
   }

@@ -3,21 +3,13 @@
  *
  * DB-free so unit tests can import the pipeline directly without pulling
  * the TypeORM chain. Warning codes match the task Data Model contract.
+ *
+ * Canonical warning types live in `shared/types/render.ts` (Task 24 single
+ * source of truth — imported here for local use, NOT re-exported, so Nuxt
+ * auto-import registers each name exactly once).
  */
 
-export type RenderWarningCode =
-  | 'MISSING_DATA'
-  | 'EXPR_ERROR'
-  | 'LOOP_TRUNCATED'
-  | 'IMAGE_MISSING'
-  | 'TIMEOUT'
-  | 'UNKNOWN_NODE'
-
-export interface RenderWarning {
-  code: RenderWarningCode
-  nodeId: string | null
-  message: string
-}
+import type { RenderWarning } from '../../../shared/types/render'
 
 export type RenderContext = Record<string, any>
 

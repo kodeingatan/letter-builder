@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm'
 import { appEntities, appMigrations } from '~~/server/utils/orm-data-source'
+import { isSynchronizeEnabled } from './startup-check'
 
 let dataSource: DataSource | null = null
 
@@ -8,9 +9,7 @@ export async function getDataSource(): Promise<DataSource> {
     // Task 22 (REQ-004): production boots with `synchronize:false` +
     // checked-in baseline migration. Override with DB_SYNCHRONIZE env var;
     // dev default stays `true` for the synchronize-era workflow.
-    const synchronize = process.env.DB_SYNCHRONIZE
-      ? process.env.DB_SYNCHRONIZE !== 'false'
-      : process.env.NODE_ENV !== 'production'
+    const synchronize = isSynchronizeEnabled()
     // Task 23: apply pending migrations automatically on production boot
     // (before the idempotent seed in `database.server.ts`). Dev keeps
     // `synchronize:true` and never runs migrations implicitly.

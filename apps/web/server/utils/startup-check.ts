@@ -12,6 +12,17 @@
 
 export const DEFAULT_JWT_SECRET = 'default-secret-change-me'
 
+/**
+ * Whether TypeORM `synchronize` is active for the current environment
+ * (Task 24: single home for the condition — `server/utils/db.ts` and the
+ * Nitro startup plugin both use this, so dev-silence gating can never drift
+ * from the actual DataSource setting. Dev default `true`, prod `false`.)
+ */
+export function isSynchronizeEnabled(env: NodeJS.ProcessEnv = process.env): boolean {
+  if (env.DB_SYNCHRONIZE) return env.DB_SYNCHRONIZE !== 'false'
+  return env.NODE_ENV !== 'production'
+}
+
 export interface StartupCheckInput {
   jwtSecret: string
   nodeEnv: string
@@ -52,4 +63,20 @@ export function runStartupChecks(input: StartupCheckInput): StartupIssue[] {
     })
   }
   return issues
+}
+
+/**
+ * Dev-silence gate (Task 24): with `synchronize:true` outside production the
+ * `migrations` bookkeeping table intentionally does not exist and no
+ * `JWT_SECRET` is configured — both are noise on a dev boot. Production
+ * behaviour is unchanged: every prod input returns `true`.
+ *
+ * Pure and unit-tested; the Nitro plugin routes both its raw drift warn and
+ * the `runStartupChecks` warn loop through here. Fatal handling is untouched
+ * (fatals always emit — the plugin exits on them before reaching this gate).
+ */
+export function shouldEmitStartupWarn(code: string, nodeEnv: string, synchronize: boolean): boolean {
+  if (nodeEnv === 'production') return true
+  if (synchronize && (code === 'JWT_SECRET_DEFAULT' || code === 'MIGRATION_DRIFT')) return false
+  return true
 }

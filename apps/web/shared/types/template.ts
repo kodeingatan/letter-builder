@@ -69,16 +69,22 @@ export interface QueryTemplate {
 }
 
 // --- Composition Editor (Task 15) -------------------------------------------
+// Canonical composition-tree contracts (Task 24): `server/utils/composition-tree.ts`
+// re-exports these names instead of redeclaring them, so Nuxt auto-import
+// registers each exactly once.
 
-export type CompositionKind =
-  | 'text'
-  | 'image'
-  | 'table'
-  | 'component'
-  | 'data-token'
-  | 'loop'
-  | 'condition'
-  | 'page-break'
+export const COMPOSITION_KINDS = [
+  'text',
+  'image',
+  'table',
+  'component',
+  'data-token',
+  'loop',
+  'condition',
+  'page-break',
+] as const
+
+export type CompositionKind = (typeof COMPOSITION_KINDS)[number]
 
 export interface CompositionNode {
   id: string

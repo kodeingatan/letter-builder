@@ -16,11 +16,10 @@ import {
   sanitizeTree,
   collectPlacements,
   isSlotBound,
-  type CompositionNode,
-  type TreeIssue,
   type TreeValidation,
-  type UnboundSlot,
 } from '~~/server/utils/composition-tree'
+// Canonical composition types (Task 24 single source of truth).
+import type { CompositionNode, TreeIssue, UnboundSlot } from '../../shared/types/template'
 import { TemplateBindingsService } from '~~/server/services/template-bindings.service'
 import type {
   TemplateQueryInput,

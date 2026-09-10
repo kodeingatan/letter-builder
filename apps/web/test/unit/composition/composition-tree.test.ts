@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
+// Canonical composition contracts (Task 24 single source of truth).
+import { COMPOSITION_KINDS, type CompositionNode } from '../../../shared/types/template'
 import {
-  COMPOSITION_KINDS,
   isCompositionNode,
   unwrapTokenExpression,
   isBooleanShapedExpression,
@@ -13,7 +14,6 @@ import {
   parseTreeInput,
   hasCompositionNodes,
   MAX_WRAPPER_DEPTH,
-  type CompositionNode,
 } from '../../../server/utils/composition-tree'
 
 function node(kind: CompositionNode['kind'], attrs: Record<string, any> = {}, id = `n-${Math.random()}`): CompositionNode {

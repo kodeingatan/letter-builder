@@ -20,8 +20,9 @@ import type {
   ComponentSnapshotLike,
   RenderContext,
   RenderResult,
-  RenderWarning,
 } from '~~/server/utils/rendering/types'
+// Canonical render warning type (Task 24 single source of truth).
+import type { RenderWarning } from '../../shared/types/render'
 import { StorageService } from '~~/server/services/storage.service'
 
 function httpError(statusCode: number, message: string, data?: unknown): Error {

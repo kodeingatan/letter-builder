@@ -1,6 +1,8 @@
 /**
  * Shared rendering-engine contracts for the client (Task 20).
- * Mirrors `server/utils/rendering/types.ts` warning codes.
+ * Canonical home for the warning types (Task 24 single source of truth):
+ * `server/utils/rendering/types.ts` re-exports these names instead of
+ * redeclaring them, so Nuxt auto-import registers each exactly once.
  */
 
 export type RenderWarningCode =

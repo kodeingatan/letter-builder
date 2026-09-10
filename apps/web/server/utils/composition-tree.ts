@@ -11,38 +11,11 @@
 
 import { validate as validateExpression, parse as parseExpression } from './expressions'
 
-export const COMPOSITION_KINDS = [
-  'text',
-  'image',
-  'table',
-  'component',
-  'data-token',
-  'loop',
-  'condition',
-  'page-break',
-] as const
-
-export type CompositionKind = (typeof COMPOSITION_KINDS)[number]
-
-export interface CompositionNode {
-  id: string
-  kind: CompositionKind
-  attrs?: Record<string, any>
-  children?: CompositionNode[]
-}
-
-export interface TreeIssue {
-  path: string
-  message: string
-}
-
-export interface UnboundSlot {
-  nodeId: string
-  componentId: number
-  componentName?: string
-  requirement: string
-  type: string
-}
+// Canonical composition-tree contracts live in `shared/types/template.ts`
+// (Task 24 single source of truth — this module imports them for local use
+// but does NOT re-export, so Nuxt auto-import registers each name once).
+import { COMPOSITION_KINDS } from '../../shared/types/template'
+import type { CompositionKind, CompositionNode, TreeIssue, UnboundSlot } from '../../shared/types/template'
 
 export interface TreeStats {
   nodeCount: number

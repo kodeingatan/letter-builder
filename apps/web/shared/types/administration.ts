@@ -4,11 +4,17 @@ export type StepFieldType = 'text' | 'richtext' | 'date' | 'select' | 'number' |
 
 export const STEP_FIELD_TYPES: StepFieldType[] = ['text', 'richtext', 'date', 'select', 'number', 'currency', 'image']
 
+// Canonical step-field contract (Task 24 single source of truth):
+// `server/utils/administration-helpers.ts` re-exports these names instead of
+// redeclaring them, so Nuxt auto-import registers each exactly once.
+// `type`/`required` stay loose on the wire — strictness lives in the Zod
+// DTO (`StepFieldSchema`) + `isStepFieldType` guard; `StepFieldType` above
+// serves UI pickers that need the closed list.
 export interface StepField {
   name: string
   label: string
-  type: StepFieldType
-  required: boolean
+  type: string
+  required?: boolean
   options?: string[]
 }
 
