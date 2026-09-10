@@ -29,7 +29,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 | tasks/21-generated-menu.md | [x] | [x] | [x] |
 | tasks/22-dynamic-rbac-audit-production.md | [x] | [x] | [x] |
 | tasks/23-production-migration-baseline.md | [x] | [x] | [x] |
-| tasks/24-startup-warnings-cleanup.md | [x] | [x] | [ ] |
+| tasks/24-startup-warnings-cleanup.md | [x] | [x] | [x] |
 
 ## Sudah Implementasi
 
@@ -99,6 +99,7 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /review — APPROVED
 - [x] tasks/12-global-table-data.md — Global Table Data & Generated CRUD — 2026-09-09 by /review — APPROVED
 - [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-10 by /review — APPROVED
+- [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /review — APPROVED
 
 ## Belum Direview
 
@@ -108,7 +109,6 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/24-startup-warnings-cleanup.md
 
 ## Detail per Task
 
@@ -223,10 +223,10 @@ Implementation / verification / review tracking for all tasks in `tasks/`.
 
 - Implemented: [x] 2026-09-10 by /implement — Single export site per name in `shared/types/*` (COMPOSITION_KINDS const moved to shared template types; StepField loosened to wire shape); server utils import-without-re-export (re-export proven insufficient — unimport still warns; fallback per plan Step 4); 5 importers repointed to canonical relative paths; `isSynchronizeEnabled` + `shouldEmitStartupWarn` added to dependency-free `startup-check.ts` with plugin gating (dev/sync silent, prod unchanged); `public/favicon.svg` + `.env.example` created; `test/unit/utils/startup-warnings.test.ts` (12 tests) + `test/e2e/startup-warnings.spec.ts` (2 tests). Evidence: unit 457/457 (36 files), nuxt 15/15, vue-tsc clean, build OK with 0 Duplicated imports, live dev boot 0/0/0 warns (boot+HMR), favicon/health/login 200 + guest 401, prod scratch boot healthy (migrations 1, perms 22, users 5), prod no-JWT → JWT_SECRET_DEFAULT + exit(1) + conn refused. Repo DB untouched (latest activity 00:26 pre-session; counts 28|9|5|4 stable, integrity ok, migrations/ clean). E2E 2/2 green.
 - Verified: [x] 2026-09-10 by /verify — PASS: unit 457/457 (36 files, incl. 12 startup-warnings), nuxt 15/15, vue-tsc clean, build OK with 0 `Duplicated imports` (rg-confirmed single declaration per each of the 8 names, no re-exports). Live on fresh dev boot (:3002, no env): 0 duplicated-imports / 0 [startup] / 0 R0004 across boot + HMR touch; health/favicon(200 SVG)/login 200, guest /api/users 401, viewer global-tables GET 200 / POST 403. Prod scratch: healthy boot (migrations=1, perms 22, users 5, favicon 200); rogue applied row → MIGRATION_DRIFT + exit(1) + conn refused + runbook pointer; no-JWT prod → JWT_SECRET_DEFAULT + exit(1) + refused. E2E startup-warnings 2/2 green. Repo DB restored (28|9|5|4, integrity ok, activity tail 00:26 pre-session, migrations/ clean). 2 minor (stale re-export comments in shared/types; pre-existing auth-only POST /api/users allows viewer 200 — untouched since setup, out of scope).
-- Reviewed: [ ] belum.
+- Reviewed: [x] 2026-09-10 by /review — APPROVED. Single-source-of-truth for 8 colliding types in shared/types/*; server utils import without re-exporting. isSynchronizeEnabled centralized in startup-check.ts; shouldEmitStartupWarn gates dev-silent JWT/drift warns while prod fatals unchanged. Favicon 200 SVG. 12 unit + 2 E2E tests. No must-fix issues. Zero regressions.
 
 ## Last Updated
 
 - Date: 2026-09-10
-- By: /verify
+- By: /review
 - Task: tasks/24-startup-warnings-cleanup.md
