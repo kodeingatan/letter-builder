@@ -3,9 +3,10 @@
 ## Overview
 
 - **Database Engine**: SQLite (via `better-sqlite3`)
-- **ORM**: TypeORM 1.1 (`EntitySchema` pattern, 18 entity files in `server/entities/`)
+- **ORM**: TypeORM 1.1 (`EntitySchema` pattern; 18 entity files defining 23 EntitySchemas / 26 physical tables including 3 M:N junctions)
 - **Database File**: `apps/web/db.sqlite`
 - **Migrations**: `synchronize: true` in development (default; override with `DB_SYNCHRONIZE` env var, `false` in production). Production boots apply the checked-in baseline `server/migrations/1788914913928-Baseline.ts` (all 23 entities / 26 tables) automatically (`migrationsRun` in `getDataSource()`); drift refuses boot with `MIGRATION_DRIFT` (real check in `server/utils/migration-status.ts`). CLI-loadable config: `server/utils/orm-data-source.ts`. Workflow: `npm run migration:generate -- <Name>` / `migration:run` / `migration:revert` (see `docs/production-runbook.md` §1). BR-001: never edit an applied migration.
+- **Startup gating**: Dev boots with `synchronize:true` suppress `JWT_SECRET_DEFAULT` and `MIGRATION_DRIFT` warnings (Task 24); prod fatals unchanged.
 
 ---
 
@@ -334,7 +335,7 @@ Tabel untuk menyimpan URL patterns yang diizinkan oleh permission.
 | 2 | /* |
 | 3 | /* |
 
-> Note (Task 22): seeder additionally provisions `Designer` and `Operator` roles plus a permission-matrix catalog (module Read/Write permissions, `Data:{table}:Read/Write` auto-provisioned per Global Table). See `server/utils/permission-matrix.ts` and `server/services/seeder.service.ts` for the authoritative grant matrix (26 permissions at baseline).
+> Note (Task 22): seeder additionally provisions `Designer` and `Operator` roles plus a permission-matrix catalog (module Read/Write permissions, `Data:{table}:Read/Write` auto-provisioned per Global Table). See `server/utils/permission-matrix.ts` and `server/services/seeder.service.ts` for the authoritative grant matrix (22 base permissions at baseline; `Data:*` permissions auto-provisioned per Global Table).
 
 ---
 
@@ -420,7 +421,7 @@ Tabel untuk menyimpan pengaturan aplikasi (key-value store).
 | key | value | description |
 |-----|-------|-------------|
 | `app_name` | `MyApp` | Nama aplikasi |
-| `app_favicon` | `/favicon.svg` | Favicon URL |
+| `app_favicon` | `/favicon.svg` | Favicon URL (static file at `public/favicon.svg`, brand-consistent SVG) |
 | `login_bg_gradient` | `#1e40af,#3b82f6,#6366f1` | Gradient colors untuk login background |
 
 ---

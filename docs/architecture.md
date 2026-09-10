@@ -255,6 +255,8 @@ Single Nuxt 4 package:
 - RBAC: Middleware-based guards using `defineEventHandler` + `getRouterParams`
 - Entity definitions: `server/entities/` (TypeORM `EntitySchema`); DataSource singleton in `server/utils/db.ts`
 - Auth: JWT sign/verify in `server/utils/jwt.ts`, password hashing in `server/utils/password.ts`
+- Shared types: `shared/types/` (20 files) — canonical type definitions imported by both frontend and server
+- Server utils import shared types directly (no re-export) to avoid Nuxt auto-import collisions (Task 24)
 
 ---
 
@@ -306,6 +308,8 @@ Sistem (group)
 | POST | `/api/auth/register` | Register user | Public |
 | POST | `/api/auth/login` | Login user | Public |
 | GET | `/api/auth/profile` | Get profile with roles, permissions, guards | Bearer |
+| PATCH | `/api/auth/profile` | Update profile (firstName, lastName, email, username) | Bearer |
+| PATCH | `/api/auth/password` | Change password (currentPassword, newPassword, confirmPassword) | Bearer |
 
 **Profile Response** includes full user data with nested relations:
 ```json
@@ -568,6 +572,14 @@ RBAC is enforced via Nitro route middleware and utility functions:
 | `verifyToken()` / `signToken()` | `server/utils/jwt.ts` | Validate/sign JWT token |
 | `hashPassword()` | `server/utils/password.ts` | Hash password with bcrypt |
 | `requireAuth()` / `requireApiAccess()` | `server/utils/route-guard.ts` | Bearer check + permission method+URL enforcement |
+| `getDataSource()` | `server/utils/db.ts` | TypeORM DataSource singleton (synchronize + migrationsRun) |
+| `isSynchronizeEnabled()` | `server/utils/startup-check.ts` | Single source of truth for dev/prod synchronize condition |
+| `shouldEmitStartupWarn()` | `server/utils/startup-check.ts` | Dev-silence gate: suppresses JWT/drift warns in dev synchronize mode |
+| `runStartupChecks()` | `server/utils/startup-check.ts` | Pure startup self-checks (JWT, storage, migration drift) |
+| `checkMigrationStatus()` | `server/utils/migration-status.ts` | Compares applied migrations against checked-in classes |
+| `computeMigrationSync()` | `server/utils/migration-status.ts` | Pure migration drift computation |
+| `matchUrlPattern()` | `server/utils/url-matcher.ts` | URL pattern matching for RBAC |
+| `permissionMatrix` | `server/utils/permission-matrix.ts` | Module permission catalog for RBAC seeding |
 
 ### RBAC Guard Logic (`server/utils/route-guard.ts`)
 
@@ -593,6 +605,16 @@ Request → Nitro route handler → requireAuth → requireApiAccess
            → ALLOW
        → Fail: 403 "Access denied"
 ```
+
+### Startup Checks (Task 22–24)
+
+The Nitro plugin (`server/plugins/database.server.ts`) runs startup self-checks on boot:
+
+1. **Database initialization** — `getDataSource()` initializes SQLite with `synchronize` (dev) or `migrationsRun` (prod)
+2. **Migration drift detection** — `checkMigrationStatus()` compares applied migrations against checked-in classes; prod fatals on drift, dev silent with `synchronize:true`
+3. **Seed** — `seedDatabase()` runs idempotent seed (RBAC + Dynamic Administration permissions)
+4. **Startup checks** — `runStartupChecks()` validates JWT_SECRET, storage writability, migration sync
+5. **Dev-silence gate** — `shouldEmitStartupWarn()` suppresses JWT_SECRET_DEFAULT and MIGRATION_DRIFT warns in dev `synchronize:true` mode; prod fatals unchanged (`console.error` + `process.exit(1)`)
 
 ### Client-Side Authorization
 
@@ -656,10 +678,18 @@ users ──────< users_roles >────── roles
 
 ### Backend (Nitro Server)
 - Nitro (Nuxt 4 server engine)
-- TypeORM 1.1
+- TypeORM 1.1 (EntitySchema pattern)
 - better-sqlite3
 - bcrypt
 - Zod (DTO validation in `server/dto/`; `class-validator` remains an installed but unused dependency)
+- jsonwebtoken (JWT auth)
+
+### Database
+- SQLite via `better-sqlite3`
+- `synchronize: true` in development (override with `DB_SYNCHRONIZE` env var)
+- Production: checked-in baseline migration (`server/migrations/1788914913928-Baseline.ts`) applied automatically via `migrationsRun`
+- Drift detection: `server/utils/migration-status.ts` compares applied migrations against checked-in classes
+- CLI: `npm run migration:generate/run/revert` (via `server/utils/migration-cli.ts`)
 
 ---
 

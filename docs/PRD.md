@@ -10,7 +10,7 @@
 
 > `Data → Component → Template → Administration → Document`
 
-**Current Implementation State**: Aplikasi mengimplementasikan fondasi **User Management System dengan RBAC** (admin panel untuk mengelola user, role, permission, dan guard) **dan** seluruh modul **Dynamic Administration** — Global Table (+ columns, computed fields, relations, generated CRUD), Expression Engine, Component, Template (+ composition editor, data binding), Administration (+ runner), Document, Rendering Engine, Generated Menu, serta Dynamic RBAC/Audit/Production readiness (tasks 07–22, implemented + verified). Yang belum dikonfigurasi hanya **baseline migrasi produksi** (task 23): development masih memakai `synchronize: true`.
+**Current Implementation State**: Aplikasi mengimplementasikan fondasi **User Management System dengan RBAC** (admin panel untuk mengelola user, role, permission, dan guard) **dan** seluruh modul **Dynamic Administration** — Global Table (+ columns, computed fields, relations, generated CRUD), Expression Engine, Component, Template (+ composition editor, data binding), Administration (+ runner), Document, Rendering Engine, Generated Menu, serta Dynamic RBAC/Audit/Production readiness (tasks 07–22). Production migration baseline (task 23) dan startup warnings cleanup (task 24) sudah diimplementasikan — development memakai `synchronize: true`, production memakai checked-in baseline migration dengan drift detection.
 
 **Tech Stack**:
 - Frontend: Nuxt 4 + Vue 3 + TypeScript + Naive UI + Tailwind CSS v4
@@ -159,7 +159,7 @@ Lihat detail di bawah (Dashboard, User Management, Role Management, Permission M
 
 - Database: SQLite (better-sqlite3) — cocok untuk skala kecil hingga sedang
 - Metadata-driven: menyiratkan kebutuhan schema fleksibel untuk data Global Table
-- `synchronize: true` untuk development; migrasi produksi belum dikonfigurasi
+- `synchronize: true` untuk development; production memakai checked-in baseline migration (`server/migrations/1788914913928-Baseline.ts`) dengan drift detection
 - Ekspresi dievaluasi server-side (keamanan)
 
 ---
@@ -504,6 +504,8 @@ Semua halaman tabel (Users, Roles, Permissions, Guards) menggunakan komponen **D
 
 ## C. Alur Authorization
 
+### Server-Side Enforcement
+
 ```
 Request masuk
     ↓
@@ -511,22 +513,26 @@ JWT Token valid?
     ↓ (Ya)
 Ambil User dari Token
     ↓
-Ambil Roles User
+Ambil Roles User → Permissions (eager-loaded)
     ↓
-Untuk setiap Role:
+Untuk setiap Role → Permission:
     ↓
-    Ambil Guards & Permissions
-    ↓
-    Method cocok? (dari Permission)
+    Method cocok? (allow_methods atau *)
         ↓ (Ya)
-    URL cocok? (dari Guard Allow URLs)
-        ↓ (Ya)
-    URL tidak di-deny? (dari Guard Deny URLs)
+    URL cocok? (allow_urls pattern, support wildcard)
         ↓ (Ya)
     → ALLOW
         ↓
 Response dikirim
 ```
+
+### Client-Side Gating (Menu/UX)
+
+Guard allow/deny URL lists dievaluasi client-side (`useAuthorization().canAccessUrl`) untuk:
+- Menu visibility (sidebar item ditampilkan/hide)
+- Aksi gating (tombol Create/Edit/Delete)
+
+Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+URL.
 
 ### Detail Alur
 
@@ -534,13 +540,12 @@ Response dikirim
 2. **JWT Validation** → Server validasi token JWT
 3. **User Lookup** → Ambil data user dari token (sub = user.id)
 4. **Role Resolution** → Ambil semua role yang dimiliki user
-5. **Permission Check** → Untuk setiap role, ambil permission-nya:
-   - Cek apakah HTTP method ada di `allow_methods`
-   - Cek apakah request URL match dengan `allow_urls` (support wildcard)
-6. **Guard Check** → Untuk setiap role, ambil guard-nya:
-   - Cek apakah request URL match dengan `allow_urls`
-   - Cek apakah request URL tidak match dengan `deny_urls`
-7. **Authorization Decision** → Jika semua check pass, izinkan akses. Jika tidak, return 403 Forbidden.
+5. **Permission Check** → Untuk setiap role → permission:
+   - Cek apakah HTTP method ada di `allow_methods` (atau `*` wildcard)
+   - Cek apakah request URL match dengan `allow_urls` pattern (support wildcard)
+   - Jika cocok → ALLOW
+6. **Authorization Decision** → Jika tidak ada permission yang match, return 403 Forbidden.
+7. **Client-Side** → Guard allow/deny URLs dievaluasi untuk menu visibility dan aksi gating (bukan enforcement server-side).
 
 ---
 
@@ -637,7 +642,8 @@ User Management (group)
     └── Permissions          → /dashboard/permissions
 Sistem (group)
     ├── Activity Logs        → /dashboard/activity-logs
-    └── System Logs          → /dashboard/system-logs
+    ├── System Logs          → /dashboard/system-logs
+    └── Settings             → /dashboard/settings
 ```
 
 ---
