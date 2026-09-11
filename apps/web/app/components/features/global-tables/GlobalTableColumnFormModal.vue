@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import {
-  NModal, NForm, NFormItem, NInput, NSelect, NButton, NCheckbox,
-  NSpace, NTag, NRadio, useMessage, type FormInst, type FormRules,
+  NModal, NForm, NFormItem, NInput, NInputNumber, NSelect, NButton, NCheckbox,
+  NCheckboxGroup, NRadioGroup, NRadio, NSpace, NTag, NAlert, useMessage, type FormInst, type FormRules,
 } from 'naive-ui'
 import { useGlobalTableColumnsStore } from '~/stores/global-table-columns'
 import { useAuthStore } from '~/stores/auth'
@@ -28,6 +28,7 @@ const formRef = ref<FormInst | null>(null)
 const submitting = ref(false)
 const globalTables = ref<Array<{ id: number; name: string; displayName: string }>>([])
 const targetColumns = ref<Array<{ name: string; displayName: string; type: string }>>([])
+const testResult = ref<{ ok: boolean; msg: string } | null>(null)
 
 const columnTypes = ['text', 'richtext', 'date', 'select', 'number', 'currency', 'image', 'hidden-computed', 'readonly-computed', 'select-table-relation', 'select-table-relation-multiple']
 
@@ -45,13 +46,6 @@ const form = ref({
   expression: '',
   relationTableId: null as number | null,
   relationConfig: null as { displayColumns: string[]; separator: string; onTargetDelete: string } | null,
-})
-
-const relationConfig = computed({
-  get: () => form.value.relationConfig,
-  set: (val: { displayColumns: string[]; separator: string; onTargetDelete: string } | null) => {
-    form.value.relationConfig = val
-  },
 })
 
 const relationDisplayColumns = computed<string[]>({
@@ -81,16 +75,52 @@ const relationOnTargetDelete = computed<string>({
   },
 })
 
+const optionRules = computed(() => {
+  if (form.value.type !== 'select') return []
+  return [
+    {
+      validator: (_rule: unknown, value: string) => {
+        const v = value ?? form.value.options
+        if (!v || String(v).trim() === '') {
+          return Promise.reject(new Error('Options wajib untuk type select — JSON [{label,value}]'))
+        }
+        try {
+          const parsed = JSON.parse(String(v))
+          if (!Array.isArray(parsed) || parsed.length === 0) {
+            return Promise.reject(new Error('Options harus array JSON dengan minimal 1 opsi'))
+          }
+          const vals = parsed.map((o: any) => o?.value)
+          if (vals.some((x: any) => x === undefined || x === null || String(x).trim() === '')) {
+            return Promise.reject(new Error('Setiap opsi harus punya value'))
+          }
+          if (new Set(vals.map((x: any) => String(x))).size !== vals.length) {
+            return Promise.reject(new Error('value opsi harus unik'))
+          }
+          return Promise.resolve()
+        } catch (e: any) {
+          if (e?.message?.includes('value opsi') || e?.message?.includes('Options')) return Promise.reject(e)
+          return Promise.reject(new Error('Format options tidak valid — JSON [{label,value}]'))
+        }
+      },
+      trigger: ['blur', 'input', 'change'],
+    },
+  ] as any
+})
+
+const expressionDeps = computed(() => {
+  const expr = form.value.expression || ''
+  const m = [...expr.matchAll(/\{\{\s*(\w+)\s*\}\}/g)]
+  return m.map(x => x[1]).filter((v, i, a) => a.indexOf(v) === i)
+})
+
 const rules = computed<FormRules>(() => ({
   name: [
     { required: true, message: 'Name is required', trigger: 'blur' },
     {
       validator: (_rule: unknown, value: string) => {
         if (!value) return Promise.resolve()
-        if (form.value.type !== 'select' && form.value.type !== 'number' && form.value.type !== 'currency') {
-          if (!/^[a-z][a-z0-9_]*$/.test(value)) {
-            return Promise.reject(new Error('Use snake_case: start with a letter, lowercase letters, numbers, underscores (max 64)'))
-          }
+        if (!/^[a-z][a-z0-9_]*$/.test(value)) {
+          return Promise.reject(new Error('Use snake_case: start with a letter, lowercase letters, numbers, underscores (max 64)'))
         }
         return Promise.resolve()
       },
@@ -110,20 +140,9 @@ const rules = computed<FormRules>(() => ({
     },
     trigger: 'blur',
   },
-  'relationConfig.displayColumns': [
-    {
-      validator: (_rule: unknown, value: string[]) => {
-        if (isRelationalType(form.value.type) && (!value || value.length === 0)) {
-          return Promise.reject(new Error('At least one display column is required'))
-        }
-        return Promise.resolve()
-      },
-      trigger: 'blur',
-    }
-  ],
 }))
 
-const title = computed(() => props.mode === 'create' ? 'Add Column' : 'Edit Column')
+const title = computed(() => props.mode === 'create' ? 'Tambah Kolom' : 'Ubah Kolom')
 
 function isRelationalType(type: string): boolean {
   return type === 'select-table-relation' || type === 'select-table-relation-multiple'
@@ -131,13 +150,14 @@ function isRelationalType(type: string): boolean {
 
 async function loadGlobalTables() {
   try {
-    const response = await $fetch<Array<{ id: number; name: string; displayName: string }>>(
+    const response = await $fetch<any>(
       '/api/global-tables',
       {
         headers: { Authorization: `Bearer ${auth.token}` },
       }
     )
-    globalTables.value = response
+    const list = Array.isArray(response) ? response : (response?.data ?? [])
+    globalTables.value = list
   } catch (e) {
     console.error('Failed to load global tables', e)
   }
@@ -149,13 +169,14 @@ async function loadTargetColumns(tableId: number) {
     return
   }
   try {
-    const response = await $fetch<Array<{ name: string; displayName: string; type: string }>>(
+    const response = await $fetch<any>(
       `/api/global-tables/${tableId}/columns`,
       {
         headers: { Authorization: `Bearer ${auth.token}` },
       }
     )
-    targetColumns.value = response.filter(
+    const list = Array.isArray(response) ? response : (response?.data ?? [])
+    targetColumns.value = (list as any[]).filter(
       c => c.type !== 'hidden-computed' && c.type !== 'readonly-computed'
     )
   } catch (e) {
@@ -163,16 +184,36 @@ async function loadTargetColumns(tableId: number) {
   }
 }
 
-function getRelationDisplayColumns(tableId: number): string[] {
-  return targetColumns.value.map(c => c.name)
-}
-
 function getGlobalTablesMap(): Array<{ label: string; value: number }> {
   return globalTables.value.map(t => ({ label: t.displayName || t.name, value: t.id }))
 }
 
+async function handleTestExpression() {
+  testResult.value = null
+  const expr = form.value.expression?.trim()
+  if (!expr) {
+    testResult.value = { ok: false, msg: 'Expression kosong' }
+    return
+  }
+  try {
+    const res = await $fetch<any>('/api/expressions/validate', {
+      method: 'POST',
+      body: { expression: expr, sampleContext: {} },
+      headers: { Authorization: `Bearer ${auth.token}` },
+    })
+    if (res?.valid === false) {
+      testResult.value = { ok: false, msg: res?.error || 'Ekspresi tidak valid' }
+    } else {
+      testResult.value = { ok: true, msg: res?.error ? `Valid — ${res.error}` : 'Ekspresi valid' }
+    }
+  } catch (e: any) {
+    testResult.value = { ok: false, msg: getErrorMessage(e, 'Ekspresi tidak valid') }
+  }
+}
+
 watch(() => props.visible, async (val) => {
   if (val) {
+    testResult.value = null
     await loadGlobalTables()
     if (props.mode === 'edit' && props.column) {
       form.value = {
@@ -216,11 +257,11 @@ watch(() => props.visible, async (val) => {
         relationConfig: null,
       }
     }
-    store.fetchAll(props.tableId)
   }
 })
 
 watch(() => form.value.type, (newType) => {
+  testResult.value = null
   if (!isRelationalType(newType)) {
     form.value.relationTableId = null
     form.value.relationConfig = null
@@ -254,17 +295,19 @@ async function handleSubmit() {
 
   submitting.value = true
   try {
+    const payload: any = { ...form.value }
+    // Ensure relationConfig sent as expected by service (object or JSON string both accepted; keep object)
     if (props.mode === 'create') {
-      await store.create(props.tableId, form.value as CreateGlobalTableColumn)
-      message.success('Column created')
+      await store.create(props.tableId, payload as CreateGlobalTableColumn)
+      message?.success('Kolom berhasil dibuat')
     } else if (props.column) {
-      await store.update(props.column.id, form.value as UpdateGlobalTableColumn)
-      message.success('Column updated')
+      await store.update(props.column.id, { ...payload, globalTableId: props.tableId } as any)
+      message?.success('Kolom berhasil diperbarui')
     }
     emit('update:visible', false)
     emit('success')
   } catch (e: any) {
-    message.error(getErrorMessage(e, 'Failed to save column'))
+    message?.error(getErrorMessage(e, 'Gagal menyimpan kolom'))
   } finally {
     submitting.value = false
   }
@@ -274,13 +317,14 @@ async function handleSubmit() {
 <template>
   <NModal
     :show="visible"
-    @update:show="(v) => emit('update:visible', v)"
     preset="card"
     :title="title"
-    class="max-w-md"
+    style="width: min(640px, 90vw)"
+    class="max-w-2xl"
     :bordered="false"
+    @update:show="(v) => emit('update:visible', v)"
   >
-    <NForm ref="formRef" :model="form" :rules="rules" label-placement="top">
+    <NForm ref="formRef" :model="form" :rules="rules" label-placement="top" require-mark-placement="right-hanging">
       <NFormItem label="Name" path="name">
         <NInput
           v-model:value="form.name"
@@ -289,11 +333,11 @@ async function handleSubmit() {
           style="font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;"
         />
         <template #feedback>
-          <span style="font-size: 12px; color: #666">snake_case, start with letter</span>
+          <span style="font-size: 12px; color: #94a3b8">snake_case, start with letter</span>
         </template>
       </NFormItem>
       <NFormItem label="Display Name" path="displayName">
-        <NInput v-model:value="form.displayName" placeholder="Column display name" />
+        <NInput v-model:value="form.displayName" placeholder="Nama tampilan kolom" />
       </NFormItem>
       <NFormItem label="Type" path="type">
         <NSelect
@@ -301,114 +345,126 @@ async function handleSubmit() {
           :options="columnTypes.map(type => ({ label: type, value: type }))"
           filterable
           style="width: 100%"
-          @change="optionRules.value = {}"
         />
       </NFormItem>
+
+      <!-- Relation sections — v-if mount bersyarat -->
+      <template v-if="isRelationalType(form.type)">
+        <NFormItem label="Relation Table" path="relationTableId">
+          <NSelect
+            v-model:value="form.relationTableId"
+            :options="getGlobalTablesMap()"
+            filterable
+            style="width: 100%"
+            placeholder="Pilih tabel target"
+          />
+        </NFormItem>
+        <NFormItem label="Display Columns" path="relationConfig.displayColumns">
+          <NCheckboxGroup v-model:value="relationDisplayColumns">
+            <NSpace vertical size="small" style="width: 100%">
+              <NCheckbox
+                v-for="col in targetColumns"
+                :key="col.name"
+                :value="col.name"
+                :label="col.name"
+              />
+              <span v-if="targetColumns.length===0" style="font-size:12px;color:#94a3b8">Pilih tabel target dulu — tidak ada kolom</span>
+            </NSpace>
+          </NCheckboxGroup>
+          <template #feedback>
+            <span style="font-size:12px;color:#94a3b8">Minimal 1 kolom untuk label relation</span>
+          </template>
+        </NFormItem>
+        <NFormItem label="Separator" path="relationConfig.separator">
+          <NInput v-model:value="relationSeparator" placeholder=" - " />
+        </NFormItem>
+        <NFormItem label="On Target Delete" path="relationConfig.onTargetDelete">
+          <NRadioGroup v-model:value="relationOnTargetDelete">
+            <NSpace>
+              <NRadio value="restrict">Restrict</NRadio>
+              <NRadio value="detach">Detach</NRadio>
+            </NSpace>
+          </NRadioGroup>
+        </NFormItem>
+      </template>
+
+      <!-- Computed sections -->
+      <template v-if="form.type === 'hidden-computed' || form.type === 'readonly-computed'">
+        <NFormItem label="Expression" path="expression">
+          <NInput
+            v-model:value="form.expression"
+            placeholder="e.g. {{harga}} * {{jumlah}}"
+            style="font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;"
+            type="textarea"
+            :autosize="{ minRows: 2, maxRows: 4 }"
+          />
+          <template #feedback>
+            <div class="text-xs mt-1" style="color:#94a3b8">
+              Gunakan syntax {{field}}. Referensi harus kolom sibling.
+            </div>
+          </template>
+        </NFormItem>
+        <div v-if="expressionDeps.length" class="mb-3 flex flex-wrap items-center gap-2">
+          <NTag v-for="dep in expressionDeps" :key="dep" type="info" size="small">{{ dep }}</NTag>
+          <NButton size="small" secondary @click="handleTestExpression">▶ Uji ekspresi</NButton>
+        </div>
+        <div v-else-if="form.expression" class="mb-3">
+          <NButton size="small" secondary @click="handleTestExpression">▶ Uji ekspresi</NButton>
+        </div>
+        <NAlert v-if="testResult" :type="testResult.ok ? 'success' : 'error'" style="margin-bottom:12px" closable @close="testResult=null">
+          {{ testResult.msg }}
+        </NAlert>
+      </template>
+
+      <!-- Select options — v-if -->
       <NFormItem
-        v-show="isRelationalType(form.type)"
-        label="Relation Table"
-        path="relationTableId"
-      >
-        <NSelect
-          v-model:value="form.relationTableId"
-          :options="getGlobalTablesMap()"
-          filterable
-          style="width: 100%"
-          placeholder="Select target table"
-        />
-        <template #placeholder>
-          <span>Select target table</span>
-        </template>
-      </NFormItem>
-      <NFormItem
-        v-show="isRelationalType(form.type)"
-        label="Display Columns"
-        path="relationConfig.displayColumns"
-      >
-        <NSpace vertical size="2" style="width: 100%">
-          <NCheckbox
-            v-for="(col, index) in getRelationDisplayColumns(form.relationTableId ?? 0)"
-            :key="index"
-            :value="relationDisplayColumns.includes(col)"
-            @input="(val) => relationDisplayColumns = val ? [...relationDisplayColumns, col] : relationDisplayColumns.filter(c => c !== col)"
-          >
-            {{ col }}
-          </NCheckbox>
-        </NSpace>
-      </NFormItem>
-      <NFormItem
-        v-show="isRelationalType(form.type)"
-        label="Separator"
-        path="relationConfig.separator"
-      >
-        <NInput v-model:value="relationSeparator" placeholder=" - " />
-      </NFormItem>
-      <NFormItem
-        v-show="isRelationalType(form.type)"
-        label="On Target Delete"
-        path="relationConfig.onTargetDelete"
-      >
-        <NRadio
-          v-model:value="relationOnTargetDelete"
-          :options="[{ label: 'Restrict', value: 'restrict' }, { label: 'Detach', value: 'detach' }]"
-        />
-      </NFormItem>
-      <NFormItem
-        v-show="form.type === 'hidden-computed' || form.type === 'readonly-computed'"
-        label="Expression"
-        path="expression"
-      >
-        <NInput
-          v-model:value="form.expression"
-          placeholder="e.g. {{harga}} * {{jumlah}}"
-          style="font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;"
-        />
-        <template #feedback>
-          <div class="text-xs text-gray-500 mt-1">
-            Use {{field}} syntax. References must be sibling columns.
-          </div>
-        </template>
-      </NFormItem>
-      <NFormItem
+        v-if="form.type === 'select'"
         label="Options (JSON)"
-        :rules="optionRules"
-        v-show="form.type === 'select'"
+        path="options"
+        :rule="optionRules"
       >
         <NInput
           v-model:value="form.options"
+          type="textarea"
+          :autosize="{ minRows: 3, maxRows: 6 }"
           placeholder='[{"label": "Option 1", "value": "opt1"}, {"label": "Option 2", "value": "opt2"}]'
+          style="font-family: 'SF Mono', monospace"
         />
+        <template #feedback>
+          <span style="font-size:12px;color:#94a3b8">JSON array [{label,value}] — value harus unik</span>
+        </template>
       </NFormItem>
+
+      <!-- Date format — v-if -->
       <NFormItem
+        v-if="form.type === 'date'"
         label="Format"
-        v-show="form.type === 'date'"
       >
-        <NInput v-model:value="form.format" placeholder="m-d-Y" />
+        <NInput v-model:value="form.format" placeholder="m-d-Y atau gunakan Date type" />
       </NFormItem>
-      <NFormItem
-        label="Default Value"
-        :rules="form.required ? { required: true, message: 'Default value is required' } : undefined"
-      >
-        <NInput v-model:value="form.defaultValue" placeholder="Default value" />
+
+      <!-- Common -->
+      <NFormItem label="Default Value">
+        <NInput v-model:value="form.defaultValue" placeholder="Nilai default (opsional)" />
       </NFormItem>
       <NFormItem label="Required" path="required">
-        <NCheckbox v-model:value="form.required" />
+        <NCheckbox v-model:checked="form.required">Required</NCheckbox>
       </NFormItem>
       <NFormItem label="Searchable" path="searchable">
-        <NCheckbox v-model:value="form.searchable" />
+        <NCheckbox v-model:checked="form.searchable">Searchable</NCheckbox>
       </NFormItem>
       <NFormItem label="Orderable" path="orderable">
-        <NCheckbox v-model:value="form.orderable" />
+        <NCheckbox v-model:checked="form.orderable">Orderable</NCheckbox>
       </NFormItem>
       <NFormItem label="Position" path="position">
-        <NInput type="number" v-model:value="form.position" min="0" />
+        <NInputNumber v-model:value="form.position" :min="0" clearable placeholder="Urutan" style="width:100%" />
       </NFormItem>
     </NForm>
     <template #footer>
       <NSpace justify="end">
-        <NButton @click="emit('update:visible', false)">Cancel</NButton>
+        <NButton @click="emit('update:visible', false)">Batal</NButton>
         <NButton type="primary" :loading="submitting" @click="handleSubmit">
-          {{ mode === 'create' ? 'Create' : 'Save' }}
+          {{ mode === 'create' ? 'Buat' : 'Simpan' }}
         </NButton>
       </NSpace>
     </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import {
-  NModal, NCard, NUpload, NButton, NSpace, NAlert, NDataTable, NSpin,
+  NModal, NUpload, NButton, NSpace, NAlert, NDataTable, NSpin,
   useMessage, type UploadFileInfo,
 } from 'naive-ui'
 import { useTableDataStore } from '~/stores/tableData'
@@ -31,7 +31,28 @@ const errorColumns = computed(() => [
 ])
 
 function parsePreview(text: string): string[][] {
-  return text.split('\n').slice(0, 6).map((line) => line.split(',').map((c) => c.trim()))
+  // Quote-aware parser — state machine inQuotes + "" escape, mirror server parseCsv
+  const rows: string[][] = []
+  let row: string[] = []
+  let cell = ''
+  let inQuotes = false
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i]
+    if (inQuotes) {
+      if (ch === '"') {
+        if (text[i + 1] === '"') { cell += '"'; i++ } else inQuotes = false
+      } else cell += ch
+    } else if (ch === '"') inQuotes = true
+    else if (ch === ',') { row.push(cell.trim()); cell = '' }
+    else if (ch === '\n') { row.push(cell); rows.push(row); row = []; cell = '' }
+    else if (ch === '\r') { /* skip */ }
+    else cell += ch
+  }
+  row.push(cell)
+  rows.push(row)
+  // filter empty rows + limit 6 (header + 5 preview)
+  const filtered = rows.filter(r => r.some(c => c !== ''))
+  return filtered.slice(0, 6).map(r => r.map(c => c.trim()))
 }
 
 async function handleFileChange(options: { file: UploadFileInfo }) {
@@ -47,7 +68,16 @@ async function handleFileChange(options: { file: UploadFileInfo }) {
   }
   file.value = f
   summary.value = null
-  previewRows.value = parsePreview(await f.text())
+  try {
+    const text = await f.text()
+    previewRows.value = parsePreview(text)
+    if (previewRows.value.length > 1 && previewRows.value[0].length === 0) {
+      message?.warning('CSV header kosong — periksa file')
+    }
+  } catch {
+    message?.error('Gagal membaca file')
+    previewRows.value = []
+  }
 }
 
 async function handleImport() {
@@ -57,8 +87,8 @@ async function handleImport() {
     const result = await store.importCsv(props.tableName, file.value)
     summary.value = result
     emit('imported', result)
-    if (result.failed === 0) message?.success(`${result.imported} rows imported`)
-    else message?.warning(`${result.imported} imported, ${result.failed} failed`)
+    if (result.failed === 0) message?.success(`${result.imported} baris berhasil diimpor`)
+    else message?.warning(`${result.imported} berhasil, ${result.failed} gagal — lihat tabel error`)
   } catch (e: any) {
     message?.error(getErrorMessage(e, 'Import failed'))
   } finally {
@@ -75,24 +105,26 @@ function handleClose() {
 </script>
 
 <template>
-  <NModal :show="visible" preset="dialog" title="Import CSV" style="width: 640px;" @update:show="(v) => !v && handleClose()">
+  <NModal :show="visible" preset="card" title="Import CSV" style="width: min(640px, 90vw)" @update:show="(v) => !v && handleClose()">
     <NSpin :show="running">
       <NSpace vertical size="medium" class="w-full">
-        <NUpload :show-file-list="false" accept=".csv" :custom-request="() => {}" @change="handleFileChange">
-          <NButton>Select CSV file (max 5MB)</NButton>
+        <NUpload :show-file-list="false" accept=".csv" @change="handleFileChange">
+          <NButton type="primary" ghost>Pilih file CSV (max 5MB)</NButton>
         </NUpload>
-        <div v-if="file" class="text-sm text-gray-500">{{ file.name }} — first 5 rows preview:</div>
-        <NDataTable
-          v-if="previewRows.length"
-          :columns="previewRows[0].map((h, i) => ({ title: h || `Column ${i + 1}`, key: String(i) }))"
-          :data="previewRows.slice(1).map((r, i) => Object.fromEntries(r.map((c, j) => [String(j), c])))"
-          :bordered="false"
-          size="small"
-        />
-        <NAlert v-if="summary && summary.failed > 0" type="warning" :title="`Partial success: ${summary.imported} imported, ${summary.failed} failed`">
-          See error table below for row numbers and reasons.
+        <div v-if="file" class="text-sm" style="color:#6B7280">{{ file.name }} — preview 5 baris (quote-aware):</div>
+        <div v-if="previewRows.length" style="border:1px solid #E5E7EB;border-radius:8px;overflow:hidden">
+          <NDataTable
+            :columns="previewRows[0].map((h, i) => ({ title: h || `Kolom ${i + 1}`, key: String(i) }))"
+            :data="previewRows.slice(1).map((r) => Object.fromEntries(r.map((c, j) => [String(j), c])))"
+            :bordered="false"
+            size="small"
+          />
+          <div style="font-size:11px;color:#6B7280;padding:6px 10px;border-top:1px solid #F3F4F6">Parser quote-aware: "a, b" tetap 1 kolom, "" → " — fix naive split(',')</div>
+        </div>
+        <NAlert v-if="summary && summary.failed > 0" type="warning" :title="`Partial success: ${summary.imported} berhasil, ${summary.failed} gagal`">
+          Lihat tabel error di bawah untuk nomor baris dan alasan.
         </NAlert>
-        <NAlert v-else-if="summary" type="success" :title="`${summary.imported} rows imported`" />
+        <NAlert v-else-if="summary" type="success" :title="`${summary.imported} baris berhasil diimpor`" />
         <NDataTable
           v-if="summary && summary.errors.length"
           :columns="errorColumns"
@@ -100,8 +132,9 @@ function handleClose() {
           size="small"
           :max-height="240"
         />
+        <div v-if="summary && summary.errors.length" style="font-size:11px;color:#6B7280">Error per baris max 20 ditampilkan — file >5000 baris ditolak 422</div>
         <NSpace justify="end">
-          <NButton @click="handleClose">Close</NButton>
+          <NButton @click="handleClose">Tutup</NButton>
           <NButton type="primary" :disabled="!file" :loading="running" @click="handleImport">Import</NButton>
         </NSpace>
       </NSpace>

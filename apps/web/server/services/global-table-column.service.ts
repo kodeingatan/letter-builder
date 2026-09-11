@@ -99,11 +99,12 @@ export const GlobalTableColumnService = {
       }
       deps = validation.deps
 
-// Check for cycles with new deps
-    const computedCols = await getComputedColumnsForTable(tableId)
-    const cycle = detectCycle(computedCols, undefined, deps)
-    if (cycle) {
-      throw httpError(422, `CYCLIC_DEPENDENCY: ${cycle.join(' → ')}`)
+      // Check for cycles with new deps
+      const computedCols = await getComputedColumnsForTable(tableId)
+      const cycle = detectCycle(computedCols, undefined, deps)
+      if (cycle) {
+        throw httpError(422, `CYCLIC_DEPENDENCY: ${cycle.join(' → ')}`)
+      }
     }
 
     // Relation column validation
@@ -115,7 +116,7 @@ export const GlobalTableColumnService = {
       if (!data.relationConfig) {
         throw httpError(422, 'Relation columns require relationConfig')
       }
-      
+
       const validation = await validateRelationConfig(
         data.relationTableId,
         data.relationConfig,
@@ -125,7 +126,6 @@ export const GlobalTableColumnService = {
       if (!validation.valid) {
         throw httpError(422, validation.error || 'Invalid relation configuration')
       }
-    }
     }
 
     // Check name uniqueness within table
@@ -229,16 +229,18 @@ export const GlobalTableColumnService = {
     const ds = await getDataSource()
     const repo = ds.getRepository(GlobalTableColumnSchema)
 
-    if (data.displayName !== undefined) column.displayName = data.displayName
-    if (data.type !== undefined) column.type = data.type
-    if (data.defaultValue !== undefined) column.defaultValue = data.defaultValue
-    if (data.required !== undefined) column.required = data.required
-    if (data.searchable !== undefined) column.searchable = data.searchable
-    if (data.orderable !== undefined) column.orderable = data.orderable
-    if (data.position !== undefined) column.position = data.position
-    if (data.options !== undefined) column.options = data.options
-    if (data.format !== undefined) column.format = data.format
-    if (data.expression !== undefined) column.expression = data.expression
+    if (data.displayName !== undefined) (column as any).displayName = data.displayName
+    if (data.type !== undefined) (column as any).type = data.type
+    if (data.defaultValue !== undefined) (column as any).defaultValue = data.defaultValue
+    if (data.required !== undefined) (column as any).required = data.required
+    if (data.searchable !== undefined) (column as any).searchable = data.searchable
+    if (data.orderable !== undefined) (column as any).orderable = data.orderable
+    if (data.position !== undefined) (column as any).position = data.position
+    if (data.options !== undefined) (column as any).options = data.options
+    if (data.format !== undefined) (column as any).format = data.format
+    if (data.expression !== undefined) (column as any).expression = data.expression
+    if (data.relationTableId !== undefined) (column as any).relationTableId = data.relationTableId
+    if (data.relationConfig !== undefined) (column as any).relationConfig = data.relationConfig
 
     return repo.save(column)
   },
@@ -261,22 +263,22 @@ export const GlobalTableColumnService = {
     return { message: 'Global table column deleted' }
   },
 
-  async reorder(data: ReorderGlobalTableColumnsInput) {
+  async reorder(tableId: number, data: ReorderGlobalTableColumnsInput) {
     const ds = await getDataSource()
     const repo = ds.getRepository(GlobalTableColumnSchema)
 
-    const columns = await repo.find({ order: { position: 'ASC' } })
+    const columns = await repo.find({ where: { globalTableId: tableId }, order: { position: 'ASC' } })
     const idToPosition = new Map(columns.map((c: any) => [c.id, c.position]))
 
     data.orderedIds.forEach((id, index) => {
       idToPosition.set(id, index)
     })
 
-    // Update positions
+    // Update positions — only columns of this table
     for (const [id, position] of idToPosition) {
-      const column = await repo.findOne({ where: { id } })
+      const column = await repo.findOne({ where: { id, globalTableId: tableId } })
       if (column) {
-        column.position = position
+        (column as any).position = position
         await repo.save(column)
       }
     }

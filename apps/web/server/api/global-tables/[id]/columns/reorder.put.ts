@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
   if (!parsed.success) throw createError({ statusCode: 422, message: parsed.error.errors[0].message })
 
   try {
-    await GlobalTableColumnService.reorder(parsed.data)
+    await GlobalTableColumnService.reorder(tableId, parsed.data)
     return { success: true }
   } catch (e: any) {
     throw createError({ statusCode: e.statusCode ?? 400, message: e.message })

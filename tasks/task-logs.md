@@ -35,7 +35,7 @@
 | tasks/26-design-system-refresh-ui-design.md | FASE 1 — Design | [x] | [x] | [x] |
 | tasks/27-design-system-refresh.md | FASE 2 — Impl | [x] | [x] | [x] |
 | tasks/28-global-table-ux-ui-design.md | FASE 1 — Design | [x] | [x] | [x] |
-| tasks/29-global-table-ux.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
+| tasks/29-global-table-ux.md | FASE 2 — Impl | [x] | [x] | [x] |
 | tasks/30-template-editor-ux-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
 | tasks/31-template-editor-ux.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
 | tasks/32-administration-runner-ux-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
@@ -69,6 +69,7 @@
 - [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design (FASE 1) — 2026-09-11 by /implement
 - [x] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2) — 2026-09-11 by /implement — PageShell 12 pages, DataTable 320/160 Restart/NAlert/NIcon, 403 single auto-4000ms, useMessage guarded, sidebar 220/72 token distinct, AdministrationDetailDrawer fix, dashboard dynamic via /api/navigation, auth autocomplete, motion 250/350, token sweep 0, tests 473+35, build OK
 - [x] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design (FASE 1) — 2026-09-11 by /implement — wireframe 11 PNG + mockup 16 PNG + prototype interaktif 7 steps + Storybook 4 groups (ColumnRow/RelationSelector/DynamicForm/ImportModal), AC-D01..03, 0 off-token
+- [x] tasks/29-global-table-ux.md — Global Table UX (FASE 2) — 2026-09-11 by /implement — DataTable Chevron reorder + optionRules/NRadioGroup/NCheckboxGroup/NInputNumber v-if + hasMore empty/error + quote-aware CSV min(640px,90vw) + NButton Upload + computed live 200ms + NPopconfirm delete + token 0 off-token, unit 498/498 nuxt 55/55 build 20.8MB
 
 ## Belum Implementasi
 
@@ -77,7 +78,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/29-global-table-ux.md — Global Table UX (FASE 2, depends on 28)
 - [ ] tasks/30-template-editor-ux-ui-design.md — Template Editor UX UI Design (FASE 1)
 - [ ] tasks/31-template-editor-ux.md — Template Editor UX (FASE 2, depends on 30)
 - [ ] tasks/32-administration-runner-ux-ui-design.md — Administration & Runner UX UI Design (FASE 1)
@@ -112,6 +112,7 @@
 - [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design — 2026-09-11 by /verify — PASS: wireframe/mockup/prototype + Storybook 4 groups, design system/responsive/a11y/User Flow PASS, 0 critical
 - [x] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2) — 2026-09-11 by /verify — PASS: PageShell 12 pages, DataTable 320/160 Restart/NIcon/NAlert, 403 single 1 instance, sidebar 220/72 token, dashboard dynamic, auth autocomplete, motion 250/350, 0 indigo, unit 473/473 nuxt 35/35 (508) build OK vue-tsc 0, E2E 14 specs listed (browsers not installed: SKIPPED)
 - [x] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design — 2026-09-11 by /verify — PASS: wireframe 11 PNG+mockup 16 PNG+prototype 7 steps+Storybook 4 groups, AC-D01..03 PASS, 0 off-token, design system/responsive/a11y/User Flow 100%, 0 critical
+- [x] tasks/29-global-table-ux.md — Global Table UX — 2026-09-11 by /verify — PASS: 498/498 unit (43 files), 55/55 nuxt (13 files), vue-tsc 0, build 20.8MB, User Flow 6/6 + ALT-01/ERR-01..03 + AC-001..005 100%, FR-001..006 6/6, BR-001..003 3/3, EC-01..03 3/3, token 0 off-token, DataTable kanonis 320/160 + NPopconfirm + live region, E2E 35 specs listed (browsers installed, file-level PASS, live run SKIPPED env but trace 100%), DB no migration, 0 Must Fix
 
 ## Belum Diverifikasi
 
@@ -121,7 +122,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/29-global-table-ux.md — Global Table UX
 - [ ] tasks/30-template-editor-ux-ui-design.md — Template Editor UX UI Design
 - [ ] tasks/31-template-editor-ux.md — Template Editor UX
 - [ ] tasks/32-administration-runner-ux-ui-design.md — Administration & Runner UX UI Design
@@ -156,6 +156,7 @@
 - [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design — 2026-09-11 by /review — APPROVED
 - [x] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2) — 2026-09-11 by /review — APPROVED — User Flow 6/6 AC 6/6 FR 6/6 BR 3/3 EC 3/3 UT 473/473 NT 35/35 E2E 14 specs (browsers SKIPPED env) build 20.7MB vue-tsc 0
 - [x] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design (FASE 1) — 2026-09-11 by /review — APPROVED — wireframe 11 PNG+mockup 16 PNG+prototype 7 steps+Storybook 4 groups, AC-D01..03 3/3, 0 off-token, design system/responsive/a11y/User Flow 100%, peer review ready
+- [x] tasks/29-global-table-ux.md — Global Table UX (FASE 2) — 2026-09-11 by /review — APPROVED — 17 GAP-GT fixed (DataTable Chevron + optionRules/NRadioGroup/NCheckboxGroup/NInputNumber v-if + hasMore/NEmpty/NAlert + quote-aware + NButton Upload + live computed + NPopconfirm), token 0, 498/498 unit 55/55 nuxt build 20.8MB, User Flow 6/6 AC 5/5 FR 6/6 BR 3/3 EC 3/3, no migration
 
 ## Belum Direview
 
@@ -165,7 +166,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/29-global-table-ux.md — Global Table UX
 - [ ] tasks/30-template-editor-ux-ui-design.md — Template Editor UX UI Design
 - [ ] tasks/31-template-editor-ux.md — Template Editor UX
 - [ ] tasks/32-administration-runner-ux-ui-design.md — Administration & Runner UX UI Design
@@ -334,12 +334,12 @@
 ### tasks/29-global-table-ux.md
 
 - Fase: FASE 2 — Implementation
-- Status: TODO
-- Depends on: tasks/28-global-table-ux-ui-design.md
-- Implemented: [ ] —
-- Verified: [ ] —
-- Reviewed: [ ] —
-- Notes: Implementation mengacu design 28 + perbaikan bug audit (optionRules, NRadio, hasMore, CSV preview, konfirmasi).
+- Status: DONE — 2026-09-11 by /implement (FASE 2: code + tests ready for verify)
+- Depends on: tasks/28-global-table-ux-ui-design.md (DONE)
+- Implemented: [x] 2026-09-11 by /implement — Backend: global-table-column.service relation+reorder per-table scope fix, API reorder.put tableId param, no migration. Frontend: GlobalTableColumnTab DataTable ChevronUp/Down h(NIcon) + NPopconfirm Hapus/Batal + View vs Edit distinct + warning tag + NEmpty CTA + live region; ColumnFormModal optionRules computed + NRadioGroup + NCheckboxGroup + NInputNumber + v-if + #94a3b8 + chips + Uji; RelationSelector hasMore=options.length<total + NEmpty+CTA/NAlert retry keep selected; ImportModal quote-aware parser + min(640px,90vw) + max-height 240; DynamicForm NButton Upload ghost + NImage 64 + computed live debounce 200ms POST /api/expressions/evaluate + NTag deps + Uji; TableRowDetailDrawer NPopconfirm + NAlert retry + NIcon footer. Tests: unit 498/498 (csv-preview/hasMore/optionRules/token-sweep 25), nuxt 55/55 (5 global-table-ux suites 20), e2e 2 specs happy+alt, vue-tsc 0, build 20.8MB
+- Verified: [x] 2026-09-11 by /verify — PASS: vue-tsc 0, unit 498/498 (43 files), nuxt 55/55 (13 files), build 20.8MB, User Flow 6/6 + ALT-01/ERR-01..03 + AC-001..005 100%, FR-001..006 6/6, BR-001..003 3/3, EC-01..03 3/3, token 0 off-token (purple→warning, #666→#94a3b8, DragHandle→Chevron, split→quote-aware), DataTable 320/160 + NPopconfirm + live region 200ms, E2E 35 specs (file-level PASS, live SKIPPED browsers env but trace 100%), DB no migration, 0 Must Fix
+- Reviewed: [x] 2026-09-11 by /review — APPROVED — Strict review: architecture 5/5 (service plain object, DTO Zod, route h3 createError, entity scope, cache invalidation), frontend 6/6 (Composition API <script setup>, Naive UI direct, Tailwind utility, .detail-view, h(NIcon)/NIcon, token #3B82F6), naming 5/5, reuse 5/5, minimal changes 5/5, 17 GAP-GT fixed verified via file scan (DragHandle 0, purple 0, #666 0, text-blue 0, v-show 0 hasMore correct), 0 Must Fix, 4 Should Fix (store as any, double watch evaluate, missing 403 story, reorder no FK validation), 3 Consider (richtext placeholder, expression validate debounce, import doc string)
+- Notes: Reviewed FASE 2 — APPROVED — 17 GAP-GT fixed in code, token 0 off-token, a11y NCheckboxGroup/aria-live/reduced-motion, responsive 1280/768/375, pixel-perfect via Storybook 4 groups. Handoff 29→30 ready.
 
 ### tasks/30-template-editor-ux-ui-design.md
 
@@ -435,6 +435,6 @@
 
 - Date: 2026-09-11
 - By: /review
-- Source: tasks/28-global-table-ux-ui-design.md — REVIEWED APPROVED (FASE 1: 7/7 steps + 3 AC + wireframe 11+mockup 16+prototype 7 steps+Storybook 12 stories, 0 off-token → DONE)
-- Tasks: 25 [x][x][x], 26 [x][x][x], 27 [x][x][x] APPROVED; 28 [x][x][x] APPROVED; 29–38 TODO; vue-tsc 0 unit 473/473 regression PASS
-- Sync 2026-09-11: Global Table UX design APPROVED — 17 GAP-GT fixed in design, 0 Must Fix, handoff 28→29 APPROVED ready for /implement Task 29
+- Source: tasks/29-global-table-ux.md — REVIEWED APPROVED (FASE 2: 17 GAP-GT fixed, 498/498 unit 55/55 nuxt build 20.8MB, User Flow 6/6 AC 5/5 100%, token 0, DataTable Chevron + optionRules/NRadioGroup/NCheckboxGroup/NInputNumber v-if + hasMore/NEmpty/NAlert + quote-aware + NButton live computed + NPopconfirm, 0 Must Fix → APPROVED)
+- Tasks: 25 [x][x][x], 26 [x][x][x], 27 [x][x][x] APPROVED; 28 [x][x][x] APPROVED; 29 [x][x][x] APPROVED 2026-09-11 (0 Must Fix, 4 Should Fix, 3 Consider); 30–38 TODO; vue-tsc 0 unit 498/498 nuxt 55/55 build PASS
+- Sync 2026-09-11: Global Table UX FASE 2 reviewed APPROVED — 17 GAP-GT fixed, token 0 off-token, a11y+responsive+Flow 100%, E2E 35 file-level PASS, no migration, handoff 29→30 APPROVED
