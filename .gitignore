@@ -1,0 +1,6 @@
+# Audit screenshots — Task 25 placeholder only; binaries ignored (verify suggestion)
+docs/audit/screenshots/*.png
+docs/audit/screenshots/*.jpg
+docs/audit/screenshots/*.webp
+!docs/audit/screenshots/README.md
+!docs/audit/screenshots/.gitkeep

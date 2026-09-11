@@ -31,7 +31,7 @@
 | tasks/22-dynamic-rbac-audit-production.md | Legacy | [x] | [x] | [x] |
 | tasks/23-production-migration-baseline.md | Legacy | [x] | [x] | [x] |
 | tasks/24-startup-warnings-cleanup.md | Legacy | [x] | [x] | [x] |
-| tasks/25-ux-audit-concept-alignment.md | Audit gate | [ ] | [ ] | [ ] |
+| tasks/25-ux-audit-concept-alignment.md | Audit gate | [x] | [x] | [x] |
 | tasks/26-design-system-refresh-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
 | tasks/27-design-system-refresh.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
 | tasks/28-global-table-ux-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
@@ -65,6 +65,7 @@
 - [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /implement
 - [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-09 by /implement
 - [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /implement
+- [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment (Audit gate) — 2026-09-11 by /implement
 
 ## Belum Implementasi
 
@@ -73,7 +74,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment (Audit gate)
 - [ ] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design (FASE 1)
 - [ ] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2, depends on 26)
 - [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design (FASE 1)
@@ -108,6 +108,7 @@
 - [x] tasks/22-dynamic-rbac-audit-production.md — Dynamic RBAC, Audit & Production Readiness — 2026-09-08 by /verify — PASS: 427/427 unit, 15/15 nuxt, vue-tsc clean, build OK, live AC-001..AC-006 verified (golden path table→component→template→admin→run→doc+PDF, coverage 10/10 after 1 user-approved audit fix), DB restored
 - [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-10 by /verify — PASS: 445/445 unit, 15/15 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified, DB restored
 - [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /verify — PASS: 457/457 unit, 15/15 nuxt, vue-tsc clean, build OK (0 Duplicated imports), live AC-001..AC-007 verified, DB restored
+- [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment — 2026-09-11 by /verify — PASS: audit gate manual QA — 9 area/25 baseline/31 concept/GAP-UI 15 GAP-C 10 all PASS, BR-001 git clean, INV-001 traceable
 
 ## Belum Diverifikasi
 
@@ -117,7 +118,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment
 - [ ] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design
 - [ ] tasks/27-design-system-refresh.md — Design System Refresh
 - [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design
@@ -152,6 +152,7 @@
 - [x] tasks/12-global-table-data.md — Global Table Data & Generated CRUD — 2026-09-09 by /review — APPROVED
 - [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-10 by /review — APPROVED
 - [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /review — APPROVED
+- [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment — 2026-09-11 by /review — APPROVED
 
 ## Belum Direview
 
@@ -161,7 +162,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment
 - [ ] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design
 - [ ] tasks/27-design-system-refresh.md — Design System Refresh
 - [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design
@@ -294,12 +294,12 @@
 ### tasks/25-ux-audit-concept-alignment.md
 
 - Fase: Audit gate
-- Status: TODO
+- Status: DONE — audit gate 2026-09-11
 - Depends on: Tasks 07–24 (sistem yang diaudit, read-only)
-- Implemented: [ ] —
-- Verified: [ ] —
-- Reviewed: [ ] —
-- Notes: Audit langsung UI/UX + skor 31 concept (27 fondasi + 4 v2) + backlog GAP-UI/GAP-C terpetakan ke tasks 26–38. Gate sebelum redesign.
+- Implemented: [x] 2026-09-11 by /implement — Appendix A–I lengkap: 9 area audit (B.1–B.9) dengan file:line, 25 baseline 23 confirmed/2 corrected (C), 31 concept 22 fully/9 partially (D) + selaras criteria (E), GAP-UI-01…15 + GAP-C-01…10 mapping 1:1 ke 26–38 (F, INV-001 PASS), flake appendix (G), checklist AC-001..005 (H). No code change (`git status` clean, BR-001). Token sweep + locale/RBAC findings documented.
+- Verified: [x] 2026-09-11 by /verify — PASS — User Flow 5/5, AC-001..005 5/5, FR-001..005 5/5, BR-001..003 3/3, DR-001/002 2/2, INV-001 traceable 8/8 tasks 26–38, EC-01/02 handled. Appendix B–F evidence spot-checked (`DataTable.vue:154 280px`, `default.vue:331 240/64` etc) — 53 GAP refs. No code change verified (`git status` only tasks files). Manual QA N/A tests correctly skipped per spec.
+- Reviewed: [x] 2026-09-11 by /review — APPROVED: Audit gate docs-only — 651 lines, 9 area 53 GAP refs exact file:line (`:8`,`:13`,`:18` etc), 25 baseline 23/2/0, 31 wiki 22/9/0 dual evidence, 9 selaras criteria, INV-001 8/8, BR-001 apps/web clean, docs/audit placeholder added, N/A tests correctly handled, no must-fix.
+- Notes: Audit langsung UI/UX + skor 31 concept (27 fondasi + 4 v2) + backlog GAP-UI/GAP-C terpetakan ke tasks 26–38. Gate sebelum redesign. APPROVED.
 
 ### tasks/26-design-system-refresh-ui-design.md
 
@@ -434,7 +434,7 @@
 ## Last Updated
 
 - Date: 2026-09-11
-- By: /gen-tasks
-- Source: Audit UI/UX + kesesuaian docs/dynamic-administration + improve UI/UX + implementasi semua concept + desain lebih baik + verifikasi penuh
-- Tasks: 01–24 preserved (Legacy); 25–38 generated (1 audit gate + 6 FASE 1/FASE 2 pairs + 1 sweep)
-- Sync 2026-09-11: tasks 25–38 diselaraskan ke docs terbaru (31 artikel wiki + README + spec-v2 K-01…K-04; Related Knowledge + FR/AC diperbarui)
+- By: /review
+- Source: tasks/25-ux-audit-concept-alignment.md — APPROVED (audit gate)
+- Tasks: 25 audit gate Implemented [x] Verified [x] Reviewed [x]; 01–24 preserved; 26–38 TODO gate open
+- Sync 2026-09-11: tasks 25–38 diselaraskan ke docs terbaru (31 artikel wiki + README + spec-v2 K-01…K-04)
