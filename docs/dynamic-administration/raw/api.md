@@ -153,13 +153,14 @@ Server: strip `hidden-computed/readonly-computed` dari input → compute `expres
 | Method | Route | Auth | DTO | Deskripsi |
 |--------|-------|------|-----|-----------|
 | GET | `/api/components` | Read | `ComponentQuerySchema` | List |
-| POST | `/api/components` | Write | `CreateComponentSchema {name 1–100, content nullable, looping bool, requirements: [{name snake_case 1–64, type enum text/date/image/number/richtext}]}` | Create (requirements UQ per component) |
+| POST | `/api/components` | Write | `CreateComponentSchema {name 1–100, content nullable, looping bool, requirements: [{name snake_case 1–64, type enum text/image/component (v2 K-03; legacy: text/date/image/number/richtext)}]}` | Create (requirements UQ per component) |
 | GET | `/api/components/:id` | Read | — | Detail + requirements |
 | PUT | `/api/components/:id` | Write | `UpdateComponentSchema` | Update |
 | DELETE | `/api/components/:id` | Write | — | Delete (cek binding usage 409) |
 | POST | `/api/components/:id/preview` | Read | `PreviewComponentSchema {samples: Record<string,string|number>, items?: Record[] }` | Render preview tanpa publish |
 | POST | `/api/components/:id/publish` | Write | — | Publish → append `component_versions` frozen `requirements` |
 | GET | `/api/components/:id/versions/:version` | Read | — | Snapshot |
+| POST | `/api/components/:id/rollback/:version` | Write (🎯 v2 K-parity, task 38) | — | Copy vX snapshot ke draft (paritas template rollback) |
 
 #### Request preview
 ```json
@@ -181,7 +182,7 @@ Server: strip `hidden-computed/readonly-computed` dari input → compute `expres
 | POST | `/api/templates/:id/publish` | Write | — | Publish → frozen `template_versions.content` |
 | POST | `/api/templates/:id/rollback/:version` | Write | — | Copy vX snapshot ke draft lalu publish baru |
 | GET | `/api/templates/:id/versions/:version` | Read | — | Snapshot |
-| PUT | `/api/templates/:id/bindings` | Write | `UpsertTemplateBindingsSchema {bindings:[{placementId 64, requirementName 64, source enum administration/global_table/manual/expression/system, sourceRef 255 nullable, literalValue text nullable, expression text nullable}]}` batch upsert | Binding. UQ `(placementId,requirementName)` |
+| PUT | `/api/templates/:id/bindings` | Write | `UpsertTemplateBindingsSchema {bindings:[{placementId 64, requirementName 64, source enum administration/global_table/manual/expression/system, sourceRef 255 nullable, literalValue text nullable, expression text nullable}]}` batch upsert | Binding. UQ `(placementId,requirementName)`. v2 K-04: `sourceRef` namespace `step.*`/`component.*` divalidasi bind-time (typo → 422 + saran) |
 | GET | `/api/templates/:id/bindings` | Read | — | List bindings |
 | DELETE | `/api/templates/:id/bindings/:bindingId` | Write | — | Delete binding |
 | POST | `/api/templates/:id/bindings/preview` | Read | `{ placementId, dummyData }` | Preview binding |
@@ -223,7 +224,7 @@ Server: strip `hidden-computed/readonly-computed` dari input → compute `expres
 
 | Method | Route | Auth | DTO | Deskripsi |
 |--------|-------|------|-----|-----------|
-| POST | `/api/administrations/:id/runs` | Write | — | Create run `in_progress`, `resolvedPins` dari versi publish, `stepData:{}` |
+| POST | `/api/administrations/:id/runs` | Write | — | Create run `in_progress`, `resolvedPins` dari versi publish, `stepData:{}`. v2 K-02: run menerima `runtimeSteps[]` (template pilihan operator) yang ikut di-freeze |
 | GET | `/api/runs/mine` | Read | `?page&limit&search&status` | List my runs |
 | GET | `/api/runs/:runId` | Read | — | Detail run + steps |
 | PATCH | `/api/runs/:runId/steps/:stepId` | Write | `UpdateRunStepSchema {fields?: Record<string,unknown>, rowSelections?: Record<string,number[]>, manualInputs?: Record<string,unknown>}` | Upsert stepData[stepId] |
@@ -331,10 +332,29 @@ POST /api/runs/10/complete
 
 GET /api/documents/42/pdf
 → 200 application/pdf (binary)
+
+```http
+# v2 K-02 — runtime step: pilih template 7 sebagai step baru
+POST /api/runs/10/runtime-steps
+{"templateId":7}
+→ 201 {stepId:"rs1", templateId:7, version:"2"}
+
+# v2 K-parity — rollback component ke v1
+POST /api/components/4/rollback/1
+→ 200 {draft:{...}, fromVersion:1}
 ```
 
 ---
 
-## 15. Referensi DTO Lengkap
+## 15. Sinkronisasi v2 (2026-09-11, keputusan K-01…K-04)
+
+- K-01: `global-table-columns.dto` enum bertambah `datetime,time,select-multiple`;
+  `administrations.dto` step fields mengikuti (minimal `text,richtext` + v2 sesuai keputusan task).
+- K-02: `POST /runs/:runId/runtime-steps` (baru) + `resolvedPins` diperluas (audit pilihan runtime).
+- K-03: requirement enum menambah `component`; `validate-tree`/publish/preview mengembalikan
+  `cyclicRequirements[]` (rantai + lokasi) sebagai 422 `INFINITE_LOOP`.
+- K-04: binding validator menolak namespace tak dikenal dengan 422 + `suggestion`.
+
+## 16. Referensi DTO Lengkap
 `server/dto/global-tables.dto.ts`, `global-table-columns.dto.ts`, `table-data.dto.ts`, `components.dto.ts`, `templates.dto.ts`, `template-bindings.dto.ts`, `administrations.dto.ts`, `runs.dto.ts`, `documents.dto.ts`, `render.dto.ts`, `expressions.dto.ts`, `navigation.dto.ts`, `users.dto.ts`, `roles.dto.ts`, `permissions.dto.ts`, `guards.dto.ts`, `activity-logs.dto.ts`, `system-logs.dto.ts`, `settings.dto.ts`, `auth.dto.ts`.
 Lihat `orm-data-source.ts` untuk entity list canonical; `docs/database.md` untuk 26 physical tables.

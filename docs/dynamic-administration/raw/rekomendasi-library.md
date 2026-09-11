@@ -304,10 +304,22 @@ Cross-cutting (Bab 21,26,27)     → fuse.js, @vueuse/virtualList, command-score
 | Auth | `jsonwebtoken` | `authjs` (butuh migration) |
 | Animation page | `animejs` 4.5 | `gsap` (kecuali butuh timeline kompleks) — cukup `auto-animate` untuk list |
 | Icon | `@vicons/carbon` | `lucide`, `heroicons` duplikat |
+| Date/datetime/time pick | `NDatePicker` + `date-fns` | `moment`, `flatpickr` duplikat — v2 K-01 cukup keduanya |
+| GraphQL | — (sengaja tidak ada, decision D-01) | `nuxt-graphql-client`, `graphql-yoga` — akan melemahkan RBAC method+URL |
 
 ---
 
-## 13. Referensi & Versi 2026
+## 13. Adendum v2 (2026-09-11, keputusan K-01…K-04)
+
+- K-01 (`datetime`/`time`/`select-multiple`): tanpa library baru — `NDatePicker` (datetime: `type="datetime"`,
+  time: `type="time"`) + `NSelect multiple` + `date-fns` format `m-d-Y H:i:s` / `H:i:s`.
+- K-02 (runtime steps): tanpa library baru — state Pinia + `NSelect` template picker + `NSteps` existing.
+- K-03 (nested + cycle alert): tanpa library baru — DFS siklik di `computed-field.service` + `NAlert`
+  rantai; pertimbangkan `graphlib` HANYA bila rantai >1000 node (saat ini tidak perlu).
+- K-04 (`step.*` autocomplete): `NMention`/`NAutoComplete` Naive UI existing + validator Zod;
+  tanpa `monaco-editor` (overkill) kecuali editor ekspresi naik kelas (keputusan task 36).
+
+## 14. Referensi & Versi 2026
 
 - Tiptap v2.8+ — https://tiptap.dev/docs/editor/getting-started/install
 - VueUse v11+ — https://vueuse.org/

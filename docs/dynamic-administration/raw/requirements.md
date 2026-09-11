@@ -249,10 +249,23 @@ Designer POST /api/global-tables (Pegawai) → GET /api/navigation
 - [ ] Semua route metadata terproteksi RBAC; 401/403 handling client sesuai `design-system.md` Authorization UI Patterns.
 - [ ] Expression invalid diblok di `validate`/`validate-tree` dengan pesan field-level.
 
----
+## 9. Sinkronisasi v2 (2026-09-11, keputusan K-01…K-04)
 
-## 9. Referensi
-- `core-conpect.md` bab 1–28 (sumber konsep)
+- [ ] K-01: `datetime`/`time`/`select-multiple` terdaftar di DTO + form + display + search/order
+  (format default `m-d-Y H:i:s` / `H:i:s`; options `{value,label}`).
+- [ ] K-02: Operator dapat menambah step (pilih template) saat runtime; run mem-freeze pilihan;
+  complete atomic mencakup steps runtime; steps predefined tetap kerangka awal.
+- [ ] K-03: Requirement `component` nested tanpa batas depth; loop terdeteksi → alert infinite
+  loop + blokir render terdampak (tanpa crash) di validate-tree, publish guard, preview, editor.
+- [ ] K-04: Field step memakai konvensi `step_field` (`{{data.<step>.<field>}}`); typo namespace
+  gagal di bind-time dengan pesan + saran; ref lama kompatibel mundur.
+- [ ] Popup klik-kanan component: input nama data + select tipe (`text`/`image`/`component`).
+- [ ] Template: description + form generated (C.4) + preview PDF (C.5) — ketiganya verified existing,
+  dipertahankan sebagai acceptance.
+
+## 10. Referensi
+- `core-conpect.md` bab 1–31 (sumber konsep, termasuk v2 bab 29–31)
+- `spec-v2-statamic-alignment.md` (spec mentah v2 + keputusan K-01…K-04)
 - `docs/PRD.md` §8–11 (business rules & glossary)
 - `docs/database.md` §DYNAMIC ADMINISTRATION TABLES (schema aktual)
 - `docs/architecture.md` §Dynamic Administration Layers & RBAC

@@ -20,6 +20,7 @@ Each article covers one core concept. Articles use `[[wikilinks]]` to reference 
 - **Rendering** — Document rendering engine, runtime flow
 - **UI Generation** — Auto-generated menus from metadata
 - **Architecture Principles** — Design rules and patterns
+- **Referensi & Core Concept** — Statamic adaptation map, perfected core concept, v2 column catalog, runtime administration
 
 ## Conventions
 

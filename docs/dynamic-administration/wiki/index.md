@@ -14,6 +14,7 @@ Knowledge base for the Dynamic Administration & Document Composition Platform.
 
 - [[global-table]]
 - [[column-type]]
+- [[column-type-catalog]]
 - [[computed-field]]
 - [[crud-generated-table]]
 - [[relation-data-provider]]
@@ -43,6 +44,7 @@ Knowledge base for the Dynamic Administration & Document Composition Platform.
 - [[administration]]
 - [[step]]
 - [[multi-template-administration]]
+- [[administration-runtime]]
 
 ## Rendering
 
@@ -52,3 +54,8 @@ Knowledge base for the Dynamic Administration & Document Composition Platform.
 ## UI Generation
 
 - [[generated-menu]]
+
+## Referensi & Core Concept
+
+- [[core-concept]]
+- [[statamic-reference]]

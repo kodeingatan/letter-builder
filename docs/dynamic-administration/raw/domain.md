@@ -18,7 +18,7 @@
 | Entity | File | Kolom kunci | Deskripsi |
 |--------|------|-------------|-----------|
 | `Component` | `component.entity.ts` | `id PK, name UQ 100, content text nullable (HTML/handlebars), looping bool default false, preview text nullable, version int default 1, status 16 default draft, createdAt, updatedAt` | Reusable document block. `looping` = Single vs Collection mode (bab 9). |
-| `ComponentDataRequirement` | `component.entity.ts` | `id PK, componentId FK, name 64, type 16, createdAt, updatedAt` — UQ `(componentId,name)` | Contract: "saya butuh `nama, nip, jabatan`" (bab 8). |
+| `ComponentDataRequirement` | `component.entity.ts` | `id PK, componentId FK, name 64, type 16, createdAt, updatedAt` — UQ `(componentId,name)` | Contract: "saya butuh `nama, nip, jabatan`" (bab 8). v2 type: `text, image, component` (K-03; `component` = nested tanpa batas + cycle alert). |
 | `ComponentVersion` | `component.entity.ts` | `id PK, componentId FK, version int, content nullable, looping bool, requirements text JSON frozen, createdAt` — UQ `(componentId,version)` | Immutable snapshot publish. `requirements` frozen `[{name,type}]`. |
 
 ### 1.3 Templates
@@ -34,7 +34,7 @@
 | `Administration` | `administration.entity.ts` | `id PK, name UQ 100, description nullable, status 16 default draft, version int default 0, menuOrder nullable, menuIcon 32 nullable, createdAt, updatedAt` | Workflow pengumpulan data. Projection ke menu `Persuratan`. |
 | `AdministrationStep` | `administration.entity.ts` | `id PK, administrationId FK, order int, name 100, templateId nullable, templateVersion 16 nullable pin, fields text nullable JSON` — UQ `(administrationId,order)` | Satu tahap pengumpulan data (bab 15). `fields` = definisi field step. |
 | `AdministrationVersion` | `administration.entity.ts` | `id PK, administrationId FK, version int, steps text JSON frozen `[{order,name,templateId,templateVersion,fields}]`, publishedBy nullable, createdAt` — UQ `(administrationId,version)` | Immutable publish snapshot steps. |
-| `AdministrationRun` | `administration-run.entity.ts` | `id PK, administrationId FK, administrationVersion int default 0, resolvedPins text JSON `[{stepId,templateId,version}]`, stepData text JSON `RunStepDataMap`, status 16 default in_progress, startedBy nullable, startedAt nullable, completedAt nullable, createdAt, updatedAt` | Eksekusi workflow. `stepData = { [stepId]: { fields, rowSelections, manualInputs } }`. |
+| `AdministrationRun` | `administration-run.entity.ts` | `id PK, administrationId FK, administrationVersion int default 0, resolvedPins text JSON `[{stepId,templateId,version}]`, stepData text JSON `RunStepDataMap`, status 16 default in_progress, startedBy nullable, startedAt nullable, completedAt nullable, createdAt, updatedAt` | Eksekusi workflow. `stepData = { [stepId]: { fields, rowSelections, manualInputs } }`. v2 runtime-penuh (K-02): run juga mem-freeze **urutan + pilihan template steps runtime**; field namespaced `step_field` (`{{data.<step>.<field>}}`). |
 
 ### 1.5 Documents
 | Entity | File | Kolom kunci | Deskripsi |
@@ -244,7 +244,19 @@ Binding `p1`:
 
 ---
 
-## 7. Referensi
-- `core-conpect.md` bab 6–9 (Component contract), 10–13 (Template binding), 14–16 (Administration), 26 (Object Model), 27 (Prinsip)
+## 8. Sinkronisasi v2 (2026-09-11, keputusan K-01…K-04)
+
+- **K-01 katalog 14**: `GlobalTableColumn.type` bertambah `datetime` (format default `m-d-Y H:i:s`),
+  `time` (default `H:i:s`), `select-multiple` (options `{value,label}`).
+- **K-02 runtime-penuh**: `AdministrationRun` mem-freeze urutan + pilihan template steps runtime;
+  steps predefined = kerangka awal. Relasi run→template-step runtime tercatat di `resolvedPins`
+  yang diperluas (audit).
+- **K-03 nested**: `ComponentDataRequirement.type` menambah `component`; rantai
+  requirement→component→requirement membentuk graph (bukan tree) — engine wajib cycle check.
+- **K-04 prefix**: field step memakai namespace `step_field`; `RunStepDataMap` keys
+  direkomendasikan `<step>_<field>`; bahasa `{{data.<step>.<field>}}`.
+
+## 9. Referensi
+- `core-conpect.md` bab 6–9 (Component contract), 10–13 (Template binding), 14–16 (Administration), 26 (Object Model), 27 (Prinsip), 29–31 (v2)
 - `database.md` § DYNAMIC ADMINISTRATION TABLES (skema aktual)
 - `architecture.md` § Dynamic Administration Layers

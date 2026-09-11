@@ -144,7 +144,33 @@ number + currency
    ↓
 Number Input
    ↓
-Currency Formatter
+Currency Formatter (IDR realtime saat mengetik)
+```
+
+v2 — tiga tipe baru (TARGET, keputusan K-01 2026-09-11):
+
+```text
+datetime
+   ↓
+Date+Time Picker
+   ↓
+Format Display (default m-d-Y H:i:s)
+```
+
+```text
+time
+   ↓
+Time Picker
+   ↓
+Format Display (default H:i:s)
+```
+
+```text
+select-multiple
+   ↓
+Multi Select
+   ↓
+Options {value, label} (tambah sesuai kebutuhan)
 ```
 
 Dengan demikian:
@@ -1435,3 +1461,40 @@ Kalau seluruh aplikasi harus dijelaskan kepada developer hanya dengan **satu dia
                          │ PDF               │
                          └───────────────────┘
 ```
+
+---
+
+# 29. Referensi Arsitektur Statamic → BMS (v2, 2026-09-11)
+
+Pola Statamic CMS (Laravel) diadaptasi ke Nuxt 4 + Nitro + TypeORM + SQLite + Naive UI —
+bukan dependensi, hanya referensi pola. Peta lengkap: wiki `statamic-reference`.
+
+```text
+Statamic bootstrap/providers/web.php  →  nuxt.config + database.server.ts + server/api/*
+Entry/Contracts/Stache/Repository     →  EntitySchema + Zod DTO + plain-object services
+Stache flat store                     →  SQLite + global_table_rows (JSON-per-row)
+Blueprint/Fieldtypes(Bard)            →  kolom + step fields + 14 column types
+CP Inertia/Vue + SavePipeline         →  dashboard Naive UI + wizard autosave/complete
+Antlers Engine                        →  pipeline resolve-tree → HTML → PDF
+Static cache                          →  cache proyeksi navigasi + PDF frozen
+REST/GraphQL                          →  REST saja (tanpa GraphQL — decision D-01)
+Addons/events, search, filesystem     →  activity-log, search/lookup, storage allowlist
+```
+
+# 30. Runtime Penuh + Prefix step_field + Nested Component (v2, 2026-09-11)
+
+Keputusan alignment K-02/K-03/K-04:
+
+1. **Runtime penuh** — operator menyusun steps dari template saat menjalankan (bukan hanya
+   predefined). Run mem-freeze urutan + pilihan template (auditable). Steps predefined tetap
+   sebagai kerangka awal. Detail: wiki `administration-runtime` §A.
+2. **Konvensi `step_field`** — data administrasi memakai bahasa `{{data.<step>.<field>}}`
+   (contoh `{{data.step1.nama}}`); validator + binding editor mendukung namespace `step.*`.
+3. **Requirement `component` (nested)** — tipe view ketiga selain `text`/`image`; tanpa batas
+   depth; engine wajib deteksi siklik + alert infinite loop + blokir render terdampak.
+
+# 31. Katalog Tipe Kolom v2 (14 Types)
+
+v1 = 11 tipe (bab 3). v2 menambah `datetime`, `time`, `select-multiple` (lihat kotak v2 di bab 3).
+Spesifikasi perilaku + sintaks operasi `++` + contoh `1 * 2 = 2`: wiki `column-type-catalog`.
+Core concept sempurna (12 lapisan + aturan emas): wiki `core-concept`.

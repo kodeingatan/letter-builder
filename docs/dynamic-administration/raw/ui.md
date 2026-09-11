@@ -313,10 +313,21 @@ Tool prototype: Figma link (placeholder) + Storybook `play` function untuk click
 - [ ] Empty/Error/Success/Loading states di Storybook tiap component.
 - [ ] A11y axe audit 0 violation critical.
 
----
+## 12. Sinkronisasi v2 (2026-09-11, keputusan K-01…K-04)
 
-## 12. Referensi
-- `core-conpect.md` bab 10–16 (canvas, context menu, binding, workflow)
+- K-01: input `datetime` (date+time picker, format `m-d-Y H:i:s`), `time` (format `H:i:s`),
+  `select-multiple` (multi dari options `{value,label}`) di DynamicForm + column form;
+  currency IDR realtime di label number.
+- K-02: wizard mendukung "tambah step (pilih template)" saat runtime + review mencakup steps
+  runtime + complete menampilkan tautan dokumen per step.
+- K-03: popup klik-kanan requirement menambah opsi `component` + picker component;
+  loop terdeteksi → alert infinite loop (rantai + lokasi) + blokir aksi terkait.
+- K-04: editor/picker menampilkan namespace `step.*` (`{{data.<step>.<field>}}`) dengan
+  autocomplete; typo → inline error + saran (bind-time).
+
+## 13. Referensi
+- `core-conpect.md` bab 10–16 (canvas, context menu, binding, workflow), 29–31 (v2)
+- `spec-v2-statamic-alignment.md` (spec mentah v2)
 - `architecture.md` § Dynamic Administration UI Patterns (column mapping, CRUD impl)
 - `design-system.md` (tokens, Table, Animations, Authorization UI Patterns, naiveui-theme)
 - `rekomendasi-library.md` layer 4 (Tiptap stack) & layer 7 (auto-animate)
