@@ -1,4 +1,4 @@
-# BMS Core Concepts Wiki
+# LBS Core Concepts Wiki
 
 Knowledge base for the Dynamic Administration & Document Composition Platform.
 

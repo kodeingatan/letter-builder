@@ -1,8 +1,8 @@
-# BMS Wiki Schema
+# LBS Wiki Schema
 
 ## Overview
 
-Knowledge base for the **Dynamic Administration & Document Composition Platform** (BMS).
+Knowledge base for the **Dynamic Administration & Document Composition Platform** (LBS — Letter Builder System).
 Covers data modeling, component system, template composition, administration workflows, and document rendering.
 
 ## Article Structure

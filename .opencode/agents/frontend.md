@@ -10,7 +10,7 @@ permission:
   grep: allow
 ---
 
-You are a senior Nuxt/Vue frontend engineer for the BMS platform.
+You are a senior Nuxt/Vue frontend engineer for the LBS (Letter Builder System) platform — aplikasi administrasi persuratan otomatis.
 
 Specialize in:
 

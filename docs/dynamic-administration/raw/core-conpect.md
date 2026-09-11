@@ -1464,7 +1464,7 @@ Kalau seluruh aplikasi harus dijelaskan kepada developer hanya dengan **satu dia
 
 ---
 
-# 29. Referensi Arsitektur Statamic → BMS (v2, 2026-09-11)
+# 29. Referensi Arsitektur Statamic → LBS (v2, 2026-09-11)
 
 Pola Statamic CMS (Laravel) diadaptasi ke Nuxt 4 + Nitro + TypeORM + SQLite + Naive UI —
 bukan dependensi, hanya referensi pola. Peta lengkap: wiki `statamic-reference`.

@@ -1,10 +1,10 @@
-# Referensi Arsitektur — Statamic CMS → BMS
+# Referensi Arsitektur — Statamic CMS → LBS
 
-> Pemetaan arsitektur [Statamic CMS](https://github.com/statamic/cms) (Laravel flat-file CMS) ke tech stack BMS
+> Pemetaan arsitektur [Statamic CMS](https://github.com/statamic/cms) (Laravel flat-file CMS) ke tech stack LBS (Letter Builder System)
 > (Nuxt 4 + Nitro + TypeORM + SQLite + Naive UI). Statamic dipakai sebagai **referensi pola**,
-> bukan sebagai dependensi — tidak ada kode Laravel di BMS.
+> bukan sebagai dependensi — tidak ada kode Laravel di LBS.
 
-## Diagram Adaptasi (Tech Stack BMS)
+## Diagram Adaptasi (Tech Stack LBS)
 
 ```mermaid
 flowchart TD
@@ -67,9 +67,9 @@ node_addons_events -.->|"feeds search"| node_search
 node_domain -->|"uses assets"| node_asset_imaging
 ```
 
-## Tabel Pemetaan (Statamic → BMS)
+## Tabel Pemetaan (Statamic → LBS)
 
-| Statamic (Laravel) | BMS (Nuxt 4) | Catatan adaptasi |
+| Statamic (Laravel) | LBS (Nuxt 4) | Catatan adaptasi |
 |---|---|---|
 | `Statamic.php` package bootstrap | `nuxt.config.ts` + `server/plugins/database.server.ts` | Bootstrap Nuxt: DB init, seed, drift check, startup self-check |
 | Service & route providers | Nitro plugin + `server/utils/orm-data-source.ts` | DataSource singleton 23 EntitySchema; `server/api/*` file routes ganti `web.php` |

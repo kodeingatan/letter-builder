@@ -34,10 +34,10 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Business Management System',
+      title: 'Letter Builder System',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Sistem manajemen bisnis digital' },
+        { name: 'description', content: 'Letter Builder System — aplikasi administrasi persuratan otomatis untuk pemerintahan dan perusahaan' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

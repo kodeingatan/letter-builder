@@ -20,7 +20,7 @@ Versi sempurna (12 lapisan, peran, golden path, 8 aturan emas, peta status): `wi
 | `wiki/index.md` | Katalog 31 artikel per 9 kategori |
 | `wiki/AGENTS.md` | Skema wiki (kategori + konvensi wikilink) |
 | `wiki/core-concept.md` | Core concept sempurna — logika & fitur keseluruhan |
-| `wiki/statamic-reference.md` | Peta arsitektur Statamic → tech stack BMS + decision log |
+| `wiki/statamic-reference.md` | Peta arsitektur Statamic → tech stack LBS + decision log |
 | `wiki/column-type-catalog.md` | Katalog 14 tipe kolom (v1 implemented + v2 target) |
 | `wiki/administration-runtime.md` | Runtime penuh + `step_field` + nested component |
 | `wiki/konsep-utama.md`, `final-concept.md`, `overall-flow.md` | Rantai, diagram, alur (fondasi) |

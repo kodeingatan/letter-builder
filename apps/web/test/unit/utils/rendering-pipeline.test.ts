@@ -100,7 +100,7 @@ describe('render — AC-003 missing data warns but succeeds', () => {
   it('emits empty string + MISSING_DATA for unbound slots', () => {
     const tree = [{ id: 'c1', kind: 'component', attrs: { componentId: 7 } }]
     const result = render(tree, { data: {} }, { componentSnapshots: collectionSnapshot(), bindings: [] })
-    expect(result.html).toContain('bms-doc')
+    expect(result.html).toContain('lbs-doc')
     const codes = result.warnings.map((w) => w.code)
     expect(codes).toContain('MISSING_DATA')
     expect(result.warnings[0].nodeId).toBe('c1')
@@ -319,6 +319,6 @@ describe('render — timings + shell', () => {
       expect(typeof result.timings[stage]).toBe('number')
     }
     expect(result.html).toContain('<!DOCTYPE html>')
-    expect(result.html).toContain('bms-doc')
+    expect(result.html).toContain('lbs-doc')
   })
 })

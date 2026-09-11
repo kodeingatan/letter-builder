@@ -2,9 +2,9 @@
 
 ## 1. Product Overview
 
-**Nama Project**: BMS — Dynamic Administration & Document Composition Platform
+**Nama Project**: LBS — Letter Builder System — Dynamic Administration & Document Composition Platform
 
-**Tujuan**: Membangun platform manajemen administrasi yang metadata-driven. Inti platform adalah konsep **Data → Component → Template → Administration → Document**, di mana non-developer dapat mendefinisikan struktur data (Global Table), blok dokumen yang dapat digunakan kembali (Component), blueprint dokumen (Template), dan workflow pengumpulan data (Administration) untuk akhirnya menghasilkan dokumen (PDF/HTML).
+**Tujuan**: Membangun **Letter Builder System (LBS)** — aplikasi administrasi persuratan otomatis, mulai dari builder table sebagai data awal, membuat component surat, membuat surat (Template), dan step administrasi persuratan di pemerintahan/perusahaan. Platform ini metadata-driven dengan inti konsep **Data → Component → Template → Administration → Document**, di mana non-developer dapat mendefinisikan struktur data (Global Table), blok dokumen yang dapat digunakan kembali (Component), blueprint dokumen (Template), dan workflow pengumpulan data (Administration) untuk akhirnya menghasilkan dokumen (PDF/HTML).
 
 **Core Concept** (dokumentasi asli: `docs/dynamic-administration/`):
 

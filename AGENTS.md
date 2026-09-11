@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Business Management System (BMS)** — Metadata-driven platform to define data structures (Global Tables), reusable document blocks (Components), document blueprints (Templates), data-collection workflows (Administrations), and generate documents (PDF/HTML). RBAC foundation + Dynamic Administration modules are implemented.
+**Letter Builder System (LBS)** — Aplikasi administrasi persuratan otomatis — mulai dari builder table sebagai data awal, membuat component surat, membuat surat (Template), dan step administrasi persuratan di pemerintahan/perusahaan. Metadata-driven platform to define data structures (Global Tables), reusable document blocks (Components), document blueprints (Templates), data-collection workflows (Administrations), and generate documents (PDF/HTML). RBAC foundation + Dynamic Administration modules are implemented.
 
 **Core flow**: Global Table → Component → Template → Administration → Document (PDF/HTML)
 

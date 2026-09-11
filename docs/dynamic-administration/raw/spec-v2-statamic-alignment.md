@@ -6,13 +6,13 @@
 > dan tuangkan seluruh detail konsep modul. Status implementasi ditandai
 > ✅ implemented / 🎯 target / 📋 roadmapped (tasks 25–38).
 
-## 1. Referensi Arsitektur (Statamic → BMS)
+## 1. Referensi Arsitektur (Statamic → LBS)
 
 Statamic: Laravel package → providers → web.php → Entry/Contracts/Stache/Repository →
 Blueprint/Fieldtypes(Bard) → CP Inertia/Vue + SavePipeline → Antlers Engine → static cache →
 REST/GraphQL, addons/events, search index, filesystem/Glide.
 
-Adaptasi BMS: Nuxt config + `database.server.ts` → Nitro plugin + DataSource →
+Adaptasi LBS: Nuxt config + `database.server.ts` → Nitro plugin + DataSource →
 `server/api/*` + `app/pages/*` → EntitySchema + Zod DTO + services →
 kolom + step fields → 14 column types → dashboard Naive UI + wizard autosave/complete →
 pipeline resolve-tree → HTML→PDF → proyeksi navigasi + PDF frozen →

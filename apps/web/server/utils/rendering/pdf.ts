@@ -111,7 +111,7 @@ export function htmlToPdf(html: string): Buffer {
   const catalog = '1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj'
   const pagesObj = `2 0 obj\n<< /Type /Pages /Kids [${pageObjectNumbers.map((n) => `${n} 0 R`).join(' ')}] /Count ${pageObjectNumbers.length} >>\nendobj`
   const font = '3 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj'
-  const info = '<< /Producer (BMS Rendering Engine) /Creator (BMS Rendering Engine) /CreationDate (D:20260101000000Z) /ModDate (D:20260101000000Z) >>'
+  const info = '<< /Producer (LBS Rendering Engine) /Creator (LBS Rendering Engine) /CreationDate (D:20260101000000Z) /ModDate (D:20260101000000Z) >>'
   const infoNum = next++
   const infoObj = `${infoNum} 0 obj\n${info}\nendobj`
   const trailerId = '<0123456789ABCDEF0123456789ABCDEF>'
