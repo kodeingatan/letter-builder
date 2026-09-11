@@ -10,7 +10,7 @@ Single Nuxt 4 package:
 
 ## Dynamic Administration Layers (IMPLEMENTED)
 
-> Platform mengimplementasikan fondasi **RBAC** dan seluruh modul Dynamic Administration (Global Table, Component, Template, Administration, Expression Engine, Rendering Engine) — tasks 07–22 — plus production hardening (tasks 23–24), audit gate (task 25) dan design system foundation: wireframe/mockup/prototype (task 26) serta implementasi kanonis PageShell/DataTable/403-single/locale/sidebar/dashboard/motion (task 27). Desain layer di bawah ini adalah arsitektur yang berjalan di kode, bukan rencana.
+> Platform mengimplementasikan fondasi **RBAC** dan seluruh modul Dynamic Administration (Global Table, Component, Template, Administration, Expression Engine, Rendering Engine) — tasks 07–22 — plus production hardening (tasks 23–24), audit gate (task 25), design system foundation: wireframe/mockup/prototype (task 26) serta implementasi kanonis PageShell/DataTable/403-single/locale/sidebar/dashboard/motion (task 27), dan Global Table UX design — wireframe/mockup/prototype redesign (task 28, FASE 1, acuan untuk implementasi task 29). Desain layer di bawah ini adalah arsitektur yang berjalan di kode, bukan rencana.
 
 ### Layer Stack (Implemented)
 

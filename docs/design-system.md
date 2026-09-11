@@ -801,6 +801,14 @@ Satu locale **ID** (Indonesia) untuk fondasi — selaras `Masuk`/`Daftar` existi
 
 Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` sebagai bahasa visual kanonis untuk Task 27. Lokasi: `docs/wireframes/foundation/`, `docs/mockups/foundation/`, `docs/prototypes/foundation/`, `apps/web/stories/foundation/` (PageShell 4 stories, DataTable 6 states + Refresh, AccessDeniedAlert single, Dashboard 3 varian per peran). Diimplementasikan Task 27: PageShell 12+ pages, DataTable kanonis 320/160 + Restart + error slot `NAlert` + `NIcon` + locale ID (`Cari...` `Semua Kolom` `Menampilkan` `Belum ada data` `Gagal memuat data` `Coba lagi`), AccessDeniedAlert single `data-testid=access-denied` floating 16px/448px 4000ms, sidebar 220/72 token #3B82F6/#2563EB, dashboard dinamis via `/api/navigation` (NGrid 3→2→1) + EC-01 empty, auth `autocomplete` + `aria-hidden` + `aria-label`, motion `usePageTransition` 250ms + reduced-motion. Token 0 indigo (`#3B82F6`), sidebar `220/72`, motion `Fast 150/Normal 250/Slow 350` + `prefers-reduced-motion`.
 
+## Global Table UX Deliverables (Task 28 Design — Done, FASE 1)
+
+Redesign UX modul Global Table (task 28) — FASE 1 design selesai 2026-09-11, siap untuk implementasi FASE 2 (task 29). Fondasi 26/27 tetap berlaku (PageShell, DataTable kanonis, 403 tunggal, token #3B82F6).
+
+- **Lokasi**: `docs/wireframes/global-table-ux/` (low-fi master 10 sections + 11 PNG 1280×800 + `_audit-matrix.md` 17 GAP-GT + `_user-flow-map.md` 7 steps + `_wireframe-spec.md`), `docs/mockups/global-table-ux/` (hi-fi token-exact master + 16 PNG + `_mockup-tokens.md` + `_token-diff.md`), `docs/prototypes/global-table-ux/` (interaktif 7 steps + `_prototype-spec.md`), `apps/web/stories/global-table/` (ColumnRow 4, RelationSelector 5, DynamicForm 3, ImportModal 3 stories), generator `scripts/generate-global-table-pngs.mjs`.
+- **Pola yang ditetapkan**: Columns manager `NDataTable` + reorder eksplisit `ChevronUp/Down` via `h(NIcon)` + `NPopconfirm` (menggantikan raw `<table>` + `DragHandle` palsu + `purple` tag), column form sections `v-if` per-type + `NRadioGroup` + `NCheckboxGroup` + `NInputNumber` + `optionRules` computed (menggantikan `NRadio` tunggal + `v-show` bocor + `NInput number` + `#666`), RelationSelector `hasMore = options.length < total` + `NEmpty`/`NAlert+retry` dengan panduan (menggantikan `offset+length<total` + silent error), import `quote-aware` parser + `min(640px,90vw)` + `max-height 240` error per baris (menggantikan `split(',')` + `640px` fix), DynamicForm `NButton primary ghost Upload` + `NImage 64` + computed live `readonly` via `POST /api/expressions/evaluate` debounce, drawer `NPopconfirm` + `NAlert+retry`.
+- **Keputusan**: reorder eksplisit (bukan DnD) + CSV preview max 5 baris / error table max 20, file >5MB atau >5000 baris → 422.
+
 ---
 
 ## Dynamic Administration UI Patterns (IMPLEMENTED)

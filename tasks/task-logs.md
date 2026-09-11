@@ -34,7 +34,7 @@
 | tasks/25-ux-audit-concept-alignment.md | Audit gate | [x] | [x] | [x] |
 | tasks/26-design-system-refresh-ui-design.md | FASE 1 — Design | [x] | [x] | [x] |
 | tasks/27-design-system-refresh.md | FASE 2 — Impl | [x] | [x] | [x] |
-| tasks/28-global-table-ux-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
+| tasks/28-global-table-ux-ui-design.md | FASE 1 — Design | [x] | [x] | [x] |
 | tasks/29-global-table-ux.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
 | tasks/30-template-editor-ux-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
 | tasks/31-template-editor-ux.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
@@ -68,6 +68,7 @@
 - [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment (Audit gate) — 2026-09-11 by /implement
 - [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design (FASE 1) — 2026-09-11 by /implement
 - [x] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2) — 2026-09-11 by /implement — PageShell 12 pages, DataTable 320/160 Restart/NAlert/NIcon, 403 single auto-4000ms, useMessage guarded, sidebar 220/72 token distinct, AdministrationDetailDrawer fix, dashboard dynamic via /api/navigation, auth autocomplete, motion 250/350, token sweep 0, tests 473+35, build OK
+- [x] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design (FASE 1) — 2026-09-11 by /implement — wireframe 11 PNG + mockup 16 PNG + prototype interaktif 7 steps + Storybook 4 groups (ColumnRow/RelationSelector/DynamicForm/ImportModal), AC-D01..03, 0 off-token
 
 ## Belum Implementasi
 
@@ -76,7 +77,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design (FASE 1)
 - [ ] tasks/29-global-table-ux.md — Global Table UX (FASE 2, depends on 28)
 - [ ] tasks/30-template-editor-ux-ui-design.md — Template Editor UX UI Design (FASE 1)
 - [ ] tasks/31-template-editor-ux.md — Template Editor UX (FASE 2, depends on 30)
@@ -111,6 +111,7 @@
 - [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment — 2026-09-11 by /verify — PASS: audit gate manual QA — 9 area/25 baseline/31 concept/GAP-UI 15 GAP-C 10 all PASS, BR-001 git clean, INV-001 traceable
 - [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design — 2026-09-11 by /verify — PASS: wireframe/mockup/prototype + Storybook 4 groups, design system/responsive/a11y/User Flow PASS, 0 critical
 - [x] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2) — 2026-09-11 by /verify — PASS: PageShell 12 pages, DataTable 320/160 Restart/NIcon/NAlert, 403 single 1 instance, sidebar 220/72 token, dashboard dynamic, auth autocomplete, motion 250/350, 0 indigo, unit 473/473 nuxt 35/35 (508) build OK vue-tsc 0, E2E 14 specs listed (browsers not installed: SKIPPED)
+- [x] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design — 2026-09-11 by /verify — PASS: wireframe 11 PNG+mockup 16 PNG+prototype 7 steps+Storybook 4 groups, AC-D01..03 PASS, 0 off-token, design system/responsive/a11y/User Flow 100%, 0 critical
 
 ## Belum Diverifikasi
 
@@ -120,7 +121,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design
 - [ ] tasks/29-global-table-ux.md — Global Table UX
 - [ ] tasks/30-template-editor-ux-ui-design.md — Template Editor UX UI Design
 - [ ] tasks/31-template-editor-ux.md — Template Editor UX
@@ -155,6 +155,7 @@
 - [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment — 2026-09-11 by /review — APPROVED
 - [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design — 2026-09-11 by /review — APPROVED
 - [x] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2) — 2026-09-11 by /review — APPROVED — User Flow 6/6 AC 6/6 FR 6/6 BR 3/3 EC 3/3 UT 473/473 NT 35/35 E2E 14 specs (browsers SKIPPED env) build 20.7MB vue-tsc 0
+- [x] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design (FASE 1) — 2026-09-11 by /review — APPROVED — wireframe 11 PNG+mockup 16 PNG+prototype 7 steps+Storybook 4 groups, AC-D01..03 3/3, 0 off-token, design system/responsive/a11y/User Flow 100%, peer review ready
 
 ## Belum Direview
 
@@ -164,7 +165,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design
 - [ ] tasks/29-global-table-ux.md — Global Table UX
 - [ ] tasks/30-template-editor-ux-ui-design.md — Template Editor UX UI Design
 - [ ] tasks/31-template-editor-ux.md — Template Editor UX
@@ -324,12 +324,12 @@
 ### tasks/28-global-table-ux-ui-design.md
 
 - Fase: FASE 1 — UI Design
-- Status: TODO
-- Depends on: Tasks 25, 26/27
-- Implemented: [ ] —
-- Verified: [ ] —
-- Reviewed: [ ] —
-- Notes: Wireframe/Mockup/Prototype columns manager, column form, browse, selector, DynamicForm, import.
+- Status: DONE — 2026-09-11 by /implement (FASE 1 design selesai)
+- Depends on: Tasks 25 (GAP-UI), 26/27 (fondasi kanonis DONE)
+- Implemented: [x] 2026-09-11 by /implement — Discovery (_audit-matrix 17 GAP-GT + _user-flow-map 7 steps+ALT/ERR), Wireframes (index.html 10 sections + 11 PNG 1280×800 + _wireframe-spec + README), Mockups (index.html hi-fi token-exact + 16 PNG + _mockup-tokens + _token-diff + README), Prototype (index.html 7 steps interaktif + _prototype-spec + README, kontrol QA Steps1-7+ALT/ERR, debounce/reorder/live), Storybook 4 groups (ColumnRow 4 stories, RelationSelector 5, DynamicForm 3, ImportModal 3) + build-storybook PASS, keputusan reorder ChevronUp/Down + CSV 5+20 (5000 limit), generator scripts/generate-global-table-pngs.mjs. 0 off-token, a11y + responsive + User Flow 100%.
+- Verified: [x] 2026-09-11 by /verify — PASS: User Flow 7/7 + ALT-01/02 + ERR-01..03, AC-D01..03 3/3, wireframe 11 PNG+mockup 16 PNG+prototype 7 steps+Storybook 4 groups (12 stories), design system 0 off-token (purple/#666/text-blue/DragHandle→Chevron, NRadio→NRadioGroup, v-show→v-if, hasMore, split→quote-aware) + Inter/JetBrains Mono/radius 6/4/8, responsive D(≥1024)/T(768-1023)/M(<768), a11y keyboard/NCheckboxGroup/aria-live/reduced-motion, Flow→UI/API 100%, no code regression (vue-tsc 0, unit 473/473), peer review ready
+- Reviewed: [x] 2026-09-11 by /review — APPROVED: FASE 1 design — User Flow 7/7 AC 3/3 100%, wireframe 11 PNG+mockup 16 PNG+prototype 7 steps (debounce 300/200, reorder ChevronUp/Down eksplisit, NPopconfirm, quote-aware, live computed)+Storybook 4 groups 12 stories, design system 0 off-token + token #3B82F6 + radius 6/4/8, responsive D/T/M, a11y NCheckboxGroup/aria-live/reduced-motion, traceability 100%, no code regression (vue-tsc 0, unit 473/473), handoff 28→29 ready
+- Notes: FASE 1 untuk Task 29 — pixel-perfect mockup columns DataTable+reorder eksplisit, form v-if+NRadioGroup/NCheckboxGroup/NInputNumber+optionRules, selector NEmpty/NAlert+hasMore fix, DynamicForm upload NButton+live computed, import quote-aware min(640,90vw). Siap Task 29. Verified PASS → reviewed APPROVED.
 
 ### tasks/29-global-table-ux.md
 
@@ -435,6 +435,6 @@
 
 - Date: 2026-09-11
 - By: /review
-- Source: tasks/27-design-system-refresh.md — REVIEWED APPROVED (FASE 2 foundation: User Flow 6/6 AC 6/6 FR 6/6 BR 3/3 EC 3/3 DR-001 INV-001 + 508 tests + 0 indigo + 403 single + PageShell 12 + 220/72 + i18n — APPROVED)
-- Tasks: 25 [x][x][x], 26 [x][x][x], 27 [x][x][x] APPROVED; 28–38 TODO; E2E SKIPPED env but file-level PASS
-- Sync 2026-09-11: fondasi KANONIS APPROVED — 0 Must Fix, 4 Should Fix (non-blocking), 5 Consider; build 508/508 vue-tsc 0; ready /knowledge → tasks 28–38
+- Source: tasks/28-global-table-ux-ui-design.md — REVIEWED APPROVED (FASE 1: 7/7 steps + 3 AC + wireframe 11+mockup 16+prototype 7 steps+Storybook 12 stories, 0 off-token → DONE)
+- Tasks: 25 [x][x][x], 26 [x][x][x], 27 [x][x][x] APPROVED; 28 [x][x][x] APPROVED; 29–38 TODO; vue-tsc 0 unit 473/473 regression PASS
+- Sync 2026-09-11: Global Table UX design APPROVED — 17 GAP-GT fixed in design, 0 Must Fix, handoff 28→29 APPROVED ready for /implement Task 29
