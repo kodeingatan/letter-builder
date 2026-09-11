@@ -32,7 +32,7 @@
 | tasks/23-production-migration-baseline.md | Legacy | [x] | [x] | [x] |
 | tasks/24-startup-warnings-cleanup.md | Legacy | [x] | [x] | [x] |
 | tasks/25-ux-audit-concept-alignment.md | Audit gate | [x] | [x] | [x] |
-| tasks/26-design-system-refresh-ui-design.md | FASE 1 — Design | [x] | [ ] | [ ] |
+| tasks/26-design-system-refresh-ui-design.md | FASE 1 — Design | [x] | [x] | [x] |
 | tasks/27-design-system-refresh.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
 | tasks/28-global-table-ux-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
 | tasks/29-global-table-ux.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
@@ -109,6 +109,7 @@
 - [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-10 by /verify — PASS: 445/445 unit, 15/15 nuxt, vue-tsc clean, build OK, live AC-001..AC-005 verified, DB restored
 - [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /verify — PASS: 457/457 unit, 15/15 nuxt, vue-tsc clean, build OK (0 Duplicated imports), live AC-001..AC-007 verified, DB restored
 - [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment — 2026-09-11 by /verify — PASS: audit gate manual QA — 9 area/25 baseline/31 concept/GAP-UI 15 GAP-C 10 all PASS, BR-001 git clean, INV-001 traceable
+- [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design — 2026-09-11 by /verify — PASS: wireframe/mockup/prototype + Storybook 4 groups, design system/responsive/a11y/User Flow PASS, 0 critical
 
 ## Belum Diverifikasi
 
@@ -118,7 +119,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design
 - [ ] tasks/27-design-system-refresh.md — Design System Refresh
 - [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design
 - [ ] tasks/29-global-table-ux.md — Global Table UX
@@ -153,6 +153,7 @@
 - [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-10 by /review — APPROVED
 - [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /review — APPROVED
 - [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment — 2026-09-11 by /review — APPROVED
+- [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design — 2026-09-11 by /review — APPROVED
 
 ## Belum Direview
 
@@ -162,7 +163,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design
 - [ ] tasks/27-design-system-refresh.md — Design System Refresh
 - [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design
 - [ ] tasks/29-global-table-ux.md — Global Table UX
@@ -307,8 +307,8 @@
 - Status: DONE — 2026-09-11 by /implement (FASE 1 design selesai)
 - Depends on: Task 25 (GAP-UI fondasi)
 - Implemented: [x] 2026-09-11 by /implement — Discovery (_audit-matrix 15 GAP + _user-flow-map 7 steps), Wireframes (index.html master + 10 PNG 1280×800 + _wireframe-spec + README), Mockups (index.html hi-fi token-exact + 11 PNG + _mockup-tokens + _token-diff + README), Prototype (index.html interaktif 7 steps + _prototype-spec + README), Storybook 4 groups (PageShell 4, DataTable 6, AccessDeniedAlert 4, Dashboard 4) + PageShellDemo.vue, keputusan ID + floating global 403 + distinct icons + motion token, generator scripts/generate-foundation-pngs.mjs. Verifikasi token/responsive/a11y/User Flow PASS.
-- Verified: [ ] —
-- Reviewed: [ ] —
+- Verified: [x] 2026-09-11 by /verify — PASS: User Flow 7/7, AC-D01..D04 4/4, 0 critical, design system/responsive/a11y PASS, wireframe 10 PNG + mockup 11 PNG + prototype 3 files + stories 5 files, 0 indigo, 0 dead-end, 403 single, 220/72 token, build PASS
+- Reviewed: [x] 2026-09-11 by /review — APPROVED: architecture/User Flow 7/7, AC 4/4 PASS, 0 must-fix, 2 minor, 2 consider, stories 18 + prototype QA, token 0 indigo, handoff ready for Task 27
 - Notes: Wireframe/Mockup/Prototype shell kanonis, DataTable kanonis 320/160+Refresh+error, pola 403 tunggal floating global, locale ID, sidebar 220/72 token, dashboard dinamis — siap Task 27.
 
 ### tasks/27-design-system-refresh.md
@@ -434,7 +434,7 @@
 ## Last Updated
 
 - Date: 2026-09-11
-- By: /implement
-- Source: tasks/26-design-system-refresh-ui-design.md — DONE (FASE 1 design)
-- Tasks: 25 [x][x][x], 26 [x] DONE (wireframe/mockup/prototype + Storybook); 27–38 TODO
-- Sync 2026-09-11: docs/wireframes/foundation + docs/mockups/foundation + docs/prototypes/foundation + stories/foundation done; token 0 indigo; User Flow 7 steps covered
+- By: /review
+- Source: tasks/26-design-system-refresh-ui-design.md — REVIEWED APPROVED (FASE 1 design)
+- Tasks: 25 [x][x][x], 26 [x][x][x] DONE+VERIFIED+REVIEWED (wireframe/mockup/prototype + Storybook); 27–38 TODO
+- Sync 2026-09-11: docs/wireframes/foundation + docs/mockups/foundation + docs/prototypes/foundation + stories/foundation APPROVED; 0 must-fix; ready Task 27

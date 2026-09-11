@@ -741,15 +741,26 @@ Reusable component untuk semua halaman tabel (Users, Roles, Permissions, Guards)
 |------|-------------|
 | `toolbar` | Custom toolbar content (e.g., Add button) |
 
-### Features
-1. **Column Visibility Toggle** — NPopover with checkboxes to show/hide columns
-2. **Server-Side Sorting** — Click column header to toggle ASC → DESC → none
-3. **Field-Specific Search** — NSelect to choose which field to search, or "All Fields"
-4. **Global Search** — NInput with debounce (300ms)
-5. **Pagination** — NPagination with page size selector (10, 20, 50, 100)
-6. **Loading State** — NSpin overlay
-7. **Empty State** — NEmpty with message
-8. **Reset Filters** — Button to clear all filters
+### Features (Kanonis Task 26)
+
+1. **Global Search — 320px** — `NInput` `min-width:320px flex-1 height:32px` + prefix `Search` via `h(NIcon)` + clearable + debounce `300ms` (bukan `280px` bare `<Search/>`)
+2. **Field-Specific Search — 160px** — `NSelect` `width:160px` filterable `All Fields` (bukan `140px`)
+3. **Refresh** — `NButton` + `Restart` via `h(NIcon)` + `aria-label="Segarkan data"` + refetch tanpa reset `search/sort/page` (slot kanonis, Task 26)
+4. **Error Slot** — `NAlert type="error"` full-width di atas `NDataTable` + `Retry` (`emit retry`) — props `error: string | null` (Task 26)
+5. **Column Visibility Toggle** — `NPopover` with checkboxes to show/hide columns + `Settings` via `h(NIcon)`
+6. **Server-Side Sorting** — Click column header to toggle ASC → DESC → none (Carbon `ArrowUp`/`ArrowDown` 14px Primary)
+7. **Pagination** — NPagination with page size selector (10, 20, 50, 100) + `Menampilkan {from}-{to} dari {total}`
+8. **Loading State** — `NSpin` overlay semi-transparan
+9. **Empty State** — `NEmpty` + CTA `+ Buat ...` (BR: no dead-end)
+10. **Reset Filters** — Button to clear all filters
+
+### PageShell (Kanonis Task 26)
+
+**Path**: `app/components/layout/PageShell.vue` (baru Task 27) — `props: title, breadcrumbs[]`, slots `actions` + `default`. Header `title 20px Semibold` + `breadcrumb` (`<a href>` + `preventDefault` + `router.push`) + `actions` → `toolbar` → `konten` → `pagination`. Menggantikan header lokal `NCard title` tanpa breadcrumb. Deliverables: `docs/wireframes/foundation/`, `docs/mockups/foundation/`, `docs/prototypes/foundation/`, `apps/web/stories/foundation/`.
+
+### Storybook Foundation (Task 26)
+
+`apps/web/stories/foundation/` — `Foundation/PageShell` (4), `Foundation/DataTable` (6 states + Refresh), `Foundation/AccessDeniedAlert` (floating global single `data-testid=access-denied`), `Foundation/DashboardShortcuts` (3 varian per peran). `npm run storybook` `:6006`, `npm run build-storybook`.
 
 ### Composable: `useDataTable`
 

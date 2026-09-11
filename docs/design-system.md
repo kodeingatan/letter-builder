@@ -477,6 +477,17 @@ Each stat is an `NStatistic` component with colored label matching log level.
 
 ---
 
+## PageShell (Kanonis List/Detail/Editor)
+
+Kanonis shell untuk semua halaman `list` / `detail` / `editor` (fondasi Task 26). Menggantikan header lokal `NCard title` tanpa breadcrumb.
+
+- **Komponen**: `app/components/layout/PageShell.vue` (rencana Task 27) — props `title: string`, `breadcrumbs: {label, href?}[]`, slots `actions` + `default`.
+- **Struktur**: `breadcrumb` → `header (title + actions)` → `toolbar (DataTable)` → `konten (table/detail/editor)` → `pagination`. Padding `head 16px 20px`, `body 20px`, border `1px #E5E7EB` radius `8`.
+- **Breadcrumb**: leaf non-link, lainnya `<a href>` + `preventDefault` + `router.push` (native right-click preserved). Title `20px Semibold #1F2937`, subtitle `12px #6B7280`.
+- **BR**: tidak ada halaman me-render konten kosong tanpa pesan/aksi — empty → `NEmpty` + CTA, error → `NAlert` + retry.
+
+---
+
 ## Sidebar Navigation
 
 ### Menu Item Link Behavior
@@ -606,16 +617,31 @@ label: 'User Management'  // plain string
 
 ### Menu Item Icons (Current Mapping)
 
+| Menu Item | Icon | Import | Catatan |
+|-----------|------|--------|---------|
+| Dashboard | `Grid` | `@vicons/carbon` | — |
+| User Management | `UserMultiple` | `@vicons/carbon` | Group |
+| User | `User` | `@vicons/carbon` | — |
+| Guard | `Security` | `@vicons/carbon` | — |
+| Role | `UserRole` | `@vicons/carbon` | — |
+| Permissions | `Document` | `@vicons/carbon` | — |
+| Profile | `UserAvatar` | `@vicons/carbon` | — |
+| Logout | `Logout` | `@vicons/carbon` | — |
+
+### Menu Item Icons — Dokumen Distinct (Task 26, Token-Fixed)
+
+`Data` & `Persuratan` adalah generated (dari `GET /api/navigation`); `Dokumen` group ikon **distinct** (bukan 5× `Document` identik — GAP-UI-09):
+
 | Menu Item | Icon | Import |
 |-----------|------|--------|
-| Dashboard | `Grid` | `@vicons/carbon` |
-| User Management | `UserMultiple` | `@vicons/carbon` |
-| User | `User` | `@vicons/carbon` |
-| Guard | `Security` | `@vicons/carbon` |
-| Role | `UserRole` | `@vicons/carbon` |
-| Permissions | `Document` | `@vicons/carbon` |
-| Profile | `UserAvatar` | `@vicons/carbon` |
-| Logout | `Logout` | `@vicons/carbon` |
+| Global Tables (Data group) | `DataTable` | `@vicons/carbon` |
+| Data table (generated) | `DataTable` / `resolveMenuIcon(entry.icon)` | `@vicons/carbon` |
+| Persuratan (generated) | `Document` (via `resolveMenuIcon`) | `@vicons/carbon` |
+| Components | `Grid` | `@vicons/carbon` |
+| Templates | `Document` | `@vicons/carbon` |
+| Administrations | `Task` / `Flow` | `@vicons/carbon` |
+| My Runs | `Activity` | `@vicons/carbon` |
+| Documents | `Report` | `@vicons/carbon` |
 
 ---
 
@@ -717,16 +743,18 @@ Semua animasi harus menghormati `prefers-reduced-motion`:
 
 ## Authorization UI Patterns
 
-### Access Denied Alert
+### Access Denied Alert — Single Pattern (Task 26)
+
+Pola 403 **tunggal** (floating global, GAP-UI-12) — keputusan Task 26: `AccessDeniedAlert.vue` via `Teleport` top `16px` right `16px` max `448px`, `slideIn 300ms ease-out`, auto-dismiss `4s`, closable. Satu event `rbac-denied` (`useApi.ts:25` + `middleware/auth.ts:52` dispatch) → tepat satu `NAlert` (`[data-testid=access-denied]` length `1`). Listener per halaman (`global-tables.vue:58`, `components.vue:58`, `administrations.vue:62`, `templates.vue:62`) **dihapus** di Task 27 (`BR-003`: 1 event → 1 feedback, `AC-D03`).
 
 When user lacks permission for an action:
 
 | Element | Component | Usage |
 |---------|-----------|-------|
-| Access Denied Alert | `NAlert` type="error" | Shown when 403 returned from API |
-| Alert Title | "Access Denied" | Bold heading |
-| Alert Description | "You don't have permission to perform this action" | Body text |
-| Alert Icon | `Locked` from `@vicons/carbon` | Left icon |
+| Access Denied Alert | `NAlert` type="error" + `Teleport` to `body` | Shown when 403 returned from API — **floating global single instance** |
+| Alert Title | "Akses Ditolak" (`ID`) | Bold heading — locale **ID** (Task 26) |
+| Alert Description | "Anda tidak memiliki izin untuk melakukan aksi ini" | Body text — **ID** |
+| Alert Icon | `Locked` from `@vicons/carbon` via `h(NIcon)` | Left icon |
 | Dismissable | `true` | Close button available |
 
 ### Conditional Rendering
@@ -758,10 +786,20 @@ meta: {
 
 | HTTP Status | Client Action | UI Feedback |
 |-------------|---------------|-------------|
-| 401 | Clear token, redirect `/login` | "Session expired" message |
-| 403 | Show access denied alert | "Access denied" NAlert |
-| 404 | Show not found page | "Resource not found" |
-| 500 | Show error alert | "Server error" NAlert |
+| 401 | Clear token, redirect `/login` | "Sesi berakhir" (`ID`) |
+| 403 | Show access denied alert (single floating global) | "Akses Ditolak" `NAlert` |
+| 404 | Show not found page | "Halaman tidak ditemukan" |
+| 500 | Show error alert | "Terjadi kesalahan server" `NAlert` |
+
+### Locale (Task 26 — ID)
+
+Satu locale **ID** (Indonesia) untuk fondasi — selaras `Masuk`/`Daftar` existing di `login.vue`/`register.vue`. Dashboard `Welcome back!` → `Selamat Datang Kembali`, `Hello` → `Halo`, empty `No data` → `Belum ada data`, error `Failed to load` → `Gagal memuat data`, toast `Success` → `Berhasil`. Content dinamis user tidak diubah.
+
+---
+
+## Foundation Deliverables (Task 26)
+
+Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` sebagai bahasa visual kanonis untuk Task 27. Lokasi: `docs/wireframes/foundation/`, `docs/mockups/foundation/`, `docs/prototypes/foundation/`, `apps/web/stories/foundation/` (PageShell, DataTable kanonis 320/160 + Refresh + error slot `NAlert` + `NIcon` wrapper, AccessDeniedAlert single, Dashboard shortcuts per peran). Token 0 indigo (`#3B82F6`), sidebar `220/72`, motion `Fast 150/Normal 250/Slow 350` + `prefers-reduced-motion`.
 
 ---
 
