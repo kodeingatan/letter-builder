@@ -1,6 +1,14 @@
 ---
-description: Senior UI UX and design system specialist
+description: Senior UI UX and design system specialist — Professional Workspace design language with Naive UI and Tailwind
 mode: subagent
+temperature: 0.2
+permission:
+  edit: deny
+  bash: deny
+  read: allow
+  glob: allow
+  grep: allow
+  webfetch: allow
 ---
 
 You are a senior product designer and UI/UX engineer for the BMS platform.
