@@ -10,7 +10,7 @@ Single Nuxt 4 package:
 
 ## Dynamic Administration Layers (IMPLEMENTED)
 
-> Platform mengimplementasikan fondasi **RBAC** dan seluruh modul Dynamic Administration (Global Table, Component, Template, Administration, Expression Engine, Rendering Engine) — tasks 07–22. Desain layer di bawah ini adalah arsitektur yang berjalan di kode, bukan rencana.
+> Platform mengimplementasikan fondasi **RBAC** dan seluruh modul Dynamic Administration (Global Table, Component, Template, Administration, Expression Engine, Rendering Engine) — tasks 07–22 — plus production hardening (tasks 23–24), audit gate (task 25) dan design system foundation: wireframe/mockup/prototype (task 26) serta implementasi kanonis PageShell/DataTable/403-single/locale/sidebar/dashboard/motion (task 27). Desain layer di bawah ini adalah arsitektur yang berjalan di kode, bukan rencana.
 
 ### Layer Stack (Implemented)
 
@@ -282,10 +282,21 @@ Single Nuxt 4 package:
 - `auth` — Requires valid JWT token, redirects to `/login` if missing
 - `guest` — Redirects to `/dashboard` if already authenticated
 
-### Sidebar Menu (AppLayout)
+### Sidebar Menu (AppLayout — Implemented Task 27: 220/72, token #3B82F6)
 
 ```
 Dashboard                    → /dashboard
+Data (generated, per Global Table read permission)
+    ├── Global Tables        → /dashboard/data/global-tables (Admin)
+    └── <table>              → /dashboard/data/:tableName (per readable table, resolveMenuIcon)
+Persuratan (generated, per runnable Administration)
+    └── <administration>     → /dashboard/docs/run/:id (per runnable, permission-filtered)
+Dokumen (distinct icons: Grid/Document/Task/Activity/Report — not 5×Document)
+    ├── Components           → /dashboard/docs/components (Grid)
+    ├── Templates            → /dashboard/docs/templates (Document)
+    ├── Administrations      → /dashboard/docs/administrations (Task)
+    ├── My Runs              → /dashboard/docs/runs (Activity)
+    └── Documents            → /dashboard/docs/documents (Report)
 User Management (group)
     ├── User                 → /dashboard/users
     ├── Guard                → /dashboard/guards
@@ -296,6 +307,7 @@ Sistem (group)
     ├── System Logs          → /dashboard/system-logs
     └── Settings             → /dashboard/settings
 ```
+Layout: `NLayoutSider :width 220 :collapsed-width 72` (sebelumnya 240/64), collapsed-icon-size 22, bg #F9FAFB border #E5E7EB, active bg #EFF6FF border #BFDBFE text #1D4ED8, `h(NIcon)` wrapper, menu label `<a href>` preserve native right-click, `resolveActiveKey` highlight untuk `data/:table`, `run/:id`, `templates/:id`, `administrations/:id`, `documents/:id`, `runs/:id`.
 
 ---
 
@@ -741,12 +753,13 @@ Reusable component untuk semua halaman tabel (Users, Roles, Permissions, Guards)
 |------|-------------|
 | `toolbar` | Custom toolbar content (e.g., Add button) |
 
-### Features (Kanonis Task 26)
+### Features (Kanonis — Implemented Task 27)
 
-1. **Global Search — 320px** — `NInput` `min-width:320px flex-1 height:32px` + prefix `Search` via `h(NIcon)` + clearable + debounce `300ms` (bukan `280px` bare `<Search/>`)
-2. **Field-Specific Search — 160px** — `NSelect` `width:160px` filterable `All Fields` (bukan `140px`)
-3. **Refresh** — `NButton` + `Restart` via `h(NIcon)` + `aria-label="Segarkan data"` + refetch tanpa reset `search/sort/page` (slot kanonis, Task 26)
-4. **Error Slot** — `NAlert type="error"` full-width di atas `NDataTable` + `Retry` (`emit retry`) — props `error: string | null` (Task 26)
+1. **Global Search — 320px** — `NInput` `min-width:320px flex-1 height:32px` + prefix `Search` via `h(NIcon)` + clearable + debounce `300ms` + placeholder `Cari...` (ID)
+2. **Field-Specific Search — 160px** — `NSelect` `width:160px` filterable `Semua Kolom` (ID) — `width:160px` (diimplementasikan, sebelumnya 140px)
+3. **Refresh** — `NButton` + `Restart` via `h(NIcon)` + `aria-label="Segarkan data"` + `emit('refresh')` refetch tanpa reset `search/sort/page` (kanonis, `aria-label Atur ulang` untuk Reset)
+4. **Error Slot** — `NAlert type="error"` full-width di atas `NDataTable` + `Coba lagi` (`emit('retry')`) + closable, header `Gagal memuat data` (ID) — props `error: string | null` (diimplementasikan)
+5. **Pagination locale** — `Menampilkan {from}-{to} dari {total}` (ID) + detail `emptyDescription Belum ada data`
 5. **Column Visibility Toggle** — `NPopover` with checkboxes to show/hide columns + `Settings` via `h(NIcon)`
 6. **Server-Side Sorting** — Click column header to toggle ASC → DESC → none (Carbon `ArrowUp`/`ArrowDown` 14px Primary)
 7. **Pagination** — NPagination with page size selector (10, 20, 50, 100) + `Menampilkan {from}-{to} dari {total}`
@@ -754,9 +767,9 @@ Reusable component untuk semua halaman tabel (Users, Roles, Permissions, Guards)
 9. **Empty State** — `NEmpty` + CTA `+ Buat ...` (BR: no dead-end)
 10. **Reset Filters** — Button to clear all filters
 
-### PageShell (Kanonis Task 26)
+### PageShell (Kanonis — Implemented Task 27)
 
-**Path**: `app/components/layout/PageShell.vue` (baru Task 27) — `props: title, breadcrumbs[]`, slots `actions` + `default`. Header `title 20px Semibold` + `breadcrumb` (`<a href>` + `preventDefault` + `router.push`) + `actions` → `toolbar` → `konten` → `pagination`. Menggantikan header lokal `NCard title` tanpa breadcrumb. Deliverables: `docs/wireframes/foundation/`, `docs/mockups/foundation/`, `docs/prototypes/foundation/`, `apps/web/stories/foundation/`.
+**Path**: `app/components/layout/PageShell.vue` (diimplementasikan Task 27) — `props: title, breadcrumbs: {label, href?}[], description?`, slots `actions` + `default`. Header `title 20px Semibold #1F2937` + `breadcrumb` (`<a href>` + `preventDefault` + `router.push`, leaf `aria-current="page"`) + `actions` → `toolbar (DataTable kanonis)` → `konten` → `pagination`. Menggantikan header lokal `NCard title` tanpa breadcrumb. Diterapkan di 12+ pages (users/roles/permissions/guards/global-tables/[tableName]/components/templates/administrations/documents/runs/activity-logs/system-logs/settings/profile/dashboard). Deliverables: `docs/wireframes/foundation/`, `docs/mockups/foundation/`, `docs/prototypes/foundation/`, `apps/web/stories/foundation/`.
 
 ### Storybook Foundation (Task 26)
 

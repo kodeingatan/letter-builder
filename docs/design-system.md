@@ -326,7 +326,7 @@ Semua tabel di sistem **WAJIB** memiliki fitur berikut:
 - **Width**: 160px fixed
 
 ### Pagination Text
-- **Format**: "Showing {from}-{to} of {total}"
+- **Format**: "Menampilkan {from}-{to} dari {total}" (ID locale, Task 26 decision; sebelumnya `Showing {from}-{to} of {total}`)
 - **Position**: Below table, left-aligned
 - **Style**: `text-sm text-gray-500`
 
@@ -337,14 +337,14 @@ Semua tabel di sistem **WAJIB** memiliki fitur berikut:
 
 ### Empty State
 - **Component**: NEmpty
-- **Description**: "No {entity} found"
+- **Description**: "Belum ada data" / "Belum ada {entity}" (ID locale, Task 26 decision; sebelumnya `No {entity} found`) + CTA `+ Buat ...` (BR: no dead-end)
 - **Position**: Centered in table body
 
 ### Error State
-- **Component**: NAlert
-- **Type**: error
+- **Component**: NAlert `type="error"` closable + `Coba lagi` retry emit (`error: string | null` prop)
+- **Type**: error (`Gagal memuat data` header ID)
 - **Position**: Above table, full width
-- **Dismissable**: Yes (close button)
+- **Dismissable**: Yes (close button `emit('retry')` closes, retry tanpa reset `search/sort/page`)
 
 ---
 
@@ -477,14 +477,14 @@ Each stat is an `NStatistic` component with colored label matching log level.
 
 ---
 
-## PageShell (Kanonis List/Detail/Editor)
+## PageShell (Kanonis List/Detail/Editor — Implemented Task 27)
 
-Kanonis shell untuk semua halaman `list` / `detail` / `editor` (fondasi Task 26). Menggantikan header lokal `NCard title` tanpa breadcrumb.
+Kanonis shell untuk semua halaman `list` / `detail` / `editor` (fondasi Task 26, diimplementasikan Task 27). Menggantikan header lokal `NCard title` tanpa breadcrumb. Diterapkan di 12+ pages (dashboard, users/roles/permissions/guards/global-tables/[tableName]/components/templates/administrations/documents/runs/activity-logs/system-logs/settings/profile).
 
-- **Komponen**: `app/components/layout/PageShell.vue` (rencana Task 27) — props `title: string`, `breadcrumbs: {label, href?}[]`, slots `actions` + `default`.
-- **Struktur**: `breadcrumb` → `header (title + actions)` → `toolbar (DataTable)` → `konten (table/detail/editor)` → `pagination`. Padding `head 16px 20px`, `body 20px`, border `1px #E5E7EB` radius `8`.
-- **Breadcrumb**: leaf non-link, lainnya `<a href>` + `preventDefault` + `router.push` (native right-click preserved). Title `20px Semibold #1F2937`, subtitle `12px #6B7280`.
-- **BR**: tidak ada halaman me-render konten kosong tanpa pesan/aksi — empty → `NEmpty` + CTA, error → `NAlert` + retry.
+- **Komponen**: `app/components/layout/PageShell.vue` (diimplementasikan Task 27) — props `title: string`, `breadcrumbs: {label, href?}[]`, `description?: string`, slots `actions` + `default`.
+- **Struktur**: `breadcrumb` → `header (title + actions)` → `toolbar (DataTable)` → `konten (table/detail/editor)` → `pagination`. Padding `head 16px 20px`, `body 20px`, border `1px #E5E7EB` radius `8`, overflow hidden, `flex-wrap` responsive (`column <768px`).
+- **Breadcrumb**: leaf `span aria-current="page"`, lainnya `<a href>` + `preventDefault` + `router.push` (native right-click/Ctrl+click preserved). Title `20px Semibold #1F2937` (H3 token), subtitle `12px #6B7280`.
+- **BR**: tidak ada halaman me-render konten kosong tanpa pesan/aksi — empty → `NEmpty` + CTA, error → `NAlert` + retry (via DataTable slot `error: string | null` + `emit retry`).
 
 ---
 
@@ -743,9 +743,9 @@ Semua animasi harus menghormati `prefers-reduced-motion`:
 
 ## Authorization UI Patterns
 
-### Access Denied Alert — Single Pattern (Task 26)
+### Access Denied Alert — Single Pattern (Task 26 Design, Task 27 Implemented)
 
-Pola 403 **tunggal** (floating global, GAP-UI-12) — keputusan Task 26: `AccessDeniedAlert.vue` via `Teleport` top `16px` right `16px` max `448px`, `slideIn 300ms ease-out`, auto-dismiss `4s`, closable. Satu event `rbac-denied` (`useApi.ts:25` + `middleware/auth.ts:52` dispatch) → tepat satu `NAlert` (`[data-testid=access-denied]` length `1`). Listener per halaman (`global-tables.vue:58`, `components.vue:58`, `administrations.vue:62`, `templates.vue:62`) **dihapus** di Task 27 (`BR-003`: 1 event → 1 feedback, `AC-D03`).
+Pola 403 **tunggal** (floating global, GAP-UI-12) — keputusan Task 26, diimplementasikan Task 27: `AccessDeniedAlert.vue` via `Teleport` + `ClientOnly` top `16px` right `16px` max `448px`, `accessDeniedSlideIn 300ms ease-out`/`accessDeniedSlideOut 200ms`, auto-dismiss `4s`, closable, `prefers-reduced-motion 0.01ms`. Satu event `rbac-denied` (`useApi.ts:27` + `middleware/auth.ts:52` dispatch, pesan ID `Anda tidak memiliki izin...`) → tepat satu `NAlert` (`[data-testid=access-denied]` length `1`, `NIcon aria-hidden`). Listener per halaman (`global-tables.vue:58`, `components.vue:58`, `administrations.vue:62`, `templates.vue:62`) **dihapus** di Task 27 (`BR-003`: 1 event → 1 feedback, `AC-D03`) — `grep addEventListener` now 1 hit + `grep useMessage` 0 unguarded.
 
 When user lacks permission for an action:
 
@@ -797,9 +797,9 @@ Satu locale **ID** (Indonesia) untuk fondasi — selaras `Masuk`/`Daftar` existi
 
 ---
 
-## Foundation Deliverables (Task 26)
+## Foundation Deliverables (Task 26 Design + Task 27 Implementation — Done)
 
-Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` sebagai bahasa visual kanonis untuk Task 27. Lokasi: `docs/wireframes/foundation/`, `docs/mockups/foundation/`, `docs/prototypes/foundation/`, `apps/web/stories/foundation/` (PageShell, DataTable kanonis 320/160 + Refresh + error slot `NAlert` + `NIcon` wrapper, AccessDeniedAlert single, Dashboard shortcuts per peran). Token 0 indigo (`#3B82F6`), sidebar `220/72`, motion `Fast 150/Normal 250/Slow 350` + `prefers-reduced-motion`.
+Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` sebagai bahasa visual kanonis untuk Task 27. Lokasi: `docs/wireframes/foundation/`, `docs/mockups/foundation/`, `docs/prototypes/foundation/`, `apps/web/stories/foundation/` (PageShell 4 stories, DataTable 6 states + Refresh, AccessDeniedAlert single, Dashboard 3 varian per peran). Diimplementasikan Task 27: PageShell 12+ pages, DataTable kanonis 320/160 + Restart + error slot `NAlert` + `NIcon` + locale ID (`Cari...` `Semua Kolom` `Menampilkan` `Belum ada data` `Gagal memuat data` `Coba lagi`), AccessDeniedAlert single `data-testid=access-denied` floating 16px/448px 4000ms, sidebar 220/72 token #3B82F6/#2563EB, dashboard dinamis via `/api/navigation` (NGrid 3→2→1) + EC-01 empty, auth `autocomplete` + `aria-hidden` + `aria-label`, motion `usePageTransition` 250ms + reduced-motion. Token 0 indigo (`#3B82F6`), sidebar `220/72`, motion `Fast 150/Normal 250/Slow 350` + `prefers-reduced-motion`.
 
 ---
 

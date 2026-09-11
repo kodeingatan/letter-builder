@@ -422,13 +422,13 @@ Tabel untuk menyimpan pengaturan aplikasi (key-value store).
 |-----|-------|-------------|
 | `app_name` | `MyApp` | Nama aplikasi |
 | `app_favicon` | `/favicon.svg` | Favicon URL (static file at `public/favicon.svg`, brand-consistent SVG) |
-| `login_bg_gradient` | `#1e40af,#3b82f6,#6366f1` | Gradient colors untuk login background |
+| `login_bg_gradient` | `#1e40af,#3b82f6,#2563eb` | Gradient colors untuk login background (diperbarui Task 27: `#6366f1` indigo → `#2563eb` token primaryHover) |
 
 ---
 
 # DYNAMIC ADMINISTRATION TABLES (IMPLEMENTED)
 
-> Diimplementasikan tasks 07–22. Desain awal berasal dari `docs/dynamic-administration/`; tabel di bawah ini adalah schema yang berjalan di kode (`server/entities/`, pola TypeORM `EntitySchema`).
+> Diimplementasikan tasks 07–22 (plus foundation hardening tasks 23–27 tidak menambah tabel — `synchronize: true` dev / checked-in baseline prod, drift detection tetap). Desain awal berasal dari `docs/dynamic-administration/`; tabel di bawah ini adalah schema yang berjalan di kode (`server/entities/`, pola TypeORM `EntitySchema`).
 
 ## Table Overview
 
