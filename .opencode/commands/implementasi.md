@@ -1,5 +1,5 @@
 ---
-description: Implement code based on the task specification and implementation plan
+description: Implement code based on the task specification and implementation plan (alias: implementasi — Bahasa Indonesia)
 ---
 
 Implement code based on a task specification and its implementation plan.

@@ -113,11 +113,12 @@ From the task specification, extract:
 ### Affected Areas
 
 - Backend files to create/modify
-- Frontend files to create/modify
+- Frontend files to create/modify — termasuk **Storybook stories** `apps/web/stories/{feature}/*.stories.ts` untuk FASE 1 (prototype langsung di project, Naive UI + Tailwind + `naiveui-theme.ts`)
 - Database changes
 - Configuration changes
 - Documentation changes
 - Test files to create (`tests/unit`, `tests/nuxt`, `tests/e2e`) — bertindak sebagai QA
+- Storybook verification — `npm run storybook` (:6006) + `npm run build-storybook`
 
 ### Patterns to Follow
 
@@ -161,7 +162,9 @@ Identify what already exists and what needs to be created.
 
 # 7. Generate Implementation Plan
 
-> Catatan: File `tasks/NN-*.md` hasil `/gen-tasks` dan `/task` SUDAH mencantumkan plan terperinci di `## Tasks` (+ `## Test Plan` QA + `## Verification`). Command `/plan` bersifat **optional/refinement**: jika Tasks di task file sudah lengkap, plan hanya memperinci langkah eksekusi file-by-file. Jika belum lengkap, plan melengkapinya. Selalu konsisten dengan User Flow + UI FASE 1 + QA perspective.
+> Catatan: File `tasks/NN-*.md` hasil `/gen-tasks` dan `/task` SUDAH mencantumkan plan terperinci di `## Tasks` (+ `## Test Plan` QA + `## Verification`). Command `/plan` bersifat **optional/refinement**: jika Tasks di task file sudah lengkap, plan hanya memperinci langkah eksekusi file-by-file. Jika belum lengkap, plan melengkapinya. Selalu konsisten dengan User Flow + UI FASE 1 (termasuk **Storybook prototype di project**) + QA perspective.
+
+> **Deliverables Design Dulu — Storybook-First**: Untuk FASE 1, prototype WAJIB langsung implementasi pada project (`app/components/...` + `app/pages/...` + `apps/web/stories/{feature}/*.stories.ts`) dengan Naive UI + Tailwind + token `app/utils/naiveui-theme.ts`, dibaca via `npm run storybook` (port 6006) dan `npm run build-storybook`. Figma/PNG hanya sebagai arsip, bukan deliverable utama.
 
 Create a detailed plan with these sections:
 
@@ -181,15 +184,15 @@ Create a detailed plan with these sections:
 
 ## Prerequisites
 
-- [ ] Task `NN-ui-design.md` DONE (jika FASE 2)
+- [ ] Task `NN-ui-design.md` DONE — termasuk Storybook stories `apps/web/stories/{feature}/*.stories.ts` PASS (`npm run storybook` + `npm run build-storybook`) (jika FASE 2)
 - [ ] Dependencies installed
 - [ ] Database ready
-- [ ] Design tokens & mockup tersedia (jika FASE 2)
+- [ ] Design tokens `app/utils/naiveui-theme.ts` + Storybook prototype tersedia & runnable (jika FASE 2)
 
 ## Implementation Steps
 
-> Untuk FASE 1: langkah adalah Discovery → Wireframe → Mockup → Prototype → Handoff.
-> Untuk FASE 2: langkah mengikuti `## Tasks` di task file (Backend → Frontend → Test Plan QA), selalu mengacu mockup FASE 1 dan User Flow.
+> Untuk FASE 1: langkah adalah Discovery → Wireframe → Mockup (Naive UI + Tailwind + `naiveui-theme.ts`) → Prototype **Storybook di project** (`apps/web/stories/{feature}/*.stories.ts` + `app/components/...`) → Handoff via `npm run storybook` (:6006) + `npm run build-storybook`.
+> Untuk FASE 2: langkah mengikuti `## Tasks` di task file (Backend → Frontend → Test Plan QA), selalu mengacu mockup + **Storybook stories** FASE 1 dan User Flow.
 
 ### Step 1: {Step Name} — {User Flow Step / AC mapping}
 
@@ -219,9 +222,10 @@ Create a detailed plan with these sections:
 | Action | File | Description | Fase | User Flow / AC |
 |--------|------|-------------|------|----------------|
 | CREATE | `server/entities/xxx.entity.ts` | New entity | FASE 2 | DR-01, Step 3 |
-| CREATE | `app/components/xxx/XXX.vue` | New component (sesuai mockup task 01) | FASE 2 | Step 2, AC-002 |
+| CREATE | `app/components/xxx/XXX.vue` | New component (sesuai mockup + stories FASE 1) | FASE 2 | Step 2, AC-002 |
+| CREATE | `apps/web/stories/{feature}/*.stories.ts` | **Storybook prototype (FASE 1 — Naive UI + Tailwind + `naiveui-theme.ts`, a11y)** | FASE 1 | All Steps, States |
 | CREATE | `tests/e2e/xxx.spec.ts` | E2E happy path (QA) | FASE 2 | User Flow Steps 1→3 |
-| CREATE | `docs/wireframes/xxx/list.png` | Wireframe | FASE 1 | Step 1 |
+| CREATE | `docs/wireframes/xxx/list.png` | Wireframe low-fi | FASE 1 | Step 1 |
 
 ## Test Plan (QA — Bertindak sebagai QA Engineer)
 
@@ -247,17 +251,19 @@ Create a detailed plan with these sections:
 - [ ] Unit (`npm run test:unit`) — traceability ke FR/BR/DR/INV
 - [ ] Nuxt (`npm run test:nuxt`) — traceability ke UI States
 - [ ] E2E (`npm run test:e2e`) — traceability ke User Flow Steps + AC
+- [ ] Storybook build (`npm run build-storybook`) — stories FASE 1 tetap PASS, no error (FASE 1 & FASE 2)
 - [ ] Build (`npm run build`)
 
 ### Manual / QA Checklist
 
-- [ ] User Flow steps ter-cover E2E
-- [ ] AC Given/When/Then PASS
+- [ ] User Flow steps ter-cover E2E + Storybook interaction
+- [ ] AC Given/When/Then PASS (traceability ke stories + E2E)
 - [ ] Business Rules & Edge Cases PASS
-- [ ] States loading/empty/error/success/validation/permission ter-render
+- [ ] States loading/empty/error/success/validation/permission ter-render — ada NT + **Storybook story** + E2E
 - [ ] Permission 401/403 matrix
-- [ ] Pixel-perfect vs mockup FASE 1 (jika FASE 2)
-- [ ] Responsive + Accessibility
+- [ ] Pixel-perfect vs mockup + **Storybook stories** FASE 1 (jika FASE 2) — token `naiveui-theme.ts`
+- [ ] Responsive + Accessibility — Storybook viewport + `@storybook/addon-a11y` PASS
+- [ ] Storybook — `npm run storybook` (:6006) tampil, semua stories ada, controls & docs render
 
 ## Risk Assessment
 
@@ -274,8 +280,8 @@ Create a detailed plan with these sections:
 
 ## Execution Order
 
-1. {FASE 1: wireframe → mockup → prototype → handoff}
-2. {FASE 2: entity → DTO → service → API → frontend (sesuai mockup) → tests QA → verification}
+1. {FASE 1: wireframe → mockup (Naive UI + Tailwind + `naiveui-theme.ts`) → Storybook prototype di project (`apps/web/stories/{feature}/*.stories.ts` + `app/components/...`) → handoff via `npm run storybook` + `npm run build-storybook`}
+2. {FASE 2: entity → DTO → service → API → frontend (sesuai Storybook stories FASE 1) → tests QA → Storybook + build verification}
 ````
 
 ---

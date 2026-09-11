@@ -129,12 +129,13 @@ Review the implementation against these criteria, dengan penekanan pada **User F
 
 | Criterion | Check |
 |-----------|-------|
-| Pattern consistency | Does it follow existing patterns? (EntitySchema, plain object Service, Nitro route) |
+| Pattern consistency | Does it follow existing patterns? (EntitySchema, plain object Service, Nitro route, Storybook stories pattern `stories/**/*.stories.*`) |
 | Naming consistency | Does it use existing naming conventions? |
-| Structure consistency | Does it follow existing file structure? (`server/`, `app/`, `shared/`, `tests/`) |
-| Import consistency | Does it use correct import aliases `~/`, `@/`, `~~/`? |
-| UI consistency | Pixel-perfect vs mockup `tasks/NN-ui-design.md`? (FASE 2) |
-| Test consistency | Test file naming & location konsisten (`tests/unit/`, `tests/nuxt/`, `tests/e2e/`)? |
+| Structure consistency | Does it follow existing file structure? (`server/`, `app/`, `shared/`, `tests/`, `stories/`, `.storybook/`) |
+| Import consistency | Does it use correct import aliases `~/`, `@/`, `~~/` + Naive UI direct import? |
+| UI consistency | Pixel-perfect vs mockup + **Storybook stories** `tasks/NN-ui-design.md`? (FASE 2) — token `app/utils/naiveui-theme.ts` |
+| Storybook consistency | Stories di `apps/web/stories/{feature}/` dengan `themeOverrides` + `NConfigProvider`, a11y addon, docs? |
+| Test consistency | Test file naming & location konsisten (`tests/unit/`, `tests/nuxt/`, `tests/e2e/`) + stories di `stories/`? |
 
 ### 5.7 QA — User Flow & Logic Correctness (BERTINDAK SEBAGAI QA TESTER)
 
@@ -160,24 +161,26 @@ Jika salah satu baris di atas FAIL atau Test ID kosong / test dummy / tidak runn
 ### 6.1 Identify Fase
 
 - Baca `## Status` dan filename: `*-ui-design.md` = FASE 1 (design), `*.md` lainnya = FASE 2 (implementation).
-- Untuk FASE 1: fokus review adalah design deliverables (wireframe/mockup/prototype) + User Flow + UI 10 sub-bagian — bukan code UT/NT/E2E (tetapi tetap cek traceability User Flow ↔ AC design).
+- Untuk FASE 1: fokus review adalah design deliverables (wireframe low-fi + mockup hi-fi Naive UI+Tailwind+`naiveui-theme.ts` + **Storybook prototype di project** `apps/web/stories/{feature}/*.stories.ts`) + User Flow + UI 10 sub-bagian — bukan code UT/NT/E2E (tetapi tetap cek traceability User Flow ↔ AC design + cek `npm run build-storybook` PASS & a11y addon).
 
-### 6.2 Read All Changed Files (Termasuk Test Files)
+### 6.2 Read All Changed Files (Termasuk Test Files & Storybook)
 
-Read every file that was created or modified — **termasuk file test** (`tests/unit/**/*.test.ts`, `tests/nuxt/**/*.test.ts`, `tests/e2e/**/*.spec.ts`):
+Read every file that was created or modified — **termasuk file test + Storybook** (`tests/unit/**/*.test.ts`, `tests/nuxt/**/*.test.ts`, `tests/e2e/**/*.spec.ts`, `apps/web/stories/**/*.stories.ts`, `app/components/...`):
 
 - Apakah file test ada, runnable, dan bukan dummy?
+- Apakah Storybook stories ada untuk semua halaman/state (loading/empty/error/success/validation/permission) dengan token `naiveui-theme.ts` + a11y?
 - Apakah test benar-benar meng-assert Given/When/Then dari AC?
 - Apakah E2E benar-benar menjalankan User Flow steps (bukan hanya visit tanpa assertion)?
 
-### 6.3 Compare with Existing Code & Design FASE 1
+### 6.3 Compare with Existing Code & Design FASE 1 + Storybook
 
-Compare the new code with existing similar code + mockup FASE 1:
+Compare the new code with existing similar code + mockup + **Storybook stories** FASE 1 (`apps/web/stories/{feature}/*.stories.ts`):
 
-- Are patterns consistent?
+- Are patterns consistent? (Naive UI direct import, Tailwind utility, token `naiveui-theme.ts`, `.detail-view` no `NDescriptions`)
 - Are conventions followed?
 - Is the quality comparable?
-- Untuk FASE 2: apakah pixel-perfect vs mockup `tasks/NN-ui-design.md`? Jika deviasi, apakah ada catatan di `## UI > Penyesuaian dari design`?
+- Untuk FASE 1: apakah stories render dengan token `naiveui-theme.ts`, semua state ada, a11y PASS, `npm run build-storybook` sukses?
+- Untuk FASE 2: apakah pixel-perfect vs mockup + stories `tasks/NN-ui-design.md`? Jika deviasi, apakah ada catatan di `## UI > Penyesuaian dari design`? Apakah `npm run build-storybook` tetap PASS (regresi)?
 
 ### 6.4 Check Task Compliance — Traceability QA
 
@@ -239,7 +242,8 @@ Generate a review report **sebagai QA tester + code reviewer** — harus menilai
 | Module boundaries | OK/ISSUE | {notes} |
 | API consistency (8 field) | OK/ISSUE | {notes} |
 | User Flow FASE 1↔FASE 2 konsisten | OK/ISSUE | {notes} |
-| UI pixel-perfect vs mockup FASE 1 | OK/ISSUE | {notes} |
+| UI pixel-perfect vs mockup + Storybook FASE 1 | OK/ISSUE | {notes — token `naiveui-theme.ts`, `apps/web/stories/{feature}/*.stories.ts`} |
+| Storybook prototype (FASE 1 — Naive UI+Tailwind+`naiveui-theme.ts`) | OK/ISSUE | {stories ada untuk semua halaman/state, a11y PASS, `build-storybook` sukses} |
 
 ## Code Quality Review
 
@@ -278,10 +282,11 @@ Generate a review report **sebagai QA tester + code reviewer** — harus menilai
 | Nuxt tests exist & runnable (NT-01/NT-02) | OK/ISSUE | {file, semua state loading/empty/error/success/validation/permission} |
 | E2E happy path (E2E-01) | OK/ISSUE | {User Flow steps ter-cover, assertions bermakna?} |
 | E2E alternate/error/edge (E2E-02) | OK/ISSUE | {ALT/ERR/EC + permission 401/403} |
+| Storybook stories exist & build PASS | OK/ISSUE | {`apps/web/stories/{feature}/*.stories.ts` — semua halaman/state, token `naiveui-theme.ts`, a11y PASS, `npm run build-storybook` sukses} |
 | Tests bukan dummy | OK/ISSUE | {assertion bermakna atau hanya `expect(true).toBe(true)`?} |
-| Traceability User Flow ↔ AC ↔ Test ID | OK/ISSUE | {setiap AC memiliki Test ID dan PASS?} |
+| Traceability User Flow ↔ AC ↔ Test ID (termasuk stories) | OK/ISSUE | {setiap AC memiliki Test ID + story variant dan PASS?} |
 | Coverage 100% User Flow / AC / BR / EC | OK/ISSUE | {X/Y} |
-| Existing regression PASS (`npm run test`) | OK/ISSUE | {pass/total} |
+| Existing regression PASS (`npm run test` + `npm run build-storybook`) | OK/ISSUE | {pass/total, stories regression} |
 | Build & typecheck PASS | OK/ISSUE | {notes} |
 
 ## Task Compliance — Traceability Matrix (QA)
@@ -411,19 +416,20 @@ Optional improvements:
 
 The implementation can be APPROVED when (QA verdict — semua harus terpenuhi):
 
-- [ ] All must-fix issues resolved — termasuk QA blockers (User Flow tanpa E2E, AC tanpa test, BR/EC tanpa UT)
-- [ ] All task requirements met — termasuk User Flow + Requirements/Domain/API/UI + Acceptance Given/When/Then
-- [ ] Semua User Flow steps (happy + alternate + error + edge) berjalan benar — ada E2E dan PASS
+- [ ] All must-fix issues resolved — termasuk QA blockers (User Flow tanpa E2E/story, AC tanpa test/story, BR/EC tanpa UT)
+- [ ] All task requirements met — termasuk User Flow + Requirements/Domain/API/UI + Acceptance Given/When/Then + Storybook stories
+- [ ] Semua User Flow steps (happy + alternate + error + edge) berjalan benar — ada E2E + Storybook interaction dan PASS
 - [ ] Semua logika benar — FR/BR/DR/INV/EC ada UT dan PASS, validation + error + auth/authz benar
-- [ ] Semua AC Given/When/Then PASS dan traceable ke Test ID (UT/NT/E2E) di `## Tasks > Test Plan`
-- [ ] Semua UI States (loading/empty/error/success/validation/permission) ter-render + ada NT/E2E PASS
-- [ ] Pixel-perfect vs mockup `tasks/NN-ui-design.md` (untuk FASE 2) atau mockup approved (untuk FASE 1)
+- [ ] Semua AC Given/When/Then PASS dan traceable ke Test ID (UT/NT/E2E) + story variant di `## Tasks > Test Plan`
+- [ ] Semua UI States (loading/empty/error/success/validation/permission) ter-render + ada NT/E2E + **Storybook story variant** PASS
+- [ ] Pixel-perfect vs mockup + **Storybook stories** `tasks/NN-ui-design.md` (FASE 2) — token `app/utils/naiveui-theme.ts` — atau mockup + stories approved (FASE 1)
 - [ ] Tests bukan dummy — assertion bermakna, runnable via `npm run test:unit`, `npm run test:nuxt`, `npm run test:e2e`, coverage User Flow/AC/BR/EC 100%
+- [ ] Storybook — `apps/web/stories/{feature}/*.stories.ts` ada untuk semua halaman/state, a11y addon PASS, `npm run build-storybook` sukses (FASE 1 & FASE 2 regresi)
 - [ ] No security vulnerabilities — 401/403 E2E PASS, validation Zod sync
-- [ ] No breaking changes — `npm run test` regression PASS
-- [ ] Code follows project conventions (AGENTS.md) + Design System
-- [ ] `npm run build` + `vue-tsc` PASS
-- [ ] Untuk FASE 1: wireframe/mockup/prototype lengkap untuk semua halaman/state/breakpoint + User Flow coverage + peer review
+- [ ] No breaking changes — `npm run test` + `npm run build-storybook` regression PASS
+- [ ] Code follows project conventions (AGENTS.md) + Design System (`naiveui-theme.ts`, Naive UI direct import, Tailwind utility)
+- [ ] `npm run build` + `npm run build-storybook` + `vue-tsc` PASS
+- [ ] Untuk FASE 1: wireframe/mockup/**Storybook prototype di project** lengkap untuk semua halaman/state/breakpoint + User Flow coverage + peer review via `npm run storybook` (:6006)
 
 ---
 

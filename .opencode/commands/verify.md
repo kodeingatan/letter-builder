@@ -74,15 +74,17 @@ Verify against each criterion from the task specification, **bertindak sebagai Q
 
 Identifikasi Fase:
 
-- **FASE 1 — UI Design** (`*-ui-design.md`): verifikasi adalah **design review**, bukan code tests. Cek:
+- **FASE 1 — UI Design** (`*-ui-design.md`): verifikasi adalah **design review + Storybook verification**, bukan hanya code tests. Cek:
   - [ ] `## User Flow` ada (diagram, steps, alternate/error flows)
-  - [ ] `## UI` 10 sub-bagian lengkap (halaman, layout, component, interaction, responsive, loading, empty, error, success, accessibility)
-  - [ ] Wireframe / mockup / prototype deliverables ada (atau direncanakan dengan path jelas)
-  - [ ] `## Acceptance Criteria (Design)` Given/When/Then ada dan mapping ke User Flow
-  - [ ] Konsistensi dengan `docs/design-system.md` (Naive UI, Tailwind, token, `@vicons/carbon`)
-  - Untuk FASE 1: lanjut ke 5.2 (convention) dan 5.7 (design verification), lewati 5.3–5.6 code tests.
+  - [ ] `## UI` 10 sub-bagian lengkap (halaman, layout, component, interaction, responsive, loading, empty, error, success, accessibility) + token `app/utils/naiveui-theme.ts`
+  - [ ] Wireframe / mockup / prototype deliverables ada — **prototype WAJIB Storybook stories di project** (`apps/web/stories/{feature}/*.stories.ts`) bukan hanya Figma/PNG
+  - [ ] Stories ada, runnable via `npm run storybook` (:6006) — per halaman/state (loading/empty/error/success/validation/permission), responsive viewport, a11y addon
+  - [ ] `npm run build-storybook` sukses tanpa error
+  - [ ] `## Acceptance Criteria (Design)` Given/When/Then ada dan mapping ke User Flow + stories
+  - [ ] Konsistensi dengan `docs/design-system.md` & `app/utils/naiveui-theme.ts` (Naive UI direct import, Tailwind utility, primary `#3B82F6`, Inter, radius 6/4/8, `@vicons/carbon`)
+  - Untuk FASE 1: lanjut ke 5.2 (convention) dan 5.7 (design verification) + 5.6 Storybook build, lewati 5.3–5.5 code tests backend.
 
-- **FASE 2 — Implementation**: lanjut ke 5.2–5.7 lengkap.
+- **FASE 2 — Implementation**: lanjut ke 5.2–5.7 lengkap + verifikasi Storybook stories FASE 1 tetap PASS.
 
 Untuk FASE 2, verifikasi:
 
@@ -132,20 +134,23 @@ Check that the implementation integrates (FASE 2):
 1. New entities are registered in `server/utils/orm-data-source.ts` (`appEntities`)
 2. New services are importable from API routes
 3. New API routes are accessible (Nitro)
-4. New frontend components render correctly (sesuai mockup FASE 1)
+4. New frontend components render correctly (sesuai mockup + **Storybook stories** FASE 1 — `apps/web/stories/{feature}/*.stories.ts`)
 5. New stores/composables work with existing code
-6. `## UI > Referensi Design` di FASE 2 benar-benar menunjuk ke `tasks/NN-ui-design.md` yang ada
+6. `## UI > Referensi Design` di FASE 2 benar-benar menunjuk ke `tasks/NN-ui-design.md` + Storybook stories yang ada
+7. Storybook stories FASE 1 tetap runnable setelah perubahan FASE 2 (`npm run build-storybook` sukses — regresi visual)
 
 ### 5.5 Test Verification — QA Core (WAJIB — Bertindak sebagai QA)
 
-Jalankan sebagai QA tester — pastikan semua User Flow berjalan benar + semua logika benar:
+Jalankan sebagai QA tester — pastikan semua User Flow berjalan benar + semua logika benar + Storybook prototype PASS:
 
 ```bash
 # From apps/web/
-npm run test:unit      # Unit — UT-01/UT-02: service, DTO, domain, BR/DR/INV
-npm run test:nuxt      # Nuxt — NT-01/NT-02: component render semua state
-npm run test:e2e       # E2E — E2E-01/E2E-02: happy + alternate/error + permission
-npm run test           # All (unit + nuxt) — regression
+npm run test:unit        # Unit — UT-01/UT-02: service, DTO, domain, BR/DR/INV
+npm run test:nuxt        # Nuxt — NT-01/NT-02: component render semua state
+npm run test:e2e         # E2E — E2E-01/E2E-02: happy + alternate/error + permission
+npm run test             # All (unit + nuxt) — regression
+npm run build-storybook  # Storybook build — stories FASE 1 (+ FASE 2 regression) PASS
+# npm run storybook      # Manual: http://localhost:6006 — cek stories render + a11y addon
 ```
 
 Verifikasi **traceability** (sesuai `## Tasks > Test Plan` di task file):
@@ -153,24 +158,28 @@ Verifikasi **traceability** (sesuai `## Tasks > Test Plan` di task file):
 - [ ] **Unit**: semua UT-01/UT-02 ada, runnable, PASS — setiap FR/BR/DR/INV/EC memiliki test
 - [ ] **Nuxt**: semua NT-01/NT-02 ada, PASS — setiap UI State (loading/empty/error/success/validation/permission) ter-render dan ada test
 - [ ] **E2E**: semua E2E-01/E2E-02 ada, PASS — setiap User Flow step (happy + alternate + error + edge + permission 401/403) ter-cover end-to-end
+- [ ] **Storybook**: `npm run build-storybook` PASS — stories untuk semua halaman/state ada (`apps/web/stories/{feature}/*.stories.ts`), a11y addon PASS, docs render
 - [ ] **Coverage**: User Flow steps 100%, AC Given/When/Then 100%, Business Rules 100%, Edge Cases 100% — mapping `User Flow ↔ AC ↔ Test ID` di `## Tasks > Test Plan` terpenuhi
-- [ ] **Existing regression**: `npm run test` — semua test lama tetap PASS (tidak ada breaking change)
-- [ ] **Baru vs lama**: file test baru mengikuti pola existing (`apps/web/tests/`), bukan pola baru yang bertentangan
+- [ ] **Existing regression**: `npm run test` — semua test lama tetap PASS + `npm run build-storybook` stories lama tetap PASS (tidak ada breaking change)
+- [ ] **Baru vs lama**: file test baru mengikuti pola existing (`apps/web/tests/`), stories baru mengikuti pola `apps/web/stories/` + config `.storybook/main.ts`
 
-Jika task adalah FASE 1 (design): tidak ada `npm run test:*` untuk design — verifikasi adalah checklist `## Verification (Design)` (design system, responsive, accessibility, user flow coverage, peer review).
+Jika task adalah FASE 1 (design): verifikasi utama adalah **Storybook** — `npm run storybook` (:6006) tampil + `npm run build-storybook` PASS + checklist `## Verification (Design)` (design system `naiveui-theme.ts`, responsive viewport Storybook, accessibility a11y addon, user flow coverage via stories, peer review via Storybook URL). `npm run test:*` untuk FASE 1 tidak wajib kecuali komponen sudah ada.
 
 ### 5.6 Build Verification
 
 ```bash
 # From apps/web/
-npm run build         # Production build
+npm run build-storybook  # Storybook static build — prototype FASE 1
+npm run build            # Production build — Nuxt
 ```
 
 Verify:
 
-- [ ] Build completes without errors
+- [ ] Storybook build (`npm run build-storybook`) completes without errors — semua stories `apps/web/stories/{feature}/*.stories.ts` ter-compile
+- [ ] Production build (`npm run build`) completes without errors
 - [ ] No TypeScript errors (`vue-tsc`)
-- [ ] No import resolution errors
+- [ ] No import resolution errors (Naive UI direct import, `~/`, `@/`, `~~/` aliases)
+- [ ] Storybook stories render dengan token `app/utils/naiveui-theme.ts` (no missing `NConfigProvider`)
 
 ### 5.7 User Flow & Acceptance Verification (QA — Kapan Feature Dianggap Benar)
 
@@ -196,10 +205,11 @@ Verify (FASE 2):
 
 - [ ] Server starts without errors — tidak ada warning `orm-data-source` / `better-sqlite3` yang baru
 - [ ] API endpoints respond correctly — setiap `## API > Endpoint Overview` dapat di-hit dengan token valid/invalid (401/403)
-- [ ] Pages render without errors — sesuai mockup FASE 1, responsive desktop/tablet/mobile, no console error
-- [ ] States ter-trigger manual: loading (delay), empty (hapus data), error (matikan API), validation (input salah), permission (role tanpa akses) — sesuai `## UI > States`
+- [ ] Pages render without errors — sesuai mockup + **Storybook stories** FASE 1, responsive desktop/tablet/mobile, no console error — token `naiveui-theme.ts` ter-apply
+- [ ] States ter-trigger manual: loading (delay), empty (hapus data), error (matikan API), validation (input salah), permission (role tanpa akses) — sesuai `## UI > States` + Storybook story variants
+- [ ] Storybook `npm run storybook` (:6006) — semua stories render, controls interaktif, a11y addon tanpa violation
 
-Untuk FASE 1: verifikasi adalah membuka wireframe/mockup/prototype — apakah semua User Flow steps dapat diklik tanpa dead-end, apakah semua state ada.
+Untuk FASE 1: verifikasi adalah membuka **Storybook** (`npm run storybook` :6006) — apakah semua User Flow steps dapat diklik via stories tanpa dead-end, apakah semua state variants ada, apakah `npm run build-storybook` sukses (wireframe/mokup PNG di `docs/` hanya arsip).
 
 ---
 
@@ -236,13 +246,15 @@ Generate a verification report **seolah QA tester independen** — fokus pada Us
 
 | Item | Status | Notes |
 |------|--------|-------|
-| FASE 1: Wireframe/Mockup/Prototype | PASS/FAIL/N/A | {notes} |
+| FASE 1: Wireframe low-fi | PASS/FAIL/N/A | {path `docs/wireframes/{feature}/`} |
+| FASE 1: Mockup hi-fi (Naive UI + Tailwind + `naiveui-theme.ts`) | PASS/FAIL/N/A | {implementasi Vue `app/components/...` + token check} |
+| FASE 1: Storybook stories (prototype di project) | PASS/FAIL/N/A | {`apps/web/stories/{feature}/*.stories.ts` — semua halaman/state, a11y, `build-storybook` PASS} |
 | FASE 2: Entity created | PASS/FAIL/N/A | {notes} |
 | Service created | PASS/FAIL/N/A | {notes} |
 | API routes created | PASS/FAIL/N/A | {notes} |
 | DTO created (Zod) | PASS/FAIL/N/A | {notes} |
-| Frontend pages (sesuai mockup FASE 1) | PASS/FAIL/N/A | {notes} |
-| Components (semua states) | PASS/FAIL/N/A | {notes} |
+| Frontend pages (sesuai mockup + stories FASE 1) | PASS/FAIL/N/A | {notes} |
+| Components (semua states — story variant + NT/E2E) | PASS/FAIL/N/A | {notes} |
 
 ### Convention Compliance (QA Gate)
 
@@ -273,7 +285,8 @@ Generate a verification report **seolah QA tester independen** — fokus pada Us
 | Nuxt (NT-01/NT-02) | PASS/FAIL/SKIPPED | `tests/nuxt/...` | UI States (loading/empty/error/success/validation/permission) | {pass/total} |
 | E2E happy (E2E-01) | PASS/FAIL/SKIPPED | `tests/e2e/{feature}.spec.ts` | User Flow happy steps | {pass/total} |
 | E2E alternate (E2E-02) | PASS/FAIL/SKIPPED | `tests/e2e/{feature}.alt.spec.ts` | Alternate/error/edge/permission | {pass/total} |
-| Existing regression | PASS/FAIL | `npm run test` | All old tests | {pass/total} |
+| Storybook build | PASS/FAIL/SKIPPED | `apps/web/stories/{feature}/*.stories.ts` | All halaman/state + a11y | {`npm run build-storybook` result} |
+| Existing regression | PASS/FAIL | `npm run test` + `npm run build-storybook` | All old tests + stories | {pass/total} |
 
 > Traceability WAJIB: setiap AC Given/When/Then ↔ User Flow Step ↔ Test ID harus PASS. Jika ada User Flow step tanpa E2E, FAIL.
 
@@ -290,11 +303,13 @@ Generate a verification report **seolah QA tester independen** — fokus pada Us
 | Check | Status | Notes |
 |-------|--------|-------|
 | Typecheck (`vue-tsc`) | PASS/FAIL | {notes} |
+| Storybook build (`npm run build-storybook`) | PASS/FAIL | {stories compile, a11y, no error} |
 | Production build (`npm run build`) | PASS/FAIL | {notes} |
 | Dev server starts | PASS/FAIL | {notes} |
+| Storybook dev (`npm run storybook` :6006) | PASS/FAIL | {stories render, controls, viewport} |
 | API endpoints work (auth 401/403 + 200) | PASS/FAIL | {notes} |
-| Pages render (pixel-perfect vs mockup FASE 1) | PASS/FAIL | {notes} |
-| Manual QA: states, responsive, accessibility | PASS/FAIL | {notes} |
+| Pages render (pixel-perfect vs mockup + stories FASE 1) | PASS/FAIL | {notes} |
+| Manual QA: states, responsive, accessibility (Storybook a11y) | PASS/FAIL | {notes} |
 
 ## Issues Found
 
@@ -313,12 +328,13 @@ Generate a verification report **seolah QA tester independen** — fokus pada Us
 ## Verification Commands Run (QA)
 
 ```bash
-npm run test:unit      # {result: X/Y PASS, coverage}
-npm run test:nuxt      # {result}
-npm run test:e2e       # {result: semua User Flow steps PASS?}
-npm run test           # {result: regression PASS?}
-npm run build          # {result}
-# manual: server starts, E2E happy path playback
+npm run test:unit        # {result: X/Y PASS, coverage}
+npm run test:nuxt        # {result}
+npm run test:e2e         # {result: semua User Flow steps PASS?}
+npm run test             # {result: regression PASS?}
+npm run build-storybook  # {result: stories FASE 1 PASS? a11y?}
+npm run build            # {result}
+# manual: npm run storybook (:6006) — stories render + a11y, server starts, E2E happy path playback
 ```
 
 ## Traceability Matrix (QA — User Flow ↔ AC ↔ Test)

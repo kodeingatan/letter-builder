@@ -12,7 +12,12 @@ Treat `$ARGUMENTS` as the complete task/feature context.
 
 Follow this workflow strictly.
 
-**Prinsip UI-First**: Pekerjaan yang dikerjakan TERLEBIH DAHULU harus berupa design wireframe UI/UX, mockup, prototype interaktif (file tasks tersendiri — FASE 1). Pekerjaan selanjutnya (FASE 2) BARU mengimplementasikan user flow + requirements + domain + API + code yang mengacu pada UI yang telah dibuat sebelumnya.
+**Prinsip UI-First — Deliverables Design Dulu**: Pekerjaan yang dikerjakan TERLEBIH DAHULU harus berupa design wireframe UI/UX, mockup, prototype interaktif (file tasks tersendiri — FASE 1). Pekerjaan selanjutnya (FASE 2) BARU mengimplementasikan user flow + requirements + domain + API + code yang mengacu pada UI yang telah dibuat sebelumnya.
+
+**Deliverables Design WAJIB (FASE 1)**:
+1. **Wireframe low-fi** — semua halaman & states (desktop/tablet/mobile)
+2. **Mockup hi-fi** — Naive UI 2.44 + Tailwind CSS v4 + token `app/utils/naiveui-theme.ts` (primary `#3B82F6`, Inter, radius 6/4/8, `@vicons/carbon`)
+3. **Prototype interaktif LANGSUNG implementasi pada project** — komponen Vue `app/components/...` + halaman `app/pages/...` + **Storybook stories** `apps/web/stories/{feature}/*.stories.ts` dibaca via `npm run storybook` (port 6006) & `npm run build-storybook` — bukan hanya Figma/PNG.
 
 # 1. Read Project Knowledge
 
@@ -291,16 +296,20 @@ TODO
 | Deliverable | Format | Lokasi | Status |
 |-------------|--------|--------|--------|
 | Wireframe low-fi | Figma / PNG | `docs/wireframes/{feature}/` | TODO |
-| Mockup hi-fi | Figma / PNG | `docs/mockups/{feature}/` | TODO |
-| Prototype interaktif | Figma prototype / HTML | `docs/prototypes/{feature}/` atau Storybook | TODO |
+| Mockup hi-fi | Figma / PNG + **Vue (Naive UI + Tailwind, token `naiveui-theme.ts`)** | `docs/mockups/{feature}/` + `app/components/...` | TODO |
+| Prototype interaktif | **Storybook stories langsung di project** | `apps/web/stories/{feature}/*.stories.ts` (dibaca `npm run storybook` :6006) | TODO |
+| Storybook build | Static Storybook | `npm run build-storybook` | TODO |
+
+> **Aturan Storybook (WAJIB FASE 1)**: Prototype TIDAK cukup Figma link/PNG. Harus komponen Vue nyata (Naive UI direct import, Tailwind utility, token `app/utils/naiveui-theme.ts`) + stories `apps/web/stories/{feature}/`. Config `apps/web/.storybook/main.ts` (stories `../stories/**/*.stories.*`, addons `a11y`+`docs`, `vue3-vite`) & `preview.ts` (import `../assets/css/main.css`). Verifikasi: `npm run storybook` :6006 & `npm run build-storybook` sukses.
 
 ### Design Tokens Check
 
-- [ ] Warna mengikuti `naiveui-theme.ts`
+- [ ] Warna mengikuti `app/utils/naiveui-theme.ts` (`themeOverrides` — primary `#3B82F6`, `primaryColorHover` `#2563EB`, radius `6px/4px/8px`, font `Inter`)
 - [ ] Typography Inter
 - [ ] Radius 6/4/8
-- [ ] Spacing Tailwind
+- [ ] Spacing Tailwind (`app/assets/css/main.css` + Tailwind v4)
 - [ ] Icon `@vicons/carbon` dengan `h(NIcon, null, { default: () => h(IconName) })`
+- [ ] Storybook stories me-render dengan `NConfigProvider` + `themeOverrides`
 
 ## Acceptance Criteria (Design)
 
@@ -347,15 +356,18 @@ Then {navigasi sesuai User Flow tanpa dead-end}
 
 - [ ] Export assets & spec
 - [ ] Dokumentasi komponen & interaction
-- [ ] Tandai `Status: DONE` sebelum FASE 2 dimulai
+- [ ] Storybook stories terdokumentasi (`*.stories.ts` args/controls/a11y)
+- [ ] Verifikasi Storybook: `npm run storybook` (:6006) & `npm run build-storybook` sukses
+- [ ] Tandai `Status: DONE` sebelum FASE 2 dimulai — hanya jika Storybook lolos
 
 ## Verification (Design)
 
-- [ ] Design System verification
-- [ ] Responsive verification (desktop/tablet/mobile mockup)
-- [ ] Accessibility verification
-- [ ] User Flow coverage (semua step ada di prototype)
-- [ ] Stakeholder / peer review
+- [ ] Design System verification (token `naiveui-theme.ts`, Naive UI, Tailwind — no `NDescriptions`, pakai `.detail-view`)
+- [ ] Responsive verification (desktop/tablet/mobile — wireframe + Storybook viewport)
+- [ ] Accessibility verification (keyboard, ARIA, contrast, `prefers-reduced-motion`, a11y addon Storybook)
+- [ ] User Flow coverage (semua step ada di Storybook prototype — klik tanpa dead-end)
+- [ ] Storybook verification — `npm run storybook` tampil, stories semua halaman/state, `npm run build-storybook` sukses
+- [ ] Stakeholder / peer review via Storybook URL (`http://localhost:6006`)
 
 ## Assumptions
 
@@ -594,15 +606,15 @@ _(Ulangi blok ini untuk Create / Detail / Update / Delete sesuai kebutuhan)_
 - Design task: `tasks/NN-feature-ui-design.md`
 - Wireframe: `docs/wireframes/{feature}/`
 - Mockup: `docs/mockups/{feature}/`
-- Prototype: `docs/prototypes/{feature}/` / Storybook
+- Prototype: **Storybook** `apps/web/stories/{feature}/*.stories.ts` (`npm run storybook` :6006) — `docs/prototypes/{feature}/` hanya arsip Figma/PNG bila ada
 
 ### Halaman
 
-| Route | Halaman | Akses | Deskripsi | Status Design |
-|-------|---------|-------|-----------|---------------|
-| `/global-tables` | Global Table List | Admin | Daftar + search + pagination | Approved (task 01) |
-| `/global-tables/create` | Global Table Create | Admin | Form pembuatan | Approved (task 01) |
-| `/global-tables/:id` | Global Table Detail | Admin | Read-only + actions | Approved (task 01) |
+| Route | Halaman | Akses | Deskripsi | Status Design | Storybook |
+|-------|---------|-------|-----------|---------------|-----------|
+| `/global-tables` | Global Table List | Admin | Daftar + search + pagination | Approved (task 01) | `stories/global-table/List.stories.ts` |
+| `/global-tables/create` | Global Table Create | Admin | Form pembuatan | Approved (task 01) | `stories/global-table/Form.stories.ts` |
+| `/global-tables/:id` | Global Table Detail | Admin | Read-only + actions | Approved (task 01) | `stories/global-table/Detail.stories.ts` |
 
 ### Layout
 
@@ -706,7 +718,8 @@ Then ...
 
 - [ ] RBAC matrix diperbarui
 - [ ] ActivityLog / Audit jika diperlukan
-- [ ] Verifikasi konsistensi dengan `tasks/NN-feature-ui-design.md` — tidak ada deviasi tanpa catatan
+- [ ] Storybook stories FASE 1 tetap PASS setelah perubahan FASE 2 (regresi visual)
+- [ ] Verifikasi konsistensi dengan `tasks/NN-feature-ui-design.md` + Storybook (`apps/web/stories/{feature}/*.stories.ts`) — tidak ada deviasi tanpa catatan
 
 ### Test Plan (QA — Bertindak sebagai QA Engineer)
 
@@ -737,6 +750,7 @@ Then ...
 - [ ] Nuxt tests (`npm run test:nuxt`) — semua NT-01/NT-02 PASS, semua state ter-render
 - [ ] API/Integration tests — semua endpoint PASS, validation + error + auth/authz PASS
 - [ ] E2E tests (`npm run test:e2e`) — semua E2E-01/E2E-02 PASS, semua User Flow steps + Alternate/Error flows
+- [ ] Storybook build (`npm run build-storybook`) — sukses tanpa error (stories semua halaman/state)
 - [ ] Build (`npm run build`) — sukses
 
 ### Manual / QA Checklist (mapping ke User Flow & AC)
@@ -745,10 +759,11 @@ Then ...
 - [ ] Permission verification — 401/403 matrix per Permission di `## API`
 - [ ] Business Rules verification — setiap BR-XXX memiliki test dan PASS
 - [ ] Edge Cases verification — setiap EC-XXX memiliki test dan PASS
-- [ ] States verification — loading/empty/error/success/validation/permission (sesuai `## UI > States`) + test
-- [ ] Responsive verification — desktop/tablet/mobile sesuai wireframe FASE 1
-- [ ] Accessibility verification — keyboard, ARIA, contrast, reduced-motion
-- [ ] UI/UX verification — pixel-perfect terhadap mockup `tasks/NN-feature-ui-design.md`
+- [ ] States verification — loading/empty/error/success/validation/permission (sesuai `## UI > States`) + test (NT + Storybook story)
+- [ ] Responsive verification — desktop/tablet/mobile sesuai wireframe + Storybook viewport FASE 1
+- [ ] Accessibility verification — keyboard, ARIA, contrast, reduced-motion + Storybook a11y addon
+- [ ] UI/UX verification — pixel-perfect terhadap mockup + **Storybook** `apps/web/stories/{feature}/*.stories.ts` (Naive UI + Tailwind, token `naiveui-theme.ts`)
+- [ ] Storybook verification — `npm run storybook` (:6006) + `npm run build-storybook` sukses, semua stories ada
 - [ ] User Flow verification — setiap `User Flow > Steps` + `Alternate & Error Flows` + `Flow→UI/API Mapping` ada AC dan ada E2E PASS
 - [ ] Acceptance verification — setiap AC Given/When/Then PASS (traceability AC ↔ User Flow step ↔ Test ID)
 
@@ -877,20 +892,20 @@ Untuk FASE 1, AC memvalidasi design/prototype. Untuk FASE 2, AC memvalidasi impl
 
 UI/UX adalah bagian dari task specification, bukan afterthought.
 
-**FASE 1**: Isi `## UI` dengan 10 sub-bagian wajib + deliverables wireframe/mockup/prototype:
+**FASE 1 — Storybook-First**: Isi `## UI` dengan 10 sub-bagian wajib + deliverables wireframe/mockup/prototype **langsung di project**:
 * halaman — route & daftar halaman
 * layout — navigasi & struktur halaman
-* component — daftar component Vue + lokasi file (rencana)
-* interaction — trigger, flow, konfirmasi, navigasi balik, transisi, prototype link
-* responsive behavior — desktop/tablet/mobile (dengan wireframe ref)
-* states — loading / empty / error / success / validation / permission denied
-* accessibility — keyboard, ARIA, kontras, reduced-motion
-* wireframe & mockup deliverables — tabel format/lokasi/status
-* design tokens check
+* component — daftar component Vue + lokasi file (rencana) + Storybook story file `apps/web/stories/{feature}/*.stories.ts`
+* interaction — trigger, flow, konfirmasi, navigasi balik, transisi (Anime.js hormati `prefers-reduced-motion`), prototype Storybook link (`http://localhost:6006`)
+* responsive behavior — desktop/tablet/mobile (dengan wireframe ref + Storybook viewport)
+* states — loading / empty / error / success / validation / permission denied (tiap state = Storybook story variant + a11y check)
+* accessibility — keyboard, ARIA, kontras, reduced-motion + `@storybook/addon-a11y` di Storybook
+* wireframe & mockup deliverables — tabel format/lokasi/status (**termasuk `Storybook build` + `apps/web/stories/{feature}/` **)
+* design tokens check — token `app/utils/naiveui-theme.ts` (primary `#3B82F6`, Inter, radius 6/4/8) di Storybook decorator
 
-**FASE 2**: `## UI` WAJIB mereferensikan FASE 1 di `Referensi Design` dan tidak mendesain ulang:
-* halaman/layout/component/interaction/responsive/states/accessibility harus menunjuk ke mockup/wireframe FASE 1
-* catat penyesuaian di `Penyesuaian dari design` jika ada deviasi
+**FASE 2**: `## UI` WAJIB mereferensikan FASE 1 di `Referensi Design` (termasuk **Storybook** `apps/web/stories/{feature}/*.stories.ts`) dan tidak mendesain ulang:
+* halaman/layout/component/interaction/responsive/states/accessibility harus menunjuk ke mockup/wireframe **+ Storybook stories** FASE 1
+* catat penyesuaian di `Penyesuaian dari design` jika ada deviasi (termasuk dari Storybook stories)
 
 Jika feature murni backend (kedua FASE), tulis:
 
