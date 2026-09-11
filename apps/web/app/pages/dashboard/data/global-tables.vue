@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
 import { NAlert } from 'naive-ui'
 import { GlobalTableTable, GlobalTableFormModal, GlobalTableDetailDrawer } from '~/components/features/global-tables'
 import { useAuthorization } from '~/composables/useAuthorization'
@@ -44,46 +44,25 @@ function handleFormSuccess() {
 function handleDeleted() {
   selectedTable.value = null
 }
-
-function handleDenied(event: Event) {
-  const detail = (event as CustomEvent).detail
-  deniedMessage.value = detail?.message || 'Access denied'
-  showDenied.value = true
-}
-
-const showDenied = ref(false)
-const deniedMessage = ref('')
-
-if (import.meta.client) {
-  window.addEventListener('rbac-denied', handleDenied)
-}
-
-onUnmounted(() => {
-  if (import.meta.client) {
-    window.removeEventListener('rbac-denied', handleDenied)
-  }
-})
 </script>
 
 <template>
-  <div>
-    <NAlert
-      v-if="showDenied"
-      type="error"
-      closable
-      title="Access Denied"
-      style="margin-bottom: 16px;"
-      @close="showDenied = false"
-    >
-      {{ deniedMessage }}
-    </NAlert>
+  <PageShell
+    title="Tabel Global"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Data' }, { label: 'Tabel Global' }]"
+    description="Kelola struktur data dinamis — membuat, mengubah, menghapus skema tabel."
+  >
+    <template #actions>
+      <NAlert v-if="!canManage" type="warning" style="padding: 4px 12px">Mode baca saja</NAlert>
+    </template>
+
     <NAlert
       v-if="!canManage"
       type="error"
-      title="Access Denied"
+      title="Akses Ditolak"
       style="margin-bottom: 16px;"
     >
-      You do not have permission to manage Global Tables.
+      Anda tidak memiliki izin untuk mengelola Tabel Global.
     </NAlert>
     <template v-else>
       <GlobalTableTable @create="handleCreate" @edit="handleEdit" @detail="handleDetail" />
@@ -100,5 +79,5 @@ onUnmounted(() => {
         @deleted="handleDeleted"
       />
     </template>
-  </div>
+  </PageShell>
 </template>

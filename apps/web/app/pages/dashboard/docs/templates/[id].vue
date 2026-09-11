@@ -37,7 +37,7 @@ import type { ComponentDetail } from '~/shared/types/component'
 definePageMeta({ layout: 'default', middleware: 'auth', requiresAuth: true })
 
 const route = useRoute()
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const authStore = useAuthStore()
 const store = useTemplatesStore()
 const componentsStore = useComponentsStore()
@@ -228,7 +228,7 @@ async function load() {
     if (parsed && isCompositionTreeContent(parsed)) {
       nodes.value = parsed
     } else if (parsed) {
-      // One-way upgrade of Task 14 legacy skeletons (REQ-005).
+      // One-way upgrade of legacy skeletons.
       nodes.value = legacyToComposition(parsed)
     } else {
       nodes.value = []
@@ -366,7 +366,7 @@ async function handlePickerConfirm(payload: { componentId: number; componentVers
     nodes.value = insertNodeAt(nodes.value, pickerTarget.value.index, placement)
   }
   selectedId.value = placement.id
-  message.success('Component placement inserted — bind its slots in Task 16')
+  message.success('Penempatan komponen ditambahkan — ikat slot-nya di tab Binding')
 }
 
 function insertSampleComposition() {

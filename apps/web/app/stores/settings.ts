@@ -14,7 +14,7 @@ export const useSettingsStore = defineStore('settings', () => {
   const appName = computed(() => settings.value['app_name'] || 'Admin Panel')
   const appDescription = computed(() => settings.value['app_description'] || '')
   const appFavicon = computed(() => settings.value['app_favicon'] || '')
-  const loginBgGradient = computed(() => settings.value['login_bg_gradient'] || '#1e40af,#3b82f6,#6366f1')
+  const loginBgGradient = computed(() => settings.value['login_bg_gradient'] || '#1e40af,#3b82f6,#2563eb')
   const loginBgImage = computed(() => settings.value['login_bg_image'] || '')
   const loading = ref(false)
 

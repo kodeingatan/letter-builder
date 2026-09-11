@@ -34,7 +34,11 @@ function handleFormSuccess() {
 </script>
 
 <template>
-  <div>
+  <PageShell
+    title="Pengguna"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Manajemen Pengguna' }, { label: 'Pengguna' }]"
+    description="Kelola akun pengguna — buat, ubah, hapus, lihat detail."
+  >
     <UserTable @create="handleCreate" @edit="handleEdit" @detail="handleDetail" />
     <UserFormModal
       v-model:visible="showForm"
@@ -47,5 +51,5 @@ function handleFormSuccess() {
       :user-id="selectedUser?.id ?? null"
       @edit="handleEdit"
     />
-  </div>
+  </PageShell>
 </template>

@@ -125,7 +125,7 @@ function addTableColumn() {
               @update:value="(v) => patch({ componentVersion: v })"
             />
           </NFormItem>
-          <NFormItem label="Requirement slots (Task 16 fills values)">
+          <NFormItem label="Slot requirement">
             <NSpace :size="4">
               <NTag
                 v-for="slot in slots"

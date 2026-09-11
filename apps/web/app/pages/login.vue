@@ -60,7 +60,7 @@ async function handleLogin() {
 
       <NForm ref="formRef" :model="form" :rules="rules" label-placement="top" @submit.prevent="handleLogin">
         <NFormItem label="Email" path="email">
-          <NInput v-model:value="form.email" placeholder="Masukkan email Anda" />
+          <NInput v-model:value="form.email" placeholder="Masukkan email Anda" autocomplete="email" />
         </NFormItem>
 
         <NFormItem label="Password" path="password">
@@ -69,12 +69,13 @@ async function handleLogin() {
             type="password"
             show-password-on="click"
             placeholder="Masukkan password Anda"
+            autocomplete="current-password"
           />
         </NFormItem>
 
         <NButton type="primary" block :loading="authStore.loading" attr-type="submit" class="mt-2">
           <template #icon>
-            <NIcon><Login /></NIcon>
+            <NIcon aria-hidden="true"><Login /></NIcon>
           </template>
           Masuk
         </NButton>
@@ -82,7 +83,7 @@ async function handleLogin() {
 
       <p class="mt-4 text-center text-sm text-gray-600">
         Belum punya akun?
-        <RouterLink to="/register" class="text-indigo-600 hover:text-indigo-500 font-medium">
+        <RouterLink to="/register" class="text-[#3B82F6] hover:text-[#2563EB] font-medium">
           Daftar
         </RouterLink>
       </p>
@@ -92,7 +93,7 @@ async function handleLogin() {
 
 <style scoped>
 .auth-form-content {
-  animation: authFormEnter 0.4s ease-out;
+  animation: authFormEnter 250ms ease;
 }
 
 @keyframes authFormEnter {
@@ -103,6 +104,12 @@ async function handleLogin() {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-form-content {
+    animation-duration: 0.01ms !important;
   }
 }
 </style>

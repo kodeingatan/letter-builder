@@ -1,5 +1,5 @@
 /**
- * Pure client-side tree operations for the Composition Editor (Task 15).
+ * Pure client-side tree operations for the Composition Editor .
  * Framework-free so they are unit-testable in the `unit` vitest project;
  * Vue components call these and hold the resulting arrays in refs.
  */
@@ -90,7 +90,7 @@ export function serializeTree(nodes: CompositionNode[]): string {
   return JSON.stringify({ nodes }, null, 2)
 }
 
-/** True when at least one node carries a composition `kind` (Task 15 shape). */
+/** True when at least one node carries a composition `kind` . */
 export function isCompositionTreeContent(nodes: unknown[]): boolean {
   const visit = (list: unknown[]): boolean => {
     for (const node of list) {
@@ -108,7 +108,7 @@ function escapeHtml(text: string): string {
 }
 
 /**
- * One-way upgrade of Task 14 legacy skeleton nodes (`{ type, text, html,
+ * One-way upgrade of legacy skeleton nodes (`{ type, text, html,
  * componentId }`) into composition nodes so old drafts restore on the
  * canvas 1:1 (REQ-005).
  */

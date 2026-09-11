@@ -16,7 +16,7 @@ import type { AdministrationRunDetail, RunStepData, RunStepDataMap } from '~/sha
 definePageMeta({ layout: 'default', middleware: 'auth', requiresAuth: true })
 
 const route = useRoute()
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const store = useRunsStore()
 const { hasAnyRole, hasPermission } = useAuthorization()
 
@@ -162,7 +162,7 @@ async function handleComplete() {
         ? `Run completed — ${result.documentIds.length} document(s) created`
         : 'Run completed',
     )
-    // Task 19 document view does not exist yet: land on My Runs (see Assumptions).
+    // Land on My Runs if document view unavailable.
     await navigateTo('/dashboard/docs/runs')
   } catch (e: any) {
     message.error(getErrorMessage(e, 'Failed to complete run'))

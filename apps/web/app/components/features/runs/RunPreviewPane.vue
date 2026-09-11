@@ -13,9 +13,9 @@ const props = defineProps<{
 const tab = ref('rendered')
 
 /**
- * Live preview (REQ-004): Task 20's preview API does not exist yet, so v1
+ * Live preview (REQ-004):
  * renders a data summary of the current step context. The `Rendered` tab
- * is the integration point for Task 20 (`POST /api/render/preview`).
+ * Preview via POST /api/render/preview.
  */
 const summary = computed(() => {
   const fields = props.data?.fields ?? {}
@@ -60,7 +60,7 @@ const dataJson = computed(() => JSON.stringify(
         </NTabPane>
       </NTabs>
       <NText depth="3" style="font-size: 12px;">
-        Full document rendering arrives with Task 20 (Rendering Engine).
+        Pratinjau dokumen dirender via rendering engine.
       </NText>
     </NSpin>
   </NCard>

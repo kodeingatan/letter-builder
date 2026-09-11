@@ -82,12 +82,18 @@ const imageStyle = computed(() => {
   width: 120px;
   height: 120px;
   margin-bottom: 1.5rem;
-  animation: authIconFloat 3s ease-in-out infinite;
+  animation: authIconFloat 350ms ease-in-out infinite;
 }
 
 @keyframes authIconFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-image__icon {
+    animation-duration: 0.01ms !important;
+  }
 }
 
 .auth-image__title {
@@ -115,7 +121,7 @@ const imageStyle = computed(() => {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: #fafafa;
+  background: #F9FAFB;
 }
 
 .auth-form__inner {

@@ -20,7 +20,7 @@ const emit = defineEmits<{
   (e: 'success'): void
 }>()
 
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const store = useGlobalTablesStore()
 const formRef = ref<FormInst | null>(null)
 const submitting = ref(false)

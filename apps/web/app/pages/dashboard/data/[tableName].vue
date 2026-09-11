@@ -23,7 +23,7 @@ const store = useTableDataStore()
 const { hasAnyRole, hasPermission } = useAuthorization()
 const message = import.meta.client ? useMessage() : null
 
-// AC-006: browse for Read users; Create/Edit/Delete/Import gated on Write.
+// browse for Read users; Create/Edit/Delete/Import gated on Write.
 const canWrite = computed(() =>
   hasAnyRole(['Admin', 'Super Admin'])
   || hasPermission(`Data:${tableName.value}:Write`)
@@ -38,8 +38,16 @@ const detailRowId = ref<number | null>(null)
 const showImport = ref(false)
 const loadError = ref('')
 const forbidden = ref(false)
-// Task 21 REQ-005: bookmarked deleted-table URLs land here, not a blank crash.
 const notFound = ref(false)
+
+const displayName = computed(() => store.tableMeta?.displayName || tableName.value)
+
+const breadcrumbs = computed(() => [
+  { label: 'Dashboard', href: '/dashboard' },
+  { label: 'Data' },
+  { label: 'Tabel Global', href: '/dashboard/data/global-tables' },
+  { label: displayName.value },
+])
 
 const tableColumns = computed(() =>
   store.columns.map((col) => ({
@@ -57,21 +65,21 @@ const gridColumns = computed(() => [
   ...tableColumns.value,
   {
     key: 'actions',
-    title: 'Actions',
+    title: 'Aksi',
     width: 150,
     render: (row: TableRow) =>
       h(NSpace, { size: 4 }, () => [
-        h(NButton, { size: 'small', quaternary: true, type: 'info', onClick: () => openDetail(row) },
+        h(NButton, { size: 'small', quaternary: true, type: 'info', onClick: () => openDetail(row), 'aria-label': 'Lihat' },
           { default: () => h(NIcon, null, { default: () => h(View) }) }),
         canWrite.value
-          ? h(NButton, { size: 'small', quaternary: true, type: 'warning', onClick: () => openEdit(row) },
+          ? h(NButton, { size: 'small', quaternary: true, type: 'warning', onClick: () => openEdit(row), 'aria-label': 'Ubah' },
             { default: () => h(NIcon, null, { default: () => h(Edit) }) })
           : null,
         canWrite.value
           ? h(NPopconfirm, { onPositiveClick: () => handleDelete(row.id) }, {
-            trigger: () => h(NButton, { size: 'small', quaternary: true, type: 'error' },
+            trigger: () => h(NButton, { size: 'small', quaternary: true, type: 'error', 'aria-label': 'Hapus' },
               { default: () => h(NIcon, null, { default: () => h(TrashCan) }) }),
-            default: () => `Delete row #${row.id}?`,
+            default: () => `Hapus baris #${row.id}?`,
           })
           : null,
       ]),
@@ -79,7 +87,7 @@ const gridColumns = computed(() => [
 ])
 
 const searchableFields = computed(() => [
-  { label: 'All Fields', value: '' },
+  { label: 'Semua Kolom', value: '' },
   ...store.columns.filter((c) => c.searchable).map((c) => ({ label: c.displayName, value: c.name })),
 ])
 
@@ -95,8 +103,20 @@ async function load() {
     const status = e.statusCode ?? e.response?.status
     if (status === 403) forbidden.value = true
     else if (status === 404) notFound.value = true
-    else loadError.value = getErrorMessage(e, 'Failed to load rows')
+    else loadError.value = getErrorMessage(e, 'Gagal memuat data')
   }
+}
+
+function handleRetry() {
+  loadError.value = ''
+  void store.fetchAll(tableName.value).catch((e: any) => {
+    loadError.value = getErrorMessage(e, 'Gagal memuat data')
+  })
+}
+
+function handleRefresh() {
+  void store.fetchAll(tableName.value).catch(() => {})
+  message?.success('Data dimuat ulang')
 }
 
 function openCreate() {
@@ -120,9 +140,9 @@ function openDetail(row: TableRow) {
 async function handleDelete(id: number) {
   try {
     await store.remove(tableName.value, id)
-    message?.success('Row deleted')
+    message?.success('Baris berhasil dihapus')
   } catch (e: any) {
-    message?.error(getErrorMessage(e, 'Failed to delete row'))
+    message?.error(getErrorMessage(e, 'Gagal menghapus baris'))
   }
 }
 
@@ -136,7 +156,7 @@ async function handleExport() {
     a.click()
     URL.revokeObjectURL(url)
   } catch (e: any) {
-    message?.error(getErrorMessage(e, 'Export failed'))
+    message?.error(getErrorMessage(e, 'Gagal ekspor'))
   }
 }
 
@@ -145,40 +165,55 @@ onMounted(() => load())
 </script>
 
 <template>
-  <div>
-    <NAlert v-if="forbidden" type="error" title="Access Denied" style="margin-bottom: 16px;">
-      You do not have permission to view this table.
+  <PageShell :title="displayName" :breadcrumbs="breadcrumbs" :description="`Data tabel ${displayName}`">
+    <template #actions>
+      <NButton v-if="canWrite" type="primary" size="small" @click="openCreate">
+        <template #icon><NIcon><Add /></NIcon></template>
+        Tambah Baris
+      </NButton>
+      <NButton v-if="canWrite" size="small" @click="showImport = true">
+        <template #icon><NIcon><Upload /></NIcon></template>
+        Impor
+      </NButton>
+      <NButton size="small" @click="handleExport">
+        <template #icon><NIcon><Download /></NIcon></template>
+        Ekspor
+      </NButton>
+    </template>
+
+    <NAlert v-if="forbidden" type="error" title="Akses Ditolak" style="margin-bottom: 16px;">
+      Anda tidak memiliki izin untuk melihat tabel ini.
     </NAlert>
     <NResult
       v-else-if="notFound"
       status="404"
-      :title="`“${tableName}” no longer exists`"
-      description="The table was deleted or you bookmarked a dead link. Pick another table from the Data menu."
+      :title="`“${tableName}” tidak ditemukan`"
+      description="Tabel telah dihapus atau Anda menandai tautan mati. Pilih tabel lain dari menu Data."
       style="margin: 48px 0;"
     >
       <template #footer>
         <NSpace justify="center">
-          <NButton @click="navigateTo('/dashboard')">Back to Dashboard</NButton>
+          <NButton @click="navigateTo('/dashboard')">Kembali ke Dashboard</NButton>
           <NButton
             v-if="hasAnyRole(['Admin', 'Super Admin'])"
             type="primary"
             @click="navigateTo('/dashboard/data/global-tables')"
           >
-            Manage Global Tables
+            Kelola Tabel Global
           </NButton>
         </NSpace>
       </template>
     </NResult>
-    <NAlert v-else-if="loadError" type="error" :title="loadError" style="margin-bottom: 16px;" />
     <template v-else>
-      <div class="flex items-center justify-between mb-4">
-        <h1 class="text-xl font-semibold">{{ store.tableMeta?.displayName || tableName }}</h1>
-      </div>
       <NEmpty
         v-if="!store.loading && store.emptySchema"
-        :description="`Define columns for “${tableName}” first`"
+        :description="`Tentukan kolom untuk “${tableName}” terlebih dahulu`"
         style="margin: 48px 0;"
-      />
+      >
+        <template #extra>
+          <NButton type="primary" @click="navigateTo('/dashboard/data/global-tables')">Kelola Kolom</NButton>
+        </template>
+      </NEmpty>
       <DataTable
         v-else
         :columns="gridColumns"
@@ -189,31 +224,21 @@ onMounted(() => load())
         :total="store.total"
         :sort-by="store.sortBy"
         :sort-order="store.sortOrder"
-        :search-placeholder="`Search ${store.tableMeta?.displayName || tableName}...`"
+        :search-placeholder="`Cari ${displayName}...`"
         :searchable-fields="searchableFields"
         :storage-key="`datatable-hidden-${tableName}`"
-        :empty-description="'No rows yet'"
-        @search="(v) => { store.setSearch(v); store.fetchAll(tableName).catch(() => {}) }"
-        @search-field-change="(f) => { store.setSearchField(f); store.fetchAll(tableName).catch(() => {}) }"
-        @update:page="(p) => { store.setPage(p); store.fetchAll(tableName).catch(() => {}) }"
-        @update:limit="(l) => { store.setLimit(l); store.fetchAll(tableName).catch(() => {}) }"
-        @sort-change="(s) => { if (s.order) store.setSort(s.columnKey); store.fetchAll(tableName).catch(() => {}) }"
+        :empty-description="'Belum ada baris'"
+        :error="loadError || null"
+        @search="(v) => { store.setSearch(v); store.fetchAll(tableName).catch((e: any) => { loadError = getErrorMessage(e, 'Gagal memuat data') }) }"
+        @search-field-change="(f) => { store.setSearchField(f); store.fetchAll(tableName).catch((e: any) => { loadError = getErrorMessage(e, 'Gagal memuat data') }) }"
+        @update:page="(p) => { store.setPage(p); store.fetchAll(tableName).catch((e: any) => { loadError = getErrorMessage(e, 'Gagal memuat data') }) }"
+        @update:limit="(l) => { store.setLimit(l); store.fetchAll(tableName).catch((e: any) => { loadError = getErrorMessage(e, 'Gagal memuat data') }) }"
+        @sort-change="(s) => { if (s.order) store.setSort(s.columnKey); store.fetchAll(tableName).catch((e: any) => { loadError = getErrorMessage(e, 'Gagal memuat data') }) }"
+        @refresh="handleRefresh"
+        @retry="handleRetry"
       >
         <template #toolbar>
-          <NSpace>
-            <NButton v-if="canWrite" type="primary" @click="openCreate">
-              <template #icon><NIcon><Add /></NIcon></template>
-              Add Row
-            </NButton>
-            <NButton v-if="canWrite" @click="showImport = true">
-              <template #icon><NIcon><Upload /></NIcon></template>
-              Import
-            </NButton>
-            <NButton @click="handleExport">
-              <template #icon><NIcon><Download /></NIcon></template>
-              Export
-            </NButton>
-          </NSpace>
+          <span class="text-xs" style="color: #6B7280">{{ store.total }} baris</span>
         </template>
       </DataTable>
       <TableRowFormModal
@@ -232,5 +257,5 @@ onMounted(() => load())
       />
       <TableDataImportModal v-model:visible="showImport" :table-name="tableName" />
     </template>
-  </div>
+  </PageShell>
 </template>

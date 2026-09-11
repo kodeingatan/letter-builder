@@ -1,5 +1,5 @@
 /**
- * Client-side helpers for the Administration Runner wizard (Task 18).
+ * Client-side helpers for the Administration Runner wizard .
  * Pure functions for instant step validation + status before saving.
  * Server remains authoritative (re-validates on every save + complete).
  */

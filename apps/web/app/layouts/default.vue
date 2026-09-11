@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h, ref, computed, watch, onMounted } from 'vue'
+import { h, ref, computed, watch, onMounted, nextTick } from 'vue'
 import {
   NLayout,
   NLayoutHeader,
@@ -27,6 +27,7 @@ import {
   Report,
   Settings,
   Restart,
+  Task,
   DataTable as DataTableIcon,
 } from '@vicons/carbon'
 import { useNavigationStore } from '~/stores/navigation'
@@ -40,6 +41,7 @@ const navigationStore = useNavigationStore()
 const collapsed = ref(false)
 
 const user = computed(() => authStore.user)
+const pageRef = ref<HTMLElement | null>(null)
 
 onMounted(async () => {
   if (authStore.isAuthenticated && !authStore.user) {
@@ -48,7 +50,31 @@ onMounted(async () => {
   if (authStore.isAuthenticated) {
     navigationStore.fetch().catch(() => {})
   }
+  // Task 27 — activate usePageTransition (fadeInUp) on initial mount, tokenized 250ms
+  if (import.meta.client) {
+    try {
+      const { usePageTransition } = await import('~/composables/usePageTransition')
+      const { fadeInUp } = usePageTransition()
+      // @ts-expect-error pageRef is HTMLElement
+      if (pageRef.value) fadeInUp(pageRef.value)
+    } catch {}
+  }
 })
+
+watch(
+  () => route.path,
+  async () => {
+    if (import.meta.client && pageRef.value) {
+      try {
+        const { usePageTransition } = await import('~/composables/usePageTransition')
+        const { fadeInUp } = usePageTransition()
+        // nextTick to ensure DOM updated
+        await nextTick()
+        fadeInUp(pageRef.value)
+      } catch {}
+    }
+  },
+)
 
 async function refreshNavigation() {
   try {
@@ -171,7 +197,7 @@ const menuOptions = computed<MenuOption[]>(() => {
         {
           label: renderMenuLabel('Components', '/dashboard/docs/components'),
           key: 'components',
-          icon: renderIcon(Document),
+          icon: renderIcon(Grid),
         },
         {
           label: renderMenuLabel('Templates', '/dashboard/docs/templates'),
@@ -181,17 +207,17 @@ const menuOptions = computed<MenuOption[]>(() => {
         {
           label: renderMenuLabel('Administrations', '/dashboard/docs/administrations'),
           key: 'administrations',
-          icon: renderIcon(Document),
+          icon: renderIcon(Task),
         },
         {
           label: renderMenuLabel('My Runs', '/dashboard/docs/runs'),
           key: 'runs',
-          icon: renderIcon(Document),
+          icon: renderIcon(Activity),
         },
         {
           label: renderMenuLabel('Documents', '/dashboard/docs/documents'),
           key: 'documents',
-          icon: renderIcon(Document),
+          icon: renderIcon(Report),
         },
       ],
     })
@@ -272,13 +298,26 @@ const activeKey = ref('dashboard')
 
 function resolveActiveKey(path: string): string {
   if (routeKeyMap[path]) return routeKeyMap[path]
-  // Task 21 — generated entries highlight: per-table + run-starter routes.
+  // Task 21 + Task 27 — generated entries + detail/dynamic routes highlight
   const dataMatch = path.match(/^\/dashboard\/data\/([^/]+)$/)
   if (dataMatch) return `data-table-${dataMatch[1]}`
   const runMatch = path.match(/^\/dashboard\/docs\/run\/(\d+)$/)
   if (runMatch) return `persuratan-${runMatch[1]}`
   if (path.startsWith('/dashboard/docs/runs/')) return 'runs'
+  if (path.match(/^\/dashboard\/docs\/templates\/\d+$/)) return 'templates'
+  if (path.match(/^\/dashboard\/docs\/administrations\/\d+$/)) return 'administrations'
+  if (path.match(/^\/dashboard\/docs\/documents\/\d+$/)) return 'documents'
+  if (path.startsWith('/dashboard/data/')) {
+    const seg = path.split('/')[3]
+    if (seg) return `data-table-${seg}`
+  }
   return 'dashboard'
+}
+
+// Expose for unit testing
+if (import.meta.vitest) {
+  // @ts-expect-error expose for tests
+  globalThis.__resolveActiveKey = resolveActiveKey
 }
 
 watch(
@@ -291,6 +330,21 @@ watch(
     }
   },
   { immediate: true },
+)
+
+watch(
+  () => route.path,
+  async () => {
+    if (import.meta.client && pageRef.value) {
+      try {
+        const { usePageTransition } = await import('~/composables/usePageTransition')
+        const { fadeInUp } = usePageTransition()
+        await nextTick()
+        // @ts-expect-error pageRef is HTMLElement
+        fadeInUp(pageRef.value)
+      } catch {}
+    }
+  },
 )
 
 function handleMenuUpdate(key: string) {
@@ -331,20 +385,20 @@ function handleDropdownSelect(key: string) {
     <n-layout-sider
       bordered
       collapse-mode="width"
-      :collapsed-width="64"
-      :width="240"
+      :collapsed-width="72"
+      :width="220"
       :collapsed="collapsed"
       show-trigger
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <div class="flex items-center justify-center h-14 font-bold text-lg text-indigo-500">
+      <div class="flex items-center justify-center h-14 font-bold text-lg" style="color: #3B82F6">
         <span v-if="!collapsed">{{ settingsStore.appName }}</span>
         <span v-else>{{ settingsStore.appName?.charAt(0) }}</span>
       </div>
       <n-menu
         :collapsed="collapsed"
-        :collapsed-width="64"
+        :collapsed-width="72"
         :collapsed-icon-size="22"
         :options="menuOptions"
         :value="activeKey"
@@ -355,11 +409,12 @@ function handleDropdownSelect(key: string) {
           quaternary
           size="small"
           :loading="navigationStore.loading"
-          :title="navigationStore.error ?? 'Refresh menus'"
+          aria-label="Segarkan menu"
+          :title="navigationStore.error ?? 'Segarkan menu'"
           @click="refreshNavigation"
         >
           <template #icon><NIcon><Restart /></NIcon></template>
-          <span v-if="!collapsed">Refresh menus</span>
+          <span v-if="!collapsed">Segarkan menu</span>
         </NButton>
       </div>
     </n-layout-sider>
@@ -372,7 +427,7 @@ function handleDropdownSelect(key: string) {
           placement="bottom-end"
         >
           <div class="user-menu">
-            <n-avatar round :size="36" class="bg-gradient-to-r from-indigo-500 to-purple-500 font-semibold text-sm shrink-0">
+            <n-avatar round :size="36" class="bg-gradient-to-r from-[#3B82F6] to-[#2563EB] font-semibold text-sm shrink-0">
               {{ avatarLabel }}
             </n-avatar>
             <div class="flex flex-col text-left leading-tight">
@@ -386,7 +441,9 @@ function handleDropdownSelect(key: string) {
         </n-dropdown>
       </n-layout-header>
       <n-layout-content content-style="padding: 24px;" :native-scrollbar="false">
-        <slot />
+        <div ref="pageRef">
+          <slot />
+        </div>
       </n-layout-content>
       <n-layout-footer bordered class="h-12 flex items-center justify-center text-xs text-gray-400">
         &copy; 2026 {{ settingsStore.appName }}. All rights reserved.

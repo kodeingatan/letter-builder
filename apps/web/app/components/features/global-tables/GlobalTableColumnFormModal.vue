@@ -21,7 +21,7 @@ const emit = defineEmits<{
   (e: 'success'): void
 }>()
 
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const store = useGlobalTableColumnsStore()
 const auth = useAuthStore()
 const formRef = ref<FormInst | null>(null)

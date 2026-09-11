@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <PageShell title="Log Sistem" :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Log Sistem' }]" description="Lihat dan telusuri log sistem — filter, cari, statistik.">
     <n-card title="System Logs">
       <template #header-extra>
         <n-space>
@@ -71,7 +71,7 @@
       v-model:visible="showDetail"
       :entry="selectedEntry"
     />
-  </div>
+  </PageShell>
 </template>
 
 <script setup lang="ts">

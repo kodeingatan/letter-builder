@@ -33,7 +33,7 @@ async function load() {
   try {
     detail.value = await store.fetchOne(props.administrationId)
   } catch (e: any) {
-    message?.error(getErrorMessage(e, 'Failed to load administration'))
+    message?.error(getErrorMessage(e, 'Gagal memuat administrasi'))
   } finally {
     loading.value = false
   }
@@ -102,26 +102,28 @@ async function handleDelete() {
     <NDrawerContent :title="detail?.name ?? 'Administration detail'" closable>
       <NSpin :show="loading">
         <div v-if="detail" class="detail-view">
-          <div class="detail-item">
+          <div class="detail-field">
             <span class="detail-label">Name</span>
-            <NText strong>{{ detail.name }}</NText>
+            <span class="detail-value">{{ detail.name }}</span>
           </div>
-          <div class="detail-item">
+          <div class="detail-field">
             <span class="detail-label">Description</span>
-            <NText depth="3">{{ detail.description || '—' }}</NText>
+            <span class="detail-value detail-value--text">{{ detail.description || '—' }}</span>
           </div>
-          <div class="detail-item">
+          <div class="detail-field">
             <span class="detail-label">Status / Version</span>
-            <NSpace :size="6">
-              <NTag :type="statusType(detail.status)" size="small" bordered round>{{ detail.status }}</NTag>
-              <NTag size="small" bordered round>v{{ detail.version }}</NTag>
-            </NSpace>
+            <div class="detail-value">
+              <NSpace :size="6">
+                <NTag :type="statusType(detail.status)" size="small" bordered round>{{ detail.status }}</NTag>
+                <NTag size="small" bordered round>v{{ detail.version }}</NTag>
+              </NSpace>
+            </div>
           </div>
-          <div class="detail-item">
+          <div class="detail-field">
             <span class="detail-label">Documents</span>
-            <NText code>{{ detail.docsCount ?? detail.documentCount ?? 0 }}</NText>
+            <span class="detail-value detail-value--mono">{{ detail.docsCount ?? detail.documentCount ?? 0 }}</span>
           </div>
-          <div class="detail-item">
+          <div class="detail-field">
             <span class="detail-label">Steps timeline ({{ detail.stepCount }})</span>
             <NTimeline v-if="(detail.steps ?? []).length > 0" class="mt-1">
               <NTimelineItem v-for="step in detail.steps" :key="step.id" :title="`#${step.order} ${step.name}`">

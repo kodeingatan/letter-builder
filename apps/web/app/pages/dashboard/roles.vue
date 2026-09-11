@@ -34,7 +34,11 @@ function handleFormSuccess() {
 </script>
 
 <template>
-  <div>
+  <PageShell
+    title="Peran"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Manajemen Pengguna' }, { label: 'Peran' }]"
+    description="Kelola peran — hak akses guard dan permission."
+  >
     <RoleTable @create="handleCreate" @edit="handleEdit" @detail="handleDetail" />
     <RoleFormModal
       v-model:visible="showForm"
@@ -47,5 +51,5 @@ function handleFormSuccess() {
       :role-id="selectedRole?.id ?? null"
       @edit="handleEdit"
     />
-  </div>
+  </PageShell>
 </template>

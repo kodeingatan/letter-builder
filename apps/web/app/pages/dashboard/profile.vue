@@ -127,7 +127,8 @@ async function handleChangePassword() {
 </script>
 
 <template>
-  <div class="max-w-2xl">
+  <PageShell title="Profil" :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Profil' }]" description="Kelola informasi profil dan password Anda.">
+    <div class="max-w-2xl">
     <NCard title="Informasi Profil" class="mb-4">
       <NAlert v-if="profileError" type="error" class="mb-4">
         {{ profileError }}
@@ -212,6 +213,7 @@ async function handleChangePassword() {
           </NButton>
         </NSpace>
       </NForm>
-    </NCard>
-  </div>
+      </NCard>
+    </div>
+  </PageShell>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
 import { NAlert } from 'naive-ui'
 import { AdministrationTable, AdministrationFormModal, AdministrationDetailDrawer } from '~/components/features/administrations'
 import { useAuthorization } from '~/composables/useAuthorization'
@@ -48,46 +48,21 @@ function handleFormSuccess() {
 function handleChanged() {
   selectedAdministration.value = null
 }
-
-function handleDenied(event: Event) {
-  const detail = (event as CustomEvent).detail
-  deniedMessage.value = detail?.message || 'Access denied'
-  showDenied.value = true
-}
-
-const showDenied = ref(false)
-const deniedMessage = ref('')
-
-if (import.meta.client) {
-  window.addEventListener('rbac-denied', handleDenied)
-}
-
-onUnmounted(() => {
-  if (import.meta.client) {
-    window.removeEventListener('rbac-denied', handleDenied)
-  }
-})
 </script>
 
 <template>
-  <div>
-    <NAlert
-      v-if="showDenied"
-      type="error"
-      closable
-      title="Access Denied"
-      style="margin-bottom: 16px;"
-      @close="showDenied = false"
-    >
-      {{ deniedMessage }}
-    </NAlert>
+  <PageShell
+    title="Administrasi"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Dokumen' }, { label: 'Administrasi' }]"
+    description="Kelola workflow pengumpulan data — langkah, template, versi."
+  >
     <NAlert
       v-if="!canManage"
       type="error"
-      title="Access Denied"
+      title="Akses Ditolak"
       style="margin-bottom: 16px;"
     >
-      You do not have permission to manage Administrations.
+      Anda tidak memiliki izin untuk mengelola Administrasi.
     </NAlert>
     <template v-else>
       <AdministrationTable
@@ -110,5 +85,5 @@ onUnmounted(() => {
         @changed="handleChanged"
       />
     </template>
-  </div>
+  </PageShell>
 </template>

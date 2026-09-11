@@ -22,7 +22,7 @@ const canRead = computed(
 )
 
 const adminOptions = computed(() => [
-  { label: 'All administrations', value: null },
+  { label: 'Semua administrasi', value: null },
   ...(administrationsStore.administrations ?? []).map((a: any) => ({ label: a.name, value: a.id })),
 ])
 
@@ -51,22 +51,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <PageShell
+    title="Dokumen"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Dokumen' }, { label: 'Dokumen' }]"
+    description="Setiap proses yang selesai disimpan sebagai dokumen immutable."
+  >
     <NAlert
       v-if="!canRead"
       type="error"
-      title="Access Denied"
+      title="Akses Ditolak"
       style="margin-bottom: 16px;"
     >
-      You do not have permission to view Documents.
+      Anda tidak memiliki izin untuk melihat Dokumen.
     </NAlert>
     <template v-else>
       <NSpace align="center" style="margin-bottom: 12px;" wrap>
-        <NText depth="3">Every completed run is persisted here as an immutable document.</NText>
+        <NText depth="3">Setiap proses selesai tersimpan sebagai dokumen immutable.</NText>
         <NSelect
           :value="store.administrationId"
           :options="adminOptions"
-          placeholder="Filter by administration"
+          placeholder="Filter administrasi"
           clearable
           style="width: 240px;"
           @update:value="handleAdminFilter"
@@ -81,5 +85,5 @@ onMounted(() => {
       </NSpace>
       <DocumentsTable @view="handleView" />
     </template>
-  </div>
+  </PageShell>
 </template>

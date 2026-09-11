@@ -4,7 +4,7 @@ import type { TableBrowseResponse, TableRow, ImportSummary } from '~/shared/type
 import { useAuthStore } from '~/stores/auth'
 
 /**
- * Generic per-table row store (Task 12). State is keyed by tableName so
+ * Generic per-table row store . State is keyed by tableName so
  * multiple DynamicTablePages can coexist; the active table is tracked
  * via `activeTable`.
  */

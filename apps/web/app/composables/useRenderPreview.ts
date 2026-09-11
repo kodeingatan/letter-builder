@@ -7,7 +7,7 @@ function authHeaders() {
 }
 
 /**
- * Shared preview caller for `POST /api/render/preview` (Task 20).
+ * Shared preview caller for `POST /api/render/preview` .
  * Host panes (Tasks 13/15/16/18/19) debounce their own invocations;
  * this composable only tracks loading / html / warnings / error state
  * consumed by `DocumentPreview`.

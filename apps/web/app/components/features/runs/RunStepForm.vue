@@ -138,7 +138,7 @@ const availableTables = computed(() =>
       <div v-for="(issue, i) in serverIssues" :key="i">{{ issue }}</div>
     </NAlert>
 
-    <!-- (a) step-local fields form (Task 17 schema) -->
+    <!-- (a) step-local fields form -->
     <NCard v-if="step.fields && step.fields.length > 0" title="Fields" size="small" style="margin-bottom: 12px;">
       <NForm label-placement="top">
         <NFormItem
@@ -225,7 +225,7 @@ const availableTables = computed(() =>
       </NSpace>
     </NCard>
 
-    <!-- (c) manual binding inputs (Task 16 `manual` slots) -->
+    <!-- (c) manual binding inputs -->
     <NCard v-if="manualKeys.length > 0" title="Manual inputs" size="small">
       <NForm label-placement="top">
         <NFormItem v-for="key in manualKeys" :key="key" :label="key">

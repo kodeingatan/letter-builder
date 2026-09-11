@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { GuardTable, GuardFormModal, GuardDetailDrawer } from '~/components/features/users'
 import type { Guard } from '~/types/guard'
 
@@ -34,7 +34,11 @@ function handleFormSuccess() {
 </script>
 
 <template>
-  <div>
+  <PageShell
+    title="Guard"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Manajemen Pengguna' }, { label: 'Guard' }]"
+    description="Kelola guard — aturan URL allow/deny."
+  >
     <GuardTable @create="handleCreate" @edit="handleEdit" @detail="handleDetail" />
     <GuardFormModal
       v-model:visible="showForm"
@@ -47,5 +51,5 @@ function handleFormSuccess() {
       :guard-id="selectedGuard?.id ?? null"
       @edit="handleEdit"
     />
-  </div>
+  </PageShell>
 </template>

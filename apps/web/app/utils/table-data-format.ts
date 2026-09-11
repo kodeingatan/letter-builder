@@ -2,7 +2,7 @@ import type { TableDataColumn } from '~/shared/types/table-data'
 
 /**
  * Per-type cell display formatter for generated browse/detail views
- * (Task 12): formatted dates/currency, relation labels, NImage handled
+ *  formatted dates/currency, relation labels, NImage handled
  * by callers for `image` type.
  */
 export function formatCellValue(column: TableDataColumn, value: unknown, display?: string): string {

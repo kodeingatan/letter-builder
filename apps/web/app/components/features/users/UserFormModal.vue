@@ -20,7 +20,7 @@ const emit = defineEmits<{
   (e: 'success'): void
 }>()
 
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const usersStore = useUsersStore()
 const rolesStore = useRolesStore()
 const formRef = ref<FormInst | null>(null)

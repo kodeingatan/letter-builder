@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
 import { NAlert } from 'naive-ui'
 import { ComponentTable, ComponentFormModal, ComponentDetailDrawer } from '~/components/features/components'
 import { useAuthorization } from '~/composables/useAuthorization'
@@ -44,46 +44,21 @@ function handleFormSuccess() {
 function handleDeleted() {
   selectedComponent.value = null
 }
-
-function handleDenied(event: Event) {
-  const detail = (event as CustomEvent).detail
-  deniedMessage.value = detail?.message || 'Access denied'
-  showDenied.value = true
-}
-
-const showDenied = ref(false)
-const deniedMessage = ref('')
-
-if (import.meta.client) {
-  window.addEventListener('rbac-denied', handleDenied)
-}
-
-onUnmounted(() => {
-  if (import.meta.client) {
-    window.removeEventListener('rbac-denied', handleDenied)
-  }
-})
 </script>
 
 <template>
-  <div>
-    <NAlert
-      v-if="showDenied"
-      type="error"
-      closable
-      title="Access Denied"
-      style="margin-bottom: 16px;"
-      @close="showDenied = false"
-    >
-      {{ deniedMessage }}
-    </NAlert>
+  <PageShell
+    title="Komponen"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Dokumen' }, { label: 'Komponen' }]"
+    description="Kelola blok dokumen reusable — header, footer, tanda tangan."
+  >
     <NAlert
       v-if="!canManage"
       type="error"
-      title="Access Denied"
+      title="Akses Ditolak"
       style="margin-bottom: 16px;"
     >
-      You do not have permission to manage Components.
+      Anda tidak memiliki izin untuk mengelola Komponen.
     </NAlert>
     <template v-else>
       <ComponentTable @create="handleCreate" @edit="handleEdit" @detail="handleDetail" />
@@ -101,5 +76,5 @@ onUnmounted(() => {
         @published="handleDeleted"
       />
     </template>
-  </div>
+  </PageShell>
 </template>

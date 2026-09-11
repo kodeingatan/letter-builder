@@ -88,19 +88,19 @@ async function handleRegister() {
       <NForm ref="formRef" :model="form" :rules="rules" label-placement="top" @submit.prevent="handleRegister">
         <div class="grid grid-cols-2 gap-4">
           <NFormItem label="Nama Depan" path="firstName">
-            <NInput v-model:value="form.firstName" placeholder="Nama depan" />
+            <NInput v-model:value="form.firstName" placeholder="Nama depan" autocomplete="given-name" />
           </NFormItem>
           <NFormItem label="Nama Belakang" path="lastName">
-            <NInput v-model:value="form.lastName" placeholder="Nama belakang" />
+            <NInput v-model:value="form.lastName" placeholder="Nama belakang" autocomplete="family-name" />
           </NFormItem>
         </div>
 
         <NFormItem label="Username" path="username">
-          <NInput v-model:value="form.username" placeholder="Pilih username" />
+          <NInput v-model:value="form.username" placeholder="Pilih username" autocomplete="username" />
         </NFormItem>
 
         <NFormItem label="Email" path="email">
-          <NInput v-model:value="form.email" placeholder="Masukkan email Anda" />
+          <NInput v-model:value="form.email" placeholder="Masukkan email Anda" autocomplete="email" />
         </NFormItem>
 
         <NFormItem label="Password" path="password">
@@ -109,6 +109,7 @@ async function handleRegister() {
             type="password"
             show-password-on="click"
             placeholder="Minimal 8 karakter"
+            autocomplete="new-password"
           />
         </NFormItem>
 
@@ -118,6 +119,7 @@ async function handleRegister() {
             type="password"
             show-password-on="click"
             placeholder="Konfirmasi password Anda"
+            autocomplete="new-password"
           />
         </NFormItem>
 
@@ -129,7 +131,7 @@ async function handleRegister() {
           class="mt-2"
         >
           <template #icon>
-            <NIcon><UserAvatar /></NIcon>
+            <NIcon aria-hidden="true"><UserAvatar /></NIcon>
           </template>
           Buat Akun
         </NButton>
@@ -137,7 +139,7 @@ async function handleRegister() {
 
       <p class="mt-4 text-center text-sm text-gray-600">
         Sudah punya akun?
-        <RouterLink to="/login" class="text-indigo-600 hover:text-indigo-500 font-medium">
+        <RouterLink to="/login" class="text-[#3B82F6] hover:text-[#2563EB] font-medium">
           Masuk
         </RouterLink>
       </p>
@@ -147,7 +149,7 @@ async function handleRegister() {
 
 <style scoped>
 .auth-form-content {
-  animation: authFormEnter 0.4s ease-out;
+  animation: authFormEnter 250ms ease;
 }
 
 @keyframes authFormEnter {
@@ -158,6 +160,12 @@ async function handleRegister() {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-form-content {
+    animation-duration: 0.01ms !important;
   }
 }
 </style>

@@ -34,7 +34,11 @@ function handleFormSuccess() {
 </script>
 
 <template>
-  <div>
+  <PageShell
+    title="Izin"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Manajemen Pengguna' }, { label: 'Izin' }]"
+    description="Kelola izin — metode dan URL yang diizinkan."
+  >
     <PermissionTable @create="handleCreate" @edit="handleEdit" @detail="handleDetail" />
     <PermissionFormModal
       v-model:visible="showForm"
@@ -47,5 +51,5 @@ function handleFormSuccess() {
       :permission-id="selectedPermission?.id ?? null"
       @edit="handleEdit"
     />
-  </div>
+  </PageShell>
 </template>

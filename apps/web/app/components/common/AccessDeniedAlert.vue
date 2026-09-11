@@ -8,40 +8,47 @@ const message = ref('')
 
 function handleDenied(event: Event) {
   const detail = (event as CustomEvent).detail
-  message.value = detail?.message || 'Access denied'
+  message.value = detail?.message || 'Anda tidak memiliki izin untuk melakukan aksi ini'
   visible.value = true
   setTimeout(() => {
     visible.value = false
-  }, 5000)
+  }, 4000)
 }
 
-onMounted(() => window.addEventListener('rbac-denied', handleDenied))
-onUnmounted(() => window.removeEventListener('rbac-denied', handleDenied))
+onMounted(() => {
+  if (import.meta.client) window.addEventListener('rbac-denied', handleDenied)
+})
+onUnmounted(() => {
+  if (import.meta.client) window.removeEventListener('rbac-denied', handleDenied)
+})
 </script>
 
 <template>
-  <Teleport to="body">
-    <Transition name="alert-slide">
-      <div
-        v-show="visible"
-        class="alert-container"
-      >
-        <NAlert
-          type="error"
-          :bordered="false"
-          class="shadow-lg"
-          closable
-          @close="visible = false"
+  <ClientOnly>
+    <Teleport to="body">
+      <Transition name="access-denied">
+        <div
+          v-show="visible"
+          class="alert-container"
+          data-testid="access-denied"
         >
-          <template #icon>
-            <NIcon><Locked /></NIcon>
-          </template>
-          <template #header>Access Denied</template>
-          {{ message }}
-        </NAlert>
-      </div>
-    </Transition>
-  </Teleport>
+          <NAlert
+            type="error"
+            :bordered="false"
+            class="shadow-lg"
+            closable
+            @close="visible = false"
+          >
+            <template #icon>
+              <NIcon aria-hidden="true"><Locked /></NIcon>
+            </template>
+            <template #header>Akses Ditolak</template>
+            {{ message }}
+          </NAlert>
+        </div>
+      </Transition>
+    </Teleport>
+  </ClientOnly>
 </template>
 
 <style scoped>
@@ -54,20 +61,39 @@ onUnmounted(() => window.removeEventListener('rbac-denied', handleDenied))
   pointer-events: auto;
 }
 
-.alert-slide-enter-active,
-.alert-slide-leave-active {
-  transition: transform 0.3s ease, opacity 0.3s ease;
+.access-denied-enter-active {
+  animation: accessDeniedSlideIn 300ms ease-out;
+}
+.access-denied-leave-active {
+  animation: accessDeniedSlideOut 200ms ease-in;
 }
 
-.alert-slide-enter-from,
-.alert-slide-leave-to {
-  transform: translateX(120%);
-  opacity: 0;
+@keyframes accessDeniedSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.alert-slide-enter-to,
-.alert-slide-leave-from {
-  transform: translateX(0);
-  opacity: 1;
+@keyframes accessDeniedSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .access-denied-enter-active,
+  .access-denied-leave-active {
+    animation-duration: 0.01ms !important;
+  }
 }
 </style>

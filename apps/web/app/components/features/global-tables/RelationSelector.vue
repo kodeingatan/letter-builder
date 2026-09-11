@@ -26,7 +26,7 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: number | number[] | null): void
 }>()
 
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const api = useApi()
 const auth = useAuthStore()
 

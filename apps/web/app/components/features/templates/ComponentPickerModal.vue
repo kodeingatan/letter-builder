@@ -17,7 +17,7 @@ const emit = defineEmits<{
   (e: 'confirm', payload: { componentId: number; componentVersion: number }): void
 }>()
 
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const componentsStore = useComponentsStore()
 
 const componentId = ref<number | null>(null)
@@ -122,7 +122,7 @@ function handleConfirm() {
       <NEmpty v-if="!detail" size="small" description="Requirement slots preview after picking a component" />
       <div v-else>
         <NText depth="3" style="font-size: 12px;">
-          Placement is created with these requirement slots unbound (amber) — Task 16 fills values:
+          Penempatan dibuat dengan slot requirement belum terikat:
         </NText>
         <NSpace :size="6" style="margin-top: 8px;">
           <NTag

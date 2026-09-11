@@ -21,7 +21,7 @@ const {
   fetchBindings, saveBindings, removeBinding, previewBindings,
 } = useTemplateBindings(computed(() => props.templateId))
 
-// Share the unbound counter with the canvas tab (Task 15 publish guard badge).
+// Share unbound counter with canvas tab (publish guard badge).
 watch(totalUnbound, (count) => emit('update:unbound-count', count), { immediate: true })
 
 // --- Source options ---
@@ -241,7 +241,7 @@ defineExpose({ fetchBindings, totalUnbound })
 
       <NEmpty
         v-if="!loading && !displayGroups.length"
-        description="No component placements found. Add components to the canvas first (Task 15)."
+        description="Belum ada penempatan komponen. Tambahkan komponen ke kanvas terlebih dahulu."
       />
 
       <div v-for="group in displayGroups" :key="group.placementId" style="margin-bottom: 16px;">
@@ -317,7 +317,7 @@ defineExpose({ fetchBindings, totalUnbound })
                   :value="row.sourceRef"
                   size="small"
                   style="flex: 1;"
-                  placeholder="Select administration field (Task 17)"
+                  placeholder="Pilih field administrasi"
                   disabled
                 />
 

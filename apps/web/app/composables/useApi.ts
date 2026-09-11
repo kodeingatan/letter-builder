@@ -25,7 +25,7 @@ export function useApi() {
       if (error.response?.status === 403 && import.meta.client) {
         window.dispatchEvent(
           new CustomEvent('rbac-denied', {
-            detail: { message: error.response?.data?.message || 'Access denied' },
+            detail: { message: error.response?.data?.message || 'Anda tidak memiliki izin untuk melakukan aksi ini' },
           })
         )
       }

@@ -21,7 +21,7 @@ const emit = defineEmits<{
   (e: 'success'): void
 }>()
 
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const rolesStore = useRolesStore()
 const guardsStore = useGuardsStore()
 const permissionsStore = usePermissionsStore()

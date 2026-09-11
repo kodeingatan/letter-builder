@@ -2,10 +2,10 @@
 import { computed, ref, watch, onMounted } from 'vue'
 import {
   NDataTable, NInput, NButton, NSpace, NSpin, NEmpty, NPopover,
-  NCheckbox, NSelect,
+  NCheckbox, NSelect, NIcon, NAlert,
   type DataTableColumns, type PaginationProps, type DataTableSortState,
 } from 'naive-ui'
-import { Search, Reset, Settings } from '@vicons/carbon'
+import { Search, Reset, Settings, Restart } from '@vicons/carbon'
 
 interface ColumnDef {
   key: string
@@ -32,16 +32,18 @@ const props = withDefaults(defineProps<{
   sortOrder?: 'ASC' | 'DESC'
   storageKey?: string
   emptyDescription?: string
+  error?: string | null
 }>(), {
   loading: false,
   page: 1,
   limit: 20,
   total: 0,
-  searchPlaceholder: 'Search...',
+  searchPlaceholder: 'Cari...',
   sortBy: 'id',
   sortOrder: 'DESC',
   storageKey: 'datatable-hidden-columns',
-  emptyDescription: 'No data found',
+  emptyDescription: 'Belum ada data',
+  error: null,
 })
 
 const emit = defineEmits<{
@@ -50,6 +52,8 @@ const emit = defineEmits<{
   (e: 'search', value: string): void
   (e: 'search-field-change', field: string): void
   (e: 'sort-change', sorter: { columnKey: string; order: 'ascend' | 'descend' | false }): void
+  (e: 'refresh'): void
+  (e: 'retry'): void
 }>()
 
 const searchText = ref('')
@@ -144,17 +148,17 @@ function resetFilters() {
 
 <template>
   <div class="space-y-4">
-    <div class="flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3 flex-1">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div class="flex flex-wrap items-center gap-3 flex-1 min-w-[320px]">
         <NInput
           :value="searchText"
           :placeholder="searchPlaceholder"
           clearable
           @update:value="handleSearch"
-          style="min-width: 280px; flex: 1"
+          style="min-width: 320px; flex: 1"
         >
           <template #prefix>
-            <Search />
+            <NIcon><Search /></NIcon>
           </template>
         </NInput>
 
@@ -162,19 +166,30 @@ function resetFilters() {
           v-if="searchableFields?.length"
           :value="searchField"
           :options="searchableFields"
-          placeholder="All fields"
+          placeholder="Semua Kolom"
           clearable
           @update:value="handleSearchFieldChange"
-          style="width: 140px"
+          style="width: 160px"
         />
 
         <NButton
           quaternary
           circle
-          @click="resetFilters"
-          title="Reset filters"
+          aria-label="Segarkan data"
+          title="Segarkan data"
+          @click="emit('refresh')"
         >
-          <template #icon><Reset /></template>
+          <template #icon><NIcon><Restart /></NIcon></template>
+        </NButton>
+
+        <NButton
+          quaternary
+          circle
+          aria-label="Atur ulang filter"
+          title="Atur ulang filter"
+          @click="resetFilters"
+        >
+          <template #icon><NIcon><Reset /></NIcon></template>
         </NButton>
       </div>
 
@@ -183,12 +198,12 @@ function resetFilters() {
 
         <NPopover trigger="click" placement="bottom-end" :width="220">
           <template #trigger>
-            <NButton quaternary circle title="Column visibility">
-              <template #icon><Settings /></template>
+            <NButton quaternary circle aria-label="Pengaturan kolom" title="Pengaturan kolom">
+              <template #icon><NIcon><Settings /></NIcon></template>
             </NButton>
           </template>
           <div class="space-y-2">
-            <div class="text-sm font-medium text-gray-500">Columns</div>
+            <div class="text-sm font-medium text-gray-500">Kolom</div>
             <div
               v-for="col in columnOptions"
               :key="col.key"
@@ -202,6 +217,18 @@ function resetFilters() {
         </NPopover>
       </NSpace>
     </div>
+
+    <NAlert
+      v-if="error"
+      type="error"
+      closable
+      style="margin-bottom: 12px;"
+      @close="emit('retry')"
+    >
+      <template #header>Gagal memuat data</template>
+      {{ error }}
+      <NButton size="small" style="margin-left: 8px;" @click="emit('retry')">Coba lagi</NButton>
+    </NAlert>
 
     <NSpin :show="loading">
       <NDataTable
@@ -217,10 +244,10 @@ function resetFilters() {
       />
     </NSpin>
 
-    <NEmpty v-if="!loading && (data ?? []).length === 0" :description="emptyDescription" />
+    <NEmpty v-if="!loading && (data ?? []).length === 0 && !error" :description="emptyDescription" />
 
     <div v-if="total > 0" class="text-sm text-gray-500">
-      Showing {{ (page - 1) * limit + 1 }}-{{ Math.min(page * limit, total) }} of {{ total }}
+      Menampilkan {{ (page - 1) * limit + 1 }}-{{ Math.min(page * limit, total) }} dari {{ total }}
     </div>
   </div>
 </template>

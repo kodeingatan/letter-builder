@@ -42,7 +42,7 @@
         :total="total"
         :sort-by="sortBy"
         :sort-order="sortOrder"
-        search-placeholder="Search activity logs..."
+        search-placeholder="Cari log aktivitas..."
         :searchable-fields="searchableFields"
         @update:page="handlePageChange"
         @update:limit="handleLimitChange"
@@ -152,7 +152,7 @@ const showDetail = ref(false);
 const selectedLog = ref<ActivityLog | null>(null);
 
 const searchableFields = [
-  { label: 'All Fields', value: '' },
+  { label: 'Semua Kolom', value: '' },
   { label: 'Description', value: 'description' },
   { label: 'Username', value: 'user.username' },
   { label: 'First Name', value: 'user.firstName' },

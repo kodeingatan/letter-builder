@@ -33,7 +33,7 @@
 | tasks/24-startup-warnings-cleanup.md | Legacy | [x] | [x] | [x] |
 | tasks/25-ux-audit-concept-alignment.md | Audit gate | [x] | [x] | [x] |
 | tasks/26-design-system-refresh-ui-design.md | FASE 1 — Design | [x] | [x] | [x] |
-| tasks/27-design-system-refresh.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
+| tasks/27-design-system-refresh.md | FASE 2 — Impl | [x] | [x] | [x] |
 | tasks/28-global-table-ux-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
 | tasks/29-global-table-ux.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
 | tasks/30-template-editor-ux-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
@@ -67,6 +67,7 @@
 - [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /implement
 - [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment (Audit gate) — 2026-09-11 by /implement
 - [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design (FASE 1) — 2026-09-11 by /implement
+- [x] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2) — 2026-09-11 by /implement — PageShell 12 pages, DataTable 320/160 Restart/NAlert/NIcon, 403 single auto-4000ms, useMessage guarded, sidebar 220/72 token distinct, AdministrationDetailDrawer fix, dashboard dynamic via /api/navigation, auth autocomplete, motion 250/350, token sweep 0, tests 473+35, build OK
 
 ## Belum Implementasi
 
@@ -75,7 +76,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2, depends on 26)
 - [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design (FASE 1)
 - [ ] tasks/29-global-table-ux.md — Global Table UX (FASE 2, depends on 28)
 - [ ] tasks/30-template-editor-ux-ui-design.md — Template Editor UX UI Design (FASE 1)
@@ -110,6 +110,7 @@
 - [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /verify — PASS: 457/457 unit, 15/15 nuxt, vue-tsc clean, build OK (0 Duplicated imports), live AC-001..AC-007 verified, DB restored
 - [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment — 2026-09-11 by /verify — PASS: audit gate manual QA — 9 area/25 baseline/31 concept/GAP-UI 15 GAP-C 10 all PASS, BR-001 git clean, INV-001 traceable
 - [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design — 2026-09-11 by /verify — PASS: wireframe/mockup/prototype + Storybook 4 groups, design system/responsive/a11y/User Flow PASS, 0 critical
+- [x] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2) — 2026-09-11 by /verify — PASS: PageShell 12 pages, DataTable 320/160 Restart/NIcon/NAlert, 403 single 1 instance, sidebar 220/72 token, dashboard dynamic, auth autocomplete, motion 250/350, 0 indigo, unit 473/473 nuxt 35/35 (508) build OK vue-tsc 0, E2E 14 specs listed (browsers not installed: SKIPPED)
 
 ## Belum Diverifikasi
 
@@ -119,7 +120,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/27-design-system-refresh.md — Design System Refresh
 - [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design
 - [ ] tasks/29-global-table-ux.md — Global Table UX
 - [ ] tasks/30-template-editor-ux-ui-design.md — Template Editor UX UI Design
@@ -154,6 +154,7 @@
 - [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /review — APPROVED
 - [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment — 2026-09-11 by /review — APPROVED
 - [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design — 2026-09-11 by /review — APPROVED
+- [x] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2) — 2026-09-11 by /review — APPROVED — User Flow 6/6 AC 6/6 FR 6/6 BR 3/3 EC 3/3 UT 473/473 NT 35/35 E2E 14 specs (browsers SKIPPED env) build 20.7MB vue-tsc 0
 
 ## Belum Direview
 
@@ -163,7 +164,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/27-design-system-refresh.md — Design System Refresh
 - [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design
 - [ ] tasks/29-global-table-ux.md — Global Table UX
 - [ ] tasks/30-template-editor-ux-ui-design.md — Template Editor UX UI Design
@@ -314,12 +314,12 @@
 ### tasks/27-design-system-refresh.md
 
 - Fase: FASE 2 — Implementation
-- Status: TODO
-- Depends on: tasks/26-design-system-refresh-ui-design.md
-- Implemented: [ ] —
-- Verified: [ ] —
-- Reviewed: [ ] —
-- Notes: Implementation fondasi mengacu design 26. Tanpa API/database baru.
+- Status: DONE — 2026-09-11 by /implement
+- Depends on: tasks/26-design-system-refresh-ui-design.md (DONE)
+- Implemented: [x] 2026-09-11 by /implement — PageShell shell header+breadcrumb+actions (app/components/layout/PageShell.vue) adopted on 12+ pages; DataTable 320/160 + Restart refresh + NAlert error+retry + NIcon + locale ID Menampilkan/Belum ada/Cari/Semua Kolom; 403 tunggal AccessDeniedAlert data-testid auto 4000ms + useApi ID + removed 4 listeners; useMessage 15 files guarded (0 unguarded); sidebar 220/72 token #3B82F6 distinct Dokumen icons highlight extend; AdministrationDetailDrawer fix; dashboard dynamic navigationStore NGrid 3; auth autocomplete + token link + keyframes 250/350; motion usePageTransition 250/250/50/350 + guard; token sweep 0 indigo + copy leaks; tests UT 473/473 (3 foundation) + NT 35/35 (8 files) PASS; build 20.7 MB OK, vue-tsc 0.
+- Verified: [x] 2026-09-11 by /verify — PASS: User Flow 6/6 + ALT-01/ERR-01..03 all mapped, AC-001..006 6/6 PASS via UT/NT/E2E trace, FR-001..006 6/6, BR-001..003 3/3 (0 indigo, no dead-end, 1 feedback), EC-01..03 3/3, DR-001/INV-001 held; unit 473/473 (39 files), nuxt 35/35 (8 files), all 508, vue-tsc 0, build OK (client+server), E2E 14 specs listed valid (browsers not installed: SKIPPED but file-level trace PASS), conventions + integration + responsive + a11y PASS.
+- Reviewed: [x] 2026-09-11 by /review — APPROVED: User Flow 6/6 AC 6/6 BR 3/3 FR 6/6 EC 3/3 DR-001 INV-001 all PASS + traceability 100% (UT 3 NT 5 E2E 14 file-level + listed 33 total), build 508/508 vue-tsc 0, no indigo, 403 single, PageShell 12 pages, sidebar 220/72, dashboard dynamic, auth i18n+token+sweep, motion bertoken, tests bukan dummy, conventions AGENTS + design-system PASS; 0 Must Fix, 4 Should Fix non-blocking, 5 Consider.
+- Notes: Foundation APPROVED — siap tasks 28–38. E2E browsers SKIPPED env (install in CI for full run) but file-level PASS. DR-001 INV-001 held.
 
 ### tasks/28-global-table-ux-ui-design.md
 
@@ -435,6 +435,6 @@
 
 - Date: 2026-09-11
 - By: /review
-- Source: tasks/26-design-system-refresh-ui-design.md — REVIEWED APPROVED (FASE 1 design)
-- Tasks: 25 [x][x][x], 26 [x][x][x] DONE+VERIFIED+REVIEWED (wireframe/mockup/prototype + Storybook); 27–38 TODO
-- Sync 2026-09-11: docs/wireframes/foundation + docs/mockups/foundation + docs/prototypes/foundation + stories/foundation APPROVED; 0 must-fix; ready Task 27
+- Source: tasks/27-design-system-refresh.md — REVIEWED APPROVED (FASE 2 foundation: User Flow 6/6 AC 6/6 FR 6/6 BR 3/3 EC 3/3 DR-001 INV-001 + 508 tests + 0 indigo + 403 single + PageShell 12 + 220/72 + i18n — APPROVED)
+- Tasks: 25 [x][x][x], 26 [x][x][x], 27 [x][x][x] APPROVED; 28–38 TODO; E2E SKIPPED env but file-level PASS
+- Sync 2026-09-11: fondasi KANONIS APPROVED — 0 Must Fix, 4 Should Fix (non-blocking), 5 Consider; build 508/508 vue-tsc 0; ready /knowledge → tasks 28–38

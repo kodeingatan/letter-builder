@@ -14,7 +14,7 @@ import type { AdministrationDetail } from '~/shared/types/administration'
 definePageMeta({ layout: 'default', middleware: 'auth', requiresAuth: true })
 
 const route = useRoute()
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const store = useAdministrationsStore()
 const { hasAnyRole, hasPermission } = useAuthorization()
 

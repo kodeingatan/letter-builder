@@ -1,7 +1,7 @@
 /**
- * Client-side helpers for Template Management (Task 14).
+ * Client-side helpers for Template Management .
  * Mirrors `server/utils/template-helpers.ts` for instant editor validation.
- * Full composition canvas arrives in Task 15 — here the skeleton is edited
+ * Composition canvas for template editing
  * as JSON (`{ nodes: [...] }`) with a read-only stub preview.
  */
 

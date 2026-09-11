@@ -170,7 +170,7 @@ export const useTemplatesStore = defineStore('templates', () => {
     }
   }
 
-  /** Live editor feedback (Task 15): validate a candidate tree without saving. */
+  /** Live editor feedback  validate a candidate tree without saving. */
   async function validateTree(id: number, content: unknown) {
     try {
       return await $fetch<TreeValidationResult>(`/api/templates/${id}/validate-tree`, {

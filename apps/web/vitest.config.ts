@@ -14,6 +14,8 @@ export default defineConfig({
     },
   },
   test: {
+    hookTimeout: 60000,
+    testTimeout: 30000,
     projects: [
       {
         test: {
@@ -27,6 +29,8 @@ export default defineConfig({
           name: 'nuxt',
           include: ['test/nuxt/**/*.{test,spec}.ts'],
           environment: 'nuxt',
+          hookTimeout: 60000,
+          testTimeout: 30000,
         },
       }),
     ],

@@ -14,7 +14,7 @@ import type { DocumentDetail } from '~/shared/types/document'
 definePageMeta({ layout: 'default', middleware: 'auth', requiresAuth: true })
 
 const route = useRoute()
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 const store = useDocumentsStore()
 const authStore = useAuthStore()
 const { hasAnyRole, hasPermission } = useAuthorization()
@@ -137,7 +137,7 @@ async function handleReissue() {
             title="HTML only"
             style="margin-bottom: 12px;"
           >
-            PDF has not been rendered for this document yet (rendering engine lands in Task 20). The HTML preview below is the issued content.
+            PDF belum dirender untuk dokumen ini. Pratinjau HTML di bawah adalah konten yang diterbitkan. The HTML preview below is the issued content.
           </NAlert>
           <div class="detail-view">
             <div>

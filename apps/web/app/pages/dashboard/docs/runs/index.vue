@@ -23,10 +23,10 @@ const canSeeAll = computed(
 )
 
 const statusOptions = [
-  { label: 'All statuses', value: '' },
-  { label: 'In progress', value: 'in_progress' },
-  { label: 'Completed', value: 'completed' },
-  { label: 'Cancelled', value: 'cancelled' },
+  { label: 'Semua status', value: '' },
+  { label: 'Berjalan', value: 'in_progress' },
+  { label: 'Selesai', value: 'completed' },
+  { label: 'Dibatalkan', value: 'cancelled' },
 ]
 
 function handleResume(run: AdministrationRunListItem) {
@@ -45,18 +45,22 @@ function handleScopeFilter(value: 'mine' | 'all') {
 </script>
 
 <template>
-  <div>
+  <PageShell
+    title="Proses Saya"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Dokumen' }, { label: 'Proses Saya' }]"
+    description="Mulai proses dari Administrasi yang terbit, lalu lanjutkan di sini."
+  >
     <NAlert
       v-if="!canRun"
       type="error"
-      title="Access Denied"
+      title="Akses Ditolak"
       style="margin-bottom: 16px;"
     >
-      You do not have permission to run Administrations.
+      Anda tidak memiliki izin untuk menjalankan Administrasi.
     </NAlert>
     <template v-else>
       <NSpace align="center" style="margin-bottom: 12px;">
-        <NText depth="3">Start a run from a published Administration, then resume it here.</NText>
+        <NText depth="3">Mulai proses dari Administrasi terbit, lalu lanjutkan di sini.</NText>
         <NSelect
           :value="store.status"
           :options="statusOptions"
@@ -67,8 +71,8 @@ function handleScopeFilter(value: 'mine' | 'all') {
           v-if="canSeeAll"
           :value="store.scope"
           :options="[
-            { label: 'My runs', value: 'mine' },
-            { label: 'All runs', value: 'all' },
+            { label: 'Proses saya', value: 'mine' },
+            { label: 'Semua proses', value: 'all' },
           ]"
           style="width: 140px;"
           @update:value="handleScopeFilter"
@@ -76,5 +80,5 @@ function handleScopeFilter(value: 'mine' | 'all') {
       </NSpace>
       <RunsTable @resume="handleResume" />
     </template>
-  </div>
+  </PageShell>
 </template>

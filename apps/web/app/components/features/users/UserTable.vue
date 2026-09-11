@@ -13,7 +13,7 @@ const emit = defineEmits<{
 }>()
 
 const store = useUsersStore()
-const message = useMessage()
+const message = import.meta.client ? useMessage() : null
 
 const columns = computed(() => [
   { key: 'id', title: 'ID', sortable: true, width: 60 },

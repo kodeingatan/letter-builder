@@ -14,7 +14,7 @@ const settingsStore = useSettingsStore()
 
 const appName = ref('')
 const appFavicon = ref('')
-const loginBgGradient = ref(['#1e40af', '#3b82f6', '#6366f1'])
+const loginBgGradient = ref(['#1e40af', '#3b82f6', '#2563eb'])
 const loginBgImage = ref('')
 const appDescription = ref('')
 const saving = ref(false)
@@ -126,7 +126,7 @@ async function handleSave() {
         <NCard class="settings-card">
           <template #header>
             <div class="card-header">
-              <NIcon :size="20" class="text-indigo-500"><Save /></NIcon>
+              <NIcon :size="20" class="text-[#3B82F6]"><Save /></NIcon>
               <span>Nama Aplikasi</span>
             </div>
           </template>
@@ -138,7 +138,7 @@ async function handleSave() {
         <NCard class="settings-card">
           <template #header>
             <div class="card-header">
-              <NIcon :size="20" class="text-indigo-500"><Document /></NIcon>
+              <NIcon :size="20" class="text-[#3B82F6]"><Document /></NIcon>
               <span>Deskripsi Aplikasi</span>
             </div>
           </template>
@@ -150,7 +150,7 @@ async function handleSave() {
         <NCard class="settings-card">
           <template #header>
             <div class="card-header">
-              <NIcon :size="20" class="text-indigo-500"><Image /></NIcon>
+              <NIcon :size="20" class="text-[#3B82F6]"><Image /></NIcon>
               <span>Favicon</span>
             </div>
           </template>
@@ -180,7 +180,7 @@ async function handleSave() {
         <NCard class="settings-card settings-card--full">
           <template #header>
             <div class="card-header">
-              <NIcon :size="20" class="text-indigo-500"><Image /></NIcon>
+              <NIcon :size="20" class="text-[#3B82F6]"><Image /></NIcon>
               <span>Background Login & Register</span>
             </div>
           </template>
@@ -238,7 +238,7 @@ async function handleSave() {
       <NCard v-if="isProdAdmin" class="settings-card settings-card--full" style="margin-top: 20px">
         <template #header>
           <div class="card-header">
-            <NIcon :size="20" class="text-indigo-500"><Document /></NIcon>
+            <NIcon :size="20" class="text-[#3B82F6]"><Document /></NIcon>
             <span>Status Produksi</span>
           </div>
         </template>

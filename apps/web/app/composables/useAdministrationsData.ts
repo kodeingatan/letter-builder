@@ -1,5 +1,5 @@
 /**
- * Client-side helpers for Administration Workflow (Task 17).
+ * Client-side helpers for Administration Workflow .
  * Pure functions mirroring `server/utils/administration-helpers.ts`
  * for instant editor validation before saving steps.
  */
