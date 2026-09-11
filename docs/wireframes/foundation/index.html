@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframes — Foundation (Task 26) — Low-Fi</title>
+<style>
+  :root{ --line:#9CA3AF; --bg:#F9FAFB; --card:#fff; --border:#E5E7EB; --text:#111827; --muted:#6B7280; --primary:#3B82F6; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter, ui-sans-serif, system-ui, sans-serif; background:var(--bg); color:var(--text); line-height:1.5}
+  a{color:var(--primary); text-decoration:none}
+  .wrap{max-width:1280px;margin:0 auto;padding:24px}
+  h1{font-size:28px;font-weight:700;margin-bottom:4px}
+  h2{font-size:20px;font-weight:600;margin:24px 0 8px; border-top:1px solid var(--border); padding-top:16px}
+  h3{font-size:16px;font-weight:600;margin:16px 0 6px}
+  p,li{font-size:14px; color:var(--muted)}
+  .meta{font-size:13px;color:var(--muted); margin-bottom:12px}
+  .grid{display:grid; gap:16px}
+  .grid-2{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:768px){ .grid-2,.grid-3{grid-template-columns:1fr} }
+  .wire{border:2px dashed var(--line); background:var(--card); border-radius:8px; padding:12px; position:relative}
+  .wire-title{position:absolute; top:-10px; left:12px; background:var(--bg); padding:0 6px; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted)}
+  .box{border:1px solid var(--border); border-radius:6px; padding:8px 10px; background:#fff; font-size:13px}
+  .box-dashed{border:1px dashed var(--line)}
+  .row{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+  .col{flex:1; min-width:0}
+  .placeholder{background:repeating-linear-gradient(45deg,#F3F4F6,#F3F4F6 6px,#E5E7EB 6px,#E5E7EB 7px); border:1px dashed var(--line); border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.05em}
+  .h-32{height:32px} .h-36{height:36px} .h-40{height:40px} .h-52{height:52px} .h-200{height:200px} .h-120{height:120px}
+  .w-320{min-width:320px; flex:1} .w-160{width:160px}
+  .toolbar{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+  .toolbar .search{flex:1; min-width:320px}
+  .sidebar{width:220px; border-right:2px dashed var(--line); background:#fff; border-radius:8px; padding:12px 8px; display:flex; flex-direction:column; gap:6px}
+  .sidebar.collapsed{width:72px; align-items:center}
+  .menu-item{height:36px; border:1px solid var(--border); border-radius:6px; display:flex; align-items:center; gap:8px; padding:0 10px; font-size:13px}
+  .menu-item.active{background:#EFF6FF; border-color:#BFDBFE; color:#1D4ED8; font-weight:600}
+  .menu-group{font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); padding:8px 10px 2px}
+  .breadcrumb{display:flex; gap:6px; font-size:13px; color:var(--muted)}
+  .breadcrumb span:not(:last-child)::after{content:"/"; margin-left:6px}
+  .kpi{border:1px solid var(--border); border-radius:8px; padding:16px; background:#fff; text-align:center}
+  .kpi .num{font-size:24px; font-weight:700}
+  .kpi .lbl{font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em}
+  .badge{display:inline-block; padding:2px 8px; border-radius:9999px; font-size:11px; font-weight:600; border:1px solid var(--border); background:#F3F4F6}
+  .alert{border:1px solid #FCA5A5; background:#FEF2F2; color:#991B1B; border-radius:6px; padding:10px 12px; font-size:13px; display:flex; gap:8px; align-items:center}
+  .alert.success{border-color:#86EFAC; background:#F0FDF4; color:#166534}
+  .skeleton{background:linear-gradient(90deg,#F3F4F6 25%,#E5E7EB 37%,#F3F4F6 63%); background-size:400% 100%; animation:shimmer 1.4s ease infinite; border-radius:4px}
+  @keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
+  .toc{position:sticky; top:12px; background:#fff; border:1px solid var(--border); border-radius:8px; padding:12px; font-size:13px}
+  .toc a{display:block; padding:4px 0}
+  .annotation{font-size:11px; color:var(--muted); border-left:2px solid var(--primary); padding-left:8px; margin:6px 0}
+  @media(prefers-reduced-motion:reduce){ .skeleton{animation:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Foundation — Wireframes Low-Fi</h1>
+    <p class="meta">Task 26 · Naive UI + Tailwind · Token <code>docs/design-system.md</code> · Sidebar 220/72 · Search 320px · Select 160px · Locale ID · Satu pola 403 (floating global)</p>
+    <p style="font-size:13px">Dokumen ini adalah <b>wireframe low-fi</b> (grayscale, dashed). Lihat <a href="../../mockups/foundation/index.html">Mockup hi-fi</a> dan <a href="../../prototypes/foundation/index.html">Prototype interaktif</a>. Checklist Design Tokens di <a href="../_audit-matrix.md">_audit-matrix.md</a>.</p>
+  </header>
+
+  <div style="display:grid; grid-template-columns:220px 1fr; gap:20px; margin-top:18px">
+    <nav class="toc">
+      <b style="font-size:12px; letter-spacing:.05em; text-transform:uppercase">Daftar Isi</b>
+      <a href="#shell">1. List Shell Kanonis</a>
+      <a href="#datatable">2. DataTable Toolbar Kanonis</a>
+      <a href="#states">3. States (6)</a>
+      <a href="#sidebar">4. Sidebar 220/72</a>
+      <a href="#dashboard">5. Dashboard Shortcuts</a>
+      <a href="#auth">6. Auth (ID)</a>
+      <a href="#responsive">7. Responsive (D/T/M)</a>
+      <a href="#flow">8. User Flow Overlay</a>
+    </nav>
+
+    <main>
+      <!-- 1 SHELL -->
+      <h2 id="shell">1) List Shell Kanonis — <code>PageShell.vue</code> <span style="font-weight:400; color:var(--muted)">→ AC-D01</span></h2>
+      <p style="font-size:13px; margin-bottom:10px">Header (title + actions) + breadcrumb + toolbar + konten + pagination. Tidak ada halaman tanpa pesan/aksi (BR-002).</p>
+      <div class="wire">
+        <span class="wire-title">wireframe / list-shell</span>
+        <!-- header -->
+        <div class="box row" style="justify-content:space-between; background:#F9FAFB">
+          <div>
+            <div class="breadcrumb"><span>Dashboard</span><span>Data</span><span style="color:var(--text); font-weight:600">Global Tables</span></div>
+            <div style="font-size:18px; font-weight:700; margin-top:4px">Global Tables</div>
+            <div style="font-size:12px; color:var(--muted)">Kelola struktur data dinamis</div>
+          </div>
+          <div class="row"><div class="box h-32" style="width:120px">+ Buat Baru</div><div class="box h-32" style="width:80px">Aksi ▾</div></div>
+        </div>
+        <div class="annotation">PageShell props: <code>title</code>, <code>breadcrumbs: {label, href}[]</code>, <code>#actions</code> slot. Breadcrumb link &lt;a href&gt; + preventDefault. Title 20px Semibold.</div>
+        <!-- toolbar -->
+        <div class="toolbar" style="margin:12px 0">
+          <div class="box row search h-32"><span aria-hidden="true">⌕</span> <span style="color:var(--muted)">Cari global tables...</span><span style="margin-left:auto; color:var(--muted)">✕</span></div>
+          <div class="box w-160 h-32">Semua Kolom ▾</div>
+          <div class="box h-32">↻ Refresh</div>
+          <div class="box h-32">⟲ Reset</div>
+          <div class="box h-32">⚙ Kolom</div>
+        </div>
+        <div class="annotation">Search <b>min-width:320px flex:1</b> (bukan 280), Select <b>160px</b> (bukan 140), <b>Refresh (Restart)</b> + error slot — AC-D02. Icons via NIcon wrapper.</div>
+        <!-- error slot -->
+        <div class="alert" style="margin-bottom:10px"><span>⚠</span> <span><b>Gagal memuat data</b> — Periksa koneksi Anda. <a href="#">Coba lagi</a></span><span style="margin-left:auto">✕</span></div>
+        <div class="placeholder h-200">NDataTable — remote, sortable, paginated — columns: Nama | Tipe | Wajib | Dapat Dicari | Aksi</div>
+        <div class="row" style="justify-content:space-between; margin-top:8px; font-size:12px; color:var(--muted)"><span>Menampilkan 1–20 dari 42</span><span>1 2 3 ▸ — 10 / 20 / 50 / 100</span></div>
+        <div class="row" style="margin-top:10px"><div class="box box-dashed" style="flex:1; text-align:center; color:var(--muted)">Empty: <b>NEmpty</b> “Belum ada data” + <span style="color:var(--primary)">Buat Data Pertama</span></div></div>
+      </div>
+
+      <!-- 2 DATATABLE DETAIL -->
+      <h2 id="datatable">2) DataTable Toolbar Kanonis — Detail <span style="font-weight:400;color:var(--muted)">AC-D02</span></h2>
+      <div class="wire">
+        <span class="wire-title">wireframe / datatable-toolbar — 320 / 160 / Refresh / Error</span>
+        <h3>Happy (terisi)</h3>
+        <div class="toolbar"><div class="box row search h-32">⌕ <span style="color:var(--muted)">Cari users...</span> ✕</div><div class="box w-160 h-32">Semua Kolom ▾</div><div class="box h-32">↻ Refresh</div><div class="box h-32">⚙</div></div>
+        <div class="placeholder h-120" style="margin-top:8px">Table rows — sorted ASC ▴ / DESC ▾ — pagination bawah</div>
+        <h3 style="margin-top:14px">Sizing annotation</h3>
+        <div class="grid grid-3">
+          <div class="box"><b>Search</b><br>min-width <b>320px</b>, flex-1, height 32px, clearable, prefix Search via NIcon, debounce 300ms</div>
+          <div class="box"><b>Select Field</b><br>width <b>160px</b>, NSelect, placeholder “Semua Kolom”, clearable</div>
+          <div class="box"><b>Refresh</b><br>NButton + NIcon Restart, aria-label="Segarkan data", refetch tanpa reset search/sort/page</div>
+        </div>
+        <h3>Error slot (di atas tabel, full-width)</h3>
+        <div class="alert">⚠ <b>Gagal memuat data</b> — Kesalahan jaringan. <a href="#">Coba lagi</a> <span style="margin-left:auto">✕</span></div>
+        <div class="annotation">Error prop <code>error: string | null</code> + <code>emit('retry')</code>. Tidak ada loading overlay saat error. Retry tidak reset filter.</div>
+        <h3>States di DataTable</h3>
+        <div class="grid grid-2">
+          <div><b>Loading</b><div class="box" style="margin-top:6px"><div class="skeleton" style="height:16px; width:60%"></div><div class="skeleton" style="height:14px; width:90%; margin-top:8px"></div><div class="skeleton" style="height:14px; width:70%; margin-top:6px"></div></div><div class="annotation">NSpin overlay semi-transparan di atas tabel</div></div>
+          <div><b>Empty</b><div class="box" style="text-align:center; margin-top:6px">○ Belum ada data<br><span class="badge" style="margin-top:6px; background:#EFF6FF; border-color:#BFDBFE; color:#1D4ED8">+ Buat Data Pertama</span></div></div>
+        </div>
+      </div>
+
+      <!-- 3 STATES -->
+      <h2 id="states">3) States — 6 varian <span style="font-weight:400;color:var(--muted)">ALT-01 / ERR-01…03 + AC-D01…03</span></h2>
+      <div class="grid grid-2">
+        <div class="wire"><span class="wire-title">loading — NSpin</span><div class="placeholder h-120" style="position:relative"><span>NSpin overlay</span></div><div class="annotation">Table + NSpin show, tidak ada NEmpty saat loading</div></div>
+        <div class="wire"><span class="wire-title">empty — NEmpty + CTA</span><div class="box" style="text-align:center">NEmpty — “Belum ada Global Table”<br><span class="badge" style="background:#3B82F6;color:#fff; border-color:#2563EB; margin-top:8px">+ Buat Global Table Pertama</span></div><div class="annotation">ALT-01 — tidak ada dead-end; CTA mengarah ke create</div></div>
+        <div class="wire"><span class="wire-title">error — NAlert + retry</span><div class="alert">⚠ Gagal memuat data — <a href="#">Coba lagi</a></div><div class="placeholder h-120" style="margin-top:8px">Tabel tetap di bawah alert, retry tanpa reset</div></div>
+        <div class="wire"><span class="wire-title">403 — pola tunggal (floating global)</span><div class="alert" style="border-color:#FCA5A5">🔒 <b>Akses Ditolak</b> — Anda tidak memiliki izin untuk melakukan aksi ini. <span style="margin-left:auto">✕</span></div><div class="annotation"><b>Keputusan 26:</b> floating global (Teleport top-right, 300ms slide-in). Hapus listener per halaman di Task 27. Hanya satu instance — AC-D03.</div></div>
+        <div class="wire"><span class="wire-title">validation — NFormItem</span><div class="box">Label Email*<br><div class="box" style="border-color:#EF4444; background:#FEF2F2">a@b …</div><div style="color:#DC2626; font-size:12px; margin-top:4px">⚠ Email wajib diisi</div></div><div class="annotation">Inline error, focus first invalid, aria-describedby</div></div>
+        <div class="wire"><span class="wire-title">success — useMessage toast</span><div class="alert success">✓ <b>Berhasil</b> — Data disimpan. <span style="margin-left:auto">✕</span></div><div class="annotation">useMessage() — SSR guard <code>import.meta.client ? useMessage() : null</code>, live region, 3s auto-dismiss</div></div>
+      </div>
+
+      <!-- 4 SIDEBAR -->
+      <h2 id="sidebar">4) Sidebar Kanonis — 220 / 72, token, highlight <span style="font-weight:400;color:var(--muted)">AC-D04</span></h2>
+      <div class="grid grid-2">
+        <div class="wire">
+          <span class="wire-title">expanded 220px (≥1024 — desktop)</span>
+          <div class="sidebar">
+            <div class="box" style="height:52px; display:flex; align-items:center; justify-content:center; font-weight:700">MYAPP</div>
+            <div class="menu-item active">⊞ Dashboard</div>
+            <div class="menu-group">Data</div>
+            <div class="menu-item active">▦ Global Tables</div>
+            <div class="menu-item">▦ Pegawai</div>
+            <div class="menu-group">Persuratan</div>
+            <div class="menu-item">📄 Surat Tugas</div>
+            <div class="menu-item">📄 Surat Keputusan</div>
+            <div class="menu-group">Dokumen</div>
+            <div class="menu-item">⊞ Components</div>
+            <div class="menu-item">📄 Templates</div>
+            <div class="menu-item">☰ Administrations</div>
+            <div class="menu-item">◐ My Runs</div>
+            <div class="menu-item">📊 Documents</div>
+            <div class="menu-item">⚙ Sistem ▾</div>
+            <div class="box" style="display:flex; align-items:center; gap:8px; margin-top:auto"><span>↻</span> Segarkan menu</div>
+          </div>
+          <div class="annotation">Width <b>220px</b>, item 36px, NLayoutSider. Highlight via <code>resolveActiveKey</code> regex <code>data-table-*</code>, <code>persuratan-*</code>. Ikon Dokumen distinct (bukan 5× Document). Token: bg #F9FAFB, active #EFF6FF border #BFDBFE, text #1D4ED8.</div>
+        </div>
+        <div class="wire">
+          <span class="wire-title">collapsed 72px (tablet / toggle)</span>
+          <div class="sidebar collapsed">
+            <div class="box" style="width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-weight:700">M</div>
+            <div class="menu-item" style="width:40px; justify-content:center">⊞</div>
+            <div class="menu-item active" style="width:40px; justify-content:center; background:#EFF6FF">▦</div>
+            <div class="menu-item" style="width:40px; justify-content:center">▦</div>
+            <div class="menu-item" style="width:40px; justify-content:center">📄</div>
+            <div class="menu-item" style="width:40px; justify-content:center">⊞</div>
+            <div class="box" style="width:40px; height:32px; display:flex; align-items:center; justify-content:center">↻</div>
+          </div>
+          <div class="annotation">Collapsed <b>72px</b>, icon-only 22px, collapsed-icon-size 22. Label via tooltip. Refresh menus tetap via NIcon Restart.</div>
+        </div>
+      </div>
+      <div class="wire" style="margin-top:12px">
+        <span class="wire-title">highlight — semua route dinamis</span>
+        <div class="grid grid-3" style="font-size:12px">
+          <div class="box"><code>/dashboard/data/pegawai</code><br>→ <code>data-table-pegawai</code> active</div>
+          <div class="box"><code>/dashboard/docs/run/12</code><br>→ <code>persuratan-12</code> active</div>
+          <div class="box"><code>/dashboard/docs/documents/9</code><br>→ <code>documents</code> active + breadcrumb “Documents / #9”</div>
+        </div>
+        <div class="annotation">Semua leaf &lt;a href&gt; + preventDefault + router.push — native right-click / Ctrl+Click / middle-click tetap.</div>
+      </div>
+
+      <!-- 5 DASHBOARD -->
+      <h2 id="dashboard">5) Dashboard — Shortcuts Dinamis per Peran <span style="font-weight:400;color:var(--muted)">Step 6 — AC-D04</span></h2>
+      <div class="grid grid-3">
+        <div class="wire"><span class="wire-title">Designer (Super Admin / Designer)</span>
+          <div class="box" style="background:#F9FAFB"><b>Selamat Datang Kembali</b><br><span style="font-size:13px">Halo, Super Admin! Berikut ringkasan akun Anda.</span></div>
+          <div class="grid" style="margin-top:8px">
+            <div class="box"><b>Data</b> — 3 tables<br> <span style="color:var(--primary)">▦ Pegawai</span> · <span style="color:var(--primary)">▦ Jabatan</span> · <span style="color:var(--primary)">▦ Unit</span> <br><span style="font-size:11px; color:var(--muted)">Sumber: /api/navigation dataEntries</span></div>
+            <div class="box"><b>Persuratan</b> — 2 administrations<br> <span style="color:var(--primary)">📄 Surat Tugas</span> · <span style="color:var(--primary)">📄 SK</span></div>
+            <div class="box"><b>Dokumen</b> — Components / Templates / Administrations / My Runs / Documents</div>
+          </div>
+        </div>
+        <div class="wire"><span class="wire-title">Operator (hanya yang diizinkan)</span>
+          <div class="box" style="background:#F9FAFB"><b>Selamat Datang Kembali</b><br>Halo, Operator!</div>
+          <div class="grid" style="margin-top:8px">
+            <div class="box"><b>Data</b> — 1 table<br> <span style="color:var(--primary)">▦ Pegawai</span> <span style="font-size:11px; color:var(--muted)">(hanya Read) </span></div>
+            <div class="box"><b>Persuratan</b> — 1<br> <span style="color:var(--primary)">📄 Jalankan Surat Tugas →</span></div>
+            <div class="box" style="opacity:.6">Dokumen — (tidak ada akses)</div>
+          </div>
+        </div>
+        <div class="wire"><span class="wire-title">Empty (tanpa modul)</span>
+          <div class="box" style="text-align:center">NEmpty<br>“Belum ada akses modul”<br><span style="font-size:12px; color:var(--muted)">Hubungi admin untuk meminta akses.</span></div>
+          <div class="box" style="text-align:center; margin-top:8px; opacity:.7">Minta Akses (mailto admin)</div>
+          <div class="annotation">EC-01 — tidak dead-end; ada panduan.</div>
+        </div>
+      </div>
+
+      <!-- 6 AUTH -->
+      <h2 id="auth">6) Auth — Satu Locale (ID) <span style="font-weight:400;color:var(--muted)">Step 7 — AC-D04 + ERR-03</span></h2>
+      <div class="grid grid-2">
+        <div class="wire"><span class="wire-title">/login (ID) — wireframe</span>
+          <div class="box" style="text-align:center; background:#F9FAFB"><b>Selamat Datang</b><br><span style="font-size:12px; color:var(--muted)">Masuk ke akun Anda</span></div>
+          <div style="margin-top:10px">
+            <div style="font-size:12px; font-weight:600">Email *</div><div class="box h-32" style="margin-top:4px; color:var(--muted)">Masukkan email Anda — <span style="font-size:10px">[autocomplete=email]</span></div>
+            <div style="font-size:12px; font-weight:600; margin-top:8px">Password *</div><div class="box h-32" style="margin-top:4px; color:var(--muted)">Masukkan password Anda — [autocomplete=current-password]</div>
+            <div class="alert" style="margin-top:10px; font-size:12px">⚠ Email atau password salah</div>
+            <div class="box" style="text-align:center; background:#EFF6FF; border-color:#BFDBFE; color:#1D4ED8; margin-top:10px">Masuk</div>
+            <div style="text-align:center; font-size:13px; margin-top:8px; color:var(--muted)">Belum punya akun? <a href="#" style="color:#3B82F6">Daftar</a></div>
+          </div>
+          <div class="annotation">Link Daftar/Masuk: <b>#3B82F6</b> hover #2563EB (bukan indigo). Icon dekoratif <code>aria-hidden="true"</code>. NFormItem inline error. Error login: NAlert di atas form + focus.</div>
+        </div>
+        <div class="wire"><span class="wire-title">/register (ID)</span>
+          <div class="box" style="text-align:center; background:#F9FAFB"><b>Buat Akun</b><br><span style="font-size:12px; color:var(--muted)">Mulai dengan akun gratis Anda</span></div>
+          <div style="margin-top:10px" class="grid grid-2"><div><div style="font-size:11px; font-weight:600">Nama Depan *</div><div class="box h-32" style="margin-top:4px">Nama depan</div></div><div><div style="font-size:11px; font-weight:600">Nama Belakang *</div><div class="box h-32" style="margin-top:4px">Nama belakang</div></div></div>
+          <div style="font-size:11px; font-weight:600; margin-top:8px">Username *</div><div class="box h-32" style="margin-top:4px; color:var(--muted)">Pilih username</div>
+          <div style="font-size:11px; font-weight:600; margin-top:8px">Email *</div><div class="box h-32" style="margin-top:4px">email@…</div>
+          <div style="font-size:11px; font-weight:600; margin-top:8px">Password *</div><div class="box h-32" style="margin-top:4px; color:var(--muted)">Minimal 8 karakter — [autocomplete=new-password]</div>
+          <div class="box" style="text-align:center; background:#EFF6FF; border-color:#BFDBFE; color:#1D4ED8; margin-top:10px">Buat Akun</div>
+          <div style="text-align:center; font-size:13px; margin-top:8px; color:var(--muted)">Sudah punya akun? <a href="#" style="color:#3B82F6">Masuk</a></div>
+        </div>
+      </div>
+
+      <!-- 7 RESPONSIVE -->
+      <h2 id="responsive">7) Responsive — Desktop / Tablet / Mobile</h2>
+      <div class="grid grid-3">
+        <div class="wire"><span class="wire-title">desktop ≥1024 — shell penuh</span>
+          <div class="row"><div class="box" style="width:220px; height:260px">Sidebar 220<br>Data<br>Persuratan<br>Dokumen<br>Sistem</div><div class="col"><div class="box h-52">Header + Breadcrumb + Actions</div><div class="toolbar" style="margin-top:8px"><div class="box row search h-32">⌕ Cari...</div><div class="box w-160 h-32">Field</div><div class="box h-32">↻</div><div class="box h-32">⚙</div></div><div class="placeholder h-120" style="margin-top:8px">Tabel 12 kolom</div></div></div>
+          <div class="annotation">Grid 12, padding 32px, NGrid cols 2 desktop</div>
+        </div>
+        <div class="wire"><span class="wire-title">tablet 768–1023 — sider collapse, toolbar wrap</span>
+          <div class="row"><div class="box" style="width:72px; height:260px; text-align:center">72<br>⊞<br>▦<br>📄</div><div class="col"><div class="box h-40">Header</div><div class="toolbar" style="margin-top:8px"><div class="box row search h-32" style="flex-basis:100%">⌕ Cari (full-row wrap)</div><div class="box w-160 h-32">Field</div><div class="box h-32">↻</div></div><div class="placeholder h-120" style="margin-top:8px">Tabel scroll-x</div></div></div>
+        </div>
+        <div class="wire"><span class="wire-title">mobile &lt;768 — toolbar stack, tabel card</span>
+          <div class="box h-40">Header (full-width)</div>
+          <div class="box h-32" style="margin-top:8px">⌕ Cari — full width (stack)</div>
+          <div class="row" style="margin-top:6px"><div class="box h-32" style="flex:1">Field ▾</div><div class="box h-32">↻</div><div class="box h-32">⚙</div></div>
+          <div class="placeholder h-120" style="margin-top:8px">Tabel → scroll-x atau Card per row (NCard)</div>
+          <div class="annotation">Form full-width, NGrid 1 col, padding 16px</div>
+        </div>
+      </div>
+
+      <!-- 8 FLOW OVERLAY -->
+      <h2 id="flow">8) User Flow Overlay — 7 Steps</h2>
+      <div class="box" style="background:#F9FAFB; font-size:12px; line-height:1.6">
+        <b>Prototype jalur (lihat prototype interaktif):</b><br>
+        1) Entry → List (shell + toolbar) — debounce 300ms → filtered<br>
+        2) Refresh → refetch tanpa reset (search/sort/page dipertahankan)<br>
+        3) Empty → NEmpty+CTA “Buat Data Pertama” → create modal (bukan fondasi, tapi CTA ada)<br>
+        4) Error → NAlert+Retry → refetch → success toast — ERR-01<br>
+        5) 403 → floating global Akses Ditolak (1 instance) — ERR-02 / AC-D03<br>
+        6) Collapse 220↔72 → navigate /data/:table, /run/:id, /documents/:id → highlight benar — Step 5 / AC-D04<br>
+        7) Dashboard per peran (designer/operator/empty) → shortcut dinamis via /api/navigation — Step 6<br>
+        8) Login fail → inline NFormItem+ NAlert “Email atau password salah” → success → redirect dashboard — Step 7 / AC-D04
+      </div>
+      <p style="font-size:12px; color:var(--muted); margin-top:8px">Sumber: <code>tasks/26-design-system-refresh-ui-design.md</code> Steps 1..7 + ALT-01/ERR-01…03. Semua step memiliki mockup+prototype.</p>
+
+      <footer style="margin-top:24px; padding:12px; border:1px solid var(--border); border-radius:8px; background:#fff; font-size:12px; color:var(--muted)">
+        <b>Desain Tokens (low-fi anotasi, hi-fi exact):</b> Primary #3B82F6 / hover #2563EB / pressed #1D4ED8, radius 6/4/8, Inter 14px, spacing Tailwind xs2…3xl, icon Carbon via NIcon, animation Fast 150 / Normal 250 / Slow 350 + prefers-reduced-motion. <b>0 indigo</b> (BR-001). &nbsp;|&nbsp; <a href="../../mockups/foundation/index.html">→ Mockups hi-fi</a> &nbsp;|&nbsp; <a href="../../prototypes/foundation/index.html">→ Prototype interaktif</a> &nbsp;|&nbsp; <a href="../_audit-matrix.md">Audit matrix</a>
+      </footer>
+    </main>
+  </div>
+</div>
+</body>
+</html>

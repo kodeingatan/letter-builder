@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockups — Foundation Hi-Fi (Task 26)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  :root{ --primary:#3B82F6; --primary-hover:#2563EB; --primary-pressed:#1D4ED8; --primary-50:#EFF6FF; --primary-100:#DBEAFE; --primary-200:#BFDBFE; --error:#EF4444; --error-hover:#DC2626; --success:#22C55E; --warning:#F59E0B; --info:#0EA5E9; --gray-50:#F9FAFB; --gray-100:#F3F4F6; --gray-200:#E5E7EB; --gray-300:#D1D5DB; --gray-400:#9CA3AF; --gray-500:#6B7280; --gray-600:#4B5563; --gray-700:#374151; --gray-800:#1F2937; --border:#E5E7EB; --divider:#F3F4F6; --card:#fff; --sidebar:#F9FAFB; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter', ui-sans-serif, system-ui, sans-serif; background:var(--gray-50); color:var(--gray-800); line-height:1.5; font-size:14px}
+  a{color:var(--primary); text-decoration:none} a:hover{color:var(--primary-hover)}
+  .wrap{max-width:1280px;margin:0 auto;padding:24px}
+  h1{font-size:28px; font-weight:700; line-height:36px; margin-bottom:4px}
+  h2{font-size:20px; font-weight:600; line-height:28px; margin:28px 0 10px; border-top:1px solid var(--border); padding-top:18px}
+  h3{font-size:16px; font-weight:600; margin:14px 0 8px}
+  .sub{font-size:13px; color:var(--gray-500); margin-bottom:12px}
+  .grid{display:grid; gap:16px}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:900px){ .grid-2,.grid-3{grid-template-columns:1fr} }
+  /* Naive-like components */
+  .card{background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px; box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  .card-header{font-size:14px; font-weight:600; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between}
+  .btn{display:inline-flex; align-items:center; gap:6px; height:32px; padding:0 12px; border-radius:6px; border:1px solid var(--border); background:var(--card); font-size:13px; font-weight:500; cursor:pointer; transition:all 150ms ease}
+  .btn:hover{transform:scale(1.02); box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--primary); color:#fff; border-color:var(--primary)}
+  .btn-primary:hover{background:var(--primary-hover); border-color:var(--primary-hover)}
+  .btn-ghost{border-color:transparent; background:transparent}
+  .btn-ghost:hover{background:var(--gray-100)}
+  .input{display:flex; align-items:center; gap:8px; height:32px; padding:0 12px; border:1px solid var(--border); border-radius:6px; background:#fff; font-size:13px; flex:1; min-width:320px; transition:border-color 200ms ease}
+  .input:focus-within{border-color:var(--primary); box-shadow:0 0 0 2px var(--primary-100)}
+  .select{width:160px; height:32px; border:1px solid var(--border); border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 10px; font-size:13px}
+  .breadcrumb{display:flex; gap:6px; font-size:13px; color:var(--gray-500)}
+  .breadcrumb a{color:var(--gray-500)} .breadcrumb a:hover{color:var(--primary)} .breadcrumb .cur{color:var(--gray-800); font-weight:600}
+  .n-alert{border-radius:6px; padding:10px 12px; font-size:13px; display:flex; gap:10px; align-items:flex-start; border:1px solid}
+  .n-alert.error{background:#FEF2F2; border-color:#FECACA; color:#991B1B}
+  .n-alert.success{background:#F0FDF4; border-color:#BBF7D0; color:#166534}
+  .n-alert.info{background:#EFF6FF; border-color:#BFDBFE; color:#1E40AF}
+  .n-empty{text-align:center; padding:24px 12px; color:var(--gray-500)}
+  .n-empty .cta{margin-top:10px; display:inline-flex}
+  .n-spin{position:relative}
+  .n-spin::after{content:""; position:absolute; inset:0; background:rgba(255,255,255,.6); border-radius:8px; display:none}
+  .n-spin.loading::after{display:block} .n-spin.loading::before{content:"● Loading"; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:1; background:var(--card); border:1px solid var(--border); padding:6px 12px; border-radius:9999px; font-size:12px; box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .table{border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--card)}
+  .table-head{display:flex; background:var(--gray-50); border-bottom:1px solid var(--border); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--gray-500)}
+  .table-head div, .table-row div{padding:10px 12px; flex:1}
+  .table-row{display:flex; border-bottom:1px solid var(--divider); font-size:13px}
+  .table-row:last-child{border-bottom:none}
+  .table-row:hover{background:var(--gray-50)}
+  .sidebar{width:220px; background:var(--sidebar); border:1px solid var(--border); border-radius:8px; padding:8px; display:flex; flex-direction:column; gap:4px}
+  .sidebar.collapsed{width:72px; align-items:center}
+  .menu-item{height:36px; border-radius:6px; display:flex; align-items:center; gap:10px; padding:0 10px; font-size:13px; font-weight:500; cursor:pointer; transition:background-color 150ms ease}
+  .menu-item:hover{background:var(--gray-100)}
+  .menu-item.active{background:var(--primary-50); color:var(--primary-pressed); border:1px solid var(--primary-200); font-weight:600}
+  .menu-group{font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--gray-400); padding:8px 10px 4px}
+  .logo{height:52px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; color:var(--primary); border-bottom:1px solid var(--border); margin:-8px -8px 8px; background:#fff; border-radius:8px 8px 0 0}
+  .page-shell{border:1px solid var(--border); border-radius:8px; background:var(--card); overflow:hidden}
+  .page-shell-head{padding:16px 20px; border-bottom:1px solid var(--divider); display:flex; justify-content:space-between; align-items:flex-start; gap:16px}
+  .page-shell-head h3{margin:0; font-size:18px; font-weight:600}
+  .detail-view{display:flex; flex-direction:column}
+  .detail-field{padding:12px 0; border-bottom:1px solid rgba(0,0,0,.06)}
+  .detail-field:last-child{border-bottom:none}
+  .detail-label{display:block; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:#94a3b8; margin-bottom:4px}
+  .detail-value{display:block; font-size:14px; font-weight:500; color:#1e293b; line-height:1.5; word-break:break-word}
+  .tag{display:inline-flex; padding:2px 8px; border-radius:9999px; font-size:11px; font-weight:600; background:var(--primary-50); border:1px solid var(--primary-200); color:var(--primary-pressed)}
+  .kpi{border:1px solid var(--border); border-radius:8px; padding:16px; background:#fff; text-align:center}
+  .kpi .num{font-size:24px; font-weight:700; color:var(--gray-800)}
+  .kpi .lbl{font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--gray-400)}
+  .icon{width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center; border-radius:4px; background:var(--gray-100); font-size:11px}
+  .icon.primary{background:var(--primary-50); color:var(--primary)}
+  @media(prefers-reduced-motion:reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Foundation — Mockups Hi-Fi</h1>
+    <p class="sub">Naive UI 2.44 + Tailwind v4 · Token <code>naiveui-theme.ts</code> · Primary #3B82F6 · Radius 6/4/8 · Inter · 0 indigo · Icons Carbon via NIcon</p>
+    <p style="font-size:13px">Dokumen ini adalah <b>mockup hi-fi</b> (token-exact). Wireframe di <a href="../../wireframes/foundation/index.html">wireframes</a> · Prototype di <a href="../../prototypes/foundation/index.html">prototypes</a> · Token diff di <a href="_token-diff.md">_token-diff.md</a>.</p>
+  </header>
+
+  <!-- PAGE SHELL -->
+  <h2>1) PageShell — List Shell Kanonis <span style="font-weight:400; color:var(--gray-400)">AC-D01 · BR-002</span></h2>
+  <div class="page-shell">
+    <div class="page-shell-head">
+      <div>
+        <div class="breadcrumb"><a href="#">Dashboard</a> <span>/</span> <a href="#">Data</a> <span>/</span> <span class="cur">Global Tables</span></div>
+        <h3>Global Tables</h3>
+        <div style="font-size:12px; color:var(--gray-500)">Kelola struktur data dinamis — membuat, mengubah, menghapus skema tabel.</div>
+      </div>
+      <div style="display:flex; gap:8px; align-items:center">
+        <button class="btn btn-ghost" style="color:var(--gray-500)">⋯ Aksi</button>
+        <button class="btn btn-primary">+ Buat Global Table</button>
+      </div>
+    </div>
+    <div style="padding:16px 20px">
+      <!-- toolbar kanonis -->
+      <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap">
+        <div class="input"><span class="icon primary" aria-hidden="true">⌕</span> <input aria-label="Cari global tables" placeholder="Cari global tables..." style="border:none; outline:none; flex:1; font-size:13px" value=""><span style="color:var(--gray-400); cursor:pointer" aria-label="Bersihkan pencarian">✕</span></div>
+        <div class="select" aria-label="Pilih kolom pencarian"><span>Semua Kolom</span><span>▾</span></div>
+        <button class="btn" aria-label="Segarkan data"><span class="icon" aria-hidden="true">↻</span> Segarkan</button>
+        <button class="btn btn-ghost" aria-label="Atur ulang filter">⟲ Atur Ulang</button>
+        <button class="btn btn-ghost" aria-label="Visibilitas kolom"><span class="icon" aria-hidden="true">⚙</span></button>
+        <span style="margin-left:auto; font-size:12px; color:var(--gray-500)">Sumber: GET /api/global-tables · debounce 300ms</span>
+      </div>
+      <div class="n-alert error" style="margin-top:12px"><span aria-hidden="true">⚠</span><div><b>Gagal memuat data</b> — Kesalahan jaringan. <a href="#">Coba lagi</a></div><button class="btn btn-ghost" style="margin-left:auto; height:28px">✕</button></div>
+      <div class="table" style="margin-top:12px">
+        <div class="table-head"><div>Nama ▾</div><div>Nama Tampilan</div><div>Kolom</div><div>Diperbarui ▴</div><div style="max-width:120px">Aksi</div></div>
+        <div class="table-row"><div><b>pegawai</b> <span class="tag">Data</span></div><div>Pegawai</div><div>8</div><div>11 Sep 2026</div><div><a href="#">Lihat</a> · <a href="#">Ubah</a></div></div>
+        <div class="table-row"><div><b>jabatan</b></div><div>Jabatan</div><div>4</div><div>10 Sep 2026</div><div><a href="#">Lihat</a> · <a href="#">Ubah</a></div></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:10px; font-size:12px; color:var(--gray-500)"><span>Menampilkan 1–2 dari 2</span><span>1 ▸ — Tampilkan 10 / 20 / 50 / 100</span></div>
+      <div class="n-empty" style="border:1px dashed var(--border); border-radius:8px; margin-top:12px"><div style="font-size:28px">○</div><div style="font-weight:600; color:var(--gray-700)">Belum ada Global Table</div><div style="font-size:12px">Mulai dengan membuat struktur data pertama Anda.</div><button class="btn btn-primary cta">+ Buat Global Table Pertama</button></div>
+    </div>
+  </div>
+  <p style="font-size:11px; color:var(--gray-400); margin-top:6px; border-left:2px solid var(--primary); padding-left:8px">Spec: Header title 20px Semibold + breadcrumb 13px + actions slot. Search min-width 320px flex-1 (bukan 280), Select 160px, Refresh Restart + NIcon, error NAlert full-width di atas tabel, NEmpty + CTA (bukan kosong), pagination “Menampilkan X–Y dari Z”.</p>
+
+  <!-- DATATABLE VARIANTS -->
+  <h2>2) DataTable Kanonis — Toolbar + States <span style="font-weight:400; color:var(--gray-400)">AC-D02</span></h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-header">Toolbar — Happy <span style="font-weight:400; font-size:12px; color:var(--gray-400)">320 / 160 / Refresh</span></div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <div class="input"><span class="icon primary" aria-hidden="true">⌕</span><input placeholder="Cari users..." style="border:none; outline:none; flex:1" /></div>
+        <div class="select"><span>Semua Kolom</span><span>▾</span></div>
+        <button class="btn" aria-label="Segarkan data"><span class="icon" aria-hidden="true">↻</span></button>
+      </div>
+      <div class="table" style="margin-top:12px">
+        <div class="table-head"><div>Nama ▴</div><div>Email</div><div>Peran</div></div>
+        <div class="table-row"><div><b>Super Admin</b></div><div>admin@admin.com</div><div><span class="tag">Full Access</span></div></div>
+      </div>
+      <div style="margin-top:8px; font-size:11px; color:var(--gray-400); border-left:2px solid var(--primary); padding-left:8px">Anotasi: Search 320px min-width flex-1, Select 160px fixed, Refresh (Restart) aria-label, Reset, Settings popover. Icons semua via NIcon wrapper.</div>
+    </div>
+    <div class="card">
+      <div class="card-header">States di DataTable</div>
+      <div class="n-alert error" style="margin-bottom:10px"><span aria-hidden="true">⚠</span><div><b>Gagal memuat data</b> — <a href="#">Coba lagi</a> <span style="font-size:11px; color:var(--gray-500)">(retry tanpa reset)</span></div></div>
+      <div class="grid grid-2">
+        <div style="border:1px solid var(--border); border-radius:8px; padding:12px; text-align:center"><div style="font-size:22px">◌</div><div style="font-weight:600">Belum ada data</div><button class="btn btn-primary" style="margin-top:8px; height:28px">+ Buat</button></div>
+        <div class="n-spin loading" style="border:1px solid var(--border); border-radius:8px; padding:20px; height:120px"><div class="table" style="opacity:.5"><div class="table-head"><div>Kolom</div></div><div class="table-row"><div>…</div></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <h2>3) Sidebar 220 / 72 — Token + Highlight <span style="font-weight:400; color:var(--gray-400)">AC-D04 · GAP-UI-07…09</span></h2>
+  <div class="grid grid-2">
+    <div class="card" style="padding:0; overflow:hidden">
+      <div class="logo">MyApp</div>
+      <div style="display:flex; gap:12px; padding:12px">
+        <div class="sidebar" style="flex:1">
+          <div class="menu-item active"><span class="icon primary" aria-hidden="true">⊞</span> Dashboard</div>
+          <div class="menu-group">Data</div>
+          <div class="menu-item active"><span class="icon primary" aria-hidden="true">▦</span> Global Tables</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">▦</span> Pegawai</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">▦</span> Jabatan</div>
+          <div class="menu-group">Persuratan</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">✉</span> Surat Tugas</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">📃</span> Surat Keputusan</div>
+          <div class="menu-group">Dokumen</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">⊞</span> Components</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">📄</span> Templates</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">☰</span> Administrations</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">◐</span> My Runs</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">📊</span> Documents</div>
+          <div class="menu-group">Sistem</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">◷</span> Activity Logs</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">📑</span> System Logs</div>
+          <div class="menu-item"><span class="icon" aria-hidden="true">⚙</span> Settings</div>
+          <button class="btn btn-ghost" style="margin-top:8px; width:100%; justify-content:center" aria-label="Segarkan menu"><span class="icon" aria-hidden="true">↻</span> Segarkan menu</button>
+        </div>
+        <div style="flex:1; font-size:12px; color:var(--gray-500); line-height:1.6">
+          <b style="color:var(--gray-700)">Expanded 220px</b><br>
+          Item 36px, active: bg #EFF6FF, border #BFDBFE, text #1D4ED8.<br>
+          Sider bg #F9FAFB, border #E5E7EB.<br>
+          Dokumen icons <b>distinct</b> (bukan 5× Document):<br>
+          • Components — Grid/DataTable<br>
+          • Templates — Document<br>
+          • Administrations — Flow/Task<br>
+          • My Runs — Activity<br>
+          • Documents — Report<br>
+          Highlight: <code>resolveActiveKey</code> regex<br>
+          <code>data-table-*</code>, <code>persuratan-*</code>, <code>documents/:id</code> → active.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">Collapsed 72px <span style="font-weight:400; color:var(--gray-400)">icon-only, tooltip</span></div>
+      <div style="display:flex; gap:12px">
+        <div class="sidebar collapsed">
+          <div style="width:40px; height:40px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; color:var(--primary); background:#fff">M</div>
+          <div class="menu-item active" style="width:40px; justify-content:center">⊞</div>
+          <div class="menu-item" style="width:40px; justify-content:center">▦</div>
+          <div class="menu-item" style="width:40px; justify-content:center">✉</div>
+          <div class="menu-item" style="width:40px; justify-content:center">⊞</div>
+          <button class="btn btn-ghost" style="width:40px; height:32px; justify-content:center; padding:0" aria-label="Segarkan menu">↻</button>
+        </div>
+        <div style="flex:1; font-size:12px; color:var(--gray-500)">
+          <b style="color:var(--gray-700)">Collapsed</b> — tooltip on hover, label via NTooltip.<br>
+          Collapsed-icon-size 22px, width 72px (bukan 64).<br>
+          Overflow tidak terjadi di 320px mobile.
+        </div>
+      </div>
+      <div style="margin-top:12px; border:1px solid var(--primary-200); background:var(--primary-50); border-radius:6px; padding:10px; font-size:12px">
+        <b style="color:var(--primary-pressed)">Token audit:</b> 0 hits <code>indigo</code> / <code>#6366f1</code> / <code>#4F46E5</code> di mockup. Sebelum: <code>text-indigo-500</code>, <code>from-indigo-500 to-purple-500</code>, <code>text-indigo-600</code> → Sekarang: <code>#3B82F6</code> / <code>#2563EB</code> / <code>#EFF6FF</code>.
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <h2>4) Dashboard — Shortcuts Dinamis per Peran <span style="font-weight:400; color:var(--gray-400)">Step 6 · AC-D04</span></h2>
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="card-header">Designer / Super Admin</div>
+      <div class="card" style="background:var(--gray-50); border-style:dashed"><b>Selamat Datang Kembali</b><div style="font-size:13px; color:var(--gray-500)">Halo, Super Admin! Berikut ringkasan akun Anda.</div></div>
+      <div style="margin-top:10px" class="grid">
+        <div class="card"><div class="card-header" style="border:none; padding:0; margin:0">📂 Data <span style="font-weight:400; color:var(--gray-400)">3 tables</span></div><div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px"><span class="tag">▦ Pegawai</span><span class="tag">▦ Jabatan</span><span class="tag">▦ Unit</span></div><div style="font-size:11px; color:var(--gray-400); margin-top:6px">Sumber: GET /api/navigation · dataEntries</div></div>
+        <div class="card"><div class="card-header" style="border:none; padding:0; margin:0">✉ Persuratan <span style="font-weight:400; color:var(--gray-400)">2</span></div><div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px"><span class="tag">📃 Surat Tugas</span><span class="tag">📃 SK</span></div></div>
+        <div class="card"><div class="card-header" style="border:none; padding:0; margin:0">📊 Dokumen</div><div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:8px"><span class="tag">⊞ Components</span><span class="tag">📄 Templates</span><span class="tag">☰ Administrations</span></div></div>
+      </div>
+      <div class="grid grid-3" style="margin-top:10px"><div class="kpi"><div class="num">24</div><div class="lbl">Total Users</div></div><div class="kpi"><div class="num">6</div><div class="lbl">Roles</div></div><div class="kpi"><div class="num">18</div><div class="lbl">Permissions</div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header">Operator</div>
+      <div class="card" style="background:var(--gray-50); border-style:dashed"><b>Selamat Datang Kembali</b><div style="font-size:13px; color:var(--gray-500)">Halo, Operator!</div></div>
+      <div style="margin-top:10px" class="grid">
+        <div class="card"><div class="card-header" style="border:none; padding:0; margin:0">📂 Data <span style="font-weight:400; color:var(--gray-400)">1</span></div><div style="margin-top:8px"><span class="tag">▦ Pegawai</span> <span style="font-size:11px; color:var(--gray-400)">(hanya Baca)</span></div></div>
+        <div class="card"><div class="card-header" style="border:none; padding:0; margin:0">✉ Persuratan</div><div style="margin-top:8px"><a href="#" class="tag" style="background:var(--primary); color:#fff; border-color:var(--primary)">▶ Jalankan Surat Tugas</a></div></div>
+        <div class="card" style="opacity:.55"><div class="card-header" style="border:none; padding:0; margin:0">📊 Dokumen <span style="font-weight:400; color:var(--gray-400)">tidak ada akses</span></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">Empty — Tanpa Modul</div>
+      <div class="n-empty" style="border:1px dashed var(--border); border-radius:8px"><div style="font-size:28px">○</div><div style="font-weight:600; color:var(--gray-700)">Belum ada akses modul</div><div style="font-size:12px; max-width:22ch; margin:4px auto">Hubungi administrator untuk meminta akses ke Data atau Persuratan.</div><a href="mailto:admin@admin.com" class="btn btn-ghost" style="margin-top:10px; font-size:12px">Minta Akses</a></div>
+      <div style="margin-top:10px; font-size:11px; color:var(--gray-400); border-left:2px solid var(--primary); padding-left:8px">EC-01 — tidak dead-end; ada panduan, bukan halaman kosong.</div>
+    </div>
+  </div>
+  <p style="font-size:11px; color:var(--gray-400); margin-top:8px">Responsive: NGrid cols 2 desktop → 1 mobile, padding 32/24/16, shortcuts wrap.</p>
+
+  <!-- AUTH -->
+  <h2>5) Auth — Satu Locale ID + Token + A11y <span style="font-weight:400; color:var(--gray-400)">AC-D04 · ERR-03</span></h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-header">/login — ID</div>
+      <div style="background:var(--gray-50); border:1px solid var(--border); border-radius:8px; padding:16px">
+        <div style="text-align:center; margin-bottom:12px"><div style="font-size:18px; font-weight:700">Selamat Datang</div><div style="font-size:12px; color:var(--gray-500)">Masuk ke akun Anda</div></div>
+        <div class="n-alert error" style="margin-bottom:12px"><span aria-hidden="true">⚠</span><div><b>Email atau password salah</b><br><span style="font-size:11px; color:var(--gray-500)">Periksa kembali kredensial Anda.</span></div></div>
+        <div style="font-size:12px; font-weight:600; margin-bottom:4px">Email <span style="color:var(--error)">*</span></div><div class="input"><input placeholder="Masukkan email Anda" autocomplete="email" aria-label="Email" style="border:none; outline:none; flex:1" /></div>
+        <div style="font-size:12px; font-weight:600; margin:12px 0 4px">Password <span style="color:var(--error)">*</span></div><div class="input"><input type="password" placeholder="Masukkan password Anda" autocomplete="current-password" aria-label="Password" style="border:none; outline:none; flex:1" /><span style="font-size:11px; color:var(--gray-400)" aria-hidden="true">👁</span></div>
+        <div style="font-size:11px; color:var(--error); margin-top:6px">⚠ Password wajib diisi</div>
+        <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:14px"><span class="icon primary" style="background:rgba(255,255,255,.2); color:#fff" aria-hidden="true">→</span> Masuk</button>
+        <div style="text-align:center; font-size:12px; color:var(--gray-500); margin-top:10px">Belum punya akun? <a href="#" style="color:var(--primary); font-weight:600">Daftar</a></div>
+      </div>
+      <div style="font-size:11px; color:var(--gray-400); margin-top:8px; border-left:2px solid var(--primary); padding-left:8px">Link Daftar/Masuk: <b>#3B82F6</b> hover #2563EB (bukan indigo-600). autocomplete email/current-password, dekorasi aria-hidden, NFormItem inline, NAlert error di atas form.</div>
+    </div>
+    <div class="card">
+      <div class="card-header">/register — ID</div>
+      <div style="background:var(--gray-50); border:1px solid var(--border); border-radius:8px; padding:16px">
+        <div style="text-align:center; margin-bottom:12px"><div style="font-size:18px; font-weight:700">Buat Akun</div><div style="font-size:12px; color:var(--gray-500)">Mulai dengan akun gratis Anda</div></div>
+        <div class="grid grid-2"><div><div style="font-size:11px; font-weight:600">Nama Depan *</div><div class="input" style="min-width:0"><input placeholder="Nama depan" autocomplete="given-name" style="border:none; outline:none; flex:1" /></div></div><div><div style="font-size:11px; font-weight:600">Nama Belakang *</div><div class="input" style="min-width:0"><input placeholder="Nama belakang" autocomplete="family-name" style="border:none; outline:none; flex:1" /></div></div></div>
+        <div style="font-size:11px; font-weight:600; margin:10px 0 4px">Username *</div><div class="input"><input placeholder="Pilih username" autocomplete="username" style="border:none; outline:none; flex:1" /></div>
+        <div style="font-size:11px; font-weight:600; margin:10px 0 4px">Email *</div><div class="input"><input placeholder="Masukkan email Anda" autocomplete="email" style="border:none; outline:none; flex:1" /></div>
+        <div style="font-size:11px; font-weight:600; margin:10px 0 4px">Password *</div><div class="input"><input type="password" placeholder="Minimal 8 karakter" autocomplete="new-password" style="border:none; outline:none; flex:1" /></div>
+        <div style="font-size:11px; font-weight:600; margin:10px 0 4px">Konfirmasi Password *</div><div class="input"><input type="password" placeholder="Konfirmasi password Anda" autocomplete="new-password" style="border:none; outline:none; flex:1" /></div>
+        <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:14px">Buat Akun</button>
+        <div style="text-align:center; font-size:12px; color:var(--gray-500); margin-top:10px">Sudah punya akun? <a href="#" style="color:var(--primary); font-weight:600">Masuk</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATES -->
+  <h2>6) States — 6 Varian Naive UI <span style="font-weight:400; color:var(--gray-400)">loading/empty/error/success/validation/403</span></h2>
+  <div class="grid grid-3">
+    <div class="card n-spin loading" style="height:160px"><div class="card-header">Loading — NSpin overlay</div><div class="table" style="opacity:.5"><div class="table-head"><div>Nama</div><div>Status</div></div><div class="table-row"><div>…</div><div>…</div></div></div><div style="font-size:11px; color:var(--gray-400); margin-top:8px">NSpin show + semi-transparan overlay di atas tabel / NGrid skeleton untuk dashboard.</div></div>
+    <div class="card"><div class="card-header">Empty — NEmpty + CTA</div><div class="n-empty"><div style="font-size:26px">○</div><div style="font-weight:600">Belum ada data</div><div style="font-size:12px">Tidak ada Global Table yang ditemukan.</div><button class="btn btn-primary" style="margin-top:8px">+ Buat Global Table Pertama</button></div></div>
+    <div class="card"><div class="card-header">Error — NAlert + Retry</div><div class="n-alert error"><span aria-hidden="true">⚠</span><div><b>Gagal memuat data</b> — jaringan bermasalah.<br><a href="#">Coba lagi</a> <span style="font-size:11px; color:var(--gray-500)">(tanpa reset filter)</span></div></div><div class="table" style="opacity:.6; margin-top:10px"><div class="table-head"><div>Nama</div></div><div class="table-row"><div>…</div></div></div></div>
+    <div class="card"><div class="card-header">Success — useMessage toast</div><div class="n-alert success"><span aria-hidden="true">✓</span><div><b>Berhasil</b> — Data disimpan.</div></div><div style="font-size:11px; color:var(--gray-400); margin-top:8px">useMessage() — SSR guard <code>import.meta.client ? useMessage() : null</code>, 3s auto-dismiss, live region.</div></div>
+    <div class="card"><div class="card-header">Validation — NFormItem</div><div style="font-size:12px; font-weight:600">Email *</div><div class="input" style="border-color:var(--error); background:#FEF2F2"><input placeholder="a@b" style="border:none; outline:none; flex:1; background:transparent" /></div><div style="font-size:11px; color:var(--error); margin-top:4px">⚠ Email wajib diisi</div><div style="font-size:12px; font-weight:600; margin-top:10px">Password *</div><div class="input" style="border-color:var(--error); background:#FEF2F2"><input type="password" style="border:none; outline:none; flex:1; background:transparent" /></div><div style="font-size:11px; color:var(--error); margin-top:4px">⚠ Password harus mengandung huruf besar, kecil, dan angka</div></div>
+    <div class="card"><div class="card-header">403 — Pola Tunggal (floating global)</div><div class="n-alert error"><span aria-hidden="true">🔒</span><div><b>Akses Ditolak</b> — Anda tidak memiliki izin untuk melakukan aksi ini.</div><button class="btn btn-ghost" style="margin-left:auto; height:28px">✕</button></div><div style="font-size:11px; color:var(--gray-400); margin-top:8px; border-left:2px solid var(--primary); padding-left:8px"><b>Keputusan 26:</b> floating global (Teleport top-right, slide-in 300ms). Hapus listener per halaman → satu instance — AC-D03. Inline per halaman <b>tidak</b> dipakai.</div></div>
+  </div>
+
+  <!-- DETAILS -->
+  <h2>7) Detail — .detail-view + Animasi Token</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-header">Detail Drawer — .detail-view (bukan NDescriptions)</div>
+      <div class="detail-view">
+        <div class="detail-field"><span class="detail-label">Nama Pengguna</span><span class="detail-value">Super Admin</span></div>
+        <div class="detail-field"><span class="detail-label">Email</span><span class="detail-value">admin@admin.com</span></div>
+        <div class="detail-field"><span class="detail-label">Peran</span><span class="detail-value"><span class="tag">Super Admin</span> <span class="tag">Full Access</span></span></div>
+        <div class="detail-field"><span class="detail-label">Dibuat Pada</span><span class="detail-value" style="font-family:'SF Mono', monospace; font-size:13px">2026-09-11 09:42:10</span></div>
+      </div>
+      <div style="font-size:11px; color:var(--gray-400); margin-top:8px">Pattern: .detail-view flex column, .detail-field 12px 0 border-bottom rgba(0,0,0,.06), .detail-label 11px uppercase #94a3b8, .detail-value 14px #1e293b — konsisten, tidak NDescriptions.</div>
+    </div>
+    <div class="card">
+      <div class="card-header">Motion — Tokens Fast/Normal/Slow</div>
+      <div class="grid grid-2" style="font-size:12px">
+        <div class="card" style="background:var(--gray-50)"><b>Fast 150ms</b> ease-out<br>hover, button, menu item</div>
+        <div class="card" style="background:var(--gray-50)"><b>Normal 250ms</b> ease<br>page, card reveal, NAlert slideDown</div>
+        <div class="card" style="background:var(--gray-50)"><b>Slow 350ms</b> ease-in-out<br>modal/drawer, toast slide-in</div>
+        <div class="card" style="background:var(--gray-50)"><b>Reduced</b><br>@media (prefers-reduced-motion: reduce) → 0.01ms</div>
+      </div>
+      <div style="font-size:11px; color:var(--gray-400); margin-top:8px">Keputusan: aktifkan usePageTransition (fadeInUp 500 ease outExpo + stagger 80) di default.vue — atau hapus dependensi mati. Keyframes authFormEnter 250ms (bukan 400ms) token Normal.</div>
+    </div>
+  </div>
+
+  <footer style="margin-top:24px; padding:14px; border:1px solid var(--border); border-radius:8px; background:#fff; font-size:12px; color:var(--gray-500); line-height:1.6">
+    <b>Design Tokens Check:</b> Warna #3B82F6/#2563EB/#1D4ED8 (0 indigo) ✓ · Typography Inter ✓ · Radius 6/4/8 ✓ · Spacing Tailwind ✓ · Icons Carbon via NIcon ✓ · <a href="../../wireframes/foundation/index.html">Wireframes</a> · <a href="../../prototypes/foundation/index.html">Prototype</a> · <a href="../_audit-matrix.md" style="display:none">audit</a> <a href="_token-diff.md">Token diff untuk Task 27</a>
+  </footer>
+</div>
+</body>
+</html>

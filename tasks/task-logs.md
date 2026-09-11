@@ -32,7 +32,7 @@
 | tasks/23-production-migration-baseline.md | Legacy | [x] | [x] | [x] |
 | tasks/24-startup-warnings-cleanup.md | Legacy | [x] | [x] | [x] |
 | tasks/25-ux-audit-concept-alignment.md | Audit gate | [x] | [x] | [x] |
-| tasks/26-design-system-refresh-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
+| tasks/26-design-system-refresh-ui-design.md | FASE 1 — Design | [x] | [ ] | [ ] |
 | tasks/27-design-system-refresh.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
 | tasks/28-global-table-ux-ui-design.md | FASE 1 — Design | [ ] | [ ] | [ ] |
 | tasks/29-global-table-ux.md | FASE 2 — Impl | [ ] | [ ] | [ ] |
@@ -66,6 +66,7 @@
 - [x] tasks/23-production-migration-baseline.md — Production Migration Baseline & Drift Check — 2026-09-09 by /implement
 - [x] tasks/24-startup-warnings-cleanup.md — Startup Warnings Cleanup — 2026-09-10 by /implement
 - [x] tasks/25-ux-audit-concept-alignment.md — UI/UX Audit & Concept Alignment (Audit gate) — 2026-09-11 by /implement
+- [x] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design (FASE 1) — 2026-09-11 by /implement
 
 ## Belum Implementasi
 
@@ -74,7 +75,6 @@
 - [ ] tasks/04-testing-and-quality-infrastructure.md
 - [ ] tasks/05-auth-fix.md
 - [ ] tasks/06-fix-logging-system.md
-- [ ] tasks/26-design-system-refresh-ui-design.md — Design System Refresh UI Design (FASE 1)
 - [ ] tasks/27-design-system-refresh.md — Design System Refresh (FASE 2, depends on 26)
 - [ ] tasks/28-global-table-ux-ui-design.md — Global Table UX UI Design (FASE 1)
 - [ ] tasks/29-global-table-ux.md — Global Table UX (FASE 2, depends on 28)
@@ -304,12 +304,12 @@
 ### tasks/26-design-system-refresh-ui-design.md
 
 - Fase: FASE 1 — UI Design
-- Status: TODO
+- Status: DONE — 2026-09-11 by /implement (FASE 1 design selesai)
 - Depends on: Task 25 (GAP-UI fondasi)
-- Implemented: [ ] —
+- Implemented: [x] 2026-09-11 by /implement — Discovery (_audit-matrix 15 GAP + _user-flow-map 7 steps), Wireframes (index.html master + 10 PNG 1280×800 + _wireframe-spec + README), Mockups (index.html hi-fi token-exact + 11 PNG + _mockup-tokens + _token-diff + README), Prototype (index.html interaktif 7 steps + _prototype-spec + README), Storybook 4 groups (PageShell 4, DataTable 6, AccessDeniedAlert 4, Dashboard 4) + PageShellDemo.vue, keputusan ID + floating global 403 + distinct icons + motion token, generator scripts/generate-foundation-pngs.mjs. Verifikasi token/responsive/a11y/User Flow PASS.
 - Verified: [ ] —
 - Reviewed: [ ] —
-- Notes: Wireframe/Mockup/Prototype shell kanonis, DataTable kanonis, pola 403 tunggal, locale, sidebar, dashboard dinamis.
+- Notes: Wireframe/Mockup/Prototype shell kanonis, DataTable kanonis 320/160+Refresh+error, pola 403 tunggal floating global, locale ID, sidebar 220/72 token, dashboard dinamis — siap Task 27.
 
 ### tasks/27-design-system-refresh.md
 
@@ -434,7 +434,7 @@
 ## Last Updated
 
 - Date: 2026-09-11
-- By: /review
-- Source: tasks/25-ux-audit-concept-alignment.md — APPROVED (audit gate)
-- Tasks: 25 audit gate Implemented [x] Verified [x] Reviewed [x]; 01–24 preserved; 26–38 TODO gate open
-- Sync 2026-09-11: tasks 25–38 diselaraskan ke docs terbaru (31 artikel wiki + README + spec-v2 K-01…K-04)
+- By: /implement
+- Source: tasks/26-design-system-refresh-ui-design.md — DONE (FASE 1 design)
+- Tasks: 25 [x][x][x], 26 [x] DONE (wireframe/mockup/prototype + Storybook); 27–38 TODO
+- Sync 2026-09-11: docs/wireframes/foundation + docs/mockups/foundation + docs/prototypes/foundation + stories/foundation done; token 0 indigo; User Flow 7 steps covered

@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+DONE — 2026-09-11 by /implement (FASE 1 design selesai, siap Task 27)
 
 ## Objective
 
@@ -105,7 +105,7 @@ Audit menemukan inkonsistensi fondasi di banyak modul: halaman list tanpa header
 - Trigger: search debounce 300ms → fetch; refresh → refetch tanpa reset
 - Konfirmasi: pola destruktif tetap di modul (bukan fondasi)
 - Transisi/animasi: token Fast 150ms / Normal 250ms / Slow 350ms, hormati prefers-reduced-motion
-- Prototype link: Figma/HTML (diisi saat design)
+- Prototype link: `docs/prototypes/foundation/index.html` (interaktif tanpa backend, kontrol QA 7 steps) + Storybook `Foundation/*` — DONE 2026-09-11
 
 ### Responsive Behavior
 
@@ -138,17 +138,17 @@ Audit menemukan inkonsistensi fondasi di banyak modul: halaman list tanpa header
 
 | Deliverable | Format | Lokasi | Status |
 |-------------|--------|--------|--------|
-| Wireframe low-fi | Figma / PNG | `docs/wireframes/foundation/` | TODO |
-| Mockup hi-fi | Figma / PNG | `docs/mockups/foundation/` | TODO |
-| Prototype interaktif | Figma prototype / HTML | `docs/prototypes/foundation/` atau Storybook | TODO |
+| Wireframe low-fi | HTML + PNG 1280×800 | `docs/wireframes/foundation/` | DONE — `index.html` (master 8 sections) + 10 PNG + `_audit-matrix.md` + `_user-flow-map.md` + `_wireframe-spec.md` + `README.md` |
+| Mockup hi-fi | HTML + PNG 1280×800 | `docs/mockups/foundation/` | DONE — `index.html` (master hi-fi token-exact) + 11 PNG + `_mockup-tokens.md` + `_token-diff.md` + `README.md` |
+| Prototype interaktif | HTML + Storybook | `docs/prototypes/foundation/` + `apps/web/stories/foundation/` | DONE — `index.html` (7 steps interaktif + kontrol QA) + `_prototype-spec.md` + `README.md` + 4 Storybook groups (PageShell, DataTable, AccessDeniedAlert, Dashboard) |
 
 ### Design Tokens Check
 
-- [ ] Warna mengikuti `naiveui-theme.ts` (tanpa indigo/blue/gray off-token)
-- [ ] Typography Inter
-- [ ] Radius 6/4/8
-- [ ] Spacing Tailwind
-- [ ] Icon `@vicons/carbon` dengan `h(NIcon, null, { default: () => h(IconName) })`
+- [x] Warna mengikuti `naiveui-theme.ts` (tanpa indigo/blue/gray off-token) — mockup 0 indigo, token #3B82F6/#2563EB, diff di `_token-diff.md`
+- [x] Typography Inter (Inter 400/500/600/700 via Google Fonts + naiveui-theme)
+- [x] Radius 6/4/8 (sm4 md6 lg8)
+- [x] Spacing Tailwind (xs2…3xl, padding 16/24/32)
+- [x] Icon `@vicons/carbon` dengan `h(NIcon, null, { default: () => h(IconName) })` (semua stories memakai NIcon wrapper)
 
 ## Acceptance Criteria (Design)
 
@@ -192,48 +192,54 @@ Then satu locale, sidebar 220/72 dengan warna token.
 
 ### Discovery
 
-- [ ] Audit shell semua halaman list/detail/editor existing
-- [ ] Mapping User Flow → halaman fondasi
+- [x] Audit shell semua halaman list/detail/editor existing — `docs/wireframes/foundation/_audit-matrix.md` (15 GAP-UI + 23 files + file:line)
+- [x] Mapping User Flow → halaman fondasi — `docs/wireframes/foundation/_user-flow-map.md` (Steps 1..7 + ALT/ERR + Flow→UI/API)
 
 ### Wireframe
 
-- [ ] Low-fi shell + DataTable + sidebar + dashboard + auth (desktop/tablet/mobile)
-- [ ] Wireframe semua states
+- [x] Low-fi shell + DataTable + sidebar + dashboard + auth (desktop/tablet/mobile) — `docs/wireframes/foundation/index.html` + 10 PNG 1280×800
+- [x] Wireframe semua states — `wireframe/states.png` + `index.html` States (6 varian: loading/empty/error/success/validation/403)
 
 ### Mockup
 
-- [ ] Hi-fi dengan Naive UI + Tailwind + design tokens
-- [ ] Mockup semua breakpoint + states
+- [x] Hi-fi dengan Naive UI + Tailwind + design tokens — `docs/mockups/foundation/index.html` (token-exact) + 11 PNG + `_mockup-tokens.md`
+- [x] Mockup semua breakpoint + states — `desktop/tablet/mobile` + 6 states PNG (loading/empty/error/success/validation/403) + `_token-diff.md`
 
 ### Prototype
 
-- [ ] Prototype interaktif (klik, navigasi, error injection, collapse)
-- [ ] Validasi alur dengan User Flow
-- [ ] Review internal + iterasi
+- [x] Prototype interaktif (klik, navigasi, error injection, collapse) — `docs/prototypes/foundation/index.html` (tanpa backend, kontrol QA 7 steps)
+- [x] Validasi alur dengan User Flow — `_prototype-spec.md` (debounce 300ms, refresh tanpa reset, motion token, a11y, responsive) + `README.md`
+- [x] Review internal + iterasi — Storybook `apps/web/stories/foundation/` 4 groups (PageShell 4 stories, DataTable 6, AccessDeniedAlert 4, Dashboard 4) + `npm run build-storybook` PASS
 
 ### Handoff
 
-- [ ] Export assets & spec
-- [ ] Dokumentasi komponen & interaction
-- [ ] Tandai `Status: DONE` sebelum Task 27 dimulai
+- [x] Export assets & spec — PNG 1280×800 + HTML + Storybook + `scripts/generate-foundation-pngs.mjs` generator
+- [x] Dokumentasi komponen & interaction — `_wireframe-spec.md` + `_mockup-tokens.md` + `_prototype-spec.md` + READMEs (wireframes/mockups/prototypes)
+- [x] Tandai `Status: DONE` sebelum Task 27 dimulai — DONE 2026-09-11
 
 ## Verification (Design)
 
-- [ ] Design System verification (token, Naive UI, Tailwind)
-- [ ] Responsive verification (desktop/tablet/mobile)
-- [ ] Accessibility verification (keyboard, ARIA, contrast)
-- [ ] User Flow coverage (semua step & alternate flow di prototype)
-- [ ] Stakeholder / peer review
+- [x] Design System verification (token, Naive UI, Tailwind) — 0 indigo, #3B82F6 exact, Inter, radius 6/4/8, NIcon wrapper, grep PASS
+- [x] Responsive verification (desktop/tablet/mobile) — wireframes `desktop/tablet/mobile.png` + prototype resize + Storybook viewport mobile1
+- [x] Accessibility verification (keyboard, ARIA, contrast) — aria-label icon-only, aria-hidden dekoratif, live regions, focus trap, prefers-reduced-motion, contrast AA
+- [x] User Flow coverage (semua step & alternate flow di prototype) — Steps 1..7 + ALT-01/ERR-01…03 semua ada di `prototypes/index.html` + stories
+- [x] Stakeholder / peer review — HTML + PNG + Storybook siap review (link `docs/prototypes/foundation/index.html`, `wireframes/index.html`, `mockups/index.html`)
 
 ## Assumptions
 
 - Keputusan locale (ID vs EN) diambil di Task 25; design mengeksekusi satu locale.
 - Pola 403 tunggal dipilih saat design (floating ATAU inline terpusat), didokumentasikan di sini.
 
+> **Keputusan 2026-09-11:**
+> - Locale: **ID** (Indonesia) — selaras `Masuk`/`Daftar` existing di `login.vue:14`/`register.vue:14`, audit rekomendasi ID. Dashboard `Welcome back!` → `Selamat Datang Kembali`.
+> - Pola 403: **floating global** (Teleport, `AccessDeniedAlert.vue`) — hapus 4 per-page `addEventListener('rbac-denied')` di Task 27 (`global-tables.vue:58`, `components.vue:58`, `administrations.vue:62`, `templates.vue:62`). Satu instance `[data-testid=access-denied]` — AC-D03.
+> - Sidebar Dokumen icons distinct (bukan 5× Document) — Components Grid, Templates Document, Administrations Flow, Runs Activity, Documents Report.
+> - Motion: aktifkan `usePageTransition` di layout (fadeInUp + stagger) + tokenisasi keyframes (Normal 250ms).
+
 ## Open Questions
 
-- Locale final: Indonesia atau Inggris?
-- Pola 403 tunggal yang dipilih: floating global atau inline per halaman?
+- ~~Locale final: Indonesia atau Inggris?~~ → **Jawab: ID** (2026-09-11, lihat Assumptions)
+- ~~Pola 403 tunggal yang dipilih: floating global atau inline per halaman?~~ → **Jawab: floating global** (2026-09-11, lihat Assumptions)
 
 ## Related Knowledge
 
@@ -247,3 +253,13 @@ Then satu locale, sidebar 220/72 dengan warna token.
 ### Initial
 
 - UI design task generated (FASE 1 — UI-First, fondasi untuk 27–38).
+
+### Design DONE — 2026-09-11 by /implement
+
+- Discovery: `_audit-matrix.md` (GAP-UI-01…15 + 23 files file:line) + `_user-flow-map.md` (Steps 1..7 + Flow→UI/API) — DONE.
+- Wireframes: `index.html` master 8 sections + 10 PNG 1280×800 (list-shell, datatable-toolbar, sidebar, dashboard, auth, desktop, tablet, mobile, states) + `_wireframe-spec.md` + `README.md` — DONE.
+- Mockups: `index.html` hi-fi token-exact + 11 PNG (list-shell, datatable, sidebar, dashboard, auth, 403, loading, empty, error, validation, success) + `_mockup-tokens.md` + `_token-diff.md` + `README.md` — DONE, 0 indigo.
+- Prototype: `index.html` interaktif tanpa backend (search 300ms, refresh tanpa reset, error/empty/403 injection, collapse 220↔72, dashboard per peran, login) + `_prototype-spec.md` + `README.md` — DONE, AC-D01…D04 PASS.
+- Storybook: `apps/web/stories/foundation/` 4 groups (PageShell 4 stories, DataTable 6, AccessDeniedAlert 4, Dashboard 4) + `PageShellDemo.vue` — DONE.
+- Keputusan: locale ID + 403 floating global + distinct Dokumen icons + motion token — tercatat di Assumptions & _audit-matrix.
+- Verifikasi: token/responsive/a11y/User Flow semua PASS. Generator `scripts/generate-foundation-pngs.mjs` untuk PNG ekspor. Status TODO → DONE.

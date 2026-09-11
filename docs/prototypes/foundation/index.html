@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prototype — Foundation Interaktif (Task 26)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --primary:#3B82F6; --primary-hover:#2563EB; --primary-pressed:#1D4ED8; --primary-50:#EFF6FF; --primary-100:#DBEAFE; --primary-200:#BFDBFE; --error:#EF4444; --success:#22C55E; --gray-50:#F9FAFB; --gray-100:#F3F4F6; --gray-200:#E5E7EB; --gray-300:#D1D5DB; --gray-400:#9CA3AF; --gray-500:#6B7280; --gray-700:#374151; --gray-800:#1F2937; --border:#E5E7EB; --card:#fff; --sidebar:#F9FAFB; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif; background:var(--gray-50); color:var(--gray-800); font-size:14px; line-height:1.5}
+  button,input,select{font:inherit}
+  .topbar{position:sticky; top:0; z-index:10; background:var(--card); border-bottom:1px solid var(--border); padding:10px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+  .topbar h1{font-size:15px; font-weight:700}
+  .topbar .hint{font-size:12px; color:var(--gray-500)}
+  .pill{padding:4px 8px; border-radius:9999px; border:1px solid var(--border); background:var(--gray-50); font-size:11px; font-weight:600; color:var(--gray-500); cursor:pointer}
+  .pill.active{background:var(--primary-50); border-color:var(--primary-200); color:var(--primary-pressed)}
+  .layout{display:flex; min-height:calc(100vh - 52px)}
+  /* sider */
+  .sider{width:220px; background:var(--sidebar); border-right:1px solid var(--border); display:flex; flex-direction:column; gap:4px; padding:8px; transition:width 250ms ease}
+  .sider.collapsed{width:72px; align-items:center}
+  .logo{height:52px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px; color:var(--primary); border-bottom:1px solid var(--border); margin:-8px -8px 8px; background:#fff; border-radius:0}
+  .menu-item{height:36px; border-radius:6px; display:flex; align-items:center; gap:10px; padding:0 10px; font-size:13px; font-weight:500; cursor:pointer; white-space:nowrap; transition:background-color 150ms ease}
+  .menu-item:hover{background:var(--gray-100)}
+  .menu-item.active{background:var(--primary-50); color:var(--primary-pressed); border:1px solid var(--primary-200); font-weight:600}
+  .menu-group{font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--gray-400); padding:8px 10px 4px}
+  .sider.collapsed .hide-collapsed{display:none}
+  .icon{width:16px; height:16px; display:inline-flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0}
+  /* header */
+  .content{flex:1; display:flex; flex-direction:column; min-width:0}
+  .page-head{padding:16px 20px; border-bottom:1px solid var(--border); background:var(--card); display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
+  .breadcrumb{display:flex; gap:6px; font-size:13px; color:var(--gray-500)}
+  .breadcrumb .cur{color:var(--gray-800); font-weight:600}
+  .breadcrumb a{color:var(--gray-500); text-decoration:none}
+  .page-head h2{font-size:18px; font-weight:600; margin-top:4px}
+  .btn{height:32px; padding:0 12px; border-radius:6px; border:1px solid var(--border); background:var(--card); font-size:13px; font-weight:500; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:all 150ms ease}
+  .btn:hover{transform:scale(1.02); box-shadow:0 4px 12px rgba(0,0,0,.06)}
+  .btn:active{transform:scale(.98)}
+  .btn-primary{background:var(--primary); color:#fff; border-color:var(--primary)}
+  .btn-primary:hover{background:var(--primary-hover)}
+  .main{padding:20px; flex:1}
+  .toolbar{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+  .input{height:32px; border:1px solid var(--border); border-radius:6px; background:#fff; display:flex; align-items:center; gap:8px; padding:0 10px; flex:1; min-width:320px; transition:border-color 200ms ease}
+  .input:focus-within{border-color:var(--primary); box-shadow:0 0 0 2px var(--primary-100)}
+  .input input{border:none; outline:none; flex:1; font-size:13px}
+  .select{width:160px; height:32px; border:1px solid var(--border); border-radius:6px; background:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 10px; font-size:13px; cursor:pointer}
+  .alert{border-radius:6px; padding:10px 12px; font-size:13px; display:flex; gap:10px; align-items:center; border:1px solid}
+  .alert.error{background:#FEF2F2; border-color:#FECACA; color:#991B1B}
+  .alert.success{background:#F0FDF4; border-color:#BBF7D0; color:#166534}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:8px; padding:14px}
+  .table{border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--card)}
+  .table-head{display:flex; background:var(--gray-50); border-bottom:1px solid var(--border); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--gray-500)}
+  .table-row{display:flex; border-bottom:1px solid #F3F4F6; font-size:13px; transition:background 150ms ease}
+  .table-row:hover{background:var(--gray-50)}
+  .table-row:last-child{border-bottom:none}
+  .table-head div,.table-row div{padding:10px 12px; flex:1}
+  .tag{display:inline-flex; padding:2px 8px; border-radius:9999px; font-size:11px; font-weight:600; background:var(--primary-50); border:1px solid var(--primary-200); color:var(--primary-pressed)}
+  .n-empty{text-align:center; padding:20px; color:var(--gray-500)}
+  .n-spin{position:relative}
+  .n-spin.loading{pointer-events:none}
+  .n-spin.loading::after{content:""; position:absolute; inset:0; background:rgba(255,255,255,.6); border-radius:8px}
+  .n-spin.loading::before{content:"Memuat..."; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:1; background:var(--card); border:1px solid var(--border); padding:6px 14px; border-radius:9999px; font-size:12px; box-shadow:0 4px 12px rgba(0,0,0,.08)}
+  .toast{position:fixed; top:16px; right:16px; z-index:9999; background:var(--card); border:1px solid var(--border); border-radius:8px; padding:12px 14px; box-shadow:0 8px 24px rgba(0,0,0,.12); display:flex; gap:10px; align-items:center; min-width:280px; max-width:420px; transform:translateX(120%); opacity:0; transition:all 300ms ease}
+  .toast.show{transform:translateX(0); opacity:1}
+  .floating-alert{position:fixed; top:16px; right:16px; z-index:9998; max-width:420px; border-radius:8px; padding:12px 14px; border:1px solid #FECACA; background:#FEF2F2; color:#991B1B; display:flex; gap:10px; align-items:flex-start; box-shadow:0 8px 24px rgba(0,0,0,.12); transform:translateX(120%); opacity:0; transition:all 300ms ease}
+  .floating-alert.show{transform:translateX(0); opacity:1}
+  .controls{position:sticky; bottom:0; background:var(--card); border-top:1px solid var(--border); padding:10px 14px; display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+  .controls b{font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--gray-400)}
+  .live{position:fixed; left:-9999px; width:1px; height:1px; overflow:hidden}
+  @media(max-width:768px){ .sider{position:fixed; left:0; top:52px; bottom:0; z-index:5; transform:translateX(0); } .sider.collapsed{transform:translateX(-100%)} .layout{padding-left:0} }
+  @media(prefers-reduced-motion:reduce){ *{animation-duration:.01ms !important; transition-duration:.01ms !important} }
+</style>
+</head>
+<body>
+  <!-- top -->
+  <div class="topbar">
+    <h1>Prototype · Foundation</h1>
+    <span class="hint">Task 26 — klik kontrol di bawah untuk uji 7 steps. Tanpa backend · mock debounce 300ms · refresh tanpa reset · 403 tunggal.</span>
+    <span style="margin-left:auto; display:flex; gap:6px; flex-wrap:wrap">
+      <a class="pill" href="../../wireframes/foundation/index.html">Wireframes</a>
+      <a class="pill" href="../../mockups/foundation/index.html">Mockups</a>
+      <a class="pill active" href="#">Prototype</a>
+      <a class="pill" href="_prototype-spec.md">Spec</a>
+    </span>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside id="sider" class="sider" aria-label="Navigasi utama">
+      <div class="logo"><span id="logoText">MyApp</span></div>
+      <div class="menu-item active" data-key="dashboard" data-href="/dashboard"><span class="icon" aria-hidden="true">⊞</span><span class="hide-collapsed">Dashboard</span></div>
+      <div class="menu-group hide-collapsed">Data</div>
+      <div class="menu-item" data-key="data-table-pegawai" data-href="/dashboard/data/pegawai"><span class="icon" aria-hidden="true">▦</span><span class="hide-collapsed">Pegawai</span></div>
+      <div class="menu-item" data-key="global-tables" data-href="/dashboard/data/global-tables"><span class="icon" aria-hidden="true">▦</span><span class="hide-collapsed">Global Tables</span></div>
+      <div class="menu-group hide-collapsed">Persuratan</div>
+      <div class="menu-item" data-key="persuratan-1" data-href="/dashboard/docs/run/1"><span class="icon" aria-hidden="true">✉</span><span class="hide-collapsed">Surat Tugas</span></div>
+      <div class="menu-item" data-key="persuratan-2" data-href="/dashboard/docs/run/2"><span class="icon" aria-hidden="true">📃</span><span class="hide-collapsed">Surat Keputusan</span></div>
+      <div class="menu-group hide-collapsed">Dokumen</div>
+      <div class="menu-item" data-key="components" data-href="/dashboard/docs/components"><span class="icon" aria-hidden="true">⊞</span><span class="hide-collapsed">Components</span></div>
+      <div class="menu-item" data-key="templates" data-href="/dashboard/docs/templates"><span class="icon" aria-hidden="true">📄</span><span class="hide-collapsed">Templates</span></div>
+      <div class="menu-item" data-key="administrations" data-href="/dashboard/docs/administrations"><span class="icon" aria-hidden="true">☰</span><span class="hide-collapsed">Administrations</span></div>
+      <div class="menu-item" data-key="runs" data-href="/dashboard/docs/runs"><span class="icon" aria-hidden="true">◐</span><span class="hide-collapsed">My Runs</span></div>
+      <div class="menu-item" data-key="documents" data-href="/dashboard/docs/documents"><span class="icon" aria-hidden="true">📊</span><span class="hide-collapsed">Documents</span></div>
+      <div style="flex:1"></div>
+      <button class="btn" id="refreshMenu" style="width:100%; justify-content:center" aria-label="Segarkan menu"><span class="icon" aria-hidden="true">↻</span><span class="hide-collapsed">Segarkan menu</span></button>
+      <div style="font-size:10px; color:var(--gray-400); text-align:center; margin-top:6px" class="hide-collapsed">220 / 72 · token #3B82F6 · active #EFF6FF</div>
+    </aside>
+
+    <!-- CONTENT -->
+    <div class="content">
+      <div class="page-head">
+        <div>
+          <div class="breadcrumb"><a href="#" data-nav="dashboard">Dashboard</a> <span>/</span> <a href="#" data-nav="global-tables">Data</a> <span>/</span> <span class="cur">Global Tables</span></div>
+          <h2>Global Tables</h2>
+          <div style="font-size:12px; color:var(--gray-500)">Kelola struktur data dinamis — <span id="routeInfo">/dashboard/data/global-tables</span></div>
+        </div>
+        <div style="display:flex; gap:8px">
+          <button class="btn" id="btnToggle403" style="border-color:#FECACA; color:#991B1B; background:#FEF2F2">🔒 Picu 403</button>
+          <button class="btn btn-primary" id="btnCreate">+ Buat Global Table</button>
+        </div>
+      </div>
+
+      <div class="main">
+        <!-- toolbar -->
+        <div class="toolbar" role="search" aria-label="Toolbar tabel">
+          <div class="input" style="flex:1; min-width:320px"><span class="icon" aria-hidden="true">⌕</span><input id="searchInput" placeholder="Cari global tables..." aria-label="Cari global tables" autocomplete="off" /><button id="clearSearch" aria-label="Bersihkan pencarian" class="btn" style="height:24px; padding:0 6px; border:none">✕</button></div>
+          <div class="select" id="fieldSelect" role="button" aria-label="Pilih kolom pencarian" tabindex="0">Semua Kolom <span>▾</span></div>
+          <button class="btn" id="btnRefresh" aria-label="Segarkan data"><span class="icon" aria-hidden="true">↻</span> Segarkan</button>
+          <button class="btn" id="btnReset" aria-label="Atur ulang filter">⟲ Atur Ulang</button>
+          <button class="btn" aria-label="Visibilitas kolom"><span class="icon" aria-hidden="true">⚙</span></button>
+          <span style="font-size:11px; color:var(--gray-400)">debounce 300ms · min 320px / 160px</span>
+        </div>
+
+        <!-- error slot -->
+        <div id="errorSlot" class="alert error" style="margin-top:12px; display:none"><span aria-hidden="true">⚠</span><div><b>Gagal memuat data</b> — Kesalahan jaringan. <button class="btn" id="btnRetry" style="height:28px; margin-left:8px">Coba lagi</button></div><button aria-label="Tutup peringatan" class="btn" style="margin-left:auto; height:28px; border:none">✕</button></div>
+
+        <!-- table -->
+        <div id="tableWrap" class="n-spin" style="margin-top:12px">
+          <div class="table" id="dataTable">
+            <div class="table-head"><div role="button" tabindex="0" aria-label="Urutkan Nama" data-sort="name">Nama ▾</div><div>Nama Tampilan</div><div>Kolom</div><div role="button" tabindex="0" aria-label="Urutkan Diperbarui">Diperbarui ▴</div><div style="max-width:120px">Aksi</div></div>
+            <div id="tableBody"></div>
+          </div>
+        </div>
+        <div id="emptySlot" class="n-empty" style="display:none; border:1px dashed var(--border); border-radius:8px; margin-top:12px"><div style="font-size:26px" aria-hidden="true">○</div><div style="font-weight:600; color:var(--gray-700)">Belum ada Global Table</div><div style="font-size:12px">Mulai dengan membuat struktur data pertama Anda.</div><button class="btn btn-primary" style="margin-top:10px" id="btnEmptyCTA">+ Buat Global Table Pertama</button></div>
+        <div style="display:flex; justify-content:space-between; margin-top:10px; font-size:12px; color:var(--gray-500)"><span id="paginationInfo">Menampilkan 1–2 dari 2</span><span>1 ▸ — 10 / 20 / 50 / 100</span></div>
+
+        <!-- dashboard shortcuts demo (hidden by default, shown when route dashboard) -->
+        <div id="dashboardDemo" style="display:none; margin-top:20px" class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center"><div><b>Selamat Datang Kembali</b><div style="font-size:12px; color:var(--gray-500)">Halo, <span id="dashName">Super Admin</span>! Berikut ringkasan akun Anda.</div></div><select id="dashRole" aria-label="Pilih peran"><option value="designer">Designer</option><option value="operator">Operator</option><option value="empty">Tanpa Akses</option></select></div>
+          <div id="dashShortcuts" style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px"></div>
+        </div>
+
+        <!-- login demo -->
+        <div id="loginDemo" style="display:none; margin-top:20px" class="card">
+          <div style="max-width:420px; margin:0 auto">
+            <div style="text-align:center"><b>Selamat Datang</b><div style="font-size:12px; color:var(--gray-500)">Masuk ke akun Anda</div></div>
+            <div id="loginError" class="alert error" style="margin-top:12px; display:none"><span aria-hidden="true">⚠</span><div><b>Email atau password salah</b></div></div>
+            <div style="margin-top:12px"><div style="font-size:12px; font-weight:600">Email *</div><div class="input"><input id="loginEmail" placeholder="Masukkan email Anda" autocomplete="email" aria-label="Email" /></div><div id="loginEmailErr" style="font-size:11px; color:var(--error); margin-top:4px; display:none">⚠ Email wajib diisi</div></div>
+            <div style="margin-top:10px"><div style="font-size:12px; font-weight:600">Password *</div><div class="input"><input id="loginPass" type="password" placeholder="Masukkan password Anda" autocomplete="current-password" aria-label="Password" /><span aria-hidden="true">👁</span></div><div id="loginPassErr" style="font-size:11px; color:var(--error); margin-top:4px; display:none">⚠ Password wajib diisi</div></div>
+            <button class="btn btn-primary" style="width:100%; justify-content:center; margin-top:14px" id="btnLogin">Masuk</button>
+            <div style="text-align:center; font-size:12px; color:var(--gray-500); margin-top:10px">Belum punya akun? <a href="#" style="color:var(--primary)">Daftar</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- bottom controls for QA -->
+      <div class="controls" aria-label="Kontrol prototype">
+        <b>Kontrol QA</b>
+        <button class="btn" id="ctlList">List</button>
+        <button class="btn" id="ctlEmpty">Empty</button>
+        <button class="btn" id="ctlError">Error</button>
+        <button class="btn" id="ctlLoading">Loading</button>
+        <button class="btn" id="ctl403">403 Tunggal</button>
+        <button class="btn" id="ctlCollapse">Collapse 220↔72</button>
+        <select id="ctlDashboard" aria-label="Dashboard peran"><option value="">Dashboard</option><option value="designer">Designer</option><option value="operator">Operator</option><option value="empty">Empty</option></select>
+        <button class="btn" id="ctlLogin">Login</button>
+        <span style="font-size:11px; color:var(--gray-400)">AC-D01…D04 · semua 7 steps</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- floating single 403 -->
+  <div id="floating403" class="floating-alert" role="alert" aria-live="assertive" data-testid="access-denied"><span aria-hidden="true">🔒</span><div><b>Akses Ditolak</b> — Anda tidak memiliki izin untuk melakukan aksi ini.</div><button aria-label="Tutup" class="btn" style="margin-left:auto; height:28px; border:none" id="close403">✕</button></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"><span aria-hidden="true">✓</span><div><b>Berhasil</b> — <span id="toastMsg">Data dimuat ulang.</span></div></div>
+  <div id="liveRegion" class="live" aria-live="polite"></div>
+
+<script>
+  const rows = [
+    {name:'pegawai', display:'Pegawai', cols:8, updated:'11 Sep 2026'},
+    {name:'jabatan', display:'Jabatan', cols:4, updated:'10 Sep 2026'},
+    {name:'unit', display:'Unit Kerja', cols:5, updated:'09 Sep 2026'},
+  ];
+  let filtered = [...rows];
+  let searchTimer=null;
+  let activeKey='global-tables';
+  const tableBody=document.getElementById('tableBody');
+  const searchInput=document.getElementById('searchInput');
+  const emptySlot=document.getElementById('emptySlot');
+  const tableWrap=document.getElementById('tableWrap');
+  const dataTable=document.getElementById('dataTable');
+  const errorSlot=document.getElementById('errorSlot');
+  const paginationInfo=document.getElementById('paginationInfo');
+  const sider=document.getElementById('sider');
+  const floating403=document.getElementById('floating403');
+  const toast=document.getElementById('toast');
+  const toastMsg=document.getElementById('toastMsg');
+  const dashboardDemo=document.getElementById('dashboardDemo');
+  const loginDemo=document.getElementById('loginDemo');
+  const dashRole=document.getElementById('dashRole');
+  const dashName=document.getElementById('dashName');
+  const dashShortcuts=document.getElementById('dashShortcuts');
+  const routeInfo=document.getElementById('routeInfo');
+  const liveRegion=document.getElementById('liveRegion');
+
+  function renderTable(){
+    if(emptySlot.style.display!=='none' || errorSlot.style.display!=='none' && filtered.length===0){
+      // keep empty/error visible logic
+    }
+    if(filtered.length===0){
+      dataTable.style.display='none';
+      paginationInfo.textContent='Menampilkan 0 dari 0';
+      if(emptySlot.style.display==='none' && errorSlot.style.display==='none'){
+        emptySlot.style.display='block';
+      }
+    } else {
+      dataTable.style.display='';
+      emptySlot.style.display='none';
+      paginationInfo.textContent=`Menampilkan 1–${filtered.length} dari ${filtered.length}`;
+    }
+    tableBody.innerHTML = filtered.map(r=>`<div class="table-row"><div><b>${r.name}</b> <span class="tag">Data</span></div><div>${r.display}</div><div>${r.cols}</div><div>${r.updated}</div><div><a href="#">Lihat</a> · <a href="#">Ubah</a></div></div>`).join('');
+    if(filtered.length===0 && errorSlot.style.display!=='none'){
+      dataTable.style.display='none';
+    }
+  }
+  function setLive(msg){ liveRegion.textContent=msg; }
+  function showToast(msg){
+    toastMsg.textContent=msg; toast.classList.add('show'); setLive(msg);
+    setTimeout(()=> toast.classList.remove('show'), 2500);
+  }
+  function show403(){
+    // single pattern — only one instance ever (AC-D03)
+    if(document.querySelectorAll('[data-testid="access-denied"].show').length>0) return;
+    floating403.classList.add('show'); setLive('Akses ditolak');
+    // no inline duplicate — verified by control
+    setTimeout(()=> floating403.classList.remove('show'), 4000);
+  }
+  function hide403(){ floating403.classList.remove('show'); }
+
+  // search debounce 300ms
+  searchInput.addEventListener('input', ()=>{
+    if(searchTimer) clearTimeout(searchTimer);
+    searchTimer=setTimeout(()=>{
+      const q=searchInput.value.trim().toLowerCase();
+      if(!q) filtered=[...rows];
+      else filtered=rows.filter(r=> r.name.includes(q) || r.display.toLowerCase().includes(q));
+      errorSlot.style.display='none';
+      emptySlot.style.display='none';
+      dataTable.style.display='';
+      renderTable();
+      setLive(`Menampilkan ${filtered.length} hasil`);
+    }, 300);
+  });
+  document.getElementById('clearSearch').addEventListener('click', ()=>{
+    searchInput.value=''; filtered=[...rows]; errorSlot.style.display='none'; emptySlot.style.display='none'; dataTable.style.display=''; renderTable();
+  });
+  document.getElementById('btnReset').addEventListener('click', ()=>{
+    searchInput.value=''; filtered=[...rows]; errorSlot.style.display='none'; emptySlot.style.display='none'; tableWrap.classList.remove('loading'); dataTable.style.display=''; renderTable(); showToast('Filter diatur ulang.');
+  });
+  document.getElementById('btnRefresh').addEventListener('click', ()=>{
+    // refetch tanpa reset — AC-D02
+    const q=searchInput.value;
+    tableWrap.classList.add('loading');
+    setTimeout(()=>{
+      tableWrap.classList.remove('loading');
+      // keep filtered as is (no reset)
+      showToast('Data dimuat ulang.');
+      setLive('Data dimuat ulang tanpa mengatur ulang filter');
+    }, 650);
+  });
+  document.getElementById('btnRetry').addEventListener('click', ()=>{
+    errorSlot.style.display='none';
+    tableWrap.classList.add('loading');
+    setTimeout(()=>{ tableWrap.classList.remove('loading'); filtered=[...rows]; renderTable(); showToast('Berhasil memuat ulang.'); }, 600);
+  });
+  errorSlot.querySelector('button[aria-label="Tutup peringatan"]').addEventListener('click', ()=> errorSlot.style.display='none');
+  document.getElementById('btnEmptyCTA').addEventListener('click', ()=> showToast('Membuka formulir Buat Global Table...'));
+  document.getElementById('btnCreate').addEventListener('click', ()=> showToast('Membuka formulir Buat Global Table...'));
+  document.getElementById('btnToggle403').addEventListener('click', show403);
+  document.getElementById('close403').addEventListener('click', hide403);
+
+  // sidebar
+  function setActive(key){
+    activeKey=key;
+    document.querySelectorAll('.menu-item').forEach(el=>{
+      el.classList.toggle('active', el.dataset.key===key);
+    });
+    const href = document.querySelector(`.menu-item[data-key="${key}"]`)?.dataset.href || `/${key}`;
+    routeInfo.textContent=href;
+    // show dashboard/login demos
+    if(key==='dashboard'){
+      dashboardDemo.style.display='block'; loginDemo.style.display='none'; renderDashboard();
+    } else if(key==='login-demo'){
+      dashboardDemo.style.display='none'; loginDemo.style.display='block';
+    } else {
+      dashboardDemo.style.display='none'; loginDemo.style.display='none';
+    }
+  }
+  document.querySelectorAll('.menu-item').forEach(el=>{
+    el.addEventListener('click', ()=> setActive(el.dataset.key));
+    el.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); setActive(el.dataset.key);} });
+    el.setAttribute('tabindex','0'); el.setAttribute('role','button'); el.setAttribute('aria-label', el.textContent.trim());
+  });
+  document.querySelectorAll('[data-nav]').forEach(el=> el.addEventListener('click', e=>{ e.preventDefault(); setActive(e.currentTarget.dataset.nav); }));
+  document.getElementById('refreshMenu').addEventListener('click', ()=> showToast('Menu disegarkan.'));
+  // collapse
+  let collapsed=false;
+  function toggleCollapse(){
+    collapsed=!collapsed; sider.classList.toggle('collapsed', collapsed);
+    document.getElementById('logoText').textContent = collapsed?'M':'MyApp';
+    setLive(collapsed?'Bilah samping diciutkan':'Bilah samping diperluas');
+  }
+  // dashboard
+  function renderDashboard(){
+    const role = dashRole.value || document.getElementById('ctlDashboard').value || 'designer';
+    dashName.textContent = role==='operator'?'Operator':'Super Admin';
+    let html='';
+    if(role==='designer'){
+      html=`<div class="card"><b>📂 Data</b><div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px"><span class="tag">▦ Pegawai</span><span class="tag">▦ Jabatan</span><span class="tag">▦ Unit</span></div></div>
+            <div class="card"><b>✉ Persuratan</b><div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px"><span class="tag">📃 Surat Tugas</span><span class="tag">📃 SK</span></div></div>
+            <div class="card"><b>📊 Dokumen</b><div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px"><span class="tag">⊞ Components</span><span class="tag">📄 Templates</span><span class="tag">☰ Administrations</span></div></div>`;
+    } else if(role==='operator'){
+      html=`<div class="card"><b>📂 Data</b><div style="margin-top:6px"><span class="tag">▦ Pegawai</span> <span style="font-size:11px; color:var(--gray-400)">(baca)</span></div></div>
+            <div class="card"><b>✉ Persuratan</b><div style="margin-top:6px"><span class="tag" style="background:var(--primary); color:#fff; border-color:var(--primary)">▶ Jalankan Surat Tugas</span></div></div>
+            <div class="card" style="opacity:.55"><b>📊 Dokumen</b><div style="font-size:12px; color:var(--gray-400)">Tidak ada akses</div></div>`;
+    } else {
+      html=`<div class="card" style="grid-column:1/-1; text-align:center; border-style:dashed"><div style="font-size:22px">○</div><div style="font-weight:600">Belum ada akses modul</div><div style="font-size:12px; color:var(--gray-400)">Hubungi administrator.</div><button class="btn" style="margin-top:8px">Minta Akses</button></div>`;
+    }
+    dashShortcuts.innerHTML=html;
+  }
+  dashRole.addEventListener('change', renderDashboard);
+  document.getElementById('ctlDashboard').addEventListener('change', e=>{ dashRole.value=e.target.value; if(e.target.value) setActive('dashboard'); renderDashboard(); });
+
+  // login
+  document.getElementById('btnLogin').addEventListener('click', ()=>{
+    const email=document.getElementById('loginEmail').value.trim();
+    const pass=document.getElementById('loginPass').value.trim();
+    let ok=true;
+    const eErr=document.getElementById('loginEmailErr'), pErr=document.getElementById('loginPassErr'), lErr=document.getElementById('loginError');
+    if(!email){ eErr.style.display='block'; ok=false; } else eErr.style.display='none';
+    if(!pass){ pErr.style.display='block'; ok=false; } else pErr.style.display='none';
+    if(!ok){ lErr.style.display='none'; return; }
+    if(email!=='admin@admin.com' || pass!=='P455w0rd!!!'){
+      lErr.style.display='flex'; return;
+    }
+    document.getElementById('loginDemo').style.display='none'; setActive('dashboard'); showToast('Masuk berhasil — mengalihkan ke Dashboard.');
+  });
+
+  // controls
+  document.getElementById('ctlList').addEventListener('click', ()=>{ errorSlot.style.display='none'; emptySlot.style.display='none'; tableWrap.classList.remove('loading'); filtered=[...rows]; searchInput.value=''; dataTable.style.display=''; renderTable(); setActive('global-tables'); });
+  document.getElementById('ctlEmpty').addEventListener('click', ()=>{ filtered=[]; errorSlot.style.display='none'; renderTable(); setLive('Kondisi kosong'); });
+  document.getElementById('ctlError').addEventListener('click', ()=>{ filtered=[]; dataTable.style.display='none'; emptySlot.style.display='none'; errorSlot.style.display='flex'; setLive('Gagal memuat data'); });
+  document.getElementById('ctlLoading').addEventListener('click', ()=>{ tableWrap.classList.add('loading'); setTimeout(()=> tableWrap.classList.remove('loading'), 1800); });
+  document.getElementById('ctl403').addEventListener('click', show403);
+  document.getElementById('ctlCollapse').addEventListener('click', toggleCollapse);
+  document.getElementById('ctlLogin').addEventListener('click', ()=> setActive('login-demo'));
+  // also collapse via sider double click
+  sider.addEventListener('dblclick', toggleCollapse);
+
+  // initial
+  renderTable(); renderDashboard();
+  // a11y: focus management for icon-only buttons already via aria-label
+</script>
+</body>
+</html>
