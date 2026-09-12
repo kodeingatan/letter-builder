@@ -3,19 +3,19 @@
 ## Overview
 
 - **Database Engine**: SQLite (via `better-sqlite3`)
-- **ORM**: TypeORM 1.1 (`EntitySchema` pattern; 18 entity files defining 23 EntitySchemas / 26 physical tables including 3 M:N junctions)
+- **ORM**: TypeORM 1.1 (`EntitySchema` pattern; 9 entity files defining 9 EntitySchemas / 12 physical tables including 3 M:N junctions) — RBAC-Only after Task 01
 - **Database File**: `apps/web/db.sqlite`
-- **Migrations**: `synchronize: true` in development (default; override with `DB_SYNCHRONIZE` env var, `false` in production). Production boots apply the checked-in baseline `server/migrations/1788914913928-Baseline.ts` (all 23 entities / 26 tables) automatically (`migrationsRun` in `getDataSource()`); drift refuses boot with `MIGRATION_DRIFT` (real check in `server/utils/migration-status.ts`). CLI-loadable config: `server/utils/orm-data-source.ts`. Workflow: `npm run migration:generate -- <Name>` / `migration:run` / `migration:revert` (see `docs/production-runbook.md` §1). BR-001: never edit an applied migration.
+- **Migrations**: `synchronize: true` in development (default; override with `DB_SYNCHRONIZE` env var, `false` in production). Production boots apply the checked-in baseline `server/migrations/1788914913928-Baseline.ts` (RBAC subset after Task 01: 9 schemas) automatically (`migrationsRun` in `getDataSource()`); drift refuses boot with `MIGRATION_DRIFT` (real check in `server/utils/migration-status.ts`). CLI-loadable config: `server/utils/orm-data-source.ts`. Workflow: `npm run migration:generate -- <Name>` / `migration:run` / `migration:revert` (see `docs/production-runbook.md` §1). BR-001: never edit an applied migration.
 - **Startup gating**: Dev boots with `synchronize:true` suppress `JWT_SECRET_DEFAULT` and `MIGRATION_DRIFT` warnings (Task 24); prod fatals unchanged.
 
 ---
 
 ## Current vs Planned
 
-Dokumen ini membedakan dua kondisi:
+Dokumen ini membedakan dua kondisi (RBAC-Only after Task 01):
 
-- **CURRENT DATABASE** — 23 tabel dalam kode: RBAC foundation (`users`, `roles`, `permissions`, `guards`, `guard_urls`, `permission_methods`, `permission_urls`, `activity_logs`, `settings`) **plus** Dynamic Administration (`global_tables`, `global_table_columns`, `global_table_rows`, `components`, `component_data_requirements`, `component_versions`, `templates`, `template_versions`, `template_bindings`, `administrations`, `administration_steps`, `administration_versions`, `administration_runs`, `documents`).
-- **PLANNED DATABASE** — no new tables; future schema changes ship as new (additive) migration files after the Task 23 baseline.
+- **CURRENT DATABASE** — 9 schemas / 12 tabel fisik: RBAC foundation (`users`, `roles`, `permissions`, `guards`, `guard_urls`, `permission_methods`, `permission_urls`, `activity_logs`, `settings` + junctions `users_roles`, `roles_guards`, `roles_permissions`).
+- **PLANNED DATABASE** — no new tables; future schema changes ship as new (additive) migration files after the Task 23 baseline. Dynamic Administration tables dihapus Task 01 — lihat Change Log.
 
 ---
 
@@ -335,7 +335,7 @@ Tabel untuk menyimpan URL patterns yang diizinkan oleh permission.
 | 2 | /* |
 | 3 | /* |
 
-> Note (Task 22): seeder additionally provisions `Designer` and `Operator` roles plus a permission-matrix catalog (module Read/Write permissions, `Data:{table}:Read/Write` auto-provisioned per Global Table). See `server/utils/permission-matrix.ts` and `server/services/seeder.service.ts` for the authoritative grant matrix (22 base permissions at baseline; `Data:*` permissions auto-provisioned per Global Table).
+> Note (Task 01): seeder now RBAC-Only — `Designer`/`Operator` and `Data:{table}:Read/Write` removed. See `server/utils/permission-matrix.ts` (RBAC subset) and `server/services/seeder.service.ts`.
 
 ---
 
@@ -426,56 +426,9 @@ Tabel untuk menyimpan pengaturan aplikasi (key-value store).
 
 ---
 
-# DYNAMIC ADMINISTRATION TABLES (IMPLEMENTED)
+## Change Log
 
-> Diimplementasikan tasks 07–22 (plus foundation hardening tasks 23–27 tidak menambah tabel — `synchronize: true` dev / checked-in baseline prod, drift detection tetap). Desain awal berasal dari `docs/dynamic-administration/`; tabel di bawah ini adalah schema yang berjalan di kode (`server/entities/`, pola TypeORM `EntitySchema`).
+### Task 01 — Platform Scope Reduction (2026-09-12)
 
-## Table Overview
-
-| Table | Purpose | Key constraints / indexes |
-|-------|---------|---------------------------|
-| `global_tables` | Metadata definisi struktur data dinamis (`name` snake_case immutable, `displayName`, `menuOrder`, `menuIcon`) | UNIQUE(`name`) |
-| `global_table_columns` | Definisi kolom schema-driven (`type`, `defaultValue`, `required`, `searchable`, `orderable`, `position`, `options` JSON, `format`, `expression` + `dependencies`, `relationTableId` + `relationConfig` JSON) | UNIQUE(`globalTableId`,`name`), INDEX(`globalTableId`,`position`), INDEX(`relationTableId`) |
-| `global_table_rows` | Generic row store: `values` TEXT berisi JSON `{ columnName: value }` (relation single=id, multi=id[], image=url, date=ISO) | FK → `global_tables.id` ON DELETE CASCADE, composite INDEX(`globalTableId`,`id`) |
-| `components` | Reusable document block (`content`, `looping`, `status` draft/published) | UNIQUE(`name`) |
-| `component_data_requirements` | Data-requirement contract per component (`name`, `type`) | UNIQUE(`componentId`,`name`) |
-| `component_versions` | Immutable version history (byte-frozen content) | UNIQUE(`componentId`,`version`) |
-| `templates` | Blueprint dokumen: composition tree (`content` JSON), `status` draft/published/archived | UNIQUE(`name`) |
-| `template_versions` | Immutable version history (byte-frozen snapshot incl. bindings) | UNIQUE(`templateId`,`version`) |
-| `template_bindings` | Binding per tree placement (`placementId`, `requirementName`, `source`: administration/global_table/manual/expression/system, `sourceRef`, `expression`; mendukung `item.*` untuk loop) | UNIQUE(`templateId`,`placementId`,`requirementName`) |
-| `administrations` | Workflow pengumpulan data (`status` draft/published/archived, pinned template versions) | UNIQUE(`name`) |
-| `administration_steps` | Step per administration (`order` dense, `templateId`, step fields) | UNIQUE(`administrationId`,`order`) |
-| `administration_versions` | Immutable publish snapshot | UNIQUE(`administrationId`,`version`) |
-| `administration_runs` | Eksekusi workflow (`status`, `startedBy`, frozen pins, merged step data) | INDEX(`administrationId`,`status`) |
-| `documents` | Hasil akhir: `dataSnapshot` JSON (frozen) + `templateVersion` + rendered HTML snapshot + PDF di `storage/documents/`; reissue membuat baris baru (`replacesId`) | INDEX(`administrationId`,`createdAt`), INDEX(`runId`) |
-
-## Relationships (Implemented)
-
-```
-global_tables ─< global_table_columns
-global_tables ─< global_table_rows (FK CASCADE)
-global_tables <── global_table_columns.relationTableId (relation target, enforced in service)
-components ─< component_data_requirements
-components ─< component_versions
-templates ─< template_versions
-templates ─< template_bindings >── components (via componentId)
-administrations ─< administration_steps >── templates (via templateId)
-administrations ─< administration_versions
-administrations ─< administration_runs ─< documents
-administrations ─< documents
-```
-
-| Relationship | Type | Enforcement |
-|-------------|------|-------------|
-| Global Table → Column / Row | One-to-Many | Service deletes explicitly on table drop; rows additionally FK CASCADE |
-| Relation column → target table/row | Logical | `restrict` blocks with 409, `detach` nulls silently (service-level) |
-| Component/Template/Administration → Versions | One-to-Many | Immutable history rows; never updated |
-| Run → Documents | One-to-Many | Issued atomically on run complete |
-
-## Perancatatan Desain (Keputusan Final)
-
-- **Data Global Table** — JSON-per-row di `global_table_rows` (bukan tabel fisik per definisi, bukan key-value). Skala target: instansi kecil–menengah; search/sort dilakukan service-level. FTS per-tabel adalah batas upgrade yang diketahui.
-- **Computed Field** — definisi (`expression` + `dependencies`) di kolom; nilai dihitung ulang server-side pada setiap write; nilai kiriman klien untuk kolom computed diabaikan.
-- **Versioned** — Component/Template/Administration memakai tabel history terpisah (immutable); Document menyimpan snapshot data + versi template agar output lama tetap valid.
-- **FK posture** — Hanya relasi yang dideklarasikan di `EntitySchema` yang menjadi FK DB (`global_table_rows` CASCADE, `permission_*`/`guard_urls` CASCADE, `activity_logs` → users SET NULL). better-sqlite3 tidak menegakkan FK secara default, sehingga penghapusan bertingkat yang load-bearing diimplementasikan eksplisit di service (konvensi codebase).
-- **Column types** — `text`, `richtext`, `date`, `select`, `number`, `currency`, `image`, `hidden-computed`, `readonly-computed`, `select-table-relation`, `select-table-relation-multiple` (lihat `server/dto/global-table-columns.dto.ts`).
+- Removed Dynamic Administration tables (14 tabel: `global_tables`, `global_table_columns`, `global_table_rows`, `components`, `component_data_requirements`, `component_versions`, `templates`, `template_versions`, `template_bindings`, `administrations`, `administration_steps`, `administration_versions`, `administration_runs`, `documents`). RBAC-Only kini 9 EntitySchemas / 12 tabel fisik.
+- Dokumentasi dynamic diarsipkan di git history pre-Task 01. Perancatatan desain dynamic (JSON-per-row, computed field, versioned, column types) dihapus dari dokumen ini.

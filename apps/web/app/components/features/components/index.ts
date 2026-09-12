@@ -1,5 +1,0 @@
-export { default as ComponentTable } from './ComponentTable.vue'
-export { default as ComponentFormModal } from './ComponentFormModal.vue'
-export { default as ComponentDetailDrawer } from './ComponentDetailDrawer.vue'
-export { default as ComponentRequirementManager } from './ComponentRequirementManager.vue'
-export { default as ComponentPreview } from './ComponentPreview.vue'

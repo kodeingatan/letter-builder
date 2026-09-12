@@ -2,15 +2,13 @@
 
 ## 1. Product Overview
 
-**Nama Project**: LBS — Letter Builder System — Dynamic Administration & Document Composition Platform
+**Nama Project**: LBS — Letter Builder System — RBAC User Management Platform
 
-**Tujuan**: Membangun **Letter Builder System (LBS)** — aplikasi administrasi persuratan otomatis, mulai dari builder table sebagai data awal, membuat component surat, membuat surat (Template), dan step administrasi persuratan di pemerintahan/perusahaan. Platform ini metadata-driven dengan inti konsep **Data → Component → Template → Administration → Document**, di mana non-developer dapat mendefinisikan struktur data (Global Table), blok dokumen yang dapat digunakan kembali (Component), blueprint dokumen (Template), dan workflow pengumpulan data (Administration) untuk akhirnya menghasilkan dokumen (PDF/HTML).
+**Tujuan**: Membangun **Letter Builder System (LBS)** — aplikasi admin panel RBAC untuk mengelola user, role, permission, dan guard dengan dashboard, audit trail, dan pengaturan sistem. Scope saat ini adalah RBAC-Only (login, register, dashboard, user management, sistem).
 
-**Core Concept** (dokumentasi asli: `docs/dynamic-administration/`):
+**Core Concept**: RBAC Foundation — `User → Role → Permission (method+URL) + Guard (allow/deny)` dengan JWT 24 jam.
 
-> `Data → Component → Template → Administration → Document`
-
-**Current Implementation State**: Aplikasi mengimplementasikan fondasi **User Management System dengan RBAC** (admin panel untuk mengelola user, role, permission, dan guard) **dan** seluruh modul **Dynamic Administration** — Global Table (+ columns, computed fields, relations, generated CRUD), Expression Engine, Component, Template (+ composition editor, data binding), Administration (+ runner), Document, Rendering Engine, Generated Menu, serta Dynamic RBAC/Audit/Production readiness (tasks 07–22). Production migration baseline (task 23), startup warnings cleanup (task 24), UI/UX audit & concept alignment — audit gate (task 25), design system refresh — wireframe/mockup/prototype & token foundation (task 26) dan foundation implementation kanonis — PageShell, DataTable kanonis, 403 tunggal, locale ID, sidebar 220/72, dashboard dinamis, motion bertoken (task 27) sudah diimplementasikan — serta Global Table UX — wireframe/mockup/prototype redesign (task 28, FASE 1 design, siap untuk implementasi task 29) — development memakai `synchronize: true`, production memakai checked-in baseline migration dengan drift detection.
+**Current Implementation State**: Aplikasi mengimplementasikan **RBAC Foundation** (admin panel untuk mengelola user, role, permission, guard) plus **Sistem** (activity logs, system logs, settings) dan dashboard kanonis (PageShell, DataTable, 403 tunggal, locale ID, sidebar 220/72). Development memakai `synchronize: true`, production memakai checked-in baseline migration dengan drift detection. Scope Dynamic Administration **dihapus** di Task 01 — lihat Change Log.
 
 **Tech Stack**:
 - Frontend: Nuxt 4 + Vue 3 + TypeScript + Naive UI + Tailwind CSS v4
@@ -21,191 +19,137 @@
 
 ## 2. Product Vision
 
-Menjadi platform pembuat sistem administrasi (persuratan & dokumen) yang dapat dikonfigurasi sepenuhnya melalui metadata, sehingga setiap instansi/departemen dapat mendefinisikan struktur data, formulir, template dokumen, dan workflow mereka sendiri tanpa perlu menulis kode.
+Menjadi platform admin RBAC yang aman, sederhana, dan konsisten untuk mengelola akses berbasis peran dan permission di lingkungan instansi/perusahaan kecil-menengah.
 
 ---
 
 ## 3. Problem Statement
 
-Membuat surat/dokumen administrasi (mis. Surat Keputusan, Surat Tugas) secara konvensional membutuhkan:
-- Struktur data yang di-hardcode (`Pegawai`, `Surat Tugas`, dll.)
-- Development manual (migration, entity, controller, service) untuk setiap jenis data baru
-- Penulisan PDF secara khusus untuk setiap template
+Pengelolaan akses manual (user/role/permission hard-coded, guard URL tidak terpusat, audit trail tersebar) menimbulkan:
+- Kesulitan menambah role/permission baru tanpa deploy
+- Risiko kebocoran akses tanpa permission method+URL yang terstruktur
+- Audit dan observability tidak terpusat
 
-Platform ini memecahkan masalah tersebut dengan pendekatan metadata-driven sehingga setiap jenis data dan dokumen baru dapat ditambahkan melalui konfigurasi, bukan kode.
+Platform RBAC-Only memecahkan ini dengan model permission terstruktur, guard client-side gating, dan audit log terpusat.
 
 ---
 
 ## 4. Goals
 
-1. Memungkinkan user membuat struktur data tabel dinamis tanpa development manual (Global Table)
-2. Menyediakan CRUD otomatis berdasarkan definisi Global Table
-3. Komponen dokumen yang dapat digunakan kembali lintas template (Component)
-4. Komposisi dokumen berbasis template dengan rich text + data binding (Template)
-5. Workflow pengumpulan data bertahap (Administration + Step)
-6. Rendering dokumen generik ke HTML/PDF (Rendering Engine)
-7. Menu yang dihasilkan otomatis dari metadata (Generated Menu)
-8. Menjaga keamanan akses berbasis RBAC sebagai fondasi platform
+1. Menyediakan login dan registrasi yang aman (bcrypt + JWT)
+2. Dashboard ringkasan users/roles/permissions/guards + recent users
+3. CRUD User dengan assignment role
+4. CRUD Role dengan assignment guard dan permission
+5. CRUD Permission dengan method dan URL rules (wildcard)
+6. CRUD Guard dengan allow/deny URLs (client gating)
+7. Activity Logs filterable sebagai audit trail
+8. System Logs viewer + Settings (key-value + upload)
 
 ---
 
 ## 5. Non-Goals
 
-- Bukan editor layout dokumen tingkat print-ready (mis. seperti Adobe) dalam versi awal
+- Bukan editor layout dokumen atau workflow administrasi persuratan
 - Bukan database migration visual berfitur penuh pada versi awal
-- Bukan sistem approval/workflow multi-role yang kompleks pada versi awal
-- Fitur Expression Engine lanjutan (IF, SUM, DATE_FORMAT, dll) bersifat pengembangan bertahap
+- Bukan sistem approval/workflow multi-role kompleks
 
 ---
 
 ## 6. Target Users
 
-- **Admin Platform** — mendefinisikan Global Table, Component, Template, Administration
-- **Staff/Operator** — menjalankan Administration (mengisi data, menghasilkan dokumen)
-- **Administrator Sistem** — mengelola user, role, permission, guard (RBAC)
+- **Administrator Sistem** — mengelola user, role, permission, guard, dan pengaturan
+- **Admin** — mengelola user/role terbatas
+- **Viewer** — akses baca dashboard/logs
 
 ---
 
 ## 7. User Roles
 
-RBAC Foundation (sudah diimplementasikan): Super Admin, Admin, User, dsb. — dikelola via modul User/Role/Permission/Guard.
-
-Dynamic Administration roles (sudah diimplementasikan & di-seed):
-- **Designer** — membuat/mengedit Global Table, Component, Template, Administration metadata
-- **Operator** — menjalankan Administration untuk menghasilkan dokumen
+RBAC Foundation (diimplementasikan):
+- **Super Admin** — akses penuh (Full Access guard + permission)
+- **Admin** — Web Access + Read Write
+- **User / Viewer** — API Only + Read Only
+- Role lain dapat dibuat via UI Role Management.
 
 ---
 
 ## 8. Core Concepts
 
-### 8.1 Core Concept Utama
-
-```text
-GLOBAL TABLE (data) → COMPONENT (konten reusable) → TEMPLATE (blueprint dokumen) → ADMINISTRATION (workflow) → DOCUMENT (output PDF/HTML)
-```
-
-1. **Global Table** — Metadata yang mendefinisikan struktur data dinamis (nama, display name, columns). Setiap Global Table otomatis menghasilkan CRUD, form, dan UI browse.
-2. **Component** — Potongan dokumen reusable (Kop Surat, Identitas Pegawai, Tanda Tangan) yang mendeklarasikan "data requirement" (contract) sebagai sumber datanya.
-3. **Template** — Blueprint dokumen yang menyusun static content + components + data binding + conditions + looping.
-4. **Administration** — Proses/workflow pengumpulan data bertahap (Step) untuk menghasilkan dokumen. Satu Administration bisa memakai banyak Template.
-5. **Document** — Hasil akhir: snapshot data + versi template + output ter-render (PDF/HTML).
-
-### 8.2 Prinsip Arsitektur
-
-- **Metadata-driven** — data & UI didefinisikan lewat metadata, bukan hard-code
-- **Component-driven** — bagian dokumen reusable dijadikan component
-- **Template-driven** — template hanya menentukan struktur dokumen
-- **Data-driven** — data dari Global Table, Administration, manual input, system data
-- **Schema-driven** — form dibuat dari schema column definition
-- **Renderer-driven** — satu generic renderer untuk semua template
-- **Versioned** — template & component punya versi; dokumen lama tetap pakai versi saat dibuat
+- **User** — akun (firstName, lastName, username, email, password hash, roles M:N)
+- **Role** — kumpulan guard + permission (roleName unique)
+- **Permission** — aturan `methods[] + urls[]` (wildcard `*`, `/*`, `/api/users/*`) — dievaluasi server-side via `requireApiAccess`
+- **Guard** — aturan `allowUrls[] / denyUrls[]` — dievaluasi client-side untuk menu/aksi gating
+- **Activity Log** — audit trail (action, entity, userId, level INFO/WARNING/ERROR)
+- **Setting** — key-value store (app_name, app_favicon, login_bg_gradient, dll)
 
 ---
 
 ## 9. Major User Workflows
 
-### 9.1 RBAC Administration (Sudah Diimplementasikan)
+### 9.1 RBAC Administration (Diimplementasikan)
 
-1. Admin mengelola user, role, permission, guard
-2. User login → JWT → otorisasi berbasis role/guard/permission
-
-### 9.2 Dynamic Administration (Sudah Diimplementasikan)
-
-1. **Designer** mendefinisikan Global Table (columns, types, relations, computed fields)
-2. Sistem menghasilkan CRUD + menu otomatis
-3. **Designer** membuat Component dengan data requirement
-4. **Designer** membuat Template (rich text + binding + loop + condition)
-5. **Designer** membuat Administration dengan Step-step
-6. **Operator** menjalankan Administration → isi data per step → pilih template
-7. Sistem resolve data → component → binding → loop → condition → render dokumen → PDF
+1. Admin mengelola user, role, permission, guard via DataTable (search/sort/pagination)
+2. User login → JWT → otorisasi berbasis role/guard/permission (server `requireApiAccess`, client `canAccessUrl`)
+3. Admin melihat Activity Logs dan System Logs, mengubah Settings
 
 ---
 
 ## 10. Functional Requirements
 
-### 10.1 RBAC Modules (Sudah Diimplementasikan)
+### 10.1 RBAC Modules (Diimplementasikan)
 
-Lihat detail di bawah (Dashboard, User Management, Role Management, Permission Management, Guard Management, Activity Logs, System Logs, Settings).
-
-### 10.2 Dynamic Administration Modules (Sudah Diimplementasikan)
-
-| Modul | Deskripsi |
-|-------|-----------|
-| Global Table Management | Definisikan tabel dinamis: name, display name, columns (name, type, default, required, searchable, orderable, computed) |
-| Component Management | Definisikan reusable document block + data requirement |
-| Template Management | Komposisi dokumen: rich text, insert component, data binding, loop, condition, versioning |
-| Administration Management | Definisikan workflow: step-step, template per step, field data per step, multi-template |
-| Document Management | Snapshot data + versi template + output ter-render; tampilkan/download PDF & HTML |
-| Expression Engine | Evaluasi ekspresi: arithmetic, string concat, nanti IF/SUM/ROUND/DATE_FORMAT |
-| Rendering Engine | Resolve tree (binding/loop/condition) → HTML DOM → PDF |
+Lihat detail di Bagian B (Dashboard, User Management, Role Management, Permission Management, Guard Management, Activity Logs, System Logs, Settings).
 
 ---
 
 ## 11. Business Rules
 
-1. Global Table adalah sumber data yang dapat dikonsumsi oleh Component/Template
-2. Component TIDAK memiliki data final — ia mendeklarasikan data requirement yang disuplai oleh Template
-3. Template menentukan binding untuk setiap data requirement component
-4. Satu Administration dapat memiliki banyak Template (satu per step)
-5. Dokumen menyimpan data snapshot + versi template agar output lama tetap valid
-6. Menu merupakan projection dari metadata, bukan hard-coded
-7. Sumber data binding: Administration Data, Global Table, Manual Input, Expression, System Data
-8. Semua operasi metadata wajib diziarahkan melalui RBAC (keamanan platform)
-9. Unifikasi data reference & expression melalui satu "bahasa data" (`{{data.*}}`) untuk seluruh sistem
+1. Semua operasi RBAC wajib melalui permission method+URL check server-side
+2. Guard hanya untuk client gating (menu visibility), bukan enforcement server-side
+3. Username/email unik, password minimal 8 dengan uppercase+lowercase+angka
+4. Role/permission/guard yang masih digunakan tidak dapat dihapus tanpa konfirmasi dan cek referensi
+5. Activity log userId nullable (SET NULL saat user dihapus)
+6. Settings key unik
 
 ---
 
 ## 12. Constraints
 
 - Database: SQLite (better-sqlite3) — cocok untuk skala kecil hingga sedang
-- Metadata-driven: menyiratkan kebutuhan schema fleksibel untuk data Global Table
 - `synchronize: true` untuk development; production memakai checked-in baseline migration (`server/migrations/1788914913928-Baseline.ts`) dengan drift detection
-- Ekspresi dievaluasi server-side (keamanan)
+- Auth JWT 24 jam, password bcrypt
 
 ---
 
 ## 13. Important Edge Cases
 
-- Global Table dengan relasi antar tabel (select-table-relation)
-- Computed field yang bergantung pada field lain (dependencies) — nilai dihitung ulang saat dependency berubah
-- Looping component terhadap collection data (daftar pegawai)
-- Conditional rendering bagian dokumen berdasarkan data
-- Dokumen lama vs versi template baru — dokumen memakai versi saat dibuat
-- Multi-template dalam satu Administration
+- Duplicate username/email → 409
+- Permission tanpa methods/urls → deny-all (tidak efektif)
+- Guard deny dievaluasi sebelum allow untuk menu gating
+- Activity log tetap tersimpan bila user dihapus (userId SET NULL)
 
 ---
 
 ## 14. Product Principles
 
-- Metadata-first: konfigurasi diutamakan daripada kode untuk struktur data & dokumen
-- Reusability: semua bagian dokumen reusable menjadi component
-- Consistent data language: satu bahasa data & ekspresi di seluruh modul
 - Security foundation: RBAC melindungi seluruh operasi platform
+- Konsistensi UI: PageShell + DataTable kanonis + 403 tunggal
+- Auditability: semua mutasi tercatat di Activity Logs
 
 ---
 
 ## 15. Glossary
 
-- **Global Table**: definisi data dinamis yang menghasilkan CRUD
-- **Column Type**: menentukan behavior simpan/input/tampil/validasi/format/cari/urut
-- **Computed Field**: field hasil kalkulasi (hidden atau readonly) via expression
-- **Component**: blok dokumen reusable dengan data requirement
-- **Data Requirement**: contract antara component dan template (field apa yang dibutuhkan)
-- **Template**: blueprint dokumen (struktur, binding, loop, condition)
-- **Administration**: workflow pengumpulan data (step-step)
-- **Step**: satu tahap pengumpulan data dalam administration
-- **Document**: output akhir (data snapshot + template version + rendered output)
-- **Expression Engine**: engine evaluasi ekspresi
-- **Rendering Engine**: engine resolve tree → HTML → PDF
-- **Generated Menu**: menu yang dihasilkan dari metadata
-
----
+- **User**: akun dengan kredensial dan roles
+- **Role**: kumpulan permission + guard
+- **Permission**: izin method+URL (server enforcement)
+- **Guard**: aturan URL allow/deny (client gating)
+- **Activity Log**: catatan audit
+- **Setting**: konfigurasi key-value
 
 ---
 
 # Bagian II — Current Implementation Detail (RBAC Foundation)
-
-> Berikut adalah detail spesifikasi tahap saat ini yang sudah diimplementasikan. Bagian ini merupakan dokumentasi **current state** RBAC foundation, di atasnya akan dibangun modul Dynamic Administration (Bagian I).
 
 ## A. Tujuan Aplikasi (Current)
 
@@ -235,6 +179,10 @@ User Management
     ├── Guard
     ├── Role
     └── Permissions
+Sistem
+    ├── Activity Logs
+    ├── System Logs
+    └── Settings
 ```
 
 | Menu Item | Route | Deskripsi |
@@ -244,6 +192,9 @@ User Management
 | User Management > Guard | `/dashboard/guards` | Kelola guard |
 | User Management > Role | `/dashboard/roles` | Kelola role |
 | User Management > Permissions | `/dashboard/permissions` | Kelola permission |
+| Sistem > Activity Logs | `/dashboard/activity-logs` | Audit trail |
+| Sistem > System Logs | `/dashboard/system-logs` | System logs |
+| Sistem > Settings | `/dashboard/settings` | Pengaturan |
 
 #### Widget
 
@@ -549,7 +500,7 @@ Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+U
 
 ---
 
-## D. API Endpoints (Existing + Planned)
+## D. API Endpoints
 
 ### Auth API (Sudah Ada)
 
@@ -558,8 +509,10 @@ Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+U
 | POST | `/api/auth/register` | Register user baru | Public |
 | POST | `/api/auth/login` | Login user | Public |
 | GET | `/api/auth/profile` | Get profile user | Bearer |
+| PATCH | `/api/auth/profile` | Update profile | Bearer |
+| PATCH | `/api/auth/password` | Change password | Bearer |
 
-### User Management API (Planned)
+### User Management API
 
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
@@ -569,7 +522,7 @@ Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+U
 | PUT | `/api/users/:id` | Update user | Bearer + Permission |
 | DELETE | `/api/users/:id` | Hapus user | Bearer + Permission |
 
-### Role Management API (Planned)
+### Role Management API
 
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
@@ -579,7 +532,7 @@ Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+U
 | PUT | `/api/roles/:id` | Update role | Bearer + Permission |
 | DELETE | `/api/roles/:id` | Hapus role | Bearer + Permission |
 
-### Permission Management API (Planned)
+### Permission Management API
 
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
@@ -589,7 +542,7 @@ Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+U
 | PUT | `/api/permissions/:id` | Update permission | Bearer + Permission |
 | DELETE | `/api/permissions/:id` | Hapus permission | Bearer + Permission |
 
-### Guard Management API (Planned)
+### Guard Management API
 
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
@@ -615,6 +568,17 @@ Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+U
 | GET | `/api/system-logs/files/:filename` | Baca isi file log | Bearer + Permission |
 | GET | `/api/system-logs/stats/:filename` | Statistik file log | Bearer + Permission |
 
+### Settings API
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/api/settings` | Get all settings | Public |
+| GET | `/api/settings/:key` | Get setting by key | Public |
+| PUT | `/api/settings` | Update multiple settings | Bearer + Permission |
+| POST | `/api/settings/upload` | Upload file (favicon, bg) | Bearer + Permission |
+| GET | `/api/storage/:subfolder/:filename` | Serve file | Public |
+| GET | `/api/health` | Health check | Public |
+
 ---
 
 ## E. Client Routes
@@ -630,6 +594,10 @@ Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+U
 | `app/pages/dashboard/roles.vue` | `/dashboard/roles` | Required | Manajemen role |
 | `app/pages/dashboard/permissions.vue` | `/dashboard/permissions` | Required | Manajemen permission |
 | `app/pages/dashboard/guards.vue` | `/dashboard/guards` | Required | Manajemen guard |
+| `app/pages/dashboard/activity-logs.vue` | `/dashboard/activity-logs` | Required | Activity logs |
+| `app/pages/dashboard/system-logs.vue` | `/dashboard/system-logs` | Required | System logs |
+| `app/pages/dashboard/settings.vue` | `/dashboard/settings` | Required | Settings |
+| `app/pages/dashboard/profile.vue` | `/dashboard/profile` | Required | Profile |
 
 ### Sidebar Menu Structure
 
@@ -654,7 +622,7 @@ Sistem (group)
 - Password di-hash dengan bcrypt (salt rounds: 10)
 - JWT token expiry: 24 jam
 - Endpoint sensitif memerlukan autentikasi + otorisasi
-- Input validation menggunakan manual validation utilities
+- Input validation menggunakan Zod/manual validation utilities
 - Whitelist DTO properties (tidak ada extra properties)
 
 ### Performance
@@ -750,3 +718,14 @@ export function useAuthorization() {
 | Role Management | Admin, Super Admin | /api/roles/* |
 | Permission Management | Admin, Super Admin | /api/permissions/* |
 | Guard Management | Admin, Super Admin | /api/guards/* |
+
+---
+
+## Change Log
+
+### Task 01 — Platform Scope Reduction (2026-09-12)
+
+- Removed Dynamic Administration scope: Global Table, Component, Template, Administration, Document, Expression Engine, Rendering Engine, Generated Menu.
+- Deleted `docs/dynamic-administration/*`, `docs/audit`, `docs/mockups`, `docs/prototypes`, `docs/wireframes`.
+- PRD now RBAC-Only (login, register, dashboard, user management, activity logs, system logs, settings). Previous dynamic sections archived in git history pre-Task 01.
+

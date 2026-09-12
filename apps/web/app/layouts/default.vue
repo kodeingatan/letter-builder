@@ -26,18 +26,12 @@ import {
   Activity,
   Report,
   Settings,
-  Restart,
-  Task,
-  DataTable as DataTableIcon,
 } from '@vicons/carbon'
-import { useNavigationStore } from '~/stores/navigation'
-import { resolveMenuIcon } from '~/utils/navigation-icons'
 
 const route = useRoute()
 const authStore = useAuthStore()
-const { hasAnyRole, hasPermission } = useAuthorization()
+const { hasAnyRole } = useAuthorization()
 const settingsStore = useSettingsStore()
-const navigationStore = useNavigationStore()
 const collapsed = ref(false)
 
 const user = computed(() => authStore.user)
@@ -46,9 +40,6 @@ const pageRef = ref<HTMLElement | null>(null)
 onMounted(async () => {
   if (authStore.isAuthenticated && !authStore.user) {
     await authStore.fetchProfile()
-  }
-  if (authStore.isAuthenticated) {
-    navigationStore.fetch().catch(() => {})
   }
   // Task 27 — activate usePageTransition (fadeInUp) on initial mount, tokenized 250ms
   if (import.meta.client) {
@@ -76,12 +67,6 @@ watch(
   },
 )
 
-async function refreshNavigation() {
-  try {
-    await navigationStore.refresh()
-  } catch {}
-}
-
 function logout() {
   authStore.logout()
   navigateTo('/login')
@@ -108,12 +93,6 @@ function renderMenuLabel(label: string, routePath: string) {
 }
 
 const isAdmin = computed(() => hasAnyRole(['Admin', 'Super Admin']))
-const canManageTables = computed(
-  () => isAdmin.value || hasPermission('Global Table Management'),
-)
-const canManageAdministrations = computed(
-  () => isAdmin.value || hasPermission('Administration Management'),
-)
 
 const menuOptions = computed<MenuOption[]>(() => {
   const options: MenuOption[] = [
@@ -124,167 +103,62 @@ const menuOptions = computed<MenuOption[]>(() => {
     },
   ]
 
-  // Task 21 — Generated Data group: one entry per readable table.
-  // Designers see the management link first; operators see entries only.
-  // Hidden when empty, except a first-run hint for Designers.
-  const dataChildren: MenuOption[] = []
-  if (isAdmin.value) {
-    dataChildren.push({
-      label: renderMenuLabel('Global Tables', '/dashboard/data/global-tables'),
-      key: 'global-tables',
-      icon: renderIcon(DataTableIcon),
-    })
-  }
-  for (const entry of navigationStore.dataEntries) {
-    const path = `/dashboard/data/${entry.tableName}`
-    dataChildren.push({
-      label: renderMenuLabel(entry.label, path),
-      key: `data-table-${entry.tableName}`,
-      icon: renderIcon(resolveMenuIcon(entry.icon, DataTableIcon)),
-    })
-  }
-  if (dataChildren.length === 0 && canManageTables.value) {
-    dataChildren.push({
-      label: 'No data tables yet — create one',
-      key: 'data-empty-hint',
-      disabled: true,
-    })
-  } else if (navigationStore.loading && !navigationStore.projection) {
-    dataChildren.push({ label: 'Loading…', key: 'data-loading', disabled: true })
-  }
-  if (dataChildren.length > 0) {
-    options.push({
-      label: 'Data',
-      key: 'data',
-      icon: renderIcon(DataTableIcon),
-      children: dataChildren,
-    })
-  }
-
-  // Task 21 — Generated Persuratan group: one entry per runnable administration.
-  const persuratanChildren: MenuOption[] = navigationStore.persuratanEntries.map((entry) => {
-    const path = `/dashboard/docs/run/${entry.administrationId}`
-    return {
-      label: renderMenuLabel(entry.label, path),
-      key: `persuratan-${entry.administrationId}`,
-      icon: renderIcon(resolveMenuIcon(entry.icon, Document)),
-    }
+  options.push({
+    label: 'User Management',
+    key: 'user-management',
+    icon: renderIcon(UserMultiple),
+    children: [
+      {
+        label: renderMenuLabel('User', '/dashboard/users'),
+        key: 'users',
+        icon: renderIcon(User),
+      },
+      {
+        label: renderMenuLabel('Guard', '/dashboard/guards'),
+        key: 'guards',
+        icon: renderIcon(Security),
+      },
+      {
+        label: renderMenuLabel('Role', '/dashboard/roles'),
+        key: 'roles',
+        icon: renderIcon(Rule),
+      },
+      {
+        label: renderMenuLabel('Permissions', '/dashboard/permissions'),
+        key: 'permissions',
+        icon: renderIcon(Document),
+      },
+    ],
   })
-  if (persuratanChildren.length === 0 && canManageAdministrations.value) {
-    persuratanChildren.push({
-      label: 'No published administrations yet',
-      key: 'persuratan-empty-hint',
-      disabled: true,
-    })
-  } else if (navigationStore.loading && !navigationStore.projection) {
-    persuratanChildren.push({ label: 'Loading…', key: 'persuratan-loading', disabled: true })
-  }
-  if (persuratanChildren.length > 0) {
-    options.push({
-      label: 'Persuratan',
-      key: 'persuratan',
-      icon: renderIcon(Document),
-      children: persuratanChildren,
-    })
-  }
 
-  if (isAdmin.value) {
-    options.push({
-      label: 'Dokumen',
-      key: 'dokumen',
-      icon: renderIcon(Document),
-      children: [
-        {
-          label: renderMenuLabel('Components', '/dashboard/docs/components'),
-          key: 'components',
-          icon: renderIcon(Grid),
-        },
-        {
-          label: renderMenuLabel('Templates', '/dashboard/docs/templates'),
-          key: 'templates',
-          icon: renderIcon(Document),
-        },
-        {
-          label: renderMenuLabel('Administrations', '/dashboard/docs/administrations'),
-          key: 'administrations',
-          icon: renderIcon(Task),
-        },
-        {
-          label: renderMenuLabel('My Runs', '/dashboard/docs/runs'),
-          key: 'runs',
-          icon: renderIcon(Activity),
-        },
-        {
-          label: renderMenuLabel('Documents', '/dashboard/docs/documents'),
-          key: 'documents',
-          icon: renderIcon(Report),
-        },
-      ],
-    })
-
-    options.push({
-      label: 'User Management',
-      key: 'user-management',
-      icon: renderIcon(UserMultiple),
-      children: [
-        {
-          label: renderMenuLabel('User', '/dashboard/users'),
-          key: 'users',
-          icon: renderIcon(User),
-        },
-        {
-          label: renderMenuLabel('Guard', '/dashboard/guards'),
-          key: 'guards',
-          icon: renderIcon(Security),
-        },
-        {
-          label: renderMenuLabel('Role', '/dashboard/roles'),
-          key: 'roles',
-          icon: renderIcon(Rule),
-        },
-        {
-          label: renderMenuLabel('Permissions', '/dashboard/permissions'),
-          key: 'permissions',
-          icon: renderIcon(Document),
-        },
-      ],
-    })
-
-    options.push({
-      label: 'Sistem',
-      key: 'sistem',
-      icon: renderIcon(Settings),
-      children: [
-        {
-          label: renderMenuLabel('Activity Logs', '/dashboard/activity-logs'),
-          key: 'activity-logs',
-          icon: renderIcon(Activity),
-        },
-        {
-          label: renderMenuLabel('System Logs', '/dashboard/system-logs'),
-          key: 'system-logs',
-          icon: renderIcon(Report),
-        },
-        {
-          label: renderMenuLabel('Settings', '/dashboard/settings'),
-          key: 'settings',
-          icon: renderIcon(Settings),
-        },
-      ],
-    })
-  }
+  options.push({
+    label: 'Sistem',
+    key: 'sistem',
+    icon: renderIcon(Settings),
+    children: [
+      {
+        label: renderMenuLabel('Activity Logs', '/dashboard/activity-logs'),
+        key: 'activity-logs',
+        icon: renderIcon(Activity),
+      },
+      {
+        label: renderMenuLabel('System Logs', '/dashboard/system-logs'),
+        key: 'system-logs',
+        icon: renderIcon(Report),
+      },
+      {
+        label: renderMenuLabel('Settings', '/dashboard/settings'),
+        key: 'settings',
+        icon: renderIcon(Settings),
+      },
+    ],
+  })
 
   return options
 })
 
 const routeKeyMap: Record<string, string> = {
   '/dashboard': 'dashboard',
-  '/dashboard/data/global-tables': 'global-tables',
-  '/dashboard/docs/components': 'components',
-  '/dashboard/docs/templates': 'templates',
-  '/dashboard/docs/administrations': 'administrations',
-  '/dashboard/docs/runs': 'runs',
-  '/dashboard/docs/documents': 'documents',
   '/dashboard/users': 'users',
   '/dashboard/guards': 'guards',
   '/dashboard/roles': 'roles',
@@ -298,19 +172,7 @@ const activeKey = ref('dashboard')
 
 function resolveActiveKey(path: string): string {
   if (routeKeyMap[path]) return routeKeyMap[path]
-  // Task 21 + Task 27 — generated entries + detail/dynamic routes highlight
-  const dataMatch = path.match(/^\/dashboard\/data\/([^/]+)$/)
-  if (dataMatch) return `data-table-${dataMatch[1]}`
-  const runMatch = path.match(/^\/dashboard\/docs\/run\/(\d+)$/)
-  if (runMatch) return `persuratan-${runMatch[1]}`
-  if (path.startsWith('/dashboard/docs/runs/')) return 'runs'
-  if (path.match(/^\/dashboard\/docs\/templates\/\d+$/)) return 'templates'
-  if (path.match(/^\/dashboard\/docs\/administrations\/\d+$/)) return 'administrations'
-  if (path.match(/^\/dashboard\/docs\/documents\/\d+$/)) return 'documents'
-  if (path.startsWith('/dashboard/data/')) {
-    const seg = path.split('/')[3]
-    if (seg) return `data-table-${seg}`
-  }
+  // RBAC-Only — no dynamic data/:table or docs/* routes (removed Task 01)
   return 'dashboard'
 }
 
@@ -324,10 +186,6 @@ watch(
   () => route.path,
   (path) => {
     activeKey.value = resolveActiveKey(path)
-    // Task 21 — poll-on-route-change freshness (server caches 30s).
-    if (authStore.isAuthenticated) {
-      navigationStore.fetch().catch(() => {})
-    }
   },
   { immediate: true },
 )
@@ -404,19 +262,6 @@ function handleDropdownSelect(key: string) {
         :value="activeKey"
         @update:value="handleMenuUpdate"
       />
-      <div class="flex items-center justify-center py-3">
-        <NButton
-          quaternary
-          size="small"
-          :loading="navigationStore.loading"
-          aria-label="Segarkan menu"
-          :title="navigationStore.error ?? 'Segarkan menu'"
-          @click="refreshNavigation"
-        >
-          <template #icon><NIcon><Restart /></NIcon></template>
-          <span v-if="!collapsed">Segarkan menu</span>
-        </NButton>
-      </div>
     </n-layout-sider>
     <n-layout>
       <n-layout-header bordered class="h-14 flex items-center justify-end px-6">

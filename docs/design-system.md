@@ -479,7 +479,7 @@ Each stat is an `NStatistic` component with colored label matching log level.
 
 ## PageShell (Kanonis List/Detail/Editor — Implemented Task 27)
 
-Kanonis shell untuk semua halaman `list` / `detail` / `editor` (fondasi Task 26, diimplementasikan Task 27). Menggantikan header lokal `NCard title` tanpa breadcrumb. Diterapkan di 12+ pages (dashboard, users/roles/permissions/guards/global-tables/[tableName]/components/templates/administrations/documents/runs/activity-logs/system-logs/settings/profile).
+Kanonis shell untuk semua halaman `list` / `detail` / `editor` (fondasi Task 26, diimplementasikan Task 27 — RBAC-Only after Task 01). Menggantikan header lokal `NCard title` tanpa breadcrumb. Diterapkan di RBAC pages (dashboard, users/roles/permissions/guards/activity-logs/system-logs/settings/profile).
 
 - **Komponen**: `app/components/layout/PageShell.vue` (diimplementasikan Task 27) — props `title: string`, `breadcrumbs: {label, href?}[]`, `description?: string`, slots `actions` + `default`.
 - **Struktur**: `breadcrumb` → `header (title + actions)` → `toolbar (DataTable)` → `konten (table/detail/editor)` → `pagination`. Padding `head 16px 20px`, `body 20px`, border `1px #E5E7EB` radius `8`, overflow hidden, `flex-wrap` responsive (`column <768px`).
@@ -628,20 +628,17 @@ label: 'User Management'  // plain string
 | Profile | `UserAvatar` | `@vicons/carbon` | — |
 | Logout | `Logout` | `@vicons/carbon` | — |
 
-### Menu Item Icons — Dokumen Distinct (Task 26, Token-Fixed)
+### Menu Item Icons — RBAC-Only (Task 01)
 
-`Data` & `Persuratan` adalah generated (dari `GET /api/navigation`); `Dokumen` group ikon **distinct** (bukan 5× `Document` identik — GAP-UI-09):
+RBAC-Only — `Data`/`Persuratan`/`Dokumen` generated dihapus Task 01:
 
 | Menu Item | Icon | Import |
 |-----------|------|--------|
-| Global Tables (Data group) | `DataTable` | `@vicons/carbon` |
-| Data table (generated) | `DataTable` / `resolveMenuIcon(entry.icon)` | `@vicons/carbon` |
-| Persuratan (generated) | `Document` (via `resolveMenuIcon`) | `@vicons/carbon` |
-| Components | `Grid` | `@vicons/carbon` |
-| Templates | `Document` | `@vicons/carbon` |
-| Administrations | `Task` / `Flow` | `@vicons/carbon` |
-| My Runs | `Activity` | `@vicons/carbon` |
-| Documents | `Report` | `@vicons/carbon` |
+| Dashboard | `Grid` | `@vicons/carbon` |
+| User | `User` | `@vicons/carbon` |
+| Guard | `Security` | `@vicons/carbon` |
+| Role | `UserRole` | `@vicons/carbon` |
+| Permissions | `Document` | `@vicons/carbon` |
 
 ---
 
@@ -797,67 +794,14 @@ Satu locale **ID** (Indonesia) untuk fondasi — selaras `Masuk`/`Daftar` existi
 
 ---
 
-## Foundation Deliverables (Task 26 Design + Task 27 Implementation — Done)
+## Foundation Deliverables (Task 26 Design + Task 27 Implementation — RBAC-Only after Task 01)
 
-Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` sebagai bahasa visual kanonis untuk Task 27. Lokasi: `docs/wireframes/foundation/`, `docs/mockups/foundation/`, `docs/prototypes/foundation/`, `apps/web/stories/foundation/` (PageShell 4 stories, DataTable 6 states + Refresh, AccessDeniedAlert single, Dashboard 3 varian per peran). Diimplementasikan Task 27: PageShell 12+ pages, DataTable kanonis 320/160 + Restart + error slot `NAlert` + `NIcon` + locale ID (`Cari...` `Semua Kolom` `Menampilkan` `Belum ada data` `Gagal memuat data` `Coba lagi`), AccessDeniedAlert single `data-testid=access-denied` floating 16px/448px 4000ms, sidebar 220/72 token #3B82F6/#2563EB, dashboard dinamis via `/api/navigation` (NGrid 3→2→1) + EC-01 empty, auth `autocomplete` + `aria-hidden` + `aria-label`, motion `usePageTransition` 250ms + reduced-motion. Token 0 indigo (`#3B82F6`), sidebar `220/72`, motion `Fast 150/Normal 250/Slow 350` + `prefers-reduced-motion`.
+Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` sebagai bahasa visual kanonis untuk Task 27. Lokasi setelah Task 01: `apps/web/stories/foundation/` (PageShell 4 stories, DataTable 6 states + Refresh, AccessDeniedAlert single). `docs/wireframes|mockups|prototypes` dihapus Task 01. Diimplementasikan Task 27: PageShell untuk RBAC pages, DataTable kanonis 320/160 + Restart + error slot `NAlert` + `NIcon` + locale ID (`Cari...` `Semua Kolom` `Menampilkan` `Belum ada data` `Gagal memuat data` `Coba lagi`), AccessDeniedAlert single `data-testid=access-denied` floating 16px/448px 4000ms, sidebar 220/72 token #3B82F6/#2563EB, motion `usePageTransition` 250ms + reduced-motion.
 
-## Global Table UX Deliverables (Task 28 Design — Done, FASE 1)
+## Change Log — Task 01 Scope Reduction (2026-09-12)
 
-Redesign UX modul Global Table (task 28) — FASE 1 design selesai 2026-09-11, siap untuk implementasi FASE 2 (task 29). Fondasi 26/27 tetap berlaku (PageShell, DataTable kanonis, 403 tunggal, token #3B82F6).
-
-- **Lokasi**: `docs/wireframes/global-table-ux/` (low-fi master 10 sections + 11 PNG 1280×800 + `_audit-matrix.md` 17 GAP-GT + `_user-flow-map.md` 7 steps + `_wireframe-spec.md`), `docs/mockups/global-table-ux/` (hi-fi token-exact master + 16 PNG + `_mockup-tokens.md` + `_token-diff.md`), `docs/prototypes/global-table-ux/` (interaktif 7 steps + `_prototype-spec.md`), `apps/web/stories/global-table/` (ColumnRow 4, RelationSelector 5, DynamicForm 3, ImportModal 3 stories), generator `scripts/generate-global-table-pngs.mjs`.
-- **Pola yang ditetapkan**: Columns manager `NDataTable` + reorder eksplisit `ChevronUp/Down` via `h(NIcon)` + `NPopconfirm` (menggantikan raw `<table>` + `DragHandle` palsu + `purple` tag), column form sections `v-if` per-type + `NRadioGroup` + `NCheckboxGroup` + `NInputNumber` + `optionRules` computed (menggantikan `NRadio` tunggal + `v-show` bocor + `NInput number` + `#666`), RelationSelector `hasMore = options.length < total` + `NEmpty`/`NAlert+retry` dengan panduan (menggantikan `offset+length<total` + silent error), import `quote-aware` parser + `min(640px,90vw)` + `max-height 240` error per baris (menggantikan `split(',')` + `640px` fix), DynamicForm `NButton primary ghost Upload` + `NImage 64` + computed live `readonly` via `POST /api/expressions/evaluate` debounce, drawer `NPopconfirm` + `NAlert+retry`.
-- **Keputusan**: reorder eksplisit (bukan DnD) + CSV preview max 5 baris / error table max 20, file >5MB atau >5000 baris → 422.
-
----
-
-## Dynamic Administration UI Patterns (IMPLEMENTED)
-
-> Modul Dynamic Administration (Global Table, Component, Template, Administration) sudah diimplementasikan (tasks 07–22). Bagian ini mendokumentasikan pola UI yang berjalan di kode. Prinsip desain mengikuti spesifikasi Naive UI + Tailwind yang sudah ada.
-
-### Metadata-driven / Schema-driven UI
-
-- Menu navigasi bukan hard-coded — dihasilkan (generated) dari metadata:
-  - Tiap Global Table → item menu di bawah grup **Data**
-  - Tiap Administration → item menu di bawah grup **Persuratan**
-- Form dibuat otomatis dari column/schema definition:
-  ```
-  Column Definition → Form Renderer → Input Component
-  ```
-
-### Column Type → Input/Display Component Mapping (Implemented)
-
-| Column Type | Input Component | Display |
-|-------------|----------------|---------|
-| text | `NInput` | Teks |
-| richtext | `NInput` textarea v1 (HTML editor didefer; display di-escape) | Teks |
-| date | `NDatePicker` | Format display (`m-d-Y`) |
-| select | `NSelect` (options) | Tag/label |
-| number / currency | `NInputNumber` | Format number/currency |
-| select-table-relation (+ `-multiple`) | `RelationSelector` (dari Global Table) | Label referensi (`_display`) |
-| image | Upload input + preview | `NImage` |
-| hidden-computed | (no input — server recompute) | hidden |
-| readonly-computed | readonly `NInput` | Teks |
-
-### CRUD Generated Table (Implemented)
-
-Secara otomatis menghasilkan Browse/Create/Edit/Delete dengan:
-- Browse: global search, column visibility, sorting, pagination → menggunakan komponen `DataTable` yang sudah ada
-- Create/Edit: form yang di-generate dari column definition
-- Delete: konfirmasi
-
-### Template Rich Text Editor (Implemented)
-
-- Composition canvas (`CompositionCanvas` + `CompositionNodeView`) untuk menyusun blueprint dokumen
-- `ComponentPickerModal` untuk insert component, `NodeInspector` untuk konfigurasi node
-- Data binding/placeholder menggunakan unified data language, contoh: `{{data.pegawai.nip}}`
-- Mendukung loop & condition pada bagian template
-
-### Administration Workflow UI (Implemented)
-
-- Multi-step wizard (mengikuti `NSteps` / `NStep`) — satu step = satu tahap pengumpulan data
-- Step dapat memakai template (blueprint)
-- Badan alur: pilih Administration → isi step demi step → resolve & render → PDF/HTML
+- Removed Global Table UX deliverables (Task 28) + Dynamic Administration UI Patterns (Metadata-driven, Column Type mapping, CRUD Generated, Template Editor, Administration Workflow). RBAC-Only now: PageShell + DataTable kanonis + AccessDeniedAlert single.
+- Deleted `docs/wireframes|mockups|prototypes` + `docs/dynamic-administration` — archived in git history pre-Task 01.
 
 ---
 

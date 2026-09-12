@@ -8,62 +8,48 @@ Single Nuxt 4 package:
 
 ---
 
-## Dynamic Administration Layers (IMPLEMENTED)
+## RBAC Architecture (RBAC-Only — Task 01)
 
-> Platform mengimplementasikan fondasi **RBAC** dan seluruh modul Dynamic Administration (Global Table, Component, Template, Administration, Expression Engine, Rendering Engine) — tasks 07–22 — plus production hardening (tasks 23–24), audit gate (task 25), design system foundation: wireframe/mockup/prototype (task 26) serta implementasi kanonis PageShell/DataTable/403-single/locale/sidebar/dashboard/motion (task 27), dan Global Table UX design — wireframe/mockup/prototype redesign (task 28, FASE 1, acuan untuk implementasi task 29). Desain layer di bawah ini adalah arsitektur yang berjalan di kode, bukan rencana.
+> Platform saat ini adalah **RBAC-Only** (login, register, dashboard, user management, sistem). Modul Dynamic Administration **dihapus** di Task 01 — arsitektur di bawah ini adalah yang berjalan di kode setelah cleanup.
 
-### Layer Stack (Implemented)
+### Layer Stack (RBAC-Only)
 
 ```text
 ┌──────────────────────────────────────────────────────┐
-│                    UI GENERATION                       │
-│  Generated Menu  •  Schema-driven Forms  •  Browse    │
+│                    PRESENTATION                        │
+│  Nuxt 4 + Vue 3 + Naive UI + Tailwind + PageShell    │
 ├──────────────────────────────────────────────────────┤
-│                  ADMINISTRATION SYSTEM               │
-│  Workflow  •  Steps  •  Data Gathering               │
+│                  AUTHORIZATION                         │
+│  JWT → User → Role → Permission (method+URL)          │
+│  Guard (allow/deny) client gating                    │
 ├──────────────────────────────────────────────────────┤
-│                  TEMPLATE SYSTEM                      │
-│  RichText  •  Components  •  Binding  •  Loop  • Cond │
-│  (Versioned)                                          │
+│                  APPLICATION                           │
+│  Nitro API (Auth, Users, Roles, Permissions, Guards) │
+│  Activity Logs, System Logs, Settings, Storage        │
 ├──────────────────────────────────────────────────────┤
-│                  COMPONENT SYSTEM                     │
-│  Reusable Blocks  •  Data Requirement (contract)     │
-├──────────────────────────────────────────────────────┤
-│                 EXPRESSION ENGINE                     │
-│  Arithmetic  •  String Concat  •  (IF/SUM/ROUND/dll) │
-├──────────────────────────────────────────────────────┤
-│                 DATA LAYER (Global Table)             │
-│  Definitions  •  Columns  •  Relations  • Computed   │
-│  CRUD Generation  •  Data Context                    │
-├──────────────────────────────────────────────────────┤
-│                   RENDERING ENGINE                    │
-│  Resolve Tree (Binding/Loop/Condition) → HTML → PDF  │
+│                  DATA LAYER                            │
+│  TypeORM EntitySchema (9 schemas / 12 tables)        │
+│  SQLite better-sqlite3                               │
 └──────────────────────────────────────────────────────┘
 ```
 
-### Architecture Rules (Enforced)
+### Architecture Rules (RBAC-Only)
 
-1. **Metadata-driven** — data & UI didefinisikan lewat metadata, bukan hard-code
-2. **Component-driven** — bagian dokumen reusable dijadikan component
-3. **Template-driven** — template hanya menentukan struktur dokumen
-4. **Data-driven** — data berasal dari Global Table / Administration / manual / system
-5. **Schema-driven** — form dibuat dari column/schema definition
-6. **Renderer-driven** — satu generic renderer untuk semua template
-7. **Versioned** — template & component memiliki versi
-8. **Unified data language** — satu bahasa reference & ekspresi (`{{data.*}}`) lintas modul
-9. **RBAC sebagai penjaga** — semua operasi metadata & rendering wajib dilindungi otorisasi
+1. **RBAC sebagai penjaga** — semua operasi sensitif wajib melalui permission method+URL check
+2. **JWT stateless** — token 24 jam, disimpan di localStorage + cookie
+3. **Server enforcement via `requireApiAccess`** — guard hanya client gating
+4. **Stateless CRUD** — users/roles/permissions/guards/settings tanpa workflow versioning
 
-### Module Boundaries (Implemented)
+### Module Boundaries (RBAC-Only)
 
 | Concern | Responsibility | Example |
 |---------|---------------|---------|
-| Global Table | Data definition + auto CRUD | `Pegawai` dengan columns |
-| Component | Reusable document block | Kop Surat, Identitas Pegawai |
-| Template | Document blueprint (structure) | Template Surat Keputusan |
-| Administration | Data collection workflow | Surat Keputusan (multi-step) |
-| Document | Data snapshot + rendered output | Hasil surat (PDF/HTML) |
-| Expression Engine | Expression evaluation | `{{harga}} * {{jumlah}}` |
-| Rendering Engine | Resolve tree → HTML → PDF | Generic renderer |
+| Auth | Login/register/profile/password | `POST /api/auth/login` |
+| User Management | CRUD user + role assignment | `app/pages/dashboard/users.vue` |
+| Role Management | CRUD role + guard/permission assignment | `app/pages/dashboard/roles.vue` |
+| Permission Management | CRUD permission method+URL | `app/pages/dashboard/permissions.vue` |
+| Guard Management | CRUD guard allow/deny URLs | `app/pages/dashboard/guards.vue` |
+| Sistem | Activity logs, system logs, settings, storage | `app/pages/dashboard/activity-logs.vue` |
 
 ---
 
@@ -282,21 +268,10 @@ Single Nuxt 4 package:
 - `auth` — Requires valid JWT token, redirects to `/login` if missing
 - `guest` — Redirects to `/dashboard` if already authenticated
 
-### Sidebar Menu (AppLayout — Implemented Task 27: 220/72, token #3B82F6)
+### Sidebar Menu (AppLayout — RBAC-Only 220/72, token #3B82F6 — Task 01)
 
 ```
 Dashboard                    → /dashboard
-Data (generated, per Global Table read permission)
-    ├── Global Tables        → /dashboard/data/global-tables (Admin)
-    └── <table>              → /dashboard/data/:tableName (per readable table, resolveMenuIcon)
-Persuratan (generated, per runnable Administration)
-    └── <administration>     → /dashboard/docs/run/:id (per runnable, permission-filtered)
-Dokumen (distinct icons: Grid/Document/Task/Activity/Report — not 5×Document)
-    ├── Components           → /dashboard/docs/components (Grid)
-    ├── Templates            → /dashboard/docs/templates (Document)
-    ├── Administrations      → /dashboard/docs/administrations (Task)
-    ├── My Runs              → /dashboard/docs/runs (Activity)
-    └── Documents            → /dashboard/docs/documents (Report)
 User Management (group)
     ├── User                 → /dashboard/users
     ├── Guard                → /dashboard/guards
@@ -307,7 +282,7 @@ Sistem (group)
     ├── System Logs          → /dashboard/system-logs
     └── Settings             → /dashboard/settings
 ```
-Layout: `NLayoutSider :width 220 :collapsed-width 72` (sebelumnya 240/64), collapsed-icon-size 22, bg #F9FAFB border #E5E7EB, active bg #EFF6FF border #BFDBFE text #1D4ED8, `h(NIcon)` wrapper, menu label `<a href>` preserve native right-click, `resolveActiveKey` highlight untuk `data/:table`, `run/:id`, `templates/:id`, `administrations/:id`, `documents/:id`, `runs/:id`.
+Layout: `NLayoutSider :width 220 :collapsed-width 72`, collapsed-icon-size 22, bg #F9FAFB border #E5E7EB, active bg #EFF6FF border #BFDBFE text #1D4ED8, `h(NIcon)` wrapper, menu label `<a href>` preserve native right-click. Tidak ada group `Data`/`Persuratan`/`Dokumen` (dihapus Task 01).
 
 ---
 
@@ -547,24 +522,11 @@ Layout: `NLayoutSider :width 220 :collapsed-width 72` (sebelumnya 240/64), colla
 [2026-08-15T10:31:00.000Z] [ERROR] [UsersService] Failed to create user
 ```
 
-### Dynamic Administration
+### Health
 
-All routes require Bearer auth + matching permission (`requireApiAccess`), unless noted.
-
-| Module | Prefix | Key endpoints |
-|--------|--------|---------------|
-| Global Tables | `/api/global-tables` | CRUD + `PUT /:id/menu`, `/:id/columns/*` (CRUD + reorder), `/:id/rows/lookup` |
-| Table Data | `/api/data/:tableName` | Row CRUD + `/export?format=csv` + `/import` (multipart CSV) |
-| Expressions | `/api/expressions` | `POST /validate`, `POST /evaluate` |
-| Components | `/api/components` | CRUD + `/:id/preview`, `/:id/publish`, `/versions/:version` |
-| Templates | `/api/templates` | CRUD + `/:id/publish`, `/rollback/:version`, `/validate-tree`, `/versions/:version`, `/bindings/*` |
-| Administrations | `/api/administrations` | CRUD + `/:id/publish`, `/archive`, `/new-version`, `/steps`, `/versions/:version`, `/:id/runs` |
-| Runs | `/api/runs` | `GET /mine`, `/:runId` detail, `/steps/:stepId` patch, `/complete`, `/cancel` |
-| Documents | `/api/documents` | List/detail + `/:id/html`, `/:id/pdf`, `/:id/reissue` |
-| Rendering | `/api/render` | `POST /preview` |
-| Navigation | `/api/navigation` | `GET /` (auth-only, permission-filtered menu projection) |
-| Health | `/api/health` | `GET /` (public) |
-| Activity-log coverage | `/api/activity-logs/coverage` | RBAC/audit coverage matrix (Task 22) |
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| GET | `/api/health` | Health check | Public |
 
 ---
 
@@ -618,13 +580,13 @@ Request → Nitro route handler → requireAuth → requireApiAccess
        → Fail: 403 "Access denied"
 ```
 
-### Startup Checks (Task 22–24)
+### Startup Checks (Task 22–24 — RBAC-Only after Task 01)
 
 The Nitro plugin (`server/plugins/database.server.ts`) runs startup self-checks on boot:
 
 1. **Database initialization** — `getDataSource()` initializes SQLite with `synchronize` (dev) or `migrationsRun` (prod)
 2. **Migration drift detection** — `checkMigrationStatus()` compares applied migrations against checked-in classes; prod fatals on drift, dev silent with `synchronize:true`
-3. **Seed** — `seedDatabase()` runs idempotent seed (RBAC + Dynamic Administration permissions)
+3. **Seed** — `seedDatabase()` runs idempotent seed (RBAC only — Super Admin/Admin/User + Full Access/Read/Read Write)
 4. **Startup checks** — `runStartupChecks()` validates JWT_SECRET, storage writability, migration sync
 5. **Dev-silence gate** — `shouldEmitStartupWarn()` suppresses JWT_SECRET_DEFAULT and MIGRATION_DRIFT warns in dev `synchronize:true` mode; prod fatals unchanged (`console.error` + `process.exit(1)`)
 
@@ -767,13 +729,13 @@ Reusable component untuk semua halaman tabel (Users, Roles, Permissions, Guards)
 9. **Empty State** — `NEmpty` + CTA `+ Buat ...` (BR: no dead-end)
 10. **Reset Filters** — Button to clear all filters
 
-### PageShell (Kanonis — Implemented Task 27)
+### PageShell (Kanonis — Implemented Task 27 — RBAC-Only after Task 01)
 
-**Path**: `app/components/layout/PageShell.vue` (diimplementasikan Task 27) — `props: title, breadcrumbs: {label, href?}[], description?`, slots `actions` + `default`. Header `title 20px Semibold #1F2937` + `breadcrumb` (`<a href>` + `preventDefault` + `router.push`, leaf `aria-current="page"`) + `actions` → `toolbar (DataTable kanonis)` → `konten` → `pagination`. Menggantikan header lokal `NCard title` tanpa breadcrumb. Diterapkan di 12+ pages (users/roles/permissions/guards/global-tables/[tableName]/components/templates/administrations/documents/runs/activity-logs/system-logs/settings/profile/dashboard). Deliverables: `docs/wireframes/foundation/`, `docs/mockups/foundation/`, `docs/prototypes/foundation/`, `apps/web/stories/foundation/`.
+**Path**: `app/components/layout/PageShell.vue` (diimplementasikan Task 27) — `props: title, breadcrumbs: {label, href?}[], description?`, slots `actions` + `default`. Header `title 20px Semibold #1F2937` + `breadcrumb` (`<a href>` + `preventDefault` + `router.push`, leaf `aria-current="page"`) + `actions` → `toolbar (DataTable kanonis)` → `konten` → `pagination`. Menggantikan header lokal `NCard title` tanpa breadcrumb. Diterapkan di RBAC pages (users/roles/permissions/guards/activity-logs/system-logs/settings/profile/dashboard). Deliverables dipangkas ke `apps/web/stories/foundation/` (PageShell, DataTable, AccessDeniedAlert) — `docs/wireframes|mockups|prototypes` dihapus Task 01.
 
-### Storybook Foundation (Task 26)
+### Storybook Foundation (Task 26 — RBAC-Only after Task 01)
 
-`apps/web/stories/foundation/` — `Foundation/PageShell` (4), `Foundation/DataTable` (6 states + Refresh), `Foundation/AccessDeniedAlert` (floating global single `data-testid=access-denied`), `Foundation/DashboardShortcuts` (3 varian per peran). `npm run storybook` `:6006`, `npm run build-storybook`.
+`apps/web/stories/foundation/` — `Foundation/PageShell` (4), `Foundation/DataTable` (6 states + Refresh), `Foundation/AccessDeniedAlert` (floating global single `data-testid=access-denied`). `DashboardShortcuts` dinamis dihapus Task 01. `npm run storybook` `:6006`, `npm run build-storybook`.
 
 ### Composable: `useDataTable`
 

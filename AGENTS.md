@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-**Letter Builder System (LBS)** — Aplikasi administrasi persuratan otomatis — mulai dari builder table sebagai data awal, membuat component surat, membuat surat (Template), dan step administrasi persuratan di pemerintahan/perusahaan. Metadata-driven platform to define data structures (Global Tables), reusable document blocks (Components), document blueprints (Templates), data-collection workflows (Administrations), and generate documents (PDF/HTML). RBAC foundation + Dynamic Administration modules are implemented.
+**Letter Builder System (LBS)** — RBAC User Management Platform — admin panel untuk login, register, dashboard, user management (user, guard, role, permission), dan sistem (activity logs, system logs, settings). RBAC-Only scope (Task 01): Dynamic Administration (Global Table → Component → Template → Administration → Document) **dihapus**.
 
-**Core flow**: Global Table → Component → Template → Administration → Document (PDF/HTML)
+**Core flow**: RBAC — `User → Role → Permission (method+URL) / Guard (allow/deny)` → JWT → API
 
 ## Critical Working Directory
 
@@ -61,11 +61,11 @@ Request → JWT validation → User lookup → Role resolution
   → ALLOW / 403
 ```
 
-### Entities (23 EntitySchemas, 26 physical tables)
+### Entities (9 EntitySchemas, 12 physical tables inc. 3 junctions — RBAC-Only after Task 01)
 
 Canonical source: `server/utils/orm-data-source.ts` — imports all schemas and migrations. `server/utils/db.ts` re-exports from here. **Do not duplicate entity lists elsewhere.**
 
-Key entities: User, Role, Permission, PermissionMethod, PermissionUrl, Guard, GuardUrl, ActivityLog, Setting, GlobalTable, GlobalTableColumn, GlobalTableRow, Component (+ ComponentVersion, ComponentDataRequirement), Template (+ TemplateVersion), TemplateBinding, Administration (+ AdministrationStep, AdministrationVersion), AdministrationRun, Document.
+Key entities: User, Role, Permission, PermissionMethod, PermissionUrl, Guard, GuardUrl, ActivityLog, Setting.
 
 Junction tables: `users_roles`, `roles_guards`, `roles_permissions`.
 
@@ -90,7 +90,7 @@ Junction tables: `users_roles`, `roles_guards`, `roles_permissions`.
 - `useAuthorization()` — `hasRole()`, `hasPermission()`, `canAccessUrl()`
 - `useDataTable()` — search, sort, column visibility, server-side pagination
 - `usePageTransition()` — Anime.js helpers (fadeInUp, staggerFadeIn, etc.)
-- Feature composables: `useUsersData`, `useRolesData`, `useGlobalTablesData`, `useTemplatesData`, `useComponentsData`, `useAdministrationsData`, `useRunsData`, etc.
+- Feature composables: `useUsersData`, `useRolesData`, `usePermissionsData`, `useGuardsData` (RBAC-Only)
 
 ### Import Aliases
 - `~/` → `app/` root (e.g., `~/stores/auth`, `~/utils/error`)
@@ -182,14 +182,13 @@ Response format: `{ data: [...], total, page, limit, totalPages }`
 - **Primary color**: `#3B82F6` (Blue 500), font: Inter, border-radius: 6px/4px/8px
 - **Animations**: Respect `prefers-reduced-motion`
 - **Access denied**: 403 → NAlert + dispatch `rbac-denied` custom event
-- **DB synced entities**: 23 EntitySchemas, 26 physical tables — check `orm-data-source.ts` for canonical list
+- **DB synced entities**: 9 EntitySchemas, 12 physical tables — check `orm-data-source.ts` for canonical list (RBAC-Only after Task 01; pre-Task 01 was 23/26)
 
 ## Documentation
 
-- `docs/PRD.md` — Product requirements
-- `docs/architecture.md` — System architecture, API endpoints
-- `docs/database.md` — Entity schema, relationships, seed data
-- `docs/design-system.md` — Design tokens, component specs
-- `docs/dynamic-administration/` — Wiki and knowledge graph for Dynamic Administration design
+- `docs/PRD.md` — Product requirements (RBAC-Only after Task 01)
+- `docs/architecture.md` — System architecture, API endpoints (RBAC-Only)
+- `docs/database.md` — Entity schema, relationships, seed data (RBAC-Only)
+- `docs/design-system.md` — Design tokens, component specs (RBAC-Only)
 - `tasks/` — Current implementation task lists
 - `.ua/` — Knowledge graph (754 nodes, 1036 edges mapping project structure)

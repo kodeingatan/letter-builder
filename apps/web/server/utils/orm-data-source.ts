@@ -1,7 +1,9 @@
 /**
- * CLI-loadable TypeORM data-source config (Task 23).
+ * CLI-loadable TypeORM data-source config (RBAC-Only after Task 01).
  *
- * Same 23 EntitySchemas as the Nuxt runtime (`server/utils/db.ts`), but with
+ * 9 EntitySchemas / 12 physical tables (incl. 3 M:N junctions) — Dynamic Administration
+ * (Global Table, Component, Template, Administration, Document) removed Task 01.
+ * Same 9 EntitySchemas as the Nuxt runtime (`server/utils/db.ts`), but with
  * plain relative imports and no `~~/` Nuxt aliases so it can be loaded by
  * `jiti` (see `server/utils/migration-cli.ts`) and the `migration:*` npm
  * scripts. `server/utils/db.ts` imports the canonical `appEntities` /
@@ -17,29 +19,10 @@ import { GuardSchema } from '../entities/guard.entity'
 import { GuardUrlSchema } from '../entities/guard-url.entity'
 import { ActivityLogSchema } from '../entities/activity-log.entity'
 import { SettingSchema } from '../entities/setting.entity'
-import { GlobalTableSchema } from '../entities/global-table.entity'
-import { GlobalTableColumnSchema } from '../entities/global-table-column.entity'
-import { GlobalTableRowSchema } from '../entities/global-table-row.entity'
-import {
-  ComponentSchema,
-  ComponentDataRequirementSchema,
-  ComponentVersionSchema,
-} from '../entities/component.entity'
-import {
-  TemplateSchema,
-  TemplateVersionSchema,
-} from '../entities/template.entity'
-import { TemplateBindingSchema } from '../entities/template-binding.entity'
-import {
-  AdministrationSchema,
-  AdministrationStepSchema,
-  AdministrationVersionSchema,
-} from '../entities/administration.entity'
-import { AdministrationRunSchema } from '../entities/administration-run.entity'
-import { DocumentSchema } from '../entities/document.entity'
 import { Baseline1788914913928 } from '../migrations/1788914913928-Baseline'
+import { DropDynamicTables1700000000001 } from '../migrations/1700000000001-DropDynamicTables'
 
-/** All 23 EntitySchemas (26 physical tables incl. 3 M:N junctions). */
+/** All 9 EntitySchemas (12 physical tables incl. 3 M:N junctions) — RBAC-Only. */
 export const appEntities = [
   UserSchema,
   RoleSchema,
@@ -50,27 +33,13 @@ export const appEntities = [
   GuardUrlSchema,
   ActivityLogSchema,
   SettingSchema,
-  GlobalTableSchema,
-  GlobalTableColumnSchema,
-  GlobalTableRowSchema,
-  ComponentSchema,
-  ComponentDataRequirementSchema,
-  ComponentVersionSchema,
-  TemplateSchema,
-  TemplateVersionSchema,
-  TemplateBindingSchema,
-  AdministrationSchema,
-  AdministrationStepSchema,
-  AdministrationVersionSchema,
-  AdministrationRunSchema,
-  DocumentSchema,
 ]
 
 /**
  * Checked-in migrations, oldest first. BR-001: never edit an applied
  * migration — new schema changes ship as new files in `server/migrations/`.
  */
-export const appMigrations = [Baseline1788914913928]
+export const appMigrations = [Baseline1788914913928, DropDynamicTables1700000000001]
 
 /** Database file path: `DB_PATH` env override, default `db.sqlite` (cwd). */
 export function resolveDatabasePath(): string {

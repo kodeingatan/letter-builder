@@ -173,16 +173,7 @@ const entityOptions = [
   { label: 'Permission', value: 'Permission' },
   { label: 'Guard', value: 'Guard' },
   { label: 'Auth', value: 'Auth' },
-  { label: 'GlobalTable', value: 'GlobalTable' },
-  { label: 'GlobalTableColumn', value: 'GlobalTableColumn' },
-  { label: 'Component', value: 'Component' },
-  { label: 'Template', value: 'Template' },
-  { label: 'TemplateBinding', value: 'TemplateBinding' },
-  { label: 'Administration', value: 'Administration' },
-  { label: 'AdministrationRun', value: 'AdministrationRun' },
-  { label: 'Document', value: 'Document' },
-  { label: 'Render', value: 'Render' },
-  { label: 'Expression', value: 'Expression' },
+  { label: 'Settings', value: 'Settings' },
 ];
 
 const levelOptions = [

@@ -1,5 +1,0 @@
-export { default as AdministrationTable } from './AdministrationTable.vue'
-export { default as AdministrationFormModal } from './AdministrationFormModal.vue'
-export { default as AdministrationDetailDrawer } from './AdministrationDetailDrawer.vue'
-export { default as AdministrationStepCard } from './AdministrationStepCard.vue'
-export { default as AdministrationWorkflowEditor } from './AdministrationWorkflowEditor.vue'

@@ -1,8 +1,8 @@
-# Production Runbook (Task 22)
+# Production Runbook (RBAC-Only — Task 01)
 
 Single-node SQLite deployment. Multi-node/HA is out of scope.
 
-## 1. Production boot & baseline migration (Task 23)
+## 1. Production boot & baseline migration
 
 ```bash
 NODE_ENV=production JWT_SECRET=<strong-secret> DB_SYNCHRONIZE=false npm run build && npm run preview
@@ -11,8 +11,7 @@ NODE_ENV=production JWT_SECRET=<strong-secret> DB_SYNCHRONIZE=false npm run buil
 - `synchronize:false` in production (`server/utils/db.ts` — override with
   `DB_SYNCHRONIZE=true` only for scratch/dev). On a fresh database file the
   server applies the checked-in baseline migration
-  (`server/migrations/1788914913928-Baseline.ts` — all 23 entities / 26
-  tables) automatically at boot (`migrationsRun` in `getDataSource()`), then
+  (`server/migrations/1788914913928-Baseline.ts` — RBAC-Only after Task 01: 9 schemas / 12 tables) automatically at boot (`migrationsRun` in `getDataSource()`), then
   runs the idempotent seed. Dev default is unchanged (`synchronize:true`,
   no migration enforcement).
 - On drift the server fails fast with `MIGRATION_DRIFT` pointing here (see
@@ -20,8 +19,7 @@ NODE_ENV=production JWT_SECRET=<strong-secret> DB_SYNCHRONIZE=false npm run buil
   `server/utils/migration-status.ts`, wired via
   `server/plugins/database.server.ts`).
 - Fresh-install seed is idempotent: every `seed*` function checks existence
-  first — re-running never duplicates permissions, roles, users, or settings
-  (26 permissions at baseline).
+  first — re-running never duplicates permissions, roles, users, or settings.
 - Startup self-check fails fast in production when `JWT_SECRET` is default,
   storage is unwritable, or migrations drift. Dev boots
   (`synchronize:true`, the default outside production) are startup-warn-free
@@ -34,7 +32,7 @@ NODE_ENV=production JWT_SECRET=<strong-secret> DB_SYNCHRONIZE=false npm run buil
 npm run migration:run                    # apply pending migrations (DB_PATH defaults to db.sqlite)
 DB_PATH=/tmp/scratch.sqlite npm run migration:run     # target a scratch copy
 npm run migration:revert                 # revert the last applied migration (up/down drill)
-npm run migration:generate -- <Name>     # diff the 23 EntitySchemas vs DB → server/migrations/<timestamp>-<Name>.ts
+npm run migration:generate -- <Name>     # diff the RBAC EntitySchemas vs DB → server/migrations/<timestamp>-<Name>.ts
 ```
 
 - `generate` diffs entity metadata against the target database: point
@@ -42,9 +40,7 @@ npm run migration:generate -- <Name>     # diff the 23 EntitySchemas vs DB → s
   wire the new class into `appMigrations` in
   `server/utils/orm-data-source.ts` (the CLI prints a reminder).
 - BR-001: never edit an applied migration; schema changes ship as new files.
-- Up/down drill on an empty scratch file before touching prod (a
-  pre-migration database copy has tables but no `migrations` bookkeeping —
-  see drift recovery §4 below — so drills always start from empty):
+- Up/down drill on an empty scratch file before touching prod:
 
 ```bash
 rm -f /tmp/drill.sqlite
@@ -73,13 +69,12 @@ sqlite3 /tmp/drill.sqlite "PRAGMA integrity_check;"  # must print: ok
 `GET /api/health` — public, no PII:
 
 ```json
-{ "status": "healthy", "db": "healthy", "storage": "healthy", "renderer": "healthy", "version": "1.0.0" }
+{ "status": "healthy", "db": "healthy", "storage": "healthy", "version": "1.0.0" }
 ```
 
-Wire it to your process monitor / load-balancer probe. `renderer:
-degraded` means all 4 render slots are busy (transient).
+Wire it to your process monitor / load-balancer probe.
 
-## 3. SQLite backup / restore (REQ-005)
+## 3. SQLite backup / restore
 
 SQLite is a single file: `apps/web/db.sqlite`.
 
@@ -92,89 +87,55 @@ sqlite3 backups/db-$(date +%F).sqlite "PRAGMA integrity_check;"  # must print: o
 # Restore on a scratch copy + verify
 cp backups/db-<date>.sqlite /tmp/restore-check.sqlite
 sqlite3 /tmp/restore-check.sqlite "PRAGMA integrity_check;"      # ok
-# boot against the copy, open a document + download its PDF, compare
-# byte-identical with the live copy before swapping the file in.
 ```
 
 Cadence: daily file copy off-host; `VACUUM` monthly. WAL mode is the
 default recommendation when concurrent readers grow.
 
-## 4. Least-privilege roles (REQ-001)
+## 4. Least-privilege roles (RBAC-Only)
 
-| Role     | Grants |
+| Role | Grants |
 | -------- | ------ |
-| Designer | Global Table Mgmt, Table Data Read/Write, Component/Template/Administration Mgmt, Run, Document read, Expression Use, Rendering Preview, Navigation Read |
-| Operator | Table Data Read/Write, Run, Document read, Expression Use, Navigation Read |
-| Admin    | All of Designer + Document Reissue (reissue/purge) + settings |
+| Super Admin | Full Access (all methods + URLs) |
+| Admin | Web Access + Read Write (users/roles/permissions/guards + logs/settings) |
+| User | Web Access + Read (read-only) |
 
-New users get Operator-equivalent or nothing (never Designer/Admin)
-unless explicitly granted. Permission names are immutable once seeded —
-add new ones only via additive seeding (`seedTask22Catalog`).
+New users get User-equivalent or nothing unless explicitly granted. Permission names are immutable once seeded.
 
-## 5. Audit coverage (REQ-002)
+## 5. Audit coverage
 
 Every mutation emits an activity log. Verify during QA:
 
 ```
-GET /api/activity-logs/coverage   (admin, activity-logs GET grant)
-→ { entities: [{ entity, count, covered }], missing: [...], coverage: "10/10" }
+GET /api/activity-logs (admin)
+→ { data: [...], total, page, limit, totalPages }
+GET /api/activity-logs/stats
 ```
 
-Covered entities: GlobalTable, GlobalTableColumn, Component, Template,
-TemplateBinding, Administration, AdministrationRun, Document, Render,
-Expression. Table-row writes log under the table displayName with
-redacted metadata (see §6).
+Covered entities: User, Role, Permission, Guard, Auth, Settings.
 
-## 6. PII discipline (BR-003)
-
-Row VALUES never enter system logs. Activity metadata stores column
-names + row ids; values of PII columns are replaced with `[REDACTED]`.
-PII column-name fragments (case-insensitive substring):
-
-`email, phone, telp, telepon, hp, address, alamat, nik, ktp, npwp,
-password, token, secret`
-
-The Activity Logs page shows a redaction notice.
-
-## 7. Limits (verified, Task 22 sweep)
+## 6. Limits
 
 | Surface | Limit | Behavior |
 | ------- | ----- | -------- |
-| Uploads | 5 MB, allowlist `png jpg jpeg svg webp ico gif pdf` | 400 otherwise |
-| CSV import | 5000 rows | 422 above |
-| Render preview | 30/min/user, 4 concurrent renders | 429 / 503 + `Retry-After` |
-| Expressions | 60/min/user, 2000 chars, 100 ms, depth 20 | 429 / 400 |
+| Uploads (settings) | 5 MB, allowlist `png jpg jpeg svg webp ico gif pdf` | 400 otherwise |
+| Auth | 60/min/user for login | 429 |
 
-## 8. CSV formula-injection note (AC-006)
+## 7. Quickstarts
 
-Exported cells starting with `= + - @` are prefixed with `'` so
-spreadsheet apps treat them as text. Operators opening exports from
-untrusted rows should still prefer "import as text" in their spreadsheet.
+**Admin:** Login → Dashboard → User Management (Users/Roles/Permissions/Guards) → Activity Logs / System Logs / Settings.
 
-## 9. IDOR / traversal posture (AC-005)
+## 8. API delta (RBAC-Only after Task 01)
 
-Runs/documents are own-vs-all scoped at the service layer: operator B
-fetching operator A's run/document gets 403/404 with no data leak.
-Storage serving rejects unknown subfolders and generated filenames
-prevent traversal.
+RBAC endpoints only:
+- `/api/auth/*` (login, register, profile, password)
+- `/api/users/*`, `/api/roles/*`, `/api/permissions/*`, `/api/guards/*`
+- `/api/activity-logs/*`, `/api/system-logs/*`, `/api/settings/*`, `/api/storage/*`, `/api/health`
 
-## 10. Quickstarts
+Dynamic Administration endpoints (`/api/global-tables/*`, `/api/data/*`, `/api/components/*`, `/api/templates/*`, `/api/administrations/*`, `/api/runs/*`, `/api/documents/*`, `/api/render/*`, `/api/expressions/*`, `/api/navigation`) removed Task 01.
 
-**Designer:** Global Tables → add columns → Components → Templates
-(canvas + Bindings tab, validate-tree must be green, publish) →
-Administrations (pin published template versions, publish) → share with
-Operators.
+## Change Log
 
-**Operator:** Persuratan → start a published administration → fill steps
-→ complete → Dokumen → preview/download PDF.
+### Task 01 — 2026-09-12
 
-## 11. API delta (Tasks 07–21, new since RBAC foundation)
-
-- `/api/global-tables/*`, `/api/data/:tableName/*` (incl. import/export),
-  `/api/components/*`, `/api/templates/*` (incl. bindings, validate-tree,
-  publish, rollback), `/api/administrations/*` (incl. steps, publish,
-  archive, new-version, menu), `/api/administrations/:id/runs`,
-  `/api/runs/*` (mine, steps PATCH, complete, cancel),
-  `/api/documents/*` (html, pdf, reissue), `/api/render/preview`,
-  `/api/expressions/*`, `/api/navigation`, `/api/health`,
-  `/api/activity-logs/coverage`.
+- Pruned to RBAC-Only. Removed Designer/Operator roles, Dynamic Administration permissions, rendering/expression limits, and docs references. Archived dynamic runbook sections in git history pre-Task 01.
