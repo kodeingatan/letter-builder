@@ -147,7 +147,7 @@ function resetFilters() {
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div class="flex flex-col gap-4">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div class="flex flex-wrap items-center gap-3 flex-1 min-w-[320px]">
         <NInput
