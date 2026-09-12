@@ -338,7 +338,8 @@ Semua tabel di sistem **WAJIB** memiliki fitur berikut:
 ### Empty State
 - **Component**: NEmpty
 - **Description**: "Belum ada data" / "Belum ada {entity}" (ID locale, Task 26 decision; sebelumnya `No {entity} found`) + CTA `+ Buat ...` (BR: no dead-end)
-- **Position**: Centered in table body
+- **Position**: Centered in table body (via `NDataTable` slot `#empty` — single instance)
+- **Implementation**: `app/components/common/DataTable/DataTable.vue:244-248` renders single `NEmpty :description="emptyDescription"` through `<template #empty>` inside `NDataTable`; prevents duplicate default `No Data` (Task 02 fix for stale duplicate)
 
 ### Error State
 - **Component**: NAlert `type="error"` closable + `Coba lagi` retry emit (`error: string | null` prop)
@@ -802,6 +803,10 @@ Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` 
 
 - Removed Global Table UX deliverables (Task 28) + Dynamic Administration UI Patterns (Metadata-driven, Column Type mapping, CRUD Generated, Template Editor, Administration Workflow). RBAC-Only now: PageShell + DataTable kanonis + AccessDeniedAlert single.
 - Deleted `docs/wireframes|mockups|prototypes` + `docs/dynamic-administration` — archived in git history pre-Task 01.
+
+## Change Log — Task 02 Build Recovery (2026-09-12)
+
+- Fixed `DataTable.vue:244-248` duplicate empty — now single `NEmpty` via `NDataTable` `#empty` slot (`Belum ada data` ID locale) instead of `No Data` + `Belum ada data` duplicate (Task 02 infra fix).
 
 ---
 

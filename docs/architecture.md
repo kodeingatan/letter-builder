@@ -726,7 +726,7 @@ Reusable component untuk semua halaman tabel (Users, Roles, Permissions, Guards)
 6. **Server-Side Sorting** — Click column header to toggle ASC → DESC → none (Carbon `ArrowUp`/`ArrowDown` 14px Primary)
 7. **Pagination** — NPagination with page size selector (10, 20, 50, 100) + `Menampilkan {from}-{to} dari {total}`
 8. **Loading State** — `NSpin` overlay semi-transparan
-9. **Empty State** — `NEmpty` + CTA `+ Buat ...` (BR: no dead-end)
+9. **Empty State** — `NEmpty` + CTA `+ Buat ...` (BR: no dead-end) — single instance via `NDataTable` `#empty` slot `DataTable.vue:244-248` (Task 02 prevents duplicate `No Data`)
 10. **Reset Filters** — Button to clear all filters
 
 ### PageShell (Kanonis — Implemented Task 27 — RBAC-Only after Task 01)

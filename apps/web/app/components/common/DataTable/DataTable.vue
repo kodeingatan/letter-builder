@@ -241,10 +241,12 @@ function resetFilters() {
         @update:page="(p) => emit('update:page', p)"
         @update:page-size="(s) => emit('update:limit', s)"
         @update:sorter="handleSorterChange"
-      />
+      >
+        <template #empty>
+          <NEmpty v-if="!loading && !error" :description="emptyDescription" />
+        </template>
+      </NDataTable>
     </NSpin>
-
-    <NEmpty v-if="!loading && (data ?? []).length === 0 && !error" :description="emptyDescription" />
 
     <div v-if="total > 0" class="text-sm text-gray-500">
       Menampilkan {{ (page - 1) * limit + 1 }}-{{ Math.min(page * limit, total) }} dari {{ total }}

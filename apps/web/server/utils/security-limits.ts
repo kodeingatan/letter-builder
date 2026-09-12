@@ -4,10 +4,9 @@
  * Centralizes the limits deferred from Tasks 09/12/20 so this task can
  * verify/enforce them in one place:
  * - upload allowlists (extension + size) enforced by StorageService,
- * - CSV row cap enforced by TableDataService.importCsv,
- * - expression validate/evaluate rate limit enforced by the expression
- *   routes (mirrors the render-guard sliding-window pattern),
- * - render preview/semaphore limits live in `server/utils/render-guard.ts`.
+ * - CSV row cap (5000 rows) enforced for CSV imports (Task 12 limit: MAX_CSV_IMPORT_ROWS),
+ * - expression validate/evaluate rate limit enforced by the expression routes (60/min via checkExpressionRateLimit — sliding-window),
+ * - render preview limits — removed in Task 01 (dynamic rendering deleted; no semaphore file).
  */
 
 /** Max upload size: 5 MB (settings images/avatars/general). */

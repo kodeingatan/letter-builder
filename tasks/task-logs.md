@@ -7,37 +7,41 @@
 
 - Date: 2026-09-12
 - By: /review
-- Source: Task 01 review — APPROVED_WITH_COMMENTS (blocking 0, major 2, minor 3)
+- Source: Task 02 — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — REVIEWED APPROVED
 
 ## Overview
 
 | Task File | Fase | Status | Implemented | Verified | Reviewed |
 | --------- | ---- | ------ | ----------- | -------- | -------- |
 | tasks/01-platform-scope-reduction.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
+| tasks/02-fix-stale-nuxt-imports-and-render-guard.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
 
 ## Belum Implementasi
 
-- (sudah semua)
+- (none)
 
 ## Sudah Implementasi
 
 - [x] tasks/01-platform-scope-reduction.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh) (FASE 2 — Implementation)
+- [x] tasks/02-fix-stale-nuxt-imports-and-render-guard.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) (FASE 2 — Implementation) — 2026-09-12 by /implement
 
 ## Belum Diverifikasi
 
-- (sudah semua)
+- (none)
 
 ## Sudah Diverifikasi
 
 - [x] tasks/01-platform-scope-reduction.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh)
+- [x] tasks/02-fix-stale-nuxt-imports-and-render-guard.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — 2026-09-12 by /verify — PASS
 
 ## Belum Direview
 
-- (sudah semua)
+- (none)
 
 ## Sudah Direview
 
 - [x] tasks/01-platform-scope-reduction.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh)
+- [x] tasks/02-fix-stale-nuxt-imports-and-render-guard.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — 2026-09-12 by /review — APPROVED
 
 ## Detail per Task
 
@@ -50,4 +54,14 @@
 - Verified: [x] — 2026-09-12 via /verify: AC-001..012 PASS (docs 5 files, PRD/arch no dynamic outside Change Log, DB 9 schemas/12 tables, API 10 dirs, pages 9, sidebar User Management+Sistem, build PASS), test:unit 12 files/76 tests PASS, test:nuxt 7 files/30 tests PASS (after fixing Dashboard & DocumentPreview dynamic tests), E2E crud.spec infra missing Playwright browser (file-level routing verified, 8 specs exist but browser launch failed — pending `npx playwright install`)
 - Reviewed: [x] — 2026-09-12 via /review: APPROVED_WITH_COMMENTS (blocking 0, major 2 infra, minor 3 docs) — see Review Notes
 - Notes: RBAC-Only cleanup — hapus 14 EntitySchemas dynamic (GlobalTable/Component/Template/Administration/Document dkk) + DTO/service/API/composable/store/pages/components/shared-types/utils dynamic + hapus docs/dynamic-administration, docs/audit, docs/mockups, docs/prototypes, docs/wireframes + update docs/PRD.md, architecture.md, database.md, design-system.md ke RBAC-Only (9 EntitySchemas / 12 tabel fisik). Verifikasi: `ls docs/` hanya RBAC docs, `GET /api/global-tables` 404 (file not exist), `npm run build` 0 error (17.5MB), db sqlite 12 tables confirmed, permission-matrix stub PASS, layout RBAC-only, dashboard RBAC shortcuts, drop-migration `1700000000001-DropDynamicTables.ts` added. Remaining: run `npx playwright install` then `HEADLESS=1 npm run test:e2e -- test/e2e/crud.spec.ts` to fully verify E2E. Review fixed `docs/design-system.md:482` PageShell 12+→RBAC pages.
+
+### tasks/02-fix-stale-nuxt-imports-and-render-guard.md
+
+- Fase: FASE 2 — Implementation
+- Status: DONE
+- Depends on: tasks/01-platform-scope-reduction.md — Platform Scope Reduction RBAC-Only (DONE) — menghapus 9 store + render-guard + memperbarui health; tidak ada FASE 1 karena no UI baru (UI: N/A, verifikasi PageShell/DataTable existing)
+- Implemented: [x] — 2026-09-12 by /implement — Modified `apps/web/server/utils/security-limits.ts:1-11` (removed live path, 0 render-guard hit), purged `.nuxt/.output/node_modules/.vite` + `npx nuxt prepare` (imports.d.ts 6 stores), deleted `nul` + added `.gitignore`, created 5 tests (`test/unit/server/api/health.test.ts`, `test/nuxt/imports.test.ts`, `test/e2e/health.spec.ts`, `build-recovery.spec.ts`, `negative-dynamic.spec.ts`), verified `health` no renderer, `nuxt.config` dirs, `orm-data-source` 9 schemas, `npm run build` 0 B6005/0 ENOENT (17.5MB), `preview /api/health` 200 healthy, `test:unit` 82 passed, `test:nuxt` 36 passed.
+- Verified: [x] — 2026-09-12 by /verify — PASS: User Flow 10/10, AC 9/9, FR 10/10, BR 5/5, EC 8/8 traceable; `test:unit` 13 files 82 passed, `test:nuxt` 8 files 36 passed, `test` 21 files 118 passed, `vue-tsc` 0 error, `npm run build` 0 B6005/0 ENOENT (17.5MB), `.nuxt/imports.d.ts:56-61` 6 stores, `dev/index.mjs` 0 render-guard, `GET /api/health` 200 healthy without renderer (E2E health 3 passed), `grep render-guard` 0 hit server (except removed tag now 0), `nul` deleted, `GET /api/global-tables` etc 10/10 pass 404, `imports` & `health` file contracts PASS; E2E crud page tests skipped (missing chromium_headless_shell — infra, not code — per ERR-04/EC-06), Storybook binary missing but `stories/foundation` 3 files no deleted-store imports, `storybook-static` exists.
+- Reviewed: [x] — 2026-09-12 by /review — APPROVED: Architecture User Flow 10/10, AC 9/9, FR 10/10, BR 5/5, EC 8/8 traceable; code quality high (security-limits comment precise, health RBAC-Only, 6-store import clean); tests 118/118 PASS + E2E health 3 + negative 10 PASS, DataTable duplicate empty fixed (single Belum ada data via slot #empty), build 0 B6005/0 ENOENT 17.5MB, vue-tsc 0 error; 0 critical, 2 minor infra (playwright browser/storybook binary missing) not blocking.
+- Notes: Build recovery pasca Task 01 — `NUXT_B6005` 9× store terhapus (administrations/components/documents/global-table-columns/globalTables/navigation/runs/tableData/templates) + Nitro `ENOENT server/utils/render-guard (imported by health)` double-slash. Root cause: cache `.nuxt/.output/node_modules/.vite` stale + komentar `security-limits.ts:10` menyebut file terhapus sebagai path aktif. Fix: `rm -rf .nuxt .output node_modules/.vite && npx nuxt prepare`, koreksi komentar `security-limits.ts:1-11` menjadi `removed in Task 01` (now 0 hit), verifikasi `server/api/health/index.get.ts:1-6` tanpa import render-guard, `nuxt.config.ts:9-12` `imports.dirs:['stores']` scan 6 file, `GET /api/health` healthy (preview 200 + E2E 3 tests), build 0 warning (build.log). User follow-up duplicate NEmpty fixed in `DataTable.vue:233-248` via slot. Task logs: 2026-09-12 /review APPROVED.
 
