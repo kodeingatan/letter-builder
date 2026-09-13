@@ -18,6 +18,24 @@ export type MigrationDriftReason =
   | 'unknown-applied'
   | 'migrations-table-missing'
 
+/**
+ * Task 06 (BR-006): physical `mst_*` tables are runtime artifacts created by
+ * `master-ddl.service` — they are NOT entities and NOT migrations, so the
+ * migration-bookkeeping drift check below is inherently table-agnostic.
+ * These helpers make the ignore rule explicit and testable.
+ */
+export const MASTER_PHYSICAL_TABLE_PREFIX = 'mst_'
+
+/** True for runtime Master Data tables ignored by drift detection. */
+export function isMasterPhysicalTable(tableName: string): boolean {
+  return tableName.startsWith(MASTER_PHYSICAL_TABLE_PREFIX)
+}
+
+/** Filter a `sqlite_master` table list down to migration-managed tables. */
+export function filterManagedTables(tableNames: string[]): string[] {
+  return tableNames.filter((name) => !isMasterPhysicalTable(name))
+}
+
 export interface MigrationSyncState {
   inSync: boolean
   applied: string[]

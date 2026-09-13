@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" font-family="Inter,sans-serif">
+<rect x="0" y="0" width="900" height="560" fill="#fff"/>
+<text x="24" y="30" font-size="15" font-weight="600">Builder Template — 3 pane (260 | flex-1 #f6f5f4 | 320)</text>
+<rect x="24" y="44" width="220" height="480" rx="8" fill="#f6f5f4" stroke="#e5e5e5"/>
+<text x="36" y="70" font-size="12" font-weight="600">Library Blok</text>
+<rect x="36" y="80" width="196" height="28" rx="6" fill="#fff" stroke="#d4d4d4"/>
+<text x="48" y="99" font-size="11">+ Teks / Heading / Gambar</text>
+<rect x="36" y="114" width="196" height="28" rx="6" fill="#fff" stroke="#d4d4d4"/>
+<text x="48" y="133" font-size="11">+ Loop / Kondisi / Component</text>
+<rect x="36" y="148" width="196" height="28" rx="6" fill="#fff" stroke="#d4d4d4"/>
+<text x="48" y="167" font-size="11">+ TTD / Pembatas / Halaman</text>
+<rect x="256" y="44" width="360" height="480" rx="8" fill="#f6f5f4" stroke="#e5e5e5"/>
+<text x="268" y="70" font-size="12" font-weight="600">Kanvas Dokumen (drag-drop + ↑↓)</text>
+<rect x="268" y="80" width="336" height="60" rx="6" fill="#e8f2fd" stroke="#0075de"/>
+<text x="280" y="102" font-size="11">heading — SK {{letter.number}} [↑][↓][x]</text>
+<rect x="268" y="148" width="336" height="60" rx="6" fill="#fff" stroke="#d4d4d4"/>
+<text x="280" y="170" font-size="11">repeater — Loop employees → item [↑][↓][x]</text>
+<rect x="628" y="44" width="248" height="480" rx="8" fill="#fff" stroke="#e5e5e5"/>
+<text x="640" y="70" font-size="12" font-weight="600">Properti (live NForm)</text>
+<text x="640" y="94" font-size="11">Source: [employees____]</text>
+<text x="640" y="118" font-size="11">Item: [item_]</text>
+<text x="640" y="142" font-size="11">Master: [pilih tabel mst_*]</text>
+<text x="640" y="166" font-size="11">[x] Pilih semua kolom</text>
+<rect x="640" y="440" width="224" height="30" rx="6" fill="#3B82F6"/>
+<text x="680" y="460" font-size="12" fill="#fff">Simpan / Publish / Preview</text>
+</svg>

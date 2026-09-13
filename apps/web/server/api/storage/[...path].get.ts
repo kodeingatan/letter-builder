@@ -10,6 +10,10 @@ export default defineEventHandler(async (event) => {
   const filename = filenameParts.join('/')
   try {
     const filePath = await StorageService.getFilePath(subfolder, filename)
+    // Serve known types with the correct Content-Type (Task 05: PDF preview).
+    if (filename.toLowerCase().endsWith('.pdf')) {
+      event.node.res.setHeader('Content-Type', 'application/pdf')
+    }
     const stream = createReadStream(filePath)
     return sendStream(event, stream)
   } catch {

@@ -60,27 +60,27 @@ Then 401/403 benar; stories template-admin tampil; `build-storybook` sukses.
 
 ### Backend
 
-- [ ] Entities 5 tabel + registrasi `orm-data-source.ts` + migration additive (post-baseline Task 23).
-- [ ] DTO Zod: component (tiptap+binding), template (schema reuse 05 + requirement), admin/steps, run.
-- [ ] Services: `doc-components` (CRUD+preview+ref-check), `doc-templates` (CRUD+form-schema+publish/version), `administrations` (CRUD+steps), `documents` (run gabungan → panggil renderer/pdf 05, kunci versi).
-- [ ] API 10 endpoint (`requireApiAccess`, `createError`, pagination).
-- [ ] Converter Tiptap↔DocNode + validasi binding (master via schema 06 / manual / system).
-- [ ] Deps: `tiptap` (`@tiptap/vue-3, starter-kit, table, image, link`), sanitizer reuse 05.
-- [ ] Seeder contoh (Kop, SK, Administrasi demo) + permission/guards + ActivityLog.
+- [x] Entities 5 tabel + registrasi `orm-data-source.ts` + migration additive (post-baseline Task 23).
+- [x] DTO Zod: component (tiptap+binding), template (schema reuse 05 + requirement), admin/steps, run.
+- [x] Services: `doc-components` (CRUD+preview+ref-check), `doc-templates` (CRUD+form-schema+publish/version), `administrations` (CRUD+steps), `documents` (run gabungan → panggil renderer/pdf 05, kunci versi).
+- [x] API 10 endpoint (`requireApiAccess`, `createError`, pagination).
+- [x] Converter Tiptap↔DocNode + validasi binding (master via schema 06 / manual / system).
+- [x] Deps: `tiptap` (`@tiptap/vue-3, starter-kit, table, image, link`), sanitizer reuse 05.
+- [x] Seeder contoh (Kop, SK, Administrasi demo) + permission/guards + ActivityLog.
 
 ### Frontend
 
-- [ ] Types/composables/stores: `useComponentsData, useTemplatesData, useAdministrationsData, useBuilderStore(blocks, selectedId, update/move/add)`.
-- [ ] Pages 4 rute + 8 komponen builder/wizard sesuai mockup inline (Naive UI direct import + Tailwind + token `#0075de`).
-- [ ] Tiptap editor + BindingPopup (right-click) + Relation/looping picker (reuse 06) + auto-form + PreviewDrawer.
-- [ ] Wizard tambah-step-N + draft DRAFT + render gabungan + unduh PDF.
-- [ ] Sidebar: grup `Persuratan` (Component/Template/Administrasi) + menu dinamis per administrasi.
-- [ ] Storybook `stories/template-admin/{Component,Builder,Wizard}.stories.ts` (semua state).
+- [x] Types/composables/stores: `useComponentsData, useTemplatesData, useAdministrationsData, useBuilderStore(blocks, selectedId, update/move/add)`.
+- [x] Pages 4 rute + 8 komponen builder/wizard sesuai mockup inline (Naive UI direct import + Tailwind + token `#0075de`).
+- [x] Tiptap editor + BindingPopup (right-click) + Relation/looping picker (reuse 06) + auto-form + PreviewDrawer.
+- [x] Wizard tambah-step-N + draft DRAFT + render gabungan + unduh PDF.
+- [x] Sidebar: grup `Persuratan` (Component/Template/Administrasi) + menu dinamis per administrasi.
+- [x] Storybook `stories/template-admin/{Component,Builder,Wizard}.stories.ts` (semua state).
 
 ### Cross-Cutting
 
-- [ ] RBAC matrix + guards `/api/doc-*`, `/api/administrations/*`, `/api/documents/*`.
-- [ ] Cap upload Tiptap image 5MB; sanitasi semua richtext.
+- [x] RBAC matrix + guards `/api/doc-*`, `/api/administrations/*`, `/api/documents/*`.
+- [x] Cap upload Tiptap image 5MB; sanitasi semua richtext.
 
 ### Test Plan
 

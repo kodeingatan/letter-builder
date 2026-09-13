@@ -60,25 +60,25 @@ Then 401 / 403.
 
 ### Backend
 
-- [ ] Shared types — `shared/types/document.ts` (DocNode union + RenderContext + PdfOptions).
-- [ ] DTO — `server/dto/documents.dto.ts` (DocNodeSchema rekursif + Preview/Pdf schema + depth check).
-- [ ] `expression.service` — `resolvePath`, `evalCondition` 8 operator, operasi-teks `++ "" * / + -` tokenizer aman.
-- [ ] `renderer.service` — plain object `render(tree, data): {html, warnings}` (rekursif, nested scope, escape, sanitasi).
-- [ ] `pdf.service` — Puppeteer launch headless, `page.pdf {format, landscape, printBackground}`, tulis `storage/documents/`, cleanup saat gagal.
-- [ ] API — `server/api/documents/preview.post.ts`, `pdf.post.ts` (`requireApiAccess` + Zod + `createError`).
-- [ ] Storage whitelist tambah `documents` + serve PDF.
-- [ ] `permission-matrix.ts` + seeder: permission preview/pdf + guard URLs.
-- [ ] Deps: tambah `puppeteer`, `sanitize-html` (atau `isomorphic-dompurify`) di `apps/web/package.json`.
+- [x] Shared types — `shared/types/document.ts` (DocNode union + RenderContext + PdfOptions).
+- [x] DTO — `server/dto/documents.dto.ts` (DocNodeSchema rekursif + Preview/Pdf schema + depth check).
+- [x] `expression.service` — `resolvePath`, `evalCondition` 8 operator, operasi-teks `++ "" * / + -` tokenizer aman.
+- [x] `renderer.service` — plain object `render(tree, data): {html, warnings}` (rekursif, nested scope, escape, sanitasi).
+- [x] `pdf.service` — Puppeteer launch headless, `page.pdf {format, landscape, printBackground}`, tulis `storage/documents/`, cleanup saat gagal.
+- [x] API — `server/api/documents/preview.post.ts`, `pdf.post.ts` (`requireApiAccess` + Zod + `createError`).
+- [x] Storage whitelist tambah `documents` + serve PDF.
+- [x] `permission-matrix.ts` + seeder: permission preview/pdf + guard URLs.
+- [x] Deps: tambah `puppeteer`, `sanitize-html` (atau `isomorphic-dompurify`) di `apps/web/package.json`.
 
 ### Frontend
 
-- [ ] N/A — tidak ada halaman (konsumen di Task 07).
+- [x] N/A — tidak ada halaman (konsumen di Task 07).
 
 ### Cross-Cutting
 
-- [ ] RBAC matrix + seed + ActivityLog (`DOCUMENT_PREVIEW`, `DOCUMENT_PDF`).
-- [ ] Batas body 2MB + timeout PDF 30s + cap node 200/level 500 item.
-- [ ] Docs singkat engine di `verification.md` Related (tanpa ubah `docs/` permanen).
+- [x] RBAC matrix + seed + ActivityLog (`DOCUMENT_PREVIEW`, `DOCUMENT_PDF`).
+- [x] Batas body 2MB + timeout PDF 30s + cap node 200/level 500 item.
+- [x] Docs singkat engine di `verification.md` Related (tanpa ubah `docs/` permanen).
 
 ### Test Plan
 

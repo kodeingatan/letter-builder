@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" font-family="Inter,sans-serif">
+<rect x="0" y="0" width="800" height="520" fill="#fff"/>
+<rect x="200" y="0" width="600" height="56" fill="#f5f5f4"/>
+<text x="224" y="34" font-size="16" font-weight="600">Master Data — Definisi Tabel</text>
+<rect x="200" y="0" width="150" height="520" fill="#fafaf9"/>
+<text x="216" y="90" font-size="12">Dashboard</text>
+<text x="216" y="112" font-size="12" font-weight="700">Master Data</text>
+<text x="216" y="134" font-size="12">User Mgmt</text>
+<rect x="380" y="72" width="120" height="32" rx="6" fill="#3B82F6"/>
+<text x="392" y="93" font-size="13" fill="#fff">+ Buat Tabel</text>
+<rect x="380" y="72" width="200" height="32" rx="6" fill="none"/>
+<rect x="380" y="120" width="380" height="300" rx="8" fill="none" stroke="#e5e5e5"/>
+<text x="396" y="148" font-size="12">Nama Tabel | Slug | Status | Kolom | Aksi</text>
+<line x1="380" y1="160" x2="760" y2="160" stroke="#e5e5e5"/>
+<text x="396" y="186" font-size="12">Pegawai | pegawai | ACTIVE | 6 | Browse/Edit/Hapus</text>
+<text x="396" y="212" font-size="12">Jabatan | jabatan | ACTIVE | 2 | Browse/Edit/Hapus</text>
+<rect x="380" y="440" width="380" height="40" rx="8" fill="#f5f5f4"/>
+<text x="396" y="465" font-size="12">Pagination: 1/1 — search “Cari tabel...”</text>
+</svg>

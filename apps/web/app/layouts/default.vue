@@ -26,6 +26,7 @@ import {
   Activity,
   Report,
   Settings,
+  Table,
 } from '@vicons/carbon'
 
 const route = useRoute()
@@ -132,6 +133,47 @@ const menuOptions = computed<MenuOption[]>(() => {
   })
 
   options.push({
+    label: 'Master Data',
+    key: 'master-data',
+    icon: renderIcon(Table),
+    children: [
+      {
+        label: renderMenuLabel('Definisi Tabel', '/dashboard/master-data'),
+        key: 'master-data-list',
+        icon: renderIcon(Table),
+      },
+    ],
+  })
+
+  options.push({
+    label: 'Persuratan',
+    key: 'persuratan',
+    icon: renderIcon(Document),
+    children: [
+      {
+        label: renderMenuLabel('Component', '/dashboard/components'),
+        key: 'components',
+        icon: renderIcon(Document),
+      },
+      {
+        label: renderMenuLabel('Template', '/dashboard/templates'),
+        key: 'templates',
+        icon: renderIcon(Document),
+      },
+      {
+        label: renderMenuLabel('Administrasi', '/dashboard/administrations'),
+        key: 'administrations',
+        icon: renderIcon(Document),
+      },
+      {
+        label: renderMenuLabel('Dokumen', '/dashboard/documents'),
+        key: 'documents',
+        icon: renderIcon(Document),
+      },
+    ],
+  })
+
+  options.push({
     label: 'Sistem',
     key: 'sistem',
     icon: renderIcon(Settings),
@@ -166,12 +208,23 @@ const routeKeyMap: Record<string, string> = {
   '/dashboard/activity-logs': 'activity-logs',
   '/dashboard/system-logs': 'system-logs',
   '/dashboard/settings': 'settings',
+  '/dashboard/master-data': 'master-data-list',
+  '/dashboard/master-data/create': 'master-data-list',
+  '/dashboard/components': 'components',
+  '/dashboard/templates': 'templates',
+  '/dashboard/administrations': 'administrations',
+  '/dashboard/documents': 'documents',
 }
 
 const activeKey = ref('dashboard')
 
 function resolveActiveKey(path: string): string {
   if (routeKeyMap[path]) return routeKeyMap[path]
+  // Master Data per-table browse/edit routes highlight the parent menu.
+  if (path.startsWith('/dashboard/master-data/')) return 'master-data-list'
+  // Template builder + per-letter wizard highlight their parents.
+  if (path.startsWith('/dashboard/templates/')) return 'templates'
+  if (path.startsWith('/dashboard/documents/')) return 'documents'
   // RBAC-Only — no dynamic data/:table or docs/* routes (removed Task 01)
   return 'dashboard'
 }

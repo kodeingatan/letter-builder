@@ -8,7 +8,7 @@
 ## Last Updated
 
 - Date: 2026-09-13
-- By: /gen-tasks
+- By: /auto-all-tasks (/review Task 07 — GOALS TERCAPAI)
 - Source: Roadmap Document Platform 05-document-engine + 06-master-data-ddl + 07-template-administration (engine dulu, DDL dinamis mst_*, Tiptap, Puppeteer, istilah Master Data)
 
 ## Overview
@@ -19,17 +19,21 @@
 | tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
 | tasks/03-redesign-ui-design/README.md | FASE 1 — UI Design | DONE | [x] | [x] | [x] |
 | tasks/04-redesign/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
-| tasks/05-document-engine/README.md | FASE 2 — Implementation (backend only, UI N/A) | TODO | [ ] | [ ] | [ ] |
-| tasks/06-master-data-ddl/README.md | FASE 2 — Implementation (UI inline + Storybook) | TODO | [ ] | [ ] | [ ] |
-| tasks/07-template-administration/README.md | FASE 2 — Implementation (UI inline + Storybook) | TODO | [ ] | [ ] | [ ] |
+| tasks/05-document-engine/README.md | FASE 2 — Implementation (backend only, UI N/A) | DONE | [x] | [x] | [x] |
+| tasks/06-master-data-ddl/README.md | FASE 2 — Implementation (UI inline + Storybook) | DONE | [x] | [x] | [x] |
+| tasks/07-template-administration/README.md | FASE 2 — Implementation (UI inline + Storybook) | DONE | [x] | [x] | [x] |
 
 ## Belum Implementasi
 
-- [ ] tasks/05-document-engine/README.md — Document Engine (FASE 2 — backend only)
-- [ ] tasks/06-master-data-ddl/README.md — Master Data DDL (FASE 2)
-- [ ] tasks/07-template-administration/README.md — Template & Administrasi (FASE 2)
+_(kosong — semua task terimplementasi)_
 
 ## Sudah Implementasi
+
+- [x] tasks/07-template-administration/README.md — Template & Administrasi (FASE 2) — 2026-09-13 by /implement
+
+- [x] tasks/06-master-data-ddl/README.md — Master Data DDL (FASE 2) — 2026-09-13 by /implement
+
+- [x] tasks/05-document-engine/README.md — Document Engine (FASE 2 — backend only) — 2026-09-13 by /implement
 
 - [x] tasks/01-platform-scope-reduction/README.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh) (FASE 2 — Implementation)
 - [x] tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) (FASE 2 — Implementation) — 2026-09-12 by /implement
@@ -38,11 +42,15 @@
 
 ## Belum Diverifikasi
 
-- [ ] tasks/05-document-engine/README.md — Document Engine
-- [ ] tasks/06-master-data-ddl/README.md — Master Data DDL
-- [ ] tasks/07-template-administration/README.md — Template & Administrasi
+_(kosong — semua task terverifikasi)_
 
 ## Sudah Diverifikasi
+
+- [x] tasks/07-template-administration/README.md — Template & Administrasi — 2026-09-13 by /verify — PASS
+
+- [x] tasks/06-master-data-ddl/README.md — Master Data DDL — 2026-09-13 by /verify — PASS
+
+- [x] tasks/05-document-engine/README.md — Document Engine — 2026-09-13 by /verify — PASS
 
 - [x] tasks/01-platform-scope-reduction/README.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh)
 - [x] tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — 2026-09-12 by /verify — PASS
@@ -51,11 +59,15 @@
 
 ## Belum Direview
 
-- [ ] tasks/05-document-engine/README.md — Document Engine
-- [ ] tasks/06-master-data-ddl/README.md — Master Data DDL
-- [ ] tasks/07-template-administration/README.md — Template & Administrasi
+_(kosong — semua task tereview)_
 
 ## Sudah Direview
+
+- [x] tasks/07-template-administration/README.md — Template & Administrasi — 2026-09-13 by /review — APPROVED
+
+- [x] tasks/06-master-data-ddl/README.md — Master Data DDL — 2026-09-13 by /review — APPROVED
+
+- [x] tasks/05-document-engine/README.md — Document Engine — 2026-09-13 by /review — APPROVED
 
 - [x] tasks/03-redesign-ui-design/README.md — Redesign UI/UX Notion-Calm (FASE 1 — UI Design) — 2026-09-13 by /review — APPROVED
 - [x] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman) — 2026-09-13 by /review — APPROVED
@@ -68,31 +80,31 @@
 ### tasks/05-document-engine/README.md
 
 - Fase: FASE 2 — Implementation (backend only, UI N/A)
-- Status: TODO
+- Status: TODO REVIEW
 - Depends on: tasks/04-redesign (DONE, fondasi stabil)
-- Implemented: [ ] —
-- Verified: [ ] —
-- Reviewed: [ ] —
+- Implemented: [x] — 2026-09-13 by /implement — created shared/types/document.ts, server/services/{expression,renderer,pdf}.service.ts, server/dto/documents.dto.ts, server/api/documents/{preview,pdf}.post.ts, 6 test files (UT-01/02/03, API-01/02, E2E-01); modified storage route (pdf content-type), seeder.service.ts (Document Preview/PDF + backfill Super Admin), storage.service.ts (relative import), package.json (+puppeteer, +sanitize-html); UT 64/64, full unit 161/161, nuxt 52/52, build 19.3MB, E2E 4 pass/1 skip (no Chrome)
+- Verified: [x] — 2026-09-13 by /verify — PASS: User Flow 5/5, AC-001..007 7/7 (AC-006 binary live skip, Chrome absen — mock unit + ERR-04 live), UT 64/64, full unit 161/161, nuxt 52/52, E2E-01 5 pass/1 skip + 403 live, full E2E 45 pass (3 cold-start flake lolos isolasi), vue-tsc 0, build 19.3MB
+- Reviewed: [x] — 2026-09-13 by /review — APPROVED: pola existing (plain-object service, Zod DTO, requireApiAccess, relative import vitest-safe), 0 must-fix; traceability Flow↔AC↔Test 100% (AC-006 binary live pending Chrome = infra, bukan kode); 2 consider (LaunchFn type longgar, PDF binary live saat Chrome tersedia)
 - Notes: JSON Tree + expression + renderer + Puppeteer PDF; dikonsumsi 06/07.
 
 ### tasks/06-master-data-ddl/README.md
 
 - Fase: FASE 2 — Implementation (UI inline + Storybook `stories/master-data/`)
-- Status: TODO
+- Status: TODO REVIEW
 - Depends on: tasks/05-document-engine (expression reuse; fallback evaluator bila belum DONE)
-- Implemented: [ ] —
-- Verified: [ ] —
-- Reviewed: [ ] —
+- Implemented: [x] — 2026-09-13 by /implement — created entities×2 + migration, dto, master-ddl/master-data services, 11 API routes, store, 5 components, 4 pages, sidebar menu, master-operation util, 3 stories + wireframes×3, 6 test files (UT-01/02/03+util, NT-01, E2E-01/02); modified orm-data-source, migration-status, seeder (MD Read/Write + contoh Jabatan/Pegawai), storage route reuse; UT full 198/198, build + storybook PASS, E2E 9/9
+- Verified: [x] — 2026-09-13 by /verify — PASS: User Flow 6/6, AC-001..007 7/7, UT-01/02/03+util 37/37, full unit 198/198, NT-01 5/5 (full nuxt 57/57), E2E-01/02 10/10, vue-tsc 0, build + storybook PASS (MasterData×3)
+- Reviewed: [x] — 2026-09-13 by /review — APPROVED: pola existing (EntitySchema, plain-object service, requireApiAccess, DataTable/PageShell/modal-card, $fetch+Bearer stores), 4 should-fix applied (DDL 400, image allowlist, count tanpa join, slug refetch) + 1 test image; traceability 100%; 1 consider (rename = drop+add, backup tersedia)
 - Notes: Meta master_tables/columns + fisik mst_* + 13 tipe + relation picker + schema API.
 
 ### tasks/07-template-administration/README.md
 
 - Fase: FASE 2 — Implementation (UI inline + Storybook `stories/template-admin/`)
-- Status: TODO
+- Status: TODO REVIEW
 - Depends on: tasks/05-document-engine + tasks/06-master-data-ddl
-- Implemented: [ ] —
-- Verified: [ ] —
-- Reviewed: [ ] —
+- Implemented: [x] — 2026-09-13 by /implement — created 5 entities + migration, persuratan DTO, converter + 4 services, 15 API routes, 2 stores, 8 components, 6 pages, sidebar Persuratan, 3 stories + 3 wireframes, 5 test files (UT-01/02/03, NT-01/02, E2E-01/02); modified orm-data-source, seeder (8 permissions + demo), pdf.service (generatePdfFromHtml); UT 25/25 backend, build + storybook PASS, E2E 6/7 pass + 1 skip (Chrome)
+- Verified: [x] — 2026-09-13 by /verify — PASS: User Flow 6/6, AC-001..007 7/7 (AC-004 binary live skip Chrome, mock+ERR-03 live), UT-01/02/03 26/26, full unit 226/226, NT-01/02 10/10 (full nuxt 67/67), E2E-01/02 6/7+1 skip, vue-tsc 0, build + storybook PASS (TemplateAdmin×3)
+- Reviewed: [x] — 2026-09-13 by /review — APPROVED: pola existing + Tiptap ClientOnly; 3 should-fix applied (explicit step delete, version bump on PUBLISHED-schema edit, count tanpa join) + 3 tests (AC-002 registry, version, remove); API snake_case dinormalisasi; traceability 100%
 - Notes: Component Tiptap + Template 3-pane + Administrasi wizard + PDF gabungan.
 
 ### tasks/01-platform-scope-reduction/README.md

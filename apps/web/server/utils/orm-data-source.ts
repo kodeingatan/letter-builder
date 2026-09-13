@@ -1,8 +1,9 @@
 /**
- * CLI-loadable TypeORM data-source config (RBAC-Only after Task 01).
+ * CLI-loadable TypeORM data-source config (RBAC + Master Data + Persuratan).
  *
- * 9 EntitySchemas / 12 physical tables (incl. 3 M:N junctions) — Dynamic Administration
- * (Global Table, Component, Template, Administration, Document) removed Task 01.
+ * 16 EntitySchemas + dynamic `mst_*` physical tables (NOT entities — created
+ * by master-ddl.service, ignored by drift detection, never dropped by
+ * synchronize).
  * Same 9 EntitySchemas as the Nuxt runtime (`server/utils/db.ts`), but with
  * plain relative imports and no `~~/` Nuxt aliases so it can be loaded by
  * `jiti` (see `server/utils/migration-cli.ts`) and the `migration:*` npm
@@ -19,10 +20,19 @@ import { GuardSchema } from '../entities/guard.entity'
 import { GuardUrlSchema } from '../entities/guard-url.entity'
 import { ActivityLogSchema } from '../entities/activity-log.entity'
 import { SettingSchema } from '../entities/setting.entity'
+import { MasterTableSchema } from '../entities/master-table.entity'
+import { MasterTableColumnSchema } from '../entities/master-table-column.entity'
+import { DocComponentSchema } from '../entities/doc-component.entity'
+import { DocTemplateSchema } from '../entities/doc-template.entity'
+import { AdministrationSchema } from '../entities/administration.entity'
+import { AdminStepSchema } from '../entities/admin-step.entity'
+import { DocumentSchema } from '../entities/document.entity'
 import { Baseline1788914913928 } from '../migrations/1788914913928-Baseline'
 import { DropDynamicTables1700000000001 } from '../migrations/1700000000001-DropDynamicTables'
+import { CreateMasterTables1789300000000 } from '../migrations/1789300000000-CreateMasterTables'
+import { CreatePersuratanTables1789310000000 } from '../migrations/1789310000000-CreatePersuratanTables'
 
-/** All 9 EntitySchemas (12 physical tables incl. 3 M:N junctions) — RBAC-Only. */
+/** All 16 EntitySchemas — RBAC + Master Data (Task 06) + Persuratan (Task 07). */
 export const appEntities = [
   UserSchema,
   RoleSchema,
@@ -33,13 +43,20 @@ export const appEntities = [
   GuardUrlSchema,
   ActivityLogSchema,
   SettingSchema,
+  MasterTableSchema,
+  MasterTableColumnSchema,
+  DocComponentSchema,
+  DocTemplateSchema,
+  AdministrationSchema,
+  AdminStepSchema,
+  DocumentSchema,
 ]
 
 /**
  * Checked-in migrations, oldest first. BR-001: never edit an applied
  * migration — new schema changes ship as new files in `server/migrations/`.
  */
-export const appMigrations = [Baseline1788914913928, DropDynamicTables1700000000001]
+export const appMigrations = [Baseline1788914913928, DropDynamicTables1700000000001, CreateMasterTables1789300000000, CreatePersuratanTables1789310000000]
 
 /** Database file path: `DB_PATH` env override, default `db.sqlite` (cwd). */
 export function resolveDatabasePath(): string {

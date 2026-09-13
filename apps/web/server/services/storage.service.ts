@@ -1,6 +1,6 @@
 import { join } from 'path'
 import { mkdir, writeFile, stat } from 'fs/promises'
-import { validateUpload } from '~~/server/utils/security-limits'
+import { validateUpload } from '../utils/security-limits'
 
 const STORAGE_DIR = join(process.cwd(), 'storage')
 const ALLOWED_SUBFOLDERS = ['settings', 'avatars', 'general', 'documents']

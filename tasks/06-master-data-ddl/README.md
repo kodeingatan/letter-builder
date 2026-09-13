@@ -4,7 +4,7 @@
 
 ## Status
 
-TODO
+DONE
 
 ## Panduan baca
 

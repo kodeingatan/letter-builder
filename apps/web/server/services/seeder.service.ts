@@ -7,6 +7,8 @@ import { PermissionUrlSchema } from '~~/server/entities/permission-url.entity'
 import { GuardSchema } from '~~/server/entities/guard.entity'
 import { GuardUrlSchema } from '~~/server/entities/guard-url.entity'
 import { SettingSchema } from '~~/server/entities/setting.entity'
+import { MasterTableSchema } from '~~/server/entities/master-table.entity'
+import { DocTemplateSchema } from '~~/server/entities/doc-template.entity'
 import { hashPassword } from '~~/server/utils/password'
 
 export async function seedDatabase(ds: DataSource) {
@@ -21,7 +23,12 @@ export async function seedDatabase(ds: DataSource) {
 
   const guards = await seedGuards(guardsRepo, guardUrlsRepo)
   const permissions = await seedPermissions(permissionsRepo, permissionMethodsRepo, permissionUrlsRepo)
+  const mdPermissions = await seedMasterDataPermissions(permissionsRepo, permissionMethodsRepo, permissionUrlsRepo)
+  const psPermissions = await seedPersuratanPermissions(permissionsRepo, permissionMethodsRepo, permissionUrlsRepo)
   const roles = await seedRoles(rolesRepo, guards, permissions)
+  await backfillDocumentGrants(rolesRepo, [...permissions, ...mdPermissions, ...psPermissions])
+  await seedSampleMasterTables(ds)
+  await seedDemoPersuratan(ds)
   await seedUsers(usersRepo, roles)
   await seedSettings(settingsRepo)
 }
@@ -240,7 +247,51 @@ async function seedPermissions(permissionsRepo: any, permissionMethodsRepo: any,
     await permissionUrlsRepo.save(permissionUrlsRepo.create({ url: '/api/system-logs/*', permission: systemLogs }))
   }
 
-  return [fullAccess, readOnly, readWrite, userMgmt, roleMgmt, guardMgmt, permMgmt, dashRead, activityLogs, systemLogs]
+  // Document Engine permissions (Task 05): least-privilege grants for
+  // POST /api/documents/preview and POST /api/documents/pdf.
+  let docPreview = await permissionsRepo.findOne({ where: { permissionName: 'Document Preview' } })
+  if (!docPreview) {
+    docPreview = permissionsRepo.create({ permissionName: 'Document Preview', description: 'Preview dokumen via Document Engine' })
+    await permissionsRepo.save(docPreview)
+    await permissionMethodsRepo.save(permissionMethodsRepo.create({ method: 'POST', permission: docPreview }))
+    await permissionUrlsRepo.save(permissionUrlsRepo.create({ url: '/api/documents/preview', permission: docPreview }))
+  }
+
+  let docPdf = await permissionsRepo.findOne({ where: { permissionName: 'Document PDF' } })
+  if (!docPdf) {
+    docPdf = permissionsRepo.create({ permissionName: 'Document PDF', description: 'Generate PDF via Document Engine' })
+    await permissionsRepo.save(docPdf)
+    await permissionMethodsRepo.save(permissionMethodsRepo.create({ method: 'POST', permission: docPdf }))
+    await permissionUrlsRepo.save(permissionUrlsRepo.create({ url: '/api/documents/pdf', permission: docPdf }))
+  }
+
+  return [fullAccess, readOnly, readWrite, userMgmt, roleMgmt, guardMgmt, permMgmt, dashRead, activityLogs, systemLogs, docPreview, docPdf]
+}
+
+async function seedMasterDataPermissions(permissionsRepo: any, permissionMethodsRepo: any, permissionUrlsRepo: any) {
+  // Master Data permissions (Task 06): read for GET, write for mutations.
+  let mdRead = await permissionsRepo.findOne({ where: { permissionName: 'Master Data Read' } })
+  if (!mdRead) {
+    mdRead = permissionsRepo.create({ permissionName: 'Master Data Read', description: 'Lihat Master Data' })
+    await permissionsRepo.save(mdRead)
+    await permissionMethodsRepo.save(permissionMethodsRepo.create({ method: 'GET', permission: mdRead }))
+    await permissionUrlsRepo.save(permissionUrlsRepo.create({ url: '/api/master-data/*', permission: mdRead }))
+  }
+
+  let mdWrite = await permissionsRepo.findOne({ where: { permissionName: 'Master Data Write' } })
+  if (!mdWrite) {
+    mdWrite = permissionsRepo.create({ permissionName: 'Master Data Write', description: 'Kelola Master Data' })
+    await permissionsRepo.save(mdWrite)
+    await permissionMethodsRepo.save([
+      permissionMethodsRepo.create({ method: 'GET', permission: mdWrite }),
+      permissionMethodsRepo.create({ method: 'POST', permission: mdWrite }),
+      permissionMethodsRepo.create({ method: 'PUT', permission: mdWrite }),
+      permissionMethodsRepo.create({ method: 'DELETE', permission: mdWrite }),
+    ])
+    await permissionUrlsRepo.save(permissionUrlsRepo.create({ url: '/api/master-data/*', permission: mdWrite }))
+  }
+
+  return [mdRead, mdWrite]
 }
 
 async function seedRoles(rolesRepo: any, guards: any[], permissions: any[]) {
@@ -395,6 +446,30 @@ async function seedUsers(usersRepo: any, roles: any[]) {
   }
 }
 
+/**
+ * Task 05+06: grant Document + Master Data permissions to Super Admin
+ * (idempotent backfill — existing databases get the grants on next boot).
+ */
+async function backfillDocumentGrants(rolesRepo: any, permissions: any[]) {
+  const docGrants = permissions.filter((p) =>
+    p?.permissionName === 'Document Preview' || p?.permissionName === 'Document PDF' ||
+    p?.permissionName === 'Master Data Read' || p?.permissionName === 'Master Data Write' ||
+    p?.permissionName === 'Component Read' || p?.permissionName === 'Component Write' ||
+    p?.permissionName === 'Template Read' || p?.permissionName === 'Template Write' ||
+    p?.permissionName === 'Administration Read' || p?.permissionName === 'Administration Write' ||
+    p?.permissionName === 'Document Read' || p?.permissionName === 'Document Write',
+  )
+  if (docGrants.length === 0) return
+  const superAdmin = await rolesRepo.findOne({ where: { roleName: 'Super Admin' }, relations: { permissions: true } })
+  if (!superAdmin) return
+  const existing = new Set((superAdmin.permissions ?? []).map((p: any) => p.permissionName))
+  const missing = docGrants.filter((p: any) => !existing.has(p.permissionName))
+  if (missing.length > 0) {
+    superAdmin.permissions = [...(superAdmin.permissions ?? []), ...missing]
+    await rolesRepo.save(superAdmin)
+  }
+}
+
 async function seedSettings(settingsRepo: any) {
   const defaultSettings = [
     { key: 'app_name', value: 'MyApp' },
@@ -409,4 +484,141 @@ async function seedSettings(settingsRepo: any) {
       await settingsRepo.save(settingsRepo.create({ key, value }))
     }
   }
+}
+
+/**
+ * Task 06: seed example Master Data (Jabatan + Pegawai) when no tables exist.
+ * Imported lazily so RBAC-only unit tests never boot the DDL path.
+ */
+async function seedSampleMasterTables(ds: DataSource) {
+
+  const { MasterDataService } = await import('./master-data.service')
+  const tablesRepo = ds.getRepository(MasterTableSchema)
+  if (await tablesRepo.count() > 0) return
+
+  await MasterDataService.createTable({
+    name: 'jabatan',
+    display_name: 'Jabatan',
+    description: 'Contoh Master Data jabatan',
+    columns: [
+      { name: 'nama', display_name: 'Nama Jabatan', type: 'text', is_required: true, is_searchable: true, is_orderable: true },
+      { name: 'eselon', display_name: 'Eselon', type: 'select', config: { options: ['I', 'II', 'III', 'IV', 'Non-Eselon'] } },
+    ],
+  })
+  await MasterDataService.createTable({
+    name: 'pegawai',
+    display_name: 'Pegawai',
+    description: 'Contoh Master Data pegawai',
+    columns: [
+      { name: 'nama', display_name: 'Nama', type: 'text', is_required: true, is_searchable: true, is_orderable: true },
+      { name: 'nip', display_name: 'NIP', type: 'text', is_searchable: true },
+      { name: 'tanggal_lahir', display_name: 'Tanggal Lahir', type: 'date', config: { format: 'm-d-Y' } },
+      { name: 'gaji', display_name: 'Gaji', type: 'number', config: { currency: true }, is_orderable: true },
+      { name: 'jabatan_id', display_name: 'Jabatan', type: 'relation_single', config: { target_slug: 'jabatan', display_column: 'nama' } },
+      { name: 'total_info', display_name: 'Info Total', type: 'readonly_operation_text', config: { expression: '"Gaji: "++gaji' } },
+    ],
+  })
+}
+
+async function seedPersuratanPermissions(permissionsRepo: any, permissionMethodsRepo: any, permissionUrlsRepo: any) {
+  // Task 07 least-privilege grants (additive, idempotent).
+  const defs = [
+    { name: 'Component Read', methods: ['GET'], url: '/api/doc-components/*' },
+    { name: 'Component Write', methods: ['GET', 'POST', 'PUT', 'DELETE'], url: '/api/doc-components/*' },
+    { name: 'Template Read', methods: ['GET'], url: '/api/doc-templates/*' },
+    { name: 'Template Write', methods: ['GET', 'POST', 'PUT', 'DELETE'], url: '/api/doc-templates/*' },
+    { name: 'Administration Read', methods: ['GET'], url: '/api/administrations/*' },
+    { name: 'Administration Write', methods: ['GET', 'POST', 'PUT', 'DELETE'], url: '/api/administrations/*' },
+    { name: 'Document Read', methods: ['GET'], url: '/api/documents/*' },
+    { name: 'Document Write', methods: ['GET', 'POST', 'PUT', 'DELETE'], url: '/api/documents/*' },
+  ]
+  const created: any[] = []
+  for (const def of defs) {
+    let permission = await permissionsRepo.findOne({ where: { permissionName: def.name } })
+    if (!permission) {
+      permission = permissionsRepo.create({ permissionName: def.name, description: `Task 07 — ${def.name}` })
+      await permissionsRepo.save(permission)
+      await permissionMethodsRepo.save(def.methods.map((method) => permissionMethodsRepo.create({ method, permission })))
+      await permissionUrlsRepo.save(permissionUrlsRepo.create({ url: def.url, permission }))
+    }
+    created.push(permission)
+  }
+  return created
+}
+
+/**
+ * Task 07 demo content (Kop + Daftar Pegawai + SK template + demo
+ * administration) — created only when no templates exist.
+ */
+async function seedDemoPersuratan(ds: DataSource) {
+  const { DocComponentsService } = await import('./doc-components.service')
+  const { DocTemplatesService } = await import('./doc-templates.service')
+  const { AdministrationsService } = await import('./administrations.service')
+  const templateRepo = ds.getRepository(DocTemplateSchema)
+  if (await templateRepo.count() > 0) return
+
+  await DocComponentsService.create({
+    name: 'Kop Surat',
+    tiptap_json: {
+      type: 'doc',
+      content: [
+        { type: 'heading', attrs: { level: 2 }, content: [{ type: 'text', text: 'PEMERINTAH KOTA CONTOH' }] },
+        {
+          type: 'paragraph',
+          content: [{ type: 'docBinding', attrs: { name: 'kantor', target: 'office.app_name', view: 'text' } }],
+        },
+      ],
+    },
+  })
+  await DocComponentsService.create({
+    name: 'Daftar Pegawai',
+    is_looping: true,
+    tiptap_json: {
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            { type: 'docBinding', attrs: { name: 'nama', target: 'item.nama', view: 'text' } },
+            { type: 'text', text: ' / ' },
+            { type: 'docBinding', attrs: { name: 'nip', target: 'item.nip', view: 'text' } },
+          ],
+        },
+      ],
+    },
+  })
+  const template = await DocTemplatesService.create({
+    name: 'SK Contoh',
+    code: 'sk-contoh',
+    description: 'Template SK demo (Kop + repeater pegawai + tanda tangan)',
+    schema_json: {
+      type: 'document',
+      children: [
+        { type: 'component-ref', props: { componentId: 'Kop Surat', propsOverride: {} } },
+        { type: 'heading', props: { content: 'SURAT KEPUTUSAN {{letter.number}}', level: 1 } },
+        {
+          type: 'repeater',
+          props: { source: 'employees', item: 'item' },
+          children: [{ type: 'component-ref', props: { componentId: 'Daftar Pegawai', propsOverride: {} } }],
+        },
+        { type: 'signature', props: { name: '{{signer.name}}', title: 'Kepala Dinas', city: 'Banda Aceh' } },
+      ],
+    },
+  } as never)
+  const templateId = (template as unknown as { id: number }).id
+  await AdministrationsService.create({
+    name: 'SK Pengangkatan Demo',
+    slug: 'sk-pengangkatan-demo',
+    description: 'Administrasi demo 1 step',
+    steps: [{
+      template_id: templateId,
+      step_order: 0,
+      mapping: {
+        employees: { kind: 'master-list', ref: 'pegawai' },
+        'letter.number': { kind: 'value', ref: '800/001/2026' },
+        'office.app_name': { kind: 'system', ref: 'office.app_name' },
+        'signer.name': { kind: 'value', ref: 'H. Contoh' },
+      },
+    }],
+  })
 }

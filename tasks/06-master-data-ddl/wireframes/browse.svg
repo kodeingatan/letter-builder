@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" font-family="Inter,sans-serif">
+<rect x="0" y="0" width="800" height="560" fill="#fff"/>
+<text x="24" y="34" font-size="16" font-weight="600">Browse Pegawai — mst_pegawai</text>
+<rect x="560" y="12" width="130" height="32" rx="6" fill="#3B82F6"/>
+<text x="572" y="33" font-size="13" fill="#fff">+ Tambah Data</text>
+<rect x="24" y="56" width="300" height="32" rx="6" fill="none" stroke="#d4d4d4"/>
+<text x="36" y="77" font-size="12">Cari data... (hanya kolom searchable)</text>
+<rect x="24" y="104" width="752" height="330" rx="8" fill="none" stroke="#e5e5e5"/>
+<text x="40" y="132" font-size="12">Nama ⇅ | Gaji (Rp) ⇅ | Status | Jabatan | Info Total | Aksi</text>
+<line x1="24" y1="144" x2="776" y2="144" stroke="#e5e5e5"/>
+<text x="40" y="170" font-size="12">Afdal | Rp 2.000.000 | PNS | Programmer | Total: 2000000 | Edit/Hapus</text>
+<text x="40" y="196" font-size="12">Budi | Rp 1.500.000 | PPPK | Analis | Total: 1500000 | Edit/Hapus</text>
+<rect x="400" y="230" width="340" height="180" rx="8" fill="#fff" stroke="#3B82F6" stroke-width="2"/>
+<text x="416" y="256" font-size="13" font-weight="600">Relation Picker — Jabatan</text>
+<rect x="416" y="268" width="308" height="28" rx="6" fill="none" stroke="#d4d4d4"/>
+<text x="428" y="287" font-size="11">Cari... + sort tiap kolom + ☑ (1/N)</text>
+<text x="416" y="312" font-size="12">☐ Programmer — Eselon III</text>
+<text x="416" y="336" font-size="12">☑ Analis — Non-Eselon</text>
+<rect x="600" y="364" width="110" height="30" rx="6" fill="#3B82F6"/>
+<text x="622" y="384" font-size="12" fill="#fff">Pilih (1)</text>
+</svg>

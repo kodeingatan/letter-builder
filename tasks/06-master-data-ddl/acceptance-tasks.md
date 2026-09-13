@@ -60,26 +60,26 @@ Then 401/403 benar; `npm run storybook` stories master-data tampil; `build-story
 
 ### Backend
 
-- [ ] Entity `server/entities/master-table.entity.ts`, `master-table-column.entity.ts` + registrasi `orm-data-source.ts`.
-- [ ] DTO `server/dto/master-data.dto.ts` (Create/Update Table discriminated 13 tipe + Row dinamis + Query).
-- [ ] `master-ddl.service` (sanitize, CREATE/alter-rebuild, backup, blacklist, ignore-drift hook).
-- [ ] `master-data.service` (CRUD definisi + rows via QueryBuilder + komputasi operasi server + cek referensi).
-- [ ] API 7 endpoint di atas (`requireApiAccess`, `createError`, pagination standar).
-- [ ] `migration-status.ts` ignore `mst_*`; seed contoh bila kosong; ActivityLog.
-- [ ] Storage whitelist untuk `image` kolom (reuse `general`/`avatars` atau tambah `master`).
+- [x] Entity `server/entities/master-table.entity.ts`, `master-table-column.entity.ts` + registrasi `orm-data-source.ts`.
+- [x] DTO `server/dto/master-data.dto.ts` (Create/Update Table discriminated 13 tipe + Row dinamis + Query).
+- [x] `master-ddl.service` (sanitize, CREATE/alter-rebuild, backup, blacklist, ignore-drift hook).
+- [x] `master-data.service` (CRUD definisi + rows via QueryBuilder + komputasi operasi server + cek referensi).
+- [x] API 7 endpoint di atas (`requireApiAccess`, `createError`, pagination standar).
+- [x] `migration-status.ts` ignore `mst_*`; seed contoh bila kosong; ActivityLog.
+- [x] Storage whitelist untuk `image` kolom (reuse `general`/`avatars` atau tambah `master`).
 
 ### Frontend
 
-- [ ] Types `shared/types/master-data.ts` + composable `useMasterData.ts` + store bila perlu.
-- [ ] Pages `/dashboard/master-data/*` + Components (DataTable/Form/Row/RelationPicker) sesuai mockup inline.
-- [ ] 13 input + IDR realtime + operasi preview + validasi sinkron Zod.
-- [ ] Visibility per slug (localStorage), search debounce 300ms, sort whitelist.
-- [ ] Storybook `stories/master-data/{List,Form,RelationPicker}.stories.ts` (default/loading/empty/error/validation).
+- [x] Types `shared/types/master-data.ts` + composable `useMasterData.ts` + store bila perlu.
+- [x] Pages `/dashboard/master-data/*` + Components (DataTable/Form/Row/RelationPicker) sesuai mockup inline.
+- [x] 13 input + IDR realtime + operasi preview + validasi sinkron Zod.
+- [x] Visibility per slug (localStorage), search debounce 300ms, sort whitelist.
+- [x] Storybook `stories/master-data/{List,Form,RelationPicker}.stories.ts` (default/loading/empty/error/validation).
 
 ### Cross-Cutting
 
-- [ ] Permission `Master Data Read/Write` + guard + sidebar dinamis per tabel.
-- [ ] Backup pre-alter + batas upload 5MB + cap kolom/baris.
+- [x] Permission `Master Data Read/Write` + guard + sidebar dinamis per tabel.
+- [x] Backup pre-alter + batas upload 5MB + cap kolom/baris.
 
 ### Test Plan
 
