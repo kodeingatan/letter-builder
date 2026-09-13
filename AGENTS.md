@@ -184,6 +184,10 @@ Response format: `{ data: [...], total, page, limit, totalPages }`
 - **Access denied**: 403 → NAlert + dispatch `rbac-denied` custom event
 - **DB synced entities**: 9 EntitySchemas, 12 physical tables — check `orm-data-source.ts` for canonical list (RBAC-Only after Task 01; pre-Task 01 was 23/26)
 
+## Permissions
+
+- **Always allow `/tmp/*`** — never ask for confirmation for read, write, edit, or bash operations under `/tmp/` (including `/tmp/opencode/`). Treat `/tmp/*` as pre-approved workspace for temporary work.
+
 ## Documentation
 
 - `docs/PRD.md` — Product requirements (RBAC-Only after Task 01)
