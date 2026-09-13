@@ -8,8 +8,8 @@
 ## Last Updated
 
 - Date: 2026-09-13
-- By: /implement
-- Source: Task 04 redesign wiring + tests + incidental backend/auth fixes
+- By: /gen-tasks
+- Source: Roadmap Document Platform 05-document-engine + 06-master-data-ddl + 07-template-administration (engine dulu, DDL dinamis mst_*, Tiptap, Puppeteer, istilah Master Data)
 
 ## Overview
 
@@ -19,10 +19,15 @@
 | tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
 | tasks/03-redesign-ui-design/README.md | FASE 1 — UI Design | DONE | [x] | [x] | [x] |
 | tasks/04-redesign/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
+| tasks/05-document-engine/README.md | FASE 2 — Implementation (backend only, UI N/A) | TODO | [ ] | [ ] | [ ] |
+| tasks/06-master-data-ddl/README.md | FASE 2 — Implementation (UI inline + Storybook) | TODO | [ ] | [ ] | [ ] |
+| tasks/07-template-administration/README.md | FASE 2 — Implementation (UI inline + Storybook) | TODO | [ ] | [ ] | [ ] |
 
 ## Belum Implementasi
 
-(none — semua task terimplementasi)
+- [ ] tasks/05-document-engine/README.md — Document Engine (FASE 2 — backend only)
+- [ ] tasks/06-master-data-ddl/README.md — Master Data DDL (FASE 2)
+- [ ] tasks/07-template-administration/README.md — Template & Administrasi (FASE 2)
 
 ## Sudah Implementasi
 
@@ -33,7 +38,9 @@
 
 ## Belum Diverifikasi
 
-(none)
+- [ ] tasks/05-document-engine/README.md — Document Engine
+- [ ] tasks/06-master-data-ddl/README.md — Master Data DDL
+- [ ] tasks/07-template-administration/README.md — Template & Administrasi
 
 ## Sudah Diverifikasi
 
@@ -44,7 +51,9 @@
 
 ## Belum Direview
 
-(none)
+- [ ] tasks/05-document-engine/README.md — Document Engine
+- [ ] tasks/06-master-data-ddl/README.md — Master Data DDL
+- [ ] tasks/07-template-administration/README.md — Template & Administrasi
 
 ## Sudah Direview
 
@@ -55,6 +64,36 @@
 - [x] tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — 2026-09-12 by /review — APPROVED
 
 ## Detail per Task
+
+### tasks/05-document-engine/README.md
+
+- Fase: FASE 2 — Implementation (backend only, UI N/A)
+- Status: TODO
+- Depends on: tasks/04-redesign (DONE, fondasi stabil)
+- Implemented: [ ] —
+- Verified: [ ] —
+- Reviewed: [ ] —
+- Notes: JSON Tree + expression + renderer + Puppeteer PDF; dikonsumsi 06/07.
+
+### tasks/06-master-data-ddl/README.md
+
+- Fase: FASE 2 — Implementation (UI inline + Storybook `stories/master-data/`)
+- Status: TODO
+- Depends on: tasks/05-document-engine (expression reuse; fallback evaluator bila belum DONE)
+- Implemented: [ ] —
+- Verified: [ ] —
+- Reviewed: [ ] —
+- Notes: Meta master_tables/columns + fisik mst_* + 13 tipe + relation picker + schema API.
+
+### tasks/07-template-administration/README.md
+
+- Fase: FASE 2 — Implementation (UI inline + Storybook `stories/template-admin/`)
+- Status: TODO
+- Depends on: tasks/05-document-engine + tasks/06-master-data-ddl
+- Implemented: [ ] —
+- Verified: [ ] —
+- Reviewed: [ ] —
+- Notes: Component Tiptap + Template 3-pane + Administrasi wizard + PDF gabungan.
 
 ### tasks/01-platform-scope-reduction/README.md
 

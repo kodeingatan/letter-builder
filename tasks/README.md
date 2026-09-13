@@ -10,7 +10,10 @@
 | Task 01 — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh) | `01-platform-scope-reduction/` | DONE | [x] | [x] | [x] |
 | Task 02 — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) | `02-fix-stale-nuxt-imports-and-render-guard/` | DONE | [x] | [x] | [x] |
 | Task 03 — Redesign UI/UX Notion-Calm (Wireframe / Mockup / Prototype) | `03-redesign-ui-design/` | DONE | [x] | [x] | [x] |
-| Task 04 — Redesign Implementation (Notion-Calm ke 11 Halaman) | `04-redesign/` | TODO | [ ] | [ ] | [ ] |
+| Task 04 — Redesign Implementation (Notion-Calm ke 11 Halaman) | `04-redesign/` | DONE | [x] | [x] | [x] |
+| Task 05 — Document Engine (JSON Tree + Repeater + Condition + Renderer + PDF) | `05-document-engine/` | TODO | [ ] | [ ] | [ ] |
+| Task 06 — Master Data DDL (pengganti Global Tabel) | `06-master-data-ddl/` | TODO | [ ] | [ ] | [ ] |
+| Task 07 — Template & Administrasi (Component Tiptap + Builder + Wizard + PDF) | `07-template-administration/` | TODO | [ ] | [ ] | [ ] |
 
 ## Struktur tiap folder task
 
