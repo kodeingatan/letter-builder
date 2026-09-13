@@ -54,23 +54,23 @@ Then semua hijau; stories `foundation/` + `redesign/` PASS; tidak ada perubahan 
 
 ### Backend
 
-- [ ] N/A — tidak ada entity/DTO/service/API baru maupun perubahan (FR-006). Verifikasi via grep: tidak ada file `server/` yang diubah kecuali bila insidental.
+- [x] Insidental — `server/services/users.service.ts` `findAll`/`findOne` join `roles` (tanpa ini AC-002 tak terpenuhi: API tak pernah mengembalikan relasi; route/DTO/validasi/auth tak berubah) (FR-002, AC-002)
 
 ### Frontend
 
-- [ ] `dashboard/index.vue` — integrasi `DashboardHero` (stat + recent), hapus greeting card lama (FR-001, AC-001, EC-01)
-- [ ] `UserTable.vue` — kolom peran → `BadgePill` + fallback `—` (FR-002, AC-002, EC-02)
-- [ ] Logs table — kolom level → `BadgePill` (atau pertahankan `LogLevelBadge` + catat deviasi EC-04) (FR-002, AC-002)
-- [ ] `RoleFormModal`, `PermissionFormModal`, `GuardFormModal` — tambah class `.modal-card` (FR-003, AC-003, EC-03)
-- [ ] List pages — slot `#empty` → `EmptyStateCard` + CTA per entity (FR-004, AC-004)
-- [ ] Auth pages — verifikasi final visual + hero panel (FR-005, AC-005)
-- [ ] Sweep visual 11 halaman (PageShell/DataTable/sidebar hasil FASE 1) + catat deviasi (BR-001)
+- [x] `dashboard/index.vue` — integrasi `DashboardHero` (stat + recent), hapus greeting card lama (FR-001, AC-001, EC-01)
+- [x] `UserTable.vue` — kolom peran → `BadgePill` + fallback `—` (FR-002, AC-002, EC-02)
+- [x] Logs table — kolom level → `BadgePill` (`LogLevelBadge` dipertahankan untuk drawer + koeksistensi, lihat Penyesuaian) (FR-002, AC-002)
+- [x] `RoleFormModal`, `PermissionFormModal`, `GuardFormModal` — tambah class `.modal-card` (FR-003, AC-003, EC-03)
+- [x] List pages — slot `#empty` → `EmptyStateCard` + CTA per entity (FR-004, AC-004)
+- [x] Auth pages — verifikasi final visual + hero panel (FR-005, AC-005)
+- [x] Sweep visual 11 halaman (PageShell/DataTable/sidebar hasil FASE 1) + catat deviasi (BR-001)
 
 ### Cross-Cutting
 
-- [ ] RBAC tak tersentuh — permission gating `canAccessUrl`/`requireApiAccess` identik (BR-002)
-- [ ] Stories `foundation/` + `redesign/` tetap PASS (BR-003)
-- [ ] `docs/design-system.md` — catat penyesuaian bila ada (Change Log)
+- [x] RBAC tak tersentuh — permission gating `canAccessUrl`/`requireApiAccess` identik (BR-002)
+- [x] Stories `foundation/` + `redesign/` tetap PASS (BR-003)
+- [x] `docs/design-system.md` — catat penyesuaian bila ada (Change Log)
 
 ### Test Plan (QA — Bertindak sebagai QA Engineer)
 
@@ -82,7 +82,7 @@ Then semua hijau; stories `foundation/` + `redesign/` PASS; tidak ada perubahan 
 | E2E-01 | E2E — Happy | `test/e2e/redesign.spec.ts` | Login → dashboard → list → modal → toast | Steps 1–11, AC-001..005 |
 | E2E-02 | E2E — Alternate | `test/e2e/redesign-alt.spec.ts` | Empty, validation, 403, mobile viewport | ALT-01, ERR-01/02, EC-03 |
 
-- [ ] Unit tests — props/emit/fallback per komponen baru
-- [ ] Nuxt tests — semua state dari `## UI > States`
-- [ ] E2E tests — happy + alternate/error + permission — mapping 1:1 ke User Flow + AC
-- [ ] Coverage target: User Flow steps 100%, AC 100%, EC 100% (FR/BR tak ada logika baru — coverage via regresi)
+- [x] Unit tests — props/emit/fallback per komponen baru
+- [x] Nuxt tests — semua state dari `## UI > States`
+- [x] E2E tests — happy + alternate/error + permission — mapping 1:1 ke User Flow + AC
+- [x] Coverage target: User Flow steps 100%, AC 100%, EC 100% (FR/BR tak ada logika baru — coverage via regresi)

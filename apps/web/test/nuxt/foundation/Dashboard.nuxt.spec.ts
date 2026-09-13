@@ -2,38 +2,37 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
-describe('Dashboard — RBAC-Only after Task 01 (FR-005 / AC-005)', () => {
-  it('dashboard file is RBAC-only via ID locale and PageShell (no navigationStore)', () => {
-    const appDir = join(process.cwd(), 'app')
-    const content = readFileSync(join(appDir, 'pages/dashboard/index.vue'), 'utf8')
-    expect(content).not.toContain('navigationStore')
-    expect(content).toContain('Selamat Datang Kembali')
-    expect(content).toContain('Halo,')
-    expect(content).toContain('Berikut ringkasan akun Anda')
-    expect(content).toContain('PageShell')
-    expect(content).toContain('NGrid')
-    expect(content).toContain('Akses Cepat — RBAC')
+const appDir = join(process.cwd(), 'app')
+const read = (p: string) => readFileSync(join(appDir, p), 'utf8')
+
+describe('Dashboard — Task 04 AC-001 / FR-001 (DashboardHero terintegrasi)', () => {
+  const dashboard = read('pages/dashboard/index.vue')
+
+  it('renders DashboardHero with stat + recent (greeting card lama dihapus)', () => {
+    expect(dashboard).toContain('DashboardHero')
+    expect(dashboard).toContain(':stats="heroStats"')
+    expect(dashboard).toContain('Pengguna Terbaru')
+    expect(dashboard).not.toContain('Selamat Datang Kembali')
   })
 
-  it('dashboard shows RBAC shortcuts (User/Role/Permission/Guard + Activity/System/Settings)', () => {
-    const appDir = join(process.cwd(), 'app')
-    const content = readFileSync(join(appDir, 'pages/dashboard/index.vue'), 'utf8')
-    expect(content).toContain('User')
-    expect(content).toContain('Role')
-    expect(content).toContain('Permission')
-    expect(content).toContain('Guard')
-    expect(content).toContain('Activity Logs')
-    expect(content).toContain('System Logs')
-    expect(content).toContain('Settings')
-    // Ensure dynamic shortcuts removed
-    expect(content).not.toContain('Komponen')
-    expect(content).not.toContain('Persuratan')
+  it('derives stats from existing list endpoints (tanpa API baru, FR-006)', () => {
+    expect(dashboard).toContain('/api/users')
+    expect(dashboard).toContain('/api/roles')
+    expect(dashboard).toContain('/api/permissions')
+    expect(dashboard).toContain('/api/guards')
+    expect(dashboard).not.toContain('/api/dashboard')
+    expect(dashboard).not.toContain('/api/summary')
   })
 
-  it('dashboard responsive NGrid 3 cols', () => {
-    const appDir = join(process.cwd(), 'app')
-    const content = readFileSync(join(appDir, 'pages/dashboard/index.vue'), 'utf8')
-    expect(content).toContain(':cols="3"')
-    expect(content).toContain('responsive="screen"')
+  it('handles slow/failed stat fetch (EC-01: hero tetap render)', () => {
+    expect(dashboard).toContain("'…'")
+    expect(dashboard).toContain('statsLoading')
+  })
+
+  it('keeps RBAC shortcuts and profile (no regression)', () => {
+    expect(dashboard).toContain('Akses Cepat — RBAC')
+    expect(dashboard).toContain('Informasi Profil')
+    expect(dashboard).toContain('PageShell')
+    expect(dashboard).not.toContain('navigationStore')
   })
 })

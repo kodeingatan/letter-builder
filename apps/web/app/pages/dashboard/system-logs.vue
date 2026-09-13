@@ -52,6 +52,7 @@
         :sort-order="sortOrder"
         search-placeholder="Search system logs..."
         :searchable-fields="searchableFields"
+        empty-description="Belum ada system log"
         @search="handleSearch"
         @search-field-change="handleSearchField"
         @update:page="handlePageChange"
@@ -77,12 +78,13 @@
 <script setup lang="ts">
 import { ref, h, onMounted, computed } from 'vue';
 import { NTag, NSpace, NSelect, NButton } from 'naive-ui';
-import { LogDetailDrawer, LogLevelBadge } from '~/components/features/logging';
+import { LogDetailDrawer } from '~/components/features/logging';
+import BadgePill from '~/components/common/BadgePill/BadgePill.vue';
 import type { LogEntry, SystemLogFile, SystemLogStats } from '~/shared/types/system-log';
 
 definePageMeta({ layout: 'default', middleware: 'auth', requiresAuth: true })
 
-useAuthStore()
+const authStore = useAuthStore()
 
 const files = ref<SystemLogFile[]>([]);
 const selectedFile = ref<string | null>(null);
@@ -128,6 +130,43 @@ const fileOptions = computed(() =>
   })),
 );
 
+const parseLogLine = (line: unknown, index: number): LogEntry => {
+  const rawLine = typeof line === 'string' ? line : JSON.stringify(line ?? '')
+  if (typeof line === 'object' && line !== null) {
+    const entry = line as Partial<LogEntry>
+    return {
+      timestamp: entry.timestamp ?? '—',
+      level: entry.level ?? 'INFO',
+      context: entry.context ?? '—',
+      message: entry.message ?? rawLine,
+      rawLine,
+    }
+  }
+  const levelMatch = rawLine.match(/\[([A-Z]+)\]/)
+  return {
+    timestamp: '—',
+    level: levelMatch ? levelMatch[1] : 'INFO',
+    context: '—',
+    message: rawLine,
+    rawLine: `${index}:${rawLine}`,
+  }
+};
+
+const levelPillType = (level: string): 'primary' | 'success' | 'warning' | 'error' | 'default' => {
+  const map: Record<string, 'primary' | 'success' | 'warning' | 'error' | 'default'> = {
+    TRACE: 'default',
+    DEBUG: 'default',
+    INFO: 'primary',
+    NOTICE: 'primary',
+    WARNING: 'warning',
+    ERROR: 'error',
+    CRITICAL: 'error',
+    FATAL: 'error',
+    EMERGENCY: 'error',
+  };
+  return map[level] || 'default';
+};
+
 const columns = computed(() => [
   { title: 'Timestamp', key: 'timestamp', width: 200, sortable: true },
   {
@@ -136,7 +175,7 @@ const columns = computed(() => [
     width: 100,
     sortable: true,
     render(row: LogEntry) {
-      return h(LogLevelBadge, { level: row.level, size: 'small' });
+      return h(BadgePill, { label: row.level, type: levelPillType(row.level) });
     },
   },
   { title: 'Context', key: 'context', width: 150, sortable: true },
@@ -201,8 +240,10 @@ const levelStats = computed(() => {
 
 const fetchFiles = async () => {
   try {
-    const response = await $fetch<any>('/api/system-logs/files');
-    files.value = response.data;
+    const response = await $fetch<any>('/api/system-logs/files', {
+      headers: { Authorization: `Bearer ${authStore.token}` },
+    });
+    files.value = Array.isArray(response) ? response : (response.data ?? []);
     if (files.value.length > 0 && !selectedFile.value) {
       selectedFile.value = files.value[0].filename;
       fetchContent();
@@ -228,13 +269,26 @@ const fetchContent = async () => {
     if (filterLevel.value) params.level = filterLevel.value;
 
     const [contentRes, statsRes] = await Promise.all([
-      $fetch<any>(`/api/system-logs/files/${selectedFile.value}`, { params }),
-      $fetch<any>(`/api/system-logs/stats/${selectedFile.value}`),
+      $fetch<any>(`/api/system-logs/files/${selectedFile.value}`, {
+        params,
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      }),
+      $fetch<any>(`/api/system-logs/stats/${selectedFile.value}`, {
+        headers: { Authorization: `Bearer ${authStore.token}` },
+      }),
     ]);
 
-    logEntries.value = contentRes.data.lines;
-    total.value = contentRes.data.total;
-    stats.value = statsRes.data;
+    logEntries.value = (contentRes.lines ?? contentRes.data?.lines ?? []).map(parseLogLine);
+    total.value = contentRes.total ?? contentRes.data?.total ?? logEntries.value.length;
+    const statsRaw = statsRes ?? {};
+    const rawLevels = statsRaw.byLevel ?? statsRaw.levels ?? {};
+    stats.value = {
+      total: statsRaw.total ?? 0,
+      byLevel: {
+        ...rawLevels,
+        WARNING: rawLevels.WARNING ?? rawLevels.WARN ?? 0,
+      },
+    };
   } catch (error) {
     console.error('Failed to fetch log content:', error);
   } finally {

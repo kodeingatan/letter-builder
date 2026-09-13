@@ -98,7 +98,7 @@ async function handleSubmit() {
     @update:show="(v) => emit('update:visible', v)"
     preset="card"
     :title="title"
-    class="max-w-lg"
+    class="max-w-lg modal-card"
     :bordered="false"
   >
     <NForm ref="formRef" :model="form" :rules="rules" label-placement="top">

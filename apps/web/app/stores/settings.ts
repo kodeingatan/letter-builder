@@ -55,7 +55,9 @@ export const useSettingsStore = defineStore('settings', () => {
   async function fetchSettings(): Promise<Record<string, string> | null> {
     loading.value = true
     try {
-      const response = await $fetch<Setting[]>('/api/settings')
+      const response = await $fetch<Setting[]>('/api/settings', {
+        headers: { Authorization: `Bearer ${useAuthStore().token}` },
+      })
       const map: Record<string, string> = {}
       response.forEach((s) => { map[s.key] = s.value })
       settings.value = map

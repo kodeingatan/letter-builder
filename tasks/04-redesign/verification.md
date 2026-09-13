@@ -34,8 +34,8 @@
 
 ## Open Questions
 
-- [ ] `LogLevelBadge` vs `BadgePill` di logs — unifikasi atau koeksistensi? (lihat EC-04; rekomendasi: unifikasi bila API props kompatibel)
-- [ ] Stat dashboard diambil dari endpoint ringkasan existing atau agregasi client? Rekomendasi: pakai pola existing dashboard (minimal change).
+- [x] `LogLevelBadge` vs `BadgePill` di logs — unifikasi atau koeksistensi? **Diputuskan (auto-task): koeksistensi** — tabel memakai `BadgePill`, `LogDetailDrawer` tetap `LogLevelBadge` (lihat `domain-api-ui.md` § Penyesuaian).
+- [x] Stat dashboard diambil dari endpoint ringkasan existing atau agregasi client? **Diputuskan (auto-task): agregasi client** via endpoint list existing (`limit=1` → `total`), tanpa API baru.
 
 ## Related Knowledge
 

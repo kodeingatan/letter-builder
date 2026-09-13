@@ -2,7 +2,7 @@
 
 ## Status
 
-TODO
+DONE
 
 > Folder mode (opsi B). Baca berurutan:
 > 1. `spec.md` — Objective, Context, Scope, Dependencies

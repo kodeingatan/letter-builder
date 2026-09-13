@@ -1,11 +1,12 @@
 <script setup lang="ts" generic="T extends Record<string, any>">
 import { computed, ref, watch, onMounted } from 'vue'
 import {
-  NDataTable, NInput, NButton, NSpace, NSpin, NEmpty, NPopover,
+  NDataTable, NInput, NButton, NSpace, NSpin, NPopover,
   NCheckbox, NSelect, NIcon, NAlert,
   type DataTableColumns, type PaginationProps, type DataTableSortState,
 } from 'naive-ui'
 import { Search, Reset, Settings, Restart } from '@vicons/carbon'
+import EmptyStateCard from '~/components/common/EmptyStateCard/EmptyStateCard.vue'
 
 interface ColumnDef {
   key: string
@@ -32,6 +33,7 @@ const props = withDefaults(defineProps<{
   sortOrder?: 'ASC' | 'DESC'
   storageKey?: string
   emptyDescription?: string
+  emptyCtaLabel?: string
   error?: string | null
 }>(), {
   loading: false,
@@ -43,6 +45,7 @@ const props = withDefaults(defineProps<{
   sortOrder: 'DESC',
   storageKey: 'datatable-hidden-columns',
   emptyDescription: 'Belum ada data',
+  emptyCtaLabel: undefined,
   error: null,
 })
 
@@ -54,6 +57,7 @@ const emit = defineEmits<{
   (e: 'sort-change', sorter: { columnKey: string; order: 'ascend' | 'descend' | false }): void
   (e: 'refresh'): void
   (e: 'retry'): void
+  (e: 'empty-cta'): void
 }>()
 
 const searchText = ref('')
@@ -243,7 +247,12 @@ function resetFilters() {
         @update:sorter="handleSorterChange"
       >
         <template #empty>
-          <NEmpty v-if="!loading && !error" :description="emptyDescription" />
+          <EmptyStateCard
+            v-if="!loading && !error"
+            :title="emptyDescription"
+            :cta-label="emptyCtaLabel"
+            @cta="emit('empty-cta')"
+          />
         </template>
       </NDataTable>
     </NSpin>

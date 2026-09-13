@@ -28,6 +28,7 @@ export const UsersService = {
 
     const total = await qb.getCount()
     const data = await qb
+      .leftJoinAndSelect('user.roles', 'role')
       .skip((query.page - 1) * query.limit)
       .take(query.limit)
       .getMany()
@@ -38,7 +39,7 @@ export const UsersService = {
 
   async findOne(id: number) {
     const ds = await getDataSource()
-    const user = await ds.getRepository(UserSchema).findOne({ where: { id } })
+    const user = await ds.getRepository(UserSchema).findOne({ where: { id }, relations: ['roles'] })
     if (!user) throw new Error('User not found')
     const { password, ...rest } = user
     return rest

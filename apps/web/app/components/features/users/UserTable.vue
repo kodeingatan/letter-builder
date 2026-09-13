@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { h, onMounted, computed } from 'vue'
-import { NTag, NSpace, NText, NButton, NPopconfirm, NIcon, useMessage } from 'naive-ui'
+import { NSpace, NText, NButton, NPopconfirm, NIcon, useMessage } from 'naive-ui'
 import { Add, TrashCan, Edit, View } from '@vicons/carbon'
 import DataTable from '~/components/common/DataTable/DataTable.vue'
+import BadgePill from '~/components/common/BadgePill/BadgePill.vue'
 import { useUsersStore } from '~/stores/users'
 import type { User } from '~/shared/types/user'
 
@@ -25,10 +26,10 @@ const columns = computed(() => [
     key: 'roles',
     title: 'Roles',
     render(row: User) {
-      if (!row.roles?.length) return h(NText, { depth: 3 }, () => '-')
+      if (!row.roles?.length) return h(NText, { depth: 3 }, () => '—')
       return h(NSpace, { size: 4 }, () =>
         row.roles.map((role) =>
-          h(NTag, { key: role.id, size: 'small', type: 'info', bordered: false }, () => role.roleName)
+          h(BadgePill, { key: role.id, label: role.roleName ?? '—', type: 'primary' })
         )
       )
     },
@@ -124,8 +125,11 @@ onMounted(() => {
       :sort-order="store.sortOrder"
       search-placeholder="Search users..."
       :searchable-fields="searchableFields"
+      empty-description="Belum ada user"
+      empty-cta-label="+ Buat User"
       @search="handleSearch"
       @search-field-change="handleSearchField"
+      @empty-cta="emit('create')"
       @update:page="handlePageChange"
       @update:limit="handleLimitChange"
       @sort-change="handleSortChange"

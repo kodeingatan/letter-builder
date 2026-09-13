@@ -24,7 +24,9 @@ watch(() => props.visible, async (val) => {
   if (val && props.userId) {
     loading.value = true
     try {
-      const data = await $fetch<User>(`/api/users/${props.userId}`)
+      const data = await $fetch<User>(`/api/users/${props.userId}`, {
+        headers: { Authorization: `Bearer ${useAuthStore().token}` },
+      })
       user.value = data
     } catch {
       user.value = null

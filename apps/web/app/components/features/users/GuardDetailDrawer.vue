@@ -24,7 +24,9 @@ watch(() => props.visible, async (val) => {
   if (val && props.guardId) {
     loading.value = true
     try {
-      const data = await $fetch<Guard>(`/api/guards/${props.guardId}`)
+      const data = await $fetch<Guard>(`/api/guards/${props.guardId}`, {
+        headers: { Authorization: `Bearer ${useAuthStore().token}` },
+      })
       guard.value = data
     } catch {
       guard.value = null

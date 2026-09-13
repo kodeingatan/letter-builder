@@ -24,7 +24,9 @@ watch(() => props.visible, async (val) => {
   if (val && props.roleId) {
     loading.value = true
     try {
-      const data = await $fetch<Role>(`/api/roles/${props.roleId}`)
+      const data = await $fetch<Role>(`/api/roles/${props.roleId}`, {
+        headers: { Authorization: `Bearer ${useAuthStore().token}` },
+      })
       role.value = data
     } catch {
       role.value = null

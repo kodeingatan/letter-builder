@@ -8,8 +8,8 @@
 ## Last Updated
 
 - Date: 2026-09-13
-- By: /task
-- Source: Redesign implementasi mengacu stories approved Task 03 — FASE 2 dibuat (tasks/04-redesign)
+- By: /implement
+- Source: Task 04 redesign wiring + tests + incidental backend/auth fixes
 
 ## Overview
 
@@ -18,35 +18,38 @@
 | tasks/01-platform-scope-reduction/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
 | tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
 | tasks/03-redesign-ui-design/README.md | FASE 1 — UI Design | DONE | [x] | [x] | [x] |
-| tasks/04-redesign/README.md | FASE 2 — Implementation | TODO | [ ] | [ ] | [ ] |
+| tasks/04-redesign/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
 
 ## Belum Implementasi
 
-- [ ] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman) (FASE 2 — Implementation)
+(none — semua task terimplementasi)
 
 ## Sudah Implementasi
 
 - [x] tasks/01-platform-scope-reduction/README.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh) (FASE 2 — Implementation)
 - [x] tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) (FASE 2 — Implementation) — 2026-09-12 by /implement
 - [x] tasks/03-redesign-ui-design/README.md — Redesign UI/UX Notion-Calm (FASE 1 — UI Design) — 2026-09-13 by /implement
+- [x] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman) (FASE 2 — Implementation) — 2026-09-13 by /implement
 
 ## Belum Diverifikasi
 
-- [ ] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman)
+(none)
 
 ## Sudah Diverifikasi
 
 - [x] tasks/01-platform-scope-reduction/README.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh)
 - [x] tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — 2026-09-12 by /verify — PASS
 - [x] tasks/03-redesign-ui-design/README.md — Redesign UI/UX Notion-Calm (FASE 1 — UI Design) — 2026-09-13 by /verify — PASS
+- [x] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman) — 2026-09-13 by /verify — PASS
 
 ## Belum Direview
 
-- [ ] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman)
+(none)
 
 ## Sudah Direview
 
 - [x] tasks/03-redesign-ui-design/README.md — Redesign UI/UX Notion-Calm (FASE 1 — UI Design) — 2026-09-13 by /review — APPROVED
+- [x] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman) — 2026-09-13 by /review — APPROVED
 
 - [x] tasks/01-platform-scope-reduction/README.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh)
 - [x] tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — 2026-09-12 by /review — APPROVED
@@ -86,10 +89,10 @@
 ### tasks/04-redesign/README.md
 
 - Fase: FASE 2 — Implementation
-- Status: TODO
+- Status: DONE
 - Depends on: tasks/03-redesign-ui-design/README.md (DONE + APPROVED — acuan pixel-perfect: 8 stories + 6 wireframes)
-- Implemented: [ ] —
-- Verified: [ ] —
-- Reviewed: [ ] —
-- Notes: Wiring prototype approved ke 11 halaman (DashboardHero, BadgePill, EmptyStateCard, ModalCard rollout, auth final) + tests UT/NT/E2E. Tanpa perubahan API/DB/RBAC.
+- Implemented: [x] — 2026-09-13 by /implement — DashboardHero wiring + BadgePill tables + EmptyStateCard DataTable + modal-card ×3 + PageShell activity-logs + Bearer headers (logs/drawers/settings) + users roles join + response parsing fixes; tests UT 97/97 NT 52/52 E2E-redesign 9/9; vue-tsc 0; build 15.8MB + storybook PASS
+- Verified: [x] — 2026-09-13 by /verify — PASS: User Flow 11/11 + ALT/ERR, AC-001..006 6/6, UT 97/97 (16 files), NT 52/52 (10 files), E2E-redesign 9/9, full E2E 42/43 (1 pre-existing crud.spec strict-violation, gagal di HEAD juga — bukan regresi), vue-tsc 0, build 15.8MB, build-storybook PASS
+- Reviewed: [x] — 2026-09-13 by /review — APPROVED: FASE 1→FASE 2 konsisten, pola existing (h-render, Bearer stores, direct Naive UI import), 0 must-fix; UT/NT/E2E bermakna + traceable (Flow↔AC↔Test 100%); no security/regression; 1 should-fix pre-existing (crud.spec strict-violation, di HEAD juga) sebagai follow-up, 1 consider (system-logs tanpa logs/ di dev → verifikasi rows saat ada file)
+- Notes: Wiring prototype approved ke 11 halaman (DashboardHero, BadgePill, EmptyStateCard, ModalCard rollout, auth final) + tests UT/NT/E2E. Insidental backend minimal: users.service join roles; frontend Bearer headers + parsing fixes (activity-logs 401/parse, system-logs shapes). Tanpa perubahan API/DB/RBAC (route/DTO/auth/pagination identik). Pre-existing (bukan regresi): E2E crud sidebar strict-violation (gagal di HEAD juga); scripts/*.mjs terhapus di workdir sebelum sesi (tak tersentuh).
 

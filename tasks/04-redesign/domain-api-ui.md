@@ -66,4 +66,11 @@ Sesuai FASE 1 (keyboard, ARIA, kontras AA via token, reduced-motion, live region
 
 ### Penyesuaian dari design
 
-_(Diisi saat implementasi bila ada deviasi dari stories approved — beserta alasan. Awal: none.)_
+_(Diisi saat implementasi bila ada deviasi dari stories approved — beserta alasan.)_
+
+1. **EC-04 `LogLevelBadge` vs `BadgePill` — koeksistensi (decided by /auto-task):** kolom tabel (`activity-logs` action/entity/level, `system-logs` level) memakai `BadgePill`; `LogLevelBadge.vue` dipertahankan dan tetap dipakai `LogDetailDrawer` + story `Redesign/LevelBadge` (tanpa penghapusan file).
+2. **Stat dashboard — agregasi client via endpoint existing (decided by /auto-task):** `dashboard/index.vue` memanggil `GET /api/users|roles|permissions|guards` (`limit=1` → `total`) + recent users (`limit=5`) dengan Bearer header; tanpa endpoint/DTO baru (FR-006).
+3. **Insidental backend (decided by /auto-task):** `UsersService.findAll` + `findOne` join relasi `roles` — sebelumnya API tak pernah mengembalikan `roles` sehingga kolom peran selalu fallback (AC-002 tak mungkin PASS). Route/DTO/validasi/auth/pagination identik.
+4. **Insidental frontend auth headers (decided by /auto-task):** `activity-logs.vue`, `system-logs.vue`, 4 `*DetailDrawer`, `settings` store `fetchSettings` kini mengirim `Authorization: Bearer` (pola sama dengan stores) — sebelumnya selalu 401 karena server hanya honor Bearer header. Plus perbaikan parsing respons (`activity-logs`: `response.data`/`response.total`; `system-logs`: bentuk array langsung + normalisasi `levels`→`byLevel` + `WARN`→`WARNING`, mapping baris string→`LogEntry`).
+5. **Sweep:** `activity-logs.vue` dibungkus `PageShell` (konsistensi 11 halaman); mapping level/action case-insensitive (data seed memakai action lowercase).
+6. **Auth pages:** verify-only — sudah final FASE 1 (pill CTA round, auth layout, inline error); tanpa perubahan.

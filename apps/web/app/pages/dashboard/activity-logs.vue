@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <PageShell
+    title="Log Aktivitas"
+    :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Log Aktivitas' }]"
+    description="Telusuri log aktivitas — filter, cari, lihat detail."
+  >
     <n-alert type="info" style="margin-bottom: 12px">
       Nilai PII (email, telepon, alamat, NIK, dsb.) disensor pada metadata audit — hanya nama kolom + ID yang tersimpan.
     </n-alert>
@@ -44,6 +48,7 @@
         :sort-order="sortOrder"
         search-placeholder="Cari log aktivitas..."
         :searchable-fields="searchableFields"
+        empty-description="Belum ada activity log"
         @update:page="handlePageChange"
         @update:limit="handleLimitChange"
         @search="handleSearch"
@@ -71,14 +76,14 @@
             <div class="detail-field">
               <span class="detail-label">Action</span>
               <span class="detail-value">
-                <n-tag :type="getActionType(selectedLog.action)" size="small" round>{{ selectedLog.action }}</n-tag>
+                <BadgePill :label="selectedLog.action" :type="getActionType(selectedLog.action)" />
               </span>
             </div>
 
             <div class="detail-field">
               <span class="detail-label">Entity</span>
               <span class="detail-value">
-                <n-tag size="small" round>{{ selectedLog.entity }}</n-tag>
+                <BadgePill :label="selectedLog.entity" type="default" />
               </span>
             </div>
 
@@ -90,7 +95,7 @@
             <div class="detail-field">
               <span class="detail-label">Level</span>
               <span class="detail-value">
-                <n-tag :type="getLevelType(selectedLog.level)" size="small" round>{{ selectedLog.level }}</n-tag>
+                <BadgePill :label="selectedLog.level" :type="getLevelType(selectedLog.level)" />
               </span>
             </div>
 
@@ -124,17 +129,18 @@
         </template>
       </n-drawer-content>
     </n-drawer>
-  </div>
+  </PageShell>
 </template>
 
 <script setup lang="ts">
 import { ref, h, onMounted } from 'vue';
 import { NTag, NSpace, NSelect, NCard, NDrawer, NDrawerContent, NAlert } from 'naive-ui';
+import BadgePill from '~/components/common/BadgePill/BadgePill.vue';
 import type { ActivityLog } from '~/shared/types/activity-log';
 
 definePageMeta({ layout: 'default', middleware: 'auth', requiresAuth: true })
 
-useAuthStore()
+const authStore = useAuthStore()
 
 const logs = ref<ActivityLog[]>([]);
 const loading = ref(false);
@@ -183,23 +189,23 @@ const levelOptions = [
 ];
 
 const getActionType = (action: string) => {
-  const map: Record<string, 'success' | 'warning' | 'error' | 'info' | 'default'> = {
+  const map: Record<string, 'success' | 'warning' | 'error' | 'primary' | 'default'> = {
     CREATE: 'success',
     UPDATE: 'warning',
     DELETE: 'error',
-    LOGIN: 'info',
+    LOGIN: 'primary',
     LOGOUT: 'default',
   };
-  return map[action] || 'default';
+  return map[(action || '').toUpperCase()] || 'default';
 };
 
 const getLevelType = (level: string) => {
-  const map: Record<string, 'success' | 'warning' | 'error' | 'info' | 'default'> = {
-    INFO: 'info',
+  const map: Record<string, 'success' | 'warning' | 'error' | 'primary' | 'default'> = {
+    INFO: 'primary',
     WARNING: 'warning',
     ERROR: 'error',
   };
-  return map[level] || 'default';
+  return map[(level || '').toUpperCase()] || 'default';
 };
 
 const formatMetadata = (metadata: string) => {
@@ -227,7 +233,7 @@ const columns = [
     key: 'action',
     width: 100,
     render(row: ActivityLog) {
-      return h(NTag, { type: getActionType(row.action), size: 'small' }, { default: () => row.action });
+      return h(BadgePill, { label: row.action, type: getActionType(row.action) });
     },
   },
   {
@@ -235,7 +241,7 @@ const columns = [
     key: 'entity',
     width: 100,
     render(row: ActivityLog) {
-      return h(NTag, { size: 'small' }, { default: () => row.entity });
+      return h(BadgePill, { label: row.entity, type: 'default' });
     },
   },
   { title: 'Description', key: 'description', ellipsis: { tooltip: true } },
@@ -244,7 +250,7 @@ const columns = [
     key: 'level',
     width: 80,
     render(row: ActivityLog) {
-      return h(NTag, { type: getLevelType(row.level), size: 'small' }, { default: () => row.level });
+      return h(BadgePill, { label: row.level, type: getLevelType(row.level) });
     },
   },
   { title: 'Created At', key: 'createdAt', width: 180, sortable: true },
@@ -284,9 +290,12 @@ const fetchLogs = async () => {
     if (filterEntity.value) params.entity = filterEntity.value;
     if (filterLevel.value) params.level = filterLevel.value;
 
-    const response = await $fetch<any>('/api/activity-logs', { params });
-    logs.value = response.data.data;
-    total.value = response.data.total;
+    const response = await $fetch<any>('/api/activity-logs', {
+      params,
+      headers: { Authorization: `Bearer ${authStore.token}` },
+    });
+    logs.value = response.data ?? [];
+    total.value = response.total ?? 0;
   } catch (error) {
     console.error('Failed to fetch activity logs:', error);
   } finally {
