@@ -222,8 +222,8 @@ Single Nuxt 4 package:
 
 ### Frontend (Nuxt 4)
 - Vue 3 `<script setup>` SFCs with TypeScript
-- UI: **Naive UI** (priority) + **Tailwind CSS v4** (utility classes)
-- Tailwind CSS v4 without preflight (to avoid Naive UI conflicts)
+- UI: **Naive UI** (komponen utama) + **Tailwind CSS v4** (pendekatan utama untuk CSS pada component — intended direction 2026-09-13, praktik mengikuti skill `.opencode/skills/tailwind-base-practices`)
+- Tailwind CSS v4 without preflight (to avoid Naive UI conflicts), loaded via `@tailwindcss/vite` + `app/assets/css/main.css` (`theme` + `utilities` layers only)
 - Auto-imports: composables, components, utilities auto-imported by Nuxt
 - File-based routing: pages in `app/pages/` → routes automatically
 - Layouts: `app/layouts/` — wrap pages with `<NuxtLayout>`
@@ -681,8 +681,8 @@ Lihat `docs/design-system.md` untuk dokumentasi lengkap design tokens, color pal
 
 **Prinsip**:
 - **Naive UI** = komponen utama (Button, Input, Form, DataTable, dll)
-- **Tailwind CSS** = utility classes (spacing, flexbox, display)
-- Customisasi tema via `GlobalThemeOverrides` pada `NConfigProvider`
+- **Tailwind CSS v4** = pendekatan utama untuk CSS pada component (utilities inline di template; `<style scoped>` hanya untuk override Naive UI via `:deep()` dan selector kompleks) — intended direction 2026-09-13, detail: `docs/design-system.md` § Implementation Notes
+- Customisasi tema via `GlobalThemeOverrides` pada `NConfigProvider` + token `:root` di `app/assets/css/main.css`
 - Semua komponen harus dibungkus dengan `NConfigProvider`
 
 ---
@@ -754,6 +754,10 @@ Manages table state (search, sort, column visibility). Used by DataTable compone
 ---
 
 ## Change Log
+
+### Tailwind-First Component CSS (2026-09-13)
+
+- § Conventions (Frontend) + § Design System: Tailwind CSS v4 ditetapkan sebagai pendekatan utama untuk CSS pada component (intended direction; praktik mengikuti `.opencode/skills/tailwind-base-practices`). CURRENT masih campuran (`AuthForm` Tailwind vs `PageShell`/`.detail-view` scoped CSS) — migrasi bertahap, tanpa perubahan token visual atau struktur modul.
 
 ### Docs Tidy — Adopsi Notion Design (2026-09-13)
 

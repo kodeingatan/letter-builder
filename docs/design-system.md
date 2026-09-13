@@ -2,7 +2,7 @@
 
 ## Overview
 
-Design system menggunakan **Naive UI** sebagai komponen utama dengan Tailwind CSS sebagai pelengkap untuk spacing/utility classes. Semua token didefinisikan melalui Naive UI `GlobalThemeOverrides`.
+Design system menggunakan **Naive UI** sebagai komponen utama dengan **Tailwind CSS v4 sebagai pendekatan utama untuk CSS pada component** (keputusan intended-direction 2026-09-13 — lihat Change Log). Semua token didefinisikan melalui Naive UI `GlobalThemeOverrides` + CSS variables di `app/assets/css/main.css`; Tailwind utilities memakai nilai token yang sama.
 
 ---
 
@@ -755,7 +755,12 @@ Semua animasi harus menghormati `prefers-reduced-motion`:
 ## Implementation Notes
 
 - **Naive UI** adalah komponen utama — gunakan `GlobalThemeOverrides` untuk customisasi tema (`app/utils/naiveui-theme.ts`: primary `#0075de` / hover `#0069c4` / pressed `#005bab`, body `#f6f5f4`, kartu/modal/popover/tabel/input `#ffffff`, border `#e6e6e6`, radius 8/4, font Inter)
-- **Tailwind CSS** hanya untuk utility classes (spacing, display, flexbox) yang tidak tersedia di Naive UI
+- **Tailwind CSS v4 adalah pendekatan utama untuk CSS pada component** (intended direction 2026-09-13; CURRENT masih campuran — lihat Change Log):
+  - Gunakan utility classes inline di template sebagai default (`flex`, `grid`, `gap-*`, `p-*`, `text-*`, `bg-*`, arbitrary values untuk token kanonis seperti `bg-[#f6f5f4]`, `border-[#e6e6e6]`, `text-[#0075de]`).
+  - Praktik mengikuti skill `.opencode/skills/tailwind-base-practices`: konfigurasi CSS-first (`@theme`), **tanpa preflight** agar kompatibel Naive UI, hindari over-`@apply` (prefer inline utilities), hindari `!important`, hard-coded color di luar token dilarang.
+  - `<style scoped>` hanya untuk yang tidak bisa diungkapkan via utilities: override Naive UI via `:deep(...)` (contoh `DataTable.vue` header/cell chrome) dan selector kompleks/media query khusus.
+  - `app/assets/css/main.css` hanya mengimpor `tailwindcss/theme` + `tailwindcss/utilities` (tanpa preflight) + token `:root` + pola global (`modal-card`, transisi halaman, `prefers-reduced-motion`).
+  - Pola `.detail-view` (label → value) tetap berlaku sebagai API class kanonis untuk read detail; komponen baru sedapat mungkin mengimplementasikannya dengan utilities Tailwind tanpa mengubah class API.
 - Semua komponen harus dibungkus dengan `NConfigProvider`
 - Gunakan direct import per komponen, jangan global import
 - Gunakan `v-model:value` untuk form components
@@ -965,6 +970,11 @@ Baris navigasi di App Shell — status aktif memakai primary sebagai indikator:
 Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` sebagai bahasa visual kanonis untuk Task 27. Lokasi setelah Task 01: `apps/web/stories/foundation/` (PageShell 4 stories, DataTable 6 states + Refresh, AccessDeniedAlert single). `docs/wireframes|mockups|prototypes` dihapus Task 01. Diimplementasikan Task 27: PageShell untuk RBAC pages, DataTable kanonis 320/160 + Restart + error slot `NAlert` + `NIcon` + locale ID (`Cari...` `Semua Kolom` `Menampilkan` `Belum ada data` `Gagal memuat data` `Coba lagi`), AccessDeniedAlert single `data-testid=access-denied` floating 16px/448px 4000ms, sidebar 220/72 token #0075de/#005bab, motion `usePageTransition` 250ms + reduced-motion.
 
 ## Change Log
+
+### Tailwind-First Component CSS (2026-09-13)
+
+- Keputusan intended-direction: **Tailwind CSS v4 sebagai pendekatan utama untuk CSS pada component**; praktik mengikuti skill `.opencode/skills/tailwind-base-practices` (CSS-first `@theme`, tanpa preflight, hindari over-`@apply`).
+- CURRENT vs INTENDED: `AuthForm.vue`/`DataTable.vue`/layout sudah memakai utilities Tailwind; `PageShell.vue` dan pola `.detail-view` masih custom scoped CSS — migrasi bertahap, class API `.detail-view` tetap stabil. § Overview + § Implementation Notes diperbarui; token visual tidak berubah.
 
 ### Docs Tidy — Adopsi Notion Design (2026-09-13)
 
