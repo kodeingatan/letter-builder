@@ -38,7 +38,12 @@ The task must be consistent with the project's Permanent Knowledge.
 
 # 2. Understand Existing Tasks
 
-Inspect the existing `tasks/` directory.
+Inspect the existing `tasks/` directory (see `tasks/README.md` for the index).
+
+A task is EITHER a legacy flat file `tasks/NN-slug.md` OR a folder-mode task
+`tasks/NN-slug/` whose entrypoint is `README.md` (folder mode, opsi B — preferred
+for new tasks). When scanning, match BOTH `tasks/NN-*.md` files AND `tasks/NN-*/`
+folders (excluding `tasks/_template/`, `tasks/README.md`, `tasks/task-logs.md`).
 
 Determine:
 
@@ -67,11 +72,17 @@ Dibuat jika:
 - Feature memiliki antarmuka pengguna DAN belum memiliki `NN-feature-ui-design.md`, atau
 - User secara eksplisit meminta `design`, `wireframe`, `mockup`, `prototype`, `UI` terlebih dahulu.
 
-Filename:
+Filename (legacy flat mode — only for updating an existing flat task):
 
 ```text
 NN-feature-ui-design.md
 ```
+
+**Folder mode (opsi B — preferred for NEW tasks)**: create `tasks/NN-slug/` by
+copying `tasks/_template/` and filling per file (`README.md` entrypoint + `spec.md`
++ `flow-requirements.md` + `domain-api-ui.md` + `acceptance-tasks.md` +
+`verification.md`). Task identity in reports and `tasks/task-logs.md` is the
+entrypoint `tasks/NN-slug/README.md`.
 
 Contoh: `05-global-table-ui-design.md`, `07-component-ui-design.md`
 
@@ -84,7 +95,7 @@ Dibuat jika:
 - Feature murni backend tanpa UI (`UI: N/A`), atau
 - User meminta implementasi dan design sudah ada.
 
-Filename:
+Filename (legacy flat mode — only for updating an existing flat task):
 
 ```text
 NN-feature.md
@@ -116,12 +127,15 @@ New task (implementation with UI reference):
 tasks/04-user-management.md   # Depends on 03-users-ui-design.md
 ```
 
-Use:
+Use (legacy flat mode — new tasks SHOULD use folder mode instead):
 
 ```text
 NN-kebab-case-name.md              # implementation
 NN-kebab-case-name-ui-design.md    # UI design
 ```
+
+Folder mode (opsi B — preferred): `tasks/NN-kebab-case-name/` copied from
+`tasks/_template/`, identity = `tasks/NN-kebab-case-name/README.md`.
 
 ---
 
@@ -1006,7 +1020,7 @@ The output of this command is the SDD task specification + `tasks/task-logs.md` 
 After generating/updating the task, report:
 
 ```text
-Task: tasks/NN-task-name.md
+Task: tasks/NN-task-name.md            # folder mode: tasks/NN-slug/README.md
 
 Action:
 - CREATED (FASE 1 — UI Design)
@@ -1084,9 +1098,9 @@ This step is mandatory and is part of `/task` execution — do NOT skip it.
 
 ### 12.1 Rules
 
-1. If `tasks/task-logs.md` does not exist → CREATE it using the same template as `/gen-tasks` #24.2, listing all `tasks/NN-*.md` (excluding `task-logs.md` itself) dengan kolom Fase.
+1. If `tasks/task-logs.md` does not exist → CREATE it using the same template as `/gen-tasks` #24.2, listing all folder-mode entrypoints (`tasks/NN-slug/README.md`) AND legacy `tasks/NN-*.md` files (excluding `task-logs.md` itself) dengan kolom Fase.
 2. If it already exists → UPDATE it:
-   - add the current task (`tasks/NN-task-name.md`) if not yet listed dengan Fase yang benar,
+    - add the current task (`tasks/NN-task-name.md`; folder mode: `tasks/NN-slug/README.md`) if not yet listed dengan Fase yang benar,
    - preserve existing `[x]` states for already implemented/verified/reviewed items — never reset `[x]` to `[ ]`,
    - update `Last Updated` (`Date`, `By: /task`, `Source: $ARGUMENTS` summary),
    - update the `Overview` row and `Detail per Task` section for the current task (termasuk Depends on),
@@ -1103,5 +1117,5 @@ Before finishing `/task`, ensure:
 - [ ] `tasks/task-logs.md` exists
 - [ ] Current task is listed in Overview and Detail per Task dengan Fase
 - [ ] For FASE 2: `Depends on` menunjuk ke task FASE 1 yang benar
-- [ ] Current task status in `tasks/task-logs.md` matches its `## Status` in `tasks/NN-*.md`
+- [ ] Current task status in `tasks/task-logs.md` matches its `## Status` in `tasks/NN-*.md` (folder mode: `tasks/NN-slug/README.md`)
 - [ ] No existing `[x]` was reset

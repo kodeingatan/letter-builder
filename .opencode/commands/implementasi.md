@@ -35,11 +35,29 @@ Determine which task to implement.
 If `$ARGUMENTS` is:
 
 - a file path (e.g., `tasks/01-migrate-admin-panel-to-nuxt.md`) → use that file
+- a folder path (e.g., `tasks/01-migrate-admin-panel-to-nuxt/`) → use `README.md` inside it (folder mode, opsi B)
 - a task number (e.g., `01`) → find matching task in `tasks/`
 - a task name (e.g., `authentication`) → find matching task in `tasks/`
 - empty → list available tasks and ask the user to choose
 
-Read the identified task file completely.
+**Folder mode (opsi B) — task resolution**: a task is EITHER a legacy flat file
+`tasks/NN-slug.md` OR a folder `tasks/NN-slug/` whose entrypoint is `README.md`
+(status + reading order) with split files `spec.md`, `flow-requirements.md`,
+`domain-api-ui.md`, `acceptance-tasks.md`, `verification.md`. Resolution rules:
+
+1. If `$ARGUMENTS` is a folder → read `README.md` in it first, then the split
+   files needed for the implementation (`spec.md`, `flow-requirements.md`,
+   `domain-api-ui.md`, `acceptance-tasks.md`).
+2. If `$ARGUMENTS` is a number/name → match against BOTH `tasks/NN-*.md` files
+   AND `tasks/NN-*/` folders (folder wins if both exist for the same NN-slug).
+3. In folder mode, the `## Status` lives in `README.md`; `## Tasks` checklist
+   lives in `acceptance-tasks.md`; Test Plan + Verification live in
+   `acceptance-tasks.md` / `verification.md`. Marking task DONE = update
+   `README.md` `## Status`.
+4. When reporting paths (Final Response #12, Task Logs #13), use the folder
+   entrypoint `tasks/NN-slug/README.md` for folder-mode tasks.
+
+Read the identified task file(s) completely.
 
 ---
 
@@ -447,7 +465,7 @@ After implementation, return:
 ```text
 Implementation Complete
 
-Task: tasks/NN-task-name.md
+Task: tasks/NN-task-name.md            # folder mode: tasks/NN-slug/README.md
 
 Files Created:
 - path/to/file1.ts
@@ -464,7 +482,7 @@ Status: Ready for verification
 
 Next Step:
 
-/verify tasks/NN-task-name.md
+/verify tasks/NN-task-name.md          # folder mode: /verify tasks/NN-slug/README.md
 ```
 
 ---
@@ -478,7 +496,7 @@ This step is mandatory — do NOT skip it.
 ### 13.1 Rules
 
 1. Read `tasks/task-logs.md`. If it does not exist → CREATE it using the template in `/gen-tasks` #23.2, then mark the current task as implemented.
-2. Update ONLY the implementation tracking for the current task (`tasks/NN-task-name.md`):
+2. Update ONLY the implementation tracking for the current task (`tasks/NN-task-name.md`; folder mode: `tasks/NN-slug/README.md`):
    - Overview table: set `Implemented` column to `[x]` for this task row.
    - Move entry from `## Belum Implementasi` (`- [ ] tasks/NN-...`) to `## Sudah Implementasi` (`- [x] tasks/NN-... — {Task Name} — {date} by /implement`).
    - Detail per Task section: set `Implemented: [x] {date} by /implement — {short notes: files created/modified}`.

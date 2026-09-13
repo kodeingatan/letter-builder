@@ -1498,8 +1498,10 @@ Serta catat di `## UI > Penyesuaian dari design` (FASE 2) jika ada deviasi dari 
 This command may:
 
 ```text
-create/update tasks/*.md
+create/update tasks/NN-slug/ folders (folder mode, opsi B — preferred: README.md + spec.md + flow-requirements.md + domain-api-ui.md + acceptance-tasks.md + verification.md, copied from tasks/_template/)
+update legacy tasks/*.md (only when updating an existing flat task)
 create/update tasks/task-logs.md
+create/update tasks/README.md (index)
 ```
 
 It MUST NOT:
@@ -1534,13 +1536,13 @@ Tasks:
 NN tasks generated (X design + Y implementation)
 
 Created (FASE 1 — UI Design):
-- tasks/01-xxx-ui-design.md
-- tasks/03-yyy-ui-design.md
+- tasks/01-xxx-ui-design/README.md
+- tasks/03-yyy-ui-design/README.md
 ...
 
 Created (FASE 2 — Implementation):
-- tasks/02-xxx.md (depends on 01)
-- tasks/04-yyy.md (depends on 03)
+- tasks/02-xxx/README.md (depends on 01)
+- tasks/04-yyy/README.md (depends on 03)
 ...
 
 Updated:
@@ -1619,7 +1621,7 @@ This step is mandatory and is part of `/gen-tasks` execution — do NOT skip it.
 
 ### 24.1 Rules
 
-1. Scan all `tasks/NN-*.md` files (excluding `tasks/task-logs.md` itself).
+1. Scan all folder-mode entrypoints `tasks/NN-slug/README.md` AND legacy `tasks/NN-*.md` files (excluding `tasks/task-logs.md`, `tasks/README.md`, `tasks/_template/` itself).
 2. If `tasks/task-logs.md` does not exist → CREATE it using the template in 24.2.
 3. If it already exists → UPDATE it:
    - preserve existing checklist states `[x]` for already implemented/verified/reviewed items,
@@ -1648,13 +1650,13 @@ This step is mandatory and is part of `/gen-tasks` execution — do NOT skip it.
 
 | Task File | Fase | Status | Implemented | Verified | Reviewed |
 | --------- | ---- | ------ | ----------- | -------- | -------- |
-| tasks/01-xxx-ui-design.md | FASE 1 — Design | TODO | [ ] | [ ] | [ ] |
-| tasks/02-xxx.md | FASE 2 — Impl | TODO | [ ] | [ ] | [ ] |
+| tasks/01-xxx-ui-design/README.md | FASE 1 — Design | TODO | [ ] | [ ] | [ ] |
+| tasks/02-xxx/README.md | FASE 2 — Impl | TODO | [ ] | [ ] | [ ] |
 
 ## Belum Implementasi
 
-- [ ] tasks/01-xxx-ui-design.md — {Task Name} (FASE 1)
-- [ ] tasks/02-xxx.md — {Task Name} (FASE 2)
+- [ ] tasks/01-xxx-ui-design/README.md — {Task Name} (FASE 1)
+- [ ] tasks/02-xxx/README.md — {Task Name} (FASE 2)
 
 ## Sudah Implementasi
 
@@ -1662,8 +1664,8 @@ This step is mandatory and is part of `/gen-tasks` execution — do NOT skip it.
 
 ## Belum Diverifikasi
 
-- [ ] tasks/01-xxx-ui-design.md — {Task Name}
-- [ ] tasks/02-xxx.md — {Task Name}
+- [ ] tasks/01-xxx-ui-design/README.md — {Task Name}
+- [ ] tasks/02-xxx/README.md — {Task Name}
 
 ## Sudah Diverifikasi
 
@@ -1671,8 +1673,8 @@ This step is mandatory and is part of `/gen-tasks` execution — do NOT skip it.
 
 ## Belum Direview
 
-- [ ] tasks/01-xxx-ui-design.md — {Task Name}
-- [ ] tasks/02-xxx.md — {Task Name}
+- [ ] tasks/01-xxx-ui-design/README.md — {Task Name}
+- [ ] tasks/02-xxx/README.md — {Task Name}
 
 ## Sudah Direview
 
@@ -1680,7 +1682,7 @@ This step is mandatory and is part of `/gen-tasks` execution — do NOT skip it.
 
 ## Detail per Task
 
-### tasks/01-xxx-ui-design.md
+### tasks/01-xxx-ui-design/README.md
 
 - Fase: FASE 1 — UI Design
 - Status: TODO
@@ -1690,11 +1692,11 @@ This step is mandatory and is part of `/gen-tasks` execution — do NOT skip it.
 - Reviewed: [ ] —
 - Notes: Wireframe/Mockup/Prototype untuk {Feature}.
 
-### tasks/02-xxx.md
+### tasks/02-xxx/README.md
 
 - Fase: FASE 2 — Implementation
 - Status: TODO
-- Depends on: tasks/01-xxx-ui-design.md
+- Depends on: tasks/01-xxx-ui-design/README.md
 - Implemented: [ ] —
 - Verified: [ ] —
 - Reviewed: [ ] —
@@ -1706,7 +1708,7 @@ This step is mandatory and is part of `/gen-tasks` execution — do NOT skip it.
 Before finishing `/gen-tasks`, ensure:
 
 - [ ] `tasks/task-logs.md` exists
-- [ ] Every `tasks/NN-*.md` is listed in Overview and Detail per Task dengan Fase
+- [ ] Every folder-mode `tasks/NN-slug/README.md` (and any legacy `tasks/NN-*.md`) is listed in Overview and Detail per Task dengan Fase
 - [ ] Every new task appears under Belum Implementasi / Belum Diverifikasi / Belum Direview with `[ ]`
 - [ ] Existing `[x]` states are not reset to `[ ]`
 - [ ] Dependency FASE 1 → FASE 2 tercatat di Detail per Task
