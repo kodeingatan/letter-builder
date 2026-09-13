@@ -47,14 +47,14 @@ function handleBreadcrumbClick(e: MouseEvent, href?: string) {
 
 <style scoped>
 .page-shell {
-  border: 1px solid #E5E7EB;
-  border-radius: 8px;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
   background: #fff;
   overflow: hidden;
 }
 .page-shell-head {
   padding: 16px 20px;
-  border-bottom: 1px solid #F3F4F6;
+  border-bottom: 1px solid #e6e6e6;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -68,13 +68,14 @@ function handleBreadcrumbClick(e: MouseEvent, href?: string) {
 .page-title {
   font-size: 20px;
   font-weight: 600;
+  letter-spacing: -0.125px;
   line-height: 28px;
   margin-top: 4px;
-  color: #1F2937;
+  color: #000000;
 }
 .page-subtitle {
   font-size: 12px;
-  color: #6B7280;
+  color: #615d59;
   margin-top: 2px;
   line-height: 16px;
 }
@@ -85,7 +86,7 @@ function handleBreadcrumbClick(e: MouseEvent, href?: string) {
   flex-wrap: wrap;
 }
 .page-body {
-  padding: 20px;
+  padding: 24px;
 }
 @media (max-width: 768px) {
   .page-shell-head {

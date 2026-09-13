@@ -7,9 +7,9 @@
 
 ## Last Updated
 
-- Date: 2026-09-12
+- Date: 2026-09-13
 - By: /review
-- Source: Task 02 — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — REVIEWED APPROVED
+- Source: tasks/03-redesign-ui-design/README.md — REVIEW APPROVED (5/5 fixes verified, 118 tests)
 
 ## Overview
 
@@ -17,6 +17,7 @@
 | --------- | ---- | ------ | ----------- | -------- | -------- |
 | tasks/01-platform-scope-reduction/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
 | tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
+| tasks/03-redesign-ui-design/README.md | FASE 1 — UI Design | DONE | [x] | [x] | [x] |
 
 ## Belum Implementasi
 
@@ -26,6 +27,7 @@
 
 - [x] tasks/01-platform-scope-reduction/README.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh) (FASE 2 — Implementation)
 - [x] tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) (FASE 2 — Implementation) — 2026-09-12 by /implement
+- [x] tasks/03-redesign-ui-design/README.md — Redesign UI/UX Notion-Calm (FASE 1 — UI Design) — 2026-09-13 by /implement
 
 ## Belum Diverifikasi
 
@@ -35,12 +37,15 @@
 
 - [x] tasks/01-platform-scope-reduction/README.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh)
 - [x] tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — 2026-09-12 by /verify — PASS
+- [x] tasks/03-redesign-ui-design/README.md — Redesign UI/UX Notion-Calm (FASE 1 — UI Design) — 2026-09-13 by /verify — PASS
 
 ## Belum Direview
 
 - (none)
 
 ## Sudah Direview
+
+- [x] tasks/03-redesign-ui-design/README.md — Redesign UI/UX Notion-Calm (FASE 1 — UI Design) — 2026-09-13 by /review — APPROVED
 
 - [x] tasks/01-platform-scope-reduction/README.md — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh)
 - [x] tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) — 2026-09-12 by /review — APPROVED
@@ -66,4 +71,14 @@
 - Verified: [x] — 2026-09-12 by /verify — PASS: User Flow 10/10, AC 9/9, FR 10/10, BR 5/5, EC 8/8 traceable; `test:unit` 13 files 82 passed, `test:nuxt` 8 files 36 passed, `test` 21 files 118 passed, `vue-tsc` 0 error, `npm run build` 0 B6005/0 ENOENT (17.5MB), `.nuxt/imports.d.ts:56-61` 6 stores, `dev/index.mjs` 0 render-guard, `GET /api/health` 200 healthy without renderer (E2E health 3 passed), `grep render-guard` 0 hit server (except removed tag now 0), `nul` deleted, `GET /api/global-tables` etc 10/10 pass 404, `imports` & `health` file contracts PASS; E2E crud page tests skipped (missing chromium_headless_shell — infra, not code — per ERR-04/EC-06), Storybook binary missing but `stories/foundation` 3 files no deleted-store imports, `storybook-static` exists.
 - Reviewed: [x] — 2026-09-12 by /review — APPROVED: Architecture User Flow 10/10, AC 9/9, FR 10/10, BR 5/5, EC 8/8 traceable; code quality high (security-limits comment precise, health RBAC-Only, 6-store import clean); tests 118/118 PASS + E2E health 3 + negative 10 PASS, DataTable duplicate empty fixed (single Belum ada data via slot #empty), build 0 B6005/0 ENOENT 17.5MB, vue-tsc 0 error; 0 critical, 2 minor infra (playwright browser/storybook binary missing) not blocking.
 - Notes: Build recovery pasca Task 01 — `NUXT_B6005` 9× store terhapus (administrations/components/documents/global-table-columns/globalTables/navigation/runs/tableData/templates) + Nitro `ENOENT server/utils/render-guard (imported by health)` double-slash. Root cause: cache `.nuxt/.output/node_modules/.vite` stale + komentar `security-limits.ts:10` menyebut file terhapus sebagai path aktif. Fix: `rm -rf .nuxt .output node_modules/.vite && npx nuxt prepare`, koreksi komentar `security-limits.ts:1-11` menjadi `removed in Task 01` (now 0 hit), verifikasi `server/api/health/index.get.ts:1-6` tanpa import render-guard, `nuxt.config.ts:9-12` `imports.dirs:['stores']` scan 6 file, `GET /api/health` healthy (preview 200 + E2E 3 tests), build 0 warning (build.log). User follow-up duplicate NEmpty fixed in `DataTable.vue:233-248` via slot. Task logs: 2026-09-12 /review APPROVED.
+
+### tasks/03-redesign-ui-design/README.md
+
+- Fase: FASE 1 — UI Design
+- Status: DONE
+- Depends on: — (FASE 1 pertama untuk redesign; mengacu `docs/design-system.md` Notion-calm + `docs/PRD.md` + `docs/architecture.md` + stories `foundation/` baseline)
+- Implemented: [x] — 2026-09-13 by /implement — Komponen baru (BadgePill, EmptyStateCard, DashboardHero) + refine (auth layout/card, pill CTA, PageShell, DataTable, sidebar, UserFormModal modal-card) + 8 stories redesign + 6 wireframe SVG + build/test PASS (82/36)
+- Verified: [x] — 2026-09-13 by /verify — PASS: User Flow 11/11, AC-D01..05 5/5, 5/5 review fixes, vue-tsc 0 error, test:unit 82/82, test:nuxt 36/36, build 15.8MB, build-storybook sukses (8 Redesign/*)
+- Reviewed: [x] — 2026-09-13 by /review — APPROVED: 5/5 fixes verified in files (provider, selector, icon, prop, a11y claim), 118/118 tests re-run PASS, User Flow 11/11 + AC-D01..05, 8 stories + 6 wireframes, no security/regression issues; 2 considers (manual click headless, E2E/audit penuh FASE 2)
+- Notes: Redesign menyeluruh 11 halaman mengikuti docs terbaru (Notion-calm) — wireframe/mockup/Storybook `stories/redesign/`. FASE 2 (`tasks/04-redesign.md`) dibuat setelah design DONE.
 

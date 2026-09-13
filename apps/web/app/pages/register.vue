@@ -126,6 +126,7 @@ async function handleRegister() {
         <NButton
           type="primary"
           block
+          round
           :loading="authStore.loading"
           attr-type="submit"
           class="mt-2"

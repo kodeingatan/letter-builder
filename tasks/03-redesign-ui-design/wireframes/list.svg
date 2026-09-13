@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="Inter, sans-serif">
+  <rect width="1280" height="800" fill="#f6f5f4"/>
+  <text x="40" y="50" font-size="28" font-weight="700">Wireframe — List (users/roles/permissions/guards) — Desktop 1280</text>
+  <rect x="40" y="80" width="220" height="680" rx="12" fill="#fff" stroke="#e6e6e6"/>
+  <text x="60" y="120" font-size="14">Sidebar 220/72</text>
+  <!-- PageShell -->
+  <rect x="280" y="80" width="960" height="680" rx="12" fill="#fff" stroke="#e6e6e6"/>
+  <text x="310" y="115" font-size="13" fill="#0075de">Dashboard / User</text>
+  <text x="310" y="150" font-size="20" font-weight="600">User</text>
+  <rect x="1080" y="120" width="130" height="40" rx="20" fill="#0075de"/>
+  <text x="1145" y="145" font-size="14" font-weight="500" fill="#fff" text-anchor="middle">+ Buat</text>
+  <!-- toolbar -->
+  <rect x="310" y="180" width="320" height="36" rx="4" fill="#fff" stroke="#e6e6e6"/>
+  <rect x="640" y="180" width="160" height="36" rx="4" fill="#fff" stroke="#e6e6e6"/>
+  <circle cx="830" cy="198" r="16" fill="#fff" stroke="#e6e6e6"/>
+  <circle cx="870" cy="198" r="16" fill="#fff" stroke="#e6e6e6"/>
+  <!-- table -->
+  <rect x="310" y="230" width="900" height="40" fill="#f6f5f4"/>
+  <text x="322" y="255" font-size="12" font-weight="600">USERNAME ⇅ㅣPERANㅣEMAIL</text>
+  <rect x="310" y="270" width="900" height="300" fill="#fff" stroke="#e6e6e6"/>
+  <text x="322" y="300" font-size="14">adminㅣ[Super Admin pill]ㅣadmin@…</text>
+  <text x="322" y="540" font-size="14" fill="#615d59">Menampilkan 1-2 dari 2</text>
+  <text x="40" y="790" font-size="13" fill="#615d59">Tablet: kolom hide via visibility toggle, toolbar wrap. Mobile: scroll-x, modal full-width.</text>
+</svg>

@@ -73,7 +73,7 @@ async function handleLogin() {
           />
         </NFormItem>
 
-        <NButton type="primary" block :loading="authStore.loading" attr-type="submit" class="mt-2">
+        <NButton type="primary" block round :loading="authStore.loading" attr-type="submit" class="mt-2">
           <template #icon>
             <NIcon aria-hidden="true"><Login /></NIcon>
           </template>

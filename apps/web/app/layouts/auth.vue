@@ -44,7 +44,13 @@ const imageStyle = computed(() => {
     <!-- Form Panel -->
     <div class="auth-form">
       <div class="auth-form__inner">
-        <slot />
+        <div class="auth-form__header">
+          <h1 class="auth-form__title">{{ title }}</h1>
+          <p v-if="subtitle" class="auth-form__subtitle">{{ subtitle }}</p>
+        </div>
+        <div class="auth-form__card">
+          <slot />
+        </div>
       </div>
     </div>
   </div>
@@ -99,6 +105,7 @@ const imageStyle = computed(() => {
 .auth-image__title {
   font-size: 2rem;
   font-weight: 700;
+  letter-spacing: -1px;
   margin-bottom: 0.5rem;
 }
 
@@ -121,12 +128,39 @@ const imageStyle = computed(() => {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: #F9FAFB;
+  background: #f6f5f4;
 }
 
 .auth-form__inner {
   width: 100%;
   max-width: 400px;
+}
+
+.auth-form__header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.auth-form__title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.125px;
+  color: #000000;
+  margin: 0 0 4px;
+}
+
+.auth-form__subtitle {
+  font-size: 14px;
+  color: #615d59;
+  margin: 0;
+}
+
+.auth-form__card {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  padding: 24px;
 }
 
 /* Responsive */

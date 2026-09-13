@@ -310,6 +310,28 @@ function handleDropdownSelect(key: string) {
 }
 
 .user-menu:hover {
-  background-color: #f3f4f6;
+  background-color: #f6f5f4;
+}
+
+/* App-Shell Row pattern (Notion): active row = primary indicator bar + soft tint.
+   Naive UI menandai item aktif dengan .n-menu-item-content--selected. */
+:deep(.n-menu-item-content--selected) {
+  background-color: #e8f2fd !important;
+  border-radius: 5px;
+  position: relative;
+}
+:deep(.n-menu-item-content--selected::before) {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  border-radius: 9999px;
+  background-color: #0075de;
+}
+:deep(.n-menu-item) {
+  border-radius: 5px;
+  margin: 1px 8px;
 }
 </style>

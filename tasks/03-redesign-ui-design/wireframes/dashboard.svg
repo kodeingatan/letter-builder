@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" font-family="Inter, sans-serif">
+  <rect width="1280" height="800" fill="#f6f5f4"/>
+  <text x="40" y="50" font-size="28" font-weight="700">Wireframe — Dashboard — Desktop 1280</text>
+  <!-- sidebar -->
+  <rect x="40" y="80" width="220" height="680" rx="12" fill="#fff" stroke="#e6e6e6"/>
+  <rect x="48" y="100" width="204" height="40" rx="5" fill="#e8f2fd"/>
+  <rect x="48" y="100" width="3" height="24" y2="0" rx="2" fill="#0075de"/>
+  <text x="70" y="126" font-size="14">▮ Dashboard (aktif)</text>
+  <text x="60" y="170" font-size="14">User Mgmt ▸</text>
+  <text x="60" y="200" font-size="14">Sistem ▸</text>
+  <!-- hero band -->
+  <rect x="280" y="80" width="960" height="220" rx="16" fill="#213183"/>
+  <text x="320" y="150" font-size="12" font-weight="600" fill="#fff" opacity="0.75">L E T T E R  B U I L D E R</text>
+  <text x="320" y="195" font-size="40" font-weight="700" fill="#fff">Selamat Datang Kembali</text>
+  <text x="320" y="225" font-size="16" fill="#fff" opacity="0.85">Kelola RBAC dari satu tempat yang tenang.</text>
+  <circle cx="1150" cy="140" r="20" fill="#62aef0" opacity="0.8"/>
+  <rect x="1100" y="200" width="40" height="40" rx="12" fill="#d6b6f6" opacity="0.8"/>
+  <!-- stat cards -->
+  <rect x="280" y="320" width="225" height="120" rx="12" fill="#fff" stroke="#e6e6e6"/>
+  <rect x="520" y="320" width="225" height="120" rx="12" fill="#fff" stroke="#e6e6e6"/>
+  <rect x="760" y="320" width="225" height="120" rx="12" fill="#fff" stroke="#e6e6e6"/>
+  <rect x="1000" y="320" width="240" height="120" rx="12" fill="#fff" stroke="#e6e6e6"/>
+  <text x="300" y="360" font-size="12" fill="#615d59">TOTAL USERS</text>
+  <text x="300" y="400" font-size="26" font-weight="700">128</text>
+  <!-- recent -->
+  <rect x="280" y="460" width="960" height="300" rx="12" fill="#fff" stroke="#e6e6e6"/>
+  <text x="310" y="500" font-size="20" font-weight="600">Profil + Akses Cepat</text>
+  <text x="40" y="790" font-size="13" fill="#615d59">Tablet: sidebar 72 icon-only. Mobile: drawer + hero stack + NGrid 1 kolom.</text>
+</svg>

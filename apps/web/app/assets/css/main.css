@@ -17,6 +17,14 @@
   --info: #0EA5E9;
 }
 
+/* ModalCard pattern (Notion): kartu dialog xl16 + Level-2 + hairline.
+   Pakai bersama NModal preset="card": <NModal class="max-w-lg modal-card" ...> */
+.n-modal.modal-card .n-card {
+  border-radius: 16px;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 23px 52px rgba(0, 0, 0, 0.05);
+}
+
 * {
   margin: 0;
   padding: 0;

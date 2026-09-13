@@ -9,6 +9,7 @@
 |------|--------|--------|-------------|----------|----------|
 | Task 01 — Platform Scope Reduction (RBAC-Only Cleanup & Docs Refresh) | `01-platform-scope-reduction/` | DONE | [x] | [x] | [x] |
 | Task 02 — Fix Stale Nuxt Auto-Imports & Missing render-guard (Build Recovery) | `02-fix-stale-nuxt-imports-and-render-guard/` | DONE | [x] | [x] | [x] |
+| Task 03 — Redesign UI/UX Notion-Calm (Wireframe / Mockup / Prototype) | `03-redesign-ui-design/` | TODO | [ ] | [ ] | [ ] |
 
 ## Struktur tiap folder task
 

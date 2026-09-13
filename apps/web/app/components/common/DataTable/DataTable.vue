@@ -147,7 +147,7 @@ function resetFilters() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-4 datatable-notion">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div class="flex flex-wrap items-center gap-3 flex-1 min-w-[320px]">
         <NInput
@@ -253,3 +253,17 @@ function resetFilters() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.datatable-notion :deep(.n-data-table-th) {
+  background-color: #f6f5f4;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.125px;
+  text-transform: uppercase;
+}
+.datatable-notion :deep(.n-data-table-td) {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e6e6e6;
+}
+</style>
