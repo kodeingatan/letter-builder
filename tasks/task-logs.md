@@ -8,8 +8,8 @@
 ## Last Updated
 
 - Date: 2026-09-13
-- By: /review
-- Source: tasks/03-redesign-ui-design/README.md — REVIEW APPROVED (5/5 fixes verified, 118 tests)
+- By: /task
+- Source: Redesign implementasi mengacu stories approved Task 03 — FASE 2 dibuat (tasks/04-redesign)
 
 ## Overview
 
@@ -18,10 +18,11 @@
 | tasks/01-platform-scope-reduction/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
 | tasks/02-fix-stale-nuxt-imports-and-render-guard/README.md | FASE 2 — Implementation | DONE | [x] | [x] | [x] |
 | tasks/03-redesign-ui-design/README.md | FASE 1 — UI Design | DONE | [x] | [x] | [x] |
+| tasks/04-redesign/README.md | FASE 2 — Implementation | TODO | [ ] | [ ] | [ ] |
 
 ## Belum Implementasi
 
-- (none)
+- [ ] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman) (FASE 2 — Implementation)
 
 ## Sudah Implementasi
 
@@ -31,7 +32,7 @@
 
 ## Belum Diverifikasi
 
-- (none)
+- [ ] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman)
 
 ## Sudah Diverifikasi
 
@@ -41,7 +42,7 @@
 
 ## Belum Direview
 
-- (none)
+- [ ] tasks/04-redesign/README.md — Redesign Implementation (Notion-Calm ke 11 Halaman)
 
 ## Sudah Direview
 
@@ -80,5 +81,15 @@
 - Implemented: [x] — 2026-09-13 by /implement — Komponen baru (BadgePill, EmptyStateCard, DashboardHero) + refine (auth layout/card, pill CTA, PageShell, DataTable, sidebar, UserFormModal modal-card) + 8 stories redesign + 6 wireframe SVG + build/test PASS (82/36)
 - Verified: [x] — 2026-09-13 by /verify — PASS: User Flow 11/11, AC-D01..05 5/5, 5/5 review fixes, vue-tsc 0 error, test:unit 82/82, test:nuxt 36/36, build 15.8MB, build-storybook sukses (8 Redesign/*)
 - Reviewed: [x] — 2026-09-13 by /review — APPROVED: 5/5 fixes verified in files (provider, selector, icon, prop, a11y claim), 118/118 tests re-run PASS, User Flow 11/11 + AC-D01..05, 8 stories + 6 wireframes, no security/regression issues; 2 considers (manual click headless, E2E/audit penuh FASE 2)
-- Notes: Redesign menyeluruh 11 halaman mengikuti docs terbaru (Notion-calm) — wireframe/mockup/Storybook `stories/redesign/`. FASE 2 (`tasks/04-redesign.md`) dibuat setelah design DONE.
+- Notes: Redesign menyeluruh 11 halaman mengikuti docs terbaru (Notion-calm) — wireframe/mockup/Storybook `stories/redesign/`. FASE 2 (`tasks/04-redesign/README.md`) dibuat 2026-09-13 via /task.
+
+### tasks/04-redesign/README.md
+
+- Fase: FASE 2 — Implementation
+- Status: TODO
+- Depends on: tasks/03-redesign-ui-design/README.md (DONE + APPROVED — acuan pixel-perfect: 8 stories + 6 wireframes)
+- Implemented: [ ] —
+- Verified: [ ] —
+- Reviewed: [ ] —
+- Notes: Wiring prototype approved ke 11 halaman (DashboardHero, BadgePill, EmptyStateCard, ModalCard rollout, auth final) + tests UT/NT/E2E. Tanpa perubahan API/DB/RBAC.
 
