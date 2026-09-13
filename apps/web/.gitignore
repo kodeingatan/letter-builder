@@ -16,6 +16,16 @@ node_modules
 logs
 *.log
 
+# SQLite dev database (seeded automatically on server start)
+db.sqlite
+db.sqlite-*
+
+# Test artifacts (vitest/playwright outputs, failure videos)
+test-results/
+playwright-report/
+blob-report/
+coverage/
+
 # Misc
 .DS_Store
 .fleet
