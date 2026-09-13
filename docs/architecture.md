@@ -94,7 +94,8 @@ Single Nuxt 4 package:
 │   │   │   ├── guards.vue        → /dashboard/guards
 │   │   │   ├── activity-logs.vue → /dashboard/activity-logs
 │   │   │   ├── system-logs.vue   → /dashboard/system-logs
-│   │   │   └── settings.vue      → /dashboard/settings
+│   │   │   ├── settings.vue      → /dashboard/settings
+│   │   │   └── profile.vue       → /dashboard/profile
 │   │   └── [...slug].vue         # Catch-all (optional)
 │   │
 │   ├── plugins/                  # Nuxt plugins
@@ -248,6 +249,8 @@ Single Nuxt 4 package:
 
 ## Routing
 
+> Ringkasan sudut pandang produk: `docs/PRD.md` §20 Client Routes.
+
 ### File-Based Routing (Nuxt Pages)
 
 | File | Route | Auth | Description |
@@ -262,13 +265,14 @@ Single Nuxt 4 package:
 | `app/pages/dashboard/activity-logs.vue` | `/dashboard/activity-logs` | Required | Activity logs viewer |
 | `app/pages/dashboard/system-logs.vue` | `/dashboard/system-logs` | Required | System logs viewer |
 | `app/pages/dashboard/settings.vue` | `/dashboard/settings` | Required | Application settings |
+| `app/pages/dashboard/profile.vue` | `/dashboard/profile` | Required (self) | Profile + change password |
 
 ### Route Middleware
 
 - `auth` — Requires valid JWT token, redirects to `/login` if missing
 - `guest` — Redirects to `/dashboard` if already authenticated
 
-### Sidebar Menu (AppLayout — RBAC-Only 220/72, token #3B82F6 — Task 01)
+### Sidebar Menu (AppLayout — RBAC-Only 220/72, token #0075de — Task 01, Notion 2026-09-13)
 
 ```
 Dashboard                    → /dashboard
@@ -282,11 +286,13 @@ Sistem (group)
     ├── System Logs          → /dashboard/system-logs
     └── Settings             → /dashboard/settings
 ```
-Layout: `NLayoutSider :width 220 :collapsed-width 72`, collapsed-icon-size 22, bg #F9FAFB border #E5E7EB, active bg #EFF6FF border #BFDBFE text #1D4ED8, `h(NIcon)` wrapper, menu label `<a href>` preserve native right-click. Tidak ada group `Data`/`Persuratan`/`Dokumen` (dihapus Task 01).
+Layout: `NLayoutSider :width 220 :collapsed-width 72`, collapsed-icon-size 22, bg #FFFFFF border #e6e6e6, active bg #e8f2fd border #0075de text #005bab, `h(NIcon)` wrapper, menu label `<a href>` preserve native right-click. Tidak ada group `Data`/`Persuratan`/`Dokumen` (dihapus Task 01).
 
 ---
 
 ## API Endpoints
+
+> Ringkasan sudut pandang produk: `docs/PRD.md` §19 API Endpoints.
 
 ### Auth
 
@@ -532,6 +538,8 @@ Layout: `NLayoutSider :width 220 :collapsed-width 72`, collapsed-icon-size 22, b
 
 ## RBAC System
 
+> Alur otorisasi sudut pandang produk: `docs/PRD.md` §18 Alur Authorization, §23 Client-Side Authorization.
+
 ### Server-Side Guards (Nitro Middleware)
 
 RBAC is enforced via Nitro route middleware and utility functions:
@@ -742,3 +750,16 @@ Reusable component untuk semua halaman tabel (Users, Roles, Permissions, Guards)
 **Path**: `app/composables/useDataTable.ts`
 
 Manages table state (search, sort, column visibility). Used by DataTable component internally.
+
+---
+
+## Change Log
+
+### Docs Tidy — Adopsi Notion Design (2026-09-13)
+
+- Sidebar + Table Browse mengikuti token Notion (`#0075de`, hairline `#e6e6e6`, header eyebrow). Detail: `docs/design-system.md`.
+
+### Docs Tidy — Penyelarasan dengan PRD (2026-09-13)
+
+- Routing + project structure: tambah `/dashboard/profile` (`app/pages/dashboard/profile.vue`) yang sebelumnya hanya ada di PRD — kini selaras `docs/PRD.md` §20.
+- Cross-reference dua arah dengan PRD (§ Routing, API Endpoints, RBAC System) agar ringkasan produk vs detail teknis tidak drift.

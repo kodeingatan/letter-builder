@@ -252,19 +252,29 @@ Tabel untuk menyimpan URL patterns yang diizinkan oleh permission.
 
 ## Seed Data
 
+> Sumber kebenaran: `apps/web/server/services/seeder.service.ts` (idempotent — hanya seed bila belum ada). Ringkasan produk: `docs/PRD.md` §22.
+
 ### Users
 
-| id | firstName | lastName | username | email | password (bcrypt) |
-|----|-----------|----------|----------|-------|-------------------|
-| 1 | Super | Admin | admin | admin@admin.com | `$2b$10$...` (P455w0rd!!!) |
+| id | firstName | lastName | username | email | password (bcrypt) | roles |
+|----|-----------|----------|----------|-------|-------------------|-------|
+| 1 | Super | Admin | admin | admin@admin.com | `$2b$10$...` (P455w0rd!!!) | Super Admin |
+| 2 | John | Editor | editor | editor@example.com | `$2b$10$...` (P455w0rd!!!) | Editor |
+| 3 | Jane | Viewer | viewer | viewer@example.com | `$2b$10$...` (P455w0rd!!!) | Viewer |
+| 4 | Bob | Manager | manager | manager@example.com | `$2b$10$...` (P455w0rd!!!) | Manager |
+| 5 | Alice | Guest | guest | guest@example.com | `$2b$10$...` (P455w0rd!!!) | Guest |
 
 ### Roles
 
-| id | roleName | description |
-|----|----------|-------------|
-| 1 | Super Admin | Akses penuh ke semua fitur |
-| 2 | Admin | Akses admin terbatas |
-| 3 | User | Akses dasar untuk user biasa |
+| id | roleName | description | guards | permissions |
+|----|----------|-------------|--------|-------------|
+| 1 | Super Admin | Akses penuh ke semua fitur | Full Access | Full Access, Activity Logs, System Logs |
+| 2 | Admin | Akses admin terbatas | Web Access | Read Write |
+| 3 | User | Akses dasar untuk user biasa | API Only | Read Only |
+| 4 | Editor | Akses edit user dan content | API Only | Read Write, User Management |
+| 5 | Viewer | Hanya melihat data | Read Only Guard | Read Only, Dashboard Read |
+| 6 | Manager | Akses management user dan role | Web Access, User Management Guard | Read Write, User Management, Role Management |
+| 7 | Guest | Akses terbatas hanya dashboard | Dashboard Only | Dashboard Read |
 
 ### Guards
 
@@ -273,20 +283,36 @@ Tabel untuk menyimpan URL patterns yang diizinkan oleh permission.
 | 1 | Full Access | Izinkan semua URL |
 | 2 | Web Access | Hanya akses API, tolak admin routes |
 | 3 | API Only | Hanya akses API endpoints |
+| 4 | Admin Only | Hanya akses admin dan user management |
+| 5 | Read Only Guard | Akses baca saja, tolak user dan role management |
+| 6 | User Management Guard | Hanya akses user management |
+| 7 | Role Management Guard | Hanya akses role management |
+| 8 | Dashboard Only | Hanya akses profile, tolak semua management |
 
 ### Permissions
 
-| id | permissionName | description |
-|----|----------------|-------------|
-| 1 | Full Access | Izinkan semua method dan URL |
-| 2 | Read Only | Hanya izinkan GET dan OPTIONS |
-| 3 | Read Write | Izinkan semua method CRUD |
+| id | permissionName | description | methods | urls |
+|----|----------------|-------------|---------|------|
+| 1 | Full Access | Izinkan semua method dan URL | * | /* |
+| 2 | Read Only | Hanya izinkan GET dan OPTIONS | GET, OPTIONS | /* |
+| 3 | Read Write | Izinkan semua method CRUD | GET, POST, PUT, DELETE, PATCH, OPTIONS | /* |
+| 4 | User Management | Izinkan CRUD user | GET, POST, PUT, DELETE | /api/users/* |
+| 5 | Role Management | Izinkan CRUD role | GET, POST, PUT, DELETE | /api/roles/* |
+| 6 | Guard Management | Izinkan CRUD guard | GET, POST, PUT, DELETE | /api/guards/* |
+| 7 | Permission Management | Izinkan CRUD permission | GET, POST, PUT, DELETE | /api/permissions/* |
+| 8 | Dashboard Read | Hanya baca profile | GET | /api/auth/profile |
+| 9 | Activity Logs | Akses melihat activity logs | GET | /api/activity-logs/* |
+| 10 | System Logs | Akses melihat system logs | GET | /api/system-logs/* |
 
 ### Junction: users_roles
 
 | userId | roleId |
 |--------|--------|
 | 1 | 1 |
+| 2 | 4 |
+| 3 | 5 |
+| 4 | 6 |
+| 5 | 7 |
 
 ### Junction: roles_guards
 
@@ -295,14 +321,29 @@ Tabel untuk menyimpan URL patterns yang diizinkan oleh permission.
 | 1 | 1 |
 | 2 | 2 |
 | 3 | 3 |
+| 4 | 3 |
+| 5 | 5 |
+| 6 | 2 |
+| 6 | 6 |
+| 7 | 8 |
 
 ### Junction: roles_permissions
 
 | roleId | permissionId |
 |--------|-------------|
 | 1 | 1 |
+| 1 | 9 |
+| 1 | 10 |
 | 2 | 3 |
 | 3 | 2 |
+| 4 | 3 |
+| 4 | 4 |
+| 5 | 2 |
+| 5 | 8 |
+| 6 | 3 |
+| 6 | 4 |
+| 6 | 5 |
+| 7 | 8 |
 
 ### Junction: guard_urls
 
@@ -312,6 +353,19 @@ Tabel untuk menyimpan URL patterns yang diizinkan oleh permission.
 | 2 | /api/* | allow |
 | 2 | /api/admin/* | deny |
 | 3 | /api/* | allow |
+| 4 | /api/admin/* | allow |
+| 4 | /api/users/* | allow |
+| 4 | /api/roles/* | allow |
+| 5 | /api/* | allow |
+| 5 | /api/users | deny |
+| 5 | /api/roles | deny |
+| 6 | /api/users/* | allow |
+| 7 | /api/roles/* | allow |
+| 8 | /api/auth/profile | allow |
+| 8 | /api/users/* | deny |
+| 8 | /api/roles/* | deny |
+| 8 | /api/permissions/* | deny |
+| 8 | /api/guards/* | deny |
 
 ### Junction: permission_methods
 
@@ -326,6 +380,25 @@ Tabel untuk menyimpan URL patterns yang diizinkan oleh permission.
 | 3 | DELETE |
 | 3 | PATCH |
 | 3 | OPTIONS |
+| 4 | GET |
+| 4 | POST |
+| 4 | PUT |
+| 4 | DELETE |
+| 5 | GET |
+| 5 | POST |
+| 5 | PUT |
+| 5 | DELETE |
+| 6 | GET |
+| 6 | POST |
+| 6 | PUT |
+| 6 | DELETE |
+| 7 | GET |
+| 7 | POST |
+| 7 | PUT |
+| 7 | DELETE |
+| 8 | GET |
+| 9 | GET |
+| 10 | GET |
 
 ### Junction: permission_urls
 
@@ -334,8 +407,15 @@ Tabel untuk menyimpan URL patterns yang diizinkan oleh permission.
 | 1 | /* |
 | 2 | /* |
 | 3 | /* |
+| 4 | /api/users/* |
+| 5 | /api/roles/* |
+| 6 | /api/guards/* |
+| 7 | /api/permissions/* |
+| 8 | /api/auth/profile |
+| 9 | /api/activity-logs/* |
+| 10 | /api/system-logs/* |
 
-> Note (Task 01): seeder now RBAC-Only — `Designer`/`Operator` and `Data:{table}:Read/Write` removed. See `server/utils/permission-matrix.ts` (RBAC subset) and `server/services/seeder.service.ts`.
+> Note (Task 01): `Designer`/`Operator` and `Data:{table}:Read/Write` tidak ada di seeder — lihat `server/utils/permission-matrix.ts` (RBAC subset) dan `server/services/seeder.service.ts`.
 
 ---
 
@@ -416,17 +496,26 @@ Tabel untuk menyimpan pengaturan aplikasi (key-value store).
 - `PRIMARY KEY` on `id`
 - `UNIQUE` on `key`
 
-**Seed Data**:
+**Seed Data** (sumber kebenaran: `server/services/seeder.service.ts`):
 
 | key | value | description |
 |-----|-------|-------------|
 | `app_name` | `MyApp` | Nama aplikasi |
 | `app_favicon` | `/favicon.svg` | Favicon URL (static file at `public/favicon.svg`, brand-consistent SVG) |
-| `login_bg_gradient` | `#1e40af,#3b82f6,#2563eb` | Gradient colors untuk login background (diperbarui Task 27: `#6366f1` indigo → `#2563eb` token primaryHover) |
+| `login_bg_gradient` | `#0075de,#005bab,#213183` | Gradient Notion blue untuk login background (diadopsi 2026-09-13) |
+| `app_description` | `Sistem manajemen bisnis digital` | Deskripsi aplikasi |
 
 ---
 
 ## Change Log
+
+### Docs Tidy — Adopsi Notion Design (2026-09-13)
+
+- Settings seed `login_bg_gradient` → Notion blue (`#0075de,#005bab,#213183`); sinkron dengan `server/services/seeder.service.ts`.
+
+### Docs Tidy — Seed Data selaras seeder (2026-09-13)
+
+- § Seed Data dilengkapi agar sama dengan `server/services/seeder.service.ts`: 5 users, 7 roles, 8 guards, 10 permissions + junction rows lengkap (`users_roles`, `roles_guards`, `roles_permissions`, `guard_urls`, `permission_methods`, `permission_urls`). Settings seed: + `app_description`, gradient sesuai seeder.
 
 ### Task 01 — Platform Scope Reduction (2026-09-12)
 

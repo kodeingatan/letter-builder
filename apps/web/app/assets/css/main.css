@@ -3,8 +3,14 @@
 @import "~/assets/css/animations.css";
 
 :root {
-  --primary: #3B82F6;
-  --primary-hover: #2563EB;
+  --primary: #0075de;
+  --primary-hover: #0069c4;
+  --primary-pressed: #005bab;
+  --primary-soft: #e8f2fd;
+  --canvas-soft: #f6f5f4;
+  --hairline: #e6e6e6;
+  --shadow-soft: 0 4px 18px rgba(0, 0, 0, 0.04);
+  --shadow-elevated: 0 23px 52px rgba(0, 0, 0, 0.05);
   --error: #EF4444;
   --warning: #F59E0B;
   --success: #22C55E;
@@ -19,8 +25,8 @@
 
 body {
   font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  background-color: #F9FAFB;
-  color: #111827;
+  background-color: #f6f5f4;
+  color: #000000;
 }
 
 .page-enter-active,

@@ -98,7 +98,7 @@ RBAC Foundation (diimplementasikan):
 
 ### 10.1 RBAC Modules (Diimplementasikan)
 
-Lihat detail di Bagian B (Dashboard, User Management, Role Management, Permission Management, Guard Management, Activity Logs, System Logs, Settings).
+Lihat detail di §17 (Dashboard, User Management, Role Management, Permission Management, Guard Management, Activity Logs, System Logs, Settings).
 
 ---
 
@@ -135,6 +135,7 @@ Lihat detail di Bagian B (Dashboard, User Management, Role Management, Permissio
 - Security foundation: RBAC melindungi seluruh operasi platform
 - Konsistensi UI: PageShell + DataTable kanonis + 403 tunggal
 - Auditability: semua mutasi tercatat di Activity Logs
+- Paper-calm: kanvas warm `#f6f5f4`, satu aksen Notion blue, chrome monokrom + hairline (detail: `docs/design-system.md`)
 
 ---
 
@@ -149,9 +150,7 @@ Lihat detail di Bagian B (Dashboard, User Management, Role Management, Permissio
 
 ---
 
-# Bagian II — Current Implementation Detail (RBAC Foundation)
-
-## A. Tujuan Aplikasi (Current)
+## 16. Tujuan Aplikasi (Current)
 
 Admin panel untuk **User Management System** yang menyediakan:
 
@@ -164,9 +163,9 @@ Admin panel untuk **User Management System** yang menyediakan:
 
 ---
 
-## B. Daftar Fitur
+## 17. Daftar Fitur
 
-### B.1 Dashboard
+### 17.1 Dashboard
 
 **Halaman utama admin panel** yang menampilkan:
 
@@ -208,7 +207,7 @@ Sistem
 
 ---
 
-### B.2 User Management
+### 17.2 User Management
 
 **Halaman kelola user** dengan fitur:
 
@@ -251,7 +250,7 @@ Roles: [Super Admin]
 
 ---
 
-### B.3 Role Management
+### 17.3 Role Management
 
 **Halaman kelola role** dengan fitur:
 
@@ -295,7 +294,7 @@ Roles: [Super Admin]
 
 ---
 
-### B.4 Permission Management
+### 17.4 Permission Management
 
 **Halaman kelola permission** dengan fitur:
 
@@ -344,7 +343,7 @@ Roles: [Super Admin]
 
 ---
 
-### B.5 Guard Management
+### 17.5 Guard Management
 
 **Halaman kelola guard** dengan fitur:
 
@@ -394,7 +393,9 @@ Roles: [Super Admin]
 
 ---
 
-### B.6 Table Browse Features
+### 17.6 Table Browse Features
+
+> Spesifikasi komponen: `docs/architecture.md` § Table Browse Component, `docs/design-system.md` § Table.
 
 Semua halaman tabel (Users, Roles, Permissions, Guards) menggunakan komponen **DataTable** yang reusable dengan fitur:
 
@@ -453,7 +454,9 @@ Semua halaman tabel (Users, Roles, Permissions, Guards) menggunakan komponen **D
 
 ---
 
-## C. Alur Authorization
+## 18. Alur Authorization
+
+> Referensi teknis: `docs/architecture.md` § RBAC System (`requireAuth` / `requireApiAccess`, access control flow).
 
 ### Server-Side Enforcement
 
@@ -500,7 +503,9 @@ Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+U
 
 ---
 
-## D. API Endpoints
+## 19. API Endpoints
+
+> Tabel di bawah adalah ringkasan sudut pandang produk. Referensi teknis (DTO, query params, response format): `docs/architecture.md` § API Endpoints.
 
 ### Auth API (Sudah Ada)
 
@@ -581,7 +586,9 @@ Guard TIDAK dievaluasi server-side — server hanya mengecek permission method+U
 
 ---
 
-## E. Client Routes
+## 20. Client Routes
+
+> Referensi teknis (file routing, middleware, sidebar): `docs/architecture.md` § Routing.
 
 ### File-Based Routing (Nuxt Pages)
 
@@ -616,7 +623,7 @@ Sistem (group)
 
 ---
 
-## F. Non-Functional Requirements
+## 21. Non-Functional Requirements
 
 ### Security
 - Password di-hash dengan bcrypt (salt rounds: 10)
@@ -631,6 +638,8 @@ Sistem (group)
 
 ### UX
 - Responsive design (mobile-first)
+- Warm paper canvas `#f6f5f4` + kartu putih hairline (bukan putih klinis penuh)
+- Primary CTA pill Notion blue `#0075de`; input tetap tight 4px
 - Loading states pada semua aksi
 - Error handling dengan pesan yang jelas
 - Konfirmasi sebelum delete
@@ -639,7 +648,9 @@ Sistem (group)
 
 ---
 
-## G. Seed Data Summary
+## 22. Seed Data Summary
+
+> Sumber kebenaran: `apps/web/server/services/seeder.service.ts` (idempotent — hanya seed bila belum ada). Detail relasi: `docs/database.md` § Seed Data.
 
 ### Users
 | Username | Email | Password | Role |
@@ -648,15 +659,18 @@ Sistem (group)
 | editor | editor@example.com | P455w0rd!!! | Editor |
 | viewer | viewer@example.com | P455w0rd!!! | Viewer |
 | manager | manager@example.com | P455w0rd!!! | Manager |
+| guest | guest@example.com | P455w0rd!!! | Guest |
 
 ### Roles
 | Role Name | Guards | Permissions |
 |-----------|--------|-------------|
-| Super Admin | Full Access | Full Access |
+| Super Admin | Full Access | Full Access, Activity Logs, System Logs |
 | Admin | Web Access | Read Write |
-| Editor | API Only | Read Write |
-| Viewer | API Only | Read Only |
-| Manager | Web Access | Read Write |
+| User | API Only | Read Only |
+| Editor | API Only | Read Write, User Management |
+| Viewer | Read Only Guard | Read Only, Dashboard Read |
+| Manager | Web Access, User Management Guard | Read Write, User Management, Role Management |
+| Guest | Dashboard Only | Dashboard Read |
 
 ### Guards
 | Guard Name | Allow URLs | Deny URLs |
@@ -664,8 +678,11 @@ Sistem (group)
 | Full Access | /* | (none) |
 | Web Access | /api/* | /api/admin/* |
 | API Only | /api/* | (none) |
-| Admin Only | /api/admin/* | (none) |
-| Read Only | /api/* | /api/users, /api/roles |
+| Admin Only | /api/admin/*, /api/users/*, /api/roles/* | (none) |
+| Read Only Guard | /api/* | /api/users, /api/roles |
+| User Management Guard | /api/users/* | (none) |
+| Role Management Guard | /api/roles/* | (none) |
+| Dashboard Only | /api/auth/profile | /api/users/*, /api/roles/*, /api/permissions/*, /api/guards/* |
 
 ### Permissions
 | Permission Name | Allow Methods | Allow URLs |
@@ -677,12 +694,15 @@ Sistem (group)
 | Role Management | GET, POST, PUT, DELETE | /api/roles/* |
 | Guard Management | GET, POST, PUT, DELETE | /api/guards/* |
 | Permission Management | GET, POST, PUT, DELETE | /api/permissions/* |
+| Dashboard Read | GET | /api/auth/profile |
 | Activity Logs | GET | /api/activity-logs/* |
 | System Logs | GET | /api/system-logs/* |
 
 ---
 
-## H. Client-Side Authorization
+## 23. Client-Side Authorization
+
+> Referensi teknis: `docs/architecture.md` § RBAC System → Client-Side Authorization.
 
 ### Access Denied Handling
 
@@ -722,6 +742,16 @@ export function useAuthorization() {
 ---
 
 ## Change Log
+
+### Docs Tidy — Adopsi Notion Design (2026-09-13)
+
+- §14 + §21 UX: prinsip paper-calm (warm canvas, satu aksen `#0075de`, CTA pill). Detail token: `docs/design-system.md`.
+
+### Docs Tidy — Penomoran & Penyelarasan (2026-09-13)
+
+- Penomoran tunggal 1–23 (sebelumnya 1–15 + A–H + H1 "Bagian II" di tengah dokumen). §16 Tujuan Aplikasi, §17 Daftar Fitur (17.1–17.6), §18 Alur Authorization, §19 API Endpoints, §20 Client Routes, §21 Non-Functional Requirements, §22 Seed Data Summary, §23 Client-Side Authorization.
+- §22 Seed Data Summary diselaraskan dengan `apps/web/server/services/seeder.service.ts`: + user `guest`, + role `User`/`Guest`, + guard `Read Only Guard`/`User Management Guard`/`Role Management Guard`/`Dashboard Only`, + permission `Dashboard Read`, mapping role→guard/permission per seeder.
+- Cross-reference dua arah PRD ↔ `docs/architecture.md` (§17.6, §18, §19, §20, §22, §23) agar ringkasan produk vs detail teknis tidak drift.
 
 ### Task 01 — Platform Scope Reduction (2026-09-12)
 

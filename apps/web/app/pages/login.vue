@@ -83,7 +83,7 @@ async function handleLogin() {
 
       <p class="mt-4 text-center text-sm text-gray-600">
         Belum punya akun?
-        <RouterLink to="/register" class="text-[#3B82F6] hover:text-[#2563EB] font-medium">
+        <RouterLink to="/register" class="text-[#0075de] hover:text-[#005bab] font-medium">
           Daftar
         </RouterLink>
       </p>

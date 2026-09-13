@@ -12,7 +12,7 @@ const meta: Meta<typeof PageShellDemo> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Kanonis shell — header + breadcrumb + actions slot. Referensi: wireframes/list-shell, mockups/list-shell, AC-D01 (tanpa dead-end). Token: radius 8, Inter, primary #3B82F6.',
+        component: 'Kanonis shell — header + breadcrumb + actions slot. Referensi: wireframes/list-shell, mockups/list-shell, AC-D01 (tanpa dead-end). Token: radius 8, Inter, primary #0075de.',
       },
     },
   },

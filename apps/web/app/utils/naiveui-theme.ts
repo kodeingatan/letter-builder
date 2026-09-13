@@ -1,11 +1,15 @@
 import type { GlobalThemeOverrides } from 'naive-ui'
 
+// Notion-adapted tokens (adopsi 2026-09-13, sumber: DESIGN-notion.md):
+// satu aksen struktural Notion blue, warm paper canvas, ink scale,
+// hairline + micro-shadow, radius xs4/sm5/md8/lg12/xl16/full.
+// Semantic ramp Tailwind dipertahankan (Notion tak punya semantic ramp).
 export const themeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: '#3B82F6',
-    primaryColorHover: '#2563EB',
-    primaryColorPressed: '#1D4ED8',
-    primaryColorSuppl: '#60A5FA',
+    primaryColor: '#0075de',
+    primaryColorHover: '#0069c4',
+    primaryColorPressed: '#005bab',
+    primaryColorSuppl: '#62aef0',
 
     errorColor: '#EF4444',
     errorColorHover: '#DC2626',
@@ -27,23 +31,23 @@ export const themeOverrides: GlobalThemeOverrides = {
     infoColorPressed: '#0369A1',
     infoColorSuppl: '#38BDF8',
 
-    textColorBase: '#111827',
-    textColor1: '#111827',
-    textColor2: '#374151',
-    textColor3: '#6B7280',
+    textColorBase: '#000000',
+    textColor1: '#000000',
+    textColor2: '#31302e',
+    textColor3: '#615d59',
 
-    bodyColor: '#F9FAFB',
+    bodyColor: '#f6f5f4',
     cardColor: '#FFFFFF',
     modalColor: '#FFFFFF',
     popoverColor: '#FFFFFF',
     tableColor: '#FFFFFF',
     inputColor: '#FFFFFF',
 
-    borderColor: '#E5E7EB',
-    dividerColor: '#F3F4F6',
-    hoverColor: '#F3F4F6',
+    borderColor: '#e6e6e6',
+    dividerColor: '#e6e6e6',
+    hoverColor: '#f6f5f4',
 
-    borderRadius: '6px',
+    borderRadius: '8px',
     borderRadiusSmall: '4px',
 
     fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
@@ -61,14 +65,14 @@ export const themeOverrides: GlobalThemeOverrides = {
     heightLarge: '40px',
   },
   Button: {
-    borderRadiusMedium: '6px',
+    borderRadiusMedium: '8px',
     borderRadiusSmall: '4px',
-    borderRadiusLarge: '8px',
+    borderRadiusLarge: '12px',
   },
   Input: {
-    borderRadius: '6px',
+    borderRadius: '4px',
   },
   Card: {
-    borderRadius: '8px',
+    borderRadius: '12px',
   },
 }

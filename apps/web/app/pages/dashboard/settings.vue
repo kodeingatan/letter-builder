@@ -126,7 +126,7 @@ async function handleSave() {
         <NCard class="settings-card">
           <template #header>
             <div class="card-header">
-              <NIcon :size="20" class="text-[#3B82F6]"><Save /></NIcon>
+              <NIcon :size="20" class="text-[#0075de]"><Save /></NIcon>
               <span>Nama Aplikasi</span>
             </div>
           </template>
@@ -138,7 +138,7 @@ async function handleSave() {
         <NCard class="settings-card">
           <template #header>
             <div class="card-header">
-              <NIcon :size="20" class="text-[#3B82F6]"><Document /></NIcon>
+              <NIcon :size="20" class="text-[#0075de]"><Document /></NIcon>
               <span>Deskripsi Aplikasi</span>
             </div>
           </template>
@@ -150,7 +150,7 @@ async function handleSave() {
         <NCard class="settings-card">
           <template #header>
             <div class="card-header">
-              <NIcon :size="20" class="text-[#3B82F6]"><Image /></NIcon>
+              <NIcon :size="20" class="text-[#0075de]"><Image /></NIcon>
               <span>Favicon</span>
             </div>
           </template>
@@ -180,7 +180,7 @@ async function handleSave() {
         <NCard class="settings-card settings-card--full">
           <template #header>
             <div class="card-header">
-              <NIcon :size="20" class="text-[#3B82F6]"><Image /></NIcon>
+              <NIcon :size="20" class="text-[#0075de]"><Image /></NIcon>
               <span>Background Login & Register</span>
             </div>
           </template>
@@ -238,7 +238,7 @@ async function handleSave() {
       <NCard v-if="isProdAdmin" class="settings-card settings-card--full" style="margin-top: 20px">
         <template #header>
           <div class="card-header">
-            <NIcon :size="20" class="text-[#3B82F6]"><Document /></NIcon>
+            <NIcon :size="20" class="text-[#0075de]"><Document /></NIcon>
             <span>Status Produksi</span>
           </div>
         </template>

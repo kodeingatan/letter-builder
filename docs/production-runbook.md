@@ -100,7 +100,7 @@ default recommendation when concurrent readers grow.
 | Admin | Web Access + Read Write (users/roles/permissions/guards + logs/settings) |
 | User | Web Access + Read (read-only) |
 
-New users get User-equivalent or nothing unless explicitly granted. Permission names are immutable once seeded.
+New users get User-equivalent or nothing unless explicitly granted. Permission names are immutable once seeded. Katalog seed lengkap: `docs/database.md` § Seed Data, ringkasan produk: `docs/PRD.md` §22.
 
 ## 5. Audit coverage
 

@@ -250,7 +250,7 @@ function handleDropdownSelect(key: string) {
       @collapse="collapsed = true"
       @expand="collapsed = false"
     >
-      <div class="flex items-center justify-center h-14 font-bold text-lg" style="color: #3B82F6">
+      <div class="flex items-center justify-center h-14 font-bold text-lg" style="color: #0075de">
         <span v-if="!collapsed">{{ settingsStore.appName }}</span>
         <span v-else>{{ settingsStore.appName?.charAt(0) }}</span>
       </div>
@@ -272,7 +272,7 @@ function handleDropdownSelect(key: string) {
           placement="bottom-end"
         >
           <div class="user-menu">
-            <n-avatar round :size="36" class="bg-gradient-to-r from-[#3B82F6] to-[#2563EB] font-semibold text-sm shrink-0">
+            <n-avatar round :size="36" class="bg-gradient-to-r from-[#0075de] to-[#005bab] font-semibold text-sm shrink-0">
               {{ avatarLabel }}
             </n-avatar>
             <div class="flex flex-col text-left leading-tight">

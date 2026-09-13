@@ -11,7 +11,7 @@ describe('Auth locale + a11y — FR-006 / AC-006', () => {
     const content = readFileSync(join(appDir, 'pages/login.vue'), 'utf8')
     expect(content).toContain('autocomplete="email"')
     expect(content).toContain('autocomplete="current-password"')
-    expect(content).toContain('text-[#3B82F6]')
+    expect(content).toContain('text-[#0075de]')
     expect(content).not.toContain('text-indigo-600')
     expect(content).toContain('aria-hidden="true"')
     const wrapper = await mountSuspended(LoginPage as any, {})
@@ -25,7 +25,7 @@ describe('Auth locale + a11y — FR-006 / AC-006', () => {
     expect(content).toContain('autocomplete="family-name"')
     expect(content).toContain('autocomplete="username"')
     expect(content).toContain('autocomplete="new-password"')
-    expect(content).toContain('text-[#3B82F6]')
+    expect(content).toContain('text-[#0075de]')
     expect(content).not.toContain('text-indigo-600')
 
     const wrapper = await mountSuspended(RegisterPage as any, {})

@@ -399,7 +399,7 @@ async function seedSettings(settingsRepo: any) {
   const defaultSettings = [
     { key: 'app_name', value: 'MyApp' },
     { key: 'app_favicon', value: '/favicon.svg' },
-    { key: 'login_bg_gradient', value: '#1e40af,#3b82f6,#6366f1' },
+    { key: 'login_bg_gradient', value: '#0075de,#005bab,#213183' },
     { key: 'app_description', value: 'Sistem manajemen bisnis digital' },
   ]
 

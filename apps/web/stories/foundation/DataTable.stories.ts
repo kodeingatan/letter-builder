@@ -12,7 +12,7 @@ const meta: Meta<typeof DataTable> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Kanonis DataTable — search 320px + select 160px + Refresh (Restart via NIcon) + error slot NAlert + retry. Token: primary #3B82F6, debounce 300ms. Referensi AC-D02.',
+        component: 'Kanonis DataTable — search 320px + select 160px + Refresh (Restart via NIcon) + error slot NAlert + retry. Token: primary #0075de, debounce 300ms. Referensi AC-D02.',
       },
     },
   },
@@ -76,7 +76,7 @@ export const Default: Story = {
               <b>Slot error (rencana Task 27):</b> <code>error: string | null</code> + <code>@retry</code> → NAlert + retry tanpa reset. Lihat story Error di bawah.
             </div>
           </div>
-          <div style="font-size:11px; color:#6B7280; margin-top:8px; border-left:2px solid #3B82F6; padding-left:8px">Icons via <code>h(NIcon, null, {default:()=>h(Search)})</code> — bukan bare &lt;Search/&gt;. Search min-width 320px flex-1, Select 160px fixed.</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:8px; border-left:2px solid #0075de; padding-left:8px">Icons via <code>h(NIcon, null, {default:()=>h(Search)})</code> — bukan bare &lt;Search/&gt;. Search min-width 320px flex-1, Select 160px fixed.</div>
         </div>
       </div>
     `,
@@ -164,7 +164,7 @@ export const Error: Story = {
             Kesalahan jaringan. <NButton size="small" @click="retry" style="margin-left:8px">Coba lagi</NButton>
           </NAlert>
           <DataTable v-bind="args" />
-          <div style="font-size:11px; color:#6B7280; margin-top:8px; border-left:2px solid #3B82F6; padding-left:8px">ERR-01 — error NAlert full-width di atas tabel + retry tanpa reset search/sort/page (slot error kanonis Task 27).</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:8px; border-left:2px solid #0075de; padding-left:8px">ERR-01 — error NAlert full-width di atas tabel + retry tanpa reset search/sort/page (slot error kanonis Task 27).</div>
         </div>
       </div>
     `,
@@ -227,7 +227,7 @@ export const RefreshWithoutReset: Story = {
           <div style="margin-top:12px; text-align:center">
             <NButton @click="onRefresh"><template #icon><NIcon><Restart /></NIcon></template>Simulasikan Refresh (Restart) — tanpa reset</NButton>
           </div>
-          <div style="font-size:11px; color:#6B7280; margin-top:8px; border-left:2px solid #3B82F6; padding-left:8px">AC-D02 — Refresh memakai NIcon Restart, aria-label "Segarkan data", refetch tanpa reset state.</div>
+          <div style="font-size:11px; color:#6B7280; margin-top:8px; border-left:2px solid #0075de; padding-left:8px">AC-D02 — Refresh memakai NIcon Restart, aria-label "Segarkan data", refetch tanpa reset state.</div>
         </div>
       </div>
     `,

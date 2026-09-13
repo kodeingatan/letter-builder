@@ -139,7 +139,7 @@ async function handleRegister() {
 
       <p class="mt-4 text-center text-sm text-gray-600">
         Sudah punya akun?
-        <RouterLink to="/login" class="text-[#3B82F6] hover:text-[#2563EB] font-medium">
+        <RouterLink to="/login" class="text-[#0075de] hover:text-[#005bab] font-medium">
           Masuk
         </RouterLink>
       </p>

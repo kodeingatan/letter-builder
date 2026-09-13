@@ -8,105 +8,125 @@ Design system menggunakan **Naive UI** sebagai komponen utama dengan Tailwind CS
 
 ## Color Palette
 
-### Primary
+> Sumber inspirasi: analisis design language Notion (`DESIGN-notion.md`, dihapus setelah adopsi — riwayat di git). Prinsip: kanvas paper-calm, **satu aksen struktural** (Notion blue, hanya untuk CTA/link/fokus), chrome monokrom, personality dari ilustrasi.
 
-| Token           | Hex         | Usage                  |
-| --------------- | ----------- | ---------------------- |
-| Primary 50      | `#EFF6FF`   | Background hover/light |
-| Primary 100     | `#DBEAFE`   | Soft background        |
-| Primary 200     | `#BFDBFE`   | Border light           |
-| Primary 300     | `#93C5FD`   | Disabled state         |
-| Primary 400     | `#60A5FA`   | Secondary button       |
-| **Primary 500** | **`#3B82F6`** | **Main Brand Color** |
-| Primary 600     | `#2563EB`   | Button Hover           |
-| Primary 700     | `#1D4ED8`   | Active                 |
-| Primary 800     | `#1E40AF`   | Strong emphasis        |
-| Primary 900     | `#1E3A8A`   | Dark Mode              |
+### Primary (Notion Blue — satu-satunya aksen struktural)
 
-### Natural (Gray)
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Primary | `#0075de` | Main brand — primary CTA, inline link, active/focus signal |
+| Primary Hover | `#0069c4` | Button hover (turunan 12% darken dari primary) |
+| Primary Pressed | `#005bab` | Pressed state (`primary-active` Notion) |
+| Primary Soft | `#e8f2fd` | Background hover/light (tint primary ~8%) |
+| Deep Indigo | `#213183` | Full-bleed inverted band (hero dashboard) — satu-satunya momen gelap |
 
-| Token    | Hex       |
-| -------- | --------- |
-| Gray 50  | `#F9FAFB` |
-| Gray 100 | `#F3F4F6` |
-| Gray 200 | `#E5E7EB` |
-| Gray 300 | `#D1D5DB` |
-| Gray 400 | `#9CA3AF` |
-| Gray 500 | `#6B7280` |
-| Gray 600 | `#4B5563` |
-| Gray 700 | `#374151` |
-| Gray 800 | `#1F2937` |
-| Gray 900 | `#111827` |
+### Canvas & Surface (warm paper, bukan clinical white)
 
-### Semantic Colors
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Canvas | `#ffffff` | Nav bar, kartu, panel, form field |
+| Canvas Soft | `#f6f5f4` | Page canvas + footer band — warm off-white khas paper-calm |
+| Hairline | `#e6e6e6` | Border 1px kartu & divider (solid, black-10%-on-white) |
 
-| Token   | Hex       | Usage       |
-| ------- | --------- | ----------- |
-| Success | `#22C55E` | Success     |
-| Warning | `#F59E0B` | Warning     |
-| Error   | `#EF4444` | Error       |
-| Info    | `#0EA5E9` | Information |
+### Ink (teks — skala warm charcoal)
 
-### Background
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Ink | `#000000` | Headline + body utama (render ~95% alpha) |
+| Ink Secondary | `#31302e` | Body sekunder, footer |
+| Ink Muted | `#615d59` | Supporting / muted copy |
+| Ink Faint | `#a39e98` | Caption, metadata, placeholder |
 
-| Token      | Hex       |
-| ---------- | --------- |
-| Background | `#FFFFFF` |
-| Surface    | `#F8FAFC` |
-| Card       | `#FFFFFF` |
-| Sidebar    | `#F9FAFB` |
+### Sticker Palette (dekoratif saja — tidak pernah untuk CTA/struktur)
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Sky | `#62aef0` | Ilustrasi, icon tile, category dot |
+| Purple / Deep | `#d6b6f6` / `#391c57` | Ilustrasi |
+| Pink | `#ff64c8` | Ilustrasi |
+| Orange / Deep | `#dd5b00` / `#793400` | Ilustrasi |
+| Teal | `#2a9d99` | Ilustrasi, affirmative tick |
+| Green | `#1aae39` | Ilustrasi, affirmative tick |
+| Brown | `#523410` | Ilustrasi |
+
+### Semantic Colors (dipertahankan — deviasi disengaja)
+
+Notion tidak punya semantic ramp (status dibawa sticker palette), tetapi admin panel butuh status eksplisit — ramp Tailwind dipertahankan:
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| Success | `#22C55E` | Success |
+| Warning | `#F59E0B` | Warning |
+| Error | `#EF4444` | Error |
+| Info | `#0EA5E9` | Information |
 
 ### Border
 
-| Token   | Hex       |
-| ------- | --------- |
-| Default | `#E5E7EB` |
-| Focus   | `#3B82F6` |
-| Divider | `#F3F4F6` |
+| Token | Hex |
+|-------|-----|
+| Default (Hairline) | `#e6e6e6` |
+| Focus | `#0075de` |
+| Divider | `#e6e6e6` |
 
 ---
 
 ## Typography
 
-| Token   | Size | Line Height | Weight   |
-| ------- | ---- | ----------- | -------- |
-| Display | 32px | 40px        | Bold     |
-| H1      | 28px | 36px        | Bold     |
-| H2      | 24px | 32px        | Bold     |
-| H3      | 20px | 28px        | Semibold |
-| H4      | 18px | 26px        | Semibold |
-| H5      | 16px | 24px        | Medium   |
-| H6      | 14px | 20px        | Medium   |
-| Body    | 14px | 20px        | Regular  |
-| Small   | 13px | 18px        | Regular  |
-| Caption | 12px | 16px        | Regular  |
+Font: **Inter** (substitusi langsung `NotionInter` — terapkan negative tracking eksplisit agar setajam Notion).
+
+| Token | Size | Weight | Line Height | Tracking | Usage |
+|-------|------|--------|-------------|----------|-------|
+| Display | 40px | 700 | 1.1 | −1px | Hero dashboard |
+| H1 | 28px | 700 | 1.23 | −0.625px | Section headline |
+| H2 | 24px | 700 | 1.27 | −0.25px | Sub-section |
+| H3 | 20px | 600 | 1.4 | −0.125px | Card title (PageShell title 20px Semibold) |
+| Body | 14px | 400 | 1.5 | 0 | Default body |
+| Small | 13px | 400 | 1.43 | 0 | Dense body, table row |
+| Caption | 12px | 400 | 1.43 | 0 | Caption, footnote |
+| Eyebrow | 12px | 600 | 1.33 | +0.125px | Pill badge, table header, small label |
+
+Prinsip: headline berat (700) + body tenang (400) adalah lever ekspresif utama; body tidak pernah heavy.
 
 ---
 
 ## Spacing
 
-| Token | Value |
-| ----- | ----- |
-| xs    | 2px   |
-| sm    | 4px   |
-| md    | 8px   |
-| lg    | 12px  |
-| xl    | 16px  |
-| 2xl   | 24px  |
-| 3xl   | 32px  |
+Skala 8px-base (Notion: xxs 4 · xs 8 · sm 12 · md 16 · lg 24 · xl 28 · xxl 32):
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| xxs | 4px | Gap mikro, chip padding |
+| xs | 8px | Gap antar-aksi, toolbar gap |
+| sm | 12px | Cell padding vertikal tabel |
+| md | 16px | Padding kartu kecil, gap form |
+| lg | 24px | Padding kartu, padding PageShell body |
+| xl | 28px | Gap section |
+| xxl | 32px | Gap section besar, empty-state padding |
 
 ---
 
 ## Border Radius
 
-| Token | Value  |
-| ----- | ------ |
-| xs    | 2px    |
-| sm    | 4px    |
-| md    | 6px    |
-| lg    | 8px    |
-| xl    | 12px   |
-| Full  | 9999px |
+| Token | Value | Usage |
+|-------|-------|-------|
+| xs | 4px | Form field, tag, chip (input tetap tight — tidak pernah pill) |
+| sm | 5px | Menu item, list row, status pill |
+| md | 8px | Utility/nav button, kartu kecil |
+| lg | 12px | Feature card, PageShell, illustration frame |
+| xl | 16px | Kontainer besar, modal, drawer |
+| Full | 9999px | Primary CTA pill, badge, circular icon button |
+
+---
+
+## Elevation & Depth
+
+Filosofi **barely-there**: permukaan didefinisikan hairline + micro-shadow berlapis nyaris transparan — terasa terangkat dari kertas, bukan di-drop dramatis. Ilustrasi (sticker palette) adalah cue kedalaman utama, bukan shadow.
+
+| Level | Treatment | Use |
+|-------|-----------|-----|
+| 0 — Flat | Hairline `#e6e6e6` 1px, no shadow | Default card di warm canvas, DataTable container |
+| 1 — Soft | Layered micro-shadow `rgba(0,0,0,0.04) 0 4px 18px` + hairline | Raised card, floating button, focus input |
+| 2 — Elevated | Deeper stack `rgba(0,0,0,0.05) 0 23px 52px` + hairline | Modal, popover, drawer |
 
 ---
 
@@ -255,11 +275,15 @@ Semua detail views **WAJIB** menggunakan pola ini:
 
 ### Dimensions
 
-| Item          | Value |
-| ------------- | ----- |
-| Row Height    | 36px  |
-| Cell Padding  | 8px   |
-| Header Height | 40px  |
+| Item | Value |
+|------|-------|
+| Row Height | 36px |
+| Cell Padding | `12px 16px` (sm–md, Notion data-table chrome) |
+| Header Height | 40px |
+| Header Background | Canvas Soft `#f6f5f4` |
+| Header Typography | Eyebrow 12px/600 (caps, +0.125px tracking) |
+| Body Typography | Small 13–14px/400 |
+| Row Border | Hairline `#e6e6e6` 1px |
 
 ### Required Features
 
@@ -309,8 +333,8 @@ Semua tabel di sistem **WAJIB** memiliki fitur berikut:
 
 ### Sort Indicators
 - **Unsorted**: No indicator (column header text only)
-- **Ascending**: ↑ arrow (Carbon `ArrowUp` icon, 14px, Primary 500 color)
-- **Descending**: ↓ arrow (Carbon `ArrowDown` icon, 14px, Primary 500 color)
+- **Ascending**: ↑ arrow (Carbon `ArrowUp` icon, 14px, Primary color)
+- **Descending**: ↓ arrow (Carbon `ArrowDown` icon, 14px, Primary color)
 - **Transition**: 150ms ease-out color change on hover
 
 ### Column Visibility Toggle
@@ -357,8 +381,8 @@ Sistem harus mendukung semua standar log levels:
 
 | Level | Color | Icon | Description |
 |-------|-------|------|-------------|
-| `TRACE` | `#6B7280` (Gray) | `Information` | Detail trace information |
-| `DEBUG` | `#3B82F6` (Blue) | `Bug` | Debugging information |
+| `TRACE` | `#615d59` (Stone) | `Information` | Detail trace information |
+| `DEBUG` | `#0075de` (Blue) | `Bug` | Debugging information |
 | `INFO` | `#22C55E` (Green) | `CheckmarkFilled` | General information |
 | `NOTICE` | `#0EA5E9` (Sky) | `Warning` | Normal but significant |
 | `WARNING` | `#F59E0B` (Amber) | `Warning` | Warning conditions |
@@ -483,8 +507,8 @@ Each stat is an `NStatistic` component with colored label matching log level.
 Kanonis shell untuk semua halaman `list` / `detail` / `editor` (fondasi Task 26, diimplementasikan Task 27 — RBAC-Only after Task 01). Menggantikan header lokal `NCard title` tanpa breadcrumb. Diterapkan di RBAC pages (dashboard, users/roles/permissions/guards/activity-logs/system-logs/settings/profile).
 
 - **Komponen**: `app/components/layout/PageShell.vue` (diimplementasikan Task 27) — props `title: string`, `breadcrumbs: {label, href?}[]`, `description?: string`, slots `actions` + `default`.
-- **Struktur**: `breadcrumb` → `header (title + actions)` → `toolbar (DataTable)` → `konten (table/detail/editor)` → `pagination`. Padding `head 16px 20px`, `body 20px`, border `1px #E5E7EB` radius `8`, overflow hidden, `flex-wrap` responsive (`column <768px`).
-- **Breadcrumb**: leaf `span aria-current="page"`, lainnya `<a href>` + `preventDefault` + `router.push` (native right-click/Ctrl+click preserved). Title `20px Semibold #1F2937` (H3 token), subtitle `12px #6B7280`.
+- **Struktur**: `breadcrumb` → `header (title + actions)` → `toolbar (DataTable)` → `konten (table/detail/editor)` → `pagination`. Padding `head 16px 20px`, `body 24px`, border `1px #e6e6e6` radius `12`, overflow hidden, `flex-wrap` responsive (`column <768px`).
+- **Breadcrumb**: leaf `span aria-current="page"`, lainnya `<a href>` + `preventDefault` + `router.push` (native right-click/Ctrl+click preserved). Title `20px Semibold #000000` (H3 token, tracking −0.125px), subtitle `12px #615d59`.
 - **BR**: tidak ada halaman me-render konten kosong tanpa pesan/aksi — empty → `NEmpty` + CTA, error → `NAlert` + retry (via DataTable slot `error: string | null` + `emit retry`).
 
 ---
@@ -730,12 +754,13 @@ Semua animasi harus menghormati `prefers-reduced-motion`:
 
 ## Implementation Notes
 
-- **Naive UI** adalah komponen utama — gunakan `GlobalThemeOverrides` untuk customisasi tema
+- **Naive UI** adalah komponen utama — gunakan `GlobalThemeOverrides` untuk customisasi tema (`app/utils/naiveui-theme.ts`: primary `#0075de` / hover `#0069c4` / pressed `#005bab`, body `#f6f5f4`, kartu/modal/popover/tabel/input `#ffffff`, border `#e6e6e6`, radius 8/4, font Inter)
 - **Tailwind CSS** hanya untuk utility classes (spacing, display, flexbox) yang tidak tersedia di Naive UI
 - Semua komponen harus dibungkus dengan `NConfigProvider`
 - Gunakan direct import per komponen, jangan global import
 - Gunakan `v-model:value` untuk form components
 - Gunakan `on-update:*` pattern untuk event handlers
+- CTA primer pill (`border-radius: 9999px`); input tetap tight 4px
 
 ---
 
@@ -795,21 +820,6 @@ Satu locale **ID** (Indonesia) untuk fondasi — selaras `Masuk`/`Daftar` existi
 
 ---
 
-## Foundation Deliverables (Task 26 Design + Task 27 Implementation — RBAC-Only after Task 01)
-
-Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` sebagai bahasa visual kanonis untuk Task 27. Lokasi setelah Task 01: `apps/web/stories/foundation/` (PageShell 4 stories, DataTable 6 states + Refresh, AccessDeniedAlert single). `docs/wireframes|mockups|prototypes` dihapus Task 01. Diimplementasikan Task 27: PageShell untuk RBAC pages, DataTable kanonis 320/160 + Restart + error slot `NAlert` + `NIcon` + locale ID (`Cari...` `Semua Kolom` `Menampilkan` `Belum ada data` `Gagal memuat data` `Coba lagi`), AccessDeniedAlert single `data-testid=access-denied` floating 16px/448px 4000ms, sidebar 220/72 token #3B82F6/#2563EB, motion `usePageTransition` 250ms + reduced-motion.
-
-## Change Log — Task 01 Scope Reduction (2026-09-12)
-
-- Removed Global Table UX deliverables (Task 28) + Dynamic Administration UI Patterns (Metadata-driven, Column Type mapping, CRUD Generated, Template Editor, Administration Workflow). RBAC-Only now: PageShell + DataTable kanonis + AccessDeniedAlert single.
-- Deleted `docs/wireframes|mockups|prototypes` + `docs/dynamic-administration` — archived in git history pre-Task 01.
-
-## Change Log — Task 02 Build Recovery (2026-09-12)
-
-- Fixed `DataTable.vue:244-248` duplicate empty — now single `NEmpty` via `NDataTable` `#empty` slot (`Belum ada data` ID locale) instead of `No Data` + `Belum ada data` duplicate (Task 02 infra fix).
-
----
-
 ## Profile Page
 
 ### Endpoint
@@ -856,3 +866,122 @@ AppLayout
 - Dari dropdown header: klik "Profile" → navigasi ke `/dashboard/profile`
 - Tidak perlu `@Roles` atau `@Permissions` — semua user yang login bisa akses
 - Self-service: user hanya bisa edit data sendiri
+
+---
+
+## Chrome Patterns (Notion — diadaptasi untuk admin panel)
+
+Pola permukaan + feedback yang dipinjam dari Notion, dipetakan ke komponen LBS. Elevasi mengikuti § Elevation & Depth (hairline + micro-shadow, bukan drop-shadow berat).
+
+### Badge Pill (eyebrow label)
+
+Label kecil untuk role, level log, kategori — `NTag` pill tanpa border:
+
+| Property | Value |
+|----------|-------|
+| Surface | Canvas `#ffffff`, teks Primary `#0075de` untuk kategori; varian semantic (`success/warning/error`) untuk status |
+| Typography | Eyebrow 12px/600, +0.125px tracking |
+| Radius | Full `9999px`, padding `4px 8px` |
+| Contoh | Role badge di UserTable, `LogLevelBadge` (level→warna), category dot sticker palette |
+
+### Empty-State Card
+
+Bingkai ilustrasi + caption + CTA (BR: no dead-end):
+
+| Property | Value |
+|----------|-------|
+| Surface | Canvas Soft `#f6f5f4` |
+| Radius | xl `16px`, padding xxl `32px` |
+| Caption | Body 14px/400 Ink Muted + CTA `+ Buat ...` |
+| Implementasi | `NEmpty` via `NDataTable` slot `#empty` (single instance) |
+
+### Toast
+
+Notifikasi sukses/gagal — bentuk feature-card + medium shadow:
+
+| Property | Value |
+|----------|-------|
+| Surface | Canvas `#ffffff`, radius xl `16px`, padding `12px 16px` |
+| Typography | Small 13–14px/400 |
+| Implementasi | `useMessage()` (sukses `Berhasil`), `NAlert` untuk error yang butuh aksi |
+
+### Auth Card (login/register)
+
+Kartu sign-in/up di atas warm canvas:
+
+| Property | Value |
+|----------|-------|
+| Page | Canvas Soft `#f6f5f4` full-viewport, konten center |
+| Card | Canvas `#ffffff`, radius xl `16px`, padding lg `24px`, hairline + Level-1 shadow |
+| Field | `text-input` tight: radius xs `4px`, padding `6px`, border hairline; fokus + Level-1 shadow |
+| CTA | Primary pill Full `9999px` (`button-primary`); secondary di sampingnya putih pill |
+| Implementasi | `AuthForm.vue` — link antar-form memakai teks Primary |
+
+### Modal Card
+
+Dialog (form create/edit) — chrome sama dengan feature-card + elevasi:
+
+| Property | Value |
+|----------|-------|
+| Surface | Canvas `#ffffff`, radius xl `16px`, padding lg `24px`, Level-2 shadow |
+| Implementasi | `NModal` (`*FormModal.vue`), focus trap, tombol primer pill |
+
+### App-Shell Row (sidebar)
+
+Baris navigasi di App Shell — status aktif memakai primary sebagai indikator:
+
+| Property | Value |
+|----------|-------|
+| Surface | Canvas, teks Ink |
+| Active | Indikator Primary `#0075de` (bar/border) + tint Primary Soft `#e8f2fd` |
+| Radius | sm `5px`, padding `12px 16px` |
+| Implementasi | `AppLayout` — sidebar 220/72, group label string, leaf `<a href>` + `router.push` |
+
+---
+
+## Do's and Don'ts (Notion)
+
+### Do
+- Cadangkan Primary `#0075de` untuk aksi primer, inline link, sinyal aktif/fokus — tidak untuk dekorasi.
+- Halaman di Canvas Soft `#f6f5f4`; kartu & field putih `#ffffff` untuk figure/ground lembut.
+- Sticker palette hanya untuk ilustrasi, icon tile, category dot.
+- Headline heavy (700) + tracking negatif eksplisit; body 400.
+- CTA primer pill Full; tombol utility radius md 8px — kontras disengaja.
+- Permukaan = hairline + micro-shadow berlapis.
+- Satu momen gelap (deep indigo `#213183`) untuk hero dashboard — bukan band berulang.
+
+### Don't
+- Jangan cat CTA/fill struktural dengan warna sticker palette.
+- Jangan tambah aksen struktural kedua selain primary.
+- Jangan beri radius pill pada form field — input tetap xs 4px.
+- Jangan pakai heavy shadow.
+- Jangan set body copy heavy — 400 untuk keterbacaan.
+- Jangan gelar halaman penuh di putih klinis — warm canvas adalah inti ketenangan brand.
+
+---
+
+## Foundation Deliverables (Task 26 Design + Task 27 Implementation — RBAC-Only after Task 01)
+
+Wireframe low-fi, mockup hi-fi, prototype interaktif + Storybook `Foundation/*` sebagai bahasa visual kanonis untuk Task 27. Lokasi setelah Task 01: `apps/web/stories/foundation/` (PageShell 4 stories, DataTable 6 states + Refresh, AccessDeniedAlert single). `docs/wireframes|mockups|prototypes` dihapus Task 01. Diimplementasikan Task 27: PageShell untuk RBAC pages, DataTable kanonis 320/160 + Restart + error slot `NAlert` + `NIcon` + locale ID (`Cari...` `Semua Kolom` `Menampilkan` `Belum ada data` `Gagal memuat data` `Coba lagi`), AccessDeniedAlert single `data-testid=access-denied` floating 16px/448px 4000ms, sidebar 220/72 token #0075de/#005bab, motion `usePageTransition` 250ms + reduced-motion.
+
+## Change Log
+
+### Docs Tidy — Adopsi Notion Design (2026-09-13)
+
+- Sumber: `DESIGN-notion.md` (analisis design language Notion — dihapus setelah adopsi, riwayat di git). Token primer diganti ke Notion blue (`#0075de`/`#0069c4`/`#005bab`), canvas warm paper `#f6f5f4`, ink scale, hairline `#e6e6e6`, radius xs4/sm5/md8/lg12/xl16/full, tracking negatif + eyebrow.
+- Baru: § Elevation & Depth, § Chrome Patterns (Badge Pill, Empty-State Card, Toast, Auth Card, Modal Card, App-Shell Row), Do's and Don'ts. Semantic ramp Tailwind dipertahankan (deviasi disengaja — Notion tak punya semantic ramp).
+- Kode mengikuti: `naiveui-theme.ts`, `main.css`, `AuthForm`, halaman auth, sidebar, favicon, stories, test ekspektasi warna.
+
+### Docs Tidy — Profile Page + penomoran log (2026-09-13)
+
+- `## Profile Page` dipindah ke sebelum `## Foundation Deliverables` (sebelumnya setelah Change Log di akhir file).
+- Change Log disatukan di bawah satu `## Change Log` (sebelumnya dua heading `## Change Log — Task XX` terpisah).
+
+### Task 01 — Scope Reduction (2026-09-12)
+
+- Removed Global Table UX deliverables (Task 28) + Dynamic Administration UI Patterns (Metadata-driven, Column Type mapping, CRUD Generated, Template Editor, Administration Workflow). RBAC-Only now: PageShell + DataTable kanonis + AccessDeniedAlert single.
+- Deleted `docs/wireframes|mockups|prototypes` + `docs/dynamic-administration` — archived in git history pre-Task 01.
+
+### Task 02 — Build Recovery (2026-09-12)
+
+- Fixed `DataTable.vue:244-248` duplicate empty — now single `NEmpty` via `NDataTable` `#empty` slot (`Belum ada data` ID locale) instead of `No Data` + `Belum ada data` duplicate (Task 02 infra fix).

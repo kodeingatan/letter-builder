@@ -83,7 +83,7 @@ export const FloatingGlobal: Story = {
             <div style="margin-top:12px"><NButton type="error" @click="trigger">🔒 Picu 403</NButton></div>
             <div style="font-size:11px; margin-top:8px">Saat 403: window.dispatchEvent(new CustomEvent('rbac-denied', {detail:{message}})) → AccessDeniedAlert global</div>
           </div>
-          <div style="font-size:11px; color:#6B7280; margin-top:12px; border-left:2px solid #3B82F6; padding-left:8px">
+          <div style="font-size:11px; color:#6B7280; margin-top:12px; border-left:2px solid #0075de; padding-left:8px">
             <b>Keputusan 26:</b> floating global (Teleport body, top 16 right 16, max 448px, slideIn 300ms ease-out). Hapus 4 per-page listeners:<br>
             <code>global-tables.vue:58</code>, <code>components.vue:58</code>, <code>administrations.vue:62</code>, <code>templates.vue:62</code> — Task 27.<br>
             Verifikasi: <code>document.querySelectorAll('[data-testid=access-denied"].show').length === 1</code>
