@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="1024" viewBox="0 0 768 1024">
+  <rect width="768" height="1024" fill="#f6f5f4"/>
+  <rect x="0" y="0" width="72" height="1024" fill="#ffffff" stroke="#e6e6e6"/>
+  <rect x="20" y="24" width="32" height="32" rx="8" fill="#e8f2fd" stroke="#0075de"/><text x="30" y="44" font-family="Inter" font-size="14">≡</text>
+  <rect x="88" y="16" width="664" height="84" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <text x="108" y="62" font-family="Inter" font-size="18" font-weight="600">Pegawai</text>
+  <rect x="600" y="42" width="120" height="32" rx="9999" fill="#0075de"/><text x="624" y="62" font-family="Inter" font-size="12" fill="#ffffff">+ Tambah</text>
+  <rect x="88" y="116" width="664" height="72" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <rect x="104" y="132" width="260" height="32" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="116" y="152" font-family="Inter" font-size="12" fill="#a39e98">Cari...</text>
+  <rect x="374" y="132" width="140" height="32" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="384" y="152" font-family="Inter" font-size="11">Semua Kolom</text>
+  <rect x="88" y="200" width="664" height="200" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <rect x="88" y="200" width="664" height="36" rx="8" fill="#f6f5f4"/><text x="104" y="222" font-family="Inter" font-size="11" font-weight="600">NAMA • GAJI • INFO</text>
+  <rect x="104" y="248" width="632" height="32" fill="#ffffff" stroke="#e6e6e6"/><text x="116" y="268" font-family="Inter" font-size="12">Afdal • 2.5jt • Total: 2500000</text>
+  <!-- Builder tablet: drawer hint -->
+  <rect x="88" y="420" width="664" height="260" rx="12" fill="#ffffff" stroke="#0075de" stroke-dasharray="6 4"/>
+  <text x="108" y="448" font-family="Inter" font-size="13" font-weight="600">BUILDER 3-PANE → TABLET DRAWER</text>
+  <text x="108" y="472" font-family="Inter" font-size="12" fill="#615d59">Library (NTree) → overlay drawer 260px • Canvas flex-1 • Properties → drawer 320px</text>
+  <rect x="108" y="490" width="120" height="28" rx="8" fill="#ffffff" stroke="#e6e6e6"/><text x="122" y="508" font-family="Inter" font-size="12">☰ Library</text>
+  <rect x="534" y="490" width="120" height="28" rx="8" fill="#ffffff" stroke="#e6e6e6"/><text x="548" y="508" font-family="Inter" font-size="12">⚙ Properties</text>
+  <text x="0" y="1008" font-family="Inter" font-size="11" fill="#a39e98">WIREFRAME TABLET • 768px • collapsed 72 + drawer • toolbar wrap • NSteps horizontal</text>
+</svg>

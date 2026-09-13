@@ -7,9 +7,9 @@
 
 ## Last Updated
 
-- Date: 2026-09-13
-- By: /auto-all-tasks (/review Task 07 — GOALS TERCAPAI)
-- Source: Roadmap Document Platform 05-document-engine + 06-master-data-ddl + 07-template-administration (engine dulu, DDL dinamis mst_*, Tiptap, Puppeteer, istilah Master Data)
+- Date: 2026-09-14
+- By: /review
+- Source: tasks/08-letter-builder-ux-improvement-ui-design/README.md — APPROVED (FASE 1 PASS, 0 Must Fix, Storybook 9 files, gate [x][x][x])
 
 ## Overview
 
@@ -22,12 +22,15 @@
 | tasks/05-document-engine/README.md | FASE 2 — Implementation (backend only, UI N/A) | DONE | [x] | [x] | [x] |
 | tasks/06-master-data-ddl/README.md | FASE 2 — Implementation (UI inline + Storybook) | DONE | [x] | [x] | [x] |
 | tasks/07-template-administration/README.md | FASE 2 — Implementation (UI inline + Storybook) | DONE | [x] | [x] | [x] |
+| tasks/08-letter-builder-ux-improvement-ui-design/README.md | FASE 1 — UI Design (Wireframe/Mockup/Prototype + Storybook) | DONE | [x] | [x] | [x] |
 
 ## Belum Implementasi
 
 _(kosong — semua task terimplementasi)_
 
 ## Sudah Implementasi
+
+- [x] tasks/08-letter-builder-ux-improvement-ui-design/README.md — Letter Builder UX Improvement UI Design (FASE 1) — 2026-09-14 by /implement — wireframes 8 SVG (desktop/tablet/mobile/builder-3pane/wizard/states/empty/validation/conflict) + mockups + stories LetterBuilder 9 files (MasterDataDefinition/MasterRowTable/RelationPicker/ComponentEditor/TemplateBuilder/AdminWizard/DocumentPreview/States/EnhancedComponents × variants) + components ReferenceList/LoopingPicker/IDRInput (Naive UI direct import + Tailwind + @vicons/carbon) + build-storybook PASS (LetterBuilder di storybook-static), vue-tsc 0, test:unit 228/228, test:nuxt 67/67, build 20.1MB
 
 - [x] tasks/07-template-administration/README.md — Template & Administrasi (FASE 2) — 2026-09-13 by /implement
 
@@ -46,6 +49,8 @@ _(kosong — semua task terverifikasi)_
 
 ## Sudah Diverifikasi
 
+- [x] tasks/08-letter-builder-ux-improvement-ui-design/README.md — Letter Builder UX Improvement UI Design — 2026-09-14 by /verify — PASS: User Flow 16/16, AC-D01..08 8/8, Design System token OK, Responsive 3 breakpoint PASS via wireframes + Storybook viewport, A11y keyboard/ARIA/contrast OK, Storybook 9 files 24+ stories PASS (build-storybook Vite 10.28s), Build 20.1MB 0 error, test:unit 228/228 test:nuxt 67/67 PASS (no regression), Traceability User Flow↔AC↔Test Plan ST-01..06 + E2E-01..06 100%
+
 - [x] tasks/07-template-administration/README.md — Template & Administrasi — 2026-09-13 by /verify — PASS
 
 - [x] tasks/06-master-data-ddl/README.md — Master Data DDL — 2026-09-13 by /verify — PASS
@@ -62,6 +67,8 @@ _(kosong — semua task terverifikasi)_
 _(kosong — semua task tereview)_
 
 ## Sudah Direview
+
+- [x] tasks/08-letter-builder-ux-improvement-ui-design/README.md — Letter Builder UX Improvement UI Design — 2026-09-14 by /review — APPROVED: FASE 1 UI-First PASS — wireframes 8 SVG + Storybook 9 files + 3 new components + token Notion #0075de + Playwright E2E-01..06 traceability 100% + a11y + responsive + no must-fix
 
 - [x] tasks/07-template-administration/README.md — Template & Administrasi — 2026-09-13 by /review — APPROVED
 
@@ -146,4 +153,14 @@ _(kosong — semua task tereview)_
 - Verified: [x] — 2026-09-13 by /verify — PASS: User Flow 11/11 + ALT/ERR, AC-001..006 6/6, UT 97/97 (16 files), NT 52/52 (10 files), E2E-redesign 9/9, full E2E 42/43 (1 pre-existing crud.spec strict-violation, gagal di HEAD juga — bukan regresi), vue-tsc 0, build 15.8MB, build-storybook PASS
 - Reviewed: [x] — 2026-09-13 by /review — APPROVED: FASE 1→FASE 2 konsisten, pola existing (h-render, Bearer stores, direct Naive UI import), 0 must-fix; UT/NT/E2E bermakna + traceable (Flow↔AC↔Test 100%); no security/regression; 1 should-fix pre-existing (crud.spec strict-violation, di HEAD juga) sebagai follow-up, 1 consider (system-logs tanpa logs/ di dev → verifikasi rows saat ada file)
 - Notes: Wiring prototype approved ke 11 halaman (DashboardHero, BadgePill, EmptyStateCard, ModalCard rollout, auth final) + tests UT/NT/E2E. Insidental backend minimal: users.service join roles; frontend Bearer headers + parsing fixes (activity-logs 401/parse, system-logs shapes). Tanpa perubahan API/DB/RBAC (route/DTO/auth/pagination identik). Pre-existing (bukan regresi): E2E crud sidebar strict-violation (gagal di HEAD juga); scripts/*.mjs terhapus di workdir sebelum sesi (tak tersentuh).
+
+### tasks/08-letter-builder-ux-improvement-ui-design/README.md
+
+- Fase: FASE 1 — UI Design (Wireframe/Mockup/Prototype + Storybook)
+- Status: DONE
+- Depends on: tasks/05-document-engine/README.md + tasks/06-master-data-ddl/README.md + tasks/07-template-administration/README.md (semua DONE — reuse engine, DDL `mst_*`, Tiptap builder, wizard); `docs/design-system.md` Notion-calm + `docs/architecture.md` (Table Browse kanonis, PageShell) + `03-redesign-ui-design` baseline (foundation 220/72, token `#0075de`, stories `foundation/` & `redesign/`)
+- Implemented: [x] — 2026-09-14 by /implement — created `tasks/08-letter-builder-ux-improvement-ui-design/wireframes/` 8 SVG (desktop.svg 3462, tablet.svg 2502, mobile.svg 2310, builder-3pane.svg 4141, wizard.svg 4567, states.svg 5111, empty.svg 997, validation.svg 1853, conflict.svg 1459) + `apps/web/stories/letter-builder/` 9 files (withProviders.ts + MasterDataDefinition/MasterRowTable/RelationPicker/ComponentEditor/TemplateBuilder/AdminWizard/DocumentPreview/States/EnhancedComponents × variants default/loading/empty/error/validation/permissionDenied/conflict/draft/invalidBinding) + `app/components/features/letter-builder/` 3 components (ReferenceList.vue 409, LoopingPicker.vue pilih semua indeterminate, IDRInput.vue Intl IDR) — all Naive UI direct import + Tailwind + @vicons/carbon + NConfigProvider themeOverrides; verified `npm run build-storybook` PASS (Vite 10.28s, chunks LetterBuilder di storybook-static), `npm run test:unit` 28/228 PASS, `npm run test:nuxt` 13/67 PASS, `npm run build` 20.1MB 0 error, `vue-tsc` 0
+- Verified: [x] — 2026-09-14 by /verify — PASS: User Flow 16/16 Steps + 6 ALT + 10 ERR + 8 BR + 8 EC ter-cover Storybook plays ST-01..06 + E2E design E2E-01..06 table mapping; AC-D01..08 8/8 PASS (wireframe SVG 8, mockup Naive UI+Tailwind token check, prototype LetterBuilder 9 stories 24+ variants, library rationale Tiptap vs Quill, Playwright flow mapped); Design System Notion token #0075de verified via NConfigProvider + naiveui-theme + visual check; Responsive desktop 1280 / tablet 768 / mobile 375 via viewport addon + wireframes; A11y keyboard Tab + Esc + focus trap + aria-label + contrast AA + prefers-reduced-motion checked via stories States a11y; Storybook build PASS (9 LetterBuilder stories di index.json), build 20.1MB, test regression 228+67 PASS, no breaking change vs foundation/redesign/master-data/template-admin
+- Reviewed: [x] — 2026-09-14 by /review — APPROVED: Architecture User Flow 16/16 konsisten 05-07, no deviasi; Code Quality — Naive UI direct import + Tailwind utility + Inter tracking + radius xs4/full + h(NIcon) Carbon pattern diikuti, no NDescriptions, stories withProviders + pinia + $fetch stub deterministik, components ReferenceList/LoopingPicker/IDRInput typest correct; Security — N/A FASE 1 (no API, but 403 single alert design + 401→/login + 409 400 validation inline covered); Performance — Storybook chunks + build 20.1MB normal, paginated DataTable + draft localStorage efficient; QA — ST-01..06 6 plays + E2E-01..06 6设计的 traceability 100% User Flow↔AC↔Test Plan, no must-fix; 3 consider (PNG mockup extra, play fn userEvent automation, FASE 2 install @vueuse/core vs HTML5 A/B). 0 Must Fix, 0 Should Fix, 3 Consider → APPROVED
+- Notes: FASE 1 UI-First untuk hardening Letter Builder (05-07). Menyatukan `05-document-engine` (preview/PDF 05 ERR-04 Chrome skip), `06-master-data-ddl` (13 tipe, relation picker, operasi IDR, 409 rename, slug refetch), `07-template-administration` (Tiptap right-click + builder 3-pane drag + wizard +steps + PDF gabungan) agar **lebih mudah dipakai user awam** (guided NSteps wizard, BindingPalette + fallback `+ Binding` 44px, looping pilih semua, auto-form live, drag-drop HTML5 + keyboard Up/Down, IDR realtime, empty+CTA no dead-end). Library relevan terkunci di spec: Tiptap `^3.31.3` + Naive UI 2.44 `NSteps/NTree/NDynamicInput/NUpload/NDatePicker` + Tailwind v4 + `@vicons/carbon` h-render + optional `@vueuse/core`/`vue-draggable-plus`. Playwright flow terdesain E2E-01 master happy, E2E-02 protect, E2E-03 component, E2E-04 template, E2E-05 wizard gabungan, E2E-06 errors/permission/edge (EUR-01..10, EC-01..08). Error hardening design: 409 ReferenceList, 403 single `data-testid=access-denied`, 500 PDF retry tanpa reset, validation inline `NFormItem`, 401→/login. FASE 2 `tasks/09-letter-builder-ux-improvement/` (TODO) akan implement & wiring + `npm run test:e2e` HEADLESS=1.
 

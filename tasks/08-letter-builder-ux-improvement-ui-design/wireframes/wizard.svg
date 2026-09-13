@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#f6f5f4"/>
+  <rect x="12" y="12" width="1256" height="56" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <text x="28" y="32" font-family="Inter" font-size="11" fill="#615d59">Persuratan / SK Pengangkatan</text>
+  <text x="28" y="48" font-family="Inter" font-size="16" font-weight="600">Wizard — SK Pengangkatan</text>
+  <!-- NSteps vertical -->
+  <rect x="12" y="80" width="280" height="708" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <text x="28" y="108" font-family="Inter" font-size="11" font-weight="600" fill="#a39e98">NSTEPS VERTICAL GUIDED</text>
+  <circle cx="36" cy="136" r="14" fill="#0075de"/><text x="31" y="141" font-family="Inter" font-size="12" fill="#ffffff">1</text><text x="60" y="132" font-family="Inter" font-size="13" font-weight="600">Data</text><text x="60" y="148" font-family="Inter" font-size="11" fill="#615d59">step.field dinamis</text>
+  <rect x="36" y="158" width="2" height="24" fill="#e6e6e6"/>
+  <circle cx="36" cy="196" r="14" fill="#ffffff" stroke="#0075de"/><text x="31" y="201" font-family="Inter" font-size="12" fill="#0075de">2</text><text x="60" y="192" font-family="Inter" font-size="13">SK</text><text x="60" y="208" font-family="Inter" font-size="11" fill="#615d59">Template SK → mapping</text>
+  <rect x="36" y="218" width="2" height="24" fill="#e6e6e6"/>
+  <circle cx="36" cy="256" r="14" fill="#ffffff" stroke="#e6e6e6"/><text x="31" y="261" font-family="Inter" font-size="12" fill="#a39e98">3</text><text x="60" y="252" font-family="Inter" font-size="13" fill="#a39e98">Tanda Tangan</text><text x="60" y="268" font-family="Inter" font-size="11" fill="#a39e98">+ Tambah Step N</text>
+  <rect x="36" y="278" width="2" height="24" fill="#e6e6e6"/>
+  <circle cx="36" cy="316" r="14" fill="#ffffff" stroke="#e6e6e6"/><text x="31" y="321" font-family="Inter" font-size="12" fill="#a39e98">4</text><text x="60" y="312" font-family="Inter" font-size="13" fill="#a39e98">Review</text><text x="60" y="328" font-family="Inter" font-size="11" fill="#a39e98">gabungan + pagebreak + PDF</text>
+  <rect x="28" y="360" width="248" height="32" rx="8" fill="#ffffff" stroke="#e6e6e6" stroke-dasharray="4 4"/><text x="40" y="380" font-family="Inter" font-size="12">+ Tambah Step — dashed w-full</text>
+  <!-- Form -->
+  <rect x="304" y="80" width="964" height="708" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <rect x="324" y="100" width="924" height="28" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="336" y="118" font-family="Inter" font-size="12">Nomor dokumen (unik, opsional) — 800/001/2026</text>
+  <text x="324" y="148" font-family="Inter" font-size="13" font-weight="600">Data surat (step.field) — NDynamicInput</text>
+  <rect x="324" y="160" width="452" height="32" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="336" y="180" font-family="Inter" font-size="12">step1.nomor</text><rect x="588" y="160" width="452" height="32" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="600" y="180" font-family="Inter" font-size="12">001/HR/2026</text>
+  <rect x="324" y="200" width="452" height="32" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="336" y="220" font-family="Inter" font-size="12">step1.tanggal</text><rect x="588" y="200" width="452" height="32" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="600" y="220" font-family="Inter" font-size="12">2026-09-14</text>
+  <rect x="324" y="248" width="150" height="28" rx="8" fill="#ffffff" stroke="#e6e6e6"/><text x="336" y="266" font-family="Inter" font-size="12">+ Tambah field</text>
+  <rect x="324" y="300" width="924" height="36" rx="8" fill="#e8f2fd" stroke="#e6e6e6"/><text x="336" y="322" font-family="Inter" font-size="12" fill="#005bab">ℹ Field tersimpan saat render — format step.field agar bisa dipetakan</text>
+  <rect x="324" y="360" width="200" height="36" rx="8" fill="#ffffff" stroke="#e6e6e6"/><text x="340" y="382" font-family="Inter" font-size="13">← Kembali</text>
+  <rect x="900" y="360" width="140" height="36" rx="9999" fill="#0075de"/><text x="934" y="382" font-family="Inter" font-size="13" fill="#ffffff">Lanjut →</text>
+  <rect x="700" y="360" width="180" height="36" rx="8" fill="#0075de"/><text x="730" y="382" font-family="Inter" font-size="13" fill="#ffffff">Render Gabungan + PDF →</text>
+  <text x="0" y="790" font-family="Inter" font-size="11" fill="#a39e98">WIZARD • NSteps vertical guided • per-step validation → Lanjut disabled bila kosong • tambah-step N append • Review concatenation + pagebreak</text>
+</svg>

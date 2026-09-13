@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#f6f5f4"/>
+  <rect x="12" y="12" width="1256" height="44" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <text x="28" y="30" font-family="Inter" font-size="11" fill="#615d59">Dashboard / Templates / SK Pengangkatan</text>
+  <text x="28" y="42" font-family="Inter" font-size="13" font-weight="600">Template Builder — SK Pengangkatan</text>
+  <rect x="1000" y="18" width="110" height="32" rx="9999" fill="#0075de"/><text x="1024" y="38" font-family="Inter" font-size="12" fill="#ffffff">Publikasikan</text>
+  <!-- 3 Pane -->
+  <rect x="12" y="68" width="260" height="720" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <text x="28" y="92" font-family="Inter" font-size="11" font-weight="600" fill="#a39e98">LIBRARY (NTree) 260px</text>
+  <rect x="28" y="104" width="228" height="28" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="40" y="122" font-family="Inter" font-size="12" fill="#a39e98">🔍 Cari component...</text>
+  <rect x="28" y="144" width="228" height="32" rx="6" fill="#e8f2fd" stroke="#0075de"/><text x="40" y="164" font-family="Inter" font-size="13">▸ Kop Surat  v1</text>
+  <rect x="28" y="180" width="228" height="32" rx="6" fill="#ffffff" stroke="#e6e6e6"/><text x="40" y="200" font-family="Inter" font-size="13">▸ Daftar Pegawai  (loop)</text>
+  <rect x="28" y="216" width="228" height="32" rx="6" fill="#ffffff" stroke="#e6e6e6"/><text x="40" y="236" font-family="Inter" font-size="13">▸ Tanda Tangan</text>
+  <text x="28" y="268" font-family="Inter" font-size="11" fill="#615d59">drag → canvas (HTML5 ghost 0.5)</text>
+  <!-- Canvas -->
+  <rect x="284" y="68" width="674" height="720" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <rect x="284" y="68" width="674" height="44" rx="12" fill="#f6f5f4"/><text x="300" y="96" font-family="Inter" font-size="11" font-weight="600">CANVAS flex-1 warm #f6f5f4</text>
+  <rect x="340" y="132" width="562" height="96" rx="8" fill="#ffffff" stroke="#e6e6e6"/><text x="360" y="160" font-family="Inter" font-size="13">Kop Surat — logo + “Dinas ...” — binding pill</text>
+  <rect x="360" y="168" width="120" height="20" rx="9999" fill="#e8f2fd"/><text x="370" y="182" font-family="Inter" font-size="11" fill="#0075de">kop.nama</text>
+  <rect x="340" y="244" width="562" height="100" rx="8" fill="#e8f2fd" stroke="#0075de"/><text x="360" y="272" font-family="Inter" font-size="13">Daftar Pegawai  — REPEATER source=pegawai item=item</text>
+  <text x="360" y="292" font-family="Inter" font-size="12" fill="#005bab">↺ pilih semua kolom • 4 kolom dipilih</text>
+  <rect x="340" y="360" width="562" height="28" rx="4" fill="#ffffff" stroke="#e6e6e6" stroke-dasharray="4 4"/><text x="360" y="378" font-family="Inter" font-size="12" fill="#a39e98">+ Tambah Blok — EmptyStateCard</text>
+  <!-- Properties -->
+  <rect x="970" y="68" width="298" height="720" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <text x="986" y="92" font-family="Inter" font-size="11" font-weight="600" fill="#a39e98">PROPERTIES 320px — NForm live</text>
+  <text x="986" y="116" font-family="Inter" font-size="11" fill="#94a3b8">LABEL (eyebrow)</text>
+  <rect x="986" y="124" width="266" height="28" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="998" y="142" font-family="Inter" font-size="12">Teks — “SURAT ... {{number}}”</text>
+  <rect x="986" y="168" width="266" height="36" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="998" y="190" font-family="Inter" font-size="12">Data Binding — master: pegawai.nama</text>
+  <rect x="986" y="216" width="266" height="36" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="998" y="238" font-family="Inter" font-size="12">Repeater — pegawai → item.*</text>
+  <rect x="986" y="264" width="266" height="36" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="998" y="286" font-family="Inter" font-size="12">Condition — letter.type eq internal</text>
+  <text x="0" y="790" font-family="Inter" font-size="11" fill="#a39e98">BUILDER 3-PANE • 260 | flex-1 | 320 • drag-drop HTML5 + keyboard Up/Down • selection ring #0075de • NForm live useBuilderStore</text>
+</svg>

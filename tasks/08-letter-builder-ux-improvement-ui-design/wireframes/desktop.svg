@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#f6f5f4"/>
+  <!-- Sidebar 260 -->
+  <rect x="0" y="0" width="220" height="800" fill="#ffffff" stroke="#e6e6e6"/>
+  <text x="18" y="28" font-family="Inter" font-size="11" font-weight="600" fill="#a39e98">MASTER DATA</text>
+  <rect x="12" y="40" width="196" height="28" rx="5" fill="#e8f2fd" stroke="#0075de"/><text x="24" y="58" font-family="Inter" font-size="13" fill="#005bab">● Pegawai</text>
+  <rect x="12" y="74" width="196" height="28" rx="5" fill="#ffffff"/><text x="24" y="92" font-family="Inter" font-size="13" fill="#31302e">○ Jabatan</text>
+  <text x="18" y="128" font-family="Inter" font-size="11" font-weight="600" fill="#a39e98">PERSURATAN</text>
+  <rect x="12" y="140" width="196" height="28" rx="5" fill="#ffffff"/><text x="24" y="158" font-family="Inter" font-size="13">Component</text>
+  <rect x="12" y="172" width="196" height="28" rx="5" fill="#ffffff"/><text x="24" y="190" font-family="Inter" font-size="13">Template</text>
+  <rect x="12" y="204" width="196" height="28" rx="5" fill="#ffffff"/><text x="24" y="222" font-family="Inter" font-size="13">Administrasi</text>
+  <!-- PageShell header -->
+  <rect x="240" y="16" width="1020" height="84" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <text x="260" y="38" font-family="Inter" font-size="11" fill="#615d59">Dashboard / Master Data / Pegawai</text>
+  <text x="260" y="62" font-family="Inter" font-size="20" font-weight="600">Pegawai</text>
+  <rect x="900" y="42" width="140" height="32" rx="9999" fill="#0075de"/><text x="934" y="62" font-family="Inter" font-size="13" fill="#ffffff">+ Tambah Data</text>
+  <!-- DataTable toolbar -->
+  <rect x="240" y="116" width="1020" height="56" rx="12" fill="#ffffff" stroke="#e6e6e6"/>
+  <rect x="256" y="132" width="320" height="32" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="268" y="152" font-family="Inter" font-size="12" fill="#a39e98">🔍 Cari...</text>
+  <rect x="590" y="132" width="160" height="32" rx="4" fill="#ffffff" stroke="#e6e6e6"/><text x="600" y="152" font-family="Inter" font-size="12">Semua Kolom ▼</text>
+  <rect x="770" y="132" width="48" height="32" rx="8" fill="#ffffff" stroke="#e6e6e6"/><text x="786" y="152" font-family="Inter" font-size="14">↻</text>
+  <rect x="828" y="132" width="48" height="32" rx="8" fill="#ffffff" stroke="#e6e6e6"/><text x="844" y="152" font-family="Inter" font-size="14">⚙</text>
+  <!-- Table header eyebrow -->
+  <rect x="240" y="184" width="1020" height="40" rx="8" fill="#f6f5f4" stroke="#e6e6e6"/>
+  <text x="256" y="208" font-family="Inter" font-size="12" font-weight="600" fill="#31302e">NAMA ↑  •  GAJI  •  JABATAN  •  INFO TOTAL</text>
+  <rect x="240" y="230" width="1020" height="36" fill="#ffffff" stroke="#e6e6e6"/><text x="256" y="252" font-family="Inter" font-size="13">Afdal  •  Rp 2.500.000  •  Programmer  •  Total: 2500000</text>
+  <rect x="240" y="266" width="1020" height="36" fill="#ffffff" stroke="#e6e6e6"/><text x="256" y="288" font-family="Inter" font-size="13">Budi  •  Rp 1.500.000  •  Analis  •  Total: 1500000</text>
+  <!-- Pagination -->
+  <text x="260" y="330" font-family="Inter" font-size="12" fill="#615d59">Menampilkan 1-2 dari 2</text>
+  <text x="0" y="780" font-family="Inter" font-size="11" fill="#a39e98">WIREFRAME DESKTOP • 1280px • 3-PANE BUILDER NOT SHOWN • PageShell + DataTable 320/160 + Restart + Settings</text>
+</svg>
