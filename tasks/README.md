@@ -14,6 +14,8 @@
 | Task 05 — Document Engine (JSON Tree + Repeater + Condition + Renderer + PDF) | `05-document-engine/` | DONE | [x] | [x] | [x] |
 | Task 06 — Master Data DDL (pengganti Global Tabel) | `06-master-data-ddl/` | DONE | [x] | [x] | [x] |
 | Task 07 — Template & Administrasi (Component Tiptap + Builder + Wizard + PDF) | `07-template-administration/` | DONE | [x] | [x] | [x] |
+| Task 08 — Persuratan UI Refinement (Wireframe & Storybook) | `08-persuratan-ui-refinement/` | TODO | [ ] | [ ] | [ ] |
+| Task 09 — Persuratan Stabilization (Audit + Playwright + UI Implementation) | `09-persuratan-stabilization/` | TODO | [ ] | [ ] | [ ] |
 
 ## Struktur tiap folder task
 
