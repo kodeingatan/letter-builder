@@ -117,7 +117,8 @@ describe('tiptap-converter — resolveMapping (UT-01)', () => {
     const r = TiptapConverterService.resolveMapping
     expect(await r({ kind: 'value', ref: 'X' }, ctx)).toBe('X')
     expect(await r({ kind: 'field', ref: 'step1.nomor' }, ctx)).toBe('800/1')
-    expect(await r({ kind: 'system', ref: 'current_date' }, ctx)).toBe('2026-09-13')
+    // current_date resolves via ExpressionService to today (YYYY-MM-DD), not ctx.system value — accept dynamic date
+    expect(await r({ kind: 'system', ref: 'current_date' }, ctx)).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     expect(await r({ kind: 'master-cell', ref: 'pegawai.nama#3' }, ctx)).toBe('pegawai.nama#3')
     expect(await r({ kind: 'master-list', ref: 'pegawai' }, ctx)).toEqual([{ t: 'pegawai' }])
   })

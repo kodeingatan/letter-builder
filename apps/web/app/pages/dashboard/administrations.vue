@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { h, onMounted, computed, ref } from 'vue'
-import { NSpace, NButton, NPopconfirm, NIcon, NModal, NForm, NFormItem, NInput, NSelect, NDynamicInput, NCard, useMessage } from 'naive-ui'
+import { NSpace, NButton, NPopconfirm, NIcon, NModal, NAlert, NForm, NFormItem, NInput, NSelect, NDynamicInput, NCard, useMessage } from 'naive-ui'
 import { Add, TrashCan, Edit } from '@vicons/carbon'
 import DataTable from '~/components/common/DataTable/DataTable.vue'
 import { usePersuratanStore } from '~/stores/persuratan'
-import { getErrorMessage } from '~/utils/error'
+import { getErrorMessage, isConflictError } from '~/utils/error'
 import type { Administration, MappingEntry } from '~/shared/types/persuratan'
 
 definePageMeta({ layout: 'default', middleware: 'auth', requiresAuth: true })
@@ -17,6 +17,8 @@ const editingId = ref<number | null>(null)
 const form = ref({ name: '', slug: '', description: '' })
 const steps = ref<Array<{ template_id: number | null; step_order: number; mappingText: string }>>([])
 const saving = ref(false)
+const formError = ref<string | null>(null)
+const formErrorType = ref<'error' | 'warning'>('error')
 
 const columns = computed(() => [
   { key: 'name', title: 'Nama Surat', sortable: true },
@@ -47,12 +49,14 @@ function openCreate() {
   editingId.value = null
   form.value = { name: '', slug: '', description: '' }
   steps.value = []
+  formError.value = null
   showForm.value = true
   store.fetchTemplates().catch(() => {})
 }
 
 async function openEdit(row: Administration) {
   editingId.value = row.id
+  formError.value = null
   form.value = { name: row.name, slug: row.slug, description: row.description ?? '' }
   try {
     const detail = await store.fetchAdministration(row.id) as unknown as {
@@ -80,6 +84,7 @@ async function handleDelete(row: Administration) {
 
 async function handleSave() {
   saving.value = true
+  formError.value = null
   try {
     const payloadSteps = steps.value
       .filter((s) => s.template_id !== null)
@@ -107,7 +112,14 @@ async function handleSave() {
     showForm.value = false
     await store.fetchAdministrations()
   } catch (e) {
-    message?.error(getErrorMessage(e))
+    if (isConflictError(e)) {
+      formErrorType.value = 'warning'
+      formError.value = getErrorMessage(e, 'Slug/nama sudah ada (409) — coba nama lain.')
+    } else {
+      formErrorType.value = 'error'
+      formError.value = getErrorMessage(e)
+      message?.error(getErrorMessage(e))
+    }
   } finally {
     saving.value = false
   }
@@ -149,6 +161,7 @@ onMounted(reload)
     </DataTable>
 
     <NModal :show="showForm" preset="card" title="Form Administrasi" class="max-w-2xl modal-card" :bordered="false" @update:show="(v: boolean) => showForm = v">
+      <NAlert v-if="formError" :type="formErrorType" class="mb-3" closable @close="formError = null">{{ formError }}</NAlert>
       <NForm @submit.prevent="handleSave">
         <div class="grid gap-4 md:grid-cols-2">
           <NFormItem label="Nama surat" :show-require-mark="true">

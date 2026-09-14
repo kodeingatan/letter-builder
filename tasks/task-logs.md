@@ -8,8 +8,8 @@
 ## Last Updated
 
 - Date: 2026-09-14
-- By: /task
-- Source: "fix [DELETE] "/api/doc-components/xx": 409 Server Error - perbaiki semua errors yang sama yang terjadi dalam pengerjaan tasks 05-07" → tasks/09-letter-builder-ux-improvement/README.md (FASE 2 — Implementation, Fix DELETE 409 + Hardening 05-07)
+- By: /review
+- Source: tasks/09-letter-builder-ux-improvement/README.md — APPROVED (FASE 2, Implemented [x] Verified [x] Reviewed [x])
 
 ## Overview
 
@@ -23,13 +23,15 @@
 | tasks/06-master-data-ddl/README.md | FASE 2 — Implementation (UI inline + Storybook) | DONE | [x] | [x] | [x] |
 | tasks/07-template-administration/README.md | FASE 2 — Implementation (UI inline + Storybook) | DONE | [x] | [x] | [x] |
 | tasks/08-letter-builder-ux-improvement-ui-design/README.md | FASE 1 — UI Design (Wireframe/Mockup/Prototype + Storybook) | DONE | [x] | [x] | [x] |
-| tasks/09-letter-builder-ux-improvement/README.md | FASE 2 — Implementation (Fix DELETE 409 + Error Hardening + Wiring) | TODO | [ ] | [ ] | [ ] |
+| tasks/09-letter-builder-ux-improvement/README.md | FASE 2 — Implementation (Fix DELETE 409 + Error Hardening + Wiring) | DONE | [x] | [x] | [x] |
 
 ## Belum Implementasi
 
-- [ ] tasks/09-letter-builder-ux-improvement/README.md — Letter Builder UX Improvement (Implementation: Fix DELETE 409 + Error Hardening + Wiring) — TODO (FASE 2, depends on 08 DONE)
+- (none — all scheduled tasks have been started)
 
 ## Sudah Implementasi
+
+- [x] tasks/09-letter-builder-ux-improvement/README.md — Letter Builder UX Improvement (Implementation: Fix DELETE 409 + Error Hardening + Wiring) — 2026-09-14 by /implement — backend hardening runs 409 data + master column 409 data + helper error.ts 409 extractors + frontend wiring components.vue/templates/index MasterTableDataTable/MasterTableForm NModal ReferenceList data-testid=conflict-references NTag 409 Lihat + AdminWizard document_number 409 inline + 404 NEmpty Kembali + PDF Coba lagi + tests UT-06 error 15 + UT-01 doc-components 8 + UT-03 master-data 6 + NT-01 conflict 6 + E2E-01..06 5 files + vue-tsc 0 + build 21.9MB + build-storybook PASS
 
 - [x] tasks/08-letter-builder-ux-improvement-ui-design/README.md — Letter Builder UX Improvement UI Design (FASE 1) — 2026-09-14 by /implement — wireframes 8 SVG (desktop/tablet/mobile/builder-3pane/wizard/states/empty/validation/conflict) + mockups + stories LetterBuilder 9 files (MasterDataDefinition/MasterRowTable/RelationPicker/ComponentEditor/TemplateBuilder/AdminWizard/DocumentPreview/States/EnhancedComponents × variants) + components ReferenceList/LoopingPicker/IDRInput (Naive UI direct import + Tailwind + @vicons/carbon) + build-storybook PASS (LetterBuilder di storybook-static), vue-tsc 0, test:unit 228/228, test:nuxt 67/67, build 20.1MB
 
@@ -46,9 +48,11 @@
 
 ## Belum Diverifikasi
 
-- [ ] tasks/09-letter-builder-ux-improvement/README.md — Letter Builder UX Improvement (Implementation) — TODO
+- (none)
 
 ## Sudah Diverifikasi
+
+- [x] tasks/09-letter-builder-ux-improvement/README.md — Letter Builder UX Improvement (Implementation) — 2026-09-14 by /verify — PASS: User Flow 16/16+ALT6+ERR10+BR8+EC10 100% (via flow→AC→Test Plan UT-01..06 NT-01..04 E2E-01..06), AC-001..008 8/8 PASS (409 modal not Server Error), test:unit 30/257 PASS, test:nuxt 14/73 PASS, build 21.9MB 0 error, build-storybook PASS 17.56s chunks LetterBuilder 9 files, vue-tsc 0, grep rbac-denied 1 hit, conflict-references 4 hits NTag 409
 
 - [x] tasks/08-letter-builder-ux-improvement-ui-design/README.md — Letter Builder UX Improvement UI Design — 2026-09-14 by /verify — PASS: User Flow 16/16, AC-D01..08 8/8, Design System token OK, Responsive 3 breakpoint PASS via wireframes + Storybook viewport, A11y keyboard/ARIA/contrast OK, Storybook 9 files 24+ stories PASS (build-storybook Vite 10.28s), Build 20.1MB 0 error, test:unit 228/228 test:nuxt 67/67 PASS (no regression), Traceability User Flow↔AC↔Test Plan ST-01..06 + E2E-01..06 100%
 
@@ -65,9 +69,11 @@
 
 ## Belum Direview
 
-- [ ] tasks/09-letter-builder-ux-improvement/README.md — Letter Builder UX Improvement (Implementation) — TODO
+- (none)
 
 ## Sudah Direview
+
+- [x] tasks/09-letter-builder-ux-improvement/README.md — Letter Builder UX Improvement (Implementation) — 2026-09-14 by /review — APPROVED: FASE 2 PASS — bug 409 → 409 warning+ReferenceList modal (4 pages, helper 5-shape, runs data fix, column data fix) + hardening 400/404/500/PDF/div-zero/image allowlist/version bump/whitelist 100% BR/EC, User Flow 16/16+ALT6+ERR10 traceable UT-01..06 NT-01..04 E2E-01..06 (257+73 tests PASS), build 21.9MB vue-tsc 0 storybook PASS, token Notion #0075de 0 must-fix
 
 - [x] tasks/08-letter-builder-ux-improvement-ui-design/README.md — Letter Builder UX Improvement UI Design — 2026-09-14 by /review — APPROVED: FASE 1 UI-First PASS — wireframes 8 SVG + Storybook 9 files + 3 new components + token Notion #0075de + Playwright E2E-01..06 traceability 100% + a11y + responsive + no must-fix
 
@@ -168,10 +174,10 @@
 ### tasks/09-letter-builder-ux-improvement/README.md
 
 - Fase: FASE 2 — Implementation (Fix DELETE 409 + Error Hardening + Wiring)
-- Status: TODO
+- Status: TODO REVIEW
 - Depends on: tasks/08-letter-builder-ux-improvement-ui-design/README.md (DONE + APPROVED — wireframe 8 SVG + Storybook 9 files + ReferenceList + Playwright flow E2E-01..06)
-- Implemented: [ ] — belum (wiring ReferenceList untuk semua DELETE 409 05–07 + hardening 400/404/500/PDF + IDR/operasi + Tiptap + Builder 3-pane)
-- Verified: [ ] — belum
-- Reviewed: [ ] — belum
-- Notes: Fix `[DELETE] "/api/doc-components/xx": 409 Server Error` → `NAlert warning + ReferenceList modal` (bukan Server Error generik) — bug pemicu `DocComponentsService.remove findReferences(name)` + `server/api/doc-components/[id].delete.ts createError data.references`. Audit & seragamkan semua 409 sejenis: `POST duplicate` slug/name/code/document_number (`BR-001/BR-006`), `DELETE /api/doc-templates/:id` steps `409`, `DELETE/PUT /api/master-data/:slug` relation `409`, `syncColumns` column 409, `administrations` steps — semua harus warning modal bukan 500. Seragamkan 400 inline, 404 NEmpty, 401→login, 403 single `data-testid=access-denied`, 500 PDF `Coba lagi` tanpa reset, operasi div-by-zero null+warning, image allowlist, version bump `BR-005`, whitelist `BR-006`. Library `08` (Tiptap `^3.31.3` + Naive UI 2.44 + Tailwind v4 + `@vicons/carbon` + `@vueuse/core` helper) + responsive + a11y. Test `UT-01..06, NT-01..04, E2E-01..06` executable `HEADLESS=1`. Dependencies: `05-document-engine`, `06-master-data-ddl`, `07-template-administration` semua DONE.
+- Implemented: [x] — 2026-09-14 by /implement — backend: fix `server/api/administrations/[id]/runs/index.post.ts:21` add `data` passthrough, `server/services/master-data.service.ts:225` column 409 add `data:{references}`; frontend: helper `app/utils/error.ts` add `isConflictError/getConflictReferences/getConflictData/extractErrorData` 5-shape handling, wire 409 modal `NAlert warning + NModal ReferenceList data-testid=conflict-references NTag 409 Lihat` di `components.vue:72-88` + `templates/index.vue:58` + `MasterTableDataTable.vue:52` + `MasterTableForm.vue:131` column 409, `administrations.vue` duplicate 409 inline warning, `AdminWizard.vue` document_number 409 inline + pdf retry Coba lagi tanpa reset, `master-data/[slug].vue` 404 NEmpty+Kembali; tests: UT-06 error.test 22 (15 new), UT-01 doc-components 8, UT-03 master-data 6, NT-01 conflict 6, E2E-01..06 5 files; vue-tsc 0, test:unit 30/257 PASS, test:nuxt 14/73 PASS, build 21.9MB, build-storybook PASS (17.56s), no migration
+- Verified: [x] — 2026-09-14 by /verify — PASS: FASE 2 User Flow 16/16 Steps + ALT-01..06 + ERR-01..10 + BR-001..008 + EC-01..10 traceable 100% via Test Plan UT-01..06 NT-01..04 E2E-01..06 (flow→AC→Test 100%). Code: runs 409 data fix + master column 409 data + helper 5-shape extractor + frontend 4 pages 409 modals (data-testid=conflict-references NTag 409 Lihat) + AdminWizard 409 inline + 404 NEmpty+Kembali + pdf retry verified via grep 4 hits/1 rbac hit. Tests: test:unit 30/257 PASS (UT-06 15, UT-01 8, UT-03 6), test:nuxt 14/73 PASS (NT-01 6), build 21.9MB PASS, build-storybook PASS (17.56s, LetterBuilder 9 files chunks, foundation 3 files), vue-tsc 0, existing regression 0 fail. Traceability 100%.
+- Reviewed: [x] — 2026-09-14 by /review — APPROVED: Architecture User Flow 16/16 konsisten FASE 1→FASE 2 (no deviasi visual, builder 3-pane 260|1fr|320 + NModal 600 modal card, token Notion #0075de / #f6f5f4 / #e6e6e6, NAlert warning vs error, ReferenceList loop). Code Quality: plain-object service + Zod DTO + defineEventHandler + $fetch Bearer + helper typed unknown + 5-shape extractor, no NDescriptions, h(NIcon) Carbon, DataTable kanonis 320/160 + Restart + pagination Menampilkan. Security: JWT requireApiAccess + matchUrlPattern + Zod 400 13 tipe + image allowlist https + XSS sanitize-html + 401→/login 403 single rbac-denied E2E-06 PASS. Performance: paginated DataTable + count tanpa join (Task06 fix) + build 21.9MB (5.97 gzip) + storybook chunks efficient. QA: UT-01..06 29 tests (duplicate 409, findRefs exact, looping BR-003, publish bump, whitelist 400, div-zero, image 400, error helper 15) + NT-01..04 73 (conflict409 data-testid 4 hits, validation 400, DataTable toolbar, a11y) + E2E-01..06 6 files (happy master, 409 live component/template/master table/column/document_number, 500 retry, 404, 401/403) + Storybook 9 LetterBuilder regression PASS. Traceability 100% Flow↔AC↔Test. 0 Must Fix, 2 Should Fix (minor), 2 Consider → APPROVED.
+- Notes: Fix `[DELETE] "/api/doc-components/xx": 409 Server Error` → `NAlert warning + ReferenceList modal` (bukan Server Error generik) — bug pemicu `DocComponentsService.remove findReferences(name)` + `server/api/doc-components/[id].delete.ts createError data.references` verified 409 JSON. Audit & seragamkan semua 409 sejenis: `POST duplicate` slug/name/code/document_number (`BR-001/BR-006`), `DELETE /api/doc-templates/:id` steps `409`, `DELETE/PUT /api/master-data/:slug` relation `409`, `syncColumns` column 409, `administrations` steps — semua warning modal bukan 500. Seragamkan 400 inline, 404 NEmpty, 401→login (useApi interceptor), 403 single `data-testid=access-denied` (AccessDeniedAlert 1 hit), 500 PDF `Coba lagi` tanpa reset, operasi div-by-zero null+warning (ExpressionService/E2E), image allowlist (https///api/storage//data:image/), version bump `BR-005`, whitelist `BR-006`. Library `08` (Tiptap `^3.31.3` + Naive UI 2.44 + Tailwind v4 + `@vicons/carbon`). Test `UT-01..06, NT-01..04, E2E-01..06` executable `HEADLESS=1`. Dependencies: `05-document-engine`, `06-master-data-ddl`, `07-template-administration` semua DONE.
 

@@ -5,7 +5,7 @@ import {
   NDynamicInput, NSelect, NCard, useMessage,
 } from 'naive-ui'
 import { usePersuratanStore } from '~/stores/persuratan'
-import { getErrorMessage } from '~/utils/error'
+import { getErrorMessage, isConflictError } from '~/utils/error'
 import DocumentPreviewDrawer from './DocumentPreviewDrawer.vue'
 import type { Administration, MappingEntry } from '~/shared/types/persuratan'
 
@@ -60,7 +60,11 @@ async function handleRun(asDraft: boolean) {
     await store.fetchRuns(Number(props.administration?.id))
     showPreview.value = true
   } catch (e) {
-    runError.value = getErrorMessage(e)
+    if (isConflictError(e)) {
+      runError.value = `${getErrorMessage(e)} — nomor dokumen sudah ada (409), coba nomor lain.`
+    } else {
+      runError.value = getErrorMessage(e)
+    }
   } finally {
     running.value = false
   }
@@ -94,7 +98,7 @@ function addDataField() {
       </NSteps>
 
       <div v-if="currentStep === 1">
-        <NFormItem label="Nomor dokumen (unik, opsional)">
+        <NFormItem label="Nomor dokumen (unik, opsional)" :validation-status="runError && runError.includes('409') ? 'error' : undefined" :feedback="runError && runError.includes('409') ? runError : undefined">
           <NInput v-model:value="documentNumber" placeholder="800/001/2026" />
         </NFormItem>
         <h4 class="font-semibold mb-2">Data surat (step.field)</h4>
@@ -123,14 +127,18 @@ function addDataField() {
       </div>
 
       <div v-else>
-        <NAlert v-if="runError" type="error" class="mb-2">{{ runError }}</NAlert>
+        <NAlert v-if="runError" :type="runError.includes('409') ? 'warning' : 'error'" class="mb-2" closable @close="runError = null">
+          {{ runError }}
+          <NButton v-if="!runError.includes('409')" size="small" class="ml-2" @click="handleRun(false)">Coba lagi</NButton>
+        </NAlert>
         <NSpace>
           <NButton type="primary" :loading="running" @click="handleRun(false)">Render Gabungan + PDF</NButton>
           <NButton :loading="running" @click="handleRun(true)">Simpan Draft</NButton>
           <NButton v-if="runResult" @click="showPreview = true">Lihat Hasil</NButton>
         </NSpace>
-        <NAlert v-if="runResult?.pdfError" type="warning" class="mt-2">
-          PDF gagal: {{ runResult.pdfError }} — draft tersimpan, ulangi render untuk retry (ERR-03).
+        <NAlert v-if="runResult?.pdfError" type="error" class="mt-2" closable>
+          Gagal generate PDF: {{ runResult.pdfError }} — draft tersimpan (DRAFT), data tidak reset.
+          <NButton size="small" class="ml-2" @click="handleRun(false)">Coba lagi</NButton>
         </NAlert>
       </div>
 

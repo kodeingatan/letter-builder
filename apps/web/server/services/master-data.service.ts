@@ -221,8 +221,9 @@ export const MasterDataService = {
     for (const col of removed) {
       const refs = await MasterDataService.findColumnReferences(current.slug, col.name)
       if (refs.length > 0) {
-        const error = new Error(`Column "${col.name}" is still referenced: ${refs.join(', ')}`) as Error & { statusCode?: number }
+        const error = new Error(`Column "${col.name}" is still referenced: ${refs.join(', ')}`) as Error & { statusCode?: number; data?: unknown }
         error.statusCode = 409
+        ;(error as Error & { data?: unknown }).data = { references: refs }
         throw error
       }
     }

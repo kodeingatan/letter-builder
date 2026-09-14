@@ -49,7 +49,10 @@ watch(slug, (next) => {
     :breadcrumbs="[{ label: 'Dashboard', href: '/dashboard' }, { label: 'Master Data', href: '/dashboard/master-data' }, { label: store.currentTable?.display_name ?? slug }]"
     :description="`Browse & kelola baris mst_${slug}`"
   >
-    <NAlert v-if="store.error" type="error" class="mb-3">{{ store.error }}</NAlert>
+    <NAlert v-if="store.error" type="error" class="mb-3" closable>
+      {{ store.error }}
+      <span v-if="store.error.includes('not found') || store.error.includes('404')"> — <NuxtLink to="/dashboard/master-data" class="underline">Kembali ke Master Data</NuxtLink></span>
+    </NAlert>
     <MasterRowTable ref="tableRef" :slug="slug" @create="handleCreate" @edit="handleEdit" />
     <MasterRowForm
       v-model:visible="showForm"

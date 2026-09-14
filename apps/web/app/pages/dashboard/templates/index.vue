@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { h, onMounted, computed, ref } from 'vue'
-import { NSpace, NButton, NPopconfirm, NIcon, NModal, NForm, NFormItem, NInput, useMessage } from 'naive-ui'
+import { NSpace, NButton, NPopconfirm, NIcon, NModal, NAlert, NTag, NForm, NFormItem, NInput, useMessage } from 'naive-ui'
 import { Add, TrashCan, Edit } from '@vicons/carbon'
 import DataTable from '~/components/common/DataTable/DataTable.vue'
 import BadgePill from '~/components/common/BadgePill/BadgePill.vue'
 import { usePersuratanStore } from '~/stores/persuratan'
-import { getErrorMessage } from '~/utils/error'
+import { getErrorMessage, isConflictError, getConflictReferences, getConflictData } from '~/utils/error'
 import type { DocTemplate } from '~/shared/types/persuratan'
 
 definePageMeta({ layout: 'default', middleware: 'auth', requiresAuth: true })
@@ -16,6 +16,18 @@ const search = ref('')
 const showCreate = ref(false)
 const createForm = ref({ name: '', code: '', description: '' })
 const creating = ref(false)
+const conflictRefs = ref<string[] | null>(null)
+const conflictDetail = ref<{ steps?: number; administrations?: number[] } | null>(null)
+const showConflict = ref(false)
+
+function parseRefsToDisplay(refs: string[]): Array<{ label: string; href: string }> {
+  return refs.map((r) => {
+    const [type, ...rest] = r.split(':')
+    const name = rest.join(':') || r
+    const href = type === 'template' ? `/dashboard/templates?search=${encodeURIComponent(name)}` : type === 'component' ? `/dashboard/components?search=${encodeURIComponent(name)}` : `/dashboard/administrations?search=${encodeURIComponent(name)}`
+    return { label: r, href }
+  })
+}
 
 const columns = computed(() => [
   { key: 'name', title: 'Nama', sortable: true },
@@ -60,6 +72,22 @@ async function handleDelete(row: DocTemplate) {
     await store.removeTemplate(row.id)
     message?.success(`Template "${row.name}" dihapus`)
   } catch (e) {
+    const refs = getConflictReferences(e)
+    if (isConflictError(e) && refs) {
+      conflictRefs.value = refs
+      conflictDetail.value = getConflictData(e) as { steps?: number; administrations?: number[] } | null
+      showConflict.value = true
+      return
+    }
+    if (isConflictError(e)) {
+      const data = getConflictData(e)
+      if (data?.steps !== undefined) {
+        conflictRefs.value = [`${data.steps} step(s) di ${data.administrations?.length ?? 0} administrasi`, ...((data.administrations ?? []).map((id) => `administration:${id}`))]
+        conflictDetail.value = data
+        showConflict.value = true
+        return
+      }
+    }
     message?.error(getErrorMessage(e, 'Gagal menghapus (mungkin dipakai step)'))
   }
 }
@@ -134,6 +162,23 @@ onMounted(reload)
           <NButton type="primary" attr-type="submit" :loading="creating">Buat & Buka Builder</NButton>
         </NSpace>
       </NForm>
+    </NModal>
+
+    <NModal v-model:show="showConflict" preset="card" title="Tidak dapat menghapus — masih dipakai" class="max-w-xl modal-card" :bordered="false" aria-modal="true">
+      <NAlert type="warning" class="mb-3" :show-icon="false">Hapus diblokir 409 — berikut daftar pemakai. Lepaskan dependensi dahulu.</NAlert>
+      <div data-testid="conflict-references" role="list">
+        <div v-for="ref in parseRefsToDisplay(conflictRefs ?? [])" :key="ref.label" role="listitem" class="flex items-center justify-between py-2 border-b border-[#e6e6e6] last:border-0">
+          <div class="flex items-center gap-2">
+            <span class="text-sm">{{ ref.label }}</span>
+            <NTag size="small" :bordered="false" class="rounded-full" style="background:#FFFBEB;color:#D97706;border:1px solid #FDE68A">409</NTag>
+          </div>
+          <NButton size="small" secondary @click="navigateTo(ref.href)">Lihat</NButton>
+        </div>
+        <div v-if="(conflictRefs ?? []).length === 0 && conflictDetail?.steps !== undefined" class="text-sm">
+          Template dipakai {{ conflictDetail.steps }} step(s) di {{ conflictDetail.administrations?.length ?? 0 }} administrasi
+        </div>
+      </div>
+      <template #footer><div class="flex justify-end"><NButton type="primary" @click="showConflict = false">Tutup</NButton></div></template>
     </NModal>
   </PageShell>
 </template>

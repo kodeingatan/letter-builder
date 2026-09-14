@@ -5,7 +5,7 @@ import {
   NDynamicInput, NCard, NAlert, useMessage,
 } from 'naive-ui'
 import { useMasterDataStore } from '~/stores/master-data'
-import { getErrorMessage } from '~/utils/error'
+import { getErrorMessage, isConflictError, getConflictReferences } from '~/utils/error'
 import type { MasterColumnType, MasterTable } from '~/shared/types/master-data'
 
 const props = defineProps<{
@@ -19,6 +19,9 @@ const store = useMasterDataStore()
 const message = import.meta.client ? useMessage() : null
 const submitting = ref(false)
 const formError = ref<string | null>(null)
+const conflictRefs = ref<string[] | null>(null)
+const showConflict = ref(false)
+const formErrorType = ref<'error' | 'warning'>('error')
 
 interface ColumnDraft {
   name: string
@@ -127,7 +130,16 @@ async function handleSubmit() {
       message?.success(`Tabel "${updated.display_name}" diperbarui`)
     }
     emit('success', slug)
-  } catch (e) {
+    } catch (e) {
+    const refs = getConflictReferences(e)
+    if (isConflictError(e) && refs) {
+      conflictRefs.value = refs
+      showConflict.value = true
+      formErrorType.value = 'warning'
+      formError.value = `Kolom masih direferensi: ${refs.join(', ')} (409) — lepaskan dependensi dahulu.`
+      return
+    }
+    formErrorType.value = 'error'
     formError.value = getErrorMessage(e)
   } finally {
     submitting.value = false
@@ -139,7 +151,13 @@ const canSubmit = computed(() => form.value.name.trim() !== '' && form.value.dis
 
 <template>
   <NForm @submit.prevent="handleSubmit">
-    <NAlert v-if="formError" type="error" class="mb-4">{{ formError }}</NAlert>
+    <NAlert v-if="formError" :type="formErrorType" class="mb-4">{{ formError }}</NAlert>
+    <NAlert v-if="showConflict && conflictRefs" type="warning" class="mb-3" data-testid="conflict-references" role="list">
+      <div v-for="ref in conflictRefs" :key="ref" role="listitem" class="flex items-center gap-2 py-1">
+        <span class="text-sm">{{ ref }}</span>
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs" style="background:#FFFBEB;color:#D97706;border:1px solid #FDE68A">409</span>
+      </div>
+    </NAlert>
     <div class="grid gap-4 md:grid-cols-2">
       <NFormItem label="Nama internal" :rule="nameRule" :show-require-mark="true">
         <NInput v-model:value="form.name" placeholder="pegawai" :disabled="mode === 'edit'" />
