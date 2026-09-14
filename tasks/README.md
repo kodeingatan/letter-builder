@@ -15,7 +15,9 @@
 | Task 06 — Master Data DDL (pengganti Global Tabel) | `06-master-data-ddl/` | DONE | [x] | [x] | [x] |
 | Task 07 — Template & Administrasi (Component Tiptap + Builder + Wizard + PDF) | `07-template-administration/` | DONE | [x] | [x] | [x] |
 | Task 08 — Letter Builder UX Improvement UI Design (Wireframe/Mockup/Prototype + Playwright Flow + Error Hardening + Tiptap/Naive UI) | `08-letter-builder-ux-improvement-ui-design/` | DONE | [x] | [x] | [x] |
-| Task 09 — Letter Builder UX Improvement (Implementation: Fix DELETE 409 + Error Hardening + Wiring) | `09-letter-builder-ux-improvement/` | TODO | [ ] | [ ] | [ ] |
+| Task 09 — Letter Builder UX Improvement (Implementation: Fix DELETE 409 + Error Hardening + Wiring) | `09-letter-builder-ux-improvement/` | DONE | [x] | [x] | [x] |
+| Task 10 — Letter Builder Polish UI Design (Wireframe/Mockup/Prototype — Dedicated Pages + Tiptap Office-Min + Builder & Mapping Redesign + Video) | `10-letter-builder-polish-ui-design/` | TODO | [ ] | [ ] | [ ] |
+| Task 11 — Letter Builder Polish (Implementation: Routing Dedicated Pages + Tiptap Hardening + Builder & Mapping Polish + Video) | `11-letter-builder-polish/` | TODO | [ ] | [ ] | [ ] |
 
 ## Struktur tiap folder task
 

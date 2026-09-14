@@ -8,8 +8,8 @@
 ## Last Updated
 
 - Date: 2026-09-14
-- By: /review
-- Source: tasks/09-letter-builder-ux-improvement/README.md — APPROVED (FASE 2, Implemented [x] Verified [x] Reviewed [x])
+- By: /task
+- Source: tasks/11-letter-builder-polish/README.md — CREATED (FASE 2 — Implementation, TODO, Implemented [ ] Verified [ ] Reviewed [ ])
 
 ## Overview
 
@@ -24,10 +24,13 @@
 | tasks/07-template-administration/README.md | FASE 2 — Implementation (UI inline + Storybook) | DONE | [x] | [x] | [x] |
 | tasks/08-letter-builder-ux-improvement-ui-design/README.md | FASE 1 — UI Design (Wireframe/Mockup/Prototype + Storybook) | DONE | [x] | [x] | [x] |
 | tasks/09-letter-builder-ux-improvement/README.md | FASE 2 — Implementation (Fix DELETE 409 + Error Hardening + Wiring) | DONE | [x] | [x] | [x] |
+| tasks/10-letter-builder-polish-ui-design/README.md | FASE 1 — UI Design (Wireframe/Mockup/Prototype + Storybook — Dedicated Pages + Tiptap Office-Min + Builder & Mapping Redesign + Video) | TODO | [ ] | [ ] | [ ] |
+| tasks/11-letter-builder-polish/README.md | FASE 2 — Implementation (Routing Dedicated Pages + Tiptap Hardening + Builder & Mapping Polish + Video) | TODO | [ ] | [ ] | [ ] |
 
 ## Belum Implementasi
 
-- (none — all scheduled tasks have been started)
+- [ ] tasks/10-letter-builder-polish-ui-design/README.md — Letter Builder Polish UI Design (FASE 1 — Dedicated Pages + Tiptap Office-Min + Builder & Mapping Redesign + Video)
+- [ ] tasks/11-letter-builder-polish/README.md — Letter Builder Polish (FASE 2 — Routing Dedicated Pages + Tiptap Hardening + Builder & Mapping Polish + Video)
 
 ## Sudah Implementasi
 
@@ -48,7 +51,8 @@
 
 ## Belum Diverifikasi
 
-- (none)
+- [ ] tasks/10-letter-builder-polish-ui-design/README.md — Letter Builder Polish UI Design (FASE 1)
+- [ ] tasks/11-letter-builder-polish/README.md — Letter Builder Polish (FASE 2)
 
 ## Sudah Diverifikasi
 
@@ -69,7 +73,8 @@
 
 ## Belum Direview
 
-- (none)
+- [ ] tasks/10-letter-builder-polish-ui-design/README.md — Letter Builder Polish UI Design (FASE 1)
+- [ ] tasks/11-letter-builder-polish/README.md — Letter Builder Polish (FASE 2)
 
 ## Sudah Direview
 
@@ -180,4 +185,24 @@
 - Verified: [x] — 2026-09-14 by /verify — PASS: FASE 2 User Flow 16/16 Steps + ALT-01..06 + ERR-01..10 + BR-001..008 + EC-01..10 traceable 100% via Test Plan UT-01..06 NT-01..04 E2E-01..06 (flow→AC→Test 100%). Code: runs 409 data fix + master column 409 data + helper 5-shape extractor + frontend 4 pages 409 modals (data-testid=conflict-references NTag 409 Lihat) + AdminWizard 409 inline + 404 NEmpty+Kembali + pdf retry verified via grep 4 hits/1 rbac hit. Tests: test:unit 30/257 PASS (UT-06 15, UT-01 8, UT-03 6), test:nuxt 14/73 PASS (NT-01 6), build 21.9MB PASS, build-storybook PASS (17.56s, LetterBuilder 9 files chunks, foundation 3 files), vue-tsc 0, existing regression 0 fail. Traceability 100%.
 - Reviewed: [x] — 2026-09-14 by /review — APPROVED: Architecture User Flow 16/16 konsisten FASE 1→FASE 2 (no deviasi visual, builder 3-pane 260|1fr|320 + NModal 600 modal card, token Notion #0075de / #f6f5f4 / #e6e6e6, NAlert warning vs error, ReferenceList loop). Code Quality: plain-object service + Zod DTO + defineEventHandler + $fetch Bearer + helper typed unknown + 5-shape extractor, no NDescriptions, h(NIcon) Carbon, DataTable kanonis 320/160 + Restart + pagination Menampilkan. Security: JWT requireApiAccess + matchUrlPattern + Zod 400 13 tipe + image allowlist https + XSS sanitize-html + 401→/login 403 single rbac-denied E2E-06 PASS. Performance: paginated DataTable + count tanpa join (Task06 fix) + build 21.9MB (5.97 gzip) + storybook chunks efficient. QA: UT-01..06 29 tests (duplicate 409, findRefs exact, looping BR-003, publish bump, whitelist 400, div-zero, image 400, error helper 15) + NT-01..04 73 (conflict409 data-testid 4 hits, validation 400, DataTable toolbar, a11y) + E2E-01..06 6 files (happy master, 409 live component/template/master table/column/document_number, 500 retry, 404, 401/403) + Storybook 9 LetterBuilder regression PASS. Traceability 100% Flow↔AC↔Test. 0 Must Fix, 2 Should Fix (minor), 2 Consider → APPROVED.
 - Notes: Fix `[DELETE] "/api/doc-components/xx": 409 Server Error` → `NAlert warning + ReferenceList modal` (bukan Server Error generik) — bug pemicu `DocComponentsService.remove findReferences(name)` + `server/api/doc-components/[id].delete.ts createError data.references` verified 409 JSON. Audit & seragamkan semua 409 sejenis: `POST duplicate` slug/name/code/document_number (`BR-001/BR-006`), `DELETE /api/doc-templates/:id` steps `409`, `DELETE/PUT /api/master-data/:slug` relation `409`, `syncColumns` column 409, `administrations` steps — semua warning modal bukan 500. Seragamkan 400 inline, 404 NEmpty, 401→login (useApi interceptor), 403 single `data-testid=access-denied` (AccessDeniedAlert 1 hit), 500 PDF `Coba lagi` tanpa reset, operasi div-by-zero null+warning (ExpressionService/E2E), image allowlist (https///api/storage//data:image/), version bump `BR-005`, whitelist `BR-006`. Library `08` (Tiptap `^3.31.3` + Naive UI 2.44 + Tailwind v4 + `@vicons/carbon`). Test `UT-01..06, NT-01..04, E2E-01..06` executable `HEADLESS=1`. Dependencies: `05-document-engine`, `06-master-data-ddl`, `07-template-administration` semua DONE.
+
+### tasks/10-letter-builder-polish-ui-design/README.md
+
+- Fase: FASE 1 — UI Design (Wireframe/Mockup/Prototype + Storybook — Dedicated Pages + Tiptap Office-Min + Builder & Mapping Redesign + Video)
+- Status: TODO
+- Depends on: tasks/08-letter-builder-ux-improvement-ui-design/README.md + tasks/09-letter-builder-ux-improvement/README.md (DONE — reuse 409 hardening + 9 stories) + tasks/05-document-engine + tasks/06-master-data-ddl + tasks/07-template-administration (all DONE) + docs/design-system.md + AGENTS.md + https://tiptap.dev/docs/examples + https://playwright.dev/docs/videos#record-video
+- Implemented: [ ] — belum (FASE 1 TODO) — target: wireframes 18 SVG (desktop/tablet/mobile/builder-3pane/master-create|edit/component-create|edit/template-create|edit/administration-create|edit + states/validation/conflict/tiptap-toolbar/tiptap-error) + stories `apps/web/stories/letter-builder-polish/` 7 files (MasterDataCreatePage/ComponentCreatePage/ComponentEditPage/TiptapToolbar/TemplateBuilderPolish/AdministrationMapping/StatesPolish × variants) + components polish (TiptapToolbar.vue grouped, StepMappingEditor.vue per-field DR-002, EmptyStateCard polish, ComponentEditor hardened guard) + video config hardening
+- Verified: [ ] — belum — verifikasi Design System token Notion #0075de + PageShell same layout dedicated pages + Tiptap configure guard no crash + Builder polish 3-pane + DR-002 per-field mapping highlight + responsive 3 breakpoint + a11y + Storybook build + Playwright video `on` 1280×720 trace
+- Reviewed: [ ] — belum
+- Notes: FASE 1 UI-First polish untuk 7 poin user: (1) dedicated create/update halaman baru layout sama via PageShell (bukan NModal) — 10 pages; (2) fix Tiptap `Cannot read properties of undefined (reading 'configure')` via extension `default` guard + ClientOnly fallback + destroy safe; (3) polish Builder `/dashboard/templates/:id` 3-pane 260|1fr|320 lebih cantik (warm #f6f5f4 + hairline + Level1 shadow + pill CTA + EmptyStateCard illustration); (4) fix DR-002 Administrasi Mapping `missing: field` via per-field editor rows + inline error + NAlert summary + scroll; (5) global UI/UX polish Notion-calm; (6) Tiptap office-min toolbar 1 baris grouped merujuk https://tiptap.dev/docs/examples (Placeholder/Highlight/Color/TextAlign/Link/Table/BubbleMenu/FloatingMenu) very minimum; (7) Playwright video `https://playwright.dev/docs/videos#record-video` `video: 'on'` 1280×720 per-test. FASE 2 `tasks/11-letter-builder-polish/` akan implement routing + Tiptap hardening + builder/mapping polish + video artifacts + E2E video.
+
+### tasks/11-letter-builder-polish/README.md
+
+- Fase: FASE 2 — Implementation (Routing Dedicated Pages + Tiptap Hardening + Builder & Mapping Polish + Video)
+- Status: TODO
+- Depends on: tasks/10-letter-builder-polish-ui-design/README.md (TODO — FASE 1 design wireframes 18 SVG + stories 7 files LetterBuilderPolish/* + TiptapToolbar + StepMappingEditor — WAJIB sebagai acuan pixel-perfect sebelum 11 wiring)
+- Implemented: [ ] — belum (FASE 2 TODO) — target: 6 dedicated pages `components/create`+`[id]/edit`, `templates/create`+`[id]/edit` meta + Builder polish `templates/[id].vue` 260|1fr|320 warm + `administrations/create`+`[id]/edit` per-field `StepMappingEditor.vue` DR-002 `data.missingFields` + hardened `ComponentEditor.vue` `mod.default ?? mod` + `TiptapToolbar.vue` grouped office-min very minimum + global UI polish + `playwright.config.ts` `video: { mode: 'on', size: 1280×720 }` + tests UT-01..06 NT-01..06 E2E-01..06 polish `video.webm` HEADLESS=1 reuseExistingServer
+- Verified: [ ] — belum — verifikasi dedicated pages same layout `PageShell` head 16×20 body 24 radius 12 + Tiptap configure guard no `Cannot read properties` + Builder polish 3-pane + DR-002 per-field highlight + responsive 3 breakpoint + a11y + video `on` 1280×720 artifact `test-results/**/video.webm` + vue-tsc 0 + build + build-storybook StorybookPolish regression
+- Reviewed: [ ] — belum
+- Notes: FASE 2 wiring design 10 ke kode nyata. Implement 6 dedicated PageShell pages layout same (create vs edit identical head/body/padding/radius hairline) `POST` vs `PUT` + version bump + breadcrumb `<a href>` preserve right-click + footer `Batal | Simpan` pill; fix Tiptap `Cannot read properties of undefined (reading 'configure')` via `await import` `mod.default ?? mod` guard + `if (!Ext?.configure) fallback` + `try/catch initEditor` `NAlert error Gagal memuat editor (configure) + Retry` + `onBeforeUnmount editor?.destroy()` safe + `ClientOnly` #fallback; polish Builder `/dashboard/templates/:id` 3-pane 260|1fr|320 warm #f6f5f4 + hairline `#e6e6e6` + Level-1 shadow + `NTree` searchable + `EmptyStateCard` illustration warm xl16 + `PropertyPanel` eyebrow + `RepeaterEditor` pilih semua indeterminate + drag ghost + keyboard reorder + preview drawer 600px; fix DR-002 via `StepMappingEditor.vue` per-field `field NTag` + `kind NSelect` + `ref NInput` + `validationStatus="error"` + `NAlert warning missing: field` summary + `focus` & `scrollIntoView` (not textarea JSON); global UI polish token Notion; Tiptap office-min toolbar 1 baris grouped `B/I/U/S Heading Align List Table/Image/Link History + Binding` 44px + BubbleMenu + FloatingMenu + Placeholder very minimum merujuk https://tiptap.dev/docs/examples; Playwright video `https://playwright.dev/docs/videos#record-video` `apps/web/playwright.config.ts` `use: { video: { mode: 'on', size: { width:1280, height:720 } }, trace: 'on-first-retry', screenshot: 'only-on-failure' }` per-test `video.webm` + `playwright-report` trace viewer HEADLESS=1 reuseExistingServer; tests UT-01..06 (DocComponents Tiptap guard + DocTemplates publish + MasterData whitelist + Administrations DR-002 data.missingFields + Renderer + Error helper) + NT-01..06 (dedicated same layout + TiptapToolbar + Builder polish + DR-002 per-field) + E2E-01..06 polish video: master dedicated, component Tiptap 409, template builder, administration DR-002, wizard, errors responsive.
 
