@@ -14,7 +14,8 @@
 | Task 05 — Document Engine (JSON Tree + Repeater + Condition + Renderer + PDF) | `05-document-engine/` | DONE | [x] | [x] | [x] |
 | Task 06 — Master Data DDL (pengganti Global Tabel) | `06-master-data-ddl/` | DONE | [x] | [x] | [x] |
 | Task 07 — Template & Administrasi (Component Tiptap + Builder + Wizard + PDF) | `07-template-administration/` | DONE | [x] | [x] | [x] |
-| Task 08 — Letter Builder UX Improvement UI Design (Wireframe/Mockup/Prototype + Playwright Flow + Error Hardening + Tiptap/Naive UI) | `08-letter-builder-ux-improvement-ui-design/` | TODO | [ ] | [ ] | [ ] |
+| Task 08 — Letter Builder UX Improvement UI Design (Wireframe/Mockup/Prototype + Playwright Flow + Error Hardening + Tiptap/Naive UI) | `08-letter-builder-ux-improvement-ui-design/` | DONE | [x] | [x] | [x] |
+| Task 09 — Letter Builder UX Improvement (Implementation: Fix DELETE 409 + Error Hardening + Wiring) | `09-letter-builder-ux-improvement/` | TODO | [ ] | [ ] | [ ] |
 
 ## Struktur tiap folder task
 

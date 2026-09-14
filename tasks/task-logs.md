@@ -8,8 +8,8 @@
 ## Last Updated
 
 - Date: 2026-09-14
-- By: /review
-- Source: tasks/08-letter-builder-ux-improvement-ui-design/README.md — APPROVED (FASE 1 PASS, 0 Must Fix, Storybook 9 files, gate [x][x][x])
+- By: /task
+- Source: "fix [DELETE] "/api/doc-components/xx": 409 Server Error - perbaiki semua errors yang sama yang terjadi dalam pengerjaan tasks 05-07" → tasks/09-letter-builder-ux-improvement/README.md (FASE 2 — Implementation, Fix DELETE 409 + Hardening 05-07)
 
 ## Overview
 
@@ -23,10 +23,11 @@
 | tasks/06-master-data-ddl/README.md | FASE 2 — Implementation (UI inline + Storybook) | DONE | [x] | [x] | [x] |
 | tasks/07-template-administration/README.md | FASE 2 — Implementation (UI inline + Storybook) | DONE | [x] | [x] | [x] |
 | tasks/08-letter-builder-ux-improvement-ui-design/README.md | FASE 1 — UI Design (Wireframe/Mockup/Prototype + Storybook) | DONE | [x] | [x] | [x] |
+| tasks/09-letter-builder-ux-improvement/README.md | FASE 2 — Implementation (Fix DELETE 409 + Error Hardening + Wiring) | TODO | [ ] | [ ] | [ ] |
 
 ## Belum Implementasi
 
-_(kosong — semua task terimplementasi)_
+- [ ] tasks/09-letter-builder-ux-improvement/README.md — Letter Builder UX Improvement (Implementation: Fix DELETE 409 + Error Hardening + Wiring) — TODO (FASE 2, depends on 08 DONE)
 
 ## Sudah Implementasi
 
@@ -45,7 +46,7 @@ _(kosong — semua task terimplementasi)_
 
 ## Belum Diverifikasi
 
-_(kosong — semua task terverifikasi)_
+- [ ] tasks/09-letter-builder-ux-improvement/README.md — Letter Builder UX Improvement (Implementation) — TODO
 
 ## Sudah Diverifikasi
 
@@ -64,7 +65,7 @@ _(kosong — semua task terverifikasi)_
 
 ## Belum Direview
 
-_(kosong — semua task tereview)_
+- [ ] tasks/09-letter-builder-ux-improvement/README.md — Letter Builder UX Improvement (Implementation) — TODO
 
 ## Sudah Direview
 
@@ -163,4 +164,14 @@ _(kosong — semua task tereview)_
 - Verified: [x] — 2026-09-14 by /verify — PASS: User Flow 16/16 Steps + 6 ALT + 10 ERR + 8 BR + 8 EC ter-cover Storybook plays ST-01..06 + E2E design E2E-01..06 table mapping; AC-D01..08 8/8 PASS (wireframe SVG 8, mockup Naive UI+Tailwind token check, prototype LetterBuilder 9 stories 24+ variants, library rationale Tiptap vs Quill, Playwright flow mapped); Design System Notion token #0075de verified via NConfigProvider + naiveui-theme + visual check; Responsive desktop 1280 / tablet 768 / mobile 375 via viewport addon + wireframes; A11y keyboard Tab + Esc + focus trap + aria-label + contrast AA + prefers-reduced-motion checked via stories States a11y; Storybook build PASS (9 LetterBuilder stories di index.json), build 20.1MB, test regression 228+67 PASS, no breaking change vs foundation/redesign/master-data/template-admin
 - Reviewed: [x] — 2026-09-14 by /review — APPROVED: Architecture User Flow 16/16 konsisten 05-07, no deviasi; Code Quality — Naive UI direct import + Tailwind utility + Inter tracking + radius xs4/full + h(NIcon) Carbon pattern diikuti, no NDescriptions, stories withProviders + pinia + $fetch stub deterministik, components ReferenceList/LoopingPicker/IDRInput typest correct; Security — N/A FASE 1 (no API, but 403 single alert design + 401→/login + 409 400 validation inline covered); Performance — Storybook chunks + build 20.1MB normal, paginated DataTable + draft localStorage efficient; QA — ST-01..06 6 plays + E2E-01..06 6设计的 traceability 100% User Flow↔AC↔Test Plan, no must-fix; 3 consider (PNG mockup extra, play fn userEvent automation, FASE 2 install @vueuse/core vs HTML5 A/B). 0 Must Fix, 0 Should Fix, 3 Consider → APPROVED
 - Notes: FASE 1 UI-First untuk hardening Letter Builder (05-07). Menyatukan `05-document-engine` (preview/PDF 05 ERR-04 Chrome skip), `06-master-data-ddl` (13 tipe, relation picker, operasi IDR, 409 rename, slug refetch), `07-template-administration` (Tiptap right-click + builder 3-pane drag + wizard +steps + PDF gabungan) agar **lebih mudah dipakai user awam** (guided NSteps wizard, BindingPalette + fallback `+ Binding` 44px, looping pilih semua, auto-form live, drag-drop HTML5 + keyboard Up/Down, IDR realtime, empty+CTA no dead-end). Library relevan terkunci di spec: Tiptap `^3.31.3` + Naive UI 2.44 `NSteps/NTree/NDynamicInput/NUpload/NDatePicker` + Tailwind v4 + `@vicons/carbon` h-render + optional `@vueuse/core`/`vue-draggable-plus`. Playwright flow terdesain E2E-01 master happy, E2E-02 protect, E2E-03 component, E2E-04 template, E2E-05 wizard gabungan, E2E-06 errors/permission/edge (EUR-01..10, EC-01..08). Error hardening design: 409 ReferenceList, 403 single `data-testid=access-denied`, 500 PDF retry tanpa reset, validation inline `NFormItem`, 401→/login. FASE 2 `tasks/09-letter-builder-ux-improvement/` (TODO) akan implement & wiring + `npm run test:e2e` HEADLESS=1.
+
+### tasks/09-letter-builder-ux-improvement/README.md
+
+- Fase: FASE 2 — Implementation (Fix DELETE 409 + Error Hardening + Wiring)
+- Status: TODO
+- Depends on: tasks/08-letter-builder-ux-improvement-ui-design/README.md (DONE + APPROVED — wireframe 8 SVG + Storybook 9 files + ReferenceList + Playwright flow E2E-01..06)
+- Implemented: [ ] — belum (wiring ReferenceList untuk semua DELETE 409 05–07 + hardening 400/404/500/PDF + IDR/operasi + Tiptap + Builder 3-pane)
+- Verified: [ ] — belum
+- Reviewed: [ ] — belum
+- Notes: Fix `[DELETE] "/api/doc-components/xx": 409 Server Error` → `NAlert warning + ReferenceList modal` (bukan Server Error generik) — bug pemicu `DocComponentsService.remove findReferences(name)` + `server/api/doc-components/[id].delete.ts createError data.references`. Audit & seragamkan semua 409 sejenis: `POST duplicate` slug/name/code/document_number (`BR-001/BR-006`), `DELETE /api/doc-templates/:id` steps `409`, `DELETE/PUT /api/master-data/:slug` relation `409`, `syncColumns` column 409, `administrations` steps — semua harus warning modal bukan 500. Seragamkan 400 inline, 404 NEmpty, 401→login, 403 single `data-testid=access-denied`, 500 PDF `Coba lagi` tanpa reset, operasi div-by-zero null+warning, image allowlist, version bump `BR-005`, whitelist `BR-006`. Library `08` (Tiptap `^3.31.3` + Naive UI 2.44 + Tailwind v4 + `@vicons/carbon` + `@vueuse/core` helper) + responsive + a11y. Test `UT-01..06, NT-01..04, E2E-01..06` executable `HEADLESS=1`. Dependencies: `05-document-engine`, `06-master-data-ddl`, `07-template-administration` semua DONE.
 
